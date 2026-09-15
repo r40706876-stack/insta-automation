@@ -41,11 +41,25 @@ def generate_reel_content():
         except Exception:
             topic_index = 0
 
-    # Explicitly force v1beta API version to avoid v1alpha 404 errors
-    client = genai.Client(
-        api_key=GEMINI_API_KEY,
-        http_options={'api_version': 'v1beta'}
-    )
+    client = genai.Client(api_key=GEMINI_API_KEY)
+
+    # Dynamic Model Selector - API Key के अनुसार सही मॉडल खुद चुनेगा
+    selected_model = "gemini-2.0-flash"
+    try:
+        available_models = [m.name.replace("models/", "") for m in client.models.list()]
+        print(f"📋 आपकी API Key के लिए उपलब्ध मॉडल्स: {available_models}", flush=True)
+        
+        for candidate in ["gemini-2.0-flash", "gemini-1.5-flash", "gemini-1.5-pro"]:
+            if candidate in available_models:
+                selected_model = candidate
+                break
+        else:
+            if available_models:
+                selected_model = available_models[0]
+    except Exception as e:
+        print(f"⚠️ मॉडल ऑटो-डिटेक्ट नहीं हो सका, डिफॉल्ट का उपयोग कर रहे हैं: {e}", flush=True)
+
+    print(f"🤖 चुना गया मॉडल: {selected_model}", flush=True)
 
     prompt = f"""
     You are an expert educational content creator for Instagram Reels.
@@ -67,7 +81,7 @@ def generate_reel_content():
     """
 
     response = client.models.generate_content(
-        model='gemini-1.5-flash',
+        model=selected_model,
         contents=prompt
     )
 
