@@ -19,8 +19,8 @@ OUTPUT_VIDEO = "reel_output.mp4"
 
 GRAPH_API_BASE = "".join(["http", "s://", "graph.", "facebook", ".com/v19.0/"])
 
-# Natural Male Educator Voice
-MALE_VOICE = "hi-IN-MadhurNeural"
+# Natural, crisp Indian Male voice for Hinglish/English content
+MALE_VOICE = "en-IN-PrabhatNeural"
 
 def get_progress():
     if os.path.exists(PROGRESS_FILE):
@@ -61,23 +61,22 @@ def generate_exam_script(raw_text):
     print(f"Using Groq Model: {model_name}")
 
     prompt = f"""
-    You are a passionate male competitive exam educator making viral 30-second Instagram reels.
-    From the given PDF text, choose ONE high-yield topic and generate a script completely in HINGLISH (Roman English alphabet only).
+    You are an enthusiastic, top-tier educator creating a viral 30-second Instagram reel.
+    Pick ONE high-yield concept from the PDF text and generate a lively script completely in conversational HINGLISH (English letters only).
 
-    STRICT GUIDELINES:
-    1. Do NOT use any Hindi/Devanagari script anywhere. Use Roman letters only.
-    2. "hook_title": Punchy 3-4 words English/Hinglish heading (e.g., "ACID BASE SHORT TRICK").
-    3. "bullet_points": Exactly 3 crisp points in English/Hinglish for the video display.
-    4. "spoken_script": Conversational, energetic Indian male voiceover in natural Hinglish (around 30-35 seconds).
-       Sound like a real confident human mentor giving quick exam advice.
-    5. "caption": Catchy caption with tags like #upsc #ssc #gkquiz #studygram.
+    GUIDELINES:
+    1. Do NOT use Devanagari script. Use Roman/English alphabet only.
+    2. "hook_title": Punchy 3-4 words title (e.g., "FAST TRICK: ACID VS BASE").
+    3. "bullet_points": Exactly 3 crisp, impactful points for on-screen display.
+    4. "spoken_script": Fluent, energetic voiceover explanation (approx 30 seconds). Sound like an engaging creator talking directly to students, not an AI reading notes.
+    5. "caption": Catchy caption with relevant study tags.
 
-    Return ONLY a valid JSON object without markdown formatting:
+    Return ONLY a valid JSON object:
     {{
       "hook_title": "SHORT TITLE",
-      "spoken_script": "Dosto agar exam me acid aur base pe question aaye, toh yeh simple trick yaad rakhna...",
-      "bullet_points": ["Point 1 in English/Hinglish", "Point 2 in English/Hinglish", "Point 3 in English/Hinglish"],
-      "caption": "Caption with hashtags"
+      "spoken_script": "Dosto agar exam me yeh question aaye toh dhyaan rakhna...",
+      "bullet_points": ["Point 1", "Point 2", "Point 3"],
+      "caption": "Reel caption with tags"
     }}
 
     PDF Text:
@@ -103,8 +102,7 @@ async def create_voiceover(text):
     communicate = edge_tts.Communicate(
         text=text,
         voice=MALE_VOICE,
-        rate="+6%",
-        pitch="-1Hz"
+        rate="+8%"
     )
     await communicate.save(AUDIO_OUTPUT)
 
