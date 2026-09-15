@@ -43,30 +43,16 @@ def extract_pdf_topic():
     save_progress(current_page + 1)
     return text, current_page + 1, total_pages
 
-def get_active_groq_model(client):
-    """Groq API se puchkar live available model chunta hai."""
-    try:
-        models = [m.id for m in client.models.list().data]
-        print(f"Available Groq models on your account: {models}")
-        # Text generation models priority
-        for preferred in ["llama-3.1-8b-instant", "llama3-8b-8192", "mixtral-8x7b-32768", "gemma2-9b-it"]:
-            if preferred in models:
-                return preferred
-        for m in models:
-            if "whisper" not in m and "vision" not in m:
-                return m
-    except Exception as e:
-        print(f"Model list fallback notice: {e}")
-    return "llama-3.1-8b-instant"
-
 def generate_exam_script(raw_text):
     api_key = os.environ.get("GROQ_API_KEY")
     if not api_key:
         raise ValueError("GROQ_API_KEY GitHub Secrets me set nahi hai!")
 
     client = Groq(api_key=api_key)
-    model_name = get_active_groq_model(client)
-    print(f"Selected Active Model: {model_name}")
+    
+    # Aapke account me verified active text model
+    model_name = "openai/gpt-oss-120b"
+    print(f"Using Verified Groq Model: {model_name}")
 
     prompt = f"""
     Tum ek expert competitive exam educator ho.
@@ -90,7 +76,14 @@ def generate_exam_script(raw_text):
         response_format={"type": "json_object"}
     )
 
-    return json.loads(response.choices[0].message.content)
+    content = response.choices[0].message.content or "{}"
+    clean_text = content.strip()
+    if clean_text.startswith("```"):
+        clean_text = clean_text.strip("`")
+        if clean_text.startswith("json"):
+            clean_text = clean_text[4:].strip()
+
+    return json.loads(clean_text)
 
 async def create_voiceover(text):
     communicate = edge_tts.Communicate(text, voice="hi-IN-MadhurNeural")
