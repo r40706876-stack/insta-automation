@@ -4,7 +4,7 @@ import json
 import asyncio
 import subprocess
 from pypdf import PdfReader
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image, ImageDraw
 from google import genai
 import edge_tts
 
@@ -29,7 +29,7 @@ def save_progress(page_num):
 
 def extract_pdf_topic():
     if not os.path.exists(PDF_PATH):
-        raise FileNotFoundError(f"'{PDF_PATH}' file nahi mili repository me!")
+        raise FileNotFoundError(f"'{PDF_PATH}' file nahi mili!")
     
     reader = PdfReader(PDF_PATH)
     total_pages = len(reader.pages)
@@ -40,23 +40,8 @@ def extract_pdf_topic():
     current_page = last_page % total_pages
     text = reader.pages[current_page].extract_text() or ""
     
-    # Next run ke liye page update
     save_progress(current_page + 1)
     return text, current_page + 1, total_pages
-
-def get_active_model(client):
-    try:
-        models = [m.name for m in client.models.list()]
-        for target in ["gemini-2.5-flash", "gemini-2.5-pro", "gemini-2.0-flash"]:
-            for m in models:
-                if target in m:
-                    return m
-        for m in models:
-            if "gemini" in m.lower() and "embed" not in m.lower():
-                return m
-    except Exception:
-        pass
-    return "gemini-2.5-flash"
 
 def generate_exam_script(raw_text):
     api_key = os.environ.get("GEMINI_API_KEY")
@@ -64,14 +49,16 @@ def generate_exam_script(raw_text):
         raise ValueError("GEMINI_API_KEY GitHub Secrets me set nahi hai!")
 
     client = genai.Client(api_key=api_key)
-    model_name = get_active_model(client)
+    
+    # Google dwara bataaya gaya bilkul latest active model
+    model_name = "gemini-3.6-flash"
     print(f"Using Model: {model_name}")
 
     prompt = f"""
     Tum ek expert competitive exam educator ho.
-    Neeche diye gaye PDF content me se ek SINGLE important topic chun kar 30 second ki Hindi Reel script banao.
+    Neeche diye gaye PDF text me se ek SINGLE important topic chun kar 30 second ki Hindi Reel script banao.
     
-    Strictly return ONLY a valid JSON object without backticks or markdown:
+    Strictly return ONLY a valid JSON object without backticks, markdown, or extra words:
     {{
       "hook_title": "Attractive 3-4 words topic title",
       "spoken_script": "30 seconds Hindi voiceover script (exam trick or core concept). Clear and direct.",
@@ -101,15 +88,12 @@ async def create_voiceover(text):
     await communicate.save(AUDIO_OUTPUT)
 
 def create_graphic_frame(reel_data):
-    """Pillow se 9:16 vertical poster banata hai jo bina kisi font error ke chalta hai."""
     width, height = 1080, 1920
-    img = Image.new("RGB", (width, height), color=(15, 23, 42))  # Dark Blue-Grey Slate
+    img = Image.new("RGB", (width, height), color=(15, 23, 42))
     draw = ImageDraw.Draw(img)
 
     # Header Box
     draw.rectangle([(80, 200), (1000, 360)], fill=(30, 41, 59))
-    
-    # Text drawing (Default fonts on Linux)
     title = reel_data.get("hook_title", "EXAM CAPSULE")
     draw.text((120, 240), f"🔥 {title}", fill=(250, 204, 21))
 
@@ -123,7 +107,6 @@ def create_graphic_frame(reel_data):
     img.save(FRAME_IMG)
 
 def render_video():
-    """Frame aur Audio ko jod kar seedhe MP4 banata hai."""
     cmd = [
         "ffmpeg", "-y",
         "-loop", "1", "-i", FRAME_IMG,
@@ -141,14 +124,14 @@ def main():
     raw_text, page_num, total = extract_pdf_topic()
     print(f"Loaded Page {page_num} of {total}")
 
-    print("🤖 [Step 2] Processing exam script with Gemini...")
+    print("🤖 [Step 2] Processing exam script with Gemini 3.6 Flash...")
     reel_data = generate_exam_script(raw_text)
     print(f"Topic: {reel_data.get('hook_title')}")
 
     print("🎙️ [Step 3] Generating Hindi Audio (Edge-TTS)...")
     asyncio.run(create_voiceover(reel_data.get("spoken_script")))
 
-    print("🖼️ [Step 4] Creating Poster Frame (Pillow)...")
+    print("🖼️ [Step 4] Creating Poster Frame...")
     create_graphic_frame(reel_data)
 
     print("🎬 [Step 5] Merging to 9:16 Video (FFmpeg)...")
