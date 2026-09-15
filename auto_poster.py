@@ -1,8 +1,10 @@
 import os
 import sys
 import json
+import time
 import asyncio
 import subprocess
+import requests
 from pypdf import PdfReader
 from PIL import Image, ImageDraw
 from groq import Groq
@@ -49,10 +51,8 @@ def generate_exam_script(raw_text):
         raise ValueError("GROQ_API_KEY GitHub Secrets me set nahi hai!")
 
     client = Groq(api_key=api_key)
-    
-    # Aapke account me verified active text model
     model_name = "openai/gpt-oss-120b"
-    print(f"Using Verified Groq Model: {model_name}")
+    print(f"Using Groq Model: {model_name}")
 
     prompt = f"""
     Tum ek expert competitive exam educator ho.
@@ -121,6 +121,63 @@ def render_video():
     ]
     subprocess.run(cmd, check=True)
 
+def upload_video_to_temp_host(file_path):
+    """Instagram ke download karne ke liye temporary public link banata hai."""
+    print("🌐 Uploading video for Instagram download link...")
+    with open(file_path, "rb") as f:
+        res = requests.post(
+            "[https://catbox.moe/user/api.php](https://catbox.moe/user/api.php)",
+            data={"reqtype": "fileupload"},
+            files={"fileToUpload": f}
+        )
+    if res.status_code == 200 and res.text.startswith("http"):
+        return res.text.strip()
+    raise RuntimeError(f"Temporary video link nahi bana: {res.text}")
+
+def post_reel_to_instagram(video_url, caption):
+    access_token = os.environ.get("IG_ACCESS_TOKEN")
+    user_id = os.environ.get("IG_USER_ID")
+    
+    if not access_token or not user_id:
+        raise ValueError("IG_ACCESS_TOKEN ya IG_USER_ID GitHub Secrets me missing hai!")
+
+    print("📲 Step 1: Instagram container create ho raha hai...")
+    container_url = f"[https://graph.facebook.com/v19.0/](https://graph.facebook.com/v19.0/){user_id}/media"
+    payload = {
+        "media_type": "REELS",
+        "video_url": video_url,
+        "caption": caption,
+        "access_token": access_token
+    }
+    r = requests.post(container_url, data=payload)
+    res_data = r.json()
+    creation_id = res_data.get("id")
+    
+    if not creation_id:
+        raise RuntimeError(f"Instagram Container Error: {res_data}")
+
+    # Instagram server processing wait
+    print("⏳ Step 2: Instagram par video ready hone ka wait ho raha hai...")
+    status_url = f"[https://graph.facebook.com/v19.0/](https://graph.facebook.com/v19.0/){creation_id}"
+    for _ in range(15):
+        time.sleep(10)
+        status_res = requests.get(status_url, params={"fields": "status_code", "access_token": access_token}).json()
+        status = status_res.get("status_code")
+        print(f"Status: {status}...")
+        if status == "FINISHED":
+            break
+        elif status == "ERROR":
+            raise RuntimeError(f"Instagram video processing fail hui: {status_res}")
+
+    print("🚀 Step 3: Reel publish ho rahi hai...")
+    publish_url = f"[https://graph.facebook.com/v19.0/](https://graph.facebook.com/v19.0/){user_id}/media_publish"
+    publish_res = requests.post(publish_url, data={"creation_id": creation_id, "access_token": access_token}).json()
+    
+    if "id" in publish_res:
+        print(f"🎉 Reel successfully Instagram par post ho gayi! Post ID: {publish_res['id']}")
+    else:
+        raise RuntimeError(f"Publish failed: {publish_res}")
+
 def main():
     print("🚀 [Step 1] Reading topic from notes.pdf...")
     raw_text, page_num, total = extract_pdf_topic()
@@ -139,8 +196,11 @@ def main():
     print("🎬 [Step 5] Merging to 9:16 Video (FFmpeg)...")
     render_video()
 
-    print("\n✅ Reel Video Ready: reel_output.mp4")
-    print(f"📝 Caption:\n{reel_data.get('caption')}")
+    print("🌐 [Step 6] Posting Reel to Instagram...")
+    public_video_url = upload_video_to_temp_host(OUTPUT_VIDEO)
+    post_reel_to_instagram(public_video_url, reel_data.get("caption", ""))
+
+    print("\n✅ All steps completed successfully!")
 
 if __name__ == "__main__":
     main()
