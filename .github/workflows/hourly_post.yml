@@ -1,28 +1,45 @@
-name: Hourly Instagram Auto-Post
+name: Hourly Instagram Reel Auto-Post
 
 on:
   schedule:
-    # Runs at minute 0 of every hour (UTC time)
     - cron: '0 * * * *'
-  workflow_dispatch: {}   # lets you also trigger it manually from the Actions tab
+  workflow_dispatch:
 
 jobs:
-  post-to-instagram:
+  post-reel:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
-      - name: Checkout repository
+      - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Set up Python
+      - name: Setup Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
+          python-version: '3.10'
 
-      - name: Install dependencies
-        run: pip install requests
+      - name: Install System Dependencies (ffmpeg)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
 
-      - name: Run auto poster
+      - name: Install Python Dependencies
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Generate and Post Reel
         env:
           IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
           IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: python auto_poster.py
+
+      - name: Save Updated Topic Index Progress
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add progress.json
+          git commit -m "Auto-update topic index progress" || exit 0
+          git push
