@@ -147,7 +147,6 @@ def post_reel_to_instagram_direct(video_file, caption):
     r = requests.post(init_url, data=init_params)
     init_data = r.json()
     video_id = init_data.get("id")
-    # Meta Graph API can return 'upload_url' or 'uri' depending on endpoint
     upload_url = init_data.get("upload_url") or init_data.get("uri")
 
     if not video_id or not upload_url:
@@ -160,7 +159,7 @@ def post_reel_to_instagram_direct(video_file, caption):
 
     headers = {
         "Authorization": f"OAuth {access_token}",
-        "file_offset": "0",
+        "Offset": "0",
         "Content-Type": "application/octet-stream"
     }
     upload_res = requests.post(upload_url, headers=headers, data=video_bytes)
