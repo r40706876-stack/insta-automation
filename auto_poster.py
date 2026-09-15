@@ -19,6 +19,9 @@ OUTPUT_VIDEO = "reel_output.mp4"
 
 GRAPH_API_BASE = "".join(["http", "s://", "graph.", "facebook", ".com/v19.0/"])
 
+# Real Male Educator Voice for Natural Hinglish
+MALE_VOICE = "hi-IN-MadhurNeural"
+
 def get_progress():
     if os.path.exists(PROGRESS_FILE):
         try:
@@ -58,15 +61,23 @@ def generate_exam_script(raw_text):
     print(f"Using Groq Model: {model_name}")
 
     prompt = f"""
-    Tum ek expert competitive exam educator ho.
-    Neeche diye gaye PDF text me se ek SINGLE important topic chun kar 30 second ki Hindi Reel script banao.
-    
-    Strictly return ONLY a valid JSON object without backticks, markdown, or extra words:
+    You are a passionate male competitive exam educator making viral 30-second Instagram reels.
+    From the given PDF text, choose ONE high-yield topic and generate a script completely in HINGLISH (Roman English alphabet only).
+
+    STRICT GUIDELINES:
+    1. Do NOT use any Hindi/Devanagari script anywhere. Use Roman letters only.
+    2. "hook_title": Punchy 3-4 words English/Hinglish heading (e.g., "ACID BASE SHORT TRICK").
+    3. "bullet_points": Exactly 3 crisp points in English/Hinglish for the video display.
+    4. "spoken_script": Conversational, energetic Indian male voiceover in natural Hinglish (around 30-35 seconds).
+       Sound like a real confident human mentor giving quick exam advice. Avoid robotic textbook jargon.
+    5. "caption": Catchy caption with tags like #upsc #ssc #gkquiz #studygram.
+
+    Return ONLY a valid JSON object without markdown formatting:
     {{
-      "hook_title": "Attractive 3-4 words topic title",
-      "spoken_script": "30 seconds Hindi voiceover script (exam trick or core concept). Clear and direct.",
-      "bullet_points": ["Short Point 1", "Short Point 2", "Short Point 3"],
-      "caption": "Instagram reel caption with hashtags"
+      "hook_title": "SHORT TITLE",
+      "spoken_script": "Dosto agar exam me acid aur base pe question aaye, toh yeh simple trick yaad rakhna...",
+      "bullet_points": ["Point 1 in English/Hinglish", "Point 2 in English/Hinglish", "Point 3 in English/Hinglish"],
+      "caption": "Caption with hashtags"
     }}
 
     PDF Text:
@@ -89,15 +100,19 @@ def generate_exam_script(raw_text):
     return json.loads(clean_text)
 
 async def create_voiceover(text):
-    communicate = edge_tts.Communicate(text, voice="hi-IN-MadhurNeural")
+    communicate = edge_tts.Communicate(
+        text=text,
+        voice=MALE_VOICE,
+        rate="+6%",
+        pitch="-1Hz"
+    )
     await communicate.save(AUDIO_OUTPUT)
 
 def get_font(size):
     font_paths = [
-        "/usr/share/fonts/truetype/noto/NotoSansDevanagari-Bold.ttf",
-        "/usr/share/fonts/truetype/noto/NotoSansDevanagari-Regular.ttf",
-        "/usr/share/fonts/truetype/deva/NotoSansDevanagari-Bold.ttf",
-        "/usr/share/fonts/truetype/freefont/FreeSansBold.ttf"
+        "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
+        "/usr/share/fonts/truetype/freefont/FreeSansBold.ttf",
+        "/usr/share/fonts/truetype/noto/NotoSansDevanagari-Bold.ttf"
     ]
     for p in font_paths:
         if os.path.exists(p):
@@ -109,29 +124,29 @@ def create_graphic_frame(reel_data):
     img = Image.new("RGB", (width, height), color=(15, 23, 42))
     draw = ImageDraw.Draw(img)
 
-    title_font = get_font(52)
+    title_font = get_font(50)
     body_font = get_font(38)
 
-    # Header Box
-    draw.rounded_rectangle([(60, 200), (1020, 380)], radius=20, fill=(30, 41, 59), outline=(250, 204, 21), width=4)
-    title = reel_data.get("hook_title", "EXAM CAPSULE")
-    draw.text((100, 260), f"🔥 {title}", fill=(250, 204, 21), font=title_font)
+    # Top Header Box
+    draw.rounded_rectangle([(60, 200), (1020, 370)], radius=20, fill=(30, 41, 59), outline=(250, 204, 21), width=4)
+    title = reel_data.get("hook_title", "EXAM CAPSULE").upper()
+    draw.text((95, 255), f"🔥 {title}", fill=(250, 204, 21), font=title_font)
 
-    # Bullet Points Boxes
-    y_offset = 480
+    # Content Boxes
+    y_offset = 460
     for pt in reel_data.get("bullet_points", []):
-        wrapped_lines = textwrap.wrap(pt, width=28)
-        box_height = max(160, len(wrapped_lines) * 55 + 50)
+        wrapped_lines = textwrap.wrap(pt, width=32)
+        box_height = max(150, len(wrapped_lines) * 55 + 50)
 
         draw.rounded_rectangle([(60, y_offset), (1020, y_offset + box_height)], radius=18, fill=(30, 41, 59))
         
         text_y = y_offset + 30
         for idx, line in enumerate(wrapped_lines):
             prefix = "✔ " if idx == 0 else "   "
-            draw.text((100, text_y), f"{prefix}{line}", fill=(255, 255, 255), font=body_font)
+            draw.text((95, text_y), f"{prefix}{line}", fill=(255, 255, 255), font=body_font)
             text_y += 55
 
-        y_offset += box_height + 40
+        y_offset += box_height + 35
 
     img.save(FRAME_IMG)
 
@@ -220,11 +235,11 @@ def main():
     raw_text, page_num, total = extract_pdf_topic()
     print(f"Loaded Page {page_num} of {total}")
 
-    print("🤖 [Step 2] Processing exam script with Groq...")
+    print("🤖 [Step 2] Generating Hinglish Script with Groq...")
     reel_data = generate_exam_script(raw_text)
     print(f"Topic: {reel_data.get('hook_title')}")
 
-    print("🎙️ [Step 3] Generating Hindi Audio (Edge-TTS)...")
+    print(f"🎙️ [Step 3] Generating Voiceover ({MALE_VOICE})...")
     asyncio.run(create_voiceover(reel_data.get("spoken_script")))
 
     print("🖼️ [Step 4] Creating Poster Frame...")
