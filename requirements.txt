@@ -1,4 +1,4 @@
-google-genai
+groq
 pypdf
 edge-tts
 pillow
