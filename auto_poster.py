@@ -64,30 +64,28 @@ def generate_exam_script(raw_text):
     print(f"Using Groq Model: {model_name}")
 
     prompt = f"""
-    You are an expert competitive exam educator making an engaging Instagram reel.
+    You are an expert competitive exam educator making an engaging 40-second Instagram reel.
     Select ONE core topic from the PDF text.
 
-    TEACHING SEQUENCE (NO FIXED TIMING CONSTRAINT):
-    1. Take as much explanation as needed to explain the concept clearly and completely so any student understands it thoroughly. Do not rush or artificially cut the explanation.
-    2. ONCE AND ONLY ONCE the topic explanation is 100% complete, ask ONE direct question testing the student on what was just taught.
-    3. Conclude smoothly by asking them to drop the answer in the comments and contact on WhatsApp for full mock tests and notes.
+    TEACHING SEQUENCE:
+    1. First explain the concept clearly and concisely (around 25-30 seconds spoken). Do not drag the explanation.
+    2. Once the topic explanation is complete, ask ONE direct question testing the student on what was just taught.
+    3. Conclude with: "Iska sahi jawab comment me batao! Aur complete mock tests ke liye WhatsApp karein."
 
     GUIDELINES:
     1. Language: Conversational HINGLISH using Roman/English alphabet only (NO Devanagari script).
-    2. "hook_title": Punchy 3-4 words topic title in English.
-    3. "bullet_points": Exactly 3 items for the visual display:
+    2. Total words for spoken_script MUST be under 80 words (so audio stays 35-40 seconds).
+    3. "hook_title": Punchy 3-4 words topic title in English.
+    4. "bullet_points": Exactly 3 items:
        - Point 1: Core rule or fact explained
        - Point 2: Important exam point / trick
        - Point 3: "❓ Q: [One question testing this concept]"
-    4. "spoken_script":
-       - Natural, detailed explanation of the concept until clear.
-       - Then seamless transition: "Ab dekhte hain aapko kitna samajh aaya... [Question]? Iska sahi jawab comment me batao! Aur sabhi exams ke mock tests ke liye hume WhatsApp karein."
     5. "caption": Reel caption highlighting the question + exam hashtags.
 
     Return ONLY a valid JSON object without markdown:
     {{
       "hook_title": "SHORT TITLE",
-      "spoken_script": "Dosto [Complete topic explanation without rushing]... Ab dekhte hain aapko kitna samajh aaya: [Question]? Iska sahi jawab comment me batao! Aur sabhi exams ke mock tests ke liye hume WhatsApp karein.",
+      "spoken_script": "Dosto [Clear 60-75 words explanation]... Ab dekhte hain aapko kitna samajh aaya: [Question]? Iska sahi jawab comment me batao! Aur complete mock tests ke liye WhatsApp karein.",
       "bullet_points": ["Concept point 1", "Concept point 2", "❓ Q: Question here?"],
       "caption": "Can you answer this question? #gk #upsc #ssc"
     }}
@@ -185,6 +183,7 @@ def render_video():
         "-c:a", "aac", "-b:a", "192k",
         "-pix_fmt", "yuv420p",
         "-shortest",
+        "-t", "50",
         OUTPUT_VIDEO
     ]
     subprocess.run(cmd, check=True)
