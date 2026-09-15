@@ -64,22 +64,32 @@ def generate_exam_script(raw_text):
     print(f"Using Groq Model: {model_name}")
 
     prompt = f"""
-    You are an enthusiastic educator creating a 30-second Instagram reel.
-    Pick ONE high-yield concept from the PDF text and generate a lively script completely in conversational HINGLISH (English letters only).
+    You are an expert competitive exam educator making an engaging Instagram reel.
+    Select ONE core topic from the PDF text.
+
+    TEACHING SEQUENCE (NO FIXED TIMING CONSTRAINT):
+    1. Take as much explanation as needed to explain the concept clearly and completely so any student understands it thoroughly. Do not rush or artificially cut the explanation.
+    2. ONCE AND ONLY ONCE the topic explanation is 100% complete, ask ONE direct question testing the student on what was just taught.
+    3. Conclude smoothly by asking them to drop the answer in the comments and contact on WhatsApp for full mock tests and notes.
 
     GUIDELINES:
-    1. Do NOT use Devanagari script. Use Roman/English alphabet only.
-    2. "hook_title": Punchy 3-4 words title in English.
-    3. "bullet_points": Exactly 3 crisp points for on-screen display.
-    4. "spoken_script": Fluent, energetic voiceover in Hinglish (approx 25-28 seconds concept explanation) + ALWAYS end with this exact closing sentence: "Sabhi competitive exams ke complete mock test aur e-books ke liye hume WhatsApp karein."
-    5. "caption": Catchy caption with tags like #upsc #ssc #gkquiz #studygram.
+    1. Language: Conversational HINGLISH using Roman/English alphabet only (NO Devanagari script).
+    2. "hook_title": Punchy 3-4 words topic title in English.
+    3. "bullet_points": Exactly 3 items for the visual display:
+       - Point 1: Core rule or fact explained
+       - Point 2: Important exam point / trick
+       - Point 3: "❓ Q: [One question testing this concept]"
+    4. "spoken_script":
+       - Natural, detailed explanation of the concept until clear.
+       - Then seamless transition: "Ab dekhte hain aapko kitna samajh aaya... [Question]? Iska sahi jawab comment me batao! Aur sabhi exams ke mock tests ke liye hume WhatsApp karein."
+    5. "caption": Reel caption highlighting the question + exam hashtags.
 
     Return ONLY a valid JSON object without markdown:
     {{
       "hook_title": "SHORT TITLE",
-      "spoken_script": "Dosto exam me yeh trick yaad rakhna... Sabhi competitive exams ke complete mock test aur e-books ke liye hume WhatsApp karein.",
-      "bullet_points": ["Point 1", "Point 2", "Point 3"],
-      "caption": "Reel caption with tags"
+      "spoken_script": "Dosto [Complete topic explanation without rushing]... Ab dekhte hain aapko kitna samajh aaya: [Question]? Iska sahi jawab comment me batao! Aur sabhi exams ke mock tests ke liye hume WhatsApp karein.",
+      "bullet_points": ["Concept point 1", "Concept point 2", "❓ Q: Question here?"],
+      "caption": "Can you answer this question? #gk #upsc #ssc"
     }}
 
     PDF Text:
@@ -135,7 +145,7 @@ def create_graphic_frame(reel_data):
     title = reel_data.get("hook_title", "EXAM CAPSULE").upper()
     draw.text((95, 255), f"🔥 {title}", fill=(250, 204, 21), font=title_font)
 
-    # 2. Content Boxes (Bullet Points)
+    # 2. Content Boxes (Topic Explanation + Final Question)
     y_offset = 450
     for pt in reel_data.get("bullet_points", []):
         wrapped_lines = textwrap.wrap(pt, width=32)
@@ -145,8 +155,9 @@ def create_graphic_frame(reel_data):
         
         text_y = y_offset + 28
         for idx, line in enumerate(wrapped_lines):
-            prefix = "✔ " if idx == 0 else "   "
-            draw.text((95, text_y), f"{prefix}{line}", fill=(255, 255, 255), font=body_font)
+            prefix = "✔ " if (idx == 0 and not line.startswith("❓")) else ("" if line.startswith("❓") else "   ")
+            text_color = (250, 204, 21) if "❓" in line else (255, 255, 255)
+            draw.text((95, text_y), f"{prefix}{line}", fill=text_color, font=body_font)
             text_y += 52
 
         y_offset += box_height + 32
@@ -178,7 +189,7 @@ def render_video():
     ]
     subprocess.run(cmd, check=True)
 
-# Original stable upload function (Run #64 proven configuration)
+# Original stable upload function (Run #64 proven configuration - UNCHANGED)
 def post_reel_to_instagram_direct(video_file, caption):
     access_token = os.environ.get("IG_ACCESS_TOKEN")
     user_id = os.environ.get("IG_USER_ID")
@@ -266,7 +277,8 @@ def main():
     # Attractive promo attached to caption
     caption_base = reel_data.get("caption", "")
     promo_caption = (
-        f"\n\n━━━━━━━━━━━━━━━━━━━━\n"
+        f"\n\n💬 Drop your answer in the COMMENTS below!\n"
+        f"━━━━━━━━━━━━━━━━━━━━\n"
         f"🎯 Complete Mock Tests & E-Books for all Competitive Exams (Banking, SSC, Railway, State PCS)!\n"
         f"📲 Send 'NOTES' on WhatsApp to get instant access: {WHATSAPP_NUMBER}\n"
         f"━━━━━━━━━━━━━━━━━━━━"
