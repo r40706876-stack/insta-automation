@@ -16,6 +16,9 @@ FRAME_IMG = "frame.png"
 AUDIO_OUTPUT = "voiceover.mp3"
 OUTPUT_VIDEO = "reel_output.mp4"
 
+# Safe URL base - immune to markdown hyperlinking
+GRAPH_API_BASE = "".join(["http", "s://", "graph.", "facebook", ".com/v19.0/"])
+
 def get_progress():
     if os.path.exists(PROGRESS_FILE):
         try:
@@ -114,6 +117,7 @@ def render_video():
         "-loop", "1", "-i", FRAME_IMG,
         "-i", AUDIO_OUTPUT,
         "-c:v", "libx264", "-tune", "stillimage",
+        "-r", "30",
         "-c:a", "aac", "-b:a", "192k",
         "-pix_fmt", "yuv420p",
         "-shortest",
@@ -132,17 +136,19 @@ def post_reel_to_instagram_direct(video_file, caption):
     print(f"Video size: {file_size} bytes. Initializing upload container...")
 
     # Step 1: Start Resumable Upload Session
-    init_url = f"[https://graph.facebook.com/v19.0/](https://graph.facebook.com/v19.0/){user_id}/media"
+    init_url = GRAPH_API_BASE + str(user_id).strip() + "/media"
     init_params = {
         "media_type": "REELS",
         "upload_type": "resumable",
         "caption": caption,
+        "length": file_size,
         "access_token": access_token
     }
     r = requests.post(init_url, data=init_params)
     init_data = r.json()
     video_id = init_data.get("id")
-    upload_url = init_data.get("uri")
+    # Meta Graph API can return 'upload_url' or 'uri' depending on endpoint
+    upload_url = init_data.get("upload_url") or init_data.get("uri")
 
     if not video_id or not upload_url:
         raise RuntimeError(f"Upload init fail hua: {init_data}")
@@ -163,7 +169,7 @@ def post_reel_to_instagram_direct(video_file, caption):
 
     # Step 3: Wait for Meta Video Processing
     print("Waiting for Instagram video processing...")
-    status_url = f"[https://graph.facebook.com/v19.0/](https://graph.facebook.com/v19.0/){video_id}"
+    status_url = GRAPH_API_BASE + str(video_id).strip()
     for _ in range(25):
         time.sleep(6)
         status_res = requests.get(status_url, params={"fields": "status_code", "access_token": access_token}).json()
@@ -176,7 +182,7 @@ def post_reel_to_instagram_direct(video_file, caption):
 
     # Step 4: Final Reel Publish
     print("Publishing Reel...")
-    publish_url = f"[https://graph.facebook.com/v19.0/](https://graph.facebook.com/v19.0/){user_id}/media_publish"
+    publish_url = GRAPH_API_BASE + str(user_id).strip() + "/media_publish"
     pub_res = requests.post(publish_url, data={"creation_id": video_id, "access_token": access_token}).json()
 
     if "id" in pub_res:
