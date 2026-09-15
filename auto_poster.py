@@ -94,12 +94,12 @@ def create_graphic_frame(reel_data):
     img = Image.new("RGB", (width, height), color=(15, 23, 42))
     draw = ImageDraw.Draw(img)
 
-    # Header Box
+    # Title Banner
     draw.rectangle([(80, 200), (1000, 360)], fill=(30, 41, 59))
     title = reel_data.get("hook_title", "EXAM CAPSULE")
     draw.text((120, 240), f"🔥 {title}", fill=(250, 204, 21))
 
-    # Bullets
+    # Bullet Points
     y_offset = 550
     for pt in reel_data.get("bullet_points", []):
         draw.rectangle([(80, y_offset), (1000, y_offset + 140)], fill=(30, 41, 59))
@@ -121,62 +121,68 @@ def render_video():
     ]
     subprocess.run(cmd, check=True)
 
-def upload_video_to_temp_host(file_path):
-    """Instagram ke download karne ke liye temporary public link banata hai."""
-    print("🌐 Uploading video for Instagram download link...")
-    with open(file_path, "rb") as f:
-        res = requests.post(
-            "[https://catbox.moe/user/api.php](https://catbox.moe/user/api.php)",
-            data={"reqtype": "fileupload"},
-            files={"fileToUpload": f}
-        )
-    if res.status_code == 200 and res.text.startswith("http"):
-        return res.text.strip()
-    raise RuntimeError(f"Temporary video link nahi bana: {res.text}")
-
-def post_reel_to_instagram(video_url, caption):
+def post_reel_to_instagram_direct(video_file, caption):
     access_token = os.environ.get("IG_ACCESS_TOKEN")
     user_id = os.environ.get("IG_USER_ID")
     
     if not access_token or not user_id:
-        raise ValueError("IG_ACCESS_TOKEN ya IG_USER_ID GitHub Secrets me missing hai!")
+        raise ValueError("IG_ACCESS_TOKEN ya IG_USER_ID secrets me missing hai!")
 
-    print("📲 Step 1: Instagram container create ho raha hai...")
-    container_url = f"[https://graph.facebook.com/v19.0/](https://graph.facebook.com/v19.0/){user_id}/media"
-    payload = {
+    file_size = os.path.getsize(video_file)
+    print(f"Video size: {file_size} bytes. Initializing upload container...")
+
+    # Step 1: Start Resumable Upload Session
+    init_url = f"[https://graph.facebook.com/v19.0/](https://graph.facebook.com/v19.0/){user_id}/media"
+    init_params = {
         "media_type": "REELS",
-        "video_url": video_url,
+        "upload_type": "resumable",
         "caption": caption,
         "access_token": access_token
     }
-    r = requests.post(container_url, data=payload)
-    res_data = r.json()
-    creation_id = res_data.get("id")
-    
-    if not creation_id:
-        raise RuntimeError(f"Instagram Container Error: {res_data}")
+    r = requests.post(init_url, data=init_params)
+    init_data = r.json()
+    video_id = init_data.get("id")
+    upload_url = init_data.get("uri")
 
-    # Instagram server processing wait
-    print("⏳ Step 2: Instagram par video ready hone ka wait ho raha hai...")
-    status_url = f"[https://graph.facebook.com/v19.0/](https://graph.facebook.com/v19.0/){creation_id}"
-    for _ in range(15):
-        time.sleep(10)
+    if not video_id or not upload_url:
+        raise RuntimeError(f"Upload init fail hua: {init_data}")
+
+    # Step 2: Stream Video Bytes directly to Instagram Server
+    print("Uploading video binary data directly to Instagram...")
+    with open(video_file, "rb") as vf:
+        video_bytes = vf.read()
+
+    headers = {
+        "Authorization": f"OAuth {access_token}",
+        "file_offset": "0",
+        "Content-Type": "application/octet-stream"
+    }
+    upload_res = requests.post(upload_url, headers=headers, data=video_bytes)
+    if upload_res.status_code not in [200, 201]:
+        raise RuntimeError(f"Video binary upload fail hua: {upload_res.text}")
+
+    # Step 3: Wait for Meta Video Processing
+    print("Waiting for Instagram video processing...")
+    status_url = f"[https://graph.facebook.com/v19.0/](https://graph.facebook.com/v19.0/){video_id}"
+    for _ in range(25):
+        time.sleep(6)
         status_res = requests.get(status_url, params={"fields": "status_code", "access_token": access_token}).json()
         status = status_res.get("status_code")
         print(f"Status: {status}...")
         if status == "FINISHED":
             break
         elif status == "ERROR":
-            raise RuntimeError(f"Instagram video processing fail hui: {status_res}")
+            raise RuntimeError(f"Instagram processing error: {status_res}")
 
-    print("🚀 Step 3: Reel publish ho rahi hai...")
+    # Step 4: Final Reel Publish
+    print("Publishing Reel...")
     publish_url = f"[https://graph.facebook.com/v19.0/](https://graph.facebook.com/v19.0/){user_id}/media_publish"
-    publish_res = requests.post(publish_url, data={"creation_id": creation_id, "access_token": access_token}).json()
-    
-    if "id" in publish_res:
-        print(f"🎉 Reel successfully Instagram par post ho gayi! Post ID: {publish_res['id']}")
+    pub_res = requests.post(publish_url, data={"creation_id": video_id, "access_token": access_token}).json()
+
+    if "id" in pub_res:
+        print(f"🎉 Reel successfully published on Instagram! Post ID: {pub_res['id']}")
     else:
-        raise RuntimeError(f"Publish failed: {publish_res}")
+        raise RuntimeError(f"Publish fail hua: {pub_res}")
 
 def main():
     print("🚀 [Step 1] Reading topic from notes.pdf...")
@@ -196,11 +202,10 @@ def main():
     print("🎬 [Step 5] Merging to 9:16 Video (FFmpeg)...")
     render_video()
 
-    print("🌐 [Step 6] Posting Reel to Instagram...")
-    public_video_url = upload_video_to_temp_host(OUTPUT_VIDEO)
-    post_reel_to_instagram(public_video_url, reel_data.get("caption", ""))
+    print("📲 [Step 6] Uploading directly to Instagram...")
+    post_reel_to_instagram_direct(OUTPUT_VIDEO, reel_data.get("caption", ""))
 
-    print("\n✅ All steps completed successfully!")
+    print("\n✅ Entire workflow completed successfully!")
 
 if __name__ == "__main__":
     main()
