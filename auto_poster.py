@@ -16,7 +16,6 @@ FRAME_IMG = "frame.png"
 AUDIO_OUTPUT = "voiceover.mp3"
 OUTPUT_VIDEO = "reel_output.mp4"
 
-# Safe URL base - immune to markdown hyperlinking
 GRAPH_API_BASE = "".join(["http", "s://", "graph.", "facebook", ".com/v19.0/"])
 
 def get_progress():
@@ -160,6 +159,8 @@ def post_reel_to_instagram_direct(video_file, caption):
     headers = {
         "Authorization": f"OAuth {access_token}",
         "Offset": "0",
+        "Content-Length": str(file_size),
+        "X-Entity-Length": str(file_size),
         "Content-Type": "application/octet-stream"
     }
     upload_res = requests.post(upload_url, headers=headers, data=video_bytes)
