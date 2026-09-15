@@ -19,8 +19,11 @@ OUTPUT_VIDEO = "reel_output.mp4"
 
 GRAPH_API_BASE = "".join(["http", "s://", "graph.", "facebook", ".com/v19.0/"])
 
-# Sirf voice change: Realistic Indian Female Voice
+# Voice: Realistic Female Voice
 VOICE_NAME = "hi-IN-SwaraNeural"
+
+# WhatsApp Business Lead Number
+WHATSAPP_NUMBER = "+91 8989971379"
 
 def get_progress():
     if os.path.exists(PROGRESS_FILE):
@@ -68,13 +71,13 @@ def generate_exam_script(raw_text):
     1. Do NOT use Devanagari script. Use Roman/English alphabet only.
     2. "hook_title": Punchy 3-4 words title in English.
     3. "bullet_points": Exactly 3 crisp points for on-screen display.
-    4. "spoken_script": Fluent, energetic voiceover in Hinglish (approx 30 seconds). Sound like an engaging creator talking directly to students.
+    4. "spoken_script": Fluent, energetic voiceover in Hinglish (approx 25-28 seconds concept explanation) + ALWAYS end with this exact closing sentence: "Sabhi competitive exams ke complete mock test aur e-books ke liye hume WhatsApp karein."
     5. "caption": Catchy caption with tags like #upsc #ssc #gkquiz #studygram.
 
     Return ONLY a valid JSON object without markdown:
     {{
       "hook_title": "SHORT TITLE",
-      "spoken_script": "Dosto exam me yeh trick yaad rakhna...",
+      "spoken_script": "Dosto exam me yeh trick yaad rakhna... Sabhi competitive exams ke complete mock test aur e-books ke liye hume WhatsApp karein.",
       "bullet_points": ["Point 1", "Point 2", "Point 3"],
       "caption": "Reel caption with tags"
     }}
@@ -124,27 +127,40 @@ def create_graphic_frame(reel_data):
 
     title_font = get_font(50)
     body_font = get_font(38)
+    promo_title_font = get_font(36)
+    promo_num_font = get_font(44)
 
-    # Top Header Box
+    # 1. Top Header Box (Title)
     draw.rounded_rectangle([(60, 200), (1020, 370)], radius=20, fill=(30, 41, 59), outline=(250, 204, 21), width=4)
     title = reel_data.get("hook_title", "EXAM CAPSULE").upper()
     draw.text((95, 255), f"🔥 {title}", fill=(250, 204, 21), font=title_font)
 
-    # Content Boxes
-    y_offset = 460
+    # 2. Content Boxes (Bullet Points)
+    y_offset = 450
     for pt in reel_data.get("bullet_points", []):
         wrapped_lines = textwrap.wrap(pt, width=32)
-        box_height = max(150, len(wrapped_lines) * 55 + 50)
+        box_height = max(145, len(wrapped_lines) * 52 + 45)
 
         draw.rounded_rectangle([(60, y_offset), (1020, y_offset + box_height)], radius=18, fill=(30, 41, 59))
         
-        text_y = y_offset + 30
+        text_y = y_offset + 28
         for idx, line in enumerate(wrapped_lines):
             prefix = "✔ " if idx == 0 else "   "
             draw.text((95, text_y), f"{prefix}{line}", fill=(255, 255, 255), font=body_font)
-            text_y += 55
+            text_y += 52
 
-        y_offset += box_height + 35
+        y_offset += box_height + 32
+
+    # 3. Bottom Professional Promo Banner
+    promo_top = 1520
+    promo_bottom = 1750
+    draw.rounded_rectangle([(60, promo_top), (1020, promo_bottom)], radius=24, fill=(17, 24, 39), outline=(34, 197, 94), width=4)
+    
+    promo_text1 = "📚 COMPLETE MOCK TESTS & E-BOOKS"
+    draw.text((100, promo_top + 35), promo_text1, fill=(250, 204, 21), font=promo_title_font)
+    
+    promo_text2 = f"📲 WhatsApp: {WHATSAPP_NUMBER}"
+    draw.text((100, promo_top + 105), promo_text2, fill=(34, 197, 94), font=promo_num_font)
 
     img.save(FRAME_IMG)
 
@@ -162,6 +178,7 @@ def render_video():
     ]
     subprocess.run(cmd, check=True)
 
+# Original stable upload function (Run #64 proven configuration)
 def post_reel_to_instagram_direct(video_file, caption):
     access_token = os.environ.get("IG_ACCESS_TOKEN")
     user_id = os.environ.get("IG_USER_ID")
@@ -246,8 +263,18 @@ def main():
     print("🎬 [Step 5] Merging to 9:16 Video (FFmpeg)...")
     render_video()
 
+    # Attractive promo attached to caption
+    caption_base = reel_data.get("caption", "")
+    promo_caption = (
+        f"\n\n━━━━━━━━━━━━━━━━━━━━\n"
+        f"🎯 Complete Mock Tests & E-Books for all Competitive Exams (Banking, SSC, Railway, State PCS)!\n"
+        f"📲 Send 'NOTES' on WhatsApp to get instant access: {WHATSAPP_NUMBER}\n"
+        f"━━━━━━━━━━━━━━━━━━━━"
+    )
+    final_caption = f"{caption_base}\n{promo_caption}"
+
     print("📲 [Step 6] Uploading directly to Instagram...")
-    post_reel_to_instagram_direct(OUTPUT_VIDEO, reel_data.get("caption", ""))
+    post_reel_to_instagram_direct(OUTPUT_VIDEO, final_caption)
 
     print("\n✅ Entire workflow completed successfully!")
 
