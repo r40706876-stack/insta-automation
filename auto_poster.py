@@ -7,7 +7,6 @@ import textwrap
 import asyncio
 import requests
 from pypdf import PdfReader
-from google import genai
 import edge_tts
 from PIL import Image, ImageDraw, ImageFont
 from moviepy.editor import ImageClip, AudioFileClip, concatenate_videoclips
@@ -29,6 +28,41 @@ def get_pdf_text(pdf_path="notes.pdf"):
             text += extracted + "\n"
     return text
 
+def call_gemini_rest_api(prompt):
+    """
+    Direct REST API call to Google Gemini. 
+    Eliminates all SDK version mismatches and automatically retries with multiple models.
+    """
+    models_to_try = ["gemini-2.0-flash", "gemini-1.5-flash", "gemini-1.5-pro"]
+    last_error = ""
+
+    for model_name in models_to_try:
+        url = f"https://generativelanguage.googleapis.com/v1beta/models/{model_name}:generateContent?key={GEMINI_API_KEY}"
+        headers = {"Content-Type": "application/json"}
+        payload = {
+            "contents": [{
+                "parts": [{"text": prompt}]
+            }]
+        }
+        
+        try:
+            print(f"🔄 Gemini REST API कॉल की जा रही है ({model_name})...", flush=True)
+            response = requests.post(url, headers=headers, json=payload, timeout=30)
+            
+            if response.status_code == 200:
+                res_data = response.json()
+                text_output = res_data['candidates'][0]['content']['parts'][0]['text']
+                print(f"✅ सफलता! मॉडल {model_name} से रिस्पॉन्स मिल गया।", flush=True)
+                return text_output
+            else:
+                print(f"⚠️ {model_name} एरर ({response.status_code}): {response.text}", flush=True)
+                last_error = response.text
+        except Exception as e:
+            print(f"⚠️ {model_name} अपवाद: {e}", flush=True)
+            last_error = str(e)
+
+    raise Exception(f"❌ सभी Gemini मॉडल्स फेल हो गए! अंतिम एरर: {last_error}")
+
 def generate_reel_content():
     pdf_text = get_pdf_text()
     progress_file = "progress.json"
@@ -40,26 +74,6 @@ def generate_reel_content():
                 topic_index = data.get("last_topic_index", 0)
         except Exception:
             topic_index = 0
-
-    client = genai.Client(api_key=GEMINI_API_KEY)
-
-    # Dynamic Model Selector - API Key के अनुसार सही मॉडल खुद चुनेगा
-    selected_model = "gemini-2.0-flash"
-    try:
-        available_models = [m.name.replace("models/", "") for m in client.models.list()]
-        print(f"📋 आपकी API Key के लिए उपलब्ध मॉडल्स: {available_models}", flush=True)
-        
-        for candidate in ["gemini-2.0-flash", "gemini-1.5-flash", "gemini-1.5-pro"]:
-            if candidate in available_models:
-                selected_model = candidate
-                break
-        else:
-            if available_models:
-                selected_model = available_models[0]
-    except Exception as e:
-        print(f"⚠️ मॉडल ऑटो-डिटेक्ट नहीं हो सका, डिफॉल्ट का उपयोग कर रहे हैं: {e}", flush=True)
-
-    print(f"🤖 चुना गया मॉडल: {selected_model}", flush=True)
 
     prompt = f"""
     You are an expert educational content creator for Instagram Reels.
@@ -80,13 +94,10 @@ def generate_reel_content():
     }}
     """
 
-    response = client.models.generate_content(
-        model=selected_model,
-        contents=prompt
-    )
+    raw_response_text = call_gemini_rest_api(prompt)
 
-    json_match = re.search(r'\{.*\}', response.text, re.DOTALL)
-    clean_json = json_match.group(0) if json_match else response.text.replace("```json", "").replace("```", "").strip()
+    json_match = re.search(r'\{.*\}', raw_response_text, re.DOTALL)
+    clean_json = json_match.group(0) if json_match else raw_response_text.replace("```json", "").replace("```", "").strip()
 
     content = json.loads(clean_json)
 
