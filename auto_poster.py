@@ -7,17 +7,10 @@ import textwrap
 import asyncio
 import requests
 from pypdf import PdfReader
-import google.generativeai as genai
+from google import genai
 import edge_tts
 from PIL import Image, ImageDraw, ImageFont
-
-# MoviePy Import Compatibility Layer
-try:
-    from moviepy.editor import ImageClip, AudioFileClip, concatenate_videoclips
-except ModuleNotFoundError:
-    from moviepy.video.VideoClip import ImageClip
-    from moviepy.audio.io.AudioFileClip import AudioFileClip
-    from moviepy.video.compositing.concatenate import concatenate_videoclips
+from moviepy.editor import ImageClip, AudioFileClip, concatenate_videoclips
 
 # Secrets
 IG_ACCESS_TOKEN = os.environ.get("IG_ACCESS_TOKEN")
@@ -48,8 +41,7 @@ def generate_reel_content():
         except Exception:
             topic_index = 0
 
-    genai.configure(api_key=GEMINI_API_KEY)
-    model = genai.GenerativeModel('gemini-1.5-flash')
+    client = genai.Client(api_key=GEMINI_API_KEY)
 
     prompt = f"""
     You are an expert educational content creator for Instagram Reels.
@@ -70,7 +62,11 @@ def generate_reel_content():
     }}
     """
 
-    response = model.generate_content(prompt)
+    response = client.models.generate_content(
+        model='gemini-2.5-flash',
+        contents=prompt
+    )
+
     json_match = re.search(r'\{.*\}', response.text, re.DOTALL)
     clean_json = json_match.group(0) if json_match else response.text.replace("```json", "").replace("```", "").strip()
 
@@ -103,7 +99,7 @@ def create_slide_image(title, body_text, slide_num, output_path):
     draw.text((80, 115), f"📌 {title.upper()[:25]}", fill=(56, 189, 248), font=font_title)
     draw.text((920, 125), f"[{slide_num}/3]", fill=(148, 163, 184), font=font_sub)
 
-    # Main Card
+    # Content Box
     draw.rectangle([50, 240, 1030, 1720], fill=(30, 41, 59))
     
     raw_lines = body_text.split('\n')
