@@ -19,8 +19,8 @@ OUTPUT_VIDEO = "reel_output.mp4"
 
 GRAPH_API_BASE = "".join(["http", "s://", "graph.", "facebook", ".com/v19.0/"])
 
-# Sirf voice change
-MALE_VOICE = "en-IN-PrabhatNeural"
+# Sirf voice change: Realistic Indian Female Voice
+VOICE_NAME = "hi-IN-SwaraNeural"
 
 def get_progress():
     if os.path.exists(PROGRESS_FILE):
@@ -101,7 +101,7 @@ def generate_exam_script(raw_text):
 async def create_voiceover(text):
     communicate = edge_tts.Communicate(
         text=text,
-        voice=MALE_VOICE,
+        voice=VOICE_NAME,
         rate="+8%"
     )
     await communicate.save(AUDIO_OUTPUT)
@@ -237,7 +237,7 @@ def main():
     reel_data = generate_exam_script(raw_text)
     print(f"Topic: {reel_data.get('hook_title')}")
 
-    print(f"🎙️ [Step 3] Generating Voiceover ({MALE_VOICE})...")
+    print(f"🎙️ [Step 3] Generating Voiceover ({VOICE_NAME})...")
     asyncio.run(create_voiceover(reel_data.get("spoken_script")))
 
     print("🖼️ [Step 4] Creating Poster Frame...")
