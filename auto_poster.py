@@ -189,7 +189,7 @@ def render_video():
     ]
     subprocess.run(cmd, check=True)
 
-# Original stable upload function (Run #64 proven configuration - UNCHANGED)
+# Run #64 wala EXACT proven upload logic
 def post_reel_to_instagram_direct(video_file, caption):
     access_token = os.environ.get("IG_ACCESS_TOKEN")
     user_id = os.environ.get("IG_USER_ID")
