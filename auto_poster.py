@@ -10,7 +10,14 @@ from pypdf import PdfReader
 import google.generativeai as genai
 import edge_tts
 from PIL import Image, ImageDraw, ImageFont
-from moviepy.editor import ImageClip, AudioFileClip, concatenate_videoclips
+
+# MoviePy Import Compatibility Layer
+try:
+    from moviepy.editor import ImageClip, AudioFileClip, concatenate_videoclips
+except ModuleNotFoundError:
+    from moviepy.video.VideoClip import ImageClip
+    from moviepy.audio.io.AudioFileClip import AudioFileClip
+    from moviepy.video.compositing.concatenate import concatenate_videoclips
 
 # Secrets
 IG_ACCESS_TOKEN = os.environ.get("IG_ACCESS_TOKEN")
@@ -65,10 +72,7 @@ def generate_reel_content():
 
     response = model.generate_content(prompt)
     json_match = re.search(r'\{.*\}', response.text, re.DOTALL)
-    if json_match:
-        clean_json = json_match.group(0)
-    else:
-        clean_json = response.text.replace("```json", "").replace("```", "").strip()
+    clean_json = json_match.group(0) if json_match else response.text.replace("```json", "").replace("```", "").strip()
 
     content = json.loads(clean_json)
 
@@ -88,28 +92,28 @@ def create_slide_image(title, body_text, slide_num, output_path):
     draw = ImageDraw.Draw(img)
 
     try:
-        font_title = ImageFont.load_default(size=48)
-        font_body = ImageFont.load_default(size=38)
-        font_sub = ImageFont.load_default(size=30)
+        font_title = ImageFont.load_default(size=44)
+        font_body = ImageFont.load_default(size=36)
+        font_sub = ImageFont.load_default(size=28)
     except TypeError:
         font_title = font_body = font_sub = ImageFont.load_default()
 
-    # Title Box
+    # Title Banner
     draw.rectangle([50, 80, 1030, 200], fill=(30, 41, 59))
     draw.text((80, 115), f"📌 {title.upper()[:25]}", fill=(56, 189, 248), font=font_title)
     draw.text((920, 125), f"[{slide_num}/3]", fill=(148, 163, 184), font=font_sub)
 
-    # Content Box
+    # Main Card
     draw.rectangle([50, 240, 1030, 1720], fill=(30, 41, 59))
     
     raw_lines = body_text.split('\n')
     y_pos = 300
     for line in raw_lines:
-        wrapped_lines = textwrap.wrap(line.strip(), width=38)
+        wrapped_lines = textwrap.wrap(line.strip(), width=36)
         for w_line in wrapped_lines:
             draw.text((90, y_pos), w_line, fill=(241, 245, 249), font=font_body)
-            y_pos += 65
-        y_pos += 25
+            y_pos += 60
+        y_pos += 20
 
     # Footer
     draw.text((380, 1780), "⚡ Exam Prep Shorts", fill=(148, 163, 184), font=font_sub)
@@ -169,7 +173,6 @@ def publish_instagram_reel(video_url, caption):
         resp.raise_for_status()
         
     container_id = resp.json()["id"]
-    
     status_url = f"https://graph.facebook.com/{GRAPH_API_VERSION}/{container_id}"
     params = {"fields": "status_code", "access_token": IG_ACCESS_TOKEN}
     
