@@ -19,7 +19,7 @@ OUTPUT_VIDEO = "reel_output.mp4"
 
 GRAPH_API_BASE = "".join(["http", "s://", "graph.", "facebook", ".com/v19.0/"])
 
-# Real Male Educator Voice for Natural Hinglish
+# Natural Male Educator Voice
 MALE_VOICE = "hi-IN-MadhurNeural"
 
 def get_progress():
@@ -69,7 +69,7 @@ def generate_exam_script(raw_text):
     2. "hook_title": Punchy 3-4 words English/Hinglish heading (e.g., "ACID BASE SHORT TRICK").
     3. "bullet_points": Exactly 3 crisp points in English/Hinglish for the video display.
     4. "spoken_script": Conversational, energetic Indian male voiceover in natural Hinglish (around 30-35 seconds).
-       Sound like a real confident human mentor giving quick exam advice. Avoid robotic textbook jargon.
+       Sound like a real confident human mentor giving quick exam advice.
     5. "caption": Catchy caption with tags like #upsc #ssc #gkquiz #studygram.
 
     Return ONLY a valid JSON object without markdown formatting:
@@ -180,7 +180,6 @@ def post_reel_to_instagram_direct(video_file, caption):
         "media_type": "REELS",
         "upload_type": "resumable",
         "caption": caption,
-        "length": file_size,
         "access_token": access_token
     }
     r = requests.post(init_url, data=init_params)
@@ -191,7 +190,7 @@ def post_reel_to_instagram_direct(video_file, caption):
     if not video_id or not upload_url:
         raise RuntimeError(f"Upload init fail hua: {init_data}")
 
-    # Step 2: Stream Video Bytes directly to Instagram Server
+    # Step 2: Stream Video Bytes directly to Instagram Server (Working Header Setup)
     print("Uploading video binary data directly to Instagram...")
     with open(video_file, "rb") as vf:
         video_bytes = vf.read()
@@ -199,8 +198,6 @@ def post_reel_to_instagram_direct(video_file, caption):
     headers = {
         "Authorization": f"OAuth {access_token}",
         "Offset": "0",
-        "Content-Length": str(file_size),
-        "X-Entity-Length": str(file_size),
         "Content-Type": "application/octet-stream"
     }
     upload_res = requests.post(upload_url, headers=headers, data=video_bytes)
