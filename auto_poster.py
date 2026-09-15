@@ -19,7 +19,7 @@ OUTPUT_VIDEO = "reel_output.mp4"
 
 GRAPH_API_BASE = "".join(["http", "s://", "graph.", "facebook", ".com/v19.0/"])
 
-# Sirf voice change: Male natural voice
+# Sirf voice change
 MALE_VOICE = "en-IN-PrabhatNeural"
 
 def get_progress():
@@ -162,7 +162,6 @@ def render_video():
     ]
     subprocess.run(cmd, check=True)
 
-# Wahi same exact upload logic jo Run #64 me pass hua tha
 def post_reel_to_instagram_direct(video_file, caption):
     access_token = os.environ.get("IG_ACCESS_TOKEN")
     user_id = os.environ.get("IG_USER_ID")
@@ -198,6 +197,8 @@ def post_reel_to_instagram_direct(video_file, caption):
     headers = {
         "Authorization": f"OAuth {access_token}",
         "Offset": "0",
+        "Content-Length": str(file_size),
+        "X-Entity-Length": str(file_size),
         "Content-Type": "application/octet-stream"
     }
     upload_res = requests.post(upload_url, headers=headers, data=video_bytes)
