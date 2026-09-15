@@ -41,7 +41,11 @@ def generate_reel_content():
         except Exception:
             topic_index = 0
 
-    client = genai.Client(api_key=GEMINI_API_KEY)
+    # Explicitly force v1beta API version to avoid v1alpha 404 errors
+    client = genai.Client(
+        api_key=GEMINI_API_KEY,
+        http_options={'api_version': 'v1beta'}
+    )
 
     prompt = f"""
     You are an expert educational content creator for Instagram Reels.
