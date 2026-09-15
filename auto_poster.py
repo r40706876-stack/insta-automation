@@ -1,12 +1,11 @@
 import os
 import sys
 import json
-import time
 import asyncio
 import subprocess
 from pypdf import PdfReader
 from PIL import Image, ImageDraw
-from google import genai
+from groq import Groq
 import edge_tts
 
 PDF_PATH = "notes.pdf"
@@ -45,11 +44,11 @@ def extract_pdf_topic():
     return text, current_page + 1, total_pages
 
 def generate_exam_script(raw_text):
-    api_key = os.environ.get("GEMINI_API_KEY")
+    api_key = os.environ.get("GROQ_API_KEY")
     if not api_key:
-        raise ValueError("GEMINI_API_KEY GitHub Secrets me set nahi hai!")
+        raise ValueError("GROQ_API_KEY GitHub Secrets me set nahi hai!")
 
-    client = genai.Client(api_key=api_key)
+    client = Groq(api_key=api_key)
 
     prompt = f"""
     Tum ek expert competitive exam educator ho.
@@ -67,28 +66,14 @@ def generate_exam_script(raw_text):
     {raw_text[:2500]}
     """
 
-    # 503 high demand aane par backup models aur retry handle karega
-    models_to_try = ["gemini-3.6-flash", "gemini-2.5-flash", "gemini-2.0-flash"]
+    print("Generating script with Groq (Fast & Stable)...")
+    response = client.chat.completions.create(
+        model="llama-3.3-70b-versatile",
+        messages=[{"role": "user", "content": prompt}],
+        response_format={"type": "json_object"}
+    )
 
-    for model_name in models_to_try:
-        for attempt in range(2):
-            try:
-                print(f"Calling Model: {model_name} (Attempt {attempt + 1})...")
-                response = client.models.generate_content(
-                    model=model_name,
-                    contents=prompt
-                )
-                clean_text = response.text.strip()
-                if clean_text.startswith("```"):
-                    clean_text = clean_text.strip("`")
-                    if clean_text.startswith("json"):
-                        clean_text = clean_text[4:].strip()
-                return json.loads(clean_text)
-            except Exception as e:
-                print(f"Notice: {model_name} busy ya error ({e}). Retrying in 3 seconds...")
-                time.sleep(3)
-
-    raise RuntimeError("Google ke sabhi models par temporary high demand hai. Kripya thodi der baad chalayein.")
+    return json.loads(response.choices[0].message.content)
 
 async def create_voiceover(text):
     communicate = edge_tts.Communicate(text, voice="hi-IN-MadhurNeural")
@@ -99,12 +84,12 @@ def create_graphic_frame(reel_data):
     img = Image.new("RGB", (width, height), color=(15, 23, 42))
     draw = ImageDraw.Draw(img)
 
-    # Title box
+    # Header Box
     draw.rectangle([(80, 200), (1000, 360)], fill=(30, 41, 59))
     title = reel_data.get("hook_title", "EXAM CAPSULE")
     draw.text((120, 240), f"🔥 {title}", fill=(250, 204, 21))
 
-    # Bullet points
+    # Bullets
     y_offset = 550
     for pt in reel_data.get("bullet_points", []):
         draw.rectangle([(80, y_offset), (1000, y_offset + 140)], fill=(30, 41, 59))
@@ -131,7 +116,7 @@ def main():
     raw_text, page_num, total = extract_pdf_topic()
     print(f"Loaded Page {page_num} of {total}")
 
-    print("🤖 [Step 2] Processing exam script with Gemini...")
+    print("🤖 [Step 2] Processing exam script...")
     reel_data = generate_exam_script(raw_text)
     print(f"Topic: {reel_data.get('hook_title')}")
 
