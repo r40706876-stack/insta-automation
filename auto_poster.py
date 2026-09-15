@@ -5,7 +5,7 @@ import random
 import urllib.parse
 import requests
 
-# GitHub Secrets से टोकन और आईडी पाना
+# GitHub Secrets
 IG_ACCESS_TOKEN = os.environ.get("IG_ACCESS_TOKEN")
 IG_USER_ID = os.environ.get("IG_USER_ID")
 GRAPH_API_VERSION = "v21.0"
@@ -31,17 +31,30 @@ def get_todays_topic():
 
 def generate_ai_image(prompt):
     encoded = urllib.parse.quote(prompt)
-    url = f"https://image.pollinations.ai/prompt/{encoded}?width=1080&height=1080&nologo=true&seed={random.randint(1, 999999)}"
-    print("⏳ Step 1: AI इमेज जनरेट हो रही है...")
+    
+    # Retry Endpoints & Models
+    urls = [
+        f"https://image.pollinations.ai/prompt/{encoded}?width=1080&height=1080&nologo=true&seed={random.randint(1, 999999)}",
+        f"https://image.pollinations.ai/prompt/{encoded}?width=1080&height=1080&model=turbo&nologo=true&seed={random.randint(1, 999999)}"
+    ]
     
     headers = {"User-Agent": "Mozilla/5.0"}
-    res = requests.get(url, headers=headers, timeout=60)
-    
-    if res.status_code == 200 and len(res.content) > 5000:
-        print("✅ AI इमेज सफलतापूर्वक बन गई!")
-        return res.content
-    else:
-        raise Exception(f"Failed to generate image. Status: {res.status_code}")
+
+    for url in urls:
+        for attempt in range(1, 4):
+            try:
+                print(f"⏳ Step 1: AI इमेज जनरेट की जा रही है (प्रयास {attempt})...")
+                res = requests.get(url, headers=headers, timeout=60)
+                if res.status_code == 200 and len(res.content) > 5000:
+                    print("✅ AI इमेज सफलतापूर्वक बन गई!")
+                    return res.content
+                else:
+                    print(f"⚠️ सर्वर रिस्पॉन्स: {res.status_code}, फिर से कोशिश की जा रही है...")
+            except Exception as e:
+                print(f"⚠️ एरर: {e}")
+            time.sleep(4)
+
+    raise Exception("❌ AI Server निरंतर डाउन है, इमेज नहीं बन पाई।")
 
 def upload_to_telegra_ph(image_bytes):
     try:
@@ -80,39 +93,16 @@ def upload_to_tmpfiles(image_bytes):
         print(f"⚠️ Server 2 Failed: {e}")
     return None
 
-def upload_to_litterbox(image_bytes):
-    try:
-        print("⏳ Server 3 (Litterbox) पर अपलोड हो रहा है...")
-        res = requests.post(
-            "https://litterbox.catbox.moe/resources/internals/api.php",
-            data={"reqtype": "fileupload", "time": "1h"},
-            files={"fileToUpload": ("image.jpg", image_bytes, "image/jpeg")},
-            timeout=15
-        )
-        if res.status_code == 200 and res.text.startswith("http"):
-            direct_url = res.text.strip()
-            print(f"✅ Server 3 Success: {direct_url}")
-            return direct_url
-    except Exception as e:
-        print(f"⚠️ Server 3 Failed: {e}")
-    return None
-
 def get_public_image_url(prompt):
     image_bytes = generate_ai_image(prompt)
     
-    # Try 1: Telegraph
     url = upload_to_telegra_ph(image_bytes)
     if url: return url
         
-    # Try 2: Tmpfiles
     url = upload_to_tmpfiles(image_bytes)
     if url: return url
         
-    # Try 3: Litterbox
-    url = upload_to_litterbox(image_bytes)
-    if url: return url
-        
-    raise Exception("❌ सारे इमेज सर्वर फेल हो गए!")
+    raise Exception("❌ इमेज अपलोड फेल हो गया!")
 
 def create_and_wait_for_media_container(image_url, caption):
     print("⏳ Step 2: Instagram कंटेनर तैयार किया जा रहा है...")
@@ -130,7 +120,6 @@ def create_and_wait_for_media_container(image_url, caption):
     container_id = resp.json()["id"]
     print(f"✅ Container Created! ID: {container_id}")
     
-    # Wait for Instagram processing
     status_url = f"https://graph.facebook.com/{GRAPH_API_VERSION}/{container_id}"
     params = {"fields": "status_code", "access_token": IG_ACCESS_TOKEN}
     
@@ -163,7 +152,7 @@ def publish_media(container_id):
 
 def main():
     if not IG_ACCESS_TOKEN or not IG_USER_ID:
-        print("❌ Error: Secrets (IG_ACCESS_TOKEN / IG_USER_ID) मिसिंग हैं!")
+        print("❌ Error: Secrets मिसिंग हैं!")
         sys.exit(1)
 
     topic_data = get_todays_topic()
@@ -176,7 +165,7 @@ def main():
     container_id = create_and_wait_for_media_container(image_url, caption)
     result = publish_media(container_id)
     
-    print("🎉 🎉 SUCCESS! आपकी पोस्ट सफलतापूर्वक Instagram पर अपलोड हो गई है! 🎉 🎉")
+    print("🎉 SUCCESS! Instagram पर पोस्ट पब्लिश हो गई है!")
     print(f"Post Result: {result}")
 
 if __name__ == "__main__":
