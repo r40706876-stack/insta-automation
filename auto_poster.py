@@ -5,8 +5,9 @@ import time
 import asyncio
 import subprocess
 import requests
+import textwrap
 from pypdf import PdfReader
-from PIL import Image, ImageDraw
+from PIL import Image, ImageDraw, ImageFont
 from groq import Groq
 import edge_tts
 
@@ -64,7 +65,7 @@ def generate_exam_script(raw_text):
     {{
       "hook_title": "Attractive 3-4 words topic title",
       "spoken_script": "30 seconds Hindi voiceover script (exam trick or core concept). Clear and direct.",
-      "bullet_points": ["Point 1", "Point 2", "Point 3"],
+      "bullet_points": ["Short Point 1", "Short Point 2", "Short Point 3"],
       "caption": "Instagram reel caption with hashtags"
     }}
 
@@ -91,22 +92,46 @@ async def create_voiceover(text):
     communicate = edge_tts.Communicate(text, voice="hi-IN-MadhurNeural")
     await communicate.save(AUDIO_OUTPUT)
 
+def get_font(size):
+    font_paths = [
+        "/usr/share/fonts/truetype/noto/NotoSansDevanagari-Bold.ttf",
+        "/usr/share/fonts/truetype/noto/NotoSansDevanagari-Regular.ttf",
+        "/usr/share/fonts/truetype/deva/NotoSansDevanagari-Bold.ttf",
+        "/usr/share/fonts/truetype/freefont/FreeSansBold.ttf"
+    ]
+    for p in font_paths:
+        if os.path.exists(p):
+            return ImageFont.truetype(p, size)
+    return ImageFont.load_default()
+
 def create_graphic_frame(reel_data):
     width, height = 1080, 1920
     img = Image.new("RGB", (width, height), color=(15, 23, 42))
     draw = ImageDraw.Draw(img)
 
-    # Title Banner
-    draw.rectangle([(80, 200), (1000, 360)], fill=(30, 41, 59))
-    title = reel_data.get("hook_title", "EXAM CAPSULE")
-    draw.text((120, 240), f"🔥 {title}", fill=(250, 204, 21))
+    title_font = get_font(52)
+    body_font = get_font(38)
 
-    # Bullet Points
-    y_offset = 550
+    # Header Box
+    draw.rounded_rectangle([(60, 200), (1020, 380)], radius=20, fill=(30, 41, 59), outline=(250, 204, 21), width=4)
+    title = reel_data.get("hook_title", "EXAM CAPSULE")
+    draw.text((100, 260), f"🔥 {title}", fill=(250, 204, 21), font=title_font)
+
+    # Bullet Points Boxes
+    y_offset = 480
     for pt in reel_data.get("bullet_points", []):
-        draw.rectangle([(80, y_offset), (1000, y_offset + 140)], fill=(30, 41, 59))
-        draw.text((120, y_offset + 40), f"✔ {pt}", fill=(255, 255, 255))
-        y_offset += 200
+        wrapped_lines = textwrap.wrap(pt, width=28)
+        box_height = max(160, len(wrapped_lines) * 55 + 50)
+
+        draw.rounded_rectangle([(60, y_offset), (1020, y_offset + box_height)], radius=18, fill=(30, 41, 59))
+        
+        text_y = y_offset + 30
+        for idx, line in enumerate(wrapped_lines):
+            prefix = "✔ " if idx == 0 else "   "
+            draw.text((100, text_y), f"{prefix}{line}", fill=(255, 255, 255), font=body_font)
+            text_y += 55
+
+        y_offset += box_height + 40
 
     img.save(FRAME_IMG)
 
