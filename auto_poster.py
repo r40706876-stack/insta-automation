@@ -190,7 +190,7 @@ def post_reel_to_instagram_direct(video_file, caption):
     if not video_id or not upload_url:
         raise RuntimeError(f"Upload init fail hua: {init_data}")
 
-    # Step 2: Stream Video Bytes directly to Instagram Server (Working Header Setup)
+    # Step 2: Stream Video Bytes directly to Instagram Server
     print("Uploading video binary data directly to Instagram...")
     with open(video_file, "rb") as vf:
         video_bytes = vf.read()
@@ -198,7 +198,9 @@ def post_reel_to_instagram_direct(video_file, caption):
     headers = {
         "Authorization": f"OAuth {access_token}",
         "Offset": "0",
-        "Content-Type": "application/octet-stream"
+        "Content-Type": "application/octet-stream",
+        "Content-Length": str(len(video_bytes)),
+        "X-Entity-Length": str(len(video_bytes))
     }
     upload_res = requests.post(upload_url, headers=headers, data=video_bytes)
     if upload_res.status_code not in [200, 201]:
