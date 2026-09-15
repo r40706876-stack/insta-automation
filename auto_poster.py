@@ -19,7 +19,7 @@ OUTPUT_VIDEO = "reel_output.mp4"
 
 GRAPH_API_BASE = "".join(["http", "s://", "graph.", "facebook", ".com/v19.0/"])
 
-# Natural, crisp Indian Male voice for Hinglish/English content
+# Natural Indian Male Voice (Clear, Modern Educator Tone)
 MALE_VOICE = "en-IN-PrabhatNeural"
 
 def get_progress():
@@ -61,17 +61,17 @@ def generate_exam_script(raw_text):
     print(f"Using Groq Model: {model_name}")
 
     prompt = f"""
-    You are an enthusiastic, top-tier educator creating a viral 30-second Instagram reel.
-    Pick ONE high-yield concept from the PDF text and generate a lively script completely in conversational HINGLISH (English letters only).
+    You are an energetic, elite competitive exam educator making viral 30-second Instagram reels.
+    From the given PDF text, choose ONE high-yield topic and generate a lively script completely in conversational HINGLISH (Roman English alphabet only).
 
     GUIDELINES:
-    1. Do NOT use Devanagari script. Use Roman/English alphabet only.
-    2. "hook_title": Punchy 3-4 words title (e.g., "FAST TRICK: ACID VS BASE").
-    3. "bullet_points": Exactly 3 crisp, impactful points for on-screen display.
-    4. "spoken_script": Fluent, energetic voiceover explanation (approx 30 seconds). Sound like an engaging creator talking directly to students, not an AI reading notes.
-    5. "caption": Catchy caption with relevant study tags.
+    1. Do NOT use Devanagari script. Use Roman letters only.
+    2. "hook_title": Punchy 3-4 words English/Hinglish heading (e.g., "FAST TRICK: ACID CONDUCTS").
+    3. "bullet_points": Exactly 3 crisp points in English/Hinglish for the video display.
+    4. "spoken_script": Conversational, energetic Indian male voiceover in natural Hinglish (around 30-35 seconds). Sound like a confident teacher giving quick exam hacks.
+    5. "caption": Catchy caption with tags like #upsc #ssc #gkquiz #studygram.
 
-    Return ONLY a valid JSON object:
+    Return ONLY a valid JSON object without markdown:
     {{
       "hook_title": "SHORT TITLE",
       "spoken_script": "Dosto agar exam me yeh question aaye toh dhyaan rakhna...",
@@ -188,19 +188,18 @@ def post_reel_to_instagram_direct(video_file, caption):
     if not video_id or not upload_url:
         raise RuntimeError(f"Upload init fail hua: {init_data}")
 
-    # Step 2: Stream Video Bytes directly to Instagram Server
-    print("Uploading video binary data directly to Instagram...")
-    with open(video_file, "rb") as vf:
-        video_bytes = vf.read()
+    # Meta backend sync delay
+    time.sleep(3)
 
+    # Step 2: Stream Video Directly (Standard File-Stream Method)
+    print("Uploading video binary data directly to Instagram...")
     headers = {
         "Authorization": f"OAuth {access_token}",
-        "Offset": "0",
-        "Content-Type": "application/octet-stream",
-        "Content-Length": str(len(video_bytes)),
-        "X-Entity-Length": str(len(video_bytes))
+        "Offset": "0"
     }
-    upload_res = requests.post(upload_url, headers=headers, data=video_bytes)
+    with open(video_file, "rb") as vf:
+        upload_res = requests.post(upload_url, headers=headers, data=vf)
+
     if upload_res.status_code not in [200, 201]:
         raise RuntimeError(f"Video binary upload fail hua: {upload_res.text}")
 
