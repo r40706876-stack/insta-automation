@@ -1,6 +1,4 @@
 google-genai
 pypdf
 edge-tts
-moviepy
 pillow
-fonttools
