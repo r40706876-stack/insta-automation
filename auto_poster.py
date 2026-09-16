@@ -64,30 +64,38 @@ def generate_exam_script(raw_text):
     print(f"Using Groq Model: {model_name}")
 
     prompt = f"""
-    You are an expert competitive exam educator making an engaging 40-second Instagram reel.
-    Select ONE core topic from the PDF text.
+    You are an expert competitive exam faculty making an engaging, high-retention 40-second Instagram reel.
+    Select ONE high-yield concept from the provided PDF text.
 
-    TEACHING SEQUENCE:
-    1. First explain the concept clearly and concisely (around 25-30 seconds spoken). Do not drag the explanation.
-    2. Once the topic explanation is complete, ask ONE direct question testing the student on what was just taught.
-    3. Conclude with: "Iska sahi jawab comment me batao! Aur complete mock tests ke liye WhatsApp karein."
+    AUDIO PRONUNCIATION & PACING RULES:
+    1. CHEMISTRY FORMULAS:
+       - In "spoken_script": ALWAYS write formulas spaced out phonetically (e.g., "H 2 O", "C O 2", "N A C L", "H 2 S O 4") or use their spoken names ("Water", "Sodium Chloride") so the TTS engine pronounces individual characters cleanly without slurring.
+       - In "bullet_points": Use standard chemical notations (e.g., H2O, NaCl, CO2) for clean on-screen reading.
+    2. PROFESSIONAL TEACHER PACING:
+       - Do not rush the script. Use commas (,) and ellipses (...) to insert natural micro-pauses.
+       - When ending, take a clear breath before asking for comments and pitching WhatsApp. Never rush the outro.
 
-    GUIDELINES:
-    1. Language: Conversational HINGLISH using Roman/English alphabet only (NO Devanagari script).
-    2. Total words for spoken_script MUST be under 80 words (so audio stays 35-40 seconds).
-    3. "hook_title": Punchy 3-4 words topic title in English.
-    4. "bullet_points": Exactly 3 items:
-       - Point 1: Core rule or fact explained
-       - Point 2: Important exam point / trick
-       - Point 3: "❓ Q: [One question testing this concept]"
-    5. "caption": Reel caption highlighting the question + exam hashtags.
+    TEACHING STRUCTURE:
+    - Step 1: Hook + Core Concept Breakdown (crisp, informative, ~25 seconds spoken).
+    - Step 2: Testing Question: "Ab ek sawal aapke liye... [Direct exam-oriented question]?"
+    - Step 3: Calm Outro: "Apna jawab comment box me likhiye... Aur sabhi competitive exams ke complete mock tests aur study notes ke liye... screen par diye gaye number par WhatsApp karein."
 
-    Return ONLY a valid JSON object without markdown:
+    OUTPUT SPECIFICATIONS:
+    - Language: Conversational Hinglish using English/Roman alphabet ONLY (absolutely NO Devanagari script).
+    - Word count for "spoken_script": Strictly 70 to 82 words (keeps audio cleanly around 38-42 seconds).
+    - "hook_title": Punchy 3-4 words title in English.
+    - "bullet_points": Exactly 3 items:
+       * Point 1: Fundamental exam rule/fact
+       * Point 2: High-yield trick/formula
+       * Point 3: "❓ Q: [Question testing the concept]"
+    - "caption": Engaging caption highlighting the question with exam hashtags (#ssc #upsc #banking #exams).
+
+    Return ONLY a valid JSON object without markdown fences:
     {{
-      "hook_title": "SHORT TITLE",
-      "spoken_script": "Dosto [Clear 60-75 words explanation]... Ab dekhte hain aapko kitna samajh aaya: [Question]? Iska sahi jawab comment me batao! Aur complete mock tests ke liye WhatsApp karein.",
-      "bullet_points": ["Concept point 1", "Concept point 2", "❓ Q: Question here?"],
-      "caption": "Can you answer this question? #gk #upsc #ssc"
+      "hook_title": "TOPIC TITLE",
+      "spoken_script": "Dosto [Concept explanation]... Ab ek sawal aapke liye: [Question]? Apna jawab comment box me likhiye... Aur sabhi competitive exams ke complete mock tests aur study notes ke liye... screen par diye gaye number par WhatsApp karein.",
+      "bullet_points": ["Concept rule 1", "Concept rule 2", "❓ Q: Question here?"],
+      "caption": "Can you solve this? Drop your answer below! #gk #ssc #upsc"
     }}
 
     PDF Text:
@@ -113,7 +121,7 @@ async def create_voiceover(text):
     communicate = edge_tts.Communicate(
         text=text,
         voice=VOICE_NAME,
-        rate="+8%"
+        rate="+0%"
     )
     await communicate.save(AUDIO_OUTPUT)
 
@@ -138,12 +146,12 @@ def create_graphic_frame(reel_data):
     promo_title_font = get_font(36)
     promo_num_font = get_font(44)
 
-    # 1. Top Header Box (Title)
+    # 1. Header Box
     draw.rounded_rectangle([(60, 200), (1020, 370)], radius=20, fill=(30, 41, 59), outline=(250, 204, 21), width=4)
     title = reel_data.get("hook_title", "EXAM CAPSULE").upper()
     draw.text((95, 255), f"🔥 {title}", fill=(250, 204, 21), font=title_font)
 
-    # 2. Content Boxes (Topic Explanation + Final Question)
+    # 2. Content Boxes
     y_offset = 450
     for pt in reel_data.get("bullet_points", []):
         wrapped_lines = textwrap.wrap(pt, width=32)
@@ -160,7 +168,7 @@ def create_graphic_frame(reel_data):
 
         y_offset += box_height + 32
 
-    # 3. Bottom Professional Promo Banner
+    # 3. WhatsApp Promo Banner
     promo_top = 1520
     promo_bottom = 1750
     draw.rounded_rectangle([(60, promo_top), (1020, promo_bottom)], radius=24, fill=(17, 24, 39), outline=(34, 197, 94), width=4)
@@ -188,7 +196,6 @@ def render_video():
     ]
     subprocess.run(cmd, check=True)
 
-# Run #64 wala EXACT proven upload logic
 def post_reel_to_instagram_direct(video_file, caption):
     access_token = os.environ.get("IG_ACCESS_TOKEN")
     user_id = os.environ.get("IG_USER_ID")
@@ -216,7 +223,7 @@ def post_reel_to_instagram_direct(video_file, caption):
     if not video_id or not upload_url:
         raise RuntimeError(f"Upload init fail hua: {init_data}")
 
-    # Step 2: Stream Video Bytes directly to Instagram Server
+    # Step 2: Stream Video Bytes
     print("Uploading video binary data directly to Instagram...")
     with open(video_file, "rb") as vf:
         video_bytes = vf.read()
@@ -245,7 +252,7 @@ def post_reel_to_instagram_direct(video_file, caption):
         elif status == "ERROR":
             raise RuntimeError(f"Instagram processing error: {status_res}")
 
-    # Step 4: Final Reel Publish
+    # Step 4: Final Publish
     print("Publishing Reel...")
     publish_url = GRAPH_API_BASE + str(user_id).strip() + "/media_publish"
     pub_res = requests.post(publish_url, data={"creation_id": video_id, "access_token": access_token}).json()
@@ -273,7 +280,6 @@ def main():
     print("🎬 [Step 5] Merging to 9:16 Video (FFmpeg)...")
     render_video()
 
-    # Attractive promo attached to caption
     caption_base = reel_data.get("caption", "")
     promo_caption = (
         f"\n\n💬 Drop your answer in the COMMENTS below!\n"
