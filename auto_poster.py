@@ -61,33 +61,21 @@ def generate_exam_script(raw_text):
     print(f"Using Groq Model: {model_name}")
 
     prompt = f"""
-    You are an expert Indian competitive exam educator creating a high-retention 40-second Instagram reel.
+    You are an expert Indian competitive exam educator creating a 40-second Instagram reel.
     Extract ONE important topic from the PDF text.
 
-    CRITICAL RULES:
-    1. "spoken_script" MUST BE WRITTEN ENTIRELY IN NATURAL DEVANAGARI HINDI (हिंदी लिपि).
-       - Never write English spelling or Roman script for spoken_script.
-       - Pronounce chemical compounds and names properly in Hindi (e.g. write "सोडियम कार्बोनेट", "धोने का सोडा", "क्रिस्टलीकरण").
-       - After asking the question, add ellipsis (...) to create a clear 1.5-second thinking pause.
-       - End the spoken_script EXACTLY with this calm closing:
-         "अपना जवाब कमेंट बॉक्स में लिखिए... और सभी एग्जाम्स के कम्पलीट मॉक टेस्ट्स के लिए... स्क्रीन पर दिए गए नंबर पर व्हाट्सएप करिए।"
-    2. "hook_title" and "bullet_points" MUST be in clean ENGLISH for visual display on screen.
-       - Keep bullet point lines clean and under 36 characters each so formulas fit comfortably.
-    3. "bullet_points" MUST have exactly 3 items:
-       - Item 1: Core rule or chemical reaction
-       - Item 2: Important exam application or fact
-       - Item 3: "❓ Q: [Clear question testing the student]"
+    RULES:
+    1. "spoken_script" MUST be in pure DEVANAGARI HINDI (हिंदी लिपि) so pronunciation is natural.
+       - End with: "अपना जवाब कमेंट बॉक्स में लिखिए... और सभी एग्जाम्स के कम्पलीट मॉक टेस्ट्स के लिए... स्क्रीन पर दिए गए नंबर पर व्हाट्सएप करिए।"
+    2. "hook_title" and "bullet_points" MUST be in clean ENGLISH for display on screen.
+    3. Exactly 3 bullet points with standard formulas (e.g. NaCl, Na2CO3).
 
-    Return ONLY a valid JSON object without markdown fences:
+    Return ONLY a valid JSON object:
     {{
-      "hook_title": "WASHING SODA FORMULA",
-      "spoken_script": "दोस्तों, सोडियम कार्बोनेट को दस जल अणुओं के साथ क्रिस्टलीकरण कर धोने का सोडा बनाते हैं... यह कपड़ों की धुलाई और जल की कठोरता हटाने में उपयोगी है। अब एक प्रश्न: सोडियम कार्बोनेट का कौन सा रूप वाशिंग सोडा कहलाता है?... अपना जवाब कमेंट बॉक्स में लिखिए... और सभी एग्जाम्स के कम्पलीट मॉक टेस्ट्स के लिए... स्क्रीन पर दिए गए नंबर पर व्हाट्सएप करिए।",
-      "bullet_points": [
-        "Na2CO3 + 10H2O → Na2CO3·10H2O",
-        "Used in laundry & water softening",
-        "❓ Q: Which form is washing soda?"
-      ],
-      "caption": "Can you solve this exam question? Drop your answer below! #chemistry #upsc #ssc #study"
+      "hook_title": "WASHING SODA",
+      "spoken_script": "दोस्तों, सोडियम कार्बोनेट को दस जल अणुओं के साथ मिलाकर धोने का सोडा बनाते हैं। अब एक प्रश्न: इसका रासायनिक सूत्र क्या है? अपना जवाब कमेंट बॉक्स में लिखिए... और सभी एग्जाम्स के कम्पलीट मॉक टेस्ट्स के लिए... स्क्रीन पर दिए गए नंबर पर व्हाट्सएप करिए।",
+      "bullet_points": ["Na2CO3 + 10H2O", "Used in cleaning", "❓ Q: What is its formula?"],
+      "caption": "Can you solve this? Drop your answer below! #chemistry #ssc #upsc"
     }}
 
     PDF Text:
@@ -133,19 +121,15 @@ def create_graphic_frame(reel_data):
     img = Image.new("RGB", (width, height), color=(15, 23, 42))
     draw = ImageDraw.Draw(img)
 
-    title_font = get_font(44)
+    title_font = get_font(46)
     body_font = get_font(34)
     promo_title_font = get_font(36)
     promo_num_font = get_font(44)
 
-    # 1. Top Header Box
     draw.rounded_rectangle([(50, 180), (1030, 360)], radius=20, fill=(30, 41, 59), outline=(250, 204, 21), width=4)
     title = reel_data.get("hook_title", "EXAM CAPSULE").upper()
-    if len(title) > 28:
-        title = title[:28] + "..."
     draw.text((80, 245), f"🔥 {title}", fill=(250, 204, 21), font=title_font)
 
-    # 2. Content Boxes
     y_offset = 430
     for pt in reel_data.get("bullet_points", []):
         wrapped_lines = textwrap.wrap(pt, width=38)
@@ -162,7 +146,6 @@ def create_graphic_frame(reel_data):
 
         y_offset += box_height + 30
 
-    # 3. WhatsApp Promo Banner
     promo_top = 1520
     promo_bottom = 1750
     draw.rounded_rectangle([(50, promo_top), (1030, promo_bottom)], radius=24, fill=(17, 24, 39), outline=(34, 197, 94), width=4)
@@ -175,7 +158,7 @@ def create_graphic_frame(reel_data):
 
     img.save(FRAME_IMG)
 
-# Smooth Slow-Motion Zoom (Ken Burns Effect) via FFmpeg
+# Smooth Zoom Effect fully compatible with Instagram Servers
 def render_video():
     cmd = [
         "ffmpeg", "-y",
@@ -184,9 +167,12 @@ def render_video():
         "-filter_complex",
         "zoompan=z='min(zoom+0.0003,1.06)':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d=1500:s=1080x1920:fps=30",
         "-c:v", "libx264",
+        "-profile:v", "high",
+        "-level", "4.2",
+        "-pix_fmt", "yuv420p",
         "-r", "30",
         "-c:a", "aac", "-b:a", "192k",
-        "-pix_fmt", "yuv420p",
+        "-movflags", "+faststart",
         "-shortest",
         "-t", "50",
         OUTPUT_VIDEO
@@ -270,7 +256,7 @@ def main():
     print("🖼️ [Step 4] Creating Poster Frame...")
     create_graphic_frame(reel_data)
 
-    print("🎬 [Step 5] Rendering Dynamic Zoom Video (FFmpeg)...")
+    print("🎬 [Step 5] Rendering Zoom Video (FFmpeg)...")
     render_video()
 
     caption_base = reel_data.get("caption", "")
