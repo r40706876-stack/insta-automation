@@ -61,21 +61,32 @@ def generate_exam_script(raw_text):
     print(f"Using Groq Model: {model_name}")
 
     prompt = f"""
-    You are an expert competitive exam educator making an engaging 40-second Instagram reel.
-    Select ONE core concept or topic from the PDF text.
+    You are an expert Indian competitive exam educator creating a high-retention 40-second Instagram reel.
+    Extract ONE important topic from the PDF text.
 
-    RULES:
-    1. Language: Conversational HINGLISH using Roman alphabet only.
-    2. Write chemistry formulas with spaces (e.g. H 2 O, C O 2) in spoken_script so speech is clean.
-    3. The spoken_script MUST end with:
-       "Apna jawab comment box me likhiye... Aur sabhi exams ke complete mock tests ke liye... screen par die number par WhatsApp kariye."
+    CRITICAL RULES:
+    1. "spoken_script" MUST BE WRITTEN ENTIRELY IN NATURAL DEVANAGARI HINDI (हिंदी लिपि).
+       - Never write English spelling or Roman script for spoken_script.
+       - Pronounce chemical compounds and names properly in Hindi (e.g. write "सोडियम क्लोराइड", "क्लोर-एल्कली प्रोसेस", "एनोड पर", "कैथोड पर").
+       - End the spoken_script EXACTLY with this calm closing:
+         "अपना जवाब कमेंट बॉक्स में लिखिए... और सभी एग्जाम्स के कम्पलीट मॉक टेस्ट्स के लिए... स्क्रीन पर दिए गए नंबर पर व्हाट्सएप करिए।"
+    2. "hook_title" and "bullet_points" MUST be in clean ENGLISH for visual display on screen.
+       - Bullet points should write standard chemistry formulas clearly (e.g., NaCl, NaOH, Cl2, H2).
+    3. "bullet_points" MUST have exactly 3 items:
+       - Item 1: Core rule or reaction
+       - Item 2: Important exam application or fact
+       - Item 3: "❓ Q: [Clear question testing the student]"
 
-    Return ONLY a valid JSON object:
+    Return ONLY a valid JSON object without markdown fences:
     {{
-      "hook_title": "SHORT TITLE",
-      "spoken_script": "Dosto [Clear short explanation]... Ab ek sawal aapke liye: [Question]? Apna jawab comment box me likhiye... Aur sabhi exams ke complete mock tests ke liye... screen par die number par WhatsApp kariye.",
-      "bullet_points": ["Point 1", "Point 2", "❓ Q: Question here?"],
-      "caption": "Can you answer this question? #gk #science #ssc #upsc"
+      "hook_title": "CHLOR-ALKALI PROCESS",
+      "spoken_script": "दोस्तों, जब हम सोडियम क्लोराइड यानी साधारण नमक के जलीय घोल का इलेक्ट्रोलीसिस करते हैं, तो हमें सोडियम हाइड्रोक्साइड, क्लोरीन और हाइड्रोजन गैस मिलती है... इसे क्लोर-एल्कली प्रोसेस कहते हैं। अब एक सवाल आपके लिए: इस प्रोसेस में एनोड पर कौन सी गैस बनती है? अपना जवाब कमेंट बॉक्स में लिखिए... और सभी एग्जाम्स के कम्पलीट मॉक टेस्ट्स के लिए... स्क्रीन पर दिए गए नंबर पर व्हाट्सएप करिए।",
+      "bullet_points": [
+        "Electrolysis of NaCl gives NaOH, Cl2 and H2",
+        "Used in making soap, bleach & water treatment",
+        "❓ Q: Which gas is produced at the anode?"
+      ],
+      "caption": "Can you solve this exam question? Drop your answer below! #chemistry #upsc #ssc #study"
     }}
 
     PDF Text:
@@ -101,7 +112,7 @@ async def create_voiceover(text):
     communicate = edge_tts.Communicate(
         text=text,
         voice=VOICE_NAME,
-        rate="+0%"
+        rate="-2%"
     )
     await communicate.save(AUDIO_OUTPUT)
 
@@ -121,40 +132,45 @@ def create_graphic_frame(reel_data):
     img = Image.new("RGB", (width, height), color=(15, 23, 42))
     draw = ImageDraw.Draw(img)
 
-    title_font = get_font(50)
-    body_font = get_font(38)
+    title_font = get_font(46)
+    body_font = get_font(36)
     promo_title_font = get_font(36)
     promo_num_font = get_font(44)
 
-    draw.rounded_rectangle([(60, 200), (1020, 370)], radius=20, fill=(30, 41, 59), outline=(250, 204, 21), width=4)
+    # 1. Header Box (Wide enough so nothing cuts)
+    draw.rounded_rectangle([(50, 180), (1030, 360)], radius=20, fill=(30, 41, 59), outline=(250, 204, 21), width=4)
     title = reel_data.get("hook_title", "EXAM CAPSULE").upper()
-    draw.text((95, 255), f"🔥 {title}", fill=(250, 204, 21), font=title_font)
+    if len(title) > 28:
+        title = title[:28] + "..."
+    draw.text((80, 245), f"🔥 {title}", fill=(250, 204, 21), font=title_font)
 
-    y_offset = 450
+    # 2. Content Boxes (Proper text wrapping so formulas don't split)
+    y_offset = 430
     for pt in reel_data.get("bullet_points", []):
-        wrapped_lines = textwrap.wrap(pt, width=32)
-        box_height = max(145, len(wrapped_lines) * 52 + 45)
+        wrapped_lines = textwrap.wrap(pt, width=40)
+        box_height = max(140, len(wrapped_lines) * 50 + 45)
 
-        draw.rounded_rectangle([(60, y_offset), (1020, y_offset + box_height)], radius=18, fill=(30, 41, 59))
+        draw.rounded_rectangle([(50, y_offset), (1030, y_offset + box_height)], radius=18, fill=(30, 41, 59))
         
-        text_y = y_offset + 28
+        text_y = y_offset + 25
         for idx, line in enumerate(wrapped_lines):
             prefix = "✔ " if (idx == 0 and not line.startswith("❓")) else ("" if line.startswith("❓") else "   ")
             text_color = (250, 204, 21) if "❓" in line else (255, 255, 255)
-            draw.text((95, text_y), f"{prefix}{line}", fill=text_color, font=body_font)
-            text_y += 52
+            draw.text((80, text_y), f"{prefix}{line}", fill=text_color, font=body_font)
+            text_y += 50
 
-        y_offset += box_height + 32
+        y_offset += box_height + 30
 
+    # 3. WhatsApp Promo Banner
     promo_top = 1520
     promo_bottom = 1750
-    draw.rounded_rectangle([(60, promo_top), (1020, promo_bottom)], radius=24, fill=(17, 24, 39), outline=(34, 197, 94), width=4)
+    draw.rounded_rectangle([(50, promo_top), (1030, promo_bottom)], radius=24, fill=(17, 24, 39), outline=(34, 197, 94), width=4)
     
     promo_text1 = "📚 COMPLETE MOCK TESTS & E-BOOKS"
-    draw.text((100, promo_top + 35), promo_text1, fill=(250, 204, 21), font=promo_title_font)
+    draw.text((90, promo_top + 35), promo_text1, fill=(250, 204, 21), font=promo_title_font)
     
     promo_text2 = f"📲 WhatsApp: {WHATSAPP_NUMBER}"
-    draw.text((100, promo_top + 105), promo_text2, fill=(34, 197, 94), font=promo_num_font)
+    draw.text((90, promo_top + 105), promo_text2, fill=(34, 197, 94), font=promo_num_font)
 
     img.save(FRAME_IMG)
 
@@ -240,7 +256,7 @@ def main():
     raw_text, page_num, total = extract_pdf_topic()
     print(f"Loaded Page {page_num} of {total}")
 
-    print("🤖 [Step 2] Generating Hinglish Script with Groq...")
+    print("🤖 [Step 2] Generating Devanagari Voice & English Visuals with Groq...")
     reel_data = generate_exam_script(raw_text)
     print(f"Topic: {reel_data.get('hook_title')}")
 
