@@ -67,24 +67,25 @@ def generate_exam_script(raw_text):
     CRITICAL RULES:
     1. "spoken_script" MUST BE WRITTEN ENTIRELY IN NATURAL DEVANAGARI HINDI (हिंदी लिपि).
        - Never write English spelling or Roman script for spoken_script.
-       - Pronounce chemical compounds and names properly in Hindi (e.g. write "सोडियम क्लोराइड", "क्लोर-एल्कली प्रोसेस", "एनोड पर", "कैथोड पर").
+       - Pronounce chemical compounds and names properly in Hindi (e.g. write "सोडियम कार्बोनेट", "धोने का सोडा", "क्रिस्टलीकरण").
+       - After asking the question, add ellipsis (...) to create a clear 1.5-second thinking pause.
        - End the spoken_script EXACTLY with this calm closing:
          "अपना जवाब कमेंट बॉक्स में लिखिए... और सभी एग्जाम्स के कम्पलीट मॉक टेस्ट्स के लिए... स्क्रीन पर दिए गए नंबर पर व्हाट्सएप करिए।"
     2. "hook_title" and "bullet_points" MUST be in clean ENGLISH for visual display on screen.
-       - Bullet points should write standard chemistry formulas clearly (e.g., NaCl, NaOH, Cl2, H2).
+       - Keep bullet point lines clean and under 36 characters each so formulas fit comfortably.
     3. "bullet_points" MUST have exactly 3 items:
-       - Item 1: Core rule or reaction
+       - Item 1: Core rule or chemical reaction
        - Item 2: Important exam application or fact
        - Item 3: "❓ Q: [Clear question testing the student]"
 
     Return ONLY a valid JSON object without markdown fences:
     {{
-      "hook_title": "CHLOR-ALKALI PROCESS",
-      "spoken_script": "दोस्तों, जब हम सोडियम क्लोराइड यानी साधारण नमक के जलीय घोल का इलेक्ट्रोलीसिस करते हैं, तो हमें सोडियम हाइड्रोक्साइड, क्लोरीन और हाइड्रोजन गैस मिलती है... इसे क्लोर-एल्कली प्रोसेस कहते हैं। अब एक सवाल आपके लिए: इस प्रोसेस में एनोड पर कौन सी गैस बनती है? अपना जवाब कमेंट बॉक्स में लिखिए... और सभी एग्जाम्स के कम्पलीट मॉक टेस्ट्स के लिए... स्क्रीन पर दिए गए नंबर पर व्हाट्सएप करिए।",
+      "hook_title": "WASHING SODA FORMULA",
+      "spoken_script": "दोस्तों, सोडियम कार्बोनेट को दस जल अणुओं के साथ क्रिस्टलीकरण कर धोने का सोडा बनाते हैं... यह कपड़ों की धुलाई और जल की कठोरता हटाने में उपयोगी है। अब एक प्रश्न: सोडियम कार्बोनेट का कौन सा रूप वाशिंग सोडा कहलाता है?... अपना जवाब कमेंट बॉक्स में लिखिए... और सभी एग्जाम्स के कम्पलीट मॉक टेस्ट्स के लिए... स्क्रीन पर दिए गए नंबर पर व्हाट्सएप करिए।",
       "bullet_points": [
-        "Electrolysis of NaCl gives NaOH, Cl2 and H2",
-        "Used in making soap, bleach & water treatment",
-        "❓ Q: Which gas is produced at the anode?"
+        "Na2CO3 + 10H2O → Na2CO3·10H2O",
+        "Used in laundry & water softening",
+        "❓ Q: Which form is washing soda?"
       ],
       "caption": "Can you solve this exam question? Drop your answer below! #chemistry #upsc #ssc #study"
     }}
@@ -132,32 +133,32 @@ def create_graphic_frame(reel_data):
     img = Image.new("RGB", (width, height), color=(15, 23, 42))
     draw = ImageDraw.Draw(img)
 
-    title_font = get_font(46)
-    body_font = get_font(36)
+    title_font = get_font(44)
+    body_font = get_font(34)
     promo_title_font = get_font(36)
     promo_num_font = get_font(44)
 
-    # 1. Header Box (Wide enough so nothing cuts)
+    # 1. Top Header Box
     draw.rounded_rectangle([(50, 180), (1030, 360)], radius=20, fill=(30, 41, 59), outline=(250, 204, 21), width=4)
     title = reel_data.get("hook_title", "EXAM CAPSULE").upper()
     if len(title) > 28:
         title = title[:28] + "..."
     draw.text((80, 245), f"🔥 {title}", fill=(250, 204, 21), font=title_font)
 
-    # 2. Content Boxes (Proper text wrapping so formulas don't split)
+    # 2. Content Boxes
     y_offset = 430
     for pt in reel_data.get("bullet_points", []):
-        wrapped_lines = textwrap.wrap(pt, width=40)
-        box_height = max(140, len(wrapped_lines) * 50 + 45)
+        wrapped_lines = textwrap.wrap(pt, width=38)
+        box_height = max(135, len(wrapped_lines) * 48 + 42)
 
         draw.rounded_rectangle([(50, y_offset), (1030, y_offset + box_height)], radius=18, fill=(30, 41, 59))
         
-        text_y = y_offset + 25
+        text_y = y_offset + 24
         for idx, line in enumerate(wrapped_lines):
             prefix = "✔ " if (idx == 0 and not line.startswith("❓")) else ("" if line.startswith("❓") else "   ")
             text_color = (250, 204, 21) if "❓" in line else (255, 255, 255)
             draw.text((80, text_y), f"{prefix}{line}", fill=text_color, font=body_font)
-            text_y += 50
+            text_y += 48
 
         y_offset += box_height + 30
 
@@ -174,12 +175,15 @@ def create_graphic_frame(reel_data):
 
     img.save(FRAME_IMG)
 
+# Smooth Slow-Motion Zoom (Ken Burns Effect) via FFmpeg
 def render_video():
     cmd = [
         "ffmpeg", "-y",
         "-loop", "1", "-i", FRAME_IMG,
         "-i", AUDIO_OUTPUT,
-        "-c:v", "libx264", "-tune", "stillimage",
+        "-filter_complex",
+        "zoompan=z='min(zoom+0.0003,1.06)':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d=1500:s=1080x1920:fps=30",
+        "-c:v", "libx264",
         "-r", "30",
         "-c:a", "aac", "-b:a", "192k",
         "-pix_fmt", "yuv420p",
@@ -256,7 +260,7 @@ def main():
     raw_text, page_num, total = extract_pdf_topic()
     print(f"Loaded Page {page_num} of {total}")
 
-    print("🤖 [Step 2] Generating Devanagari Voice & English Visuals with Groq...")
+    print("🤖 [Step 2] Generating Devanagari Voice & Visuals with Groq...")
     reel_data = generate_exam_script(raw_text)
     print(f"Topic: {reel_data.get('hook_title')}")
 
@@ -266,7 +270,7 @@ def main():
     print("🖼️ [Step 4] Creating Poster Frame...")
     create_graphic_frame(reel_data)
 
-    print("🎬 [Step 5] Merging to 9:16 Video (FFmpeg)...")
+    print("🎬 [Step 5] Rendering Dynamic Zoom Video (FFmpeg)...")
     render_video()
 
     caption_base = reel_data.get("caption", "")
