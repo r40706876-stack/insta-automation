@@ -60,52 +60,38 @@ def generate_exam_script(raw_text):
         raise ValueError("GROQ_API_KEY GitHub Secrets me set nahi hai!")
 
     client = Groq(api_key=api_key)
-    model_name = "openai/gpt-oss-120b"
+    # Llama 3.3 70B Groq ka sabse stable model hai jo JSON formatting me fail nahi hota
+    model_name = "llama-3.3-70b-versatile"
     print(f"Using Groq Model: {model_name}")
 
     prompt = f"""
-    You are an expert competitive exam faculty making an engaging, high-retention 40-second Instagram reel.
-    Select ONE high-yield concept from the provided PDF text.
+    You are an expert competitive exam educator making an engaging 40-second Instagram reel.
+    Select ONE core concept or topic from the PDF text.
 
-    AUDIO PRONUNCIATION & PACING RULES:
-    1. CHEMISTRY FORMULAS:
-       - In "spoken_script": ALWAYS write formulas spaced out phonetically (e.g., "H 2 O", "C O 2", "N A C L", "H 2 S O 4") or use their spoken names ("Water", "Sodium Chloride") so the TTS engine pronounces individual characters cleanly without slurring.
-       - In "bullet_points": Use standard chemical notations (e.g., H2O, NaCl, CO2) for clean on-screen reading.
-    2. PROFESSIONAL TEACHER PACING & OUTRO:
-       - Do not rush the script. Use commas (,) and ellipses (...) to insert natural micro-pauses.
-       - The spoken script MUST end with this EXACT sentence structure for clean audio pronunciation:
-         "Apna jawab comment box me likhiye... Aur sabhi exams ke complete mock tests ke liye... screen par die number par WhatsApp kariye."
-
-    TEACHING STRUCTURE:
-    - Step 1: Hook + Core Concept Breakdown (crisp, informative, ~25 seconds spoken).
-    - Step 2: Testing Question: "Ab ek sawal aapke liye... [Direct exam-oriented question]?"
-    - Step 3: Calm Outro: "Apna jawab comment box me likhiye... Aur sabhi exams ke complete mock tests ke liye... screen par die number par WhatsApp kariye."
-
-    OUTPUT SPECIFICATIONS:
-    - Language: Conversational Hinglish using English/Roman alphabet ONLY (absolutely NO Devanagari script).
-    - Word count for "spoken_script": Strictly 70 to 82 words (keeps audio cleanly around 38-42 seconds).
-    - "hook_title": Punchy 3-4 words title in English.
-    - "bullet_points": Exactly 3 items:
-       * Point 1: Fundamental exam rule/fact
-       * Point 2: High-yield trick/formula
-       * Point 3: "❓ Q: [Question testing the concept]"
-    - "caption": Engaging caption highlighting the question with exam hashtags (#ssc #upsc #banking #exams).
+    RULES:
+    1. Language: Conversational HINGLISH using English/Roman alphabet only (NO Devanagari).
+    2. Write chemistry formulas with spaces (e.g. H 2 O, C O 2, N A C L) in spoken_script so speech is clean.
+    3. The spoken_script MUST end with this exact line:
+       "Apna jawab comment box me likhiye... Aur sabhi exams ke complete mock tests ke liye... screen par die number par WhatsApp kariye."
 
     Return ONLY a valid JSON object without markdown fences:
     {{
-      "hook_title": "TOPIC TITLE",
-      "spoken_script": "Dosto [Concept explanation]... Ab ek sawal aapke liye: [Question]? Apna jawab comment box me likhiye... Aur sabhi exams ke complete mock tests ke liye... screen par die number par WhatsApp kariye.",
-      "bullet_points": ["Concept rule 1", "Concept rule 2", "❓ Q: Question here?"],
-      "caption": "Can you solve this? Drop your answer below! #gk #ssc #upsc"
+      "hook_title": "SHORT TITLE",
+      "spoken_script": "Dosto [Clear short explanation]... Ab ek sawal aapke liye: [Question]? Apna jawab comment box me likhiye... Aur sabhi exams ke complete mock tests ke liye... screen par die number par WhatsApp kariye.",
+      "bullet_points": ["Concept point 1", "Concept point 2", "❓ Q: Question here?"],
+      "caption": "Can you answer this question? #gk #science #ssc #upsc"
     }}
 
     PDF Text:
-    {raw_text[:2500]}
+    {raw_text[:2000]}
     """
 
     response = client.chat.completions.create(
         model=model_name,
-        messages=[{"role": "user", "content": prompt}],
+        messages=[
+            {"role": "system", "content": "You are a helpful API assistant that outputs strictly valid JSON only."},
+            {"role": "user", "content": prompt}
+        ],
         response_format={"type": "json_object"}
     )
 
@@ -147,12 +133,12 @@ def create_graphic_frame(reel_data):
     promo_title_font = get_font(36)
     promo_num_font = get_font(44)
 
-    # 1. Header Box
+    # 1. Top Header Box (Title)
     draw.rounded_rectangle([(60, 200), (1020, 370)], radius=20, fill=(30, 41, 59), outline=(250, 204, 21), width=4)
     title = reel_data.get("hook_title", "EXAM CAPSULE").upper()
     draw.text((95, 255), f"🔥 {title}", fill=(250, 204, 21), font=title_font)
 
-    # 2. Content Boxes
+    # 2. Content Boxes (Topic Explanation + Final Question)
     y_offset = 450
     for pt in reel_data.get("bullet_points", []):
         wrapped_lines = textwrap.wrap(pt, width=32)
@@ -169,7 +155,7 @@ def create_graphic_frame(reel_data):
 
         y_offset += box_height + 32
 
-    # 3. WhatsApp Promo Banner
+    # 3. Bottom Professional Promo Banner
     promo_top = 1520
     promo_bottom = 1750
     draw.rounded_rectangle([(60, promo_top), (1020, promo_bottom)], radius=24, fill=(17, 24, 39), outline=(34, 197, 94), width=4)
@@ -197,6 +183,7 @@ def render_video():
     ]
     subprocess.run(cmd, check=True)
 
+# Proven Instagram upload logic
 def post_reel_to_instagram_direct(video_file, caption):
     access_token = os.environ.get("IG_ACCESS_TOKEN")
     user_id = os.environ.get("IG_USER_ID")
@@ -224,7 +211,7 @@ def post_reel_to_instagram_direct(video_file, caption):
     if not video_id or not upload_url:
         raise RuntimeError(f"Upload init fail hua: {init_data}")
 
-    # Step 2: Stream Video Bytes
+    # Step 2: Stream Video Bytes directly to Instagram Server
     print("Uploading video binary data directly to Instagram...")
     with open(video_file, "rb") as vf:
         video_bytes = vf.read()
@@ -253,7 +240,7 @@ def post_reel_to_instagram_direct(video_file, caption):
         elif status == "ERROR":
             raise RuntimeError(f"Instagram processing error: {status_res}")
 
-    # Step 4: Final Publish
+    # Step 4: Final Reel Publish
     print("Publishing Reel...")
     publish_url = GRAPH_API_BASE + str(user_id).strip() + "/media_publish"
     pub_res = requests.post(publish_url, data={"creation_id": video_id, "access_token": access_token}).json()
