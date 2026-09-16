@@ -71,14 +71,15 @@ def generate_exam_script(raw_text):
     1. CHEMISTRY FORMULAS:
        - In "spoken_script": ALWAYS write formulas spaced out phonetically (e.g., "H 2 O", "C O 2", "N A C L", "H 2 S O 4") or use their spoken names ("Water", "Sodium Chloride") so the TTS engine pronounces individual characters cleanly without slurring.
        - In "bullet_points": Use standard chemical notations (e.g., H2O, NaCl, CO2) for clean on-screen reading.
-    2. PROFESSIONAL TEACHER PACING:
+    2. PROFESSIONAL TEACHER PACING & OUTRO:
        - Do not rush the script. Use commas (,) and ellipses (...) to insert natural micro-pauses.
-       - When ending, take a clear breath before asking for comments and pitching WhatsApp. Never rush the outro.
+       - The spoken script MUST end with this EXACT sentence structure for clean audio pronunciation:
+         "Apna jawab comment box me likhiye... Aur sabhi exams ke complete mock tests ke liye... screen par die number par WhatsApp kariye."
 
     TEACHING STRUCTURE:
     - Step 1: Hook + Core Concept Breakdown (crisp, informative, ~25 seconds spoken).
     - Step 2: Testing Question: "Ab ek sawal aapke liye... [Direct exam-oriented question]?"
-    - Step 3: Calm Outro: "Apna jawab comment box me likhiye... Aur sabhi competitive exams ke complete mock tests aur study notes ke liye... screen par diye gaye number par WhatsApp karein."
+    - Step 3: Calm Outro: "Apna jawab comment box me likhiye... Aur sabhi exams ke complete mock tests ke liye... screen par die number par WhatsApp kariye."
 
     OUTPUT SPECIFICATIONS:
     - Language: Conversational Hinglish using English/Roman alphabet ONLY (absolutely NO Devanagari script).
@@ -93,7 +94,7 @@ def generate_exam_script(raw_text):
     Return ONLY a valid JSON object without markdown fences:
     {{
       "hook_title": "TOPIC TITLE",
-      "spoken_script": "Dosto [Concept explanation]... Ab ek sawal aapke liye: [Question]? Apna jawab comment box me likhiye... Aur sabhi competitive exams ke complete mock tests aur study notes ke liye... screen par diye gaye number par WhatsApp karein.",
+      "spoken_script": "Dosto [Concept explanation]... Ab ek sawal aapke liye: [Question]? Apna jawab comment box me likhiye... Aur sabhi exams ke complete mock tests ke liye... screen par die number par WhatsApp kariye.",
       "bullet_points": ["Concept rule 1", "Concept rule 2", "❓ Q: Question here?"],
       "caption": "Can you solve this? Drop your answer below! #gk #ssc #upsc"
     }}
