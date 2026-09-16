@@ -19,10 +19,7 @@ OUTPUT_VIDEO = "reel_output.mp4"
 
 GRAPH_API_BASE = "".join(["http", "s://", "graph.", "facebook", ".com/v19.0/"])
 
-# Voice: Realistic Female Voice
 VOICE_NAME = "hi-IN-SwaraNeural"
-
-# WhatsApp Business Lead Number
 WHATSAPP_NUMBER = "+91 8989971379"
 
 def get_progress():
@@ -60,8 +57,7 @@ def generate_exam_script(raw_text):
         raise ValueError("GROQ_API_KEY GitHub Secrets me set nahi hai!")
 
     client = Groq(api_key=api_key)
-    # Llama 3.3 70B Groq ka sabse stable model hai jo JSON formatting me fail nahi hota
-    model_name = "llama-3.3-70b-versatile"
+    model_name = "openai/gpt-oss-120b"
     print(f"Using Groq Model: {model_name}")
 
     prompt = f"""
@@ -69,16 +65,16 @@ def generate_exam_script(raw_text):
     Select ONE core concept or topic from the PDF text.
 
     RULES:
-    1. Language: Conversational HINGLISH using English/Roman alphabet only (NO Devanagari).
-    2. Write chemistry formulas with spaces (e.g. H 2 O, C O 2, N A C L) in spoken_script so speech is clean.
-    3. The spoken_script MUST end with this exact line:
+    1. Language: Conversational HINGLISH using Roman alphabet only.
+    2. Write chemistry formulas with spaces (e.g. H 2 O, C O 2) in spoken_script so speech is clean.
+    3. The spoken_script MUST end with:
        "Apna jawab comment box me likhiye... Aur sabhi exams ke complete mock tests ke liye... screen par die number par WhatsApp kariye."
 
-    Return ONLY a valid JSON object without markdown fences:
+    Return ONLY a valid JSON object:
     {{
       "hook_title": "SHORT TITLE",
       "spoken_script": "Dosto [Clear short explanation]... Ab ek sawal aapke liye: [Question]? Apna jawab comment box me likhiye... Aur sabhi exams ke complete mock tests ke liye... screen par die number par WhatsApp kariye.",
-      "bullet_points": ["Concept point 1", "Concept point 2", "❓ Q: Question here?"],
+      "bullet_points": ["Point 1", "Point 2", "❓ Q: Question here?"],
       "caption": "Can you answer this question? #gk #science #ssc #upsc"
     }}
 
@@ -88,10 +84,7 @@ def generate_exam_script(raw_text):
 
     response = client.chat.completions.create(
         model=model_name,
-        messages=[
-            {"role": "system", "content": "You are a helpful API assistant that outputs strictly valid JSON only."},
-            {"role": "user", "content": prompt}
-        ],
+        messages=[{"role": "user", "content": prompt}],
         response_format={"type": "json_object"}
     )
 
@@ -133,12 +126,10 @@ def create_graphic_frame(reel_data):
     promo_title_font = get_font(36)
     promo_num_font = get_font(44)
 
-    # 1. Top Header Box (Title)
     draw.rounded_rectangle([(60, 200), (1020, 370)], radius=20, fill=(30, 41, 59), outline=(250, 204, 21), width=4)
     title = reel_data.get("hook_title", "EXAM CAPSULE").upper()
     draw.text((95, 255), f"🔥 {title}", fill=(250, 204, 21), font=title_font)
 
-    # 2. Content Boxes (Topic Explanation + Final Question)
     y_offset = 450
     for pt in reel_data.get("bullet_points", []):
         wrapped_lines = textwrap.wrap(pt, width=32)
@@ -155,7 +146,6 @@ def create_graphic_frame(reel_data):
 
         y_offset += box_height + 32
 
-    # 3. Bottom Professional Promo Banner
     promo_top = 1520
     promo_bottom = 1750
     draw.rounded_rectangle([(60, promo_top), (1020, promo_bottom)], radius=24, fill=(17, 24, 39), outline=(34, 197, 94), width=4)
@@ -183,7 +173,6 @@ def render_video():
     ]
     subprocess.run(cmd, check=True)
 
-# Proven Instagram upload logic
 def post_reel_to_instagram_direct(video_file, caption):
     access_token = os.environ.get("IG_ACCESS_TOKEN")
     user_id = os.environ.get("IG_USER_ID")
@@ -194,7 +183,6 @@ def post_reel_to_instagram_direct(video_file, caption):
     file_size = os.path.getsize(video_file)
     print(f"Video size: {file_size} bytes. Initializing upload container...")
 
-    # Step 1: Start Resumable Upload Session
     init_url = GRAPH_API_BASE + str(user_id).strip() + "/media"
     init_params = {
         "media_type": "REELS",
@@ -211,7 +199,6 @@ def post_reel_to_instagram_direct(video_file, caption):
     if not video_id or not upload_url:
         raise RuntimeError(f"Upload init fail hua: {init_data}")
 
-    # Step 2: Stream Video Bytes directly to Instagram Server
     print("Uploading video binary data directly to Instagram...")
     with open(video_file, "rb") as vf:
         video_bytes = vf.read()
@@ -227,7 +214,6 @@ def post_reel_to_instagram_direct(video_file, caption):
     if upload_res.status_code not in [200, 201]:
         raise RuntimeError(f"Video binary upload fail hua: {upload_res.text}")
 
-    # Step 3: Wait for Meta Video Processing
     print("Waiting for Instagram video processing...")
     status_url = GRAPH_API_BASE + str(video_id).strip()
     for _ in range(25):
@@ -240,7 +226,6 @@ def post_reel_to_instagram_direct(video_file, caption):
         elif status == "ERROR":
             raise RuntimeError(f"Instagram processing error: {status_res}")
 
-    # Step 4: Final Reel Publish
     print("Publishing Reel...")
     publish_url = GRAPH_API_BASE + str(user_id).strip() + "/media_publish"
     pub_res = requests.post(publish_url, data={"creation_id": video_id, "access_token": access_token}).json()
