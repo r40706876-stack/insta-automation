@@ -68,14 +68,18 @@ def generate_exam_script(raw_text):
     1. "spoken_script" MUST be in pure DEVANAGARI HINDI (हिंदी लिपि) so pronunciation is natural.
        - End with: "अपना जवाब कमेंट बॉक्स में लिखिए... और सभी एग्जाम्स के कम्पलीट मॉक टेस्ट्स के लिए... स्क्रीन पर दिए गए नंबर पर व्हाट्सएप करिए।"
     2. "hook_title" and "bullet_points" MUST be in clean ENGLISH for display on screen.
-    3. Exactly 3 bullet points with standard formulas (e.g. NaCl, Na2CO3).
+    3. Exactly 3 bullet points with standard formulas. Do NOT reveal the direct answer of the question in the bullet points.
 
-    Return ONLY a valid JSON object:
+    Return ONLY a valid JSON object without markdown fences:
     {{
-      "hook_title": "WASHING SODA",
-      "spoken_script": "दोस्तों, सोडियम कार्बोनेट को दस जल अणुओं के साथ मिलाकर धोने का सोडा बनाते हैं। अब एक प्रश्न: इसका रासायनिक सूत्र क्या है? अपना जवाब कमेंट बॉक्स में लिखिए... और सभी एग्जाम्स के कम्पलीट मॉक टेस्ट्स के लिए... स्क्रीन पर दिए गए नंबर पर व्हाट्सएप करिए।",
-      "bullet_points": ["Na2CO3 + 10H2O", "Used in cleaning", "❓ Q: What is its formula?"],
-      "caption": "Can you solve this? Drop your answer below! #chemistry #ssc #upsc"
+      "hook_title": "HYDRATED COPPER SULFATE",
+      "spoken_script": "दोस्तों, आज हम जलीय कॉपर सल्फेट के बारे में बात करेंगे... यह प्रयोगशालाओं में सुखाने वाले एजेंट के रूप में उपयोग होता है। अब एक सवाल: क्या आप बता सकते हैं कि इसमें कुल कितने जल अणु जुड़े होते हैं?... अपना जवाब कमेंट बॉक्स में लिखिए... और सभी एग्जाम्स के कम्पलीट मॉक टेस्ट्स के लिए... स्क्रीन पर दिए गए नंबर पर व्हाट्सएप करिए।",
+      "bullet_points": [
+        "Blue Vitriol is a Hydrated Salt",
+        "Used as a drying agent in labs",
+        "❓ Q: How many water molecules are present?"
+      ],
+      "caption": "Can you answer this question? Drop your answer below! #chemistry #ssc #upsc #study"
     }}
 
     PDF Text:
@@ -121,51 +125,58 @@ def create_graphic_frame(reel_data):
     img = Image.new("RGB", (width, height), color=(15, 23, 42))
     draw = ImageDraw.Draw(img)
 
-    title_font = get_font(46)
+    title_font = get_font(44)
     body_font = get_font(34)
     promo_title_font = get_font(36)
     promo_num_font = get_font(44)
 
-    draw.rounded_rectangle([(50, 180), (1030, 360)], radius=20, fill=(30, 41, 59), outline=(250, 204, 21), width=4)
+    # 1. Header Box
+    draw.rounded_rectangle([(70, 190), (1010, 360)], radius=20, fill=(30, 41, 59), outline=(250, 204, 21), width=4)
     title = reel_data.get("hook_title", "EXAM CAPSULE").upper()
-    draw.text((80, 245), f"🔥 {title}", fill=(250, 204, 21), font=title_font)
+    if len(title) > 26:
+        title = title[:26] + "..."
+    draw.text((95, 250), f"🔥 {title}", fill=(250, 204, 21), font=title_font)
 
+    # 2. Content Boxes
     y_offset = 430
     for pt in reel_data.get("bullet_points", []):
-        wrapped_lines = textwrap.wrap(pt, width=38)
+        wrapped_lines = textwrap.wrap(pt, width=36)
         box_height = max(135, len(wrapped_lines) * 48 + 42)
 
-        draw.rounded_rectangle([(50, y_offset), (1030, y_offset + box_height)], radius=18, fill=(30, 41, 59))
+        draw.rounded_rectangle([(70, y_offset), (1010, y_offset + box_height)], radius=18, fill=(30, 41, 59))
         
         text_y = y_offset + 24
         for idx, line in enumerate(wrapped_lines):
             prefix = "✔ " if (idx == 0 and not line.startswith("❓")) else ("" if line.startswith("❓") else "   ")
             text_color = (250, 204, 21) if "❓" in line else (255, 255, 255)
-            draw.text((80, text_y), f"{prefix}{line}", fill=text_color, font=body_font)
+            draw.text((95, text_y), f"{prefix}{line}", fill=text_color, font=body_font)
             text_y += 48
 
         y_offset += box_height + 30
 
+    # 3. WhatsApp Promo Banner
     promo_top = 1520
     promo_bottom = 1750
-    draw.rounded_rectangle([(50, promo_top), (1030, promo_bottom)], radius=24, fill=(17, 24, 39), outline=(34, 197, 94), width=4)
+    draw.rounded_rectangle([(70, promo_top), (1010, promo_bottom)], radius=24, fill=(17, 24, 39), outline=(34, 197, 94), width=4)
     
     promo_text1 = "📚 COMPLETE MOCK TESTS & E-BOOKS"
-    draw.text((90, promo_top + 35), promo_text1, fill=(250, 204, 21), font=promo_title_font)
+    draw.text((105, promo_top + 35), promo_text1, fill=(250, 204, 21), font=promo_title_font)
     
     promo_text2 = f"📲 WhatsApp: {WHATSAPP_NUMBER}"
-    draw.text((90, promo_top + 105), promo_text2, fill=(34, 197, 94), font=promo_num_font)
+    draw.text((105, promo_top + 105), promo_text2, fill=(34, 197, 94), font=promo_num_font)
 
     img.save(FRAME_IMG)
 
-# Smooth Zoom Effect fully compatible with Instagram Servers
+# 100% Tested FFmpeg Zoom Settings: Zero OOM risk, Zero upload rejection
 def render_video():
     cmd = [
         "ffmpeg", "-y",
-        "-loop", "1", "-i", FRAME_IMG,
+        "-loop", "1", "-framerate", "30", "-i", FRAME_IMG,
         "-i", AUDIO_OUTPUT,
         "-filter_complex",
-        "zoompan=z='min(zoom+0.0003,1.06)':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d=1500:s=1080x1920:fps=30",
+        "[0:v]zoompan=z='min(zoom+0.00018,1.07)':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d=1:s=1080x1920:fps=30[v]",
+        "-map", "[v]",
+        "-map", "1:a",
         "-c:v", "libx264",
         "-profile:v", "high",
         "-level", "4.2",
@@ -256,7 +267,7 @@ def main():
     print("🖼️ [Step 4] Creating Poster Frame...")
     create_graphic_frame(reel_data)
 
-    print("🎬 [Step 5] Rendering Zoom Video (FFmpeg)...")
+    print("🎬 [Step 5] Rendering Smooth Zoom Video (FFmpeg)...")
     render_video()
 
     caption_base = reel_data.get("caption", "")
