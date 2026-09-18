@@ -9,7 +9,7 @@ from PIL import Image, ImageDraw, ImageFilter, ImageFont
 import edge_tts
 
 # =====================================================================
-# 1. Environment & API Configurations
+# 1. कॉन्फ़िगरेशन एवं API सेटिंग्स
 # =====================================================================
 IG_ACCESS_TOKEN = os.getenv("IG_ACCESS_TOKEN", "").strip()
 IG_USER_ID = os.getenv("IG_USER_ID", "").strip()
@@ -17,26 +17,30 @@ IG_USER_ID = os.getenv("IG_USER_ID", "").strip()
 GRAPH_API_BASE = "https://graph.facebook.com/v19.0/"
 RUPLOAD_BASE = "https://rupload.facebook.com/ig-api-upload/v19.0/"
 
-ASSETS_DIR = "assets/biology_perfect_p2"
+ASSETS_DIR = "assets/biology_pro_p2"
 os.makedirs(ASSETS_DIR, exist_ok=True)
 
-# Mukta-Bold font: Hindi + English dono support karta hai (Zero Tofu boxes)
+# द्विभाषी प्रोफेशनल फ़ॉन्ट
 FONT_FILE = os.path.join(ASSETS_DIR, "Mukta-Bold.ttf")
-AUDIO_OUTPUT = "page2_voice.mp3"
-FINAL_VIDEO = "biology_page2_master_reel.mp4"
-VOICE_NAME = "hi-IN-MadhurNeural"
+AUDIO_OUTPUT = "pro_voice.mp3"
+FINAL_VIDEO = "biology_pro_reel.mp4"
+
+# पेशेवर महिला आवाज़ (Female Voice)
+VOICE_NAME = "hi-IN-SwaraNeural"
 
 RESAMPLE_MODE = getattr(Image, "Resampling", Image).LANCZOS
+
+WHATSAPP_NUMBER = "8989971379"
 
 IMAGE_URLS = {
     "cork_cells": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Robert_Hooke_Micrographia_1665_cork_cells.jpg/800px-Robert_Hooke_Micrographia_1665_cork_cells.jpg",
     "living_cell": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Anabaena_sperica.jpg/800px-Anabaena_sperica.jpg",
     "nucleus_3d": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Diagram_human_cell_nucleus.svg/1024px-Diagram_human_cell_nucleus.svg.png",
-    "trophy": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Golden_Trophy.svg/800px-Golden_Trophy.svg.png"
+    "pdf_ebook": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Golden_Trophy.svg/800px-Golden_Trophy.svg.png"
 }
 
 # =====================================================================
-# 2. Universal Font Loader (Hindi + English Safe)
+# 2. फ़ॉन्ट इंजन (बड़े और स्पष्ट अक्षर)
 # =====================================================================
 def get_verified_font(size):
     if not os.path.exists(FONT_FILE) or os.path.getsize(FONT_FILE) < 50000:
@@ -52,17 +56,10 @@ def get_verified_font(size):
     try:
         return ImageFont.truetype(FONT_FILE, size)
     except Exception:
-        sys_paths = [
-            "/usr/share/fonts/truetype/noto/NotoSansDevanagari-Bold.ttf",
-            "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
-        ]
-        for sp in sys_paths:
-            if os.path.exists(sp):
-                return ImageFont.truetype(sp, size)
         return ImageFont.load_default()
 
 # =====================================================================
-# 3. Verified Image Fetcher with 3D Graphic Backup
+# 3. 3D विजुअल और इमेज हैंडलर
 # =====================================================================
 def generate_artistic_fallback(key):
     img = Image.new("RGBA", (700, 520), (11, 19, 43, 255))
@@ -75,17 +72,17 @@ def generate_artistic_fallback(key):
             for col in range(40 + offset, 650, 60):
                 d.rounded_rectangle([col, row, col + 48, row + 45], radius=8, fill="#292524", outline="#d97706", width=3)
                 d.ellipse([col + 15, row + 14, col + 33, row + 31], fill="#451a03")
-        d.text((200, 25), "रॉबर्ट हुक कॉर्क कोशिकाएं (1665)", fill="#fde68a", font=get_verified_font(24))
+        d.text((180, 25), "रॉबर्ट हुक कॉर्क कोशिकाएं (1665)", fill="#fde68a", font=get_verified_font(26))
     elif key == "living_cell":
         d.rounded_rectangle([15, 15, 685, 505], radius=16, fill="#062c24", outline="#059669", width=4)
         d.ellipse([100, 80, 600, 440], fill="#047857", outline="#34d399", width=6)
         d.ellipse([270, 180, 430, 340], fill="#0f766e", outline="#5eead4", width=4)
-        d.text((190, 25), "ल्यूवेनहॉक जीवित कोशिका (1674)", fill="#a7f3d0", font=get_verified_font(24))
+        d.text((160, 25), "ल्यूवेनहॉक जीवित कोशिका (1674)", fill="#a7f3d0", font=get_verified_font(26))
     elif key == "nucleus_3d":
         d.rounded_rectangle([15, 15, 685, 505], radius=16, fill="#2e1065", outline="#9333ea", width=4)
         d.ellipse([140, 60, 560, 460], fill="#581c87", outline="#c084fc", width=8)
         d.ellipse([300, 210, 400, 310], fill="#a855f7", outline="#f3e8ff", width=4)
-        d.text((210, 25), "कोशिका केंद्रक (Nucleus - 1831)", fill="#f3e8ff", font=get_verified_font(24))
+        d.text((180, 25), "कोशिका केंद्रक (Nucleus - 1831)", fill="#f3e8ff", font=get_verified_font(26))
     else:
         d.rounded_rectangle([15, 15, 685, 505], radius=16, fill="#1e1b4b", outline="#f59e0b", width=4)
         d.polygon([(250, 120), (450, 120), (410, 320), (290, 320)], fill="#f59e0b", outline="#fef08a")
@@ -147,50 +144,53 @@ def paste_smooth_glow_asset(canvas, img_path, target_box, glow_rgb=(56, 189, 248
         pass
 
 # =====================================================================
-# 4. Canvas Scaffold & Slide Generation (PDF Page 2 Line-by-Line)
+# 4. प्रोफेशनली डिजाइन स्लाइड्स (WhatsApp नंबर के साथ)
 # =====================================================================
 def draw_base_scaffold(draw, slide_idx, total=4):
     draw.rounded_rectangle([35, 35, 1045, 1885], radius=28, fill="#070B14", outline="#38BDF8", width=3)
-    draw.rounded_rectangle([75, 70, 540, 135], radius=14, fill="#F59E0B")
-    draw.text((95, 85), "PARMAR SSC BIOLOGY • PAGE 2", fill="#000000", font=get_verified_font(25))
-    draw.text((710, 85), "@PARMAR_BIO", fill="#64748B", font=get_verified_font(28))
+    
+    # प्रीमियम टॉप बैनर
+    draw.rounded_rectangle([75, 70, 600, 145], radius=14, fill="#F59E0B")
+    draw.text((95, 88), "EXAM ORIENTED BIOLOGY NOTES", fill="#000000", font=get_verified_font(28))
+    draw.text((700, 88), "PDF E-BOOK", fill="#38BDF8", font=get_verified_font(30))
 
     bar_w = int(900 * (slide_idx / total))
-    draw.rounded_rectangle([90, 155, 990, 167], radius=6, fill="#1E293B")
-    draw.rounded_rectangle([90, 155, 90 + bar_w, 167], radius=6, fill="#38BDF8")
+    draw.rounded_rectangle([90, 165, 990, 177], radius=6, fill="#1E293B")
+    draw.rounded_rectangle([90, 165, 90 + bar_w, 177], radius=6, fill="#38BDF8")
 
-    draw.rounded_rectangle([75, 1725, 1005, 1835], radius=18, fill="#E11D48")
-    draw.text((150, 1755), "Page 2 Revision Pura! Save Aur Follow Karein!", fill="#FFFFFF", font=get_verified_font(32))
+    # प्रोफेशनल WhatsApp CTA बैनर (नीचे)
+    draw.rounded_rectangle([75, 1715, 1005, 1835], radius=18, fill="#059669")
+    draw.text((95, 1748), f"📲 WhatsApp करें: {WHATSAPP_NUMBER}", fill="#FFFFFF", font=get_verified_font(34))
 
 def generate_all_slides():
     slide_files = []
-    f_h1 = get_verified_font(42)
-    f_badge = get_verified_font(25)
-    f_body = get_verified_font(30)
-    f_label = get_verified_font(28)
+    f_h1 = get_verified_font(46)
+    f_badge = get_verified_font(28)
+    f_body = get_verified_font(34)
+    f_label = get_verified_font(30)
 
     # SLIDE 1
     img1 = Image.new("RGB", (1080, 1920), color="#020617")
     d1 = ImageDraw.Draw(img1)
     draw_base_scaffold(d1, 1)
-    d1.text((75, 195), "1. कोशिका की परिभाषा और खोज (1665)", fill="#38BDF8", font=f_h1)
+    d1.text((75, 205), "1. कोशिका की परिभाषा और खोज (1665)", fill="#38BDF8", font=f_h1)
 
-    box1 = [75, 265, 1005, 830]
+    box1 = [75, 280, 1005, 830]
     d1.rounded_rectangle(box1, radius=22, fill="#0B132B", outline="#38BDF8", width=2)
     paste_smooth_glow_asset(img1, get_verified_image("cork_cells"), box1, glow_rgb=(56, 189, 248))
-    d1.rounded_rectangle([95, 285, 490, 340], radius=10, fill="#1E3A8A")
-    d1.text((115, 298), "रॉबर्ट हुक: कॉर्क मृत कोशिका (1665)", fill="#93C5FD", font=f_badge)
+    d1.rounded_rectangle([95, 300, 550, 360], radius=10, fill="#1E3A8A")
+    d1.text((115, 312), "रॉबर्ट हुक: कॉर्क मृत कोशिका (1665)", fill="#93C5FD", font=f_badge)
 
-    d1.rounded_rectangle([75, 860, 1005, 1680], radius=22, fill="#0F172A", outline="#334155", width=2)
-    d1.text((105, 890), "Page 2 के मुख्य परीक्षा बिंदु (Line-by-Line):", fill="#FBBF24", font=f_label)
+    d1.rounded_rectangle([75, 855, 1005, 1680], radius=22, fill="#0F172A", outline="#334155", width=2)
+    d1.text((105, 885), "परीक्षा के लिए अति महत्वपूर्ण बिंदु:", fill="#FBBF24", font=f_label)
     txt1 = (
-        "• कोशिका: जीवन की मौलिक, संरचनात्मक और कार्यात्मक इकाई है।\n\n"
-        "• साइटोलॉजी (Cytology): कोशिका के अध्ययन को कहते हैं।\n\n"
-        "• लैटिन नाम: 'Cellula' शब्द से बना है, जिसका अर्थ है 'छोटा कमरा' (Small Room)।\n\n"
-        "• रॉबर्ट हुक (1665): पहली बार पेड़ की छाल (कॉर्क) में कोशिका देखी।\n\n"
-        "• परीक्षा ट्रैप: रॉबर्ट हुक द्वारा देखी गई कोशिका मृत (Dead Cell) थी!"
+        "• कोशिका: जीवन की मौलिक व संरचनात्मक इकाई है।\n\n"
+        "• साइटोलॉजी (Cytology): कोशिका का वैज्ञानिक अध्ययन।\n\n"
+        "• लैटिन नाम: 'Cellula' यानी छोटा कमरा (Small Room)।\n\n"
+        "• रॉबर्ट हुक (1665): पेड़ की छाल में मृत कोशिका खोजी।\n\n"
+        "• विशेष ध्यान दें: यह पहली मृत कोशिका थी!"
     )
-    d1.multiline_text((105, 955), txt1, fill="#F8FAFC", font=f_body, spacing=13)
+    d1.multiline_text((105, 955), txt1, fill="#F8FAFC", font=f_body, spacing=16)
     img1.save("slide_1.png")
     slide_files.append("slide_1.png")
 
@@ -198,23 +198,23 @@ def generate_all_slides():
     img2 = Image.new("RGB", (1080, 1920), color="#020617")
     d2 = ImageDraw.Draw(img2)
     draw_base_scaffold(d2, 2)
-    d2.text((75, 195), "2. कोशिका की अन्य प्रमुख खोजें", fill="#10B981", font=f_h1)
+    d2.text((75, 205), "2. कोशिका की अन्य प्रमुख खोजें", fill="#10B981", font=f_h1)
 
-    box2 = [75, 265, 1005, 830]
+    box2 = [75, 280, 1005, 830]
     d2.rounded_rectangle(box2, radius=22, fill="#0B132B", outline="#10B981", width=2)
     paste_smooth_glow_asset(img2, get_verified_image("living_cell"), box2, glow_rgb=(16, 185, 129))
-    d2.rounded_rectangle([95, 285, 490, 340], radius=10, fill="#064E3B")
-    d2.text((115, 298), "ल्यूवेनहॉक: पहली जीवित कोशिका (1674)", fill="#6EE7B7", font=f_badge)
+    d2.rounded_rectangle([95, 300, 550, 360], radius=10, fill="#064E3B")
+    d2.text((115, 312), "ल्यूवेनहॉक: पहली जीवित कोशिका (1674)", fill="#6EE7B7", font=f_badge)
 
-    d2.rounded_rectangle([75, 860, 1005, 1680], radius=22, fill="#0F172A", outline="#334155", width=2)
-    d2.text((105, 890), "बार-बार पूछे जाने वाले 3 वैज्ञानिक:", fill="#10B981", font=f_label)
+    d2.rounded_rectangle([75, 855, 1005, 1680], radius=22, fill="#0F172A", outline="#334155", width=2)
+    d2.text((105, 885), "शीर्ष 3 महत्वपूर्ण वैज्ञानिक:", fill="#10B981", font=f_label)
     txt2 = (
-        "• ल्यूवेनहॉक (1674): तालाब के जल में पहली 'जीवित कोशिका' (Living Cell) देखी।\n\n"
-        "• रॉबर्ट ब्राउन (1831): कोशिका के केंद्रक (Nucleus) की खोज की।\n\n"
-        "• पुरकिंजे (1839): कोशिका द्रव्य को 'प्रोटोप्लाज्म' (जीवद्रव्य) नाम दिया।\n\n"
-        "• याद रखने की ट्रिक: हुक = मृत, ल्यूवेनहॉक = जीवित, ब्राउन = केंद्रक!"
+        "• ल्यूवेनहॉक (1674): तालाब के जल में पहली जीवित कोशिका।\n\n"
+        "• रॉबर्ट ब्राउन (1831): केंद्रक (Nucleus) की खोज की।\n\n"
+        "• पुरकिंजे (1839): जीवद्रव्य को 'प्रोटोप्लाज्म' नाम दिया।\n\n"
+        "• ट्रिक: हुक = मृत, ल्यूवेनहॉक = जीवित, ब्राउन = केंद्रक।"
     )
-    d2.multiline_text((105, 955), txt2, fill="#F8FAFC", font=f_body, spacing=13)
+    d2.multiline_text((105, 955), txt2, fill="#F8FAFC", font=f_body, spacing=16)
     img2.save("slide_2.png")
     slide_files.append("slide_2.png")
 
@@ -222,24 +222,23 @@ def generate_all_slides():
     img3 = Image.new("RGB", (1080, 1920), color="#020617")
     d3 = ImageDraw.Draw(img3)
     draw_base_scaffold(d3, 3)
-    d3.text((75, 195), "3. कोशिका सिद्धांत (Cell Theory)", fill="#F43F5E", font=f_h1)
+    d3.text((75, 205), "3. कोशिका सिद्धांत (Cell Theory)", fill="#F43F5E", font=f_h1)
 
-    box3 = [75, 265, 1005, 830]
-    d2_box = [75, 265, 1005, 830]
+    box3 = [75, 280, 1005, 830]
     d3.rounded_rectangle(box3, radius=22, fill="#0B132B", outline="#F43F5E", width=2)
     paste_smooth_glow_asset(img3, get_verified_image("nucleus_3d"), box3, glow_rgb=(244, 63, 94))
-    d3.rounded_rectangle([95, 285, 490, 340], radius=10, fill="#881337")
-    d3.text((115, 298), "केंद्रक संरचना एवं कोशिका नियंत्रण", fill="#FDA4AF", font=f_badge)
+    d3.rounded_rectangle([95, 300, 550, 360], radius=10, fill="#881337")
+    d3.text((115, 312), "केंद्रक संरचना एवं नियंत्रण केंद्र", fill="#FDA4AF", font=f_badge)
 
-    d3.rounded_rectangle([75, 860, 1005, 1680], radius=22, fill="#0F172A", outline="#334155", width=2)
-    d3.text((105, 890), "सिद्धांत के नियम और वैज्ञानिक योगदान:", fill="#F43F5E", font=f_label)
+    d3.rounded_rectangle([75, 855, 1005, 1680], radius=22, fill="#0F172A", outline="#334155", width=2)
+    d3.text((105, 885), "सिद्धार्थ के मुख्य नियम:", fill="#F43F5E", font=f_label)
     txt3 = (
-        "• श्लाइडेन और श्वान (1838-1839): कोशिका सिद्धांत प्रस्तुत किया।\n\n"
-        "• मुख्य नियम: सभी पौधे और जंतु कोशिकाओं से मिलकर बने हैं।\n\n"
-        "• कोशिका जीवन की सबसे मूल संरचनात्मक इकाई है।\n\n"
-        "• रूडोल्फ विरचो (1855): कहा कि सभी नई कोशिकाएं पूर्व-मौजूद कोशिकाओं से बनती हैं।"
+        "• श्लाइडेन व श्वान (1838-39): कोशिका सिद्धांत दिया।\n\n"
+        "• मुख्य नियम: सभी पौधे व जंतु कोशिकाओं से बने हैं।\n\n"
+        "• मूल इकाई: कोशिका जीवन की मौलिक इकाई है।\n\n"
+        "• रूडोल्फ विरचो (1855): नई कोशिकाएं पुरानी से बनती हैं।"
     )
-    d3.multiline_text((105, 955), txt3, fill="#F8FAFC", font=f_body, spacing=13)
+    d3.multiline_text((105, 955), txt3, fill="#F8FAFC", font=f_body, spacing=16)
     img3.save("slide_3.png")
     slide_files.append("slide_3.png")
 
@@ -247,41 +246,41 @@ def generate_all_slides():
     img4 = Image.new("RGB", (1080, 1920), color="#020617")
     d4 = ImageDraw.Draw(img4)
     draw_base_scaffold(d4, 4)
-    d4.text((75, 195), "Page 2 का लाइव टेस्ट: सही उत्तर दें!", fill="#FBBF24", font=f_h1)
+    d4.text((75, 205), "परीक्षा उपयोगी महत्वपूर्ण प्रश्न", fill="#FBBF24", font=f_h1)
 
-    d4.rounded_rectangle([75, 260, 1005, 540], radius=22, fill="#1E293B", outline="#FBBF24", width=3)
-    d4.text((105, 290), "🎯 SSC CGL / CHSL PYQ:", fill="#FBBF24", font=f_label)
-    q_text = "तालाब के जल में पहली बार 'जीवित कोशिका' (Living Cell) की खोज किसने की थी?"
-    d4.multiline_text((105, 350), textwrap.fill(q_text, width=27), fill="#FFFFFF", font=f_body, spacing=10)
+    d4.rounded_rectangle([75, 280, 1005, 550], radius=22, fill="#1E293B", outline="#FBBF24", width=3)
+    d4.text((105, 310), "🎯 SSC CGL / CHSL PYQ:", fill="#FBBF24", font=f_label)
+    q_text = "तालाब के जल में पहली बार 'जीवित कोशिका' की खोज किसने की थी?"
+    d4.multiline_text((105, 375), textwrap.fill(q_text, width=26), fill="#FFFFFF", font=f_body, spacing=12)
 
     options = ["रॉबर्ट हुक", "ल्यूवेनहॉक", "रॉबर्ट ब्राउन", "पुरकिंजे"]
-    qy = 575
+    qy = 590
     for idx, opt in enumerate(options):
         lbl = chr(65 + idx)
         d4.rounded_rectangle([75, qy, 1005, qy + 105], radius=16, fill="#0F172A", outline="#38BDF8", width=2)
         d4.rounded_rectangle([100, qy + 18, 170, qy + 88], radius=10, fill="#38BDF8")
-        d4.text((120, qy + 30), lbl, fill="#000000", font=f_badge)
-        d4.text((195, qy + 35), opt, fill="#F8FAFC", font=f_body)
-        qy += 130
+        d4.text((122, qy + 28), lbl, fill="#000000", font=f_badge)
+        d4.text((195, qy + 32), opt, fill="#F8FAFC", font=f_body)
+        qy += 125
 
-    trophy_box = [75, 1120, 1005, 1680]
-    d4.rounded_rectangle(trophy_box, radius=22, fill="#111827", outline="#10B981", width=2)
-    paste_smooth_glow_asset(img4, get_verified_image("trophy"), [90, 1140, 420, 1660], glow_rgb=(245, 158, 11))
+    pdf_box = [75, 1110, 1005, 1680]
+    d4.rounded_rectangle(pdf_box, radius=22, fill="#111827", outline="#10B981", width=2)
+    paste_smooth_glow_asset(img4, get_verified_image("pdf_ebook"), [90, 1130, 420, 1660], glow_rgb=(16, 185, 129))
 
-    d4.text((430, 1220), "🏆 SSC TOPPER CHALLENGE", fill="#FBBF24", font=f_label)
+    d4.text((430, 1200), "📚 PDF E-BOOK ORDER", fill="#34D399", font=f_label)
     hint_desc = (
-        "• सही उत्तर वीडियो में बताया गया है!\n\n"
-        "• कमेंट सेक्शन में A, B, C या D लिखें।\n\n"
-        "• अगली रील Page 3 (कोशिका के अंग) पर आएगी!"
+        "• सम्पूर्ण बायोलॉजी नोट्स!\n\n"
+        f"• WhatsApp: {WHATSAPP_NUMBER}\n\n"
+        "• तुरंत मैसेज करें!"
     )
-    d4.multiline_text((430, 1300), hint_desc, fill="#F8FAFC", font=get_verified_font(26), spacing=12)
+    d4.multiline_text((430, 1280), hint_desc, fill="#F8FAFC", font=get_verified_font(28), spacing=14)
 
     img4.save("slide_4.png")
     slide_files.append("slide_4.png")
     return slide_files
 
 # =====================================================================
-# 5. Audio & FFmpeg (Strict 52s Locking)
+# 5. ऑडियो (फीमेल वॉइस) एवं वीडियो सिंक
 # =====================================================================
 async def make_voice(text, out_file):
     communicate = edge_tts.Communicate(text=text, voice=VOICE_NAME, rate="+0%")
@@ -328,10 +327,10 @@ def compile_video(slide_files, audio_file, output_file):
         output_file
     ]
     subprocess.run(ffmpeg_cmd, check=True)
-    print(f"\n🎬 Video Ready: {output_file}\n")
+    print(f"\n🎬 Pro Video Ready: {output_file}\n")
 
 # =====================================================================
-# 6. Instagram Upload Engine
+# 6. इंस्टाग्राम ऑटो-अपलोड इंजन
 # =====================================================================
 def post_reel_to_instagram_multipart(video_file, caption):
     access_token = os.getenv("IG_ACCESS_TOKEN", "").strip()
@@ -341,7 +340,7 @@ def post_reel_to_instagram_multipart(video_file, caption):
         print("Notice: Token ya ID set nahi hai. Video file locally create ho chuki hai.")
         return
 
-    print("🚀 Instagram auto-upload start ho raha hai...")
+    print("🚀 Instagram auto-upload start ho raha है...")
     init_url = f"{GRAPH_API_BASE}{user_id}/media"
     data = {
         "media_type": "REELS",
@@ -380,34 +379,35 @@ def post_reel_to_instagram_multipart(video_file, caption):
         print(f"🎉 SUCCESS! Reel Live on Instagram! ID: {pub_res['id']}")
 
 # =====================================================================
-# 7. Main Execution Pipeline
+# 7. मुख्य निष्पादन (Main Execution)
 # =====================================================================
 if __name__ == "__main__":
-    page2_script = (
-        "एसएससी बायोलॉजी के नोट्स का पेज नंबर दो पूरी बारीकी से समझिए! "
+    pro_script = (
+        f"एसएससी बायोलॉजी के बेहतरीन नोट्स और एक्जाम ओरिएंटेड पीडीएफ ई-बुक प्राप्त करने के लिए अभी व्हाट्सएप करें! नंबर है, {WHATSAPP_NUMBER}। "
+        "आइए कोशिका चैप्टर के सबसे महत्वपूर्ण तथ्यों को समझें। "
         "कोशिका जीवन की मौलिक और संरचनात्मक इकाई है, जिसके अध्ययन को साइटोलॉजी कहते हैं। "
-        "इसका नाम लैटिन शब्द सेल्यूला यानी छोटे कमरे से लिया गया है। "
-        "पहली बार 1665 में रॉबर्ट हुक ने पेड़ की छाल में मृत कोशिका देखी। "
-        "लेकिन ध्यान दें: पहली जीवित कोशिका 1674 में ल्यूवेनहॉक ने पानी में खोजी थी! "
-        "इसके बाद 1831 में रॉबर्ट ब्राउन ने केंद्रक यानी न्यूक्लियस की खोज की, "
-        "और पुरकिंजे ने जीवद्रव्य को प्रोटोप्लाज्म नाम दिया! "
-        "कोशिका सिद्धांत श्लाइडेन और श्वान ने दिया, जिसे रूडोल्फ विरचो ने आगे बढ़ाया "
-        "कि सभी नई कोशिकाएं पुरानी कोशिकाओं के विभाजन से बनती हैं! "
-        "तो दोस्तों, स्क्रीन पर दिए सवाल का सही उत्तर कमेंट्स में लिखें, "
-        "और पेज 3 के लिए फॉलो जरूर करें!"
+        "पहली बार 1665 में रॉबर्ट हुक ने मृत कोशिका देखी थी, "
+        "जबकि 1674 में ल्यूवेनहॉक ने पहली जीवित कोशिका की खोज की। "
+        "रॉबर्ट ब्राउन ने केंद्रक यानी न्यूक्लियस खोजा और पुरकिंजे ने जीवद्रव्य को प्रोटोप्लाज्म नाम दिया। "
+        "सभी परीक्षाओं में सफलता के लिए आज ही हमारी ई-बुक व्हाट्सएप नंबर {WHATSAPP_NUMBER} पर आर्डर करें!"
     )
 
     caption_text = (
-        "SSC Biology: कोशिका की खोज और सिद्धांत (Page 2 Complete Revision) 🧬✨\n\n"
-        "• Robert Hooke (1665) — मृत कोशिका की खोज\n"
-        "• Antonie van Leeuwenhoek (1674) — पहली जीवित कोशिका\n"
-        "• Robert Brown (1831) — केंद्रक (Nucleus)\n"
-        "• J.E. Purkinje (1839) — प्रोटोप्लाज्म (जीवद्रव्य)\n"
-        "• Schleiden, Schwann & Virchow — कोशिका सिद्धांत\n\n"
-        "#SSCCGL #ParmarSSC #BiologyShorts #CellBiology"
+        "SSC Biology Exam-Oriented Notes 🧬📚\n\n"
+        "• सम्पूर्ण पाठ्यक्रम आधारित PDF E-Book उपलब्ध!\n"
+        "• बेहतरीन ट्रिक्स और परीक्षा उपयोगी प्रश्न।\n"
+        f"• E-Book मंगवाने के लिए तुरंत WhatsApp करें: {WHATSAPP_NUMBER}\n\n"
+        "#SSCCGL #ParmarSSC #BiologyPDF #CellBiology #GovtExamPrep"
     )
 
+    print("चरण 1: बड़े फॉन्ट और स्पष्ट स्लाइड्स तैयार की जा रही हैं...", flush=True)
     slides = generate_all_slides()
-    asyncio.run(make_voice(page2_script, AUDIO_OUTPUT))
+
+    print("चरण 2: प्रोफेशनल फीमेल वॉयसओवर जनरेट हो रहा है...", flush=True)
+    asyncio.run(make_voice(pro_script, AUDIO_OUTPUT))
+
+    print("चरण 3: FFmpeg द्वारा वीडियो रेंडर की जा रही है...", flush=True)
     compile_video(slides, AUDIO_OUTPUT, FINAL_VIDEO)
+
+    print("चरण 4: इंस्टाग्राम अपलोड चलाया जा रहा है...", flush=True)
     post_reel_to_instagram_multipart(FINAL_VIDEO, caption_text)
