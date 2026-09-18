@@ -24,8 +24,8 @@ FONT_FILE = os.path.join(ASSETS_DIR, "Mukta-Bold.ttf")
 AUDIO_OUTPUT = "pro_voice.mp3"
 FINAL_VIDEO = "biology_pro_reel.mp4"
 
-# प्रोफेशनल महिला आवाज़ (Female Voice)
-VOICE_NAME = "hi-IN-SwaraNeural"
+# एकदम realistic और human जैसी गहरी Male Voice (MadhurNeural)
+VOICE_NAME = "hi-IN-MadhurNeural"
 RESAMPLE_MODE = getattr(Image, "Resampling", Image).LANCZOS
 
 WHATSAPP_NUMBER = "8989971379"
@@ -142,7 +142,7 @@ def paste_smooth_glow_asset(canvas, img_path, target_box, glow_rgb=(56, 189, 248
         pass
 
 # =====================================================================
-# 4. प्रोफेशनली डिजाइन स्लाइड्स (बड़े फॉन्ट और अंत में WhatsApp)
+# 4. प्रोफेशनली डिजाइन स्लाइड्स
 # =====================================================================
 def draw_base_scaffold(draw, slide_idx, total=4):
     draw.rounded_rectangle([35, 35, 1045, 1885], radius=28, fill="#070B14", outline="#38BDF8", width=3)
@@ -156,7 +156,7 @@ def draw_base_scaffold(draw, slide_idx, total=4):
     draw.rounded_rectangle([90, 165, 90 + bar_w, 177], radius=6, fill="#38BDF8")
 
     draw.rounded_rectangle([75, 1715, 1005, 1835], radius=18, fill="#059669")
-    draw.text((95, 1748), f"📲 WhatsApp करें: {WHATSAPP_NUMBER}", fill="#FFFFFF", font=get_verified_font(34))
+    draw.text((95, 1748), f"WhatsApp करें: {WHATSAPP_NUMBER}", fill="#FFFFFF", font=get_verified_font(34))
 
 def generate_all_slides():
     slide_files = []
@@ -276,7 +276,7 @@ def generate_all_slides():
     return slide_files
 
 # =====================================================================
-# 5. ऑडियो (फीमेल वॉइस) एवं वीडियो सिंक
+# 5. ऑडियो (Realistic Male Voice) एवं वीडियो सिंक
 # =====================================================================
 async def make_voice(text, out_file):
     communicate = edge_tts.Communicate(text=text, voice=VOICE_NAME, rate="+0%")
@@ -323,7 +323,7 @@ def compile_video(slide_files, audio_file, output_file):
         output_file
     ]
     subprocess.run(ffmpeg_cmd, check=True)
-    print(f"\n🎬 Pro Video Ready: {output_file}\n")
+    print(f"\n🎬 Pro Male Voice Video Ready: {output_file}\n")
 
 # =====================================================================
 # 6. इंस्टाग्राम ऑटो-अपलोड इंजन
@@ -378,29 +378,29 @@ def post_reel_to_instagram_multipart(video_file, caption):
 # 7. मुख्य निष्पादन (Main Execution)
 # =====================================================================
 if __name__ == "__main__":
-    # शुरुआत पूरी तरह पढ़ाई से, और WhatsApp ऑर्डर की बात बिल्कुल अंत में
     pro_script = (
+        "लिख कर ले लो, ये सवाल कंपेटिटिव एग्जाम में जरूर आएगा! "
         "आइए एसएससी बायोलॉजी के कोशिका चैप्टर के सबसे महत्वपूर्ण तथ्यों को समझें। "
         "कोशिका जीवन की मौलिक और संरचनात्मक इकाई है, जिसके अध्ययन को साइटोलॉजी कहते हैं। "
         "पहली बार 1665 में रॉबर्ट हुक ने मृत कोशिका देखी थी, "
         "जबकि 1674 में ल्यूवेनहॉक ने पहली जीवित कोशिका की खोज की। "
         "रॉबर्ट ब्राउन ने केंद्रक यानी न्यूक्लियस खोजा और पुरकिंजे ने जीवद्रव्य को प्रोटोप्लाज्म नाम दिया। "
-        "अब परीक्षा में पक्की सफलता के लिए, एक्जाम ओरिएंटेड पीडीएफ ई-बुक प्राप्त करने के लिए "
-        f"आज ही हमारे व्हाट्सएप नंबर {WHATSAPP_NUMBER} पर मैसेज करें!"
+        "अब परीक्षा में पक्की सफलता के लिए, मॉक टेस्ट और एक्जाम ओरिएंटेड पीडीएफ ई-बुक प्राप्त करने के लिए "
+        f"स्क्रीन पर दिए गए नंबर पर व्हाट्सएप करें!"
     )
 
     caption_text = (
         "SSC Biology Exam-Oriented Notes 🧬📚\n\n"
         "• सम्पूर्ण पाठ्यक्रम आधारित PDF E-Book उपलब्ध!\n"
         "• बेहतरीन ट्रिक्स और परीक्षा उपयोगी प्रश्न।\n"
-        f"• E-Book मंगवाने के लिए तुरंत WhatsApp करें: {WHATSAPP_NUMBER}\n\n"
+        f"• मॉक टेस्ट और E-Book के लिए WhatsApp करें: {WHATSAPP_NUMBER}\n\n"
         "#SSCCGL #ParmarSSC #BiologyPDF #CellBiology #GovtExamPrep"
     )
 
     print("चरण 1: बड़े फॉन्ट और स्पष्ट स्लाइड्स तैयार की जा रही हैं...", flush=True)
     slides = generate_all_slides()
 
-    print("चरण 2: प्रोफेशनल फीमेल वॉयसओवर जनरेट हो रहा है...", flush=True)
+    print("चरण 2: Realistic Male Voiceover generate ho raha hai...", flush=True)
     asyncio.run(make_voice(pro_script, AUDIO_OUTPUT))
 
     print("चरण 3: FFmpeg द्वारा वीडियो रेंडर की जा रही है...", flush=True)
