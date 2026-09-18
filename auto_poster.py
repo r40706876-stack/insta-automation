@@ -3,13 +3,14 @@ import time
 import subprocess
 import asyncio
 import textwrap
+import math
 import requests
 from io import BytesIO
 from PIL import Image, ImageDraw, ImageFilter, ImageFont
 import edge_tts
 
 # =====================================================================
-# 1. कॉन्फ़िगरेशन एवं API सेटिंग्स
+# 1. Configuration & API Settings
 # =====================================================================
 IG_ACCESS_TOKEN = os.getenv("IG_ACCESS_TOKEN", "").strip()
 IG_USER_ID = os.getenv("IG_USER_ID", "").strip()
@@ -17,28 +18,39 @@ IG_USER_ID = os.getenv("IG_USER_ID", "").strip()
 GRAPH_API_BASE = "https://graph.facebook.com/v19.0/"
 RUPLOAD_BASE = "https://rupload.facebook.com/ig-api-upload/v19.0/"
 
-ASSETS_DIR = "assets/biology_clean_p3"
+ASSETS_DIR = "assets/biology_pro_3d_p3"
 os.makedirs(ASSETS_DIR, exist_ok=True)
 
 FONT_FILE = os.path.join(ASSETS_DIR, "Mukta-Bold.ttf")
-AUDIO_OUTPUT = "clean_voice.mp3"
-FINAL_VIDEO = "biology_clean_reel.mp4"
+AUDIO_OUTPUT = "pro_voice.mp3"
+FINAL_VIDEO = "biology_3d_reel.mp4"
 
-# Realistic Male Voice
 VOICE_NAME = "hi-IN-MadhurNeural"
 RESAMPLE_MODE = getattr(Image, "Resampling", Image).LANCZOS
 
 WHATSAPP_NUMBER = "8989971379"
 
-# Clean educational asset URLs
+# Verified high-res raster mirrors (No raw SVGs)
 IMAGE_URLS = {
-    "mitochondria": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Animal_mitochondria_diagram_en.svg/1024px-Animal_mitochondria_diagram_en.svg.png",
-    "ribosome": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Ribosome_mRNA_tRNA_chain.png/800px-Ribosome_mRNA_tRNA_chain.png",
-    "lysosome": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Lysosome_diagram.svg/800px-Lysosome_diagram.svg.png"
+    "mitochondria": [
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Mitochondria%2C_mammalian_lung_-_TEM.jpg/800px-Mitochondria%2C_mammalian_lung_-_TEM.jpg",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Animal_mitochondria_diagram_en.svg/1024px-Animal_mitochondria_diagram_en.svg.png"
+    ],
+    "ribosome": [
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Ribosome_mRNA_tRNA_chain.png/800px-Ribosome_mRNA_tRNA_chain.png",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Ribosome_shape.png/800px-Ribosome_shape.png"
+    ],
+    "lysosome": [
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Lysosome_diagram.svg/800px-Lysosome_diagram.svg.png",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Cell_organelle_lysosome.png/800px-Cell_organelle_lysosome.png"
+    ],
+    "pdf_ebook": [
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Golden_Trophy.svg/800px-Golden_Trophy.svg.png"
+    ]
 }
 
 # =====================================================================
-# 2. फ़ॉन्ट इंजन
+# 2. Font Engine
 # =====================================================================
 def get_verified_font(size):
     if not os.path.exists(FONT_FILE) or os.path.getsize(FONT_FILE) < 50000:
@@ -57,48 +69,83 @@ def get_verified_font(size):
         return ImageFont.load_default()
 
 # =====================================================================
-# 3. 3D विजुअल और इमेज हैंडलर
+# 3. Realistic 3D Biological Renderer & Downloader
 # =====================================================================
-def generate_artistic_fallback(key):
-    img = Image.new("RGBA", (700, 520), (11, 19, 43, 255))
+def render_realistic_3d_organelle(key):
+    img = Image.new("RGBA", (720, 520), (10, 15, 30, 255))
     d = ImageDraw.Draw(img)
 
     if key == "mitochondria":
-        d.rounded_rectangle([15, 15, 685, 505], radius=16, fill="#2e1065", outline="#9333ea", width=4)
-        d.ellipse([100, 120, 600, 400], fill="#581c87", outline="#c084fc", width=6)
-        d.text((220, 25), "माइटोकॉन्ड्रिया (Powerhouse)", fill="#f3e8ff", font=get_verified_font(26))
+        d.rounded_rectangle([60, 80, 660, 440], radius=180, fill="#7c2d12", outline="#ea580c", width=6)
+        d.rounded_rectangle([85, 105, 635, 415], radius=155, fill="#431407", outline="#f97316", width=4)
+        cristae = [
+            [(160, 105), (160, 310), (200, 310), (200, 105)],
+            [(250, 415), (250, 210), (290, 210), (290, 415)],
+            [(340, 105), (340, 330), (380, 330), (380, 105)],
+            [(430, 415), (430, 190), (470, 190), (470, 415)],
+            [(520, 105), (520, 300), (560, 300), (560, 105)]
+        ]
+        for fold in cristae:
+            d.line(fold, fill="#fdba74", width=12, joint="curve")
+        for gx, gy in [(130, 350), (220, 160), (310, 360), (400, 150), (490, 350), (580, 230)]:
+            d.ellipse([gx, gy, gx + 14, gy + 14], fill="#fde047")
+        d.text((150, 25), "माइटोकॉन्ड्रिया: 3D आंतरिक संरचना", fill="#fed7aa", font=get_verified_font(26))
+
     elif key == "ribosome":
-        d.rounded_rectangle([15, 15, 685, 505], radius=16, fill="#062c24", outline="#059669", width=4)
-        d.ellipse([150, 100, 550, 420], fill="#047857", outline="#34d399", width=6)
-        d.text((230, 25), "राइबोसोम (Protein Factory)", fill="#a7f3d0", font=get_verified_font(26))
+        d.ellipse([180, 80, 540, 340], fill="#047857", outline="#34d399", width=6)
+        d.ellipse([240, 130, 480, 290], fill="#065f46")
+        d.rounded_rectangle([130, 300, 590, 430], radius=65, fill="#0f766e", outline="#2dd4bf", width=5)
+        mrna_points = [(90, 325), (190, 315), (300, 335), (420, 315), (530, 330), (630, 320)]
+        for i in range(len(mrna_points) - 1):
+            d.line([mrna_points[i], mrna_points[i + 1]], fill="#facc15", width=8)
+        for py, px in enumerate(range(170, 70, -20)):
+            d.ellipse([340 + (py % 2) * 15, px, 360 + (py % 2) * 15, px + 20], fill="#f43f5e")
+        d.text((170, 25), "राइबोसोम: Subunits & Protein Chain", fill="#a7f3d0", font=get_verified_font(25))
+
+    elif key == "lysosome":
+        d.ellipse([150, 70, 570, 450], fill="#881337", outline="#f43f5e", width=7)
+        d.ellipse([185, 105, 535, 415], fill="#4c0519", outline="#fb7185", width=4)
+        for angle in range(0, 360, 30):
+            rad = math.radians(angle)
+            cx = 360 + 200 * math.cos(rad)
+            cy = 260 + 180 * math.sin(rad)
+            d.ellipse([cx - 10, cy - 10, cx + 10, cy + 10], fill="#38bdf8")
+        for ex, ey in [(250, 200), (320, 170), (420, 210), (280, 300), (380, 320), (450, 280), (340, 240)]:
+            d.ellipse([ex, ey, ex + 28, ey + 28], fill="#f59e0b", outline="#fde68a", width=2)
+        d.text((160, 25), "लाइसोसोम: पाचक एंजाइम 3D Vesicle", fill="#fecdd3", font=get_verified_font(26))
+
     else:
-        d.rounded_rectangle([15, 15, 685, 505], radius=16, fill="#450a0a", outline="#dc2626", width=4)
-        d.ellipse([150, 100, 550, 420], fill="#7f1d1d", outline="#f87171", width=6)
-        d.text((210, 25), "लाइसोसोम (Suicide Bag)", fill="#fca5a5", font=get_verified_font(26))
+        d.rounded_rectangle([15, 15, 705, 505], radius=16, fill="#1e1b4b", outline="#f59e0b", width=4)
+        d.polygon([(260, 120), (460, 120), (420, 320), (300, 320)], fill="#f59e0b", outline="#fef08a")
+        d.rectangle([340, 320, 380, 400], fill="#d97706")
+        d.rectangle([270, 400, 450, 450], fill="#b45309")
+        d.text((220, 25), "Exam Oriented E-Book", fill="#fef08a", font=get_verified_font(26))
+
     return img
 
 def get_verified_image(key):
     path = os.path.join(ASSETS_DIR, f"{key}.png")
-    if os.path.exists(path) and os.path.getsize(path) > 10000:
+    if os.path.exists(path) and os.path.getsize(path) > 15000:
         return path
 
-    url = IMAGE_URLS.get(key)
+    urls = IMAGE_URLS.get(key, [])
     headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/122.0.0.0 Safari/537.36",
-        "Referer": "https://en.wikipedia.org/",
-        "Accept": "image/*"
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
+        "Referer": "https://commons.wikimedia.org/",
+        "Accept": "image/avif,image/webp,image/apng,image/*,*/*;q=0.8"
     }
 
-    try:
-        res = requests.get(url, headers=headers, timeout=15)
-        if res.status_code == 200 and len(res.content) > 5000:
-            img = Image.open(BytesIO(res.content)).convert("RGBA")
-            img.save(path, "PNG")
-            return path
-    except Exception:
-        pass
+    for u in urls:
+        try:
+            res = requests.get(u, headers=headers, timeout=12)
+            if res.status_code == 200 and len(res.content) > 10000:
+                img = Image.open(BytesIO(res.content)).convert("RGBA")
+                img.save(path, "PNG")
+                return path
+        except Exception:
+            continue
 
-    fallback_art = generate_artistic_fallback(key)
+    fallback_art = render_realistic_3d_organelle(key)
     fallback_art.save(path, "PNG")
     return path
 
@@ -122,8 +169,8 @@ def paste_smooth_glow_asset(canvas, img_path, target_box, glow_rgb=(56, 189, 248
 
         glow = Image.new("RGBA", canvas.size, (0, 0, 0, 0))
         gd = ImageDraw.Draw(glow)
-        gd.ellipse([px - 35, py - 25, px + src.width + 35, py + src.height + 25], fill=(*glow_rgb, 125))
-        glow = glow.filter(ImageFilter.GaussianBlur(radius=35))
+        gd.ellipse([px - 35, py - 25, px + src.width + 35, py + src.height + 25], fill=(*glow_rgb, 120))
+        glow = glow.filter(ImageFilter.GaussianBlur(radius=30))
         canvas.paste(glow, (0, 0), glow)
 
         canvas.paste(src, (px, py), src)
@@ -131,26 +178,25 @@ def paste_smooth_glow_asset(canvas, img_path, target_box, glow_rgb=(56, 189, 248
         pass
 
 # =====================================================================
-# 4. 3 क्लीन स्लाइड्स (Perfect Sync Layout)
+# 4. 4 Professional Slides Layout
 # =====================================================================
-def draw_base_scaffold(draw, slide_idx, total=3):
+def draw_base_scaffold(draw, slide_idx, total=4):
     draw.rounded_rectangle([35, 35, 1045, 1885], radius=28, fill="#070B14", outline="#38BDF8", width=3)
     
     draw.rounded_rectangle([75, 70, 600, 145], radius=14, fill="#F59E0B")
-    draw.text((95, 88), "BIOLOGY EXAM NOTES", fill="#000000", font=get_verified_font(28))
-    draw.text((700, 88), f"SLIDE {slide_idx}/3", fill="#38BDF8", font=get_verified_font(30))
+    draw.text((95, 88), "BIOLOGY EXAM REVISION", fill="#000000", font=get_verified_font(28))
+    draw.text((700, 88), f"PART {slide_idx}/4", fill="#38BDF8", font=get_verified_font(30))
 
     bar_w = int(900 * (slide_idx / total))
     draw.rounded_rectangle([90, 165, 990, 177], radius=6, fill="#1E293B")
     draw.rounded_rectangle([90, 165, 90 + bar_w, 177], radius=6, fill="#38BDF8")
 
-    # Sirf aakhri slide par WhatsApp CTA dikhega ya sabhi par clean footer
-    if slide_idx == 3:
+    if slide_idx == 4:
         draw.rounded_rectangle([75, 1715, 1005, 1835], radius=18, fill="#059669")
         draw.text((95, 1748), f"WhatsApp: {WHATSAPP_NUMBER}", fill="#FFFFFF", font=get_verified_font(34))
     else:
         draw.rounded_rectangle([75, 1715, 1005, 1835], radius=18, fill="#1E293B")
-        draw.text((150, 1748), "म्हात्वपूर्ण परीक्षा तथ्य", fill="#94A3B8", font=get_verified_font(30))
+        draw.text((150, 1748), "महत्वपूर्ण परीक्षा तथ्य", fill="#94A3B8", font=get_verified_font(30))
 
 def generate_all_slides():
     slide_files = []
@@ -167,9 +213,9 @@ def generate_all_slides():
 
     box1 = [75, 280, 1005, 830]
     d1.rounded_rectangle(box1, radius=22, fill="#0B132B", outline="#38BDF8", width=2)
-    paste_smooth_glow_asset(img1, get_verified_image("mitochondria"), box1, glow_rgb=(56, 189, 248))
-    d1.rounded_rectangle([95, 300, 550, 360], radius=10, fill="#1E3A8A")
-    d1.text((115, 312), "ऊर्जा गृह एवं श्वसन स्थल", fill="#93C5FD", font=f_badge)
+    paste_smooth_glow_asset(img1, get_verified_image("mitochondria"), box1, glow_rgb=(234, 88, 12))
+    d1.rounded_rectangle([95, 300, 550, 360], radius=10, fill="#7c2d12")
+    d1.text((115, 312), "ऊर्जा गृह (Powerhouse of Cell)", fill="#fed7aa", font=f_badge)
 
     d1.rounded_rectangle([75, 855, 1005, 1680], radius=22, fill="#0F172A", outline="#334155", width=2)
     d1.text((105, 885), "परीक्षा के महत्वपूर्ण बिंदु:", fill="#FBBF24", font=f_label)
@@ -193,7 +239,7 @@ def generate_all_slides():
     d2.rounded_rectangle(box2, radius=22, fill="#0B132B", outline="#10B981", width=2)
     paste_smooth_glow_asset(img2, get_verified_image("ribosome"), box2, glow_rgb=(16, 185, 129))
     d2.rounded_rectangle([95, 300, 550, 360], radius=10, fill="#064E3B")
-    d2.text((115, 312), "प्रोटीन संश्लेषण केंद्र", fill="#6EE7B7", font=f_badge)
+    d2.text((115, 312), "प्रोटीन फैक्ट्री (Protein Synthesis)", fill="#6EE7B7", font=f_badge)
 
     d2.rounded_rectangle([75, 855, 1005, 1680], radius=22, fill="#0F172A", outline="#334155", width=2)
     d2.text((105, 885), "परीक्षा के महत्वपूर्ण बिंदु:", fill="#10B981", font=f_label)
@@ -207,34 +253,65 @@ def generate_all_slides():
     img2.save("slide_2.png")
     slide_files.append("slide_2.png")
 
-    # SLIDE 3: Lysosome & WhatsApp CTA
+    # SLIDE 3: Lysosome
     img3 = Image.new("RGB", (1080, 1920), color="#020617")
     d3 = ImageDraw.Draw(img3)
     draw_base_scaffold(d3, 3)
     d3.text((75, 205), "3. लाइसोसोम (Suicide Bag)", fill="#F43F5E", font=f_h1)
 
-    box3 = [75, 280, 1005, 750]
+    box3 = [75, 280, 1005, 830]
     d3.rounded_rectangle(box3, radius=22, fill="#0B132B", outline="#F43F5E", width=2)
     paste_smooth_glow_asset(img3, get_verified_image("lysosome"), box3, glow_rgb=(244, 63, 94))
     d3.rounded_rectangle([95, 300, 550, 360], radius=10, fill="#881337")
-    d3.text((115, 312), "आत्महत्या की थैली", fill="#FDA4AF", font=f_badge)
+    d3.text((115, 312), "आत्महत्या की थैली (Suicide Bag)", fill="#FDA4AF", font=f_badge)
 
-    d3.rounded_rectangle([75, 780, 1005, 1680], radius=22, fill="#0F172A", outline="#334155", width=2)
-    d3.text((105, 810), "मॉक टेस्ट व E-Book के लिए संपर्क करें:", fill="#34D399", font=f_label)
+    d3.rounded_rectangle([75, 855, 1005, 1680], radius=22, fill="#0F172A", outline="#334155", width=2)
+    d3.text((105, 885), "परीक्षा के महत्वपूर्ण बिंदु:", fill="#F43F5E", font=f_label)
     txt3 = (
         "• उपनाम: इसे 'आत्महत्या की थैली' कहते हैं।\n\n"
         "• खोज: डी डुवे ने इसकी खोज की थी।\n\n"
-        f"• WhatsApp: {WHATSAPP_NUMBER}\n"
-        "• कम्पेटिटिव नोट्स के लिए तुरंत मैसेज करें!"
+        "• कार्य: इसमें पाचक एंजाइम होते हैं जो मृत कोशिकाओं को साफ करते हैं।"
     )
-    d3.multiline_text((105, 880), txt3, fill="#F8FAFC", font=f_body, spacing=14)
+    d3.multiline_text((105, 955), txt3, fill="#F8FAFC", font=f_body, spacing=16)
     img3.save("slide_3.png")
     slide_files.append("slide_3.png")
 
+    # SLIDE 4: Interactive Challenge & CTA
+    img4 = Image.new("RGB", (1080, 1920), color="#020617")
+    d4 = ImageDraw.Draw(img4)
+    draw_base_scaffold(d4, 4)
+    d4.text((75, 205), "कमेंट में सही उत्तर दें!", fill="#FBBF24", font=f_h1)
+
+    d4.rounded_rectangle([75, 270, 1005, 560], radius=22, fill="#1E293B", outline="#FBBF24", width=3)
+    d4.text((105, 300), "🎯 EXAM CHALLENGE:", fill="#FBBF24", font=f_label)
+    q_text = "कोशिका के किस अंग को 'आत्महत्या की थैली' (Suicide Bag) कहा जाता है?"
+    d4.multiline_text((105, 365), textwrap.fill(q_text, width=26), fill="#FFFFFF", font=f_body, spacing=10)
+
+    options = ["(A) माइटोकॉन्ड्रिया", "(B) राइबोसोम", "(C) लाइसोसोम", "(D) गॉल्जी बॉडी"]
+    qy = 600
+    for opt in options:
+        d4.rounded_rectangle([75, qy, 1005, qy + 95], radius=14, fill="#0F172A", outline="#38BDF8", width=2)
+        d4.text((110, qy + 25), opt, fill="#F8FAFC", font=f_body)
+        qy += 115
+
+    pdf_box = [75, 1140, 1005, 1680]
+    d4.rounded_rectangle(pdf_box, radius=22, fill="#111827", outline="#10B981", width=2)
+    paste_smooth_glow_asset(img4, get_verified_image("pdf_ebook"), [90, 1160, 420, 1660], glow_rgb=(16, 185, 129))
+
+    d4.text((430, 1210), "📚 PDF E-BOOK & MOCK TEST", fill="#34D399", font=f_label)
+    hint_desc = (
+        "• सही उत्तर कमेंट में लिखें!\n\n"
+        f"• WhatsApp: {WHATSAPP_NUMBER}\n\n"
+        "• सम्पूर्ण नोट्स के लिए अभी मैसेज करें!"
+    )
+    d4.multiline_text((430, 1290), hint_desc, fill="#F8FAFC", font=get_verified_font(28), spacing=12)
+
+    img4.save("slide_4.png")
+    slide_files.append("slide_4.png")
     return slide_files
 
 # =====================================================================
-# 5. ऑडियो एवं वीडियो सिंक (3 Slides Perfect Weight)
+# 5. Audio-Video Sync Engine (58.5s Duration Lock)
 # =====================================================================
 async def make_voice(text, out_file):
     communicate = edge_tts.Communicate(text=text, voice=VOICE_NAME, rate="+0%")
@@ -244,15 +321,14 @@ def compile_video(slide_files, audio_file, output_file):
     cmd_dur = ["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "default=noprint_wrappers=1:nokey=1", audio_file]
     total_dur = float(subprocess.check_output(cmd_dur).decode().strip())
 
-    target_dur = 45.0  # 3 slides ke liye 45 seconds ekdum perfect pace hai
+    target_dur = 58.5
     speed_factor = round(total_dur / target_dur, 3)
     clamped_audio = "voice_clamped.mp3"
     subprocess.run(["ffmpeg", "-y", "-i", audio_file, "-filter:a", f"atempo={speed_factor}", clamped_audio], check=True)
     audio_file = clamped_audio
     final_dur = float(subprocess.check_output(cmd_dur, text=True).strip())
 
-    # 3 slides ke liye equal distribution weights
-    weights = [1.0, 1.0, 1.0]
+    weights = [1.0, 1.0, 1.0, 1.15]
     tot_w = sum(weights)
     durs = [final_dur * (w / tot_w) for w in weights]
 
@@ -282,10 +358,10 @@ def compile_video(slide_files, audio_file, output_file):
         output_file
     ]
     subprocess.run(ffmpeg_cmd, check=True)
-    print(f"\n🎬 Clean Synchronized Video Ready: {output_file}\n")
+    print(f"\n🎬 58.5s Perfectly Synchronized Video Ready: {output_file}\n")
 
 # =====================================================================
-# 6. इंस्टाग्राम ऑटो-अपलोड इंजन
+# 6. Instagram Multipart Upload Engine
 # =====================================================================
 def post_reel_to_instagram_multipart(video_file, caption):
     access_token = os.getenv("IG_ACCESS_TOKEN", "").strip()
@@ -334,35 +410,35 @@ def post_reel_to_instagram_multipart(video_file, caption):
         print(f"🎉 SUCCESS! Reel Live on Instagram! ID: {pub_res['id']}")
 
 # =====================================================================
-# 7. मुख्य निष्पादन (Main Execution - Page 3 Clean Content)
+# 7. Execution Pipeline
 # =====================================================================
 if __name__ == "__main__":
-    # Script perfectly matched to 3 slides with strong hook and end-only CTA
-    clean_script = (
-        "लिख कर ले लो, ये सवाल हर कम्पेटिटिव एग्जाम में जरूर पूछा जाता है! "
-        "आइए कोशिका के सबसे महत्वपूर्ण अंगों को समझें। "
-        "सबसे पहले बात करते हैं माइटोकॉन्ड्रिया की, जिसे सेल का पावरहाउस कहते हैं क्योंकि यह ऊर्जा बनाता है। "
-        "दूसरी स्लाइड पर देखिए, राइबोसोम को प्रोटीन फैक्ट्री कहा जाता है क्योंकि यह प्रोटीन संश्लेषण करता है। "
-        "और तीसरी स्लाइड पर देखिए, लाइसोसोम को आत्महत्या की थैली कहते हैं। "
-        "ऐसे ही सभी चैप्टर के मॉक टेस्ट और पीडीएफ ई-बुक्स के लिए, स्क्रीन पर दिए नंबर पर व्हाट्सएप करें!"
+    sync_script = (
+        "2 number ka prasn is reel se exam me jarur milega, chalo dekhte hain! "
+        "Aaiye, cell ke sabse mahatvapurna angon ko samajhte hain. "
+        "Pehli slide par dekhiye, Mitochondria ko cell ka Powerhouse kehte hain, kyunki yeh ATP energy banata hai. "
+        "Dusri slide par dekhiye, Ribosome ko Protein Factory kaha jata hai, kyunki yeh protein synthesis karta hai. "
+        "Teesri slide par dekhiye, Lysosome ko aatmhatya ki thaili yaani Suicide Bag kehte hain. "
+        "Ab aapke liye ek chhota sa sawal. Screen par diye gaye question ka sahi uttar jaldi se comment section mein likh kar batao! "
+        "Aur aise hi sabhi chapters ke mock tests aur PDF e-books ke liye, screen par diye gaye number par WhatsApp karein!"
     )
 
     caption_text = (
-        "Biology Cell Organelles Notes 🧬📚\n\n"
-        "• Mitochondria, Ribosome & Lysosome Important Facts.\n"
-        "• Exam-oriented PDF E-Books & Mock Tests available.\n"
-        f"• WhatsApp karein: {WHATSAPP_NUMBER}\n\n"
+        "Biology Cell Organelles Important Notes 🧬📚\n\n"
+        "• Mitochondria, Ribosome & Lysosome Complete 3D Revision.\n"
+        "• Sahi uttar comment section mein zaroor likhein!\n"
+        f"• WhatsApp for E-Books & Mock Tests: {WHATSAPP_NUMBER}\n\n"
         "#BiologyShorts #CellOrganelles #GovtExamPrep #MockTest"
     )
 
-    print("चरण 1: 3 साफ़ और सटीक स्लाइड्स तैयार की जा रही हैं...", flush=True)
+    print("Step 1: 4 detailed 3D slides banayi ja rahi hain...", flush=True)
     slides = generate_all_slides()
 
-    print("चरण 2: Natural Male Voiceover generate ho raha hai...", flush=True)
-    asyncio.run(make_voice(clean_script, AUDIO_OUTPUT))
+    print("Step 2: Realistic voiceover generate ho raha hai...", flush=True)
+    asyncio.run(make_voice(sync_script, AUDIO_OUTPUT))
 
-    print("चरण 3: FFmpeg द्वारा वीडियो सिंक और रेंडर की जा रही है...", flush=True)
+    print("Step 3: FFmpeg dwara exact 58.5s synchronization shuru...", flush=True)
     compile_video(slides, AUDIO_OUTPUT, FINAL_VIDEO)
 
-    print("चरण 4: इंस्टाग्राम अपलोड चलाया जा रहा है...", flush=True)
+    print("Step 4: Instagram upload chalaya ja raha hai...", flush=True)
     post_reel_to_instagram_multipart(FINAL_VIDEO, caption_text)
