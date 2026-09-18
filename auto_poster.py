@@ -1,4 +1,5 @@
 import os
+import time
 import subprocess
 import asyncio
 import textwrap
@@ -7,19 +8,27 @@ from io import BytesIO
 from PIL import Image, ImageDraw, ImageFilter, ImageFont
 import edge_tts
 
-# --- Directories aur Global Settings ---
-ASSETS_DIR = "assets/biology_master_p2"
+# =====================================================================
+# 1. Environment & API Configurations
+# =====================================================================
+IG_ACCESS_TOKEN = os.getenv("IG_ACCESS_TOKEN", "").strip()
+IG_USER_ID = os.getenv("IG_USER_ID", "").strip()
+
+GRAPH_API_BASE = "".join(["http", "s://", "graph.", "facebook", ".com/v19.0/"])
+RUPLOAD_BASE = "https://rupload.facebook.com/ig-api-upload/v19.0/"
+
+ASSETS_DIR = "assets/biology_master"
 os.makedirs(ASSETS_DIR, exist_ok=True)
 
-FONT_PATH = "NotoSansDevanagari-Bold.ttf"
+FONT_DEV_PATH = "NotoSansDevanagari-Bold.ttf"
 AUDIO_OUTPUT = "page2_voice.mp3"
-FINAL_VIDEO = "biology_page2_final_52s.mp4"
+FINAL_VIDEO = "biology_page2_reel.mp4"
 VOICE_NAME = "hi-IN-MadhurNeural"
 
 # Cross-version Pillow Compatibility
 RESAMPLE_MODE = getattr(Image, "Resampling", Image).LANCZOS
 
-# Wikimedia High-Resolution Educational Assets (Page 2)
+# High-Resolution Educational Assets (Page 2 Topics)
 IMAGE_URLS = {
     "cork_cells": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Robert_Hooke_Micrographia_1665_cork_cells.jpg/800px-Robert_Hooke_Micrographia_1665_cork_cells.jpg",
     "living_cell": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Anabaena_sperica.jpg/800px-Anabaena_sperica.jpg",
@@ -27,26 +36,27 @@ IMAGE_URLS = {
     "trophy": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Golden_Trophy.svg/800px-Golden_Trophy.svg.png"
 }
 
-# 1. Font Download & Load
+# =====================================================================
+# 2. Font & Visual Assets Management
+# =====================================================================
 def ensure_font():
-    if not os.path.exists(FONT_PATH):
+    if not os.path.exists(FONT_DEV_PATH):
         try:
             url = "https://github.com/googlefonts/noto-fonts/raw/main/hinted/ttf/NotoSansDevanagari/NotoSansDevanagari-Bold.ttf"
             r = requests.get(url, timeout=30)
             if r.status_code == 200:
-                with open(FONT_PATH, "wb") as f:
+                with open(FONT_DEV_PATH, "wb") as f:
                     f.write(r.content)
         except Exception as e:
-            print(f"Font download warning: {e}")
+            print(f"⚠️ Font Download Warning: {e}", flush=True)
 
 def get_font(size):
     ensure_font()
     try:
-        return ImageFont.truetype(FONT_PATH, size)
+        return ImageFont.truetype(FONT_DEV_PATH, size)
     except Exception:
         return ImageFont.load_default()
 
-# 2. Image Downloader with Offline Vector Fallback
 def get_verified_asset(key):
     path = os.path.join(ASSETS_DIR, f"{key}.png")
     if os.path.exists(path):
@@ -55,7 +65,6 @@ def get_verified_asset(key):
     url = IMAGE_URLS.get(key)
     if url:
         try:
-            # Proper headers to prevent 403 Forbidden blocks
             headers = {
                 "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
                 "Accept": "image/*"
@@ -68,7 +77,7 @@ def get_verified_asset(key):
         except Exception:
             pass
 
-    # Offline Vector Fallback (No Black Screen Error)
+    # 100% Offline Vector Fallback
     fallback = Image.new("RGBA", (500, 500), (15, 23, 42, 255))
     fd = ImageDraw.Draw(fallback)
     if key == "cork_cells":
@@ -83,11 +92,10 @@ def get_verified_asset(key):
         fd.chord([120, 100, 380, 340], 0, 180, fill="#FBBF24")
     else:
         fd.ellipse([80, 80, 420, 420], fill="#881337", outline="#FDA4AF", width=6)
-
+    
     fallback.save(path, "PNG")
     return path
 
-# 3. Ambient Glow & Rounded Corner Asset Pasting
 def paste_rounded_glow_asset(canvas, img_path, target_box, glow_rgb=(56, 189, 248), corner_radius=22):
     if not os.path.exists(img_path):
         return
@@ -98,7 +106,7 @@ def paste_rounded_glow_asset(canvas, img_path, target_box, glow_rgb=(56, 189, 24
         src = Image.open(img_path).convert("RGBA")
         src.thumbnail((w - 40, h - 40), RESAMPLE_MODE)
 
-        # Smooth rounded corners mask
+        # Smooth Rounded Corner Masking
         mask = Image.new("L", src.size, 0)
         mask_draw = ImageDraw.Draw(mask)
         mask_draw.rounded_rectangle([(0, 0), src.size], radius=corner_radius, fill=255)
@@ -107,7 +115,7 @@ def paste_rounded_glow_asset(canvas, img_path, target_box, glow_rgb=(56, 189, 24
         pos_x = x1 + (w - src.width) // 2
         pos_y = y1 + (h - src.height) // 2
 
-        # Radial glowing backlight
+        # Radial Ambient Glow
         glow = Image.new("RGBA", canvas.size, (0, 0, 0, 0))
         g_draw = ImageDraw.Draw(glow)
         g_draw.ellipse(
@@ -117,16 +125,18 @@ def paste_rounded_glow_asset(canvas, img_path, target_box, glow_rgb=(56, 189, 24
         glow = glow.filter(ImageFilter.GaussianBlur(radius=35))
         canvas.paste(glow, (0, 0), glow)
 
-        # Main asset paste
         canvas.paste(src, (pos_x, pos_y), src)
     except Exception as e:
-        print(f"Warning pasting asset: {e}")
+        print(f"⚠️ Asset Paste Warning: {e}", flush=True)
 
-# 4. Global Outer Frame
+# =====================================================================
+# 3. Canvas & Visual Slides Construction (PDF Page 2 Coverage)
+# =====================================================================
 def draw_base_scaffold(draw, slide_idx, total_slides=4):
+    # Outer Border
     draw.rounded_rectangle([35, 35, 1045, 1885], radius=28, fill="#070B14", outline="#38BDF8", width=3)
 
-    # Top Brand Pill
+    # Top Pill Header
     draw.rounded_rectangle([75, 70, 530, 135], radius=14, fill="#F59E0B")
     draw.text((95, 85), "PARMAR SSC BIOLOGY • PAGE 2", fill="#000000", font=get_font(25))
     draw.text((700, 85), "@PARMAR_BIO", fill="#64748B", font=get_font(28))
@@ -136,11 +146,10 @@ def draw_base_scaffold(draw, slide_idx, total_slides=4):
     draw.rounded_rectangle([90, 155, 990, 167], radius=6, fill="#1E293B")
     draw.rounded_rectangle([90, 155, 90 + bar_w, 167], radius=6, fill="#38BDF8")
 
-    # Bottom CTA Banner
+    # Bottom Safe Zone CTA
     draw.rounded_rectangle([75, 1725, 1005, 1835], radius=18, fill="#E11D48")
     draw.text((150, 1755), "Page 2 Revision Pura! Save Aur Follow Karein!", fill="#FFFFFF", font=get_font(32))
 
-# 5. Visual Slides Construction
 def generate_all_slides():
     slide_files = []
     f_h1 = get_font(42)
@@ -201,7 +210,7 @@ def generate_all_slides():
     img2.save("slide_2.png")
     slide_files.append("slide_2.png")
 
-    # ----------------- SLIDE 3: Cell Theory (Schleiden, Schwann, Virchow) -----------------
+    # ----------------- SLIDE 3: Cell Theory -----------------
     img3 = Image.new("RGB", (1080, 1920), color="#020617")
     d3 = ImageDraw.Draw(img3)
     draw_base_scaffold(d3, 3)
@@ -221,7 +230,7 @@ def generate_all_slides():
         "• Schleiden & Schwann (1838-1839): Koshika Siddhant diya.\n\n"
         "• Mukhya Niyam: Sabhi paudhe aur janwar koshikaon se milkar bane hain.\n\n"
         "• Koshika jeevan ki sabse mool sanrachnatmak ikai hai.\n\n"
-        "• Rudolf Virchow: Kaha ki sabhi nayi koshikaayein pehle se maujood koshikaon ke vibhajan se banti hain (Omnis cellula-e-cellula)."
+        "• Rudolf Virchow: Kaha ki sabhi nayi koshikaayein purani koshikaon ke vibhajan se banti hain."
     )
     d3.multiline_text((105, 955), txt3, fill="#F8FAFC", font=f_body, spacing=13)
     img3.save("slide_3.png")
@@ -250,7 +259,7 @@ def generate_all_slides():
         d4.text((195, qy + 35), opt, fill="#F8FAFC", font=f_body)
         qy += 130
 
-    # Trophy Box (Bottom Safe Balancing)
+    # Trophy Box (Bottom Safe Balance)
     trophy_box = [75, 1120, 1005, 1680]
     d4.rounded_rectangle(trophy_box, radius=22, fill="#111827", outline="#10B981", width=2)
     paste_rounded_glow_asset(img4, get_verified_asset("trophy"), [90, 1140, 420, 1660], glow_rgb=(245, 158, 11), corner_radius=15)
@@ -267,7 +276,9 @@ def generate_all_slides():
     slide_files.append("slide_4.png")
     return slide_files
 
-# 6. Audio Generation with 3-Attempt Network Resilience
+# =====================================================================
+# 4. Resilient TTS & 50-55s FFmpeg Engine
+# =====================================================================
 async def generate_voiceover_resilient(text, out_file):
     for attempt in range(3):
         try:
@@ -279,11 +290,10 @@ async def generate_voiceover_resilient(text, out_file):
                 raise e
             await asyncio.sleep(2)
 
-# 7. Dual-Clamped 50-55s FFmpeg Stitcher
 def compile_video_master(slide_files, audio_file, output_file):
     cmd_dur = ["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "default=noprint_wrappers=1:nokey=1", audio_file]
     total_dur = float(subprocess.check_output(cmd_dur).decode().strip())
-    print(f"🎙️ Raw Voice Duration: {total_dur:.2f}s")
+    print(f"🎙️ Raw Voice Duration: {total_dur:.2f}s", flush=True)
 
     # Strict Clamping to Guarantee 50-55 Seconds
     if total_dur < 50.0:
@@ -292,16 +302,15 @@ def compile_video_master(slide_files, audio_file, output_file):
         subprocess.run(["ffmpeg", "-y", "-i", audio_file, "-filter:a", f"atempo={factor}", clamped_audio], check=True)
         audio_file = clamped_audio
         total_dur = float(subprocess.check_output(cmd_dur).decode().strip())
-        print(f"⚡ Paced audio to: {total_dur:.2f}s")
+        print(f"⚡ Paced audio to: {total_dur:.2f}s", flush=True)
     elif total_dur > 55.0:
         clamped_audio = "voice_clamped.mp3"
         factor = round(total_dur / 53.0, 3)
         subprocess.run(["ffmpeg", "-y", "-i", audio_file, "-filter:a", f"atempo={factor}", clamped_audio], check=True)
         audio_file = clamped_audio
         total_dur = float(subprocess.check_output(cmd_dur).decode().strip())
-        print(f"⚡ Clamped audio to: {total_dur:.2f}s")
+        print(f"⚡ Clamped audio to: {total_dur:.2f}s", flush=True)
 
-    # Slide Time distribution
     weights = [1.1, 1.15, 1.15, 1.0]
     tot_w = sum(weights)
     durs = [total_dur * (w / tot_w) for w in weights]
@@ -330,11 +339,108 @@ def compile_video_master(slide_files, audio_file, output_file):
         output_file
     ]
     subprocess.run(ffmpeg_cmd, check=True)
-    print(f"🎬 100% Error-Free Video Ready: {output_file}")
+    print(f"🎬 100% Error-Free Video Ready: {output_file}", flush=True)
 
-# --- Pipeline Run ---
+# =====================================================================
+# 5. Proven Resumable Multi-Attempt Instagram Upload Engine
+# =====================================================================
+def post_reel_to_instagram_multipart(video_file, caption, max_container_attempts=3):
+    access_token = os.getenv("IG_ACCESS_TOKEN", "").strip()
+    user_id = os.getenv("IG_USER_ID", "").strip()
+
+    if not access_token or not user_id:
+        print("❌ UPLOAD ABORTED: IG_ACCESS_TOKEN ya IG_USER_ID environment variables missing hain!", flush=True)
+        print("👉 Run: export IG_ACCESS_TOKEN='your_token' && export IG_USER_ID='your_numeric_id'", flush=True)
+        return False
+
+    print("\n🚀 Step 4: Starting Multi-Attempt Resumable Instagram Upload...", flush=True)
+    last_error = None
+    for container_attempt in range(1, max_container_attempts + 1):
+        print(f"   ► Attempt {container_attempt}/{max_container_attempts}...", flush=True)
+        try:
+            video_id = _create_reel_container(video_file, caption, user_id, access_token)
+            status = _poll_container_status(video_id, access_token)
+
+            if status == "FINISHED":
+                _publish_reel(video_id, user_id, access_token)
+                return True
+            else:
+                last_error = f"Status: {status}"
+        except Exception as e:
+            last_error = str(e)
+            print(f"   ⚠️ Warning on attempt {container_attempt}: {last_error}", flush=True)
+
+        if container_attempt < max_container_attempts:
+            print("   ⏳ Retrying container initialization in 25s...", flush=True)
+            time.sleep(25)
+
+    raise RuntimeError(f"Upload failed after {max_container_attempts} attempts: {last_error}")
+
+def _create_reel_container(video_file, caption, user_id, access_token):
+    init_url = GRAPH_API_BASE + str(user_id).strip() + "/media"
+    data = {
+        "media_type": "REELS",
+        "upload_type": "resumable",
+        "caption": caption,
+        "access_token": access_token
+    }
+    r = requests.post(init_url, data=data, timeout=60)
+    if r.status_code != 200:
+        raise RuntimeError(f"Container init fail: {r.text}")
+
+    res_json = r.json()
+    video_id = res_json.get("id")
+    upload_url = res_json.get("uri") or (RUPLOAD_BASE + str(video_id).strip())
+
+    time.sleep(12)  # Critical handshake buffer for Meta server
+
+    file_size = os.path.getsize(video_file)
+    upload_headers = {
+        "Authorization": f"OAuth {access_token}",
+        "offset": "0",
+        "file_size": str(file_size),
+        "Content-Type": "application/octet-stream"
+    }
+
+    with open(video_file, "rb") as vf:
+        video_bytes = vf.read()
+
+    up_r = requests.post(upload_url, headers=upload_headers, data=video_bytes, timeout=600)
+    if up_r.status_code != 200 or not up_r.json().get("success"):
+        raise RuntimeError(f"Upload fail: {up_r.text}")
+
+    return video_id
+
+def _poll_container_status(video_id, access_token, max_checks=40, wait_seconds=15):
+    status_url = GRAPH_API_BASE + str(video_id).strip()
+    print("   ⏳ Polling Instagram transcoding status...", flush=True)
+    for check_idx in range(1, max_checks + 1):
+        time.sleep(wait_seconds)
+        try:
+            res = requests.get(status_url, params={"fields": "status_code,status", "access_token": access_token}, timeout=30).json()
+            status = res.get("status_code")
+            print(f"      Status Check ({check_idx}/{max_checks}): {status}", flush=True)
+            if status == "FINISHED":
+                return "FINISHED"
+            elif status in ["ERROR", "EXPIRED"]:
+                return status
+        except Exception:
+            continue
+    return "TIMEOUT"
+
+def _publish_reel(video_id, user_id, access_token):
+    publish_url = GRAPH_API_BASE + str(user_id).strip() + "/media_publish"
+    pub_res = requests.post(publish_url, data={"creation_id": video_id, "access_token": access_token}, timeout=30).json()
+    if "id" in pub_res:
+        print(f"\n🎉🎉 SUCCESS! Reel Published to Instagram! Post ID: {pub_res['id']}\n", flush=True)
+    else:
+        raise RuntimeError(f"Publish fail: {pub_res}")
+
+# =====================================================================
+# 6. Main Execution Pipeline
+# =====================================================================
 if __name__ == "__main__":
-    # Exactly 125 words script (~52 seconds at natural pace)
+    # Page 2 Exact Line-by-Line Script (125 words, ~52s natural pace)
     page2_script = (
         "SSC Biology ke notes ka Page number 2 poori bariki se samjhiye! "
         "Koshika jeevan ki maulik aur sanrachnatmak ikai hai, jiske adhyayan ko Cytology kehte hain. "
@@ -349,11 +455,25 @@ if __name__ == "__main__":
         "aur Page 3 ke liye follow zaroor karein!"
     )
 
-    print("Step 1: Building Master Visual Slides...")
+    caption_text = (
+        "SSC Biology: कोशिका की खोज और सिद्धांत (Page 2 Complete Revision) 🧬✨\n\n"
+        "• Robert Hooke (1665) — मृत कोशिका की खोज (Cork Cells)\n"
+        "• Antonie van Leeuwenhoek (1674) — पहली जीवित कोशिका\n"
+        "• Robert Brown (1831) — केंद्रक (Nucleus)\n"
+        "• J.E. Purkinje (1839) — प्रोटोप्लाज्म (जीवद्रव्य)\n"
+        "• Schleiden, Schwann & Virchow — कोशिका सिद्धांत\n\n"
+        "सभी महत्वपूर्ण पेजों के ऐसे ही विजुअल नोट्स के लिए फॉलो जरूर करें! "
+        "#SSCCGL #ParmarSSC #BiologyShorts #CellBiology #Cytology #GovtExamPrep"
+    )
+
+    print("Step 1: Building Master Visual Slides...", flush=True)
     slides = generate_all_slides()
 
-    print("Step 2: Generating Resilient Voiceover...")
+    print("Step 2: Generating Resilient Voiceover (Edge-TTS)...", flush=True)
     asyncio.run(generate_voiceover_resilient(page2_script, AUDIO_OUTPUT))
 
-    print("Step 3: Compiling Final 52s Video...")
+    print("Step 3: Compiling Final 52s Video with FFmpeg...", flush=True)
     compile_video_master(slides, AUDIO_OUTPUT, FINAL_VIDEO)
+
+    print("Step 4: Executing Auto-Upload to Instagram...", flush=True)
+    post_reel_to_instagram_multipart(FINAL_VIDEO, caption_text)
