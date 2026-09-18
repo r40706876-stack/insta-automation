@@ -10,7 +10,7 @@ from PIL import Image, ImageDraw, ImageFilter, ImageFont
 import edge_tts
 
 # =====================================================================
-# 1. Configuration & API Settings
+# 1. Configuration & Settings
 # =====================================================================
 IG_ACCESS_TOKEN = os.getenv("IG_ACCESS_TOKEN", "").strip()
 IG_USER_ID = os.getenv("IG_USER_ID", "").strip()
@@ -18,19 +18,19 @@ IG_USER_ID = os.getenv("IG_USER_ID", "").strip()
 GRAPH_API_BASE = "https://graph.facebook.com/v19.0/"
 RUPLOAD_BASE = "https://rupload.facebook.com/ig-api-upload/v19.0/"
 
-ASSETS_DIR = "assets/biology_pro_3d_p3"
+ASSETS_DIR = "assets/biology_fixed_female_p3"
 os.makedirs(ASSETS_DIR, exist_ok=True)
 
 FONT_FILE = os.path.join(ASSETS_DIR, "Mukta-Bold.ttf")
-AUDIO_OUTPUT = "pro_voice.mp3"
-FINAL_VIDEO = "biology_3d_reel.mp4"
+AUDIO_OUTPUT = "sync_voice.mp3"
+FINAL_VIDEO = "biology_sync_reel.mp4"
 
-VOICE_NAME = "hi-IN-MadhurNeural"
+# स्पष्ट और प्राकृतिक महिला आवाज़ (Female Voice)
+VOICE_NAME = "hi-IN-SwaraNeural"
 RESAMPLE_MODE = getattr(Image, "Resampling", Image).LANCZOS
 
 WHATSAPP_NUMBER = "8989971379"
 
-# Verified high-res raster mirrors (No raw SVGs)
 IMAGE_URLS = {
     "mitochondria": [
         "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Mitochondria%2C_mammalian_lung_-_TEM.jpg/800px-Mitochondria%2C_mammalian_lung_-_TEM.jpg",
@@ -69,7 +69,7 @@ def get_verified_font(size):
         return ImageFont.load_default()
 
 # =====================================================================
-# 3. Realistic 3D Biological Renderer & Downloader
+# 3. 3D Biological Renderer & Downloader
 # =====================================================================
 def render_realistic_3d_organelle(key):
     img = Image.new("RGBA", (720, 520), (10, 15, 30, 255))
@@ -178,7 +178,7 @@ def paste_smooth_glow_asset(canvas, img_path, target_box, glow_rgb=(56, 189, 248
         pass
 
 # =====================================================================
-# 4. 4 Professional Slides Layout
+# 4. Slide Layouts
 # =====================================================================
 def draw_base_scaffold(draw, slide_idx, total=4):
     draw.rounded_rectangle([35, 35, 1045, 1885], radius=28, fill="#070B14", outline="#38BDF8", width=3)
@@ -410,17 +410,17 @@ def post_reel_to_instagram_multipart(video_file, caption):
         print(f"🎉 SUCCESS! Reel Live on Instagram! ID: {pub_res['id']}")
 
 # =====================================================================
-# 7. Execution Pipeline
+# 7. Execution Pipeline (Pure Devanagari Script for Female Voice)
 # =====================================================================
 if __name__ == "__main__":
     sync_script = (
-        "2 number ka prasn is reel se exam me jarur milega, chalo dekhte hain! "
-        "Aaiye, cell ke sabse mahatvapurna angon ko samajhte hain. "
-        "Pehli slide par dekhiye, Mitochondria ko cell ka Powerhouse kehte hain, kyunki yeh ATP energy banata hai. "
-        "Dusri slide par dekhiye, Ribosome ko Protein Factory kaha jata hai, kyunki yeh protein synthesis karta hai. "
-        "Teesri slide par dekhiye, Lysosome ko aatmhatya ki thaili yaani Suicide Bag kehte hain. "
-        "Ab aapke liye ek chhota sa sawal. Screen par diye gaye question ka sahi uttar jaldi se comment section mein likh kar batao! "
-        "Aur aise hi sabhi chapters ke mock tests aur PDF e-books ke liye, screen par diye gaye number par WhatsApp karein!"
+        "दो नंबर का प्रश्न इस रील से एग्जाम में जरूर मिलेगा, चलो देखते हैं! "
+        "आइए, कोशिका के सबसे महत्वपूर्ण अंगों को समझते हैं। "
+        "पहली स्लाइड पर देखिए, माइटोकॉन्ड्रिया को कोशिका का पावरहाउस कहते हैं, क्योंकि यह एटीपी ऊर्जा बनाता है। "
+        "दूसरी स्लाइड पर देखिए, राइबोसोम को प्रोटीन फैक्ट्री कहा जाता है, क्योंकि यह प्रोटीन संश्लेषण करता है। "
+        "तीसरी स्लाइड पर देखिए, लाइसोसोम को आत्महत्या की थैली यानी सुसाइड बैग कहते हैं। "
+        "अब आपके लिए एक छोटा सा सवाल। स्क्रीन पर दिए गए प्रश्न का सही उत्तर जल्दी से कमेंट सेक्शन में लिखकर बताओ! "
+        "और ऐसे ही सभी चैप्टर्स के मॉक टेस्ट और पीडीएफ ई-बुक्स के लिए, स्क्रीन पर दिए गए नंबर पर व्हाट्सएप करें!"
     )
 
     caption_text = (
@@ -434,7 +434,7 @@ if __name__ == "__main__":
     print("Step 1: 4 detailed 3D slides banayi ja rahi hain...", flush=True)
     slides = generate_all_slides()
 
-    print("Step 2: Realistic voiceover generate ho raha hai...", flush=True)
+    print("Step 2: Realistic Devanagari female voiceover generate ho raha hai...", flush=True)
     asyncio.run(make_voice(sync_script, AUDIO_OUTPUT))
 
     print("Step 3: FFmpeg dwara exact 58.5s synchronization shuru...", flush=True)
