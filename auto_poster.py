@@ -20,14 +20,12 @@ RUPLOAD_BASE = "https://rupload.facebook.com/ig-api-upload/v19.0/"
 ASSETS_DIR = "assets/biology_pro_p2"
 os.makedirs(ASSETS_DIR, exist_ok=True)
 
-# द्विभाषी प्रोफेशनल फ़ॉन्ट
 FONT_FILE = os.path.join(ASSETS_DIR, "Mukta-Bold.ttf")
 AUDIO_OUTPUT = "pro_voice.mp3"
 FINAL_VIDEO = "biology_pro_reel.mp4"
 
-# पेशेवर महिला आवाज़ (Female Voice)
+# प्रोफेशनल महिला आवाज़ (Female Voice)
 VOICE_NAME = "hi-IN-SwaraNeural"
-
 RESAMPLE_MODE = getattr(Image, "Resampling", Image).LANCZOS
 
 WHATSAPP_NUMBER = "8989971379"
@@ -144,12 +142,11 @@ def paste_smooth_glow_asset(canvas, img_path, target_box, glow_rgb=(56, 189, 248
         pass
 
 # =====================================================================
-# 4. प्रोफेशनली डिजाइन स्लाइड्स (WhatsApp नंबर के साथ)
+# 4. प्रोफेशनली डिजाइन स्लाइड्स (बड़े फॉन्ट और अंत में WhatsApp)
 # =====================================================================
 def draw_base_scaffold(draw, slide_idx, total=4):
     draw.rounded_rectangle([35, 35, 1045, 1885], radius=28, fill="#070B14", outline="#38BDF8", width=3)
     
-    # प्रीमियम टॉप बैनर
     draw.rounded_rectangle([75, 70, 600, 145], radius=14, fill="#F59E0B")
     draw.text((95, 88), "EXAM ORIENTED BIOLOGY NOTES", fill="#000000", font=get_verified_font(28))
     draw.text((700, 88), "PDF E-BOOK", fill="#38BDF8", font=get_verified_font(30))
@@ -158,7 +155,6 @@ def draw_base_scaffold(draw, slide_idx, total=4):
     draw.rounded_rectangle([90, 165, 990, 177], radius=6, fill="#1E293B")
     draw.rounded_rectangle([90, 165, 90 + bar_w, 177], radius=6, fill="#38BDF8")
 
-    # प्रोफेशनल WhatsApp CTA बैनर (नीचे)
     draw.rounded_rectangle([75, 1715, 1005, 1835], radius=18, fill="#059669")
     draw.text((95, 1748), f"📲 WhatsApp करें: {WHATSAPP_NUMBER}", fill="#FFFFFF", font=get_verified_font(34))
 
@@ -382,14 +378,15 @@ def post_reel_to_instagram_multipart(video_file, caption):
 # 7. मुख्य निष्पादन (Main Execution)
 # =====================================================================
 if __name__ == "__main__":
+    # शुरुआत पूरी तरह पढ़ाई से, और WhatsApp ऑर्डर की बात बिल्कुल अंत में
     pro_script = (
-        f"एसएससी बायोलॉजी के बेहतरीन नोट्स और एक्जाम ओरिएंटेड पीडीएफ ई-बुक प्राप्त करने के लिए अभी व्हाट्सएप करें! नंबर है, {WHATSAPP_NUMBER}। "
-        "आइए कोशिका चैप्टर के सबसे महत्वपूर्ण तथ्यों को समझें। "
+        "आइए एसएससी बायोलॉजी के कोशिका चैप्टर के सबसे महत्वपूर्ण तथ्यों को समझें। "
         "कोशिका जीवन की मौलिक और संरचनात्मक इकाई है, जिसके अध्ययन को साइटोलॉजी कहते हैं। "
         "पहली बार 1665 में रॉबर्ट हुक ने मृत कोशिका देखी थी, "
         "जबकि 1674 में ल्यूवेनहॉक ने पहली जीवित कोशिका की खोज की। "
         "रॉबर्ट ब्राउन ने केंद्रक यानी न्यूक्लियस खोजा और पुरकिंजे ने जीवद्रव्य को प्रोटोप्लाज्म नाम दिया। "
-        "सभी परीक्षाओं में सफलता के लिए आज ही हमारी ई-बुक व्हाट्सएप नंबर {WHATSAPP_NUMBER} पर आर्डर करें!"
+        "अब परीक्षा में पक्की सफलता के लिए, एक्जाम ओरिएंटेड पीडीएफ ई-बुक प्राप्त करने के लिए "
+        f"आज ही हमारे व्हाट्सएप नंबर {WHATSAPP_NUMBER} पर मैसेज करें!"
     )
 
     caption_text = (
