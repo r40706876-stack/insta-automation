@@ -184,7 +184,7 @@ def extract_continuous_slides(start_pg, count):
         img = Image.open(BytesIO(pix.tobytes("png"))).convert("RGB")
         
         w, h = img.size
-        header_crop_height = int(h * 0.12)
+        header_crop_height = int(h * 0.12)  # Watermark hatane ke liye
         
         draw = ImageDraw.Draw(img)
         draw.rectangle([0, 0, w, header_crop_height], fill="#020617")
@@ -204,7 +204,7 @@ def extract_continuous_slides(start_pg, count):
         target_img.save(s_path)
         slide_files.append(s_path)
 
-    # Slide 4: Interactive Quiz & Call To Action (Safe Layout Coordinates)
+    # Slide 4: Interactive Quiz & Call To Action
     img4 = Image.new("RGB", (1080, 1920), color="#020617")
     d4 = ImageDraw.Draw(img4)
     d4.rounded_rectangle([35, 35, 1045, 1885], radius=28, fill="#070B14", outline="#38BDF8", width=3)
@@ -243,7 +243,7 @@ def extract_continuous_slides(start_pg, count):
     return slide_files, extracted_texts
 
 # =====================================================================
-# 5. Audio & Video Compilation Engine (Safe Length Handling)
+# 5. Audio & Video Compilation Engine
 # =====================================================================
 async def generate_audio_clip(text, voice, filename):
     clean_text = UniversalPhoneticEngine.sanitize(text) if voice == MALE_VOICE else text
