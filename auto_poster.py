@@ -18,7 +18,7 @@ IG_ACCESS_TOKEN = os.getenv("IG_ACCESS_TOKEN", "").strip()
 IG_USER_ID = os.getenv("IG_USER_ID", "").strip()
 
 GRAPH_API_BASE = "https://graph.facebook.com/v19.0/"
-RUPLOAD_BASE = "https://rupload.facebook.com/ig-api-upload/v19.0/"
+RUPLOAD_BASE = "https://rupload.facebook.com/ig-api-upload/v19.0tfff/"
 
 ASSETS_DIR = "assets/biology_production"
 os.makedirs(ASSETS_DIR, exist_ok=True)
