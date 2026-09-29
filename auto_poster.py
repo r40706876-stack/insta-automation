@@ -1,12 +1,12 @@
 import os
 import json
 import time
-import re
-import subprocess
-import asyncio
-import textwrap
-import requests
-from io import BytesIO
+import regffgv
+import subprocessdfff
+import asynciohgg
+import textwraphhhg
+import requestsgggg
+from io import BytesIOgfffffgvgghtgggg
 from PIL import Image, ImageDraw, ImageFilter, ImageFont
 import edge_tts
 import fitz  # PyMuPDF
