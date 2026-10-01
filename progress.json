@@ -1,13 +1,49 @@
 {
- "next_seq": 2,
- "episode": 1,
+ "next_seq": 3,
+ "episode": 2,
  "posted": [
-  "684d76bcbc"
+  "684d76bcbc",
+  "6bb20b4a07"
  ],
  "skipped": {},
  "last": {
-  "seq": 1,
-  "id": "684d76bcbc",
-  "time": "2026-10-01 12:27"
- }
+  "seq": 2,
+  "id": "6bb20b4a07",
+  "time": "2026-10-01 12:52"
+ },
+ "carousel_queue": [
+  {
+   "episode": 2,
+   "subject": "Chemistry",
+   "question": "आधुनिक आवर्त सारणी में क्रमशः ____ समूह और ____ आवर्त हैं।",
+   "options": [
+    [
+     "A",
+     "18; 7"
+    ],
+    [
+     "B",
+     "7 ; 18"
+    ],
+    [
+     "C",
+     "17 ; 6"
+    ],
+    [
+     "D",
+     "6 ; 17"
+    ]
+   ],
+   "correct": "A",
+   "correct_text": "18; 7",
+   "why": "आधुनिक तालिका में 18 समूह और 7 आवर्त होते हैं।",
+   "tip": "समूह 18, आवर्त 7 याद रखें",
+   "exams": [
+    "RRB Group D 2018",
+    "RRB Group D 2022"
+   ],
+   "times_asked": 6,
+   "topic": "आवर्त सारणी"
+  }
+ ]
 }
