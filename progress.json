@@ -1,18 +1,53 @@
 {
- "next_seq": 5,
- "episode": 4,
+ "next_seq": 6,
+ "episode": 5,
  "posted": [
   "684d76bcbc",
   "6bb20b4a07",
   "5bba5e6f59",
-  "2921d011fc"
+  "2921d011fc",
+  "86fc9596f7"
  ],
  "skipped": {},
  "last": {
-  "seq": 4,
-  "id": "2921d011fc",
-  "time": "2026-10-01 13:41"
+  "seq": 5,
+  "id": "86fc9596f7",
+  "time": "2026-10-01 14:11"
  },
- "carousel_queue": [],
+ "carousel_queue": [
+  {
+   "episode": 5,
+   "subject": "Chemistry",
+   "question": "न्यूलैंड के अष्टक सिद्धांत के अनुसार, प्रकृति में कितने तत्व मौजूद हैं?",
+   "options": [
+    [
+     "A",
+     "36"
+    ],
+    [
+     "B",
+     "56"
+    ],
+    [
+     "C",
+     "76"
+    ],
+    [
+     "D",
+     "46"
+    ]
+   ],
+   "correct": "B",
+   "correct_text": "56",
+   "why": "न्यूलैंड्स के समय केवल 56 ज्ञात तत्व थे, जिनका अंतिम तत्व थोरियम था।",
+   "tip": "न्यूलैंड्स अष्टक: हाइड्रोजन से थोरियम (56)",
+   "exams": [
+    "RRB Group D 2018",
+    "RRB Group D 2022"
+   ],
+   "times_asked": 4,
+   "topic": "तत्वों का वर्गीकरण"
+  }
+ ],
  "carousel_count": 1
 }
