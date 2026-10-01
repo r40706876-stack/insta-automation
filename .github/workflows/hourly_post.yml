@@ -35,6 +35,7 @@ jobs:
           IG_USER_ID: ${{ secrets.IG_USER_ID }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          POST_MODE: publish        # 'manual' likho to Instagram pe post nahi, repo ke ready_reels/ me reel milegi
         run: python auto_poster.py
 
       - name: Progress save
@@ -44,6 +45,7 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add progress.json
           git add carousels 2>/dev/null || true
+          git add ready_reels 2>/dev/null || true
           git diff --cached --quiet || git commit -m "Update progress [skip ci]"
           git pull --rebase --autostash || true
           git push || true
