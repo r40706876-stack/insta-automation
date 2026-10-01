@@ -1,6 +1,13 @@
 {
-    "next_start_page": 58,
-    "next_hook_index": 1,
-    "current_batch": "Pages 55 to 57",
-    "active_hook": "Sirf 1 number se selection ruk jata hai? Yeh galti dobara mat karna!"
+ "next_seq": 2,
+ "episode": 1,
+ "posted": [
+  "684d76bcbc"
+ ],
+ "skipped": {},
+ "last": {
+  "seq": 1,
+  "id": "684d76bcbc",
+  "time": "2026-10-01 12:27"
+ }
 }
