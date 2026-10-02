@@ -1,6 +1,6 @@
 {
- "next_seq": 16,
- "episode": 22,
+ "next_seq": 17,
+ "episode": 23,
  "posted": [
   "684d76bcbc",
   "6bb20b4a07",
@@ -23,14 +23,48 @@
   "2738bb51c0",
   "4ee8552401",
   "04b36a258a",
-  "6809e38bc8"
+  "6809e38bc8",
+  "3dbe568d0f"
  ],
  "skipped": {},
  "last": {
-  "seq": 15,
-  "id": "6809e38bc8",
-  "time": "2026-10-02 06:10"
+  "seq": 16,
+  "id": "3dbe568d0f",
+  "time": "2026-10-02 07:11"
  },
- "carousel_queue": [],
+ "carousel_queue": [
+  {
+   "episode": 23,
+   "subject": "Geography",
+   "question": "निम्नलिखित में से कौन सा देश भारत का पड़ोसी है?",
+   "options": [
+    [
+     "A",
+     "ईरान"
+    ],
+    [
+     "B",
+     "फ्रांस"
+    ],
+    [
+     "C",
+     "इराक"
+    ],
+    [
+     "D",
+     "नेपाल"
+    ]
+   ],
+   "correct": "D",
+   "correct_text": "नेपाल",
+   "why": "नेपाल भारत के साथ लंबी सीमा साझा करता है।",
+   "tip": "हिमालय के नीचे नेपाल पड़ोसी है",
+   "exams": [
+    "RRB Group D 2018"
+   ],
+   "times_asked": 3,
+   "topic": "भौगोलिक पड़ोसी"
+  }
+ ],
  "carousel_count": 7
 }
