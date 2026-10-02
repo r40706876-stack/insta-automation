@@ -1,8 +1,14 @@
-name: Hourly Science PYQ Reel
+name: Science PYQ Reel (din me 6 baar)
 
 on:
   schedule:
-    - cron: "0 * * * *"      # har ghante
+    # GitHub UTC time maanta hai (India = UTC + 5:30). India ka samay:
+    - cron: "30 1 * * *"     # subah 7:00
+    - cron: "30 4 * * *"     # subah 10:00
+    - cron: "30 7 * * *"     # dopahar 1:00
+    - cron: "30 10 * * *"    # shaam 4:00
+    - cron: "0 13 * * *"     # shaam 6:30
+    - cron: "30 15 * * *"    # raat 9:00
   workflow_dispatch:
 
 permissions:
