@@ -703,7 +703,7 @@ Tasks - return ONLY JSON:
  "why": "...",                // ONE simple Hindi line (max 18 words): the reason / fact why the key is correct. No book/coaching names.
  "level": "easy|medium|hard", // how hard this is for an average RRB Group D aspirant
  "visual_options": true/false, // true ONLY if all 4 options are concrete things (plants, animals, objects, foods, places, body parts) that a picture can show without any text; false for numbers, years, laws/articles, people, abstract terms
- "img_options": {"a":"..","b":"..","c":"..","d":".."}, // if visual_options: ENGLISH prompt (max 15 words) for a simple clear picture of that option alone
+ "img_options": {{"a":"..","b":"..","c":"..","d":".."}}, // if visual_options: ENGLISH prompt (max 15 words) for a simple clear picture of that option alone
  "trap": "...",               // Hindi, max 16 words: which WRONG option looks tempting and why it is wrong (e.g. '(C) तिल भी फसल है, पर फलीदार नहीं')
  "tip": "...",                // Hindi memory trick / exam tip, max 8 words (can be a short formula like 'दाब = बल / क्षेत्रफल')
  "topic": "...",              // 1-3 word Hindi topic name (e.g. 'प्रकाश का अपवर्तन')
