@@ -98,7 +98,7 @@ SERIES = "SCIENCE PYQ"
 BRAND = "MinuteMe_GS"                       # Instagram account ka naam - har jagah branding
 BRAND_HANDLE = "@MinuteMe_GS"
 BRAND_SPEAK = "Minute Me G S"              # naam awaaz me ANGREZI me (Hindi lipi me galat lagta tha)
-BRAND_TAGLINE = "1 मिनट  •  1 सवाल  •  पक्का GS"
+BRAND_TAGLINE = "एक मिनट, एक PYQ - पक्का!"        # naam (Minute) se juda signature line, har jagah
 EXAMS_LINE = "RAILWAY  •  SSC  •  STATE EXAMS"
 WHATSAPP_NUMBER = os.getenv("WHATSAPP_NUMBER", "8989971379")
 HASHTAGS = "#MinuteMe_GS #sciencepyq #rrbgroupd #ssc #railwayexam"   # Instagram: max 5
@@ -701,6 +701,7 @@ Tasks - return ONLY JSON:
                               // e.g. '____ जन्तुओं का सबसे बड़ा समूह है' -> 'जन्तुओं का सबसे बड़ा समूह कौन सा है?'
  "speak_answer": "...",       // the correct option text as spoken Hindi (same rule)
  "why": "...",                // ONE simple Hindi line (max 18 words): the reason / fact why the key is correct. No book/coaching names.
+ "level": "easy|medium|hard", // how hard this is for an average RRB Group D aspirant
  "tip": "...",                // Hindi memory trick / exam tip, max 8 words (can be a short formula like 'दाब = बल / क्षेत्रफल')
  "topic": "...",              // 1-3 word Hindi topic name (e.g. 'प्रकाश का अपवर्तन')
  "en_question": "...",        // short English translation of the question (max 20 words)
@@ -799,7 +800,7 @@ def ai_enrich(q):
             print("  AI wajah kharab -> agla provider")
             continue
         # har hissa alag jaancho: sankhya/lambai badli to us hisse ke liye book ka text
-        out = {k: js.get(k) for k in ("why", "tip", "topic", "en_question", "en_why", "en_tip", "img_hook", "img_why")}
+        out = {k: js.get(k) for k in ("why", "tip", "topic", "en_question", "en_why", "en_tip", "img_hook", "img_why", "level")}
         out["hook"] = ""
         hk = clean_text(out.get("hook") or "")
         ans_core = clean_text(q["options"][q["answer"]])
@@ -1056,7 +1057,10 @@ def prepare_data(q, ai, ep, next_q=None, imgs=None):
         "vs_pair": pair, "elim_order": elim, "why": why, "tip": tip, "topic": topic,
         "times_asked": int(q.get("times_asked") or 1), "exams": exam_tags(q),
         "hook": hook_line(q, ep),
-        "exam_raw": (q.get("exams") or [""])[0] if isinstance(q.get("exams"), list) else "",
+        "exam_raw": today_exam(q) or ((q.get("exams") or [""])[0] if isinstance(q.get("exams"), list) else ""),
+        "today_exam": today_exam(q),
+        "level": str((ai or {}).get("level") or "").lower(),
+        "toppers": [],
         "also_exams": also_exams(q),
         "series": series_of(q["subject"]),
         "img_hook": (imgs or {}).get("hook"), "img_why": (imgs or {}).get("why"),
@@ -3338,9 +3342,97 @@ def encode_frames(render, n_frames, audio, out_path, key=lambda fi: fi):
         raise RuntimeError("ffmpeg encoding fail")
 
 
+
+# ---------- MinuteMe pehchan: stopwatch, repeat-thappa, aaj ki tareekh, toppers ----------
+
+def stopwatch_sprite(size, frac):
+    """Brand ki ghadi: peela stopwatch, sui frac (0-1) par. Logo bhi yahi, reel me chalti hai."""
+    S = size * 3
+    im = Image.new("RGBA", (S, S), (0, 0, 0, 0))
+    d = ImageDraw.Draw(im)
+    c, r = S / 2, S * 0.40
+    cy = c + S * 0.05
+    d.rounded_rectangle((c - S * 0.08, cy - r - S * 0.13, c + S * 0.08, cy - r + S * 0.02), radius=S // 40,
+                        fill=YELLOW + (255,))
+    d.ellipse((c - r, cy - r, c + r, cy + r), fill=(12, 22, 44, 255), outline=YELLOW + (255,), width=S // 18)
+    if frac > 0:
+        d.pieslice((c - r * 0.8, cy - r * 0.8, c + r * 0.8, cy + r * 0.8), -90, -90 + 360 * frac,
+                   fill=(250, 204, 21, 90))
+    for k in range(12):
+        a = math.radians(k * 30)
+        d.line((c + math.cos(a) * r * 0.86, cy + math.sin(a) * r * 0.86, c + math.cos(a) * r * 0.74,
+                cy + math.sin(a) * r * 0.74), fill=(200, 210, 230, 255), width=S // 50)
+    a = math.radians(-90 + 360 * frac)
+    d.line((c, cy, c + math.cos(a) * r * 0.78, cy + math.sin(a) * r * 0.78), fill=RED + (255,), width=S // 22)
+    d.ellipse((c - S * 0.04, cy - S * 0.04, c + S * 0.04, cy + S * 0.04), fill=WHITE + (255,))
+    return im.resize((size, size), Image.LANCZOS)
+
+
+@lru_cache(maxsize=8)
+def repeat_stamp(n):
+    """'रिपीट PYQ xn' laal thappa - bank ka asli data, koi aur page nahi dikhata."""
+    f1, f2 = get_font(34), get_font(24)
+    top, bot = f"रिपीट PYQ  x{n}", f"{n} शिफ्ट में पूछा गया"
+    w = int(max(text_w(top, f1), text_w(bot, f2))) + 50
+    h = 96
+    im = Image.new("RGBA", (w, h), (0, 0, 0, 0))
+    d = ImageDraw.Draw(im)
+    d.rounded_rectangle((0, 0, w - 1, h - 1), radius=16, fill=(200, 25, 40, 245), outline=WHITE + (255,), width=4)
+    d.text((w / 2, 34), top, font=f1, fill=WHITE + (255,), anchor="mm")
+    d.text((w / 2, 72), bot, font=f2, fill=(255, 230, 120, 255), anchor="mm")
+    return im
+
+
+def today_dm():
+    """IST aaj: ('DD-MM', saal). Jaanch ke liye TODAY_DM=03-10 env."""
+    ist = time.gmtime(time.time() + 19800)
+    return (os.getenv("TODAY_DM") or f"{ist.tm_mday:02d}-{ist.tm_mon:02d}"), ist.tm_year
+
+
+def today_exam(q):
+    dm, _ = today_dm()
+    for e in q.get("exams") or []:
+        if re.search(r"(?<!\d)" + re.escape(dm) + r"-20\d\d", str(e)):
+            return str(e)
+    return None
+
+
+def years_ago(exam):
+    m = re.search(r"\d\d-\d\d-(20\d\d)", exam or "")
+    return today_dm()[1] - int(m.group(1)) if m else 0
+
+
+def fetch_toppers(st):
+    """Pichhli loop reel ke comments: jinhone sirf sahi akshar likha, unke naam (max 3). Permission na ho -> []."""
+    ll = st.get("last_loop") or {}
+    mid, cor = ll.get("media"), ll.get("correct")
+    if not (mid and cor and IG_ACCESS_TOKEN) or DRY_RUN:
+        return []
+    try:
+        r = requests.get(f"{GRAPH}{mid}/comments", params={"fields": "username,text", "limit": 100,
+                                                          "access_token": IG_ACCESS_TOKEN}, timeout=30).json()
+    except Exception as exc:
+        print("  toppers nahi mile:", str(exc)[:120])
+        return []
+    if "error" in r:
+        print("  toppers: comment padhne ki permission nahi ->", str(r["error"].get("message", ""))[:120])
+        return []
+    names = []
+    for c in r.get("data", []):
+        u = (c.get("username") or "").strip()
+        letters = set(re.findall(r"(?<![A-Z])([ABCD])(?![A-Z])", (c.get("text") or "").upper()))
+        if u and u.lower() != BRAND.lower() and letters == {cor} and u not in names:
+            names.append(u)
+    print("  Kal ke toppers:", names[:3])
+    return names[:3]
+
+
 # ---------- LOOP SAWAL (8s, jawab reel me nahi -> pehle comment me) ----------
 
 def loop_hook(data):
+    if data.get("today_exam"):
+        y = years_ago(data["today_exam"])
+        return f"{y} साल पहले आज ही पूछा गया!" if y > 0 else "आज ही के दिन पूछा गया!"
     n = data["times_asked"]
     if n >= 2:
         return f"ये सवाल {n} बार पेपर में आया!"
@@ -3367,7 +3459,7 @@ def _loop_bg(img_path):
     return background("blue").crop((60, 60, 60 + W, 60 + H))
 
 
-def loop_layout(data):
+def loop_layout(data, limit=1450):
     """Sawal card (safed kaagaz, kaali syahi) + 4 poori-chaudai options. Sab 230..1560 me fit."""
     q = data["question"]
     opt_n = len(data["options"])
@@ -3377,9 +3469,9 @@ def loop_layout(data):
             continue
         lh = int(sq * 1.28)
         qh = lh * len(ql) + 70
-        top = 520
+        top = 550 if (data["times_asked"] >= 2 or data.get("level") in ("hard", "medium")) else 520
         total = qh + 36 + opt_n * oh + (opt_n - 1) * 22
-        if top + total <= 1450:
+        if top + total <= limit:
             return {"fq": fq, "ql": ql, "lh": lh, "qh": qh, "q_top": top, "os": os_, "oh": oh,
                     "o_top": top + qh + 36}
     fq, sq, ql = fit_lines(q, 920, 5, 40, 34)
@@ -3431,15 +3523,30 @@ def render_loop_frame(data, lay, t):
         row = _opt_row(L, txt, i == act, 1000, lay["oh"], lay["os"])
         place(cv, row, W / 2, y + lay["oh"] / 2)
         y += lay["oh"] + 22
-    # 5) '?' + CTA
+    # 5) pehchan ke thappe: repeat (bank ka asli data) + level (AI)
+    n = data["times_asked"]
+    if n >= 2:
+        place(cv, repeat_stamp(n), 175, qt - 34, angle=-6)
+    lv = {"hard": ("LEVEL: कठिन", RED), "medium": ("LEVEL: मध्यम", ORANGE)}.get(data.get("level", ""))
+    if lv:
+        place(cv, pill_sprite(lv[0], 28, WHITE, lv[1], WHITE), W / 2 + (90 if n >= 2 else 0), qt - 6)
     place(cv, pill_sprite("?", 56, WHITE, RED, WHITE), W - 120, qt - 18,
           scale=1 + 0.08 * math.sin(2 * math.pi * t / 1.0), angle=8)
-    place(cv, pill_sprite("जवाब A / B / C / D कमेंट करो!", 44, (30, 20, 0), YELLOW, ORANGE), W / 2, 1530,
+    # 6) kal ke toppers (comment karne ki aadat: naam screen pe aata hai)
+    if data.get("toppers"):
+        tp = "कल सही बताने वाले:  " + "   ".join("@" + u for u in data["toppers"])
+        place(cv, pill_sprite(tp, 30, WHITE, (14, 90, 50), GREEN), W / 2, 1458)
+    # 7) CTA: '8 सेकंड' (reel ki lambai = stopwatch ka ek chakkar) + baari-baari share / jawab
+    place(cv, pill_sprite("8 सेकंड में बताओ:  A / B / C / D ?", 44, (30, 20, 0), YELLOW, ORANGE), W / 2, 1530,
           scale=1 + 0.03 * math.sin(2 * math.pi * t / 1.0))
-    place(cv, pill_sprite("सही जवाब + वजह: पहला कमेंट देखो", 30, WHITE, (37, 60, 140), CYAN), W / 2, 1612)
-    place(cv, brand_logo(58), 89, 150)                      # header bina progress-bar (loop me jhatka nahi)
-    wm = brand_wordmark(32)
-    place(cv, wm, 126 + wm.width / 2, 150)
+    sub = ("सही जवाब + वजह: पहला कमेंट देखो", (37, 60, 140), CYAN) if t < LOOP_DUR / 2 else \
+          ("उस दोस्त को भेजो जो ये गलत करेगा", (150, 30, 60), (255, 150, 170))
+    place(cv, pill_sprite(sub[0], 30, WHITE, sub[1], sub[2]), W / 2, 1612)
+    # 8) header: chalti stopwatch (8s me ek chakkar = loop seamless) + naam + tagline
+    place(cv, stopwatch_sprite(84, int(t * 15) % int(LOOP_DUR * 15) / (LOOP_DUR * 15)), 92, 150)
+    wm = brand_wordmark(34)
+    place(cv, wm, 150 + wm.width / 2, 136)
+    ImageDraw.Draw(cv).text((150, 172), BRAND_TAGLINE, font=get_font(24), fill=(255, 225, 120), anchor="lm")
     lab, col = SUBJECT_STYLE.get(data["subject"], ("GK", CYAN))
     chip = pill_sprite(lab.split("•")[0].strip() + " PYQ", 26, col, (14, 26, 44), col)
     place(cv, chip, W - 130 - chip.width / 2, 150)
@@ -3448,9 +3555,16 @@ def render_loop_frame(data, lay, t):
 
 def build_loop_reel(data, out):
     resolve_font()
-    lay = loop_layout(data)
+    lay = loop_layout(data, 1405 if data.get("toppers") else 1450)
     n = int(LOOP_DUR * FPS)
-    music = beat_music(LOOP_DUR, seed=data["episode"])
+    music = beat_music(LOOP_DUR, seed=data["episode"]) * 0.85
+    # AWAAZ KI PEHCHAN: shuru me stopwatch 'tick-tick-DING' + har second halki tick (MinuteMe = ghadi)
+    add_at(music, sfx_tick(0.55), 0.0)
+    add_at(music, sfx_tick(0.55), 0.14)
+    add_at(music, sfx_ding(0.42), 0.30)
+    for k in range(1, int(LOOP_DUR)):
+        add_at(music, sfx_tick(0.22), float(k))
+    music = np.clip(music, -0.98, 0.98)
     step = max(1, FPS // 15)                      # 15 alag frame/sec kaafi (halki halchal)
     encode_frames(lambda fi: render_loop_frame(data, lay, fi / FPS), n, music, out, key=lambda fi: fi // step)
     print(f"LOOP REEL TAIYAR: {out} ({LOOP_DUR:.0f}s)")
@@ -3465,9 +3579,10 @@ def loop_caption(data):
         opts,
         "",
         f"📌 {src} में पूछा गया" + (f" ({data['times_asked']} बार)" if data["times_asked"] >= 2 else ""),
-        "💬 अपना जवाब कमेंट करो - सही जवाब + वजह पहले कमेंट में।",
+        "💬 8 सेकंड में जवाब कमेंट करो - सही जवाब + वजह पहले कमेंट में।",
+        "📤 उस दोस्त को भेजो जो Railway / SSC / Police की तैयारी कर रहा है।",
         f"{subj_word(data['subject'])} GK Question | RRB NTPC, Group D, SSC GD, State Exam PYQ",
-        f"🔔 Follow {BRAND_HANDLE} - रोज़ नए PYQ",
+        f"⏱ {BRAND} - {BRAND_TAGLINE}",
         "",
         f"#gkquiz #rrbntpc #sscgd #gkpyq {SUBJ_TAGS.get(data['subject'], '#gk')}",
     ])
@@ -3479,7 +3594,8 @@ def answer_comment(data):
         lines.append(f"💡 वजह: {data['why']}")
     if data.get("tip"):
         lines.append(f"📝 याद रखो: {data['tip']}")
-    lines.append(f"🔔 ऐसे PYQ रोज़: Follow {BRAND_HANDLE}")
+    lines.append("🏆 सही बताने वालों के नाम अगली रील में!")
+    lines.append(f"⏱ {BRAND_TAGLINE}  Follow {BRAND_HANDLE}")
     if WHATSAPP_NUMBER:
         lines.append(f"📲 Free test / notes: WhatsApp {WHATSAPP_NUMBER}")
     return "\n".join(lines)
@@ -3509,7 +3625,8 @@ def list_ok(q):
     if re.search(r"[^ऀ-ॿ -~‐-‧]", txt) or "__" in qc:
         return False
     # bina options ke list me ye sawal ulte/adhoore lagte hain
-    return not re.search(r"नहीं|असत्य|गलत|निम्न|इनमें से|इनमे से|सही कथन|पता लगाया", qc)
+    # 'वर्तमान/मौजूदा' = jawab badal chuka ho sakta hai (list me AI ke alawa ye doosri suraksha)
+    return not re.search(r"नहीं|असत्य|गलत|निम्न|इनमें से|इनमे से|सही कथन|पता लगाया|वर्तमान|मौजूदा|हाल ही|अभी", qc)
 
 
 def pick_list_items(bank, st):
@@ -3518,10 +3635,11 @@ def pick_list_items(bank, st):
     pending = [q for q in sorted(bank, key=lambda x: int(x["seq"])) if q["id"] not in done]
     if not pending:
         return None, []
-    subject = next((q["subject"] for q in pending if list_ok(q)), pending[0]["subject"])
+    today = [q for q in pending if list_ok(q) and today_exam(q)]
+    subject = "TODAY" if len(today) >= 5 else next((q["subject"] for q in pending if list_ok(q)), pending[0]["subject"])
     items = []
-    for q in pending:
-        if q["subject"] != subject or not list_ok(q):
+    for q in (today if subject == "TODAY" else pending):
+        if subject != "TODAY" and (q["subject"] != subject or not list_ok(q)):
             continue
         ai = ai_enrich(q)
         if ai and ai.get("reject"):
@@ -3546,6 +3664,8 @@ def _paper_bg():
 
 
 def list_title(subject):
+    if subject == "TODAY":
+        return "आज ही के दिन पूछे गए PYQ"
     hi = SUBJECT_STYLE.get(subject, ("GK",))[0].split("•")[-1].strip()
     return f"{hi} के {LIST_N} PYQ"
 
@@ -3555,7 +3675,9 @@ def render_list_frame(subject, items):
     d = ImageDraw.Draw(cv)
     d.text((W / 2, 245), list_title(subject), font=get_font(84), fill=PEN_BLUE, anchor="mm")
     d.line((200, 300, W - 200, 300), fill=PEN_BLUE, width=5)
-    d.text((W / 2, 345), "RRB / SSC में पूछे गए  •  SAVE करो", font=get_font(38), fill=PEN_RED, anchor="mm")
+    sub = (f"आज की तारीख ({today_dm()[0]}) के पुराने RRB पेपर  •  SAVE करो" if subject == "TODAY"
+           else "RRB / SSC में पूछे गए  •  SAVE करो")
+    d.text((W / 2, 345), sub, font=get_font(36), fill=PEN_RED, anchor="mm")
     top, bottom = 405, 1580
     for size in (42, 40, 38, 36, 34, 32):                 # sab 7 aaram se fit (koi line upar na chadhe)
         blocks = []
@@ -3575,9 +3697,10 @@ def render_list_frame(subject, items):
         d.text((175, y), "Ans →  ", font=fa, fill=PEN_BLUE, anchor="la")
         d.text((175 + text_w("Ans →  ", fa), y), ans, font=fa, fill=PEN_BLUE, anchor="la")
         y += int(size * 1.35) + gap
-    lg = brand_logo(56)
-    cv.paste(lg, (int(W / 2 - 190), 1606), lg)
-    d.text((W / 2 - 120, 1634), BRAND_HANDLE + "  •  रोज़ नए PYQ", font=get_font(34), fill=(90, 90, 110), anchor="lm")
+    sw = stopwatch_sprite(70, 0.0)
+    cv.paste(sw, (150, 1597), sw)
+    d.text((235, 1618), BRAND_HANDLE, font=get_font(36), fill=INK, anchor="lm")
+    d.text((235, 1660), BRAND_TAGLINE + "   •   दोस्तों को भेजो", font=get_font(28), fill=PEN_RED, anchor="lm")
     return cv
 
 
@@ -3595,8 +3718,9 @@ def list_caption(subject, items):
     lines = [f"📚 {list_title(subject)} - RRB / SSC में पूछे गए (Save करो)", ""]
     lines += [f"{k + 1}. {it['q']} → {it['a']}" for k, it in enumerate(items)]
     lines += ["", "💬 कितने पहले से आते थे? कमेंट करो: 7/7?",
-              f"{subj_word(subject)} GK Questions | RRB NTPC, Group D, SSC GD, State Exam PYQ",
-              f"🔔 Follow {BRAND_HANDLE} - रोज़ नए PYQ"]
+              "📤 Save करो + उस दोस्त को भेजो जो exam की तैयारी कर रहा है।",
+              f"{'GK' if subject == 'TODAY' else subj_word(subject)} GK Questions | RRB NTPC, Group D, SSC GD, State Exam PYQ",
+              f"⏱ {BRAND} - {BRAND_TAGLINE}"]
     if WHATSAPP_NUMBER:
         lines.append(f"📲 Free test / notes: WhatsApp {WHATSAPP_NUMBER}")
     lines += ["", f"#gkquiz #rrbntpc #sscgd #gkpyq {SUBJ_TAGS.get(subject, '#gk')}"]
@@ -3676,6 +3800,12 @@ def main():
             return
         fmt = "loop"
     cands = pick_question(bank, st, args.seq)
+    if not args.seq and fmt == "loop":              # aaj ki tareekh wale PYQ pehle (sirf hamara data)
+        done = set(st["posted"]) | set(st["skipped"])
+        tod = [q for q in bank if q["id"] not in done and reel_friendly(q) and today_exam(q)]
+        if tod:
+            print(f"  Aaj ki tareekh ke {len(tod)} PYQ baaki")
+            cands = tod[:3] + [c for c in cands if c not in tod[:3]]
     chosen, ai, data = None, None, None
     for i, q in enumerate(cands[:MAX_TRIES_PER_RUN]):
         print(f"\nSawal #{q['seq']} ({q['subject']}, {q['times_asked']} baar): {q['question'][:80]}")
@@ -3700,6 +3830,8 @@ def main():
         build_reel(data, out, preview_dir="preview")
         return
     if fmt == "loop":
+        if not args.seq:
+            data["toppers"] = fetch_toppers(st)
         build_loop_reel(data, out)
         thumb_ms = 0                                        # pehla frame hi poora sawal = cover
         caption = loop_caption(data)
@@ -3732,6 +3864,7 @@ def main():
             return
         if fmt == "loop":
             post_comment(pid, answer_comment(data))
+            st["last_loop"] = {"media": pid, "correct": data["correct"]}
     st["posted"].append(chosen["id"])
     carousel_step(st, data)
     st["episode"] = ep
