@@ -3518,6 +3518,23 @@ def _opt_row(letter, text, active, w=1000, h=150, size=60):
     return im
 
 
+@lru_cache(maxsize=8)
+def poster_band(text):
+    """Purane poster wali pehchan: laal brush patti, safed akshar, ank peele (pehla frame = cover)."""
+    band = brush_band(820, 150, (212, 30, 42), seed=3, tilt=1.2)
+    d = ImageDraw.Draw(band)
+    f, s_, ls = fit_lines(text, 760, 1, 72, 40)
+    words = ls[0] if ls else text.split()
+    sp = text_w(" ", f)
+    lw = sum(text_w(w_, f) for w_ in words) + sp * (len(words) - 1)
+    x, cy = band.width / 2 - lw / 2, band.height / 2
+    for w_ in words:
+        col = (255, 214, 10) if re.search(r"\d", w_) else WHITE
+        d.text((x, cy), w_, font=f, fill=col + (255,), anchor="lm", stroke_width=3, stroke_fill=(90, 0, 10, 255))
+        x += text_w(w_, f) + sp
+    return band
+
+
 def render_loop_frame(data, lay, t):
     dur = data.get("_dur", LOOP_DUR)
     cv = _loop_bg(data.get("img_hook")).copy()
@@ -3526,8 +3543,9 @@ def render_loop_frame(data, lay, t):
     src = data.get("exam_raw") or (data["exams"][0] if data.get("exams") else "RRB Group-D")
     place(cv, pill_sprite("पूछा गया:  " + src, 34, (30, 18, 0), YELLOW, ORANGE), W / 2, 255)
     # 2) hook headline (halki saans: 2s periodic -> loop me jhatka nahi)
-    hs = headline_sprite(data.get("_hook") or loop_hook(data), 80)
-    place(cv, hs, W / 2, 385, scale=1 + 0.02 * math.sin(2 * math.pi * t / 2.0))
+    hs = poster_band(data.get("_hook") or loop_hook(data))
+    place(cv, hs, W / 2 + 80, 390, scale=1 + 0.015 * math.sin(2 * math.pi * t / 2.0))
+    place(cv, shock_emoji(190), 125, 385, angle=6 * math.sin(2 * math.pi * t / 2.0))
     # 3) sawal: safed kaagaz card
     qt, qh = lay["q_top"], lay["qh"]
     place(cv, card_sprite(1000, qh, PAPER, (255, 255, 255), 3, 30), W / 2, qt + qh / 2)
@@ -3554,15 +3572,16 @@ def render_loop_frame(data, lay, t):
     # 6) kal ke toppers (comment karne ki aadat: naam screen pe aata hai)
     if data.get("toppers"):
         tp = "कल सही बताने वाले:  " + "   ".join("@" + u for u in data["toppers"])
-        place(cv, pill_sprite(tp, 30, WHITE, (14, 90, 50), GREEN), W / 2, 1458)
+        place(cv, pill_sprite(tp, 30, WHITE, (14, 90, 50), GREEN), W / 2, 1418)
     # 7) CTA: '8 सेकंड' (reel ki lambai = stopwatch ka ek chakkar) + baari-baari share / jawab
-    place(cv, pill_sprite(data.get("_cta") or "8 सेकंड में बताओ:  A / B / C / D ?", 44, (30, 20, 0), YELLOW,
-                          ORANGE), W / 2, 1530, scale=1 + 0.03 * math.sin(2 * math.pi * t / 1.0))
-    sub = ("सही जवाब + वजह: पहला कमेंट देखो", (37, 60, 140), CYAN) if t < dur / 2 else \
-          ("उस दोस्त को भेजो जो ये गलत करेगा", (150, 30, 60), (255, 150, 170))
-    if data.get("_sub"):
-        sub = (data["_sub"], (150, 30, 60), (255, 150, 170))
-    place(cv, pill_sprite(sub[0], 30, WHITE, sub[1], sub[2]), W / 2, 1612)
+    cta = data.get("_cta") or "8 सेकंड में बताओ:  A / B / C / D ?"
+    if t >= dur / 2:                                        # aadhe ke baad: share
+        cta = data.get("_sub") or "उस दोस्त को भेजो जो ये गलत करेगा"
+    place(cv, pill_sprite(cta, 40, (30, 20, 0), YELLOW, ORANGE), W / 2, 1490,
+          scale=1 + 0.03 * math.sin(2 * math.pi * t / 1.0))
+    # BADE AKSHAR: jawab kahan hai (kisi ko dhoondhna na pade)
+    place(cv, answer_banner(data.get("_ans_text") or "सही जवाब कमेंट में है"), W / 2, 1592,
+          scale=1 + 0.025 * math.sin(2 * math.pi * t / 1.0))
     # 8) header: chalti stopwatch (8s me ek chakkar = loop seamless) + naam + tagline
     place(cv, stopwatch_sprite(84, int(t * 15) % int(dur * 15) / (dur * 15)), 92, 150)
     wm = brand_wordmark(34)
@@ -3578,9 +3597,25 @@ def render_loop_frame(data, lay, t):
     return cv
 
 
+@lru_cache(maxsize=4)
+def answer_banner(text):
+    """Bada laal-safed patta + neeche ki taraf teer: 'सही जवाब कमेंट में है'."""
+    f = get_font(60)
+    tw = int(text_w(text, f))
+    w, h = tw + 220, 112
+    im = Image.new("RGBA", (w, h), (0, 0, 0, 0))
+    d = ImageDraw.Draw(im)
+    d.rounded_rectangle((0, 0, w - 1, h - 1), radius=26, fill=(220, 30, 45, 255), outline=WHITE + (255,), width=5)
+    d.text((w / 2, h / 2 + 2), text, font=f, fill=WHITE + (255,), anchor="mm")
+    for ax in (55, w - 55):                                  # dono taraf neeche teer (comment ki taraf)
+        d.polygon([(ax - 26, 38), (ax + 26, 38), (ax, 80)], fill=(255, 214, 10, 255))
+        d.rectangle((ax - 10, 18, ax + 10, 42), fill=(255, 214, 10, 255))
+    return im
+
+
 def build_loop_reel(data, out):
     resolve_font()
-    lay = loop_layout(data, 1405 if data.get("toppers") else 1450)
+    lay = loop_layout(data, 1345 if data.get("toppers") else 1420)
     n = int(LOOP_DUR * FPS)
     music = beat_music(LOOP_DUR, seed=data["episode"]) * 0.85
     # AWAAZ KI PEHCHAN: shuru me stopwatch 'tick-tick-DING' + har second halki tick (MinuteMe = ghadi)
@@ -3844,8 +3879,9 @@ def build_triple_reel(datas, out):
         d_["_hook"] = f"सवाल {k + 1}/{len(datas)}  -  {len(datas)}/{len(datas)} सही = जीनियस!"
         d_["_cta"] = "5 सेकंड!  जवाब याद रखो..." if k < len(datas) - 1 else "कितने सही?  कमेंट करो: 3/3 ?"
         d_["_sub"] = "दोस्त को भेजो: देखें उसके कितने सही होते हैं"
+        d_["_ans_text"] = "तीनों के जवाब कमेंट में हैं"
         d_["toppers"] = []
-        lays.append(loop_layout(d_, 1450))
+        lays.append(loop_layout(d_, 1420))
     music = beat_music(TRI_DUR, seed=datas[0]["episode"]) * 0.85
     add_at(music, sfx_tick(0.55), 0.0)
     add_at(music, sfx_tick(0.55), 0.14)
