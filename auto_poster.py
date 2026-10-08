@@ -118,7 +118,6 @@ VOICE_LEAD = 0.06
 EYE_LEAD = 0.10
 READ_WPS = 3.3            # mobile pe Hindi padhne ki speed (shabd/sec)
 TRANSITION = 0.30
-LOOP_BLEND = 0.35
 MAX_TRIES_PER_RUN = 6     # sawal jaanch me fail ho to agla (ek run me itne tak)
 
 FONT_FILE = "Mukta-ExtraBold.ttf"
@@ -919,8 +918,9 @@ def hook_line(q, ep):
     if n >= 2:
         return [f"ये सवाल {n} पेपर में आया!", f"{n} पेपर में आया ये सवाल!",
                 f"{n} बार पेपर में आ चुका!"][ep % 3]
-    return [f"Railway {y} पेपर का सवाल!", f"RRB {y} पेपर में आया!",
-            f"{y} के पेपर में आया!"][ep % 3].replace("  ", " ")
+    # 1 baar wala: sirf "paper me aaya" kamzor hook tha -> chunauti (sach hi, koi nakli % nahi)
+    return [f"RRB {y} का सवाल - 3 सेकंड में बताओ!", f"Railway {y} में आया - आप कर पाओगे?",
+            f"Exam में पूछा गया - जवाब दो!"][ep % 3].replace("  ", " ")
 
 
 # ---------- Cloudflare Workers AI: topic ka sundar chitra ----------
@@ -1003,15 +1003,25 @@ def make_images(q, ai):
     return out
 
 
-SCIENCE_EXAMS = ["RRB NTPC", "SSC GD", "SSC CGL", "SSC CHSL", "SSC MTS", "RRB ALP", "State Police", "UPSC Prelims",
-                 "CTET", "Patwari", "State PSC", "Railway Technician"]
+SCIENCE_EXAMS = ["RRB NTPC", "SSC GD", "SSC CGL", "SSC CHSL", "SSC MTS", "RRB ALP", "State Police", "Patwari",
+                 "State PSC"]
 
 
 def also_exams(q):
-    """Science wale doosre exams (rotate) - chip pe 'इनके लिए भी' ke saath."""
+    """GS wale doosre exams (rotate) - hook me EK chhoti line (pehle 2 line ki chips bheed karti thi)."""
     rnd = random.Random(q["id"] + "x")
-    picks = rnd.sample(SCIENCE_EXAMS, 3)
-    return [f"इनमें भी {subj_word(q['subject'])}:"] + picks
+    return rnd.sample(SCIENCE_EXAMS, 2)
+
+
+# reel ke liye bahut lamba sawal/option = pehle 2 sec me padha nahi jaata -> reel me nahi (bank me rehta hai)
+REEL_MAX_Q_WORDS = 22
+REEL_MAX_OPT_WORDS = 6
+
+
+def reel_friendly(q):
+    if len(q["question"].split()) > REEL_MAX_Q_WORDS:
+        return False
+    return all(len(str(o).split()) <= REEL_MAX_OPT_WORDS for o in q["options"].values())
 
 
 def prepare_data(q, ai, ep, next_q=None, imgs=None):
@@ -1071,16 +1081,16 @@ def build_scene_specs(data):
          "segs": [("hk", data["hook"], to_speech(data["hook"])), ("q", data["question"], data["speak_q"])]},
         {"name": "question", "mood": "blue", "tail": 0.0, "min": 0,
          "segs": [("lock", "जवाब कमेंट करो!", "जवाब कमेंट करो!")]},
-        {"name": "verdict", "mood": "green", "tail": 0.1, "min": 2.1, "delay": 0.9,
+        {"name": "verdict", "mood": "green", "tail": 0.1, "min": 1.9, "delay": 0.5,
          "segs": [("rev", ans_say, ans_say)]},
-        {"name": "why", "mood": "blue", "tail": 0.6, "min": 3.0,
-         "segs": [("wx", "क्योंकि,", "क्योंकि,"), ("why", data["why"], why_say)]
+        {"name": "why", "mood": "blue", "tail": 0.4, "min": 2.6,
+         "segs": [("why", data["why"], why_say)]
                  + ([("tip", data["tip"], to_speech("याद रखो, " + data["tip"]))] if data.get("tip") else []),
          "read": [("why", data["why"])]},
-        {"name": "cta", "mood": "purple", "tail": 1.6, "min": 4.2,
+        # ant chhota: lamba follow + WhatsApp wala bolna watch-% girata tha (WhatsApp ab caption me)
+        {"name": "cta", "mood": "purple", "tail": 1.0, "min": 3.0,
          "segs": [("cta", "अगला सवाल! जवाब पता है तो कमेंट करो।",
-                   f"अगला सवाल स्क्रीन पर है, जवाब पता हो तो कमेंट करो! {BRAND_SPEAK} को फॉलो करो, "
-                   f"और फ्री नोट्स और मॉक टेस्ट के लिए स्क्रीन पर दिए नंबर पर व्हाट्सऐप करो।")]},
+                   "अगले सवाल का जवाब पता है? कमेंट करो!")]},
     ]
     return specs
 
@@ -1610,6 +1620,7 @@ def seg_progress(sc, key, t):
     return clamp((t - s0 + EYE_LEAD) / span), th
 
 
+POSTER_TAIL = 0.4                   # reel ke ant me poster/cover kitni der
 VERDICT_X = [0.12, 0.42, 0.72]      # galat options kab katenge (verdict scene me)
 VERDICT_WIN = 1.0                   # sahi kab chamkega
 
@@ -1635,6 +1646,12 @@ def build_timeline(specs, voices, data):
             sc["dur"] = dur = max(dur, sc["cd_start"] + COUNTDOWN_SECONDS * COUNTDOWN_STEP + 0.25)
         timeline.append(sc)
         cur += dur
+    # sabse aakhir me poster (cover) ke kuch frame: Instagram cover thumb_offset se yahi uthata hai.
+    # Pehle poster video ke SHURU me tha -> feed me reel 'photo/ad' lagti thi aur log 1 sec me skip karte the.
+    timeline.append({"index": len(timeline), "name": "poster", "mood": "blue", "start": cur, "dur": POSTER_TAIL,
+                     "vdur": 0.0, "marks": {}, "wt": {}, "lead": 0.0})
+    data["_timer_end"] = next((s["start"] for s in timeline if s["name"] == "verdict"), 6.0)
+    cur += POSTER_TAIL
     return timeline, cur
 
 
@@ -1778,7 +1795,7 @@ GRID_X = [W / 2 - 250, W / 2 + 250]
 GRID_Y = [1075, 1330]
 VS_Y = 1185
 STAMP_T = 0.3
-SEAMLESS = ("question", "verdict")
+SEAMLESS = ("question", "verdict", "poster")
 
 
 @lru_cache(maxsize=8)
@@ -2155,82 +2172,75 @@ def draw_backdrop(cv, path, t, alpha):
     return Image.blend(cv, bd.crop((ox, oy, ox + W, oy + H)), clamp(alpha))
 
 
+def draw_timer(cv, data, gt):
+    """Neeche khaali hoti 'टाइम' patti: frame 1 se chalti hai -> rukne ki wajah (jawab aane tak)."""
+    end = float(data.get("_timer_end") or 6.0)
+    if gt >= end:
+        return
+    p = clamp(1 - gt / max(0.5, end))
+    x0, x1, y = 150, W - 90, 1585
+    d = ImageDraw.Draw(cv)
+    d.rounded_rectangle((x0, y - 13, x1, y + 13), radius=13, fill=(30, 40, 62))
+    col = GREEN if p > 0.5 else (YELLOW if p > 0.25 else RED)
+    cur = x0 + (x1 - x0) * p
+    d.rounded_rectangle((x0, y - 13, max(x0 + 26, cur), y + 13), radius=13, fill=col)
+    place(cv, glow_sprite(26, col, 220), cur, y)
+    d.text((95, y), "टाइम", font=get_font(30), fill=col, anchor="mm")
+
+
 def scene_hook(cv, data, t, sc):
     """
-    Pehla frame = scroll rokne wala: '{n} पेपर में आया' chamakti headline (dhamaka-ghera + chingaariyan),
-    neon card me asli sawal (bolte shabd peele) + English, aur chaaron options turant (padhna shuru).
+    Pehla frame hi poora sawal: chamakti hook-line + bada sawal + chaaron options 0.25s me uchhal ke,
+    neeche khaali hoti time-patti. (Pehle: poster -> chips ki 2 line -> chitra -> options ~1.5s baad aate the.)
     """
     fx = {}
-    place(cv, ribbon_sprite(data["series"]), W / 2, 272)
-    hy = 395
-    place(cv, rays_sprite(), W / 2, hy, angle=t * 25, scale=0.8)
+    hy = 300
+    place(cv, rays_sprite(), W / 2, hy, angle=t * 25, scale=0.7)
     hs = headline_sprite(data["hook"], 82)
-    punch = 1.18 - 0.18 * ease_out_back(prog(t, 0, 0.35))
+    punch = 1.08 - 0.08 * ease_out_back(prog(t, 0, 0.3))
+    shockwave(cv, W / 2, hy, t, 0.0, YELLOW)            # dhamaka headline ke PEECHE (shabd na dhake)
+    spark_burst(cv, W / 2, hy, t, 0.0)
     place(cv, hs, W / 2, hy, scale=punch * (1 + 0.018 * math.sin(t * 7)))
-    shockwave(cv, W / 2, hy, t, 0.0, YELLOW)
-    spark_burst(cv, W / 2, hy, t, 0.02)
     if t < 0.12:
         fx["shake"] = 9
-    # chips: asli paper (jisme aaya) + science wale bade exams (jinke liye ye zaroori hai)
-    cy_ = hy + hs.height / 2 + 2
-    real = pill_sprite("पूछा गया: " + ", ".join(data["exams"][:2]), 26, (30, 18, 0), YELLOW, ORANGE)
-    others = [pill_sprite(e, 27, (10, 30, 50), CYAN, CYAN) if i == 0 else
-              pill_sprite(e, 27, WHITE, (30, 45, 80), (90, 120, 180)) for i, e in enumerate(data["also_exams"])]
-    rows = [[real], others]
-    for r_i, row in enumerate(rows):
-        tot = sum(c.width for c in row) + 12 * (len(row) - 1)
-        fit = min(1.0, 1000 / max(1, tot))              # line screen se bahar na jaaye
-        x = W / 2 - tot * fit / 2
-        yy = cy_ + r_i * 52
-        for i, c in enumerate(row):
-            kc = ease_out_back(prog(t, 0.12 + 0.07 * (i + r_i * 2), 0.3))
-            place(cv, c, x + c.width * fit / 2, yy, scale=max(0.05, kc) * fit)
-            x += (c.width + 12) * fit
-    qcy, qh = draw_q_card(cv, data, t, sc)
-    # PYQ thappa: sawal card ke kone pe
-    # CHITRA BEAT: hook-line bolte waqt options ki jagah bada jigyasa-chitra; sawal shuru hote hi simat ke hat-ta hai
-    t_opt = 0.35
-    if data.get("img_hook"):
-        tq = sc["marks"]["q"][0] if "q" in sc["marks"] else 1.2
-        t_opt = tq + 0.05
-        ex = ease_in_out(prog(t, tq - 0.15, 0.4))
-        if ex < 0.99:
-            top_, bot_ = GRID_Y[0] - TILE_H / 2, GRID_Y[1] + TILE_H / 2
-            pw, ph = 980 * (1 - 0.3 * ex), (bot_ - top_) * (1 - 0.3 * ex)
-            kp = ease_out_back(prog(t, 0.0, 0.4))
-            pan = img_panel(data["img_hook"], pw, ph, t, border=YELLOW)
-            if pan is not None:
-                place(cv, glow_sprite(360, YELLOW, int(70 * (1 - ex))), W / 2, (top_ + bot_) / 2)
-                place(cv, pan, W / 2, (top_ + bot_) / 2, scale=max(0.05, 0.92 + 0.08 * kp), alpha=1 - ex)
-                if ex < 0.5:
-                    qb = pill_sprite("चित्र देखो - सवाल सोचो!", 38, (30, 20, 0), YELLOW, ORANGE)
-                    place(cv, qb, W / 2, bot_ - 60, scale=1 + 0.04 * math.sin(t * 9), alpha=1 - 2 * ex)
-                    place(cv, pill_sprite("?", 70, WHITE, (110, 40, 160), PURPLE), W / 2 + 400, top_ + 70,
-                          scale=1 + 0.08 * math.sin(t * 7), angle=10 * math.sin(t * 3), alpha=1 - 2 * ex)
-    # chaaron options: ek-ek karke uchhal ke (sawal bolte-bolte padh lo)
+    # EK chhoti line: asli paper + 2 bade exam (sawal ki ahmiyat), baaki bheed hata di
+    real = data["exams"][0] if data.get("exams") else "RRB Group D"
+    row = [pill_sprite("पूछा गया: " + real, 28, (30, 18, 0), YELLOW, ORANGE)] + \
+          [pill_sprite(e, 28, WHITE, (30, 45, 80), (90, 120, 180)) for e in data.get("also_exams", [])[:2]]
+    tot = sum(c.width for c in row) + 12 * (len(row) - 1)
+    fit = min(1.0, 1000 / max(1, tot))
+    x = W / 2 - tot * fit / 2
+    yy = hy + hs.height / 2 + 30
+    for i, c in enumerate(row):
+        kc = ease_out_back(prog(t, 0.1 + 0.06 * i, 0.25))
+        place(cv, c, x + c.width * fit / 2, yy, scale=max(0.05, kc) * fit)
+        x += (c.width + 12) * fit
+    draw_q_card(cv, data, t, sc)
+    # chaaron options TURANT (0.08s se): scroll karne wala pehle second me hi sochne lage
+    t_opt = 0.08
     for i, (l, txt) in enumerate(data["options"]):
         gx, gy = grid_pos(i)
-        ti_ = t_opt + 0.12 * i
-        ki = ease_out_back(prog(t, ti_, 0.35)) if t >= ti_ else 0.0
+        ti_ = t_opt + 0.08 * i
+        ki = ease_out_back(prog(t, ti_, 0.3)) if t >= ti_ else 0.0
         if ki <= 0.01:
             continue
         place(cv, tile_sprite(l, txt, data["en_opt"].get(l, ""), "normal"), gx, gy + 120 * (1 - min(ki, 1)),
               scale=0.85 + 0.15 * ki, alpha=clamp(ki * 1.5))
         if t > t_opt + 0.6:
             sheen(cv, gx, gy, TILE_W, TILE_H, t, period=2.0, offset=0.25 * i, strength=40)
-    kc = ease_out_back(prog(t, t_opt + 0.7, 0.3)) if t >= t_opt + 0.7 else 0.0
+    kc = ease_out_back(prog(t, 0.9, 0.3)) if t >= 0.9 else 0.0
     if kc > 0.01:
         place(cv, pill_sprite("आपका जवाब? कमेंट करो!", 40, (30, 20, 0), YELLOW, ORANGE), W / 2, 1505,
               scale=max(0.05, kc) * (1 + 0.03 * math.sin(t * 9)))
+    draw_timer(cv, data, sc["start"] + t)
     return fx
 
 
 def scene_grid(cv, data, t, sc):
     """Wahi screen (bina cut): 3-2-1 countdown, options pe scan-roshni."""
     fx = {}
-    place(cv, ribbon_sprite(data["series"]), W / 2, 272)
     d = ImageDraw.Draw(cv)
-    d.text((W / 2, 400), "अपना जवाब लॉक करो!", font=get_font(70), fill=YELLOW, anchor="mm", stroke_width=6,
+    d.text((W / 2, 330), "अपना जवाब लॉक करो!", font=get_font(76), fill=YELLOW, anchor="mm", stroke_width=6,
            stroke_fill=(20, 8, 0))
     draw_q_card(cv, data, t, sc, karaoke=False, pop=False)
     c0 = sc["cd_start"]
@@ -2264,6 +2274,7 @@ def scene_grid(cv, data, t, sc):
             place(cv, lock_sprite(80), cx, cy)
     place(cv, pill_sprite("A / B / C / D - कमेंट करो!", 40, (30, 20, 0), YELLOW, ORANGE), W / 2, 1505,
           scale=1 + 0.03 * math.sin(t * 9))
+    draw_timer(cv, data, sc["start"] + t)
     return fx
 
 
@@ -2517,9 +2528,6 @@ def scene_cta(cv, data, t, sc):
         if kf > 0.01:
             place(cv, pill_sprite(f"FOLLOW {BRAND_HANDLE}  •  सही जवाब अगली रील में", 32, WHITE, (200, 30, 40),
                                   (255, 140, 140)), W / 2, y + 115, scale=max(0.05, kf))
-        kw = ease_out_back(prog(t, 1.7, 0.3)) if t >= 1.7 else 0.0
-        if kw > 0.01 and WHATSAPP_NUMBER:
-            place(cv, whatsapp_card(), W / 2, y + 245, scale=max(0.05, kw) * (1 + 0.025 * math.sin(t * 6)))
     else:
         place(cv, follow_button(), W / 2, 700, scale=max(0.05, k))
     return {}
@@ -2530,9 +2538,8 @@ SCENES = {"hook": scene_hook, "question": scene_grid, "verdict": scene_verdict, 
 
 # ============================== RENDER ==============================
 
-# ---------- THUMBNAIL (reel ka pehla frame = Instagram cover) ----------
+# ---------- THUMBNAIL (reel ke AAKHRI frame = Instagram cover, thumb_offset se) ----------
 
-THUMB_HOLD = 0.25       # itni der poora thumbnail, fir 0.25s me hook me ghul jaata hai
 
 
 # ---- thumbnail ke design-tukde (poster style: brush patti, chaunka emoji, starburst sticker) ----
@@ -2821,14 +2828,12 @@ def make_thumbnail(data):
 
 def render_frame(sc, data, gt, total):
     t = gt - sc["start"]
-    cv = bg_frame(sc["mood"], gt)
     nm = sc["name"]
+    if nm == "poster":                          # ant ke frame = Instagram cover (thumb_offset)
+        return make_thumbnail(data).copy()
+    cv = bg_frame(sc["mood"], gt)
     if nm in ("hook", "question", "verdict") and data.get("img_hook"):
-        a_ = 0.45
-        if nm == "hook":
-            tq = sc["marks"]["q"][0] if "q" in sc["marks"] else 1.2
-            a_ = 0.45 * ease_in_out(prog(t, tq - 0.1, 0.5))
-        cv = draw_backdrop(cv, data["img_hook"], gt, a_)
+        cv = draw_backdrop(cv, data["img_hook"], gt, 0.45)   # chitra pehle frame se peeche (khaali intezaar nahi)
     elif nm == "why" and data.get("img_why"):
         cv = draw_backdrop(cv, data["img_why"], gt, 0.35)
     fx = SCENES[sc["name"]](cv, data, t, sc) or {}
@@ -2857,17 +2862,6 @@ def render_frame(sc, data, gt, total):
         cv = Image.blend(cv, Image.new("RGB", (W, H), (255, 255, 255)), clamp(flash))
     # watermark: video download/repost ho to bhi naam dikhe
     place(cv, watermark(), W / 2, 1690, alpha=0.55)
-    # pehla pal = thumbnail (Instagram cover), fir zoom-out ke saath hook me ghulta hai
-    if sc["name"] == "hook" and t < THUMB_HOLD + 0.25:
-        th = make_thumbnail(data)
-        if t < THUMB_HOLD:
-            cv = th.copy()
-        else:
-            p = ease_in_out(prog(t, THUMB_HOLD, 0.25))
-            z = 1 + 0.12 * p
-            big = th.resize((int(W * z), int(H * z)), Image.BILINEAR)
-            ox, oy = (big.width - W) // 2, (big.height - H) // 2
-            cv = Image.blend(big.crop((ox, oy, ox + W, oy + H)), cv, p)
     return cv
 
 
@@ -2933,17 +2927,11 @@ def build_reel(data, output_video, preview_dir=None):
             tt = gt - sc["start"]
             if si > 0 and tt < TRANSITION and sc["name"] not in SEAMLESS:
                 if si not in cache:
-                    cache = {k: v for k, v in cache.items() if k == "first"}
+                    cache = {}
                     cache[si] = render_frame(timeline[si - 1], data, sc["start"] - 1.0 / FPS, total)
                 frame = iris(cache[si], frame, tt / TRANSITION)
                 if tt < 0.12:
                     frame = rgb_split(frame, 16 * (1 - tt / 0.12))
-            if gt > total - LOOP_BLEND:                 # ant pehle frame me ghule -> Instagram loop seamless
-                if "first" not in cache:
-                    cache["first"] = render_frame(timeline[0], data, 0.0, total)
-                q_ = clamp((gt - (total - LOOP_BLEND)) / LOOP_BLEND)
-                dark = Image.new("RGB", (W, H), BG_BOTTOM)
-                frame = Image.blend(frame, dark, q_ * 2) if q_ < 0.5 else Image.blend(dark, cache["first"], (q_ - 0.5) * 2)
             proc.stdin.write(frame.tobytes())
             if fi % 150 == 0:
                 print(f"  frame {fi}/{n_frames}")
@@ -2961,34 +2949,45 @@ def build_reel(data, output_video, preview_dir=None):
 
 # ============================== CAPTION ==============================
 
+SUBJ_TAGS = {"Physics": "#physics", "Chemistry": "#chemistry", "Biology": "#biology", "History": "#history",
+             "Polity": "#polity", "Geography": "#geography", "Economics": "#economics", "Environment": "#environment",
+             "Traditional GK": "#gk", "Computer": "#computer"}
+
+
 def make_caption(data):
+    """
+    Pehli line = sawal + search shabd (Instagram ab caption ke shabdon se search/explore me dikhata hai).
+    Hashtag: 5, subject ke hisaab se. WhatsApp sirf yahan (reel me nahi).
+    """
     sub = data["subject"]
-    yrs = ", ".join(data["exams"])
-    asked = (f"📌 {yrs} में {data['times_asked']} बार पूछा गया ({sub})" if data["times_asked"] >= 2
-             else f"📌 {yrs} में पूछा गया ({sub})")
+    sw = subj_word(sub)
+    yrs = ", ".join(data["exams"][:2])
+    asked = (f"📌 {yrs} में {data['times_asked']} बार पूछा गया" if data["times_asked"] >= 2
+             else f"📌 {yrs} में पूछा गया")
     lines = [
-        f"🔬 {BRAND} | {data['series']} | {data['question']}",
+        f"❓ {data['question']}",
+        f"{sw} GK Question | RRB NTPC, Group D, SSC GD, State Exam PYQ 2026",
         "",
         asked,
     ] + ([f"🇬🇧 {data['en_question']}"] if data.get("en_question") else []) + [
-        f"🎯 Railway (NTPC / Group D / ALP), SSC (GD / MTS / CGL / CHSL) और State exams - जहाँ भी {subj_word(data['subject'])} है, ऐसे सवाल आते हैं।",
-        "👀 सही जवाब और उसकी वजह रील में। अपना जवाब A / B / C / D कमेंट करो!",
-        "📥 सेव कर लो - exam से पहले revision में काम आएगा।",
-        f"🔔 Follow {BRAND_HANDLE} - रोज़ 1 मिनट में पक्का GS (PYQ)",
+        "💬 अपना जवाब A / B / C / D कमेंट करो - सही जवाब + वजह रील में।",
+        "📥 Save करो - exam से पहले revision में काम आएगा।",
+        f"🔔 Follow {BRAND_HANDLE} - रोज़ नए PYQ",
     ] + ([f"📲 Free test / notes: WhatsApp {WHATSAPP_NUMBER}"] if WHATSAPP_NUMBER else []) + [
         "",
-        HASHTAGS if data["subject"] in SCIENCE_SUBJ else HASHTAGS.replace("#sciencepyq", "#gkpyq"),
+        f"#gkquiz #rrbntpc #sscgd #gkpyq {SUBJ_TAGS.get(sub, '#gk')}",
     ]
     return "\n".join(lines)
 
 
 # ============================== INSTAGRAM ==============================
 
-def _upload_once(video_file, caption):
+def _upload_once(video_file, caption, thumb_ms=0):
     """Ek koshish: container -> (10s ruko) -> rupload -> FINISHED -> publish."""
     r = requests.post(f"{GRAPH}{IG_USER_ID}/media",
                       data={"media_type": "REELS", "upload_type": "resumable", "caption": caption,
-                            "thumb_offset": "0",
+                            "thumb_offset": str(int(thumb_ms)),      # cover = ant wala poster frame
+                            "share_to_feed": "true",
                             "access_token": IG_ACCESS_TOKEN}, timeout=60).json()
     cid = r.get("id")
     if not cid:
@@ -3036,7 +3035,7 @@ def _upload_once(video_file, caption):
     return pub["id"]
 
 
-def post_reel(video_file, caption):
+def post_reel(video_file, caption, thumb_ms=0):
     """Poori upload 3 baar tak (har baar naya container). Fail = exception (progress aage nahi badhta)."""
     if not IG_ACCESS_TOKEN or not IG_USER_ID:
         print("IG secrets nahi - post skip (reel bani hai).")
@@ -3044,7 +3043,7 @@ def post_reel(video_file, caption):
     last = None
     for attempt in range(3):
         try:
-            pid = _upload_once(video_file, caption)
+            pid = _upload_once(video_file, caption, thumb_ms)
             print("INSTAGRAM PE POST HO GAYA:", pid)
             return pid
         except Exception as exc:
@@ -3250,7 +3249,7 @@ def pick_question(bank, st, seq=None):
     out = []
     for k in range(n):
         q = by_seq.get(((start - 1 + k) % n) + 1)
-        if q and q["id"] not in done:
+        if q and q["id"] not in done and reel_friendly(q):
             out.append(q)
         if len(out) >= MAX_TRIES_PER_RUN + 1:
             break
@@ -3299,7 +3298,8 @@ def main():
     if args.preview:
         build_reel(data, out, preview_dir="preview")
         return
-    build_reel(data, out)
+    total = build_reel(data, out)
+    thumb_ms = int((total - POSTER_TAIL / 2) * 1000)       # poster (cover) ant me hai
     try:
         make_thumbnail(data).save(os.path.join(OUTPUT_DIR, "thumbnail.jpg"), quality=92)
     except Exception as exc:
@@ -3310,14 +3310,14 @@ def main():
     if args.seq:
         print("--seq mode: progress nahi badla.")
         if not args.no_post:
-            post_reel(out, caption)
+            post_reel(out, caption, thumb_ms)
         return
     if args.no_post or DRY_RUN:
         save_progress(st)
         return
     if POST_MODE == "manual":
         save_ready(out, caption, ep)
-    elif not post_reel(out, caption):
+    elif not post_reel(out, caption, thumb_ms):
         save_progress(st)
         return
     st["posted"].append(chosen["id"])

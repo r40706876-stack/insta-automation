@@ -1,14 +1,12 @@
-name: Science PYQ Reel (din me 6 baar)
+name: Science PYQ Reel (din me 3 baar)
 
 on:
   schedule:
     # GitHub UTC time maanta hai (India = UTC + 5:30). India ka samay:
+    # Naya account: din me 6 ek-jaisi reel = spam jaisa signal. Pehle 3 (jab reel 500+ views pakde tab badhao).
     - cron: "30 1 * * *"     # subah 7:00
-    - cron: "30 4 * * *"     # subah 10:00
     - cron: "30 7 * * *"     # dopahar 1:00
-    - cron: "30 10 * * *"    # shaam 4:00
     - cron: "0 13 * * *"     # shaam 6:30
-    - cron: "30 15 * * *"    # raat 9:00
   workflow_dispatch:
 
 permissions:
