@@ -702,6 +702,8 @@ Tasks - return ONLY JSON:
  "speak_answer": "...",       // the correct option text as spoken Hindi (same rule)
  "why": "...",                // ONE simple Hindi line (max 18 words): the reason / fact why the key is correct. No book/coaching names.
  "level": "easy|medium|hard", // how hard this is for an average RRB Group D aspirant
+ "visual_options": true/false, // true ONLY if all 4 options are concrete things (plants, animals, objects, foods, places, body parts) that a picture can show without any text; false for numbers, years, laws/articles, people, abstract terms
+ "img_options": {"a":"..","b":"..","c":"..","d":".."}, // if visual_options: ENGLISH prompt (max 15 words) for a simple clear picture of that option alone
  "trap": "...",               // Hindi, max 16 words: which WRONG option looks tempting and why it is wrong (e.g. '(C) तिल भी फसल है, पर फलीदार नहीं')
  "tip": "...",                // Hindi memory trick / exam tip, max 8 words (can be a short formula like 'दाब = बल / क्षेत्रफल')
  "topic": "...",              // 1-3 word Hindi topic name (e.g. 'प्रकाश का अपवर्तन')
@@ -801,7 +803,7 @@ def ai_enrich(q):
             print("  AI wajah kharab -> agla provider")
             continue
         # har hissa alag jaancho: sankhya/lambai badli to us hisse ke liye book ka text
-        out = {k: js.get(k) for k in ("why", "tip", "topic", "en_question", "en_why", "en_tip", "img_hook", "img_why", "level", "trap")}
+        out = {k: js.get(k) for k in ("why", "tip", "topic", "en_question", "en_why", "en_tip", "img_hook", "img_why", "level", "trap", "visual_options", "img_options")}
         out["hook"] = ""
         hk = clean_text(out.get("hook") or "")
         ans_core = clean_text(q["options"][q["answer"]])
@@ -3448,6 +3450,10 @@ def fetch_toppers(st):
 # ---------- LOOP SAWAL (8s, jawab reel me nahi -> pehle comment me) ----------
 
 def loop_hook(data):
+    return exam_hook(data)
+
+
+def _old_loop_hook(data):
     if data.get("today_exam"):
         y = years_ago(data["today_exam"])
         return f"{y} साल पहले आज ही पूछा गया!" if y > 0 else "आज ही के दिन पूछा गया!"
@@ -3535,65 +3541,330 @@ def poster_band(text):
     return band
 
 
+# ---------- MinuteMe MASCOT (stopwatch character) + PEN ----------
+
+def lerp(a, b, k):
+    return a + (b - a) * k
+
+
+def mascot(size, look=(0.0, 0.0), mood="think", sweat=0.0, pose="chin", frac=0.0, blink=False, bob=0.0):
+    S = size * 2
+    im = Image.new("RGBA", (S, int(S * 1.25)), (0, 0, 0, 0))
+    d = ImageDraw.Draw(im)
+    cx, cy, r = S / 2, S * 0.55 + bob, S * 0.36
+    ink = (40, 26, 10, 255)
+    lw = max(3, S // 60)
+    # legs + shoes
+    for sx in (-1, 1):
+        x = cx + sx * r * 0.38
+        d.line((x, cy + r * 0.85, x + sx * 6, cy + r * 1.28), fill=ink, width=lw * 2)
+        d.ellipse((x + sx * 6 - S * 0.07, cy + r * 1.22, x + sx * 6 + S * 0.07, cy + r * 1.38), fill=(220, 40, 50, 255),
+                  outline=ink, width=lw)
+    # crown + side button
+    d.rounded_rectangle((cx - S * 0.07, cy - r - S * 0.11, cx + S * 0.07, cy - r + S * 0.02), radius=S // 50,
+                        fill=(250, 204, 21, 255), outline=ink, width=lw)
+    d.rounded_rectangle((cx - S * 0.12, cy - r - S * 0.15, cx + S * 0.12, cy - r - S * 0.09), radius=S // 60,
+                        fill=(250, 204, 21, 255), outline=ink, width=lw)
+    # body
+    d.ellipse((cx - r - S * 0.035, cy - r - S * 0.035, cx + r + S * 0.035, cy + r + S * 0.035),
+              fill=(250, 204, 21, 255), outline=ink, width=lw)
+    d.ellipse((cx - r, cy - r, cx + r, cy + r), fill=(255, 246, 214, 255), outline=ink, width=lw)
+    for k in range(12):
+        a = math.radians(k * 30)
+        d.line((cx + math.cos(a) * r * 0.92, cy + math.sin(a) * r * 0.92, cx + math.cos(a) * r * 0.82,
+                cy + math.sin(a) * r * 0.82), fill=(150, 140, 120, 255), width=lw)
+    # chalti laal 'sui' kinare par (8s me ek chakkar)
+    a = math.radians(-90 + 360 * frac)
+    sw = Image.new("RGBA", im.size, (0, 0, 0, 0))
+    ImageDraw.Draw(sw).pieslice((cx - r * 0.98, cy - r * 0.98, cx + r * 0.98, cy + r * 0.98), -90, -90 + 360 * frac,
+                                fill=(255, 140, 140, 55))
+    im.alpha_composite(sw)
+    d = ImageDraw.Draw(im)
+    px, py = cx + math.cos(a) * r * 0.87, cy + math.sin(a) * r * 0.87
+    d.ellipse((px - S * 0.03, py - S * 0.03, px + S * 0.03, py + S * 0.03), fill=(220, 30, 40, 255))
+    # gaal
+    for sx in (-1, 1):
+        d.ellipse((cx + sx * r * 0.55 - S * 0.06, cy + r * 0.12, cx + sx * r * 0.55 + S * 0.06, cy + r * 0.28),
+                  fill=(255, 150, 150, 150))
+    # aankhen
+    ex, ey, erx, ery = r * 0.32, cy - r * 0.12, S * 0.085, S * 0.105
+    for sx in (-1, 1):
+        x = cx + sx * ex
+        if blink:
+            d.line((x - erx, ey, x + erx, ey), fill=ink, width=lw * 2)
+        else:
+            d.ellipse((x - erx, ey - ery, x + erx, ey + ery), fill=(255, 255, 255, 255), outline=ink, width=lw)
+            px_, py_ = x + look[0] * erx * 0.45, ey + look[1] * ery * 0.45
+            d.ellipse((px_ - erx * 0.48, py_ - erx * 0.48, px_ + erx * 0.48, py_ + erx * 0.48), fill=(20, 20, 30, 255))
+            d.ellipse((px_ - erx * 0.2, py_ - erx * 0.32, px_, py_ - erx * 0.12), fill=(255, 255, 255, 255))
+        # bhaunh
+        tilt = {"think": (0.0, 0.35), "worried": (0.45, -0.1), "shock": (0.0, -0.1), "happy": (0.0, 0.0)}[mood]
+        y0 = ey - ery - S * 0.05
+        d.line((x - erx, y0 + sx * tilt[0] * S * 0.05 * (-1) + (S * 0.03 if sx < 0 else 0) * tilt[1],
+                x + erx, y0 + sx * tilt[0] * S * 0.05 + (S * 0.03 if sx > 0 else 0) * tilt[1]), fill=ink, width=lw * 2)
+    # muh
+    my = cy + r * 0.40
+    if mood == "think":
+        d.line((cx - S * 0.05, my, cx + S * 0.04, my - S * 0.015), fill=ink, width=lw * 2)
+    elif mood == "worried":
+        pts = [(cx - S * 0.08 + i * S * 0.02, my + (S * 0.012 if i % 2 else -S * 0.012)) for i in range(9)]
+        d.line(pts, fill=ink, width=lw * 2)
+    elif mood == "shock":
+        d.ellipse((cx - S * 0.045, my - S * 0.05, cx + S * 0.045, my + S * 0.05), fill=(120, 20, 25, 255), outline=ink,
+                  width=lw)
+    else:
+        d.arc((cx - S * 0.09, my - S * 0.07, cx + S * 0.09, my + S * 0.05), 20, 160, fill=ink, width=lw * 2)
+    # haath
+    glove = (255, 255, 255, 255)
+    # baaya haath: kamar par
+    lx0, ly0 = cx - r * 0.95, cy + r * 0.1
+    d.line((lx0, ly0, lx0 - S * 0.08, ly0 + S * 0.12), fill=ink, width=lw * 2)
+    d.ellipse((lx0 - S * 0.13, ly0 + S * 0.08, lx0 - S * 0.03, ly0 + S * 0.18), fill=glove, outline=ink, width=lw)
+    rx0, ry0 = cx + r * 0.95, cy + r * 0.05
+    if pose == "chin":                         # thodi par haath (soch)
+        hx, hy = cx + r * 0.25, cy + r * 0.62
+        d.line((rx0, ry0, rx0 + S * 0.05, ry0 + S * 0.22), fill=ink, width=lw * 2)
+        d.line((rx0 + S * 0.05, ry0 + S * 0.22, hx + S * 0.04, hy + S * 0.02), fill=ink, width=lw * 2)
+        d.ellipse((hx - S * 0.06, hy - S * 0.05, hx + S * 0.06, hy + S * 0.07), fill=glove, outline=ink, width=lw)
+    else:                                      # neeche ishaara (comment ki taraf)
+        hx, hy = rx0 + S * 0.10, ry0 + S * 0.30
+        d.line((rx0, ry0, hx, hy), fill=ink, width=lw * 2)
+        d.ellipse((hx - S * 0.06, hy - S * 0.06, hx + S * 0.06, hy + S * 0.06), fill=glove, outline=ink, width=lw)
+        d.line((hx, hy + S * 0.04, hx + S * 0.01, hy + S * 0.13), fill=ink, width=lw * 2)
+    # pasina
+    if sweat > 0.02:
+        sx_, sy_ = cx + r * 0.78, cy - r * 0.55 + sweat * S * 0.12
+        a_ = int(255 * min(1, sweat * 2))
+        d.polygon([(sx_, sy_ - S * 0.06), (sx_ - S * 0.035, sy_ + S * 0.01), (sx_ + S * 0.035, sy_ + S * 0.01)],
+                  fill=(80, 170, 255, a_))
+        d.ellipse((sx_ - S * 0.035, sy_ - S * 0.02, sx_ + S * 0.035, sy_ + S * 0.05), fill=(80, 170, 255, a_))
+    return im.resize((size, int(size * 1.25)), Image.LANCZOS)
+
+
+@lru_cache(maxsize=2)
+def pen_sprite(size=120):
+    im = Image.new("RGBA", (size, size), (0, 0, 0, 0))
+    d = ImageDraw.Draw(im)
+    d.polygon([(10, size - 10), (26, size - 44), (44, size - 26)], fill=(240, 220, 180, 255), outline=(60, 40, 20, 255))
+    d.polygon([(10, size - 10), (16, size - 24), (24, size - 16)], fill=(200, 30, 40, 255))
+    d.polygon([(26, size - 44), (44, size - 26), (size - 8, 30), (size - 30, 8)], fill=(220, 40, 50, 255),
+              outline=(90, 10, 20, 255))
+    return im
+
+
+# ---------- HEADLINE: "aane wale exam me aa sakta hai" (user ki manzoor ki hui lines) ----------
+AUD_SHORT = ["NTPC", "SSC GD", "Police भर्ती", "Patwari", "Agniveer", "State PSC"]   # AUDIENCES ke kram me
+
+
+def upcoming_year():
+    ist = time.gmtime(time.time() + 19800)
+    return ist.tm_year if ist.tm_mon < 7 else ist.tm_year + 1
+
+
+def exam_hook(data):
+    n, ep = data["times_asked"], data["episode"]
+    if n >= 2:
+        return [f"{n} बार आ चुका - फिर आ सकता है!", "बार-बार पूछा जाने वाला सवाल!",
+                "Repeat सवाल - इस बार मत छोड़ना!"][ep % 3]
+    aud = AUD_SHORT[ep % len(AUD_SHORT)]
+    pool = [f"{aud} {upcoming_year()} में आ सकता है!", f"{aud} की तैयारी है? ये ज़रूर देखो!",
+            "Exam से पहले ये ज़रूर देखो!", "ये गलत किया तो नंबर कटेंगे!", "Selection वाले इसे नहीं छोड़ते!",
+            "10 सेकंड दो - 1 नंबर पक्का!", "अगले Exam का Important सवाल!"]
+    return pool[ep % len(pool)]
+
+
+# ---------- chitron wale options (Cloudflare) ----------
+OPT_TW, OPT_TH, OPT_IMG_H = 495, 292, 188
+
+
+def make_option_images(q, ai):
+    """AI kahe 'chaaron options chitra me dikh sakte hain' to har option ka chitra. Ek bhi fail -> {} (lambi rows)."""
+    ai = ai or {}
+    prm = ai.get("img_options") or {}
+    if not ai.get("visual_options") or not all(isinstance(prm.get(k), str) and prm[k].strip() for k in "abcd"):
+        return {}
+    import io
+    os.makedirs(IMG_DIR, exist_ok=True)
+    out = {}
+    for k in "abcd":
+        path = os.path.join(IMG_DIR, f"{q['id']}_opt_{k}.jpg")
+        if not os.path.exists(path):
+            b = cf_image(f"{prm[k]}. single subject in the center, simple soft plain background. {IMG_STYLE}")
+            if not b:
+                print("  option chitra nahi bana -> lambi rows")
+                return {}
+            try:
+                Image.open(io.BytesIO(b)).convert("RGB").save(path, quality=90)
+            except Exception:
+                return {}
+        out[k.upper()] = path
+    print("  Option chitra bane: 4")
+    return out
+
+
+@lru_cache(maxsize=16)
+def pic_tile(L, txt, path, active):
+    TW, TH, IH = OPT_TW, OPT_TH, OPT_IMG_H
+    im = Image.new("RGBA", (TW + 30, TH + 30), (0, 0, 0, 0))
+    d = ImageDraw.Draw(im)
+    d.rounded_rectangle((15, 15, 15 + TW, 15 + TH), radius=28, fill=(16, 28, 58, 245),
+                        outline=(YELLOW if active else (110, 140, 200)) + (255,), width=7 if active else 4)
+    src = _img_src(path)
+    if src is not None:
+        w, h = TW - 24, IH
+        sc = max(w / src.width, h / src.height)
+        cw, ch = w / sc, h / sc
+        crop = src.crop((int((src.width - cw) / 2), int((src.height - ch) / 2), int((src.width + cw) / 2),
+                         int((src.height + ch) / 2))).resize((w, h), Image.LANCZOS)
+        im.paste(crop, (27, 27), _round_mask(w, h, 22))
+    r = 30
+    d.ellipse((30, 30, 30 + 2 * r, 30 + 2 * r), fill=YELLOW + (255,), outline=(40, 26, 10, 255), width=3)
+    d.text((30 + r, 30 + r + 2), L, font=get_font(38), fill=(20, 20, 30, 255), anchor="mm")
+    f, s_, ls = fit_lines(txt, TW - 40, 1, 52, 28)
+    d.text((15 + TW / 2, 27 + IH + (TH - IH - 12) / 2), " ".join(ls[0]) if ls else txt, font=f,
+           fill=(255, 255, 255, 255), anchor="mm")
+    return im
+
+
+def loop_layout2(data, limit=1420):
+    """Sawal card + options. Chaaron chitra hon aur jagah ho -> 2x2 chitra-dabbe, warna lambi rows."""
+    q = data["question"]
+    top = 600
+    if data.get("opt_imgs") and len(data["opt_imgs"]) == 4:
+        grid = 2 * OPT_TH + 22
+        for qs in (64, 58, 52, 48, 44):
+            fq, sq, ql = fit_lines(q, 920, 3, qs, qs)
+            if len(ql) > 3:
+                continue
+            lh = int(sq * 1.26)
+            qh = lh * len(ql) + 64
+            g0 = top + qh + 40
+            if g0 + grid <= limit:
+                xs = (W / 2 - OPT_TW / 2 - 12, W / 2 + OPT_TW / 2 + 12)
+                ys = (g0 + OPT_TH / 2, g0 + OPT_TH * 1.5 + 22)
+                boxes = [(xs[i % 2], ys[i // 2], OPT_TW, OPT_TH) for i in range(4)]
+                return {"mode": "pic", "fq": fq, "ql": ql, "lh": lh, "qh": qh, "q_top": top, "boxes": boxes}
+    n = len(data["options"])
+    for qs, os_, oh in ((68, 58, 140), (62, 54, 130), (56, 50, 122), (50, 46, 114), (46, 42, 106), (42, 38, 98)):
+        fq, sq, ql = fit_lines(q, 920, 4, qs, qs)
+        if len(ql) > 4:
+            continue
+        lh = int(sq * 1.28)
+        qh = lh * len(ql) + 64
+        o_top = top + qh + 34
+        if o_top + n * oh + (n - 1) * 20 <= limit:
+            break
+    boxes = [(W / 2, o_top + oh / 2 + i * (oh + 20), 1000, oh) for i in range(n)]
+    return {"mode": "rows", "fq": fq, "ql": ql, "lh": lh, "qh": qh, "q_top": top, "os": os_, "oh": oh,
+            "boxes": boxes}
+
+
+@lru_cache(maxsize=4)
+def head_band(text):
+    """Laal brush patti (mascot ke liye baayein jagah chhod ke), ank peele."""
+    band = brush_band(690, 140, (212, 30, 42), seed=3, tilt=1.2)
+    d = ImageDraw.Draw(band)
+    f, s_, ls = fit_lines(text, 640, 1, 66, 34)
+    if len(ls) > 1:
+        f, s_, ls = fit_lines(text, 640, 2, 46, 30)
+    lh = int(s_ * 1.12)
+    for j, words in enumerate(ls[:2]):
+        sp = text_w(" ", f)
+        lw = sum(text_w(w_, f) for w_ in words) + sp * (len(words) - 1)
+        x = band.width / 2 - lw / 2
+        cy = band.height / 2 + (j - (min(2, len(ls)) - 1) / 2) * lh
+        for w_ in words:
+            col = (255, 214, 10) if re.search(r"\d", w_) else WHITE
+            d.text((x, cy), w_, font=f, fill=col + (255,), anchor="lm", stroke_width=3, stroke_fill=(90, 0, 10, 255))
+            x += text_w(w_, f) + sp
+    return band
+
+
+def draw_pen(cv, box, pt, seg):
+    """Laal pen active option ke charon taraf ghera banata hai, fir '?'."""
+    x, y, bw, bh = box
+    k = clamp((pt - 0.08 * seg) / (0.45 * seg))
+    if k <= 0:
+        return
+    lay = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+    ld = ImageDraw.Draw(lay)
+    rx, ry = bw / 2 + 18, bh / 2 + 18
+    pts = [(x + math.cos(math.radians(-100 + 380 * j / 80)) * rx * (1 + 0.02 * math.sin(j)),
+            y + math.sin(math.radians(-100 + 380 * j / 80)) * ry) for j in range(int(80 * k) + 1)]
+    if len(pts) > 1:
+        ld.line(pts, fill=(230, 30, 45, 235), width=9, joint="curve")
+    cv.paste(lay, (0, 0), lay)
+    if k < 1:
+        place(cv, pen_sprite(), pts[-1][0] + 45, pts[-1][1] - 45)
+    elif pt > 0.6 * seg:
+        place(cv, pill_sprite("?", 46, WHITE, RED, WHITE), x + bw / 2 - 10, y - bh / 2 + 10,
+              scale=min(1.0, (pt - 0.6 * seg) / (0.08 * seg)))
+
+
 def render_loop_frame(data, lay, t):
     dur = data.get("_dur", LOOP_DUR)
+    rel = t / dur
+    act = int(rel * 4) % 4
     cv = _loop_bg(data.get("img_hook")).copy()
     d = ImageDraw.Draw(cv)
-    # 1) asli paper ka naam (bharosa: "SSC CHSL 15/10/2020" jaisa)
-    src = data.get("exam_raw") or (data["exams"][0] if data.get("exams") else "RRB Group-D")
-    place(cv, pill_sprite("पूछा गया:  " + src, 34, (30, 18, 0), YELLOW, ORANGE), W / 2, 255)
-    # 2) hook headline (halki saans: 2s periodic -> loop me jhatka nahi)
-    hs = poster_band(data.get("_hook") or loop_hook(data))
-    place(cv, hs, W / 2 + 80, 390, scale=1 + 0.015 * math.sin(2 * math.pi * t / 2.0))
-    place(cv, shock_emoji(190), 125, 385, angle=6 * math.sin(2 * math.pi * t / 2.0))
-    # 3) sawal: safed kaagaz card
-    qt, qh = lay["q_top"], lay["qh"]
-    place(cv, card_sprite(1000, qh, PAPER, (255, 255, 255), 3, 30), W / 2, qt + qh / 2)
-    keys = set(q_highlights(data["question"]))
-    y0 = qt + 35 + lay["lh"] / 2
-    for k, ln in enumerate(lay["ql"]):
-        _ink_words(d, ln, W / 2, y0 + k * lay["lh"], lay["fq"], INK, PEN_RED, keys)
-    # 4) options: peeli roshni A->B->C->D, har 2s (8s me poora chakkar = seamless loop)
-    act = int(t / (dur / 4)) % 4
-    y = lay["o_top"]
-    for i, (L, txt) in enumerate(data["options"]):
-        row = _opt_row(L, txt, i == act, 1000, lay["oh"], lay["os"])
-        place(cv, row, W / 2, y + lay["oh"] / 2)
-        y += lay["oh"] + 22
-    # 5) pehchan ke thappe: repeat (bank ka asli data) + level (AI)
-    n = data["times_asked"]
-    if n >= 2:
-        place(cv, repeat_stamp(n), 175, qt - 34, angle=-6)
-    lv = {"hard": ("LEVEL: कठिन", RED), "medium": ("LEVEL: मध्यम", ORANGE)}.get(data.get("level", ""))
-    if lv:
-        place(cv, pill_sprite(lv[0], 28, WHITE, lv[1], WHITE), W / 2 + (90 if n >= 2 else 0), qt - 6)
-    place(cv, pill_sprite("?", 56, WHITE, RED, WHITE), W - 120, qt - 18,
-          scale=1 + 0.08 * math.sin(2 * math.pi * t / 1.0), angle=8)
-    # 6) kal ke toppers (comment karne ki aadat: naam screen pe aata hai)
-    if data.get("toppers"):
-        tp = "कल सही बताने वाले:  " + "   ".join("@" + u for u in data["toppers"])
-        place(cv, pill_sprite(tp, 30, WHITE, (14, 90, 50), GREEN), W / 2, 1418)
-    # 7) CTA: '8 सेकंड' (reel ki lambai = stopwatch ka ek chakkar) + baari-baari share / jawab
-    cta = data.get("_cta") or "8 सेकंड में बताओ:  A / B / C / D ?"
-    if t >= dur / 2:                                        # aadhe ke baad: share
-        cta = data.get("_sub") or "उस दोस्त को भेजो जो ये गलत करेगा"
-    place(cv, pill_sprite(cta, 40, (30, 20, 0), YELLOW, ORANGE), W / 2, 1490,
-          scale=1 + 0.03 * math.sin(2 * math.pi * t / 1.0))
-    # BADE AKSHAR: jawab kahan hai (kisi ko dhoondhna na pade)
-    place(cv, answer_banner(data.get("_ans_text") or "सही जवाब कमेंट में है"), W / 2, 1592,
-          scale=1 + 0.025 * math.sin(2 * math.pi * t / 1.0))
-    # 8) header: chalti stopwatch (8s me ek chakkar = loop seamless) + naam + tagline
+    # header: chalti stopwatch + naam + tagline | subject + audience
     place(cv, stopwatch_sprite(84, int(t * 15) % int(dur * 15) / (dur * 15)), 92, 150)
     wm = brand_wordmark(34)
     place(cv, wm, 150 + wm.width / 2, 136)
-    ImageDraw.Draw(cv).text((150, 172), BRAND_TAGLINE, font=get_font(24), fill=(255, 225, 120), anchor="lm")
-    # daayein: is reel ki audience (har reel alag exam -> GS ki poori audience cover)
+    d.text((150, 172), BRAND_TAGLINE, font=get_font(24), fill=(255, 225, 120), anchor="lm")
     aud = (data.get("audience") or AUDIENCES[0])[0]
     lab, col = SUBJECT_STYLE.get(data["subject"], ("GK", CYAN))
     c1 = pill_sprite(lab.split("•")[0].strip() + " PYQ", 24, col, (14, 26, 44), col)
     c2 = pill_sprite(aud + " के लिए भी", 24, WHITE, (120, 30, 60), (255, 150, 170))
     place(cv, c1, W - 70 - c1.width / 2, 128)
     place(cv, c2, W - 70 - c2.width / 2, 172)
+    # asli paper (bharosa)
+    src = data.get("exam_raw") or (data["exams"][0] if data.get("exams") else "RRB Group-D")
+    place(cv, pill_sprite("पूछा गया:  " + src, 32, (30, 18, 0), YELLOW, ORANGE), W / 2 + 120, 262)
+    # headline patti + MASCOT
+    place(cv, head_band(data.get("_hook") or exam_hook(data)), W / 2 + 150, 410,
+          scale=1 + 0.015 * math.sin(2 * math.pi * t / 2.0))
+    if lay["mode"] == "pic":
+        look = [(-0.9, 0.9), (0.9, 0.9), (-0.9, 1.0), (0.9, 1.0)][act]
+    else:
+        look = (0.7, 0.2 + 0.25 * act)
+    mood = "think" if rel < 0.5 else ("worried" if rel < 0.75 else "shock")
+    m = mascot(270, look, mood, clamp((rel - 0.5) / 0.15) if rel >= 0.5 else 0.0,
+               "point" if rel >= 0.75 else "chin", rel, (0.17 < rel < 0.185) or (0.63 < rel < 0.645),
+               6 * math.sin(2 * math.pi * t / 1.0))
+    place(cv, m, 150, 400)
+    # sawal card + thappe
+    qt, qh = lay["q_top"], lay["qh"]
+    place(cv, card_sprite(1000, qh, PAPER, (255, 255, 255), 3, 30), W / 2, qt + qh / 2)
+    keys = set(q_highlights(data["question"]))
+    for k, ln in enumerate(lay["ql"]):
+        _ink_words(d, ln, W / 2, qt + 32 + lay["lh"] / 2 + k * lay["lh"], lay["fq"], INK, PEN_RED, keys)
+    lv = {"hard": ("LEVEL: कठिन", RED), "medium": ("LEVEL: मध्यम", ORANGE)}.get(data.get("level", ""))
+    if lv:
+        place(cv, pill_sprite(lv[0], 28, WHITE, lv[1], WHITE), W / 2 + 20, qt - 6)
+    if data["times_asked"] >= 2:
+        place(cv, repeat_stamp(data["times_asked"]), W - 200, qt - 30, angle=5)
+    # options (chitra-dabbe ya rows), active pe peeli roshni
+    for i, (L, txt) in enumerate(data["options"]):
+        bx, by, bw, bh = lay["boxes"][i]
+        if lay["mode"] == "pic":
+            place(cv, pic_tile(L, txt, data["opt_imgs"][L], i == act), bx, by, scale=1.03 if i == act else 1.0)
+        else:
+            place(cv, _opt_row(L, txt, i == act, 1000, lay["oh"], lay["os"]), bx, by)
+    draw_pen(cv, lay["boxes"][act], t - act * dur / 4, dur / 4)
+    # toppers
+    if data.get("toppers"):
+        tp = "कल सही बताने वाले:  " + "   ".join("@" + u for u in data["toppers"])
+        place(cv, pill_sprite(tp, 30, WHITE, (14, 90, 50), GREEN), W / 2, 1418)
+    # CTA + jawab ka bada patta (mascot ishaara kare tab tez dhadkan)
+    cta = data.get("_cta") or "8 सेकंड में बताओ:  A / B / C / D ?"
+    if rel >= 0.5:
+        cta = data.get("_sub") or "उस दोस्त को भेजो जो ये गलत करेगा"
+    place(cv, pill_sprite(cta, 40, (30, 20, 0), YELLOW, ORANGE), W / 2, 1490,
+          scale=1 + 0.03 * math.sin(2 * math.pi * t / 1.0))
+    fast = rel >= 0.75
+    place(cv, answer_banner(data.get("_ans_text") or "सही जवाब कमेंट में है"), W / 2, 1592,
+          scale=1 + (0.06 if fast else 0.025) * math.sin(2 * math.pi * t / (0.5 if fast else 1.0)))
     return cv
 
 
@@ -3615,7 +3886,7 @@ def answer_banner(text):
 
 def build_loop_reel(data, out):
     resolve_font()
-    lay = loop_layout(data, 1345 if data.get("toppers") else 1420)
+    lay = loop_layout2(data, 1345 if data.get("toppers") else 1420)
     n = int(LOOP_DUR * FPS)
     music = beat_music(LOOP_DUR, seed=data["episode"]) * 0.85
     # AWAAZ KI PEHCHAN: shuru me stopwatch 'tick-tick-DING' + har second halki tick (MinuteMe = ghadi)
@@ -3624,6 +3895,9 @@ def build_loop_reel(data, out):
     add_at(music, sfx_ding(0.42), 0.30)
     for k in range(1, int(LOOP_DUR)):
         add_at(music, sfx_tick(0.22), float(k))
+    for ph in range(4):                                     # pen ki 'scribble'
+        add_at(music, sfx_whoosh(0.5, 0.12), ph * LOOP_DUR / 4 + 0.15)
+    add_at(music, sfx_pop(0.4), LOOP_DUR * 0.75)            # mascot chaunka
     music = np.clip(music, -0.98, 0.98)
     step = max(1, FPS // 15)                      # 15 alag frame/sec kaafi (halki halchal)
     encode_frames(lambda fi: render_loop_frame(data, lay, fi / FPS), n, music, out, key=lambda fi: fi // step)
@@ -3863,7 +4137,9 @@ def pick_triple(bank, st, ep):
         if ai and ai.get("reject"):
             st["skipped"][q["id"]] = ai["reject"]
             continue
-        chosen.append(prepare_data(q, ai, ep, None, {}))
+        d_ = prepare_data(q, ai, ep, None, {})
+        d_["opt_imgs"] = make_option_images(q, ai)
+        chosen.append(d_)
         subs.add(q["subject"])
         if len(chosen) >= TRI_N:
             break
@@ -3881,7 +4157,7 @@ def build_triple_reel(datas, out):
         d_["_sub"] = "दोस्त को भेजो: देखें उसके कितने सही होते हैं"
         d_["_ans_text"] = "तीनों के जवाब कमेंट में हैं"
         d_["toppers"] = []
-        lays.append(loop_layout(d_, 1420))
+        lays.append(loop_layout2(d_, 1420))
     music = beat_music(TRI_DUR, seed=datas[0]["episode"]) * 0.85
     add_at(music, sfx_tick(0.55), 0.0)
     add_at(music, sfx_tick(0.55), 0.14)
@@ -4037,6 +4313,7 @@ def main():
         build_reel(data, out, preview_dir="preview")
         return
     if fmt == "loop":
+        data["opt_imgs"] = make_option_images(chosen, ai)
         if not args.seq:
             data["toppers"] = fetch_toppers(st)
         build_loop_reel(data, out)
