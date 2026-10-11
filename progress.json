@@ -1,6 +1,6 @@
 {
  "next_seq": 194,
- "episode": 79,
+ "episode": 80,
  "posted": [
   "684d76bcbc",
   "6bb20b4a07",
@@ -128,8 +128,8 @@
  "last": {
   "seq": 95,
   "id": "f89e35185d",
-  "time": "2026-10-11 01:50",
-  "format": "triple"
+  "time": "2026-10-11 07:40",
+  "format": "list"
  },
  "carousel_queue": [],
  "carousel_count": 23,
