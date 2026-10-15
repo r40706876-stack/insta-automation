@@ -4015,10 +4015,15 @@ def render_list_frame(subject, items):
     d = ImageDraw.Draw(cv)
     d.text((W / 2, 245), list_title(subject), font=get_font(84), fill=PEN_BLUE, anchor="mm")
     d.line((200, 300, W - 200, 300), fill=PEN_BLUE, width=5)
-    sub = {"TODAY": f"आज की तारीख ({today_dm()[0]}) के पुराने RRB पेपर  •  SAVE करो",
-           "WEEK": "हफ्ते भर में पूछे गए - कितने याद हैं?  •  SAVE करो"}.get(subject, "RRB / SSC में पूछे गए  •  SAVE करो")
-    d.text((W / 2, 345), sub, font=get_font(36), fill=PEN_RED, anchor="mm")
-    top, bottom = 405, 1580
+    sub = {"TODAY": f"आज की तारीख ({today_dm()[0]}) के पुराने पेपर  •  SAVE करो",
+           "WEEK": "हफ्ते भर में पूछे गए - कितने याद हैं?  •  SAVE करो"}.get(subject, "पिछले पेपरों में पूछे गए  •  SAVE करो")
+    d.text((W / 2, 335), sub, font=get_font(34), fill=PEN_RED, anchor="mm")
+    ex = "RRB • SSC • Police • Patwari • Army • State Exams"
+    fe = next(get_font(z) for z in (32, 30, 28, 26, 24) if text_w(ex, get_font(z)) + 40 <= W - 260)
+    we = text_w(ex, fe) + 40
+    d.rounded_rectangle((W / 2 - we / 2, 357, W / 2 + we / 2, 397), radius=20, fill=(18, 32, 72))
+    d.text((W / 2, 377), ex, font=fe, fill=(255, 225, 90), anchor="mm")
+    top, bottom = 420, 1580
     for size in (42, 40, 38, 36, 34, 32):                 # sab 7 aaram se fit (koi line upar na chadhe)
         blocks = []
         for k, it in enumerate(items):
@@ -4056,7 +4061,7 @@ def build_list_reel(subject, items, out):
 
 
 def list_caption(subject, items):
-    lines = [f"📚 {list_title(subject)} - RRB / SSC में पूछे गए (Save करो)", ""]
+    lines = [f"📚 {list_title(subject)} - RRB, SSC, Police, Patwari, Army, State Exams के लिए (Save करो)", ""]
     lines += [f"{k + 1}. {it['q']} → {it['a']}" for k, it in enumerate(items)]
     lines += ["", "💬 कितने पहले से आते थे? कमेंट करो: 7/7?",
               "📤 Save करो + उस दोस्त को भेजो जो exam की तैयारी कर रहा है।",
@@ -4178,6 +4183,19 @@ def _ans_sprite(text, size):
     return im
 
 
+@lru_cache(maxsize=64)
+def _count_sprite(n, frac_q):
+    """Bada laal countdown gola: number + ghatti hui ring."""
+    S = 170
+    im = Image.new("RGBA", (S, S), (0, 0, 0, 0))
+    d = ImageDraw.Draw(im)
+    d.ellipse((6, 6, S - 6, S - 6), fill=(200, 25, 40, 255), outline=(255, 225, 90, 255), width=8)
+    if frac_q < 20:
+        d.arc((18, 18, S - 18, S - 18), -90, -90 + 360 * (1 - frac_q / 20), fill=WHITE + (255,), width=7)
+    d.text((S / 2, S / 2 + 4), str(n), font=get_font(92), fill=WHITE + (255,), anchor="mm")
+    return im
+
+
 def render_quiz_frame(subject, key, t):
     items, lay = _QUIZ_CACHE[key]
     cv = _quiz_base(subject, key).copy()
@@ -4186,18 +4204,24 @@ def render_quiz_frame(subject, key, t):
     size = lay["size"] + 2
     if t < QUIZ_THINK:                                   # sochne ka samay: countdown + khaali jawab
         left = int(math.ceil(QUIZ_THINK - t))
-        sub = f"पहले खुद सोचो...  जवाब {left} सेकंड में"
-        d.text((W / 2, 350), sub, font=get_font(42), fill=PEN_RED, anchor="mm")
+        if QUIZ_THINK - t > 2.0:
+            sub, col = f"चैलेंज: {len(items)} में से कितने आते हैं?", PEN_RED
+        else:                                            # aakhri 2 sec: "aa rahe hain" chamakta hai
+            sub, col = "जवाब आ रहे हैं...  तैयार?", (PEN_RED if int(t * 6) % 2 else PEN_BLUE)
+        d.text((W / 2 - 60, 350), sub, font=get_font(44), fill=col, anchor="mm")
         frac = t / QUIZ_THINK
-        d.rounded_rectangle((200, 392, W - 270, 404), radius=6, fill=(235, 225, 225))
-        d.rounded_rectangle((200, 392, 200 + (W - 470) * (1 - frac), 404), radius=6, fill=PEN_RED)
-        sw = stopwatch_sprite(96, frac)
-        cv.paste(sw, (W - 150, 318), sw)
+        d.rounded_rectangle((150, 392, W - 230, 404), radius=6, fill=(235, 225, 225))
+        d.rounded_rectangle((150, 392, 150 + (W - 380) * (1 - frac), 404), radius=6, fill=PEN_RED)
+        within = t - math.floor(t)                       # har second number "pop" hota hai
+        sc = 0.75 + 0.25 * ease_out_back(clamp(within / 0.35))
+        cs = _count_sprite(left, int(within * 20))
+        cs = cs.resize((int(cs.width * sc), int(cs.height * sc)), Image.LANCZOS)
+        cv.paste(cs, (int(W - 120 - cs.width / 2), int(350 - cs.height / 2)), cs)
     else:
         if t < QUIZ_THINK + QUIZ_STEP * len(items) + 0.3:
             d.text((W / 2, 350), "अब मिलाओ - कितने सही?", font=get_font(44), fill=PEN_RED, anchor="mm")
         else:                                            # ant: score maango (comment)
-            msg = f"कितने सही?  कमेंट करो  __/{len(items)}"
+            msg = f"{len(items)}/{len(items)} = टॉपर!  तुम्हारे कितने?  कमेंट करो"
             fb = get_font(46)
             w = text_w(msg, fb) + 60
             d.rounded_rectangle((W / 2 - w / 2, 318, W / 2 + w / 2, 384), radius=14, fill=PEN_RED)
@@ -4207,7 +4231,9 @@ def render_quiz_frame(subject, key, t):
         x, y = lay["ax"], r["ay"]
         if t < t0:                                       # khaali line + laal ?
             d.line((x, y + size * 1.05, x + 260, y + size * 1.05), fill=(150, 160, 190), width=3)
-            d.text((x + 275, y), "?", font=fa, fill=PEN_RED, anchor="la")
+            pul = 1.0 + 0.18 * abs(math.sin(math.pi * (t * 2 + k * 0.3)))
+            d.text((x + 290, y + size * 0.6), "?", font=get_font(int(size * 1.15 * pul)), fill=PEN_RED,
+                   anchor="mm")
             continue
         sp = _ans_sprite(items[k]["a"], size)
         p = clamp((t - t0) / QUIZ_WRITE)
@@ -4226,6 +4252,9 @@ def build_quiz_reel(subject, items, out):
     music = beat_music(QUIZ_DUR, seed=len(items) + 3) * 0.8
     for k in range(int(QUIZ_THINK)):
         add_at(music, sfx_tick(0.5), float(k))
+        if k >= QUIZ_THINK - 3:
+            add_at(music, sfx_heartbeat(0.5), float(k))
+    add_at(music, sfx_riser(1.0, 0.22), QUIZ_THINK - 1.0)
     add_at(music, sfx_ding(0.5), QUIZ_THINK)
     for k in range(len(items)):
         add_at(music, sfx_pop(0.45), QUIZ_THINK + k * QUIZ_STEP)
@@ -4293,7 +4322,7 @@ def run_quiz(bank, st, ep, args):
 # Yahan dono: poora page padhna padta hai (loop/watch time) + galti ka number comment (engagement).
 # Sahi jawab pehle comment me (galat jaankari aage na jaaye).
 
-GALTI_DUR = 10.0
+GALTI_DUR = 4.0                     # bahut chhoti: galti dhoondhte-dhoondhte reel 3-4 baar loop
 GALTI_N = 6                         # kam sawal = bada font, jaldi padh ke galti pakad sake
 
 GALTI_PROMPT = """Ye Indian govt exam (RRB/SSC) ke PYQ hain, har ek: id | sawal | sahi jawab.
@@ -4403,7 +4432,7 @@ def _galti_base(key):
     w = text_w(msg, fb) + 64
     d.rounded_rectangle((W / 2 - w / 2, 305, W / 2 + w / 2, 382), radius=16, fill=PEN_RED)
     d.text((W / 2, 342), msg, font=fb, fill=WHITE, anchor="mm")
-    d.text((W / 2, 412), "आसान सवाल हैं - 10 सेकंड में गलती पकड़ो", font=get_font(36), fill=INK, anchor="mm")
+    d.text((W / 2, 412), "आसान सवाल हैं - फिर भी पकड़ पाओगे?", font=get_font(36), fill=INK, anchor="mm")
     lay = quiz_layout(items, top=485, bottom=1520, sizes=(52, 50, 48, 46, 44, 42, 40, 38, 36))
     fa = lay["fa"]
     for k, r in enumerate(lay["rows"]):
@@ -4444,7 +4473,7 @@ def render_galti_frame(key, t):
     u = 1 - abs(1 - 2 * ph)                               # 0 -> 1 -> 0
     k = int(round(u * (len(rows) - 1)))                  # sirf jawab ki line par rukta hai (sawal nahi dhakta)
     y = rows[k]["ay"] + lay["size"] * 0.6
-    x = 560 + 90 * math.sin(2 * math.pi * ph * 3)
+    x = 560 + 90 * math.sin(2 * math.pi * ph * 2)
     lens = _lens_sprite()
     cv.paste(lens, (int(x - 63), int(y - 63)), lens)
     d = ImageDraw.Draw(cv)                                # 10 sec ka timer (loop me phir bharta hai)
