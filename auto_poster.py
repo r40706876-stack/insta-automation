@@ -674,6 +674,8 @@ def load_progress():
 
 def save_progress(st):
     st["posted"] = st["posted"][-8000:]
+    if COMMENT_LOG:
+        st["comment_log"] = dict(COMMENT_LOG)
     with open(PROGRESS_FILE, "w", encoding="utf-8") as f:
         json.dump(st, f, ensure_ascii=False, indent=1)
 
@@ -3939,16 +3941,35 @@ def answer_comment(data):
     return "\n".join(lines)
 
 
+COMMENT_LOG = {}
+
+
 def post_comment(media_id, text):
-    """Reel pe pehla comment (jawab). Permission na ho to bas chhod do - reel post ho chuki hai."""
+    """Reel pe pehla comment (jawab). 4 koshish (reel taiyar hone me der lagti hai); nateeja progress.json me
+    'comment_log' me save (GitHub log na khule tab bhi wajah dikhe). Fail ho to bhi reel post ho chuki hai."""
     if not media_id or not IG_ACCESS_TOKEN:
-        return
-    try:
-        r = requests.post(f"{GRAPH}{media_id}/comments", data={"message": text, "access_token": IG_ACCESS_TOKEN},
-                          timeout=60).json()
-        print("  Jawab comment:", r.get("id") or r)
-    except Exception as exc:
-        print("  Jawab comment nahi gaya:", str(exc)[:150])
+        return None
+    last = None
+    for attempt in range(4):
+        time.sleep(15 if attempt == 0 else 25)
+        try:
+            r = requests.post(f"{GRAPH}{media_id}/comments", data={"message": text, "access_token": IG_ACCESS_TOKEN},
+                              timeout=60).json()
+        except Exception as exc:
+            r = {"error": {"message": str(exc)[:200]}}
+        last = r
+        if r.get("id"):
+            print("  Jawab comment ho gaya:", r["id"])
+            COMMENT_LOG.update({"media": media_id, "ok": True, "comment_id": r["id"], "tries": attempt + 1,
+                                "time": time.strftime("%Y-%m-%d %H:%M")})
+            return r["id"]
+        print(f"  Jawab comment koshish {attempt + 1} fail:", str(r)[:300])
+        err = (r.get("error") or {})
+        if err.get("code") in (10, 200, 190) or "permission" in str(err.get("message", "")).lower():
+            break                                   # permission/token ki dikkat: dobara koshish bekaar
+    COMMENT_LOG.update({"media": media_id, "ok": False, "error": str((last or {}).get("error") or last)[:400],
+                        "time": time.strftime("%Y-%m-%d %H:%M")})
+    return None
 
 
 # ---------- 7 PYQ LIST (10s, notebook page, sawal + jawab -> SAVE) ----------
@@ -3973,8 +3994,8 @@ def pick_list_items(bank, st):
     pending = [q for q in sorted(bank, key=lambda x: int(x["seq"])) if q["id"] not in done]
     if not pending:
         return None, []
-    today = [q for q in pending if list_ok(q) and today_exam(q)]
-    subject = "TODAY" if len(today) >= 5 else next((q["subject"] for q in pending if list_ok(q)), pending[0]["subject"])
+    today = []                                  # 'aaj ke din' wala title band: hamesha ek subject ("जीव विज्ञान के 7 PYQ")
+    subject = next((q["subject"] for q in pending if list_ok(q)), pending[0]["subject"])
     items = []
     for q in (today if subject == "TODAY" else pending):
         if subject != "TODAY" and (q["subject"] != subject or not list_ok(q)):
