@@ -3266,9 +3266,9 @@ PEN_RED = (200, 30, 40)
 
 
 def pick_format(ep):
-    if REEL_FORMAT in ("loop", "list", "classic", "triple", "quiz"):
+    if REEL_FORMAT in ("loop", "list", "classic", "triple", "quiz", "galti"):
         return REEL_FORMAT
-    return ("quiz", "list")[ep % 2]           # winner 7 PYQ list + naya quiz notebook, baari-baari
+    return ("quiz", "galti", "list")[ep % 3]  # din ki 3 reel: quiz notebook, topper ki copy (galti pakdo), 7 PYQ
 
 
 # ---------- HAR EXAM KI AUDIENCE: GS sab me aata hai -> har reel alag exam waalon ko bulaye ----------
@@ -4282,6 +4282,179 @@ def run_quiz(bank, st, ep, args):
     return True
 
 
+# ---------- GALTI PAKDO: "टॉपर की कॉपी" - 7 sawal-jawab, 1 jawab jaan-boojhkar galat ----------
+# vidIQ: viral = 1 static padhne layak page + music + 8-10s loop; jawab chhupa -> comment, 7 jawab -> save.
+# Yahan dono: poora page padhna padta hai (loop/watch time) + galti ka number comment (engagement).
+# Sahi jawab pehle comment me (galat jaankari aage na jaaye).
+
+GALTI_DUR = 10.0
+
+
+def _galti_wrong(q, ans):
+    """Asli sawal ke galat options me se ek chhota, saaf, bharosemand galat jawab."""
+    for k in ("a", "b", "c", "d"):
+        if k == q["answer"]:
+            continue
+        w = clean_text(str(q["options"].get(k, "")))
+        same = set(w.replace(",", " ").split()) & set(ans.replace(",", " ").split())
+        if same:                                   # '22 अप्रैल 1973' vs '01 अप्रैल 1973' jaisi baal ki khaal nahi
+            continue
+        if (w and w != ans and len(w.split()) <= LIST_MAX_A_WORDS
+                and not re.search(r"सभी|कोई नहीं|इनमें|उपर्युक्त|दोनों|[^ऀ-ॿ -~‐-‧]", w)):
+            return w
+    return None
+
+
+def pick_galti(bank, st, ep):
+    subject, items = pick_list_items(bank, st)
+    if len(items) < 5:
+        return subject, items, None
+    by_id = {q["id"]: q for q in bank}
+    order = list(range(1, len(items) - 1)) + [0, len(items) - 1]      # beech wala pehle (seedha na dikhe)
+    rot = ep % max(1, len(items) - 2)
+    order = order[rot:] + order[:rot]
+    for k in order:
+        w = _galti_wrong(by_id[items[k]["id"]], items[k]["a"])
+        if w:
+            items[k] = dict(items[k], wrong=w)
+            return subject, items, k
+    return subject, items, None
+
+
+def galti_title(subject):
+    if subject == "TODAY":
+        return "टॉपर की कॉपी - आज के PYQ"
+    hi = SUBJECT_STYLE.get(subject, ("GK",))[0].split("•")[-1].strip()
+    return f"टॉपर की कॉपी - {hi}"
+
+
+@lru_cache(maxsize=2)
+def _galti_base(key):
+    subject, items, bad = _GALTI_CACHE[key]
+    cv = _paper_bg().copy()
+    d = ImageDraw.Draw(cv)
+    f, sz, lines = fit_lines(galti_title(subject), 900, 1, 80, 56)
+    d.text((W / 2, 228), " ".join(lines[0]), font=f, fill=PEN_BLUE, anchor="mm")
+    d.line((170, 282, W - 170, 282), fill=PEN_BLUE, width=5)
+    msg = "इसमें 1 जवाब गलत है!"
+    fb = get_font(52)
+    w = text_w(msg, fb) + 64
+    d.rounded_rectangle((W / 2 - w / 2, 305, W / 2 + w / 2, 382), radius=16, fill=PEN_RED)
+    d.text((W / 2, 342), msg, font=fb, fill=WHITE, anchor="mm")
+    lay = quiz_layout(items, top=430, bottom=1525)
+    fa = lay["fa"]
+    for k, r in enumerate(lay["rows"]):
+        for j, ln in enumerate(r["lines"]):
+            d.text((140, r["y"] + j * r["lh"]), " ".join(ln), font=r["f"], fill=INK, anchor="la")
+        ans = items[k].get("wrong") or items[k]["a"]
+        d.text((175, r["ay"]), "Ans :  " + ans, font=fa, fill=PEN_BLUE, anchor="la")
+    d.text((W / 2, 1560), "पकड़ो कौन-सा?  नंबर कमेंट करो  (1-7)", font=get_font(44), fill=PEN_RED, anchor="mm")
+    sw = stopwatch_sprite(70, 0.0)
+    cv.paste(sw, (150, 1597), sw)
+    d.text((235, 1618), BRAND_HANDLE, font=get_font(36), fill=INK, anchor="lm")
+    d.text((235, 1660), BRAND_TAGLINE + "   •   दोस्त को चैलेंज करो", font=get_font(28), fill=PEN_RED,
+           anchor="lm")
+    return cv, lay
+
+
+_GALTI_CACHE = {}
+
+
+@lru_cache(maxsize=1)
+def _lens_sprite(size=150):
+    S = size
+    im = Image.new("RGBA", (S + 70, S + 70), (0, 0, 0, 0))
+    d = ImageDraw.Draw(im)
+    d.ellipse((6, 6, S, S), fill=(255, 240, 150, 55), outline=(40, 40, 50, 255), width=10)
+    d.line((S - 18, S - 18, S + 60, S + 60), fill=(90, 50, 20, 255), width=22)
+    d.line((S - 18, S - 18, S + 60, S + 60), fill=(140, 85, 35, 255), width=12)
+    return im
+
+
+def render_galti_frame(key, t):
+    base, lay = _galti_base(key)
+    cv = base.copy()
+    rows = lay["rows"]
+    # lens upar se neeche aur wapas (seamless loop): sab jawabon par ghoomta hai
+    ph = (t % GALTI_DUR) / GALTI_DUR
+    u = 1 - abs(1 - 2 * ph)                               # 0 -> 1 -> 0
+    pos = ease_in_out(u) * (len(rows) - 1)
+    k0 = int(pos)
+    k1 = min(len(rows) - 1, k0 + 1)
+    fr = pos - k0
+    y = rows[k0]["ay"] * (1 - fr) + rows[k1]["ay"] * fr
+    x = 520 + 160 * math.sin(2 * math.pi * ph * 2)
+    lens = _lens_sprite()
+    cv.paste(lens, (int(x - 75), int(y - 50)), lens)
+    return cv
+
+
+def build_galti_reel(subject, items, bad, out):
+    resolve_font()
+    key = "|".join(it["id"] for it in items)
+    _GALTI_CACHE[key] = (subject, items, bad)
+    music = beat_music(GALTI_DUR, seed=len(items) + 7) * 0.85
+    add_at(music, sfx_buzz(0.35), 0.05)
+    music = np.clip(music, -0.98, 0.98)
+    step = max(1, FPS // 15)
+    encode_frames(lambda fi: render_galti_frame(key, fi / FPS), int(GALTI_DUR * FPS), music, out,
+                  key=lambda fi: fi // step)
+    _galti_base(key)[0].save(os.path.join(os.path.dirname(out) or ".", "thumbnail.jpg"), quality=92)
+    print(f"GALTI REEL TAIYAR: {out} ({GALTI_DUR:.0f}s)  galat = #{bad + 1}")
+
+
+def galti_caption(subject, items, ep):
+    aud = audience_of(ep)
+    lines = [f"🔍 {galti_title(subject)}: इसमें 1 जवाब गलत है - पकड़ पाओगे?", "",
+             "💬 गलत जवाब का नंबर कमेंट करो (1-7) - सही जवाब पहले कमेंट में।",
+             "📤 दोस्त को भेजो - देखें वो पकड़ पाता है या नहीं!",
+             f"🎯 {aud[0]} + हर GS exam के लिए",
+             f"⏱ {BRAND} - {BRAND_TAGLINE}", "",
+             f"#gkquiz #gkpyq {aud[1]} {SUBJ_TAGS.get(subject, '#gk')}"]
+    return "\n".join(lines)
+
+
+def galti_comment(items, bad):
+    it = items[bad]
+    lines = [f"✅ गलती नंबर {bad + 1} में थी!",
+             f"सवाल: {it['q']}",
+             f"❌ {it['wrong']}   →   ✔️ सही जवाब: {it['a']}",
+             "", "बाकी 6 जवाब सही हैं - Save कर लो।", f"⏱ Follow {BRAND_HANDLE}"]
+    return "\n".join(lines)
+
+
+def run_galti(bank, st, ep, args):
+    subject, items, bad = pick_galti(bank, st, ep)
+    if bad is None:
+        print("Galti format ke liye sahi sawal/galat option nahi -> list format")
+        return False
+    os.makedirs(OUTPUT_DIR, exist_ok=True)
+    out = os.path.join(OUTPUT_DIR, FINAL_VIDEO)
+    build_galti_reel(subject, items, bad, out)
+    caption = galti_caption(subject, items, ep)
+    Path(os.path.join(OUTPUT_DIR, "caption.txt")).write_text(caption, encoding="utf-8")
+    Path(os.path.join(OUTPUT_DIR, "comment.txt")).write_text(galti_comment(items, bad), encoding="utf-8")
+    print("\nCAPTION:\n" + caption + "\n\nCOMMENT:\n" + galti_comment(items, bad))
+    if args.no_post or DRY_RUN:
+        save_progress(st)
+        return True
+    if POST_MODE == "manual":
+        save_ready(out, caption + "\n\n" + galti_comment(items, bad), ep)
+    else:
+        pid = post_reel(out, caption, 0)
+        if not pid:
+            save_progress(st)
+            return True
+        post_comment(pid, galti_comment(items, bad))
+    st["posted"] += [it["id"] for it in items]
+    remember_recent(st, [{k: v for k, v in it.items() if k != "wrong"} for it in items])
+    st["episode"] = ep
+    st["last"] = {"seq": items[-1]["seq"], "id": items[-1]["id"], "time": time.strftime("%Y-%m-%d %H:%M"),
+                  "format": "galti"}
+    save_progress(st)
+    return True
+
+
 # ---------- TRIPLE: "3 सवाल, 16 सेकंड" challenge (score comment + dost ko challenge = share) ----------
 
 TRI_DUR = 16.0                      # 120 BPM ke 8 bar; 3 sawal x 5.33s
@@ -4454,9 +4627,13 @@ def main():
         return
     ep = st["episode"] + 1
     fmt = "classic" if args.preview else pick_format(ep)
-    if args.seq and fmt in ("list", "triple", "quiz"):
+    if args.seq and fmt in ("list", "triple", "quiz", "galti"):
         fmt = "loop"
     print(f"FORMAT: {fmt}")
+    if fmt == "galti":
+        if run_galti(bank, st, ep, args):
+            return
+        fmt = "list"
     if fmt == "quiz":
         if run_quiz(bank, st, ep, args):
             return
