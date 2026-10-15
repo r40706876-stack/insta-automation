@@ -4040,7 +4040,8 @@ def render_list_frame(subject, items):
     sw = stopwatch_sprite(70, 0.0)
     cv.paste(sw, (150, 1597), sw)
     d.text((235, 1618), BRAND_HANDLE, font=get_font(36), fill=INK, anchor="lm")
-    d.text((235, 1660), BRAND_TAGLINE + "   •   दोस्तों को भेजो", font=get_font(28), fill=PEN_RED, anchor="lm")
+    d.text((235, 1660), f"कितने पहले से आते थे?  कमेंट करो __/{len(items)}   •   दोस्तों को भेजो",
+           font=get_font(30), fill=PEN_RED, anchor="lm")
     return cv
 
 
@@ -4115,8 +4116,8 @@ def quiz_title(subject):
     return f"{hi} के {LIST_N} PYQ"
 
 
-def quiz_layout(items, top=430, bottom=1570):
-    for size in (42, 40, 38, 36, 34, 32):
+def quiz_layout(items, top=430, bottom=1570, sizes=(42, 40, 38, 36, 34, 32)):
+    for size in sizes:
         blocks = []
         for k, it in enumerate(items):
             f, s_, lines = fit_lines(f"{k + 1}. {it['q']}", 900, 2, size, size)
@@ -4147,8 +4148,13 @@ def _quiz_base(subject, key):
     cv = _paper_bg().copy()
     d = ImageDraw.Draw(cv)
     title = quiz_title(subject)
-    d.text((W / 2, 235), title, font=get_font(84), fill=PEN_BLUE, anchor="mm")
-    d.line((170, 292, W - 170, 292), fill=PEN_BLUE, width=5)
+    msg = f"सभी {len(items)} जवाब इसी स्क्रीन पर आएँगे  -  अंत तक देखो"
+    fb = get_font(38)
+    w = text_w(msg, fb) + 60
+    d.rounded_rectangle((W / 2 - w / 2, 128, W / 2 + w / 2, 186), radius=29, fill=(18, 32, 72))
+    d.text((W / 2, 157), msg, font=fb, fill=(255, 225, 90), anchor="mm")
+    d.text((W / 2, 250), title, font=get_font(80), fill=PEN_BLUE, anchor="mm")
+    d.line((170, 302, W - 170, 302), fill=PEN_BLUE, width=5)
     for k, r in enumerate(lay["rows"]):
         for j, ln in enumerate(r["lines"]):
             d.text((140, r["y"] + j * r["lh"]), " ".join(ln), font=r["f"], fill=INK, anchor="la")
@@ -4180,22 +4186,22 @@ def render_quiz_frame(subject, key, t):
     size = lay["size"] + 2
     if t < QUIZ_THINK:                                   # sochne ka samay: countdown + khaali jawab
         left = int(math.ceil(QUIZ_THINK - t))
-        sub = f"जवाब छुपे हैं!  {left} सेकंड में सोचो..."
-        d.text((W / 2, 345), sub, font=get_font(40), fill=PEN_RED, anchor="mm")
+        sub = f"पहले खुद सोचो...  जवाब {left} सेकंड में"
+        d.text((W / 2, 350), sub, font=get_font(42), fill=PEN_RED, anchor="mm")
         frac = t / QUIZ_THINK
-        d.rounded_rectangle((200, 385, W - 270, 397), radius=6, fill=(235, 225, 225))
-        d.rounded_rectangle((200, 385, 200 + (W - 470) * (1 - frac), 397), radius=6, fill=PEN_RED)
+        d.rounded_rectangle((200, 392, W - 270, 404), radius=6, fill=(235, 225, 225))
+        d.rounded_rectangle((200, 392, 200 + (W - 470) * (1 - frac), 404), radius=6, fill=PEN_RED)
         sw = stopwatch_sprite(96, frac)
-        cv.paste(sw, (W - 150, 300), sw)
+        cv.paste(sw, (W - 150, 318), sw)
     else:
         if t < QUIZ_THINK + QUIZ_STEP * len(items) + 0.3:
-            d.text((W / 2, 345), "अब मिलाओ - कितने सही?", font=get_font(42), fill=PEN_RED, anchor="mm")
+            d.text((W / 2, 350), "अब मिलाओ - कितने सही?", font=get_font(44), fill=PEN_RED, anchor="mm")
         else:                                            # ant: score maango (comment)
             msg = f"कितने सही?  कमेंट करो  __/{len(items)}"
             fb = get_font(46)
             w = text_w(msg, fb) + 60
-            d.rounded_rectangle((W / 2 - w / 2, 315, W / 2 + w / 2, 378), radius=14, fill=PEN_RED)
-            d.text((W / 2, 346), msg, font=fb, fill=WHITE, anchor="mm")
+            d.rounded_rectangle((W / 2 - w / 2, 318, W / 2 + w / 2, 384), radius=14, fill=PEN_RED)
+            d.text((W / 2, 351), msg, font=fb, fill=WHITE, anchor="mm")
     for k, r in enumerate(lay["rows"]):
         t0 = QUIZ_THINK + k * QUIZ_STEP
         x, y = lay["ax"], r["ay"]
@@ -4216,7 +4222,7 @@ def render_quiz_frame(subject, key, t):
 def build_quiz_reel(subject, items, out):
     resolve_font()
     key = "|".join(it["id"] for it in items)
-    _QUIZ_CACHE[key] = (items, quiz_layout(items))
+    _QUIZ_CACHE[key] = (items, quiz_layout(items, top=445))
     music = beat_music(QUIZ_DUR, seed=len(items) + 3) * 0.8
     for k in range(int(QUIZ_THINK)):
         add_at(music, sfx_tick(0.5), float(k))
@@ -4288,6 +4294,43 @@ def run_quiz(bank, st, ep, args):
 # Sahi jawab pehle comment me (galat jaankari aage na jaaye).
 
 GALTI_DUR = 10.0
+GALTI_N = 6                         # kam sawal = bada font, jaldi padh ke galti pakad sake
+
+GALTI_PROMPT = """Ye Indian govt exam (RRB/SSC) ke PYQ hain, har ek: id | sawal | sahi jawab.
+{rows}
+
+Kaam:
+1) Inme se sabse AASAN 10 chuno - jinka jawab aam 10vi pass student ko turant pata ho (rozmarra / bahut prasiddh GK).
+   Mushkil, aankde wale, ya kam-jaane tathya wale mat chuno. Jawab bilkul sahi hona chahiye, warna chhod do.
+2) Har chune hue ke liye ek GALAT jawab do (Hindi, 1-3 shabd) jo usi type ka ho par aam student turant pakad le
+   ki ye galat hai (jaise sahi 'दिल्ली' -> galat 'मुंबई'; sahi 'आँख' -> galat 'कान'). Kabhi sahi ya aadha-sahi jawab mat do.
+Sirf JSON: {{"easy": [{{"id": "...", "wrong": "..."}}, ...]}}  (sabse aasan pehle)"""
+
+
+def _galti_cands(bank, st):
+    done = set(st["posted"]) | set(st["skipped"])
+    out = []
+    for q in sorted(bank, key=lambda x: int(x["seq"])):
+        if q["id"] in done or not list_ok(q) or len(q["question"].split()) > 12:
+            continue
+        a = clean_text(str(q["options"][q["answer"]]))
+        if len(a.split()) > 3 or len(re.findall(r"\d", a)) > 4:
+            continue
+        out.append(q)
+        if len(out) >= 40:
+            break
+    return out
+
+
+def _galti_ai_easy(cands):
+    rows = "\n".join(f"{q['id']} | {clean_text(q['question'])} | {clean_text(str(q['options'][q['answer']]))}"
+                     for q in cands)
+    prompt = GALTI_PROMPT.format(rows=rows)
+    for fn in (_gemini, _groq):
+        js = fn(prompt) if not DRY_RUN else None
+        if js and isinstance(js.get("easy"), list):
+            return [(e.get("id"), clean_text(str(e.get("wrong") or ""))) for e in js["easy"] if isinstance(e, dict)]
+    return None
 
 
 def _galti_wrong(q, ans):
@@ -4306,26 +4349,45 @@ def _galti_wrong(q, ans):
 
 
 def pick_galti(bank, st, ep):
-    subject, items = pick_list_items(bank, st)
+    """AASAN sawal (taaki zyada log galti pakad ke comment karein): AI se chune, warna sabse zyada baar poochhe gaye."""
+    cands = _galti_cands(bank, st)
+    by_id = {q["id"]: q for q in cands}
+    easy = _galti_ai_easy(cands) or []
+    easy = [(i, w) for i, w in easy if i in by_id]
+    if len(easy) < GALTI_N:                           # AI nahi: zyada baar poochha + chhota = aam taur par aasan
+        have = {i for i, _ in easy}
+        rest = sorted((q for q in cands if q["id"] not in have),
+                      key=lambda q: (-int(q.get("times_asked") or 1), len(q["question"].split())))
+        easy += [(q["id"], "") for q in rest]
+    items, wrongs = [], {}
+    for qid, w in easy:
+        q = by_id[qid]
+        ai = ai_enrich(q)
+        if ai and ai.get("reject"):
+            st["skipped"][q["id"]] = ai["reject"]
+            continue
+        qq = clean_text((ai or {}).get("question") or q["question"])
+        aa = clean_text(((ai or {}).get("options") or {}).get(q["answer"]) or q["options"][q["answer"]])
+        items.append({"id": q["id"], "seq": q["seq"], "q": qq, "a": aa})
+        ok_w = (w and w != aa and len(w.split()) <= 3 and not (set(w.split()) & set(aa.split()))
+                and not re.search(r"[^ऀ-ॿ -~‐-‧]", w))
+        wrongs[q["id"]] = w if ok_w else _galti_wrong(q, aa)
+        if len(items) >= GALTI_N:
+            break
     if len(items) < 5:
-        return subject, items, None
-    by_id = {q["id"]: q for q in bank}
+        return "MIX", items, None
     order = list(range(1, len(items) - 1)) + [0, len(items) - 1]      # beech wala pehle (seedha na dikhe)
     rot = ep % max(1, len(items) - 2)
     order = order[rot:] + order[:rot]
     for k in order:
-        w = _galti_wrong(by_id[items[k]["id"]], items[k]["a"])
-        if w:
-            items[k] = dict(items[k], wrong=w)
-            return subject, items, k
-    return subject, items, None
+        if wrongs.get(items[k]["id"]):
+            items[k] = dict(items[k], wrong=wrongs[items[k]["id"]])
+            return "MIX", items, k
+    return "MIX", items, None
 
 
 def galti_title(subject):
-    if subject == "TODAY":
-        return "टॉपर की कॉपी - आज के PYQ"
-    hi = SUBJECT_STYLE.get(subject, ("GK",))[0].split("•")[-1].strip()
-    return f"टॉपर की कॉपी - {hi}"
+    return "टॉपर की कॉपी चेक करो"
 
 
 @lru_cache(maxsize=2)
@@ -4341,14 +4403,16 @@ def _galti_base(key):
     w = text_w(msg, fb) + 64
     d.rounded_rectangle((W / 2 - w / 2, 305, W / 2 + w / 2, 382), radius=16, fill=PEN_RED)
     d.text((W / 2, 342), msg, font=fb, fill=WHITE, anchor="mm")
-    lay = quiz_layout(items, top=430, bottom=1525)
+    d.text((W / 2, 412), "आसान सवाल हैं - 10 सेकंड में गलती पकड़ो", font=get_font(36), fill=INK, anchor="mm")
+    lay = quiz_layout(items, top=485, bottom=1520, sizes=(52, 50, 48, 46, 44, 42, 40, 38, 36))
     fa = lay["fa"]
     for k, r in enumerate(lay["rows"]):
         for j, ln in enumerate(r["lines"]):
             d.text((140, r["y"] + j * r["lh"]), " ".join(ln), font=r["f"], fill=INK, anchor="la")
         ans = items[k].get("wrong") or items[k]["a"]
         d.text((175, r["ay"]), "Ans :  " + ans, font=fa, fill=PEN_BLUE, anchor="la")
-    d.text((W / 2, 1560), "पकड़ो कौन-सा?  नंबर कमेंट करो  (1-7)", font=get_font(44), fill=PEN_RED, anchor="mm")
+    d.text((W / 2, 1560), f"गलत वाला नंबर कमेंट करो  (1-{len(items)})", font=get_font(46), fill=PEN_RED,
+           anchor="mm")
     sw = stopwatch_sprite(70, 0.0)
     cv.paste(sw, (150, 1597), sw)
     d.text((235, 1618), BRAND_HANDLE, font=get_font(36), fill=INK, anchor="lm")
@@ -4361,7 +4425,7 @@ _GALTI_CACHE = {}
 
 
 @lru_cache(maxsize=1)
-def _lens_sprite(size=150):
+def _lens_sprite(size=120):
     S = size
     im = Image.new("RGBA", (S + 70, S + 70), (0, 0, 0, 0))
     d = ImageDraw.Draw(im)
@@ -4378,14 +4442,14 @@ def render_galti_frame(key, t):
     # lens upar se neeche aur wapas (seamless loop): sab jawabon par ghoomta hai
     ph = (t % GALTI_DUR) / GALTI_DUR
     u = 1 - abs(1 - 2 * ph)                               # 0 -> 1 -> 0
-    pos = ease_in_out(u) * (len(rows) - 1)
-    k0 = int(pos)
-    k1 = min(len(rows) - 1, k0 + 1)
-    fr = pos - k0
-    y = rows[k0]["ay"] * (1 - fr) + rows[k1]["ay"] * fr
-    x = 520 + 160 * math.sin(2 * math.pi * ph * 2)
+    k = int(round(u * (len(rows) - 1)))                  # sirf jawab ki line par rukta hai (sawal nahi dhakta)
+    y = rows[k]["ay"] + lay["size"] * 0.6
+    x = 560 + 90 * math.sin(2 * math.pi * ph * 3)
     lens = _lens_sprite()
-    cv.paste(lens, (int(x - 75), int(y - 50)), lens)
+    cv.paste(lens, (int(x - 63), int(y - 63)), lens)
+    d = ImageDraw.Draw(cv)                                # 10 sec ka timer (loop me phir bharta hai)
+    d.rounded_rectangle((200, 446, W - 200, 454), radius=4, fill=(235, 225, 225))
+    d.rounded_rectangle((200, 446, 200 + (W - 400) * (1 - ph), 454), radius=4, fill=PEN_RED)
     return cv
 
 
@@ -4406,7 +4470,7 @@ def build_galti_reel(subject, items, bad, out):
 def galti_caption(subject, items, ep):
     aud = audience_of(ep)
     lines = [f"🔍 {galti_title(subject)}: इसमें 1 जवाब गलत है - पकड़ पाओगे?", "",
-             "💬 गलत जवाब का नंबर कमेंट करो (1-7) - सही जवाब पहले कमेंट में।",
+             f"💬 गलत जवाब का नंबर कमेंट करो (1-{len(items)}) - सही जवाब पहले कमेंट में।",
              "📤 दोस्त को भेजो - देखें वो पकड़ पाता है या नहीं!",
              f"🎯 {aud[0]} + हर GS exam के लिए",
              f"⏱ {BRAND} - {BRAND_TAGLINE}", "",
@@ -4419,7 +4483,7 @@ def galti_comment(items, bad):
     lines = [f"✅ गलती नंबर {bad + 1} में थी!",
              f"सवाल: {it['q']}",
              f"❌ {it['wrong']}   →   ✔️ सही जवाब: {it['a']}",
-             "", "बाकी 6 जवाब सही हैं - Save कर लो।", f"⏱ Follow {BRAND_HANDLE}"]
+             "", f"बाकी {len(items) - 1} जवाब सही हैं - Save कर लो।", f"⏱ Follow {BRAND_HANDLE}"]
     return "\n".join(lines)
 
 
