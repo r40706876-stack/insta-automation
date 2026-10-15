@@ -3266,9 +3266,9 @@ PEN_RED = (200, 30, 40)
 
 
 def pick_format(ep):
-    if REEL_FORMAT in ("loop", "list", "classic", "triple"):
+    if REEL_FORMAT in ("loop", "list", "classic", "triple", "quiz"):
         return REEL_FORMAT
-    return ("loop", "triple", "list")[ep % 3]
+    return ("quiz", "list")[ep % 2]           # winner 7 PYQ list + naya quiz notebook, baari-baari
 
 
 # ---------- HAR EXAM KI AUDIENCE: GS sab me aata hai -> har reel alag exam waalon ko bulaye ----------
@@ -4034,8 +4034,8 @@ def render_list_frame(subject, items):
         for j, ln in enumerate(lines):
             d.text((140, y + j * lh), " ".join(ln), font=f, fill=INK, anchor="la")
         y += lh * len(lines) + 2
-        d.text((175, y), "Ans →  ", font=fa, fill=PEN_BLUE, anchor="la")
-        d.text((175 + text_w("Ans →  ", fa), y), ans, font=fa, fill=PEN_BLUE, anchor="la")
+        d.text((175, y), "Ans :  ", font=fa, fill=PEN_BLUE, anchor="la")
+        d.text((175 + text_w("Ans :  ", fa), y), ans, font=fa, fill=PEN_BLUE, anchor="la")
         y += int(size * 1.35) + gap
     sw = stopwatch_sprite(70, 0.0)
     cv.paste(sw, (150, 1597), sw)
@@ -4095,6 +4095,189 @@ def run_list(bank, st, ep, args):
     st["episode"] = ep
     st["last"] = {"seq": items[-1]["seq"], "id": items[-1]["id"], "time": time.strftime("%Y-%m-%d %H:%M"),
                   "format": "list"}
+    save_progress(st)
+    return True
+
+
+# ---------- QUIZ NOTEBOOK: 7 PYQ wala page, par jawab KHAALI -> 7s countdown -> pen se jawab likhe jaate ----------
+# Winner (7 PYQ list) ka look + quiz ka maza: dekhne wala khud sochta hai, score comment karta hai, dobara dekhta hai.
+
+QUIZ_THINK = 7.0                    # itne second sirf sawal (jawab ki jagah ____ ?)
+QUIZ_STEP = 0.7                     # har jawab ke beech ka samay
+QUIZ_WRITE = 0.45                   # ek jawab "likhne" ka samay (bayen se dayen)
+QUIZ_DUR = 14.0                     # 120 BPM ke 7 bar
+
+
+def quiz_title(subject):
+    if subject == "TODAY":
+        return "आज के दिन पूछे गए PYQ"
+    hi = SUBJECT_STYLE.get(subject, ("GK",))[0].split("•")[-1].strip()
+    return f"{hi} के {LIST_N} PYQ"
+
+
+def quiz_layout(items, top=430, bottom=1570):
+    for size in (42, 40, 38, 36, 34, 32):
+        blocks = []
+        for k, it in enumerate(items):
+            f, s_, lines = fit_lines(f"{k + 1}. {it['q']}", 900, 2, size, size)
+            blocks.append((f, int(s_ * 1.22), lines[:2], it["a"]))
+        need = sum(lh * len(ls) + int(size * 1.35) for _, lh, ls, _ in blocks)
+        if need + 14 * (len(items) - 1) <= bottom - top:
+            break
+    gap = max(0, (bottom - top - need) / max(1, len(items) - 1))
+    fa = get_font(size + 2)
+    lab = "उत्तर :  "
+    rows, y = [], top
+    for f, lh, lines, ans in blocks:
+        rows.append({"f": f, "lh": lh, "lines": lines, "y": y})
+        y += lh * len(lines) + 2
+        rows[-1]["ay"] = y
+        y += int(size * 1.35) + gap
+    return {"rows": rows, "fa": fa, "lab": lab, "ax": 175 + text_w(lab, fa), "size": size}
+
+
+def _tick_mark(d, x, y, s, col=PEN_RED):
+    d.line((x, y, x + s * 0.35, y + s * 0.4), fill=col, width=max(4, int(s / 7)))
+    d.line((x + s * 0.35, y + s * 0.4, x + s, y - s * 0.45), fill=col, width=max(4, int(s / 7)))
+
+
+@lru_cache(maxsize=2)
+def _quiz_base(subject, key):
+    items, lay = _QUIZ_CACHE[key]
+    cv = _paper_bg().copy()
+    d = ImageDraw.Draw(cv)
+    title = quiz_title(subject)
+    d.text((W / 2, 235), title, font=get_font(84), fill=PEN_BLUE, anchor="mm")
+    d.line((170, 292, W - 170, 292), fill=PEN_BLUE, width=5)
+    for k, r in enumerate(lay["rows"]):
+        for j, ln in enumerate(r["lines"]):
+            d.text((140, r["y"] + j * r["lh"]), " ".join(ln), font=r["f"], fill=INK, anchor="la")
+        d.text((175, r["ay"]), lay["lab"], font=lay["fa"], fill=PEN_BLUE, anchor="la")
+    sw = stopwatch_sprite(70, 0.0)
+    cv.paste(sw, (150, 1597), sw)
+    d.text((235, 1618), BRAND_HANDLE, font=get_font(36), fill=INK, anchor="lm")
+    d.text((235, 1660), BRAND_TAGLINE + "   •   दोस्तों को भेजो", font=get_font(28), fill=PEN_RED, anchor="lm")
+    return cv
+
+
+_QUIZ_CACHE = {}
+
+
+@lru_cache(maxsize=16)
+def _ans_sprite(text, size):
+    f = get_font(size)
+    w, h = int(text_w(text, f)) + 12, int(size * 1.45)
+    im = Image.new("RGBA", (w, h), (0, 0, 0, 0))
+    ImageDraw.Draw(im).text((2, 0), text, font=f, fill=PEN_BLUE + (255,), anchor="la")
+    return im
+
+
+def render_quiz_frame(subject, key, t):
+    items, lay = _QUIZ_CACHE[key]
+    cv = _quiz_base(subject, key).copy()
+    d = ImageDraw.Draw(cv)
+    fa = lay["fa"]
+    size = lay["size"] + 2
+    if t < QUIZ_THINK:                                   # sochne ka samay: countdown + khaali jawab
+        left = int(math.ceil(QUIZ_THINK - t))
+        sub = f"जवाब छुपे हैं!  {left} सेकंड में सोचो..."
+        d.text((W / 2, 345), sub, font=get_font(40), fill=PEN_RED, anchor="mm")
+        frac = t / QUIZ_THINK
+        d.rounded_rectangle((200, 385, W - 270, 397), radius=6, fill=(235, 225, 225))
+        d.rounded_rectangle((200, 385, 200 + (W - 470) * (1 - frac), 397), radius=6, fill=PEN_RED)
+        sw = stopwatch_sprite(96, frac)
+        cv.paste(sw, (W - 150, 300), sw)
+    else:
+        if t < QUIZ_THINK + QUIZ_STEP * len(items) + 0.3:
+            d.text((W / 2, 345), "अब मिलाओ - कितने सही?", font=get_font(42), fill=PEN_RED, anchor="mm")
+        else:                                            # ant: score maango (comment)
+            msg = f"कितने सही?  कमेंट करो  __/{len(items)}"
+            fb = get_font(46)
+            w = text_w(msg, fb) + 60
+            d.rounded_rectangle((W / 2 - w / 2, 315, W / 2 + w / 2, 378), radius=14, fill=PEN_RED)
+            d.text((W / 2, 346), msg, font=fb, fill=WHITE, anchor="mm")
+    for k, r in enumerate(lay["rows"]):
+        t0 = QUIZ_THINK + k * QUIZ_STEP
+        x, y = lay["ax"], r["ay"]
+        if t < t0:                                       # khaali line + laal ?
+            d.line((x, y + size * 1.05, x + 260, y + size * 1.05), fill=(150, 160, 190), width=3)
+            d.text((x + 275, y), "?", font=fa, fill=PEN_RED, anchor="la")
+            continue
+        sp = _ans_sprite(items[k]["a"], size)
+        p = clamp((t - t0) / QUIZ_WRITE)
+        cw = max(1, int(sp.width * ease_out_cubic(p)))
+        part = sp.crop((0, 0, cw, sp.height))
+        cv.paste(part, (int(x), int(y)), part)
+        if p >= 1:
+            _tick_mark(d, x + sp.width + 22, y + size * 0.55, size * 0.75)
+    return cv
+
+
+def build_quiz_reel(subject, items, out):
+    resolve_font()
+    key = "|".join(it["id"] for it in items)
+    _QUIZ_CACHE[key] = (items, quiz_layout(items))
+    music = beat_music(QUIZ_DUR, seed=len(items) + 3) * 0.8
+    for k in range(int(QUIZ_THINK)):
+        add_at(music, sfx_tick(0.5), float(k))
+    add_at(music, sfx_ding(0.5), QUIZ_THINK)
+    for k in range(len(items)):
+        add_at(music, sfx_pop(0.45), QUIZ_THINK + k * QUIZ_STEP)
+    add_at(music, sfx_ding(0.45), QUIZ_THINK + QUIZ_STEP * len(items) + 0.3)
+    music = np.clip(music, -0.98, 0.98)
+    step = max(1, FPS // 15)
+    encode_frames(lambda fi: render_quiz_frame(subject, key, fi / FPS), int(QUIZ_DUR * FPS), music, out,
+                  key=lambda fi: fi // step)
+    render_quiz_frame(subject, key, 0.0).save(os.path.join(os.path.dirname(out) or ".", "thumbnail.jpg"),
+                                              quality=92)
+    print(f"QUIZ REEL TAIYAR: {out} ({QUIZ_DUR:.0f}s)")
+
+
+def quiz_caption(subject, items, ep):
+    aud = audience_of(ep)
+    lines = [f"🧠 {quiz_title(subject)} - 7 सेकंड में कितने बता पाओगे?", ""]
+    lines += [f"{k + 1}. {it['q']}" for k, it in enumerate(items)]
+    lines += ["", f"💬 स्कोर कमेंट करो: {len(items)}/{len(items)} वाले जीनियस! (जवाब reel में + पहले कमेंट में)",
+              "📤 दोस्त को भेजो - देखो उसके कितने सही होते हैं!",
+              f"🎯 {aud[0]} + हर GS exam के लिए",
+              f"⏱ {BRAND} - {BRAND_TAGLINE}", "",
+              f"#gkquiz #gkpyq {aud[1]} {SUBJ_TAGS.get(subject, '#gk')}"]
+    return "\n".join(lines)
+
+
+def quiz_comment(items):
+    lines = ["✅ सही जवाब:"] + [f"{k + 1}) {it['a']}" for k, it in enumerate(items)]
+    lines += ["", f"🏆 {len(items)}/{len(items)} वाले कमेंट में हाथ उठाओ!", f"⏱ Follow {BRAND_HANDLE}"]
+    return "\n".join(lines)
+
+
+def run_quiz(bank, st, ep, args):
+    subject, items = pick_list_items(bank, st)
+    if len(items) < 5:
+        print("Quiz ke liye kaafi chhote sawal nahi -> list format")
+        return False
+    os.makedirs(OUTPUT_DIR, exist_ok=True)
+    out = os.path.join(OUTPUT_DIR, FINAL_VIDEO)
+    build_quiz_reel(subject, items, out)
+    caption = quiz_caption(subject, items, ep)
+    Path(os.path.join(OUTPUT_DIR, "caption.txt")).write_text(caption, encoding="utf-8")
+    print("\nCAPTION:\n" + caption)
+    if args.no_post or DRY_RUN:
+        save_progress(st)
+        return True
+    if POST_MODE == "manual":
+        save_ready(out, caption, ep)
+    else:
+        pid = post_reel(out, caption, 0)                 # pehla frame (khaali jawab) = cover
+        if not pid:
+            save_progress(st)
+            return True
+        post_comment(pid, quiz_comment(items))
+    st["posted"] += [it["id"] for it in items]
+    remember_recent(st, items)
+    st["episode"] = ep
+    st["last"] = {"seq": items[-1]["seq"], "id": items[-1]["id"], "time": time.strftime("%Y-%m-%d %H:%M"),
+                  "format": "quiz"}
     save_progress(st)
     return True
 
@@ -4271,9 +4454,13 @@ def main():
         return
     ep = st["episode"] + 1
     fmt = "classic" if args.preview else pick_format(ep)
-    if args.seq and fmt in ("list", "triple"):
+    if args.seq and fmt in ("list", "triple", "quiz"):
         fmt = "loop"
     print(f"FORMAT: {fmt}")
+    if fmt == "quiz":
+        if run_quiz(bank, st, ep, args):
+            return
+        fmt = "list"
     if fmt == "list":
         if run_list(bank, st, ep, args):
             return
