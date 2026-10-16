@@ -3270,8 +3270,10 @@ PEN_RED = (200, 30, 40)
 def pick_format(ep):
     if REEL_FORMAT in ("loop", "list", "classic", "triple", "quiz", "galti", "mega"):
         return REEL_FORMAT
-    # din ki 3 reel: quiz notebook, MEGA revision (100 sawal, kai page - 'galti' ki jagah), 7 PYQ
-    return ("quiz", "mega", "list")[ep % 3]
+    # din ki 3 reel samay ke hisaab se (IST): subah 7 PYQ list, dopahar quiz notebook, raat MEGA revision
+    # (MEGA = sabse zyada save wali reel -> raat 8 baje ke sabse bade peak pe)
+    h = time.gmtime(time.time() + 19800).tm_hour
+    return "list" if h < 11 else ("quiz" if h < 17 else "mega")
 
 
 # ---------- HAR EXAM KI AUDIENCE: GS sab me aata hai -> har reel alag exam waalon ko bulaye ----------
