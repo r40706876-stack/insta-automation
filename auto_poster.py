@@ -3268,9 +3268,10 @@ PEN_RED = (200, 30, 40)
 
 
 def pick_format(ep):
-    if REEL_FORMAT in ("loop", "list", "classic", "triple", "quiz", "galti"):
+    if REEL_FORMAT in ("loop", "list", "classic", "triple", "quiz", "galti", "mega"):
         return REEL_FORMAT
-    return ("quiz", "galti", "list")[ep % 3]  # din ki 3 reel: quiz notebook, topper ki copy (galti pakdo), 7 PYQ
+    # din ki 3 reel: quiz notebook, MEGA revision (100 sawal, kai page - 'galti' ki jagah), 7 PYQ
+    return ("quiz", "mega", "list")[ep % 3]
 
 
 # ---------- HAR EXAM KI AUDIENCE: GS sab me aata hai -> har reel alag exam waalon ko bulaye ----------
@@ -4569,6 +4570,326 @@ def run_galti(bank, st, ep, args):
     return True
 
 
+# ---------- MEGA REVISION: "सभी सरकारी परीक्षाओं के लिए - Physics के 100 सबसे महत्वपूर्ण प्रश्न" ----------
+# Viral reel (@sscprepfocus, Oct 2026): 7 page x 30 sawal-jawab, har page ~3s. Itna ek baar me padhna mumkin
+# nahi -> log PAUSE karte hain, SAVE karte hain, baar-baar dekhte hain (watch time + save sabse zyada).
+# Shuru me AI awaaz: "SSC, Railway... is reel ko skip karne ki galti mat karna".
+
+MEGA_PER_PAGE = 20                  # 1080 chaudai pe 20 line padhne layak (reference 30 thi, par chhota font)
+MEGA_PAGES = 5                      # 100 sawal
+MEGA_PAGE_DUR = 3.0
+MEGA_SLIDE = 0.22                   # page badalne ki slide
+MEGA_END = 1.3                      # aakhir me 'SAVE + Follow' patta
+MEGA_MIN_FONT = 30
+MEGA_SUBJ = ["Physics", "Chemistry", "Biology", "History", "Polity", "Geography", "Economics", "Traditional GK",
+             "Environment", "Computer"]
+_MEGA_JUNK = re.compile(r"[\[\]@÷{}|\\^~`◌µÀ-ÿ]|ृ\?$|=\s*$|औरीं|भ्ण्|ण्ह|फ्ह|न्न्|ज्ञ्|ष्टण्|उश्|स्/|घ्(?=\s|$)|[क-ह]्(?=[\d,.)\-–]|$)")
+# bina options/sandarbh ke adhoore lagne wale sawal (sawal-ganit, 'yadi...', 'ek vastu...')
+_MEGA_VAGUE = re.compile(r"^(\d|यदि|अगर|किसी|एक |दिए|दी गई|उपरोक्त|निम्न)|=|तो |इसलिए|गणना|ज्ञात कर")
+
+
+def subj_names(subject):
+    lab = SUBJECT_STYLE.get(subject, ("GK  •  सामान्य ज्ञान",))[0]
+    en, _, hi = lab.partition("•")
+    return hi.strip() or "सामान्य ज्ञान", en.strip().title() if en.strip() != "GK" else "GK"
+
+
+def _mega_row_text(q, a):
+    q = re.sub(r"\s*(निम्नलिखित|निम्न)\s+में\s+से\s*", " ", q)            # bina options ke 'nimn me se' bekaar
+    q = re.sub(r"[-\s]*-[-\s]*-[-\s]*", " ____ ", q).strip()
+    q = " ".join(q.split()).rstrip(" ?।:-") + "?"
+    return q, a.strip(" .।")
+
+
+def _mega_fits(q, a, size=MEGA_MIN_FONT):
+    f = get_font(size)
+    return text_w(f"100. {q}  {a}", f) <= MEGA_TEXT_W
+
+
+MEGA_TEXT_W = 900
+MEGA_ROW0, MEGA_ROW_H = 332, 61
+
+
+def pick_mega(bank, st):
+    """Agla subject (baari-baari) + uske sabse zyada baar poochhe gaye chhote sawal (1 line me fit)."""
+    used = set(st.get("mega_used", []))
+    n0 = st.get("mega_n", 0)
+    for k in range(len(MEGA_SUBJ)):
+        subject = MEGA_SUBJ[(n0 + k) % len(MEGA_SUBJ)]
+        pool, seen = [], set()
+        for q in bank:
+            if q["subject"] != subject or q["id"] in used:
+                continue
+            qq, aa = _mega_row_text(clean_text(q["question"]), clean_text(q["options"][q["answer"]]))
+            if (len(qq.split()) > 16 or len(aa.split()) > 5 or "__" in qq
+                    or re.search(r"नहीं|असत्य|गलत|इनमें से|इनमे से|सही कथन|कथन|वर्तमान|मौजूदा|हाल ही|अभी|उपर्युक्त", qq)):
+                continue
+            if (not qq or not aa or _MEGA_JUNK.search(qq + " " + aa) or _MEGA_VAGUE.search(qq) or qq in seen
+                    or re.fullmatch(r"\d+[A-Za-z]", aa)):
+                continue
+            seen.add(qq)
+            pool.append({"id": q["id"], "seq": q["seq"], "q": qq, "a": aa, "n": int(q.get("times_asked") or 1),
+                         "fit": _mega_fits(qq, aa)})
+        pool.sort(key=lambda x: (-x["n"], not x["fit"], int(x["seq"])))   # sabse zyada repeat = 'sabse mahatvapurn'
+        # AI lambe sawal chhote karke 1 line me la sakta hai; AI na chale to sirf jo already fit hain
+        checked = _mega_ai_check(pool[:MEGA_PAGES * MEGA_PER_PAGE + 60])
+        pool = checked if checked is not None else [x for x in pool if x["fit"]]
+        pages = min(MEGA_PAGES, len(pool) // MEGA_PER_PAGE)
+        if pages >= 2:
+            return subject, pool[:pages * MEGA_PER_PAGE], (n0 + k) % len(MEGA_SUBJ)
+    return None, [], n0
+
+
+MEGA_PROMPT = """Ye Indian govt exam (RRB/SSC) ke PYQ hain, har line: id | sawal | sahi jawab.
+Ye ek revision page pe BINA options ke ek line me chhapenge.
+{rows}
+
+Sirf wo id rakho jinme: sawal akela padhkar poora samajh aaye (adhoora / options pe tika / ganit wala NAHI),
+jawab bilkul sahi aur aaj bhi sahi ho, aur text me koi toota/ajeeb akshar na ho.
+Har rakhe gaye sawal ko CHHOTA likho: sawal 9 shabd tak, jawab 4 shabd tak (matlab bilkul mat badlo,
+spelling theek karo). Udaharan: 'द्रव्यमान और वेग का गुणनफल क्या कहलाता है?' -> 'द्रव्यमान × वेग = ?' nahi,
+balki 'द्रव्यमान और वेग का गुणनफल?' (Hindi hi rakho).
+Sirf JSON: {{"ok": [{{"id": "...", "q": "...", "a": "..."}}, ...]}}  (diye gaye kram me)"""
+
+
+def _mega_ai_check(pool):
+    """Ek hi AI call me 100+ line ki jaanch + chhota karna. AI na chale -> None."""
+    rows = "\n".join(f"{x['id']} | {x['q']} | {x['a']}" for x in pool)
+    for fn in (_gemini, _groq):
+        js = fn(MEGA_PROMPT.format(rows=rows)) if not DRY_RUN else None
+        if js and isinstance(js.get("ok"), list):
+            by = {x["id"]: x for x in pool}
+            out = []
+            for e in js["ok"]:
+                x = by.get(str(e.get("id"))) if isinstance(e, dict) else None
+                if not x:
+                    continue
+                q2, a2 = _mega_row_text(clean_text(e.get("q") or x["q"]), clean_text(e.get("a") or x["a"]))
+                if q2 and a2 and _mega_fits(q2, a2) and not _MEGA_JUNK.search(q2 + " " + a2):
+                    out.append(dict(x, q=q2, a=a2))
+                elif x["fit"]:
+                    out.append(x)
+            print(f"  Mega AI jaanch: {len(pool)} me se {len(out)} sahi")
+            if len(out) >= 2 * MEGA_PER_PAGE:
+                return out
+    return None
+
+
+def mega_title(subject, n):
+    hi, en = subj_names(subject)
+    return f'"{hi} ({en})" के {n} सबसे महत्वपूर्ण प्रश्न' if en != "GK" else f'"सामान्य ज्ञान" के {n} सबसे महत्वपूर्ण प्रश्न'
+
+
+@lru_cache(maxsize=4)
+def _mega_paper(subject):
+    col = SUBJECT_STYLE.get(subject, ("", CYAN))[1]
+    im = Image.new("RGB", (W, H), (234, 230, 250))
+    d = ImageDraw.Draw(im)
+    d.rounded_rectangle((26, 26, W - 26, H - 26), radius=46, fill=PAPER, outline=mix(col, (60, 40, 140), 0.55),
+                        width=7)
+    d.rounded_rectangle((40, 40, W - 40, H - 40), radius=38, outline=mix(col, (255, 255, 255), 0.45), width=3)
+    for i in range(MEGA_PER_PAGE):
+        y = MEGA_ROW0 + i * MEGA_ROW_H + 31
+        d.line((60, y, W - 60, y), fill=(222, 228, 242), width=2)
+    return im
+
+
+def render_mega_page(subject, rows, start, page, pages, total):
+    cv = _mega_paper(subject).copy()
+    d = ImageDraw.Draw(cv)
+    # sabse upar: kis-kis ke liye (bharosa + 'mere exam ka hai')
+    t1 = "सभी सरकारी परीक्षाओं के लिए"
+    f1 = get_font(50)
+    w1 = text_w(t1, f1) + 80
+    d.rounded_rectangle((W / 2 - w1 / 2, 70, W / 2 + w1 / 2, 150), radius=40, fill=(255, 255, 255),
+                        outline=(40, 40, 70), width=4)
+    d.text((W / 2, 110), t1, font=f1, fill=INK, anchor="mm")
+    place(cv, stopwatch_sprite(78, (page + 1) / pages), 100, 110)
+    pg = pill_sprite(f"पेज {page + 1}/{pages}", 26, WHITE, PEN_RED, WHITE)
+    place(cv, pg, W - 70 - pg.width / 2, 110)
+    # title: "भौतिक विज्ञान (Physics)" के 100 सबसे महत्वपूर्ण प्रश्न  (ank laal)
+    title = mega_title(subject, total)
+    ft = next(get_font(z) for z in (50, 46, 42, 40, 38, 36) if text_w(title, get_font(z)) <= W - 120)
+    sp = text_w(" ", ft)
+    words = title.split()
+    x = W / 2 - (sum(text_w(w_, ft) for w_ in words) + sp * (len(words) - 1)) / 2
+    for w_ in words:
+        d.text((x, 205), w_, font=ft, fill=PEN_RED if w_.isdigit() else (60, 30, 150), anchor="lm")
+        x += text_w(w_, ft) + sp
+    d.text((W / 2, 262), "SSC  •  Railway  •  Police  •  Patwari  •  Army  •  State Exams",
+           font=get_font(28), fill=PEN_RED, anchor="mm")
+    d.line((140, 292, W - 140, 292), fill=(60, 30, 150), width=4)
+    # 20 line: (n) sawal?  jawab
+    size = next(z for z in (38, 36, 34, 32, MEGA_MIN_FONT)
+                if all(text_w(f"{start + len(rows)}. {r['q']}  {r['a']}", get_font(z)) <= MEGA_TEXT_W for r in rows))
+    f = get_font(size)
+    fn = get_font(24)
+    for i, r in enumerate(rows):
+        y = MEGA_ROW0 + i * MEGA_ROW_H
+        n = start + i + 1
+        d.ellipse((58, y - 21, 100, y + 21), outline=(60, 30, 150), width=3, fill=(255, 255, 255))
+        d.text((79, y + 1), str(n), font=fn, fill=(60, 30, 150), anchor="mm")
+        d.text((116, y), r["q"], font=f, fill=INK, anchor="lm")
+        d.text((116 + text_w(r["q"] + "  ", f), y), r["a"], font=f, fill=PEN_BLUE, anchor="lm")
+    # neeche: SAVE patta + brand
+    t3 = "SAVE करो  -  Exam से पहले 1 बार ज़रूर देखना!"
+    f3 = get_font(38)
+    w3 = text_w(t3, f3) + 70
+    d.rounded_rectangle((W / 2 - w3 / 2, 1645, W / 2 + w3 / 2, 1715), radius=35, fill=(255, 255, 255),
+                        outline=(40, 40, 70), width=4)
+    d.text((W / 2, 1680), t3, font=f3, fill=PEN_RED, anchor="mm")
+    d.text((W / 2, 1772), BRAND_HANDLE + "   •   " + BRAND_TAGLINE, font=get_font(30), fill=(60, 30, 150),
+           anchor="mm")
+    return cv
+
+
+@lru_cache(maxsize=2)
+def _skip_stamp():
+    """Pehle page pe tircha laal thappa (bina awaaz dekhne walon ke liye wahi baat)."""
+    f = get_font(40)
+    t = "Skip करने की गलती मत करना!"
+    w, h = int(text_w(t, f)) + 60, 80
+    im = Image.new("RGBA", (w, h), (0, 0, 0, 0))
+    d = ImageDraw.Draw(im)
+    d.rounded_rectangle((0, 0, w - 1, h - 1), radius=22, fill=(220, 30, 45, 245), outline=WHITE + (255,), width=5)
+    d.text((w / 2, h / 2 + 2), t, font=f, fill=WHITE + (255,), anchor="mm")
+    return im
+
+
+def mega_end_card(last):
+    im = Image.blend(last.convert("RGB"), Image.new("RGB", (W, H), (10, 12, 24)), 0.72)
+    place(im, stopwatch_sprite(220, 0.75), W / 2, 760)
+    d = ImageDraw.Draw(im)
+    d.text((W / 2, 960), BRAND_HANDLE, font=get_font(70), fill=WHITE, anchor="mm")
+    d.text((W / 2, 1050), "SAVE करो  •  दोस्तों को भेजो  •  Follow करो", font=get_font(42), fill=YELLOW, anchor="mm")
+    return im
+
+
+def mega_voice(subject, n, rot):
+    """Shuru ki AI awaaz. Gemini na chale -> None (sirf music)."""
+    if not GEMINI_API_KEY:
+        return None
+    hi, _ = subj_names(subject)
+    line = (f"SSC, Railway, Police... सभी सरकारी exams के लिए, {hi} के {n} सबसे important सवाल! "
+            f"इस reel को skip करने की गलती मत करना... अभी Save कर लो!")
+    try:
+        arr, label = gemini_tts_once([line], rot)
+        print("  Mega awaaz:", label)
+    except Exception as exc:
+        print("  Mega awaaz nahi bani (sirf music):", str(exc)[:150])
+        return None
+    arr = np.asarray(arr, dtype=np.float32)
+    loud = np.where(np.abs(arr) > 0.02 * (np.max(np.abs(arr)) or 1))[0]
+    if len(loud):
+        arr = arr[max(0, loud[0] - int(0.05 * SR)): loud[-1] + int(0.15 * SR)]
+    try:
+        arr = speed_voice(arr)
+    except Exception:
+        pass
+    return arr
+
+
+def build_mega_reel(subject, items, out, rot=0):
+    resolve_font()
+    pages = len(items) // MEGA_PER_PAGE
+    imgs = [render_mega_page(subject, items[p * MEGA_PER_PAGE:(p + 1) * MEGA_PER_PAGE], p * MEGA_PER_PAGE, p,
+                             pages, len(items)) for p in range(pages)]
+    voice = mega_voice(subject, len(items), rot)
+    vdur = len(voice) / SR if voice is not None else 0.0
+    first = max(MEGA_PAGE_DUR + 0.6, vdur + 0.6)              # awaaz pehle page pe hi khatam ho
+    starts = [0.0]
+    for p in range(1, pages):
+        starts.append(first + (p - 1) * MEGA_PAGE_DUR)
+    end_t = starts[-1] + MEGA_PAGE_DUR
+    total = end_t + MEGA_END
+    stamp = _skip_stamp()
+    first_img = imgs[0].copy()
+    place(first_img, stamp, W / 2, 1590, angle=-3)
+    end_img = mega_end_card(imgs[-1])
+
+    def page_at(t):
+        return max(i for i, s0 in enumerate(starts) if t >= s0)
+
+    def render(fi):
+        t = fi / FPS
+        if t >= end_t:
+            return end_img
+        p = page_at(t)
+        cur = first_img if p == 0 and t < first - 0.4 else imgs[p]
+        k = (t - starts[p]) / MEGA_SLIDE if p > 0 else 1.0
+        if k >= 1:
+            return cur
+        e = ease_out_cubic(clamp(k))                         # naya page daayen se aata hai
+        cv = imgs[p - 1].copy()
+        cv.paste(cur, (int(W * (1 - e)), 0))
+        return cv
+
+    def key(fi):
+        t = fi / FPS
+        if t >= end_t:
+            return "end"
+        p = page_at(t)
+        if p > 0 and t - starts[p] < MEGA_SLIDE:
+            return fi
+        return ("p", p, p == 0 and t < first - 0.4)
+
+    music = beat_music(total, seed=len(items)) * 0.32
+    if voice is not None:
+        add_at(music, voice, 0.15, 1.0)
+    for s0 in starts[1:]:
+        add_at(music, sfx_whoosh(0.3, 0.4), s0 - 0.05)
+    add_at(music, sfx_ding(0.4), end_t)
+    music = np.clip(music, -0.98, 0.98)
+    encode_frames(render, int(total * FPS), music, out, key=key)
+    first_img.save(os.path.join(os.path.dirname(out) or ".", "thumbnail.jpg"), quality=92)
+    print(f"MEGA REEL TAIYAR: {out} ({total:.1f}s, {pages} page, {len(items)} sawal)")
+    return total
+
+
+def mega_caption(subject, items):
+    hi, en = subj_names(subject)
+    return "\n".join([
+        f"📚 {mega_title(subject, len(items))} - सभी सरकारी परीक्षाओं के लिए",
+        "",
+        "⏸️ हर पेज पर रोककर पढ़ो (स्क्रीन दबाकर रखो)",
+        "📌 अभी SAVE करो - exam से पहले 1 बार ज़रूर revise करना",
+        "📤 उस दोस्त को भेजो जो SSC / Railway / Police की तैयारी कर रहा है",
+        "💬 कितने पहले से आते थे? कमेंट करो!",
+        "",
+        f"{hi} ({en}) GK | RRB NTPC, Group D, SSC GD, CGL, MTS, Police, Patwari, State Exam PYQ",
+        f"⏱ {BRAND} - {BRAND_TAGLINE}",
+        "",
+        f"#gk #gkquiz #gkpyq #sscgd #rrbntpc #rrbgroupd #policebharti {SUBJ_TAGS.get(subject, '#gk')}",
+    ])
+
+
+def run_mega(bank, st, ep, args):
+    subject, items, idx = pick_mega(bank, st)
+    if not items:
+        print("Mega ke liye kaafi chhote sawal nahi -> list format")
+        return False
+    os.makedirs(OUTPUT_DIR, exist_ok=True)
+    out = os.path.join(OUTPUT_DIR, FINAL_VIDEO)
+    build_mega_reel(subject, items, out, rot=ep)
+    caption = mega_caption(subject, items)
+    Path(os.path.join(OUTPUT_DIR, "caption.txt")).write_text(caption, encoding="utf-8")
+    print("\nCAPTION:\n" + caption)
+    if args.no_post or DRY_RUN:
+        return True
+    if POST_MODE == "manual":
+        save_ready(out, caption, ep)
+    elif not post_reel(out, caption, 0):
+        save_progress(st)
+        return True
+    st["mega_used"] = (st.get("mega_used", []) + [it["id"] for it in items])[-3000:]
+    st["mega_n"] = idx + 1                                   # agli baar agla subject
+    st["episode"] = ep
+    st["last"] = {"seq": items[-1]["seq"], "id": items[-1]["id"], "time": time.strftime("%Y-%m-%d %H:%M"),
+                  "format": "mega"}
+    save_progress(st)
+    return True
+
+
 # ---------- TRIPLE: "3 सवाल, 16 सेकंड" challenge (score comment + dost ko challenge = share) ----------
 
 TRI_DUR = 16.0                      # 120 BPM ke 8 bar; 3 sawal x 5.33s
@@ -4741,9 +5062,13 @@ def main():
         return
     ep = st["episode"] + 1
     fmt = "classic" if args.preview else pick_format(ep)
-    if args.seq and fmt in ("list", "triple", "quiz", "galti"):
+    if args.seq and fmt in ("list", "triple", "quiz", "galti", "mega"):
         fmt = "loop"
     print(f"FORMAT: {fmt}")
+    if fmt == "mega":
+        if run_mega(bank, st, ep, args):
+            return
+        fmt = "list"
     if fmt == "galti":
         if run_galti(bank, st, ep, args):
             return
