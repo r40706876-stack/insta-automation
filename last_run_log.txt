@@ -2,19 +2,20 @@ FORMAT: trick
   Gemini gemini-flash-latest: HTTP 503
   Gemini gemini-flash-latest: HTTP 503
 TRICK: प्रतिरोध को क्या-क्या प्रभावित करता है?  (Physics / विद्युत (Electricity))
-Awaaz: Gemini TTS ek baar me (gemini-3.1-flash-tts-preview / Sulafat)
-TRICK REEL TAIYAR: generated_reels/science_pyq_reel.mp4 (19s)
+  Gemini awaaz: scenes ke beech ruk nahi mile
+Gemini awaaz scenes me sahi nahi kati -> edge-tts
+TRICK REEL TAIYAR: generated_reels/science_pyq_reel.mp4 (27s)
 
 CAPTION:
 🧠 प्रतिरोध को क्या-क्या प्रभावित करता है? - ट्रिक से 1 बार में याद!
 
-✍️ ट्रिक: ताप प्रलंबी क्षेत्र
+✍️ ट्रिक: ताप प्रलंबा क्षेत्र
 • ताप = तापमान
-• प्र = प्रकृति
-• लंबी = लंबाई
-• क्षेत्र = क्षेत्रफल
+• प्र = पदार्थ प्रकृति
+• लंबा = सुचालक लंबाई
+• क्षेत्र = अनुप्रस्थ क्षेत्रफल
 
-📝 Exam में पूछा गया: पदार्थ के प्रतिरोध को प्रभावित करने वाले कारक? → सभी कारक
+📝 Exam में पूछा गया: प्रतिरोध को प्रभावित करने वाले कारक? → तापमान, प्रकृति, लंबाई, क्षेत्रफल
 
 💬 अगली ट्रिक किस टॉपिक की चाहिए? कमेंट करो!
 📤 Save करो + उस दोस्त को भेजो जो ये हमेशा भूलता है
@@ -22,4 +23,7 @@ CAPTION:
 ⏱ MinuteMe_GS - एक मिनट, एक PYQ - पक्का!
 
 #gktricks #gkinhindi #gkpyq #policebharti #upsi #physics
-MANUAL MODE: reel ready_reels/ me rakhi (Instagram pe post nahi hui): reel_0116.mp4
+  IG container: 17909807355568651
+  upload try 1: HTTP 200 {"success":true,"message":"Upload Successful."}
+  IG processing: FINISHED
+INSTAGRAM PE POST HO GAYA: 18161452264440748
