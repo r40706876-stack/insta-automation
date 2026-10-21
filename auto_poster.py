@@ -2993,11 +2993,35 @@ def make_caption(data):
     return "\n".join(lines)
 
 
+# ============================== SERIES: "100 दिन में पूरा GS" (follow karne ki wajah) ==============================
+SERIES_START = (2026, 10, 22)              # Day 1 (IST)
+SERIES_NAME = "100 दिन में पूरा GS"
+
+
+def series_day(offset=0):
+    import datetime as _dt
+    ist = _dt.datetime.utcnow() + _dt.timedelta(hours=5, minutes=30)
+    return max(1, (ist.date() - _dt.date(*SERIES_START)).days + 1 + offset)
+
+
+def day_tag(offset=0):
+    n = series_day(offset)
+    return f"Day {n}/100" if n <= 100 else f"Day {n}"
+
+
+def series_line():
+    return f"📅 {day_tag()} • {SERIES_NAME} | कल {day_tag(1)} - Follow करो ताकि छूटे नहीं"
+
+
+def _with_series(caption):
+    return caption if caption.startswith("📅") else f"{series_line()}\n\n{caption}"
+
+
 # ============================== INSTAGRAM ==============================
 
 def _upload_once(video_file, caption, thumb_ms=0, cover_url=None):
     """Ek koshish: container -> (10s ruko) -> rupload -> FINISHED -> publish."""
-    body = {"media_type": "REELS", "upload_type": "resumable", "caption": caption,
+    body = {"media_type": "REELS", "upload_type": "resumable", "caption": _with_series(caption),
             "thumb_offset": str(int(thumb_ms)),      # cover = ant wala poster frame
             "share_to_feed": "true", "access_token": IG_ACCESS_TOKEN}
     if cover_url:                                # alag se bana sundar cover photo
@@ -4047,7 +4071,7 @@ def render_list_frame(subject, items):
     d.text((W / 2, 245), list_title(subject), font=get_font(84), fill=PEN_BLUE, anchor="mm")
     d.line((200, 300, W - 200, 300), fill=PEN_BLUE, width=5)
     sub = {"TODAY": f"आज की तारीख ({today_dm()[0]}) के पुराने पेपर  •  SAVE करो",
-           "WEEK": "हफ्ते भर में पूछे गए - कितने याद हैं?  •  SAVE करो"}.get(subject, "पिछले पेपरों में पूछे गए  •  SAVE करो")
+           "WEEK": "हफ्ते भर में पूछे गए - कितने याद हैं?  •  SAVE करो"}.get(subject, f"{day_tag()}  •  {SERIES_NAME}  •  SAVE करो")
     d.text((W / 2, 335), sub, font=get_font(34), fill=PEN_RED, anchor="mm")
     ex = "RRB • SSC • Police • Patwari • Army • State Exams"
     fe = next(get_font(z) for z in (32, 30, 28, 26, 24) if text_w(ex, get_font(z)) + 40 <= W - 260)
@@ -4725,8 +4749,9 @@ def render_mega_page(subject, rows, start, page, pages, total):
     for w_ in words:
         d.text((x, 205), w_, font=ft, fill=PEN_RED if w_.isdigit() else (60, 30, 150), anchor="lm")
         x += text_w(w_, ft) + sp
-    d.text((W / 2, 262), "SSC  •  Railway  •  Police  •  Patwari  •  Army  •  State Exams",
-           font=get_font(28), fill=PEN_RED, anchor="mm")
+    t2 = f"{day_tag()}  •  {SERIES_NAME}  •  SSC • Railway • Police • State Exams"
+    f2 = next(get_font(z) for z in (30, 28, 26, 24, 22) if text_w(t2, get_font(z)) <= W - 140)
+    d.text((W / 2, 262), t2, font=f2, fill=PEN_RED, anchor="mm")
     d.line((140, 292, W - 140, 292), fill=(60, 30, 150), width=4)
     # 20 line: (n) sawal?  jawab
     size = next(z for z in (38, 36, 34, 32, MEGA_MIN_FONT)
@@ -4771,6 +4796,7 @@ def mega_end_card(last):
     d = ImageDraw.Draw(im)
     d.text((W / 2, 960), BRAND_HANDLE, font=get_font(70), fill=WHITE, anchor="mm")
     d.text((W / 2, 1050), "SAVE करो  •  दोस्तों को भेजो  •  Follow करो", font=get_font(42), fill=YELLOW, anchor="mm")
+    d.text((W / 2, 1140), f"कल {day_tag(1)}: नए सवाल  -  छूटे नहीं!", font=get_font(46), fill=WHITE, anchor="mm")
     return im
 
 
@@ -5169,6 +5195,7 @@ def kahani_poster(story, img, w, h, badge=None):
                (cx - rw / 2 - 26, ry + 76), (cx - rw / 2, ry + 38)], fill=K_RED)
     d.text((cx, ry + 38), rib, font=fr, fill=(255, 235, 120), anchor="mm")
     subj = KAHANI_SUBJ_HI.get(story.get("_subject", ""), "")
+    subj = f"{subj}  •  {day_tag()}" if subj else day_tag()
     y = ry + 100
     if subj:
         fs = get_font(32)
@@ -5310,7 +5337,7 @@ def kahani_speeches(story):
     out = [f"{clean_text(story['topic'])}. एक बार ध्यान से सुन लो, पूरी कहानी से हमेशा याद रहेगा।"]
     for sl in story["slides"]:
         out.append(" ".join(clean_text(b.get("text", "")) for b in (sl.get("blocks") or [])))
-    out.append("ये सवाल exam में पूछे जा चुके हैं। Save करो, और दोस्त को भेजो।")
+    out.append(f"ये सवाल exam में पूछे जा चुके हैं। Save करो... कल फिर नई कहानी, Follow करो ताकि छूटे नहीं।")
     return [to_speech(t) for t in out]
 
 
@@ -5336,7 +5363,7 @@ def build_kahani_reel(pages, out, speeches=None, rot=0):
     bg = Image.new("RGB", (W, H), (32, 26, 22))
     d = ImageDraw.Draw(bg)
     d.text((W / 2, 150), "कहानी से याद करो", font=get_font(78), fill=(255, 220, 90), anchor="mm")
-    d.text((W / 2, 235), "पूरी कहानी देखो  •  SAVE करो", font=get_font(40), fill=WHITE, anchor="mm")
+    d.text((W / 2, 235), f"{day_tag()}  •  {SERIES_NAME}", font=get_font(40), fill=WHITE, anchor="mm")
     sw = stopwatch_sprite(56, 0.0)
     bg.paste(sw, (int(W / 2 - 170), 1765), sw)
     d.text((W / 2 - 100, 1793), BRAND_HANDLE, font=get_font(40), fill=WHITE, anchor="lm")
@@ -5456,7 +5483,7 @@ def post_carousel(paths, caption):
             return None
         kids.append(r["id"])
     r = requests.post(f"{GRAPH}{IG_USER_ID}/media", data={"media_type": "CAROUSEL", "children": ",".join(kids),
-                                                           "caption": caption, "access_token": IG_ACCESS_TOKEN},
+                                                           "caption": _with_series(caption), "access_token": IG_ACCESS_TOKEN},
                       timeout=90).json()
     cid = r.get("id")
     if not cid:
@@ -5700,9 +5727,9 @@ def trick_layout(tc):
     # aakhri scene: CTA
     def c_draw(d, im):
         d.rounded_rectangle((0, 0, 880, 150), radius=26, fill=K_RED)
-        d.text((440, 48), "SAVE करो  •  दोस्त को भेजो", font=get_font(54), fill=WHITE, anchor="mm")
-        d.text((440, 112), "अगली ट्रिक किस टॉपिक की चाहिए?  कमेंट करो", font=get_font(36), fill=(255, 230, 150),
-               anchor="mm")
+        d.text((440, 48), "SAVE करो  •  Follow करो", font=get_font(54), fill=WHITE, anchor="mm")
+        d.text((440, 112), f"कल {day_tag(1)}: नई ट्रिक  •  टॉपिक कमेंट करो", font=get_font(36),
+               fill=(255, 230, 150), anchor="mm")
     cta = _sprite(880, 150, c_draw)
     els.append((2 + n, cta, (150 + W) / 2 - 440, H - 300, False))
     return els
@@ -5712,7 +5739,7 @@ def trick_speeches(tc):
     out = [f"{clean_text(tc['hook'])} 99% लोग भूल जाते हैं। बस ये ट्रिक याद कर लो।",
            f"ट्रिक है... {clean_text(tc['trick'])}!"]
     out += [f"{clean_text(str(l['key']))} से... {clean_text(str(l['full']))}।" for l in tc["lines"]]
-    out.append("बस! अब कभी नहीं भूलोगे। Save करो, और कमेंट में बताओ अगली ट्रिक किस टॉपिक की चाहिए।")
+    out.append("बस! अब कभी नहीं भूलोगे। Save करो... कल फिर नई ट्रिक, Follow करो ताकि छूटे नहीं।")
     return [to_speech(t) for t in out]
 
 
@@ -5767,8 +5794,8 @@ def build_trick_reel(tc, out, rot=0):
         dur = sum(durs)
     base = _paper(W, H)
     d = ImageDraw.Draw(base)
-    rib = "Trick से याद करो"
-    fr = get_font(48)
+    rib = f"{day_tag()}  •  Trick से याद करो"
+    fr = get_font(46)
     rw = text_w(rib, fr) + 70
     cx = (150 + W) / 2
     d.polygon([(cx - rw / 2 - 26, 150), (cx + rw / 2 + 26, 150), (cx + rw / 2, 190), (cx + rw / 2 + 26, 230),
@@ -6011,6 +6038,109 @@ def run_triple(bank, st, ep, args):
     return True
 
 
+# ============================== HAFTE KI REPORT (kaunsa format chal raha hai - data se) ==============================
+REPORT_DIR = "reports"
+REPORT_METRICS = ["reach", "saved", "shares", "likes", "comments", "total_interactions", "views",
+                  "ig_reels_avg_watch_time"]
+
+
+def _fmt_of(caption, ptype):
+    c = caption or ""
+    if ptype == "CAROUSEL_ALBUM":
+        return "carousel"
+    if "कहानी से याद" in c:
+        return "kahani"
+    if "ट्रिक से" in c or "ट्रिक:" in c:
+        return "trick"
+    if "सबसे महत्वपूर्ण प्रश्न" in c:
+        return "mega"
+    if "7 सेकंड" in c:
+        return "quiz"
+    if "गलत है" in c:
+        return "galti"
+    if "PYQ" in c and "→" in c:
+        return "list"
+    return "other"
+
+
+def _media_insights(mid):
+    out = {}
+    r = requests.get(f"{GRAPH}{mid}/insights", params={"metric": ",".join(REPORT_METRICS),
+                                                        "access_token": IG_ACCESS_TOKEN}, timeout=60).json()
+    if r.get("data"):
+        for m in r["data"]:
+            out[m["name"]] = (m.get("values") or [{}])[0].get("value")
+        return out, None
+    err = str((r.get("error") or {}).get("message", r))[:200]
+    for met in REPORT_METRICS:                       # ek-ek karke (kuch metric purane version me nahi)
+        rr = requests.get(f"{GRAPH}{mid}/insights", params={"metric": met, "access_token": IG_ACCESS_TOKEN},
+                          timeout=60).json()
+        if rr.get("data"):
+            out[met] = (rr["data"][0].get("values") or [{}])[0].get("value")
+    return out, (None if out else err)
+
+
+def weekly_report(days=7):
+    import datetime as _dt
+    if not IG_ACCESS_TOKEN or not IG_USER_ID:
+        print("Report: IG secrets nahi")
+        return
+    acc = requests.get(f"{GRAPH}{IG_USER_ID}", params={"fields": "followers_count,media_count",
+                                                        "access_token": IG_ACCESS_TOKEN}, timeout=60).json()
+    since = _dt.datetime.utcnow() - _dt.timedelta(days=days)
+    items, url = [], f"{GRAPH}{IG_USER_ID}/media"
+    params = {"fields": "id,caption,timestamp,media_product_type,media_type,permalink,like_count,comments_count",
+              "limit": 50, "access_token": IG_ACCESS_TOKEN}
+    for _ in range(6):
+        r = requests.get(url, params=params, timeout=60).json()
+        stop = False
+        for m in r.get("data", []):
+            ts = _dt.datetime.strptime(m["timestamp"][:19], "%Y-%m-%dT%H:%M:%S")
+            if ts < since:
+                stop = True
+                break
+            items.append(m)
+        nxt = (r.get("paging") or {}).get("next")
+        if stop or not nxt:
+            break
+        url, params = nxt, None
+    err_any = None
+    rows = []
+    for m in items:
+        ins, err = _media_insights(m["id"])
+        err_any = err_any or err
+        rows.append({"id": m["id"], "time": m["timestamp"][:16], "format": _fmt_of(m.get("caption"), m.get("media_type")),
+                     "link": m.get("permalink"), "likes": m.get("like_count"), "comments": m.get("comments_count"),
+                     **ins})
+    os.makedirs(REPORT_DIR, exist_ok=True)
+    day = time.strftime("%Y-%m-%d")
+    with open(os.path.join(REPORT_DIR, f"report_{day}.json"), "w", encoding="utf-8") as f:
+        json.dump({"account": acc, "rows": rows, "insights_error": err_any}, f, ensure_ascii=False, indent=1)
+    by = {}
+    for r in rows:
+        by.setdefault(r["format"], []).append(r)
+
+    def avg(lst, k):
+        v = [x.get(k) for x in lst if isinstance(x.get(k), (int, float))]
+        return round(sum(v) / len(v), 1) if v else "-"
+
+    md = [f"# MinuteMe_GS - {days} din ki report ({day})", "",
+          f"Followers: **{acc.get('followers_count', '?')}**  |  Kul post: {acc.get('media_count', '?')}  |  "
+          f"Is hafte post: {len(rows)}", ""]
+    if err_any:
+        md += [f"> Insights nahi mile (token permission `instagram_manage_insights` chahiye): {err_any}", ""]
+    md += ["| Format | Post | Avg views | Avg reach | Avg save | Avg share | Avg like | Avg comment |",
+           "|---|---|---|---|---|---|---|---|"]
+    for k, lst in sorted(by.items(), key=lambda kv: -(avg(kv[1], "reach") if avg(kv[1], "reach") != "-" else 0)):
+        md.append(f"| {k} | {len(lst)} | {avg(lst, 'views')} | {avg(lst, 'reach')} | {avg(lst, 'saved')} | "
+                  f"{avg(lst, 'shares')} | {avg(lst, 'likes')} | {avg(lst, 'comments')} |")
+    top = sorted(rows, key=lambda x: -(x.get("reach") or x.get("likes") or 0))[:5]
+    md += ["", "## Top 5"] + [f"- {t['format']} | reach {t.get('reach', '-')} | save {t.get('saved', '-')} | "
+                              f"share {t.get('shares', '-')} | {t['link']}" for t in top]
+    Path(os.path.join(REPORT_DIR, f"report_{day}.md")).write_text("\n".join(md), encoding="utf-8")
+    print("\n".join(md))
+
+
 # ============================== MAIN ==============================
 
 def pick_question(bank, st, seq=None):
@@ -6039,7 +6169,11 @@ def main():
     ap.add_argument("--seq", type=int)
     ap.add_argument("--preview", action="store_true")
     ap.add_argument("--carousel-test", action="store_true")
+    ap.add_argument("--report", action="store_true")
     args = ap.parse_args()
+    if args.report:
+        weekly_report()
+        return
 
     bank = load_bank()
     st = load_progress()
