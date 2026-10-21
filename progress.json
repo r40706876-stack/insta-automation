@@ -1,6 +1,6 @@
 {
  "next_seq": 110,
- "episode": 111,
+ "episode": 112,
  "posted": [
   "684d76bcbc",
   "6bb20b4a07",
@@ -250,7 +250,17 @@
   "91e470eec2",
   "5b08979fac",
   "f152749f64",
-  "4963ec578b"
+  "4963ec578b",
+  "1df0e9b461",
+  "85b9fc46f3",
+  "adcd8ecea5",
+  "a1f637a6e7",
+  "70599312f5",
+  "cb44118373",
+  "87192486e3",
+  "7f003d5cbb",
+  "790854d422",
+  "93a7c57759"
  ],
  "skipped": {
   "bdd1ce5a8b": "उत्तर कुंजी वर्तमान स्थिति के अनुसार गलत है।",
@@ -265,11 +275,11 @@
   "bbb262a843": "2020 की अनुमानित वृद्धि का यह आंकड़ा अब पुराना (outdated) और तथ्यात्मक रूप से त्रुटिपूर्ण है।"
  },
  "last": {
-  "seq": 2081,
-  "id": "4963ec578b",
-  "time": "2026-10-21 04:34",
+  "seq": 906,
+  "id": "93a7c57759",
+  "time": "2026-10-21 05:22",
   "format": "kahani",
-  "topic": "सम्राट अकबर"
+  "topic": "पौधे के ऊतक"
  },
  "carousel_queue": [
   {
@@ -1008,7 +1018,14 @@
  ],
  "mega_n": 6,
  "kahani_chapters": [
-  "विजयनगर/बहमनी साम्राज्य (Vijaynagar/Bahmani Empire)|"
+  "विजयनगर/बहमनी साम्राज्य (Vijaynagar/Bahmani Empire)|",
+  "ऊतक (Tissues)|पादप ऊतक (Plant Tissues)"
  ],
- "kahani_n": 1
+ "kahani_n": 2,
+ "kahani_log": {
+  "reel": "17908453557330232",
+  "carousel": null,
+  "cover": true,
+  "time": "2026-10-21 05:22"
+ }
 }

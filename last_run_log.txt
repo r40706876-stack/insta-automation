@@ -1,0 +1,67 @@
+FORMAT: kahani
+  Gemini gemini-flash-latest: HTTP 503
+  Gemini gemini-flash-latest: HTTP 503
+KAHANI: पौधे के ऊतक  (Biology / ऊतक (Tissues))
+  Cloudflare flux-1-schnell: 429 {"errors":[{"message":"AiError: AiError: you have used up your daily free allocation of 10,000 neurons, please upgrade t
+  Cloudflare stable-diffusion-xl-lightning: 429 {"errors":[{"message":"AiError: AiError: you have used up your daily free allocation of 10,000 neurons, please upgrade t
+  Cloudflare flux-1-schnell: 429 {"errors":[{"message":"AiError: AiError: you have used up your daily free allocation of 10,000 neurons, please upgrade t
+  Cloudflare stable-diffusion-xl-lightning: 429 {"errors":[{"message":"AiError: AiError: you have used up your daily free allocation of 10,000 neurons, please upgrade t
+  Cloudflare flux-1-schnell: 429 {"errors":[{"message":"AiError: AiError: you have used up your daily free allocation of 10,000 neurons, please upgrade t
+  Cloudflare stable-diffusion-xl-lightning: 429 {"errors":[{"message":"AiError: AiError: you have used up your daily free allocation of 10,000 neurons, please upgrade t
+  Cloudflare flux-1-schnell: 429 {"errors":[{"message":"AiError: AiError: you have used up your daily free allocation of 10,000 neurons, please upgrade t
+  Cloudflare stable-diffusion-xl-lightning: 429 {"errors":[{"message":"AiError: AiError: you have used up your daily free allocation of 10,000 neurons, please upgrade t
+  Cloudflare flux-1-schnell: 429 {"errors":[{"message":"AiError: AiError: you have used up your daily free allocation of 10,000 neurons, please upgrade t
+  Cloudflare stable-diffusion-xl-lightning: 429 {"errors":[{"message":"AiError: AiError: you have used up your daily free allocation of 10,000 neurons, please upgrade t
+  Cloudflare flux-1-schnell: 429 {"errors":[{"message":"AiError: AiError: you have used up your daily free allocation of 10,000 neurons, please upgrade t
+  Cloudflare stable-diffusion-xl-lightning: 429 {"errors":[{"message":"AiError: AiError: you have used up your daily free allocation of 10,000 neurons, please upgrade t
+  Cloudflare flux-1-schnell: 429 {"errors":[{"message":"AiError: AiError: you have used up your daily free allocation of 10,000 neurons, please upgrade t
+  Cloudflare stable-diffusion-xl-lightning: 429 {"errors":[{"message":"AiError: AiError: you have used up your daily free allocation of 10,000 neurons, please upgrade t
+  Cloudflare flux-1-schnell: 429 {"errors":[{"message":"AiError: AiError: you have used up your daily free allocation of 10,000 neurons, please upgrade t
+  Cloudflare stable-diffusion-xl-lightning: 429 {"errors":[{"message":"AiError: AiError: you have used up your daily free allocation of 10,000 neurons, please upgrade t
+  Cloudflare flux-1-schnell: 429 {"errors":[{"message":"AiError: AiError: you have used up your daily free allocation of 10,000 neurons, please upgrade t
+  Cloudflare stable-diffusion-xl-lightning: 429 {"errors":[{"message":"AiError: AiError: you have used up your daily free allocation of 10,000 neurons, please upgrade t
+  Cloudflare flux-1-schnell: 429 {"errors":[{"message":"AiError: AiError: you have used up your daily free allocation of 10,000 neurons, please upgrade t
+  Cloudflare stable-diffusion-xl-lightning: 429 {"errors":[{"message":"AiError: AiError: you have used up your daily free allocation of 10,000 neurons, please upgrade t
+  Cloudflare flux-1-schnell: 429 {"errors":[{"message":"AiError: AiError: you have used up your daily free allocation of 10,000 neurons, please upgrade t
+  Cloudflare stable-diffusion-xl-lightning: 429 {"errors":[{"message":"AiError: AiError: you have used up your daily free allocation of 10,000 neurons, please upgrade t
+  Cloudflare flux-1-schnell: 429 {"errors":[{"message":"AiError: AiError: you have used up your daily free allocation of 10,000 neurons, please upgrade t
+  Cloudflare stable-diffusion-xl-lightning: 429 {"errors":[{"message":"AiError: AiError: you have used up your daily free allocation of 10,000 neurons, please upgrade t
+  Cloudflare flux-1-schnell: 429 {"errors":[{"message":"AiError: AiError: you have used up your daily free allocation of 10,000 neurons, please upgrade t
+  Cloudflare stable-diffusion-xl-lightning: 429 {"errors":[{"message":"AiError: AiError: you have used up your daily free allocation of 10,000 neurons, please upgrade t
+  Cloudflare flux-1-schnell: 429 {"errors":[{"message":"AiError: AiError: you have used up your daily free allocation of 10,000 neurons, please upgrade t
+  Cloudflare stable-diffusion-xl-lightning: 429 {"errors":[{"message":"AiError: AiError: you have used up your daily free allocation of 10,000 neurons, please upgrade t
+  Cloudflare flux-1-schnell: 429 {"errors":[{"message":"AiError: AiError: you have used up your daily free allocation of 10,000 neurons, please upgrade t
+  Cloudflare stable-diffusion-xl-lightning: 429 {"errors":[{"message":"AiError: AiError: you have used up your daily free allocation of 10,000 neurons, please upgrade t
+  Kahani: 9 page, 0 chitra bane
+Awaaz: Gemini TTS ek baar me (gemini-3.8-flash-lite-tts / hi-in-tutor-1)
+KAHANI REEL TAIYAR: generated_reels/science_pyq_reel.mp4 (53s)
+
+CAPTION:
+📖 पौधे के ऊतक - कहानी से याद करो! एक बार पढ़ लो, कभी नहीं भूलोगे।
+
+📝 Exam में पूछा गया:
+• कोशिकाएँ जीवित, लंबी और कोनों पर मोटी होती हैं? → कोलेनकाइमा
+• जड़ तथा तने के घेरे में वृद्धि किसके कारण होती है? → पार्श्व विभज्योतक
+• दृढ ऊतक की कोशिका भित्तियाँ किसके जमाव से मोटी होती हैं? → लिग्निन
+
+📤 Save करो + उस दोस्त को भेजो जिसे ये topic याद नहीं रहता!
+🎯 Army / Agniveer + हर GS exam के लिए
+⏱ MinuteMe_GS - एक मिनट, एक PYQ - पक्का!
+
+#gkstory #gkinhindi #gkpyq #agniveer #armygk #biology
+  photo host: 412 <html>
+<head><title>412 Precondition Failed</title></head>
+<body>
+<center><h1>412 Precondition Fa
+  photo host: 412 Invalid uploader
+  Instagram koshish 1 fail: IG container nahi bana: {'error': {'message': 'The image format is not supported.', 'type': 'OAuthException', 'code': 36001, 'error_subcode': 2207083, 'is_transient': False, 'error_user_title': 'अज्ञात फ़ोटो फ़ॉर्मेट', 'error_user_msg': 'फ़ोटो को प्रोसेस नहीं किया जा सका, क्योंकि इसके फ़ॉर्मेट की पह
+  IG container: 17909700033568651
+  upload try 1: HTTP 200 {"success":true,"message":"Upload Successful."}
+  IG processing: FINISHED
+INSTAGRAM PE POST HO GAYA: 17908453557330232
+  photo host: 412 <html>
+<head><title>412 Precondition Failed</title></head>
+<body>
+<center><h1>412 Precondition Fa
+  photo host: 412 Invalid uploader
+  CAROUSEL item fail: {'error': {'message': 'The image format is not supported.', 'type': 'OAuthException', 'code': 36001, 'error_subcode': 2207083, 'is_transient': False, 'error_user_title': 'अज्ञात फ़ोटो फ़ॉर्मेट', 'error_user_msg': 'फ़ोटो को प्रोसेस नहीं किया जा सका, क्योंकि इसके फ़ॉर्मेट की पहचान नहीं हो सकी. आम तौर 
