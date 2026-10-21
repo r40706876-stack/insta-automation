@@ -2994,13 +2994,14 @@ def make_caption(data):
 
 # ============================== INSTAGRAM ==============================
 
-def _upload_once(video_file, caption, thumb_ms=0):
+def _upload_once(video_file, caption, thumb_ms=0, cover_url=None):
     """Ek koshish: container -> (10s ruko) -> rupload -> FINISHED -> publish."""
-    r = requests.post(f"{GRAPH}{IG_USER_ID}/media",
-                      data={"media_type": "REELS", "upload_type": "resumable", "caption": caption,
-                            "thumb_offset": str(int(thumb_ms)),      # cover = ant wala poster frame
-                            "share_to_feed": "true",
-                            "access_token": IG_ACCESS_TOKEN}, timeout=60).json()
+    body = {"media_type": "REELS", "upload_type": "resumable", "caption": caption,
+            "thumb_offset": str(int(thumb_ms)),      # cover = ant wala poster frame
+            "share_to_feed": "true", "access_token": IG_ACCESS_TOKEN}
+    if cover_url:                                # alag se bana sundar cover photo
+        body["cover_url"] = cover_url
+    r = requests.post(f"{GRAPH}{IG_USER_ID}/media", data=body, timeout=60).json()
     cid = r.get("id")
     if not cid:
         raise RuntimeError(f"IG container nahi bana: {r}")
@@ -3047,7 +3048,7 @@ def _upload_once(video_file, caption, thumb_ms=0):
     return pub["id"]
 
 
-def post_reel(video_file, caption, thumb_ms=0):
+def post_reel(video_file, caption, thumb_ms=0, cover_url=None):
     """Poori upload 3 baar tak (har baar naya container). Fail = exception (progress aage nahi badhta)."""
     if not IG_ACCESS_TOKEN or not IG_USER_ID:
         print("IG secrets nahi - post skip (reel bani hai).")
@@ -3055,7 +3056,7 @@ def post_reel(video_file, caption, thumb_ms=0):
     last = None
     for attempt in range(3):
         try:
-            pid = _upload_once(video_file, caption, thumb_ms)
+            pid = _upload_once(video_file, caption, thumb_ms, cover_url)
             print("INSTAGRAM PE POST HO GAYA:", pid)
             return pid
         except Exception as exc:
@@ -5115,38 +5116,106 @@ def _fit_img(im, max_w, max_h):
     return im.resize((max(1, int(im.width * k)), max(1, int(im.height * k))), Image.LANCZOS)
 
 
-def kahani_cover(story, img, n):
-    cv = _kahani_paper().copy()
+KAHANI_SUBJ_HI = {"History": "इतिहास", "Biology": "जीव विज्ञान", "Polity": "राजव्यवस्था", "Physics": "भौतिक विज्ञान",
+                  "Geography": "भूगोल", "Chemistry": "रसायन विज्ञान", "Economics": "अर्थशास्त्र",
+                  "Environment": "पर्यावरण", "Traditional GK": "सामान्य ज्ञान"}
+
+
+def _paper(w, h):
+    if (w, h) == (KAHANI_W, KAHANI_H):
+        return _kahani_paper().copy()
+    im = Image.new("RGB", (w, h), (250, 250, 247))
+    d = ImageDraw.Draw(im)
+    for y in range(150, h - 30, 56):
+        d.line((70, y, w, y), fill=(205, 214, 232), width=2)
+    d.line((150, 0, 150, h), fill=(236, 150, 160), width=3)
+    for y in range(40, h - 20, 46):
+        d.ellipse((14, y + 6, 40, y + 22), fill=(60, 60, 70))
+        d.arc((20, y - 4, 84, y + 26), 150, 340, fill=(90, 90, 100), width=7)
+        d.arc((22, y - 3, 82, y + 24), 160, 330, fill=(190, 190, 200), width=2)
+    d.line((60, 0, 60, h), fill=(225, 225, 225), width=2)
+    return im
+
+
+def _star(d, cx, cy, r, col=(40, 40, 60)):
+    pts = []
+    for k in range(10):
+        a = math.radians(-90 + k * 36)
+        rr = r if k % 2 == 0 else r * 0.45
+        pts.append((cx + rr * math.cos(a), cy + rr * math.sin(a)))
+    d.polygon(pts, outline=col, width=3)
+
+
+def kahani_poster(story, img, w, h, badge=None):
+    """Cover: carousel ka pehla page (4:5) aur reel ka thumbnail (9:16) - ek hi design."""
+    cv = _paper(w, h)
     d = ImageDraw.Draw(cv)
-    _slide_badge(d, 1, n)
+    cx = (150 + w) / 2
+    tall = h > 1500
+    if badge:
+        _slide_badge(d, *badge)
+    # upar laal ribbon
+    rib = "कहानी से याद करो"
+    fr = get_font(46 if tall else 40)
+    rw = text_w(rib, fr) + 70
+    ry = 70 if tall else 40
+    d.polygon([(cx - rw / 2 - 26, ry), (cx + rw / 2 + 26, ry), (cx + rw / 2, ry + 38), (cx + rw / 2 + 26, ry + 76),
+               (cx - rw / 2 - 26, ry + 76), (cx - rw / 2, ry + 38)], fill=K_RED)
+    d.text((cx, ry + 38), rib, font=fr, fill=(255, 235, 120), anchor="mm")
+    subj = KAHANI_SUBJ_HI.get(story.get("_subject", ""), "")
+    y = ry + 100
+    if subj:
+        fs = get_font(32)
+        sw_ = text_w(subj, fs) + 36
+        d.rounded_rectangle((cx - sw_ / 2, y, cx + sw_ / 2, y + 46), radius=23, fill=(18, 32, 72))
+        d.text((cx, y + 23), subj, font=fs, fill=WHITE, anchor="mm")
+        y += 66
     title = clean_text(story["topic"])
     extra = clean_text(story.get("topic_extra") or "")
-    f, sz, lines = fit_lines(title + (f" ({extra})" if extra else ""), 860, 2, 92, 56)
-    y = 130
+    f, sz, lines = fit_lines(title, w - 260, 2, 118 if tall else 96, 60)
     for ln in lines[:2]:
-        d.text((KAHANI_W / 2 + 50, y), " ".join(ln), font=f, fill=K_RED, anchor="mt")
-        y += int(sz * 1.25)
+        t = " ".join(ln)
+        d.text((cx, y), t, font=f, fill=K_RED, anchor="mt")
+        tw = text_w(t, f)
+        y += int(sz * 1.22)
+    _wavy(d, cx - tw / 2, cx + tw / 2, y - sz * 0.05, K_GREEN, amp=5, w=6)
+    if extra:
+        d.text((cx, y + 14), f"({extra})", font=get_font(48 if tall else 42), fill=K_BLUE, anchor="mt")
+        y += 70
+    y += 20
     hook = "एक बार पढ़ कर ज़रूर देखिए, पूरी कहानी से याद हो जाएगा!"
-    fh, szh, hl = fit_lines(hook, 760, 2, 50, 36)
-    bh = len(hl) * int(szh * 1.35) + 40
-    d.rectangle((200, y + 20, KAHANI_W - 100, y + 20 + bh), fill=(226, 244, 246), outline=(30, 60, 90), width=4)
+    fh, szh, hl = fit_lines(hook, w - 360, 2, 52 if tall else 46, 34)
+    bh = len(hl) * int(szh * 1.35) + 36
+    d.rectangle((210 + 8, y + 8, w - 90 + 8, y + bh + 8), fill=(30, 60, 90))
+    d.rectangle((210, y, w - 90, y + bh), fill=(226, 244, 246), outline=(30, 60, 90), width=4)
     for k, ln in enumerate(hl):
-        d.text((KAHANI_W / 2 + 50, y + 40 + k * int(szh * 1.35)), " ".join(ln), font=fh, fill=K_BLUE, anchor="mt")
-    top = y + 20 + bh + 30
-    bottom = KAHANI_H - 230
-    im = _fit_img(img, 800, bottom - top)
+        d.text((cx, y + 20 + k * int(szh * 1.35)), " ".join(ln), font=fh, fill=K_BLUE, anchor="mt")
+    top = y + bh + 30
+    bottom = h - (330 if tall else 210)
+    im = _fit_img(img, w - 240, bottom - top)
     if im is not None:
-        cv.paste(im, (int(KAHANI_W / 2 + 50 - im.width / 2), int(top + (bottom - top - im.height) / 2)), im)
+        cv.paste(im, (int(cx - im.width / 2), int(top + (bottom - top - im.height) / 2)), im)
     else:
-        sw = stopwatch_sprite(300, 0.25)
-        cv.paste(sw, (int(KAHANI_W / 2 + 50 - 150), int((top + bottom) / 2 - 150)), sw)
-    # "aage to badho ->"
-    ay = KAHANI_H - 160
-    d.polygon([(220, ay - 22), (420, ay - 22), (420, ay - 50), (500, ay), (420, ay + 50), (420, ay + 22),
-               (220, ay + 22)], fill=K_RED, outline=K_BLUE)
-    d.text((540, ay), "आगे तो बढ़ो...", font=get_font(60), fill=K_RED, anchor="lm")
-    _brand_small(cv, d)
+        swp = stopwatch_sprite(320, 0.25)
+        cv.paste(swp, (int(cx - 160), int((top + bottom) / 2 - 160)), swp)
+    for sx, sy, r in ((215, top + 40, 22), (w - 110, top + 70, 18), (230, bottom - 60, 16), (w - 120, bottom - 40, 24)):
+        _star(d, sx, sy, r)
+    ay = h - (240 if tall else 140)
+    d.polygon([(200, ay - 24), (400, ay - 24), (400, ay - 54), (490, ay), (400, ay + 54), (400, ay + 24),
+               (200, ay + 24)], fill=K_RED, outline=K_BLUE)
+    d.text((530, ay), "आगे तो बढ़ो...", font=get_font(64 if tall else 58), fill=K_RED, anchor="lm")
+    if tall:
+        ex = "RRB • SSC • Police • Patwari • State Exams"
+        fe = get_font(32)
+        we = text_w(ex, fe) + 40
+        d.rounded_rectangle((cx - we / 2, h - 150, cx + we / 2, h - 104), radius=23, fill=(18, 32, 72))
+        d.text((cx, h - 127), ex, font=fe, fill=(255, 225, 90), anchor="mm")
+    _brand_small(cv, d, y=h - 52)
     return cv
+
+
+def kahani_cover(story, img, n):
+    return kahani_poster(story, img, KAHANI_W, KAHANI_H, badge=(1, n))
 
 
 def kahani_page(slide, imgs, i, n):
@@ -5214,6 +5283,7 @@ def build_kahani_pages(story, key):
     tag = re.sub(r"[^a-z0-9]", "", str(abs(hash(story["topic"]))))[:10]
     n = len(story["slides"]) + 2
     cover_img = kahani_image(story.get("cover_img"), os.path.join(IMG_DIR, f"k_{tag}_c.png"))
+    story["_cover"] = cover_img
     pages = [kahani_cover(story, cover_img, n)]
     got = int(cover_img is not None)
     for s_i, sl in enumerate(story["slides"]):
@@ -5295,7 +5365,6 @@ def build_kahani_reel(pages, out, speeches=None, rot=0):
         return (k, int(tt * FPS)) if (k > 0 and tt < 0.45) else (k, -1)
 
     encode_frames(render, int(dur * FPS), music, out, key=key)
-    pages[0].save(os.path.join(os.path.dirname(out) or ".", "thumbnail.jpg"), quality=92)
     print(f"KAHANI REEL TAIYAR: {out} ({dur:.0f}s)")
 
 
@@ -5392,6 +5461,7 @@ def run_kahani(bank, st, ep, args):
         print("Kahani nahi bani -> list format")
         return False
     print(f"KAHANI: {story['topic']}  ({key[0]} / {key[1][:40]})")
+    story["_subject"] = key[0]
     resolve_font()
     pages = build_kahani_pages(story, key)
     os.makedirs(KAHANI_DIR, exist_ok=True)
@@ -5405,6 +5475,8 @@ def run_kahani(bank, st, ep, args):
     os.makedirs(OUTPUT_DIR, exist_ok=True)
     out = os.path.join(OUTPUT_DIR, FINAL_VIDEO)
     build_kahani_reel(pages, out, kahani_speeches(story), ep)
+    thumb = os.path.join(OUTPUT_DIR, "thumbnail.jpg")
+    kahani_poster(story, story.get("_cover"), W, H).save(thumb, quality=93)
     caption = kahani_caption(story, key, ep)
     Path(os.path.join(OUTPUT_DIR, "caption.txt")).write_text(caption, encoding="utf-8")
     print("\nCAPTION:\n" + caption)
@@ -5418,10 +5490,13 @@ def run_kahani(bank, st, ep, args):
         shutil.copytree(KAHANI_DIR, dst)
         return True                                  # jaanch run: progress nahi badla (topic agli baar asli post hoga)
     else:
-        if not post_reel(out, caption, 0):
+        cover = _public_url(thumb)
+        pid = post_reel(out, caption, 0, cover)
+        if not pid:
             save_progress(st)
             return True
-        post_carousel(paths, caption)
+        cid = post_carousel(paths, caption)                 # reel ke turant baad wahi kahani carousel me
+        st["kahani_log"] = {"reel": pid, "carousel": cid, "cover": bool(cover), "time": time.strftime("%Y-%m-%d %H:%M")}
     st["posted"] += [q["id"] for q in qs]
     st.setdefault("kahani_chapters", []).append("|".join(key[1:]))
     st["kahani_n"] = int(st.get("kahani_n", 0)) + 1
