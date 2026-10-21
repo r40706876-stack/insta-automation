@@ -196,6 +196,7 @@ def clean_text(text):
     if not text:
         return ""
     t = str(text)
+    t = re.sub(r"\s*\d{2,4}\s*भ्ण्ऊ", "", t)          # PDF page-footer ka kachra ("724 भ्ण्ऊ")
     # ms–2 -> m/s², Nm–2 -> N/m², kgm–3 -> kg/m³ (book me ghaat aise likha hota hai)
     t = re.sub(r"(?<![A-Za-z])([A-Za-z]{0,3}?)\s?(s|m|K|g)\s?[–\-−]\s?([123])(?![\d.])", _unit_pow, t)
     # book me ghaat chhoot gaya: 6 × 1024 kg -> 6 × 10²⁴ kg, 3 × 108 m/s -> 3 × 10⁸ m/s
@@ -3273,8 +3274,13 @@ def pick_format(ep):
         return REEL_FORMAT
     # din ki 3 reel samay ke hisaab se (IST): subah 7 PYQ list, dopahar quiz notebook, raat MEGA revision
     # (MEGA = sabse zyada save wali reel -> raat 8 baje ke sabse bade peak pe)
+    # GitHub kabhi ghanton der se chalata hai -> format samay se nahi, kaunsa schedule chala usse tay ho
+    by_cron = {"15 1 * * *": "list", "15 7 * * *": "kahani", "15 11 * * *": "trick", "45 13 * * *": "mega"}
+    cron = os.getenv("CRON_SLOT", "").strip()
+    if cron in by_cron:
+        return by_cron[cron]
     h = time.gmtime(time.time() + 19800).tm_hour
-    return "list" if h < 11 else ("kahani" if h < 17 else "mega")   # dopahar: quiz ki jagah kahani (quiz ka skip zyada)
+    return "list" if h < 11 else ("kahani" if h < 15 else ("trick" if h < 18 else "mega"))   # dopahar: quiz ki jagah kahani (quiz ka skip zyada)
 
 
 # ---------- HAR EXAM KI AUDIENCE: GS sab me aata hai -> har reel alag exam waalon ko bulaye ----------

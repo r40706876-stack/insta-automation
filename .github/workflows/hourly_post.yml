@@ -6,6 +6,7 @@ on:
     # Exam students Insta sabse zyada: subah padhai se pehle, dopahar break, raat 8-10 (sabse bada peak).
     - cron: "15 1 * * *"     # subah ~7:00  -> 7 PYQ list (jaldi revision)
     - cron: "15 7 * * *"     # dopahar ~1:00 -> KAHANI (reel + carousel)
+    - cron: "15 11 * * *"    # shaam ~4:45-5:15 -> TRICK se yaad karo (sawal-hook + trick + awaaz)
     - cron: "45 13 * * *"    # raat ~7:45-8:15 -> MEGA revision (save wali reel, sabse bade peak pe)
   workflow_dispatch:
     inputs:
@@ -49,6 +50,7 @@ jobs:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           IMGBB_KEY: ${{ secrets.IMGBB_KEY }}
+          CRON_SLOT: ${{ github.event.schedule }}
           REEL_FORMAT: ${{ github.event.inputs.format || 'auto' }}   # auto = samay se: subah list, dopahar kahani, raat MEGA
           POST_MODE: ${{ github.event.inputs.post_mode || 'publish' }}   # 'manual' likho to Instagram pe post nahi, repo ke ready_reels/ me reel milegi
         run: |
