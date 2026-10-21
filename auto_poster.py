@@ -5406,7 +5406,22 @@ def _public_url(path):
                               headers={"User-Agent": "MinuteMe-uploader/1.0"}, timeout=120)
         return r.text.strip() if r.text.strip().startswith("http") else None
 
-    for name, fn in (("uguu", uguu), ("tmpfiles", tmpfiles), ("0x0", zerox), ("litterbox", litterbox)):
+    def imgbb():
+        key = os.getenv("IMGBB_KEY", "").strip()
+        if not key:
+            return None
+        import base64
+        with open(path, "rb") as fh:
+            b64 = base64.b64encode(fh.read()).decode()
+        r = requests.post("https://api.imgbb.com/1/upload", params={"key": key, "expiration": 604800},
+                          data={"image": b64}, timeout=120).json()
+        if not r.get("success"):
+            print("  imgbb:", str(r.get("error") or r)[:150])
+            return None
+        return (r.get("data") or {}).get("url")
+
+    for name, fn in (("imgbb", imgbb), ("uguu", uguu), ("tmpfiles", tmpfiles), ("0x0", zerox),
+                     ("litterbox", litterbox)):
         try:
             u = fn()
         except Exception as exc:
