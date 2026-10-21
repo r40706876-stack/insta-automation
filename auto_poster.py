@@ -5295,6 +5295,7 @@ def build_kahani_pages(story, key):
         pages.append(kahani_page(sl, imgs, s_i + 2, n))
     pages.append(kahani_pyq_page(story, n, n))
     print(f"  Kahani: {len(pages)} page, {got} chitra bane")
+    story["_imgs"] = got
     return pages
 
 
@@ -5368,28 +5369,52 @@ def build_kahani_reel(pages, out, speeches=None, rot=0):
     print(f"KAHANI REEL TAIYAR: {out} ({dur:.0f}s)")
 
 
-def _public_url(path):
-    """Instagram carousel ko photo ka public URL chahiye: free host par daalo (24 ghante tak)."""
-    tries = [("https://litterbox.catbox.moe/resources/internals/api.php", {"reqtype": "fileupload", "time": "24h"}),
-             ("https://catbox.moe/user/api.php", {"reqtype": "fileupload"})]
-    for url, data in tries:
-        try:
-            with open(path, "rb") as fh:
-                r = requests.post(url, data=data, files={"fileToUpload": fh}, timeout=120)
-            u = r.text.strip()
-            if r.status_code == 200 and u.startswith("http"):
-                return u
-            print("  photo host:", r.status_code, u[:100])
-        except Exception as exc:
-            print("  photo host fail:", str(exc)[:100])
+def _is_image_url(u):
     try:
+        r = requests.get(u, timeout=40, stream=True, headers={"User-Agent": "Mozilla/5.0"})
+        ok = r.status_code == 200 and r.headers.get("content-type", "").startswith("image/")
+        r.close()
+        return ok
+    except Exception:
+        return False
+
+
+def _public_url(path):
+    """Instagram carousel/cover ko photo ka public URL chahiye. Kai free host; har link jaancha jaata hai
+    ki sach me photo (image/jpeg) deta hai, HTML page nahi."""
+    def uguu():
+        with open(path, "rb") as fh:
+            r = requests.post("https://uguu.se/upload", files={"files[]": (os.path.basename(path), fh, "image/jpeg")},
+                              timeout=120).json()
+        return ((r.get("files") or [{}])[0]).get("url")
+
+    def tmpfiles():
         with open(path, "rb") as fh:
             r = requests.post("https://tmpfiles.org/api/v1/upload", files={"file": fh}, timeout=120).json()
         u = (r.get("data") or {}).get("url", "")
-        if u:
-            return u.replace("tmpfiles.org/", "tmpfiles.org/dl/", 1)
-    except Exception as exc:
-        print("  tmpfiles fail:", str(exc)[:100])
+        return re.sub(r"^https?://tmpfiles\.org/", "https://tmpfiles.org/dl/", u) if u else None
+
+    def litterbox():
+        with open(path, "rb") as fh:
+            r = requests.post("https://litterbox.catbox.moe/resources/internals/api.php",
+                              data={"reqtype": "fileupload", "time": "24h"}, files={"fileToUpload": fh}, timeout=120)
+        return r.text.strip() if r.text.strip().startswith("http") else None
+
+    def zerox():
+        with open(path, "rb") as fh:
+            r = requests.post("https://0x0.st", files={"file": fh}, data={"expires": "24"},
+                              headers={"User-Agent": "MinuteMe-uploader/1.0"}, timeout=120)
+        return r.text.strip() if r.text.strip().startswith("http") else None
+
+    for name, fn in (("uguu", uguu), ("tmpfiles", tmpfiles), ("0x0", zerox), ("litterbox", litterbox)):
+        try:
+            u = fn()
+        except Exception as exc:
+            print(f"  photo host {name} fail:", str(exc)[:100])
+            continue
+        if u and _is_image_url(u):
+            return u
+        print(f"  photo host {name}: link photo nahi deta ({str(u)[:80]})")
     return None
 
 
@@ -5464,6 +5489,10 @@ def run_kahani(bank, st, ep, args):
     story["_subject"] = key[0]
     resolve_font()
     pages = build_kahani_pages(story, key)
+    need = 1 + 2 * len(story["slides"])
+    if story.get("_imgs", 0) < need * 0.6:              # chitra ke bina kahani pheeki -> aaj doosra format
+        print(f"KAHANI ROKI: sirf {story.get('_imgs', 0)}/{need} chitra bane (Cloudflare quota?) -> list format")
+        return False
     os.makedirs(KAHANI_DIR, exist_ok=True)
     for f in os.listdir(KAHANI_DIR):
         os.remove(os.path.join(KAHANI_DIR, f))
