@@ -1,6 +1,6 @@
 {
  "next_seq": 110,
- "episode": 113,
+ "episode": 114,
  "posted": [
   "684d76bcbc",
   "6bb20b4a07",
@@ -282,10 +282,10 @@
   "bbb262a843": "2020 की अनुमानित वृद्धि का यह आंकड़ा अब पुराना (outdated) और तथ्यात्मक रूप से त्रुटिपूर्ण है।"
  },
  "last": {
-  "seq": 741,
-  "id": "265d182d9e",
-  "time": "2026-10-21 06:09",
-  "format": "list"
+  "seq": 2380,
+  "id": "8e2963ee0b",
+  "time": "2026-10-21 12:59",
+  "format": "mega"
  },
  "carousel_queue": [
   {
@@ -1020,9 +1020,49 @@
   "f944ca63ed",
   "1d2dcf12c5",
   "01ed635122",
-  "930c1ed3eb"
+  "930c1ed3eb",
+  "fba102507e",
+  "ece3d59a87",
+  "eb105b8c2d",
+  "f2f5018985",
+  "d6574112fd",
+  "9a78489b9b",
+  "3f7ccbde0c",
+  "d7d12568aa",
+  "6fcdc8b74b",
+  "28cd109730",
+  "6aeca6b351",
+  "1c9558d1fe",
+  "a271eebf01",
+  "0d9f7bcc46",
+  "b5e5e5e6e5",
+  "bd7b93dd2d",
+  "3a6b823a6e",
+  "b40999c89e",
+  "c81af31594",
+  "8957e2805a",
+  "4d4d01da05",
+  "930ae265bd",
+  "148dda8b0d",
+  "f9084b9a90",
+  "885743b6b4",
+  "0b47aed447",
+  "67dddd2887",
+  "fb237273bf",
+  "634e015598",
+  "9773a7a927",
+  "606777cf1d",
+  "960851e7c5",
+  "eba9e61e98",
+  "e06539c73d",
+  "accf0e8de0",
+  "366994c968",
+  "facfc4b4e3",
+  "1a73e07e7d",
+  "729de7342c",
+  "8e2963ee0b"
  ],
- "mega_n": 6,
+ "mega_n": 7,
  "kahani_chapters": [
   "विजयनगर/बहमनी साम्राज्य (Vijaynagar/Bahmani Empire)|",
   "ऊतक (Tissues)|पादप ऊतक (Plant Tissues)"

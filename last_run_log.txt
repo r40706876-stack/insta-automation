@@ -1,2 +1,27 @@
-FORMAT: carousel_folder
-CAROUSEL POST HO GAYA: 18138965326714200
+FORMAT: mega
+  Gemini gemini-flash-latest fail: HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeout=90)
+  Gemini gemini-2.5-flash fail: HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeout=90)
+  Gemini gemini-2.5-flash-lite: HTTP 404
+  Gemini gemini-2.0-flash: HTTP 404
+  Groq llama-3.3-70b-versatile: HTTP 404
+  Groq openai/gpt-oss-120b: HTTP 400
+  Groq llama-3.1-8b-instant: HTTP 404
+  Mega awaaz: gemini-3.8-flash-tts / hi-in-storyteller-6
+MEGA REEL TAIYAR: generated_reels/science_pyq_reel.mp4 (14.2s, 2 page, 40 sawal)
+
+CAPTION:
+📚 "अर्थशास्त्र (Economics)" के 40 सबसे महत्वपूर्ण प्रश्न - सभी सरकारी परीक्षाओं के लिए
+
+⏸️ हर पेज पर रोककर पढ़ो (स्क्रीन दबाकर रखो)
+📌 अभी SAVE करो - exam से पहले 1 बार ज़रूर revise करना
+📤 उस दोस्त को भेजो जो SSC / Railway / Police की तैयारी कर रहा है
+💬 कितने पहले से आते थे? कमेंट करो!
+
+अर्थशास्त्र (Economics) GK | RRB NTPC, Group D, SSC GD, CGL, MTS, Police, Patwari, State Exam PYQ
+⏱ MinuteMe_GS - एक मिनट, एक PYQ - पक्का!
+
+#gk #gkquiz #gkpyq #sscgd #rrbntpc #rrbgroupd #policebharti #economics
+  IG container: 17909757771568651
+  upload try 1: HTTP 200 {"success":true,"message":"Upload Successful."}
+  IG processing: FINISHED
+INSTAGRAM PE POST HO GAYA: 18044200997840115
