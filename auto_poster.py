@@ -3056,7 +3056,7 @@ def post_reel(video_file, caption, thumb_ms=0, cover_url=None):
     last = None
     for attempt in range(3):
         try:
-            pid = _upload_once(video_file, caption, thumb_ms, cover_url)
+            pid = _upload_once(video_file, caption, thumb_ms, cover_url if attempt == 0 else None)
             print("INSTAGRAM PE POST HO GAYA:", pid)
             return pid
         except Exception as exc:
