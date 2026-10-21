@@ -1033,5 +1033,10 @@
   "carousel": null,
   "cover": true,
   "time": "2026-10-21 05:22"
+ },
+ "carousel_folder_log": {
+  "carousel": "18138965326714200",
+  "pages": 9,
+  "time": "2026-10-21 08:20"
  }
 }
