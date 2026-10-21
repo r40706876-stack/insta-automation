@@ -3269,7 +3269,7 @@ PEN_RED = (200, 30, 40)
 
 
 def pick_format(ep):
-    if REEL_FORMAT in ("loop", "list", "classic", "triple", "quiz", "galti", "mega", "kahani"):
+    if REEL_FORMAT in ("loop", "list", "classic", "triple", "quiz", "galti", "mega", "kahani", "carousel_folder"):
         return REEL_FORMAT
     # din ki 3 reel samay ke hisaab se (IST): subah 7 PYQ list, dopahar quiz notebook, raat MEGA revision
     # (MEGA = sabse zyada save wali reel -> raat 8 baje ke sabse bade peak pe)
@@ -5738,6 +5738,17 @@ def main():
     if args.seq and fmt in ("list", "triple", "quiz", "galti", "mega", "kahani"):
         fmt = "loop"
     print(f"FORMAT: {fmt}")
+    if fmt == "carousel_folder":                    # post_carousel/ ki taiyar photos -> sirf carousel
+        import glob
+        paths = sorted(glob.glob("post_carousel/*.jpg"))
+        cap = Path("post_carousel/caption.txt").read_text(encoding="utf-8") if os.path.exists(
+            "post_carousel/caption.txt") else ""
+        cid = post_carousel(paths, cap) if paths else None
+        st["carousel_folder_log"] = {"carousel": cid, "pages": len(paths), "time": time.strftime("%Y-%m-%d %H:%M")}
+        save_progress(st)
+        if not cid:
+            raise SystemExit("Carousel post nahi hua")
+        return
     if fmt == "kahani":
         if run_kahani(bank, st, ep, args):
             return
