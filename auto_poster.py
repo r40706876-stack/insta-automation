@@ -3269,7 +3269,7 @@ PEN_RED = (200, 30, 40)
 
 
 def pick_format(ep):
-    if REEL_FORMAT in ("loop", "list", "classic", "triple", "quiz", "galti", "mega", "kahani", "carousel_folder"):
+    if REEL_FORMAT in ("loop", "list", "classic", "triple", "quiz", "galti", "mega", "kahani", "carousel_folder", "trick"):
         return REEL_FORMAT
     # din ki 3 reel samay ke hisaab se (IST): subah 7 PYQ list, dopahar quiz notebook, raat MEGA revision
     # (MEGA = sabse zyada save wali reel -> raat 8 baje ke sabse bade peak pe)
@@ -5563,6 +5563,277 @@ def _kahani_demo():
                     {"q": "भारतीय सिविल सेवा का जनक किसे कहा जाता है?", "a": "लॉर्ड कॉर्नवालिस"}]}
 
 
+# ---------- TRICK SE YAAD KARO: sawal-hook -> pen se likhi trick -> har akshar ka matlab (awaaz ke saath) ----------
+# vidIQ (Oct 2026): study reels me sabse zyada save/share = "G20 me kitne desh?" jaisa SAWAL se shuru, phir
+# hath se likhi mnemonic trick + awaaz (26 lakh views). MinuteMe pehchan: spiral copy, laal pen, stopwatch.
+
+TRICK_SUBJ_ORDER = ["Physics", "Geography", "Polity", "History", "Biology", "Chemistry", "Economics",
+                    "Traditional GK", "Environment"]
+
+TRICK_PROMPT = """Tum ek mashhoor Hindi GK teacher ho jo kathin list/tathya ko mazedaar TRICK (mnemonic) se yaad
+karwata hai (jaise indradhanush ke rang: "बैजानीहपीनाला" = बैंगनी, जामुनी, नीला, हरा, पीला, नारंगी, लाल).
+Neeche ek chapter ke asli PYQ (sawal | sahi jawab) hain:
+CHAPTER: {chapter}
+{rows}
+
+Kaam: is chapter se EK aisa tathya-samooh chuno jo exam me poochha jaata hai aur jise 3-7 hisson ki trick se
+yaad kiya ja sake (list, kram, sankhya, naam). Sirf pakke textbook tathya. Trick chhoti, bolne me mazedaar,
+Devanagari me. Agar is chapter me trick layak kuch nahi to {{"reject": "wajah"}} do.
+
+Sirf JSON:
+{{
+ "hook": "chaunkane wala sawal, max 9 shabd, '?' ke saath (jaise: इंद्रधनुष के 7 रंग कौन-कौन से हैं?)",
+ "trick": "trick shabd/vakya, max 5 shabd",
+ "lines": [ {{"key": "trick ka hissa (1-3 akshar/shabd)", "full": "uska matlab, max 4 shabd"}} ],   // 3-7
+ "pyq": {{"q": "isi se juda ek asli PYQ (upar wale me se, chhota)", "a": "jawab (max 4 shabd)"}}
+}}"""
+
+TRICK_CHECK = """Ye ek Hindi GK mnemonic trick ka JSON hai jo exam students ko jayegi. Jaancho: (1) har 'full' tathya
+sahi aur poora hai, (2) 'lines' ka kram aur sankhya sahi hai (koi chhoota/faltu nahi), (3) har 'key' sach me
+'trick' ka hissa hai aur usi kram me, (4) pyq ka jawab sahi hai, (5) Hindi spelling. Galti ho to sudhaar kar
+poora JSON do; agar trick bhramak hai aur sudhar nahi sakti to {{"reject": "wajah"}}. Sirf JSON.
+JSON:
+{js}"""
+
+
+def _trick_pick_group(bank, st):
+    done = set(st["posted"]) | set(st["skipped"])
+    used = set(st.get("trick_chapters", []))
+    groups = {}
+    for q in bank:
+        if q["id"] in done or "विविध" in q["chapter"] or "Misc" in q["chapter"]:
+            continue
+        groups.setdefault((q["subject"], q["chapter"], q.get("sub") or ""), []).append(q)
+    n = int(st.get("trick_n", 0))
+    for k in range(len(TRICK_SUBJ_ORDER)):
+        subj = TRICK_SUBJ_ORDER[(n + k) % len(TRICK_SUBJ_ORDER)]
+        cands = sorted(((len(v), key) for key, v in groups.items() if key[0] == subj and len(v) >= 4
+                        and "|".join(key[1:]) not in used), reverse=True)
+        if cands:
+            key = cands[0][1]
+            return key, sorted(groups[key], key=lambda q: -int(q.get("times_asked") or 1))[:14]
+    return None, []
+
+
+def trick_content(key, qs):
+    rows = "\n".join(f"- {clean_text(q['question'])} | {clean_text(str(q['options'][q['answer']]))}" for q in qs)
+    chap = key[1] + (f" / {key[2]}" if key[2] else "")
+    js = None
+    for fn in (_gemini, _groq):
+        js = fn(TRICK_PROMPT.format(chapter=chap, rows=rows))
+        if js and (js.get("reject") or len(js.get("lines") or []) >= 3):
+            break
+    if not js or js.get("reject"):
+        print("  TRICK nahi bani:", str((js or {}).get("reject"))[:120])
+        return None
+    for fn in (_gemini, _groq):
+        chk = fn(TRICK_CHECK.format(js=json.dumps(js, ensure_ascii=False)))
+        if chk and chk.get("reject"):
+            print("  TRICK CHHODI (jaanch):", str(chk["reject"])[:120])
+            return None
+        if chk and len(chk.get("lines") or []) >= 3:
+            js = chk
+            break
+    js["lines"] = [l for l in js["lines"] if l.get("key") and l.get("full")][:7]
+    return js if len(js["lines"]) >= 3 and js.get("hook") and js.get("trick") else None
+
+
+def _sprite(w, h, fn):
+    im = Image.new("RGBA", (int(w), int(h)), (0, 0, 0, 0))
+    fn(ImageDraw.Draw(im), im)
+    bb = im.getbbox()
+    return im.crop((0, 0, bb[2] + 8, bb[3] + 8)) if bb else im
+
+
+def trick_layout(tc):
+    """Har cheez ka sprite + jagah + kis scene me likhi jaaye."""
+    els = []                                    # (scene, sprite, x, y, write?)
+    # scene 0: sawal (shuru se dikhta hai - pehla frame = cover)
+    def q_draw(d, im):
+        f, sz, lines = fit_lines(clean_text(tc["hook"]), 860, 3, 92, 60)
+        for k, ln in enumerate(lines[:3]):
+            d.text((430, k * int(sz * 1.25)), " ".join(ln), font=f, fill=K_RED, anchor="ma")
+    q = _sprite(860, 360, q_draw)
+    els.append((0, q, (150 + W) / 2 - 430, 300, False))
+    sub = "99% लोग भूल जाते हैं  -  ट्रिक से 1 बार में याद!"
+    def s_draw(d, im):
+        f = get_font(40)
+        w = text_w(sub, f) + 50
+        d.rounded_rectangle((0, 0, w, 64), radius=32, fill=(18, 32, 72))
+        d.text((w / 2, 32), sub, font=f, fill=(255, 225, 90), anchor="mm")
+    sp = _sprite(1000, 64, s_draw)
+    els.append((0, sp, (150 + W) / 2 - sp.width / 2, 300 + q.height + 20, False))
+    y = 300 + q.height + 120
+    # scene 1: trick
+    def t_draw(d, im):
+        d.text((0, 10), "ट्रिक :", font=get_font(64), fill=K_BLUE, anchor="la")
+        f, sz, lines = fit_lines(clean_text(tc["trick"]), 640, 1, 104, 56)
+        tx = text_w("ट्रिक :  ", get_font(64))
+        t = " ".join(lines[0])
+        d.text((tx, 0), t, font=f, fill=K_GREEN, anchor="la")
+        _wavy(d, tx, tx + text_w(t, f), sz * 1.25, K_RED, amp=6, w=7)
+    tr = _sprite(900, 150, t_draw)
+    els.append((1, tr, 190, y, True))
+    y += tr.height + 50
+    # scene 2..: har hissa
+    n = len(tc["lines"])
+    room = (H - 330) - y
+    lh = int(min(140, room / max(1, n)))
+    fs = max(44, min(66, int(lh * 0.52)))
+    for k, ln in enumerate(tc["lines"]):
+        def l_draw(d, im, ln=ln):
+            key = clean_text(str(ln["key"]))
+            fk = get_font(fs + 8)
+            kw = text_w(key, fk) + 44
+            d.ellipse((0, 0, kw, fs * 1.6), outline=K_RED, width=5)
+            d.text((kw / 2, fs * 0.8), key, font=fk, fill=K_RED, anchor="mm")
+            d.text((kw + 22, fs * 0.8), "=  " + clean_text(str(ln["full"])), font=get_font(fs), fill=K_BLUE,
+                   anchor="lm")
+        ls = _sprite(860, int(fs * 1.7), l_draw)
+        els.append((2 + k, ls, 200, y + k * lh, True))
+    # aakhri scene: CTA
+    def c_draw(d, im):
+        d.rounded_rectangle((0, 0, 880, 150), radius=26, fill=K_RED)
+        d.text((440, 48), "SAVE करो  •  दोस्त को भेजो", font=get_font(54), fill=WHITE, anchor="mm")
+        d.text((440, 112), "अगली ट्रिक किस टॉपिक की चाहिए?  कमेंट करो", font=get_font(36), fill=(255, 230, 150),
+               anchor="mm")
+    cta = _sprite(880, 150, c_draw)
+    els.append((2 + n, cta, (150 + W) / 2 - 440, H - 300, False))
+    return els
+
+
+def trick_speeches(tc):
+    out = [f"{clean_text(tc['hook'])} 99% लोग भूल जाते हैं। बस ये ट्रिक याद कर लो।",
+           f"ट्रिक है... {clean_text(tc['trick'])}!"]
+    out += [f"{clean_text(str(l['key']))} से... {clean_text(str(l['full']))}।" for l in tc["lines"]]
+    out.append("बस! अब कभी नहीं भूलोगे। Save करो, और कमेंट में बताओ अगली ट्रिक किस टॉपिक की चाहिए।")
+    return [to_speech(t) for t in out]
+
+
+def build_trick_reel(tc, out, rot=0):
+    resolve_font()
+    els = trick_layout(tc)
+    speeches = trick_speeches(tc)
+    nsc = len(speeches)
+    voices = None
+    try:
+        voices = [v[0] for v in make_voices([{"segs": [(None, None, t)]} for t in speeches], rot)]
+    except Exception as exc:
+        print("  Trick awaaz nahi bani:", str(exc)[:150])
+    durs = [max(1.4, len(v) / SR + 0.3) for v in voices] if voices else [2.4] * nsc
+    durs[-1] = max(durs[-1], 3.0)
+    starts = [sum(durs[:k]) for k in range(nsc)]
+    dur = sum(durs)
+    base = _paper(W, H)
+    d = ImageDraw.Draw(base)
+    rib = "Trick से याद करो"
+    fr = get_font(48)
+    rw = text_w(rib, fr) + 70
+    cx = (150 + W) / 2
+    d.polygon([(cx - rw / 2 - 26, 150), (cx + rw / 2 + 26, 150), (cx + rw / 2, 190), (cx + rw / 2 + 26, 230),
+               (cx - rw / 2 - 26, 230), (cx - rw / 2, 190)], fill=K_RED)
+    d.text((cx, 190), rib, font=fr, fill=(255, 235, 120), anchor="mm")
+    _brand_small(base, d, y=H - 90)
+    pen = pen_sprite(110)
+    WRITE = 0.55
+
+    def render(fi):
+        t = fi / FPS
+        cv = base.copy()
+        for sc, sp, x, y, write in els:
+            t0 = starts[min(sc, nsc - 1)]
+            if t < t0:
+                continue
+            p = 1.0 if not write else clamp((t - t0) / WRITE)
+            if p >= 1:
+                cv.paste(sp, (int(x), int(y)), sp)
+            else:
+                cw = max(1, int(sp.width * ease_out_cubic(p)))
+                part = sp.crop((0, 0, cw, sp.height))
+                cv.paste(part, (int(x), int(y)), part)
+                cv.paste(pen, (int(x + cw - 10), int(y + sp.height * 0.55 - 100)), pen)
+        k = 0
+        while k + 1 < nsc and t >= starts[k + 1]:
+            k += 1
+        sw = stopwatch_sprite(90, clamp(t / dur))
+        cv.paste(sw, (W - 140, 40), sw)
+        return cv
+
+    music = beat_music(dur, seed=len(tc["lines"])) * (0.15 if voices else 0.7)
+    if voices:
+        for k, v in enumerate(voices):
+            add_at(music, v.astype(np.float32), starts[k] + 0.15, 1.0)
+    for sc in range(1, nsc):
+        add_at(music, sfx_pop(0.3), starts[sc])
+    music = np.clip(music, -0.98, 0.98)
+    step = max(1, FPS // 15)
+    encode_frames(render, int(dur * FPS), music, out, key=lambda fi: fi // step)
+    render(int((starts[-1] + 0.5) * FPS)).save(os.path.join(os.path.dirname(out) or ".", "trick_full.jpg"),
+                                                 quality=92)
+    print(f"TRICK REEL TAIYAR: {out} ({dur:.0f}s)")
+    return dur
+
+
+def trick_caption(tc, key, ep):
+    aud = audience_of(ep)
+    lines = [f"🧠 {clean_text(tc['hook'])} - ट्रिक से 1 बार में याद!", "",
+             f"✍️ ट्रिक: {clean_text(tc['trick'])}"]
+    lines += [f"• {clean_text(str(l['key']))} = {clean_text(str(l['full']))}" for l in tc["lines"]]
+    if tc.get("pyq"):
+        lines += ["", f"📝 Exam में पूछा गया: {clean_text(tc['pyq']['q'])} → {clean_text(tc['pyq']['a'])}"]
+    lines += ["", "💬 अगली ट्रिक किस टॉपिक की चाहिए? कमेंट करो!",
+              "📤 Save करो + उस दोस्त को भेजो जो ये हमेशा भूलता है",
+              f"🎯 {aud[0]} + हर GS exam के लिए", f"⏱ {BRAND} - {BRAND_TAGLINE}", "",
+              f"#gktricks #gkinhindi #gkpyq {aud[1]} {SUBJ_TAGS.get(key[0], '#gk')}"]
+    return "\n".join(lines)
+
+
+def _trick_demo():
+    return {"hook": "इंद्रधनुष के 7 रंग कौन-कौन से हैं?", "trick": "बैजानीहपीनाला",
+            "lines": [{"key": "बै", "full": "बैंगनी"}, {"key": "जा", "full": "जामुनी"}, {"key": "नी", "full": "नीला"},
+                      {"key": "ह", "full": "हरा"}, {"key": "पी", "full": "पीला"}, {"key": "ना", "full": "नारंगी"},
+                      {"key": "ला", "full": "लाल"}],
+            "pyq": {"q": "इंद्रधनुष में सबसे ऊपर कौन-सा रंग होता है?", "a": "लाल"}}
+
+
+def run_trick(bank, st, ep, args):
+    tc, key, qs = None, None, []
+    for _ in range(3):
+        key, qs = _trick_pick_group(bank, st)
+        if not key:
+            break
+        tc = _trick_demo() if DRY_RUN else trick_content(key, qs)
+        if tc:
+            break
+        st.setdefault("trick_chapters", []).append("|".join(key[1:]))
+    if not tc:
+        print("Trick nahi bani -> list format")
+        return False
+    print(f"TRICK: {tc['hook']}  ({key[0]} / {key[1][:40]})")
+    os.makedirs(OUTPUT_DIR, exist_ok=True)
+    out = os.path.join(OUTPUT_DIR, FINAL_VIDEO)
+    build_trick_reel(tc, out, ep)
+    caption = trick_caption(tc, key, ep)
+    Path(os.path.join(OUTPUT_DIR, "caption.txt")).write_text(caption, encoding="utf-8")
+    print("\nCAPTION:\n" + caption)
+    if args.no_post or DRY_RUN:
+        return True
+    if POST_MODE == "manual":
+        save_ready(out, caption, ep)
+        return True                                   # jaanch run: progress nahi badla
+    pid = post_reel(out, caption, 0)
+    if not pid:
+        save_progress(st)
+        return True
+    st.setdefault("trick_chapters", []).append("|".join(key[1:]))
+    st["trick_n"] = int(st.get("trick_n", 0)) + 1
+    st["episode"] = ep
+    st["last"] = {"seq": qs[-1]["seq"], "id": qs[-1]["id"], "time": time.strftime("%Y-%m-%d %H:%M"),
+                  "format": "trick", "topic": tc["hook"]}
+    save_progress(st)
+    return True
+
+
 # ---------- TRIPLE: "3 सवाल, 16 सेकंड" challenge (score comment + dost ko challenge = share) ----------
 
 TRI_DUR = 16.0                      # 120 BPM ke 8 bar; 3 sawal x 5.33s
@@ -5749,6 +6020,10 @@ def main():
         if not cid:
             raise SystemExit("Carousel post nahi hua")
         return
+    if fmt == "trick":
+        if run_trick(bank, st, ep, args):
+            return
+        fmt = "list"
     if fmt == "kahani":
         if run_kahani(bank, st, ep, args):
             return
