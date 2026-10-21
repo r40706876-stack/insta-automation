@@ -3014,7 +3014,10 @@ def series_line():
 
 
 def _with_series(caption):
-    return caption if caption.startswith("📅") else f"{series_line()}\n\n{caption}"
+    share = "📤 ये reel उस दोस्त को भेजो जो Group D / NTPC / SSC / Police की तैयारी कर रहा है!"
+    if caption.startswith("📅"):
+        return caption
+    return f"{series_line()}\n{share}\n\n{caption}"
 
 
 # ============================== INSTAGRAM ==============================
@@ -4019,6 +4022,10 @@ def list_ok(q):
         return False
     # bina options ke list me ye sawal ulte/adhoore lagte hain
     # 'वर्तमान/मौजूदा' = jawab badal chuka ho sakta hai (list me AI ke alawa ye doosri suraksha)
+    if not re.search(r"\?|क्या|कौन|किस|कब|कहाँ|कहां|कितन|किन", qc):     # adhoora "...है-" wala sawal nahi
+        return False
+    if re.search(r"\d0C\b|\d+0F\b", str(q["options"][q["answer"]])):        # 78°C -> '780C' jaisa toota ank
+        return False
     return not re.search(r"नहीं|असत्य|गलत|निम्न|इनमें से|इनमे से|सही कथन|पता लगाया|वर्तमान|मौजूदा|हाल ही|अभी", qc)
 
 
@@ -4031,7 +4038,10 @@ def pick_list_items(bank, st):
     today = []                                  # 'aaj ke din' wala title band: hamesha ek subject ("जीव विज्ञान के 7 PYQ")
     subject = next((q["subject"] for q in pending if list_ok(q)), pending[0]["subject"])
     items = []
-    for q in (today if subject == "TODAY" else pending):
+    # zyada baar poochhe gaye + chhote sawal pehle: student ko "arre, ye to aana chahiye!" lage
+    pool = sorted((q for q in pending if q["subject"] == subject),
+                  key=lambda q: (-int(q.get("times_asked") or 1), int(q["seq"])))
+    for q in (today if subject == "TODAY" else pool):
         if subject != "TODAY" and (q["subject"] != subject or not list_ok(q)):
             continue
         ai = ai_enrich(q)
@@ -4040,10 +4050,20 @@ def pick_list_items(bank, st):
             continue
         qq = clean_text((ai or {}).get("question") or q["question"])
         aa = clean_text(((ai or {}).get("options") or {}).get(q["answer"]) or q["options"][q["answer"]])
-        items.append({"id": q["id"], "seq": q["seq"], "q": qq, "a": aa})
+        items.append({"id": q["id"], "seq": q["seq"], "q": qq, "a": aa, "n": int(q.get("times_asked") or 1)})
         if len(items) >= LIST_N:
             break
     return subject, items
+
+
+def list_hook(items):
+    """Pehle second ka sach hook (bank ke data se)."""
+    rep_n = sum(1 for it in items if int(it.get("n") or 1) >= 2)
+    if rep_n >= 4:
+        return f"इनमें से {rep_n} सवाल बार-बार पूछे गए हैं!"
+    if rep_n >= 1:
+        return "Exam से पहले ये 7 ज़रूर देख लो!"
+    return "इनमें से कितने आते हैं?  सच बताना!"
 
 
 @lru_cache(maxsize=2)
@@ -4068,6 +4088,12 @@ def list_title(subject):
 def render_list_frame(subject, items):
     cv = _paper_bg().copy()
     d = ImageDraw.Draw(cv)
+    hk = list_hook(items)
+    fh = next(get_font(z) for z in (50, 46, 42, 38) if text_w(hk, get_font(z)) + 70 <= W - 140)
+    wh = text_w(hk, fh) + 70
+    d.rounded_rectangle((W / 2 - wh / 2 + 6, 126, W / 2 + wh / 2 + 6, 196), radius=18, fill=(120, 10, 20))
+    d.rounded_rectangle((W / 2 - wh / 2, 120, W / 2 + wh / 2, 190), radius=18, fill=PEN_RED)
+    d.text((W / 2, 155), hk, font=fh, fill=WHITE, anchor="mm")
     d.text((W / 2, 245), list_title(subject), font=get_font(84), fill=PEN_BLUE, anchor="mm")
     d.line((200, 300, W - 200, 300), fill=PEN_BLUE, width=5)
     sub = {"TODAY": f"आज की तारीख ({today_dm()[0]}) के पुराने पेपर  •  SAVE करो",
@@ -4957,6 +4983,7 @@ Sirf JSON do:
 {{
  "topic": "topic ka Hindi naam (max 4 shabd)",
  "topic_extra": "chhota extra jaise saal/sankshipt (max 3 shabd, ya khaali)",
+ "hook": "pehle second ka chaunkane wala SACH sawal jo kahani me answer ho (max 9 shabd, '?' ke saath), jaise: 'अकबर सिर्फ 13 साल में राजा कैसे बना?'",
  "cover_img": "English: cover ka chitra (topic ka mukhya vyakti/vastu, portrait style)",
  "slides": [   // theek 7
    {{"blocks": [
@@ -5216,8 +5243,8 @@ def kahani_poster(story, img, w, h, badge=None):
         d.text((cx, y + 14), f"({extra})", font=get_font(48 if tall else 42), fill=K_BLUE, anchor="mt")
         y += 70
     y += 20
-    hook = "एक बार पढ़ कर ज़रूर देखिए, पूरी कहानी से याद हो जाएगा!"
-    fh, szh, hl = fit_lines(hook, w - 360, 2, 52 if tall else 46, 34)
+    hook = clean_text(story.get("hook") or "") or "एक बार पढ़ कर ज़रूर देखिए, पूरी कहानी से याद हो जाएगा!"
+    fh, szh, hl = fit_lines(hook, w - 360, 2, 56 if tall else 50, 34)
     bh = len(hl) * int(szh * 1.35) + 36
     d.rectangle((210 + 8, y + 8, w - 90 + 8, y + bh + 8), fill=(30, 60, 90))
     d.rectangle((210, y, w - 90, y + bh), fill=(226, 244, 246), outline=(30, 60, 90), width=4)
@@ -5334,7 +5361,9 @@ def build_kahani_pages(story, key):
 
 def kahani_speeches(story):
     """Har page par jo likha hai wahi bolna (cover / kahani / PYQ)."""
-    out = [f"{clean_text(story['topic'])}. एक बार ध्यान से सुन लो, पूरी कहानी से हमेशा याद रहेगा।"]
+    hk = clean_text(story.get("hook") or "")
+    out = [f"{hk} पूरी कहानी सुनो, हमेशा याद रहेगा।" if hk else
+           f"{clean_text(story['topic'])}. एक बार ध्यान से सुन लो, पूरी कहानी से हमेशा याद रहेगा।"]
     for sl in story["slides"]:
         out.append(" ".join(clean_text(b.get("text", "")) for b in (sl.get("blocks") or [])))
     out.append(f"ये सवाल exam में पूछे जा चुके हैं। Save करो... कल फिर नई कहानी, Follow करो ताकि छूटे नहीं।")
@@ -5512,7 +5541,8 @@ def post_carousel(paths, caption):
 def kahani_caption(story, key, ep):
     aud = audience_of(ep)
     subj = key[0]
-    lines = [f"📖 {clean_text(story['topic'])} - कहानी से याद करो! एक बार पढ़ लो, कभी नहीं भूलोगे।", ""]
+    hk = clean_text(story.get("hook") or "")
+    lines = [f"📖 {hk + ' ' if hk else ''}{clean_text(story['topic'])} - कहानी से याद करो!", ""]
     lines += ["📝 Exam में पूछा गया:"] + [f"• {clean_text(p['q'])} → {clean_text(p['a'])}" for p in story["pyq"]]
     lines += ["", "📤 Save करो + उस दोस्त को भेजो जिसे ये topic याद नहीं रहता!",
               f"🎯 {aud[0]} + हर GS exam के लिए", f"⏱ {BRAND} - {BRAND_TAGLINE}", "",
