@@ -4919,6 +4919,7 @@ Kaam: inme se ek chhota, saaf TOPIC chuno jise 7 page ki kahani me samjhaya ja s
 ek prakriya, ek ang). Kahani me in PYQ ke jawab zaroor aayein. Sirf pakke, textbook wale tathya - koi kalpanik
 tathya, galat saal ya naam nahi. Bhasha bilkul aasan bolchal wali Hindi (Devanagari), chhote vakya, film jaisi.
 
+ZAROORI: har slide me THEEK 2 blocks aur 2 imgs (ek block = ek chhota scene). 1 block wali slide galat hai.
 Sirf JSON do:
 {{
  "topic": "topic ka Hindi naam (max 4 shabd)",
@@ -5155,22 +5156,27 @@ def kahani_page(slide, imgs, i, n):
     blocks = slide.get("blocks") or []
     X, MAXW = 180, KAHANI_W - 180 - 50
     # pehle text ki unchai, phir bachi jagah chitron me
+    fs = 52 if len(blocks) > 1 else 60                  # 1 hi hissa ho to bada text + bada chitra
     th = []
     for b in blocks:
-        f, lines, _ = _rich_layout(clean_text(b.get("text", "")), b.get("keys"), MAXW, 52)
-        th.append(int(52 * 1.42) * min(4, len(lines)))
+        f, lines, _ = _rich_layout(clean_text(b.get("text", "")), b.get("keys"), MAXW, fs)
+        th.append(int(fs * 1.42) * min(4, len(lines)))
     top, bottom = 110, KAHANI_H - 90
-    have = [im for im in imgs if im is not None]
+    have = [im for im in imgs[:len(blocks)] if im is not None]
     free = bottom - top - sum(th) - 40 * len(blocks)
-    img_h = int(min(470, free / max(1, len(have)))) if have else 0
-    y = top
+    cap = 470 if len(blocks) > 1 else 860
+    img_h = int(min(cap, free / max(1, len(have)))) if have else 0
+    fitted = [_fit_img(imgs[k] if k < len(imgs) else None, MAXW, img_h) for k in range(len(blocks))]
+    used = sum(th) + sum(im.height + 40 for im in fitted if im is not None) + 18 * len(blocks)
+    y = top + max(0, (bottom - top - used) / 2)          # bacha hissa upar-neeche barabar (khaali page na lage)
     for k, b in enumerate(blocks):
-        y = draw_rich(d, clean_text(b.get("text", "")), b.get("keys"), X, y, MAXW, 52) + 18
-        im = _fit_img(imgs[k] if k < len(imgs) else None, MAXW, img_h)
+        y = draw_rich(d, clean_text(b.get("text", "")), b.get("keys"), X, y, MAXW, fs) + 18
+        im = fitted[k]
         if im is not None:
-            xx = X + (MAXW - im.width) * (0.85 if k % 2 == 0 else 0.1)
+            pos = 0.5 if len(blocks) == 1 else (0.85 if k % 2 == 0 else 0.1)
+            xx = X + (MAXW - im.width) * pos
             cv.paste(im, (int(xx), int(y)), im)
-            y += im.height + 22
+            y += im.height + 40
         else:
             y += 30
     _brand_small(cv, d)
