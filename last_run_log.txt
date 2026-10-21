@@ -1,27 +1,25 @@
-FORMAT: mega
+FORMAT: trick
   Gemini gemini-flash-latest: HTTP 503
-  Gemini gemini-2.5-flash: HTTP 503
-  Gemini gemini-2.5-flash-lite: HTTP 404
-  Gemini gemini-2.0-flash: HTTP 404
-  Groq llama-3.3-70b-versatile: HTTP 404
-  Groq openai/gpt-oss-120b: HTTP 400
-  Groq llama-3.1-8b-instant: HTTP 404
-  Mega awaaz: gemini-3.8-flash-lite-tts / hi-in-tutor-1
-MEGA REEL TAIYAR: generated_reels/science_pyq_reel.mp4 (16.6s, 3 page, 60 sawal)
+  Gemini gemini-flash-latest: HTTP 503
+TRICK: प्रतिरोध को क्या-क्या प्रभावित करता है?  (Physics / विद्युत (Electricity))
+Awaaz: Gemini TTS ek baar me (gemini-3.1-flash-tts-preview / Sulafat)
+TRICK REEL TAIYAR: generated_reels/science_pyq_reel.mp4 (19s)
 
 CAPTION:
-📚 "सामान्य ज्ञान" के 60 सबसे महत्वपूर्ण प्रश्न - सभी सरकारी परीक्षाओं के लिए
+🧠 प्रतिरोध को क्या-क्या प्रभावित करता है? - ट्रिक से 1 बार में याद!
 
-⏸️ हर पेज पर रोककर पढ़ो (स्क्रीन दबाकर रखो)
-📌 अभी SAVE करो - exam से पहले 1 बार ज़रूर revise करना
-📤 उस दोस्त को भेजो जो SSC / Railway / Police की तैयारी कर रहा है
-💬 कितने पहले से आते थे? कमेंट करो!
+✍️ ट्रिक: ताप प्रलंबी क्षेत्र
+• ताप = तापमान
+• प्र = प्रकृति
+• लंबी = लंबाई
+• क्षेत्र = क्षेत्रफल
 
-सामान्य ज्ञान (GK) GK | RRB NTPC, Group D, SSC GD, CGL, MTS, Police, Patwari, State Exam PYQ
+📝 Exam में पूछा गया: पदार्थ के प्रतिरोध को प्रभावित करने वाले कारक? → सभी कारक
+
+💬 अगली ट्रिक किस टॉपिक की चाहिए? कमेंट करो!
+📤 Save करो + उस दोस्त को भेजो जो ये हमेशा भूलता है
+🎯 Police भर्ती + हर GS exam के लिए
 ⏱ MinuteMe_GS - एक मिनट, एक PYQ - पक्का!
 
-#gk #gkquiz #gkpyq #sscgd #rrbntpc #rrbgroupd #policebharti #gk
-  IG container: 17909805969568651
-  upload try 1: HTTP 200 {"success":true,"message":"Upload Successful."}
-  IG processing: FINISHED
-INSTAGRAM PE POST HO GAYA: 18109608932335807
+#gktricks #gkinhindi #gkpyq #policebharti #upsi #physics
+MANUAL MODE: reel ready_reels/ me rakhi (Instagram pe post nahi hui): reel_0116.mp4
