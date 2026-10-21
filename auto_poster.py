@@ -4927,7 +4927,7 @@ Sirf JSON do:
  "cover_img": "English: cover ka chitra (topic ka mukhya vyakti/vastu, portrait style)",
  "slides": [   // theek 7
    {{"blocks": [
-      {{"text": "Hindi 1-2 vakya, max 22 shabd", "keys": ["1-3 mukhya shabd jo text me hubahu hain"]}},
+      {{"text": "Hindi 1-2 chhote vakya, max 15 shabd", "keys": ["1-3 mukhya shabd jo text me hubahu hain"]}},
       {{"text": "...", "keys": ["..."]}}
     ],
     "imgs": ["English scene description for block 1 (characters, action, objects; NO text)",
@@ -5228,11 +5228,34 @@ def build_kahani_pages(story, key):
     return pages
 
 
-def build_kahani_reel(pages, out):
-    """Har page 1080x1350 -> 1080x1920 reel: upar heading, beech me page, page palatne jaisa slide."""
+def kahani_speeches(story):
+    """Har page par jo likha hai wahi bolna (cover / kahani / PYQ)."""
+    out = [f"{clean_text(story['topic'])}. एक बार ध्यान से सुन लो, पूरी कहानी से हमेशा याद रहेगा।"]
+    for sl in story["slides"]:
+        out.append(" ".join(clean_text(b.get("text", "")) for b in (sl.get("blocks") or [])))
+    out.append("ये सवाल exam में पूछे जा चुके हैं। Save करो, और दोस्त को भेजो।")
+    return [to_speech(t) for t in out]
+
+
+def build_kahani_reel(pages, out, speeches=None, rot=0):
+    """Har page 1080x1350 -> 1080x1920 reel: upar heading, beech me page, page palatne jaisa slide.
+    Awaaz: page ka text bola jaata hai; page utni hi der jitni awaaz (faltu lambai nahi)."""
     resolve_font()
     n = len(pages)
-    dur = n * KAHANI_PAGE_SEC
+    voices = None
+    if speeches and len(speeches) == n:
+        try:
+            voices = [speed_voice(v[0], 1.08)                     # kahani thodi tez: reel lambi na ho
+                      for v in make_voices([{"segs": [(None, None, t)]} for t in speeches], rot)]
+        except Exception as exc:
+            print("  Kahani awaaz nahi bani:", str(exc)[:150])
+    if voices:
+        durs = [max(2.5, len(v) / SR + 0.4) for v in voices]
+        durs[-1] = max(durs[-1], 4.0)                    # aakhri page (PYQ) padhne ka samay
+    else:
+        durs = [KAHANI_PAGE_SEC] * n
+    starts = [sum(durs[:k]) for k in range(n)]
+    dur = sum(durs)
     bg = Image.new("RGB", (W, H), (32, 26, 22))
     d = ImageDraw.Draw(bg)
     d.text((W / 2, 150), "कहानी से याद करो", font=get_font(78), fill=(255, 220, 90), anchor="mm")
@@ -5241,15 +5264,23 @@ def build_kahani_reel(pages, out):
     bg.paste(sw, (int(W / 2 - 170), 1765), sw)
     d.text((W / 2 - 100, 1793), BRAND_HANDLE, font=get_font(40), fill=WHITE, anchor="lm")
     py = 300
-    music = beat_music(dur, seed=n) * 0.8
+    music = beat_music(dur, seed=n) * (0.16 if voices else 0.8)
     for k in range(1, n):
-        add_at(music, sfx_whoosh(0.3, 0.4), k * KAHANI_PAGE_SEC - 0.15)
+        add_at(music, sfx_whoosh(0.3, 0.3), starts[k] - 0.15)
+    if voices:
+        for k, v in enumerate(voices):
+            add_at(music, v.astype(np.float32), starts[k] + 0.3, 1.0)
     music = np.clip(music, -0.98, 0.98)
+
+    def page_at(t):
+        k = 0
+        while k + 1 < n and t >= starts[k + 1]:
+            k += 1
+        return k, t - starts[k]
 
     def render(fi):
         t = fi / FPS
-        k = min(n - 1, int(t / KAHANI_PAGE_SEC))
-        tt = t - k * KAHANI_PAGE_SEC
+        k, tt = page_at(t)
         cv = bg.copy()
         if k > 0 and tt < 0.45:                       # naya page daayein se aata hai
             p = ease_out_cubic(tt / 0.45)
@@ -5260,9 +5291,7 @@ def build_kahani_reel(pages, out):
         return cv
 
     def key(fi):
-        t = fi / FPS
-        k = int(t / KAHANI_PAGE_SEC)
-        tt = t - k * KAHANI_PAGE_SEC
+        k, tt = page_at(fi / FPS)
         return (k, int(tt * FPS)) if (k > 0 and tt < 0.45) else (k, -1)
 
     encode_frames(render, int(dur * FPS), music, out, key=key)
@@ -5375,7 +5404,7 @@ def run_kahani(bank, st, ep, args):
         paths.append(p)
     os.makedirs(OUTPUT_DIR, exist_ok=True)
     out = os.path.join(OUTPUT_DIR, FINAL_VIDEO)
-    build_kahani_reel(pages, out)
+    build_kahani_reel(pages, out, kahani_speeches(story), ep)
     caption = kahani_caption(story, key, ep)
     Path(os.path.join(OUTPUT_DIR, "caption.txt")).write_text(caption, encoding="utf-8")
     print("\nCAPTION:\n" + caption)
