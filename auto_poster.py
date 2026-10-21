@@ -5716,20 +5716,55 @@ def trick_speeches(tc):
     return [to_speech(t) for t in out]
 
 
+def gemini_voice_timed(speeches, rot=0):
+    """Poori script ki awaaz Gemini se EK baar me; kaata nahi jaata - code khud andaaza lagata hai ki har line
+    kab shuru hui (text ke anupaat se, paas ki chuppi par set). -> (awaaz, [har line ki shuruaat sec]) ya None."""
+    if DRY_RUN or not (USE_GEMINI_TTS and GEMINI_API_KEY):
+        return None
+    try:
+        full, label = gemini_tts_once(speeches, rot)
+    except Exception as exc:
+        print("  Gemini awaaz nahi bani:", str(exc)[:150])
+        return None
+    a, b = _speech_bounds(full)
+    full = speed_voice(full[int(a * SR):int(b * SR)], VOICE_SPEEDUP)
+    full, _ = _compress_pauses(full, 0.32)            # lambi chuppi chhoti, par lines ke beech saans rahe
+    total = len(full) / SR
+    w = [_wt(t) for t in speeches]
+    ws = float(sum(w)) or 1.0
+    gaps = [((g0 + g1) / 2) for g0, g1 in _silence_runs(full, 0.12)]
+    starts, acc, last = [0.0], 0.0, 0.0
+    for x in w[:-1]:
+        acc += x
+        exp = total * acc / ws
+        near = [g for g in gaps if abs(g - exp) <= 0.9 and g > last + 0.4]
+        cut = min(near, key=lambda g: abs(g - exp)) if near else max(exp, last + 0.4)
+        starts.append(cut)
+        last = cut
+    print(f"Awaaz: Gemini ek baar me ({label}), {total:.1f}s, {len(speeches)} line")
+    return full, starts
+
+
 def build_trick_reel(tc, out, rot=0):
     resolve_font()
     els = trick_layout(tc)
     speeches = trick_speeches(tc)
     nsc = len(speeches)
-    voices = None
-    try:
-        voices = [v[0] for v in make_voices([{"segs": [(None, None, t)]} for t in speeches], rot)]
-    except Exception as exc:
-        print("  Trick awaaz nahi bani:", str(exc)[:150])
-    durs = [max(1.4, len(v) / SR + 0.3) for v in voices] if voices else [2.4] * nsc
-    durs[-1] = max(durs[-1], 3.0)
-    starts = [sum(durs[:k]) for k in range(nsc)]
-    dur = sum(durs)
+    voices, full = None, None
+    one = gemini_voice_timed(speeches, rot)
+    if one:
+        full, vst = one
+        starts = [x + 0.15 for x in vst]
+        dur = 0.15 + len(full) / SR + 2.2               # ant me CTA padhne ka samay
+    else:
+        try:
+            voices = [v[0] for v in make_voices([{"segs": [(None, None, t)]} for t in speeches], rot)]
+        except Exception as exc:
+            print("  Trick awaaz nahi bani:", str(exc)[:150])
+        durs = [max(1.4, len(v) / SR + 0.3) for v in voices] if voices else [2.4] * nsc
+        durs[-1] = max(durs[-1], 3.0)
+        starts = [sum(durs[:k]) for k in range(nsc)]
+        dur = sum(durs)
     base = _paper(W, H)
     d = ImageDraw.Draw(base)
     rib = "Trick से याद करो"
@@ -5765,8 +5800,10 @@ def build_trick_reel(tc, out, rot=0):
         cv.paste(sw, (W - 140, 40), sw)
         return cv
 
-    music = beat_music(dur, seed=len(tc["lines"])) * (0.15 if voices else 0.7)
-    if voices:
+    music = beat_music(dur, seed=len(tc["lines"])) * (0.15 if (voices or full is not None) else 0.7)
+    if full is not None:
+        add_at(music, full.astype(np.float32), 0.15, 1.0)
+    elif voices:
         for k, v in enumerate(voices):
             add_at(music, v.astype(np.float32), starts[k] + 0.15, 1.0)
     for sc in range(1, nsc):
