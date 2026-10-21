@@ -1,3 +1,6 @@
 *.pdf
 __pycache__/
 output/
+kahani_out/
+img_cache/
+generated_reels/

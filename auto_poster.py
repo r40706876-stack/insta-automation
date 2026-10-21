@@ -3268,12 +3268,12 @@ PEN_RED = (200, 30, 40)
 
 
 def pick_format(ep):
-    if REEL_FORMAT in ("loop", "list", "classic", "triple", "quiz", "galti", "mega"):
+    if REEL_FORMAT in ("loop", "list", "classic", "triple", "quiz", "galti", "mega", "kahani"):
         return REEL_FORMAT
     # din ki 3 reel samay ke hisaab se (IST): subah 7 PYQ list, dopahar quiz notebook, raat MEGA revision
     # (MEGA = sabse zyada save wali reel -> raat 8 baje ke sabse bade peak pe)
     h = time.gmtime(time.time() + 19800).tm_hour
-    return "list" if h < 11 else ("quiz" if h < 17 else "mega")
+    return "list" if h < 11 else ("kahani" if h < 17 else "mega")   # dopahar: quiz ki jagah kahani (quiz ka skip zyada)
 
 
 # ---------- HAR EXAM KI AUDIENCE: GS sab me aata hai -> har reel alag exam waalon ko bulaye ----------
@@ -4892,6 +4892,523 @@ def run_mega(bank, st, ep, args):
     return True
 
 
+# ---------- KAHANI NOTEBOOK: ek topic ki kahani, spiral copy ke page + colour pencil chitra ----------
+# Viral 'kahani se yaad karo' carousel jaisa (1,900+ share). Chitra AI (Cloudflare) se BINA text ke banate hain,
+# Hindi text code khud likhta hai (spelling pakki). Pehle page -> reel (video), phir wahi page -> carousel.
+
+KAHANI_SLIDES = 7                   # cover + 7 kahani + 1 PYQ = 9 (API carousel max 10)
+KAHANI_PAGE_SEC = 5.0               # reel me har page kitni der
+KAHANI_W, KAHANI_H = 1080, 1350     # carousel 4:5
+KAHANI_DIR = "kahani_out"
+KAHANI_SUBJ_ORDER = ["History", "Biology", "Polity", "Physics", "Geography", "Chemistry", "Economics",
+                     "Environment", "Traditional GK"]
+KAHANI_IMG_STYLE = ("hand-drawn colored pencil sketch illustration, school notebook doodle style, clean black ink "
+                    "outlines with soft pencil shading, plain pure white background, simple composition, no text, "
+                    "no letters, no words, no watermark")
+K_BLUE = (24, 60, 170)
+K_RED = (205, 30, 45)
+K_GREEN = (22, 140, 60)
+
+KAHANI_PROMPT = """Tum ek mashhoor Hindi GK teacher ho jo kathin topic ko MAZEDAAR KAHANI bana kar yaad karwata hai
+(jaise: "1786 में कॉर्नवालिस नाम का एक कड़क अंग्रेज़ अफ़सर एक अस्त-व्यस्त गाँव (भारत) में आता है...").
+Neeche ek chapter ke asli PYQ (sawal | sahi jawab) hain:
+CHAPTER: {chapter}
+{rows}
+
+Kaam: inme se ek chhota, saaf TOPIC chuno jise 7 page ki kahani me samjhaya ja sake (jaise ek vyakti, ek ghatna,
+ek prakriya, ek ang). Kahani me in PYQ ke jawab zaroor aayein. Sirf pakke, textbook wale tathya - koi kalpanik
+tathya, galat saal ya naam nahi. Bhasha bilkul aasan bolchal wali Hindi (Devanagari), chhote vakya, film jaisi.
+
+Sirf JSON do:
+{{
+ "topic": "topic ka Hindi naam (max 4 shabd)",
+ "topic_extra": "chhota extra jaise saal/sankshipt (max 3 shabd, ya khaali)",
+ "cover_img": "English: cover ka chitra (topic ka mukhya vyakti/vastu, portrait style)",
+ "slides": [   // theek 7
+   {{"blocks": [
+      {{"text": "Hindi 1-2 vakya, max 22 shabd", "keys": ["1-3 mukhya shabd jo text me hubahu hain"]}},
+      {{"text": "...", "keys": ["..."]}}
+    ],
+    "imgs": ["English scene description for block 1 (characters, action, objects; NO text)",
+             "English scene description for block 2"]}}
+ ],
+ "pyq": [ {{"q": "PYQ sawal (upar wale me se, chhota karke)", "a": "sahi jawab (max 4 shabd)"}} ]   // 3
+}}"""
+
+KAHANI_CHECK = """Ye ek Hindi GK kahani ka JSON hai jo exam students ko jayega. Har tathya (naam, saal, sankhya, sthan)
+jaancho. Galat ya sandigdh tathya ko sahi karo ya hata do; Hindi spelling theek karo; 'keys' ke shabd text me
+hubahu hone chahiye. Structure aur kahani ka andaaz waisa hi rakho. Agar topic hi galat/bhramak ho to
+{{"reject": "wajah"}} do. Warna sirf sudhra hua poora JSON do.
+JSON:
+{js}"""
+
+
+def _kahani_pick_group(bank, st):
+    """Subject baari-baari; us subject ka sabse bada (misc nahi) chapter jiske kam se kam 5 sawal baaki hon."""
+    done = set(st["posted"]) | set(st["skipped"])
+    used = set(st.get("kahani_chapters", []))
+    groups = {}
+    for q in bank:
+        if q["id"] in done or "विविध" in q["chapter"] or "Misc" in q["chapter"]:
+            continue
+        key = (q["subject"], q["chapter"], q.get("sub") or "")
+        groups.setdefault(key, []).append(q)
+    n = int(st.get("kahani_n", 0))
+    for k in range(len(KAHANI_SUBJ_ORDER)):
+        subj = KAHANI_SUBJ_ORDER[(n + k) % len(KAHANI_SUBJ_ORDER)]
+        cands = sorted(((len(v), key) for key, v in groups.items() if key[0] == subj and len(v) >= 5
+                        and "|".join(key[1:]) not in used), reverse=True)
+        if cands:
+            key = cands[0][1]
+            qs = sorted(groups[key], key=lambda q: -int(q.get("times_asked") or 1))[:10]
+            return key, qs
+    return None, []
+
+
+def kahani_story(key, qs):
+    rows = "\n".join(f"- {clean_text(q['question'])} | {clean_text(str(q['options'][q['answer']]))}" for q in qs)
+    chap = key[1] + (f" / {key[2]}" if key[2] else "")
+    js = None
+    for fn in (_gemini, _groq):
+        js = fn(KAHANI_PROMPT.format(chapter=chap, rows=rows))
+        if js and len(js.get("slides") or []) >= 5:
+            break
+        js = None
+    if not js:
+        return None
+    for fn in (_gemini, _groq):                      # doosri baar: tathya jaanch
+        chk = fn(KAHANI_CHECK.format(js=json.dumps(js, ensure_ascii=False)))
+        if chk and chk.get("reject"):
+            print("  KAHANI CHHODI (jaanch):", str(chk["reject"])[:150])
+            return None
+        if chk and len(chk.get("slides") or []) >= 5:
+            js = chk
+            break
+    js["slides"] = js["slides"][:KAHANI_SLIDES]
+    js["pyq"] = [p for p in (js.get("pyq") or []) if p.get("q") and p.get("a")][:3]
+    return js
+
+
+def kahani_image(prompt, path, size=768):
+    """Chitra -> safed hissa transparent (copy ke kagaz par chhapa lage). Fail -> None."""
+    import io
+    if os.path.exists(path):
+        return Image.open(path).convert("RGBA")
+    b = cf_image(f"{prompt}. {KAHANI_IMG_STYLE}") if prompt else None
+    if not b:
+        return None
+    try:
+        im = Image.open(io.BytesIO(b)).convert("RGB")
+    except Exception:
+        return None
+    im.thumbnail((size, size), Image.LANCZOS)
+    g = np.asarray(im.convert("L"), dtype=np.float32)
+    alpha = np.clip((250 - g) * 6, 0, 255).astype(np.uint8)      # safed -> paardarshi
+    rgba = im.convert("RGBA")
+    rgba.putalpha(Image.fromarray(alpha))
+    bbox = rgba.getbbox()
+    if bbox:
+        rgba = rgba.crop(bbox)
+    rgba.save(path)
+    return rgba
+
+
+@lru_cache(maxsize=1)
+def _kahani_paper():
+    W_, H_ = KAHANI_W, KAHANI_H
+    im = Image.new("RGB", (W_, H_), (250, 250, 247))
+    d = ImageDraw.Draw(im)
+    for y in range(150, H_ - 30, 52):
+        d.line((70, y, W_, y), fill=(205, 214, 232), width=2)
+    d.line((150, 0, 150, H_), fill=(236, 150, 160), width=3)
+    for y in range(40, H_ - 20, 44):                    # spiral rings
+        d.ellipse((14, y + 6, 40, y + 22), fill=(60, 60, 70))
+        d.arc((20, y - 4, 84, y + 26), 150, 340, fill=(90, 90, 100), width=7)
+        d.arc((22, y - 3, 82, y + 24), 160, 330, fill=(190, 190, 200), width=2)
+    d.line((60, 0, 60, H_), fill=(225, 225, 225), width=2)
+    return im
+
+
+def _rich_tokens(text, keys):
+    """Shabd -> (shabd, rang, key?). Key wale shabd laal/hare baari-baari."""
+    words = text.split()
+    kw = []
+    for k in keys or []:
+        k = clean_text(str(k)).strip()
+        if k:
+            kw.append(k.split())
+    marks = [None] * len(words)
+    ci = 0
+    for kws in kw:
+        n = len(kws)
+        for i in range(len(words) - n + 1):
+            if [w.strip("।,.!?\"'“”‘’()") for w in words[i:i + n]] == [w.strip("।,.!?\"'“”‘’()") for w in kws]:
+                col = (K_RED, K_GREEN)[ci % 2]
+                for j in range(i, i + n):
+                    marks[j] = col
+                ci += 1
+                break
+    return [(w, marks[i]) for i, w in enumerate(words)]
+
+
+def _rich_layout(text, keys, max_w, size):
+    f = get_font(size)
+    toks = _rich_tokens(text, keys)
+    sp = text_w(" ", f)
+    lines, cur, cw = [], [], 0
+    for w, m in toks:
+        ww = text_w(w, f)
+        if cur and cw + sp + ww > max_w:
+            lines.append(cur)
+            cur, cw = [], 0
+        cur.append((w, m, ww))
+        cw += (sp if len(cur) > 1 else 0) + ww
+    if cur:
+        lines.append(cur)
+    return f, lines, sp
+
+
+def _wavy(d, x1, x2, y, col, amp=3, w=4):
+    pts = [(x, y + amp * math.sin((x - x1) / 7)) for x in range(int(x1), int(x2) + 1, 3)]
+    if len(pts) > 1:
+        d.line(pts, fill=col, width=w)
+
+
+def draw_rich(d, text, keys, x, y, max_w, size, base=K_BLUE, max_lines=4):
+    """Rangin shabd + key shabd ke neeche hath se kheenchi line. Return: neeche ka y."""
+    for s in (size, size - 4, size - 8, size - 12):
+        f, lines, sp = _rich_layout(text, keys, max_w, s)
+        if len(lines) <= max_lines:
+            break
+    lh = int(s * 1.42)
+    for li, ln in enumerate(lines[:max_lines]):
+        cx = x
+        yy = y + li * lh
+        for w, m, ww in ln:
+            d.text((cx, yy), w, font=f, fill=m or base, anchor="la")
+            if m:
+                ucol = K_GREEN if m == K_RED else K_RED
+                _wavy(d, cx, cx + ww, yy + s * 1.18, ucol)
+            cx += ww + sp
+    return y + lh * min(len(lines), max_lines)
+
+
+def _slide_badge(d, i, n):
+    t = f"{i}/{n}"
+    f = get_font(30)
+    w = text_w(t, f) + 34
+    d.rounded_rectangle((KAHANI_W - 40 - w, 30, KAHANI_W - 40, 82), radius=26, fill=(70, 70, 78))
+    d.text((KAHANI_W - 40 - w / 2, 56), t, font=f, fill=WHITE, anchor="mm")
+
+
+def _brand_small(cv, d, y=KAHANI_H - 52):
+    sw = stopwatch_sprite(44, 0.0)
+    cv.paste(sw, (180, y - 22), sw)
+    d.text((232, y), BRAND_HANDLE, font=get_font(30), fill=(110, 110, 125), anchor="lm")
+
+
+def _fit_img(im, max_w, max_h):
+    if im is None:
+        return None
+    k = min(max_w / im.width, max_h / im.height, 1.6)
+    return im.resize((max(1, int(im.width * k)), max(1, int(im.height * k))), Image.LANCZOS)
+
+
+def kahani_cover(story, img, n):
+    cv = _kahani_paper().copy()
+    d = ImageDraw.Draw(cv)
+    _slide_badge(d, 1, n)
+    title = clean_text(story["topic"])
+    extra = clean_text(story.get("topic_extra") or "")
+    f, sz, lines = fit_lines(title + (f" ({extra})" if extra else ""), 860, 2, 92, 56)
+    y = 130
+    for ln in lines[:2]:
+        d.text((KAHANI_W / 2 + 50, y), " ".join(ln), font=f, fill=K_RED, anchor="mt")
+        y += int(sz * 1.25)
+    hook = "एक बार पढ़ कर ज़रूर देखिए, पूरी कहानी से याद हो जाएगा!"
+    fh, szh, hl = fit_lines(hook, 760, 2, 50, 36)
+    bh = len(hl) * int(szh * 1.35) + 40
+    d.rectangle((200, y + 20, KAHANI_W - 100, y + 20 + bh), fill=(226, 244, 246), outline=(30, 60, 90), width=4)
+    for k, ln in enumerate(hl):
+        d.text((KAHANI_W / 2 + 50, y + 40 + k * int(szh * 1.35)), " ".join(ln), font=fh, fill=K_BLUE, anchor="mt")
+    top = y + 20 + bh + 30
+    bottom = KAHANI_H - 230
+    im = _fit_img(img, 800, bottom - top)
+    if im is not None:
+        cv.paste(im, (int(KAHANI_W / 2 + 50 - im.width / 2), int(top + (bottom - top - im.height) / 2)), im)
+    else:
+        sw = stopwatch_sprite(300, 0.25)
+        cv.paste(sw, (int(KAHANI_W / 2 + 50 - 150), int((top + bottom) / 2 - 150)), sw)
+    # "aage to badho ->"
+    ay = KAHANI_H - 160
+    d.polygon([(220, ay - 22), (420, ay - 22), (420, ay - 50), (500, ay), (420, ay + 50), (420, ay + 22),
+               (220, ay + 22)], fill=K_RED, outline=K_BLUE)
+    d.text((540, ay), "आगे तो बढ़ो...", font=get_font(60), fill=K_RED, anchor="lm")
+    _brand_small(cv, d)
+    return cv
+
+
+def kahani_page(slide, imgs, i, n):
+    cv = _kahani_paper().copy()
+    d = ImageDraw.Draw(cv)
+    _slide_badge(d, i, n)
+    blocks = slide.get("blocks") or []
+    X, MAXW = 180, KAHANI_W - 180 - 50
+    # pehle text ki unchai, phir bachi jagah chitron me
+    th = []
+    for b in blocks:
+        f, lines, _ = _rich_layout(clean_text(b.get("text", "")), b.get("keys"), MAXW, 52)
+        th.append(int(52 * 1.42) * min(4, len(lines)))
+    top, bottom = 110, KAHANI_H - 90
+    have = [im for im in imgs if im is not None]
+    free = bottom - top - sum(th) - 40 * len(blocks)
+    img_h = int(min(470, free / max(1, len(have)))) if have else 0
+    y = top
+    for k, b in enumerate(blocks):
+        y = draw_rich(d, clean_text(b.get("text", "")), b.get("keys"), X, y, MAXW, 52) + 18
+        im = _fit_img(imgs[k] if k < len(imgs) else None, MAXW, img_h)
+        if im is not None:
+            xx = X + (MAXW - im.width) * (0.85 if k % 2 == 0 else 0.1)
+            cv.paste(im, (int(xx), int(y)), im)
+            y += im.height + 22
+        else:
+            y += 30
+    _brand_small(cv, d)
+    return cv
+
+
+def kahani_pyq_page(story, i, n):
+    cv = _kahani_paper().copy()
+    d = ImageDraw.Draw(cv)
+    _slide_badge(d, i, n)
+    d.text((KAHANI_W / 2 + 50, 120), "Exam में ऐसे पूछा गया!", font=get_font(76), fill=K_RED, anchor="mt")
+    ex = "RRB • SSC • Police • Patwari • State Exams"
+    fe = get_font(32)
+    we = text_w(ex, fe) + 40
+    d.rounded_rectangle((KAHANI_W / 2 + 50 - we / 2, 225, KAHANI_W / 2 + 50 + we / 2, 270), radius=22,
+                        fill=(18, 32, 72))
+    d.text((KAHANI_W / 2 + 50, 247), ex, font=fe, fill=(255, 225, 90), anchor="mm")
+    y = 320
+    for k, p in enumerate(story.get("pyq") or []):
+        y = draw_rich(d, f"{k + 1}. {clean_text(p['q'])}", [], 180, y, KAHANI_W - 240, 48, base=(25, 25, 35),
+                      max_lines=3) + 8
+        y = draw_rich(d, f"उत्तर : {clean_text(p['a'])}", [clean_text(p["a"])], 210, y, KAHANI_W - 270, 50,
+                      max_lines=2) + 40
+    d.rounded_rectangle((180, KAHANI_H - 250, KAHANI_W - 60, KAHANI_H - 120), radius=24, fill=K_RED)
+    d.text((KAHANI_W / 2 + 60, KAHANI_H - 205), "SAVE करो  •  दोस्त को भेजो", font=get_font(52), fill=WHITE,
+           anchor="mm")
+    d.text((KAHANI_W / 2 + 60, KAHANI_H - 150), "अगली कहानी के लिए Follow करो", font=get_font(34),
+           fill=(255, 230, 150), anchor="mm")
+    _brand_small(cv, d)
+    return cv
+
+
+def build_kahani_pages(story, key):
+    os.makedirs(IMG_DIR, exist_ok=True)
+    tag = re.sub(r"[^a-z0-9]", "", str(abs(hash(story["topic"]))))[:10]
+    n = len(story["slides"]) + 2
+    cover_img = kahani_image(story.get("cover_img"), os.path.join(IMG_DIR, f"k_{tag}_c.png"))
+    pages = [kahani_cover(story, cover_img, n)]
+    got = int(cover_img is not None)
+    for s_i, sl in enumerate(story["slides"]):
+        imgs = []
+        for b_i, pr in enumerate((sl.get("imgs") or [])[:2]):
+            im = kahani_image(pr, os.path.join(IMG_DIR, f"k_{tag}_{s_i}_{b_i}.png"))
+            got += int(im is not None)
+            imgs.append(im)
+        pages.append(kahani_page(sl, imgs, s_i + 2, n))
+    pages.append(kahani_pyq_page(story, n, n))
+    print(f"  Kahani: {len(pages)} page, {got} chitra bane")
+    return pages
+
+
+def build_kahani_reel(pages, out):
+    """Har page 1080x1350 -> 1080x1920 reel: upar heading, beech me page, page palatne jaisa slide."""
+    resolve_font()
+    n = len(pages)
+    dur = n * KAHANI_PAGE_SEC
+    bg = Image.new("RGB", (W, H), (32, 26, 22))
+    d = ImageDraw.Draw(bg)
+    d.text((W / 2, 150), "कहानी से याद करो", font=get_font(78), fill=(255, 220, 90), anchor="mm")
+    d.text((W / 2, 235), "पूरी कहानी देखो  •  SAVE करो", font=get_font(40), fill=WHITE, anchor="mm")
+    sw = stopwatch_sprite(56, 0.0)
+    bg.paste(sw, (int(W / 2 - 170), 1765), sw)
+    d.text((W / 2 - 100, 1793), BRAND_HANDLE, font=get_font(40), fill=WHITE, anchor="lm")
+    py = 300
+    music = beat_music(dur, seed=n) * 0.8
+    for k in range(1, n):
+        add_at(music, sfx_whoosh(0.3, 0.4), k * KAHANI_PAGE_SEC - 0.15)
+    music = np.clip(music, -0.98, 0.98)
+
+    def render(fi):
+        t = fi / FPS
+        k = min(n - 1, int(t / KAHANI_PAGE_SEC))
+        tt = t - k * KAHANI_PAGE_SEC
+        cv = bg.copy()
+        if k > 0 and tt < 0.45:                       # naya page daayein se aata hai
+            p = ease_out_cubic(tt / 0.45)
+            cv.paste(pages[k - 1], (int(-W * 0.25 * p), py))
+            cv.paste(pages[k], (int(W * (1 - p)), py))
+        else:
+            cv.paste(pages[k], (0, py))
+        return cv
+
+    def key(fi):
+        t = fi / FPS
+        k = int(t / KAHANI_PAGE_SEC)
+        tt = t - k * KAHANI_PAGE_SEC
+        return (k, int(tt * FPS)) if (k > 0 and tt < 0.45) else (k, -1)
+
+    encode_frames(render, int(dur * FPS), music, out, key=key)
+    pages[0].save(os.path.join(os.path.dirname(out) or ".", "thumbnail.jpg"), quality=92)
+    print(f"KAHANI REEL TAIYAR: {out} ({dur:.0f}s)")
+
+
+def _public_url(path):
+    """Instagram carousel ko photo ka public URL chahiye: free host par daalo (24 ghante tak)."""
+    tries = [("https://litterbox.catbox.moe/resources/internals/api.php", {"reqtype": "fileupload", "time": "24h"}),
+             ("https://catbox.moe/user/api.php", {"reqtype": "fileupload"})]
+    for url, data in tries:
+        try:
+            with open(path, "rb") as fh:
+                r = requests.post(url, data=data, files={"fileToUpload": fh}, timeout=120)
+            u = r.text.strip()
+            if r.status_code == 200 and u.startswith("http"):
+                return u
+            print("  photo host:", r.status_code, u[:100])
+        except Exception as exc:
+            print("  photo host fail:", str(exc)[:100])
+    try:
+        with open(path, "rb") as fh:
+            r = requests.post("https://tmpfiles.org/api/v1/upload", files={"file": fh}, timeout=120).json()
+        u = (r.get("data") or {}).get("url", "")
+        if u:
+            return u.replace("tmpfiles.org/", "tmpfiles.org/dl/", 1)
+    except Exception as exc:
+        print("  tmpfiles fail:", str(exc)[:100])
+    return None
+
+
+def post_carousel(paths, caption):
+    """Photos -> Instagram carousel. Fail = None (reel to ja chuki hai)."""
+    if not IG_ACCESS_TOKEN or not IG_USER_ID:
+        return None
+    kids = []
+    for p in paths[:10]:
+        u = _public_url(p)
+        if not u:
+            print("  CAROUSEL: photo ka URL nahi bana -> carousel chhoda")
+            return None
+        r = requests.post(f"{GRAPH}{IG_USER_ID}/media", data={"image_url": u, "is_carousel_item": "true",
+                                                               "access_token": IG_ACCESS_TOKEN}, timeout=90).json()
+        if not r.get("id"):
+            print("  CAROUSEL item fail:", str(r)[:300])
+            return None
+        kids.append(r["id"])
+    r = requests.post(f"{GRAPH}{IG_USER_ID}/media", data={"media_type": "CAROUSEL", "children": ",".join(kids),
+                                                           "caption": caption, "access_token": IG_ACCESS_TOKEN},
+                      timeout=90).json()
+    cid = r.get("id")
+    if not cid:
+        print("  CAROUSEL container fail:", str(r)[:300])
+        return None
+    for _ in range(20):
+        time.sleep(8)
+        st_ = requests.get(f"{GRAPH}{cid}", params={"fields": "status_code", "access_token": IG_ACCESS_TOKEN},
+                           timeout=30).json()
+        if st_.get("status_code") in ("FINISHED", None):
+            break
+        if st_.get("status_code") in ("ERROR", "EXPIRED"):
+            print("  CAROUSEL processing:", st_)
+            return None
+    for _ in range(3):
+        pub = requests.post(f"{GRAPH}{IG_USER_ID}/media_publish",
+                            data={"creation_id": cid, "access_token": IG_ACCESS_TOKEN}, timeout=60).json()
+        if pub.get("id"):
+            print("CAROUSEL POST HO GAYA:", pub["id"])
+            return pub["id"]
+        print("  carousel publish dobara:", str(pub)[:200])
+        time.sleep(20)
+    return None
+
+
+def kahani_caption(story, key, ep):
+    aud = audience_of(ep)
+    subj = key[0]
+    lines = [f"📖 {clean_text(story['topic'])} - कहानी से याद करो! एक बार पढ़ लो, कभी नहीं भूलोगे।", ""]
+    lines += ["📝 Exam में पूछा गया:"] + [f"• {clean_text(p['q'])} → {clean_text(p['a'])}" for p in story["pyq"]]
+    lines += ["", "📤 Save करो + उस दोस्त को भेजो जिसे ये topic याद नहीं रहता!",
+              f"🎯 {aud[0]} + हर GS exam के लिए", f"⏱ {BRAND} - {BRAND_TAGLINE}", "",
+              f"#gkstory #gkinhindi #gkpyq {aud[1]} {SUBJ_TAGS.get(subj, '#gk')}"]
+    return "\n".join(lines)
+
+
+def run_kahani(bank, st, ep, args):
+    story, key, qs = None, None, []
+    for _ in range(3):
+        key, qs = _kahani_pick_group(bank, st)
+        if not key:
+            break
+        story = kahani_story(key, qs) if not DRY_RUN else _kahani_demo()
+        if story:
+            break
+        st.setdefault("kahani_chapters", []).append("|".join(key[1:]))     # ye chapter abhi chhodo
+    if not story:
+        print("Kahani nahi bani -> list format")
+        return False
+    print(f"KAHANI: {story['topic']}  ({key[0]} / {key[1][:40]})")
+    resolve_font()
+    pages = build_kahani_pages(story, key)
+    os.makedirs(KAHANI_DIR, exist_ok=True)
+    for f in os.listdir(KAHANI_DIR):
+        os.remove(os.path.join(KAHANI_DIR, f))
+    paths = []
+    for k, pg in enumerate(pages):
+        p = os.path.join(KAHANI_DIR, f"page_{k + 1:02d}.jpg")
+        pg.save(p, quality=93)
+        paths.append(p)
+    os.makedirs(OUTPUT_DIR, exist_ok=True)
+    out = os.path.join(OUTPUT_DIR, FINAL_VIDEO)
+    build_kahani_reel(pages, out)
+    caption = kahani_caption(story, key, ep)
+    Path(os.path.join(OUTPUT_DIR, "caption.txt")).write_text(caption, encoding="utf-8")
+    print("\nCAPTION:\n" + caption)
+    if args.no_post or DRY_RUN:
+        return True
+    if POST_MODE == "manual":
+        save_ready(out, caption, ep)
+        import shutil
+        dst = os.path.join(READY_DIR, f"reel_{ep:04d}_kahani")
+        shutil.rmtree(dst, ignore_errors=True)
+        shutil.copytree(KAHANI_DIR, dst)
+        return True                                  # jaanch run: progress nahi badla (topic agli baar asli post hoga)
+    else:
+        if not post_reel(out, caption, 0):
+            save_progress(st)
+            return True
+        post_carousel(paths, caption)
+    st["posted"] += [q["id"] for q in qs]
+    st.setdefault("kahani_chapters", []).append("|".join(key[1:]))
+    st["kahani_n"] = int(st.get("kahani_n", 0)) + 1
+    st["episode"] = ep
+    st["last"] = {"seq": qs[-1]["seq"], "id": qs[-1]["id"], "time": time.strftime("%Y-%m-%d %H:%M"),
+                  "format": "kahani", "topic": story["topic"]}
+    save_progress(st)
+    return True
+
+
+def _kahani_demo():
+    """DRY_RUN jaanch ke liye bina AI ki kahani."""
+    sl = {"blocks": [{"text": "1786 में कॉर्नवालिस नाम का एक कड़क अंग्रेज़ अफ़सर भारत आता है।",
+                      "keys": ["कॉर्नवालिस", "कड़क अंग्रेज़ अफ़सर"]},
+                     {"text": "उसने आते ही देखा कि यहाँ कोई सिस्टम नहीं है, सब अस्त-व्यस्त है।",
+                      "keys": ["कोई सिस्टम नहीं"]}], "imgs": ["", ""]}
+    return {"topic": "लॉर्ड कॉर्नवालिस", "topic_extra": "1786-1793", "cover_img": "", "slides": [sl] * 7,
+            "pyq": [{"q": "भारत में स्थायी बंदोबस्त किसने लागू किया?", "a": "लॉर्ड कॉर्नवालिस"},
+                    {"q": "स्थायी बंदोबस्त कब लागू हुआ?", "a": "1793"},
+                    {"q": "भारतीय सिविल सेवा का जनक किसे कहा जाता है?", "a": "लॉर्ड कॉर्नवालिस"}]}
+
+
 # ---------- TRIPLE: "3 सवाल, 16 सेकंड" challenge (score comment + dost ko challenge = share) ----------
 
 TRI_DUR = 16.0                      # 120 BPM ke 8 bar; 3 sawal x 5.33s
@@ -5064,9 +5581,13 @@ def main():
         return
     ep = st["episode"] + 1
     fmt = "classic" if args.preview else pick_format(ep)
-    if args.seq and fmt in ("list", "triple", "quiz", "galti", "mega"):
+    if args.seq and fmt in ("list", "triple", "quiz", "galti", "mega", "kahani"):
         fmt = "loop"
     print(f"FORMAT: {fmt}")
+    if fmt == "kahani":
+        if run_kahani(bank, st, ep, args):
+            return
+        fmt = "list"
     if fmt == "mega":
         if run_mega(bank, st, ep, args):
             return
