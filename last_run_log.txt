@@ -1,41 +1,35 @@
-FORMAT: mega
+FORMAT: trick
   Gemini gemini-flash-latest: HTTP 503
-  Mega AI jaanch: 51 me se 26 sahi
-  Groq llama-3.3-70b-versatile: HTTP 404
-  Groq openai/gpt-oss-120b: HTTP 400
-  Groq llama-3.1-8b-instant: HTTP 404
+  TRICK nahi bani: दिए गए PYQ 'भारत में परिवहन' अध्याय से संबंधित नहीं हैं और उनमें 3-7 हिस्सों वाली ट्रिक बनाने लायक कोई सूची या क्रमबद्ध 
   Gemini gemini-flash-latest: HTTP 503
-  Mega AI jaanch: 3 me se 3 sahi
-  Groq llama-3.3-70b-versatile: HTTP 404
-  Mega AI jaanch: 3 me se 3 sahi
   Gemini gemini-flash-latest: HTTP 503
-  Mega AI jaanch: 46 me se 31 sahi
-  Groq llama-3.3-70b-versatile: HTTP 404
-  Groq openai/gpt-oss-120b: HTTP 400
-  Groq llama-3.1-8b-instant: HTTP 404
-  Gemini gemini-flash-latest: HTTP 503
-  Gemini gemini-2.5-flash fail: HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeout=90)
+  Gemini gemini-2.5-flash: HTTP 503
   Gemini gemini-2.5-flash-lite: HTTP 404
   Gemini gemini-2.0-flash: HTTP 404
   Groq llama-3.3-70b-versatile: HTTP 404
-  Groq openai/gpt-oss-120b: HTTP 400
-  Groq llama-3.1-8b-instant: HTTP 404
-  Mega awaaz: gemini-3.8-flash-tts / hi-in-storyteller-6
-MEGA REEL TAIYAR: generated_reels/science_pyq_reel.mp4 (23.1s, 5 page, 100 sawal)
+TRICK: भारत के प्रमुख बांध और परियोजनाएँ कौन सी हैं?  (Geography / नदी घाटी परियोजनाएँ (River Valley Projec)
+Awaaz: Gemini ek baar me (gemini-3.8-flash-lite-tts / hi-in-tutor-1), 24.5s, 8 line
+TRICK REEL TAIYAR: generated_reels/science_pyq_reel.mp4 (27s)
 
 CAPTION:
-📚 "रसायन विज्ञान (Chemistry)" के 100 सबसे महत्वपूर्ण प्रश्न - सभी सरकारी परीक्षाओं के लिए
+🧠 भारत के प्रमुख बांध और परियोजनाएँ कौन सी हैं? - ट्रिक से 1 बार में याद!
 
-⏸️ हर पेज पर रोककर पढ़ो (स्क्रीन दबाकर रखो)
-📌 अभी SAVE करो - exam से पहले 1 बार ज़रूर revise करना
-📤 उस दोस्त को भेजो जो SSC / Railway / Police की तैयारी कर रहा है
-💬 कितने पहले से आते थे? कमेंट करो!
+✍️ ट्रिक: तवा हीरा अल कंडा गोसी
+• तवा = तवा बांध
+• हीरा = हीराकुंड (महानदी)
+• अल = अलमट्टी (कृष्णा)
+• कंडा = कंडालेरू (आंध्र प्रदेश)
+• गोसी = गोसीखुर्द (महाराष्ट्र)
 
-रसायन विज्ञान (Chemistry) GK | RRB NTPC, Group D, SSC GD, CGL, MTS, Police, Patwari, State Exam PYQ
+📝 Exam में पूछा गया: अलमट्टी बांध का निर्माण किस नदी पर किया गया है? → कृष्णा
+
+💬 अगली ट्रिक किस टॉपिक की चाहिए? कमेंट करो!
+📤 Save करो + उस दोस्त को भेजो जो ये हमेशा भूलता है
+🎯 SSC GD / MTS / CGL + हर GS exam के लिए
 ⏱ MinuteMe_GS - एक मिनट, एक PYQ - पक्का!
 
-#gk #gkquiz #gkpyq #sscgd #rrbntpc #rrbgroupd #policebharti #chemistry
-  IG container: 17909909442568651
+#gktricks #gkinhindi #gkpyq #sscgd #ssccgl #geography
+  IG container: 17909937759568651
   upload try 1: HTTP 200 {"success":true,"message":"Upload Successful."}
   IG processing: FINISHED
-INSTAGRAM PE POST HO GAYA: 18122440984728031
+INSTAGRAM PE POST HO GAYA: 18132832702755269

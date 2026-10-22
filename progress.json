@@ -1,6 +1,6 @@
 {
  "next_seq": 110,
- "episode": 120,
+ "episode": 121,
  "posted": [
   "684d76bcbc",
   "6bb20b4a07",
@@ -306,10 +306,11 @@
   "bbb262a843": "2020 की अनुमानित वृद्धि का यह आंकड़ा अब पुराना (outdated) और तथ्यात्मक रूप से त्रुटिपूर्ण है।"
  },
  "last": {
-  "seq": 4392,
-  "id": "9f348d7d71",
-  "time": "2026-10-22 12:39",
-  "format": "mega"
+  "seq": 1053,
+  "id": "76d2915fe2",
+  "time": "2026-10-22 15:56",
+  "format": "trick",
+  "topic": "भारत के प्रमुख बांध और परियोजनाएँ कौन सी हैं?"
  },
  "carousel_queue": [
   {
@@ -1265,7 +1266,9 @@
   "time": "2026-10-21 08:20"
  },
  "trick_chapters": [
-  "विद्युत (Electricity)|प्रतिरोध (Resistance)"
+  "विद्युत (Electricity)|प्रतिरोध (Resistance)",
+  "भारत में परिवहन (Transport in India)|थल परिवहन (Land Transport)",
+  "नदी घाटी परियोजनाएँ (River Valley Projects)|"
  ],
- "trick_n": 1
+ "trick_n": 2
 }
