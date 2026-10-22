@@ -1,6 +1,6 @@
 {
  "next_seq": 110,
- "episode": 117,
+ "episode": 118,
  "posted": [
   "684d76bcbc",
   "6bb20b4a07",
@@ -274,7 +274,17 @@
   "8af3ea4dce",
   "2302c8522d",
   "00d82efdc5",
-  "8fb69c6d37"
+  "8fb69c6d37",
+  "3ab9f16101",
+  "4836fca059",
+  "d4ef12c6d4",
+  "e80aaa922a",
+  "65b74894cf",
+  "59487b3e5b",
+  "989c07af4b",
+  "b713d2c9a9",
+  "569fe9bd37",
+  "85397427ef"
  ],
  "skipped": {
   "bdd1ce5a8b": "उत्तर कुंजी वर्तमान स्थिति के अनुसार गलत है।",
@@ -289,10 +299,11 @@
   "bbb262a843": "2020 की अनुमानित वृद्धि का यह आंकड़ा अब पुराना (outdated) और तथ्यात्मक रूप से त्रुटिपूर्ण है।"
  },
  "last": {
-  "seq": 959,
-  "id": "8fb69c6d37",
-  "time": "2026-10-22 03:07",
-  "format": "list"
+  "seq": 1594,
+  "id": "85397427ef",
+  "time": "2026-10-22 05:56",
+  "format": "kahani",
+  "topic": "भारत की राजभाषा"
  },
  "carousel_queue": [
   {
@@ -1132,14 +1143,15 @@
  "mega_n": 8,
  "kahani_chapters": [
   "विजयनगर/बहमनी साम्राज्य (Vijaynagar/Bahmani Empire)|",
-  "ऊतक (Tissues)|पादप ऊतक (Plant Tissues)"
+  "ऊतक (Tissues)|पादप ऊतक (Plant Tissues)",
+  "राज भाषा (Official Language)|"
  ],
- "kahani_n": 2,
+ "kahani_n": 3,
  "kahani_log": {
-  "reel": "17908453557330232",
-  "carousel": null,
+  "reel": "18056346767580530",
+  "carousel": "18122593189945242",
   "cover": true,
-  "time": "2026-10-21 05:22"
+  "time": "2026-10-22 05:56"
  },
  "carousel_folder_log": {
   "carousel": "18138965326714200",
