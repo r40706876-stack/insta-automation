@@ -1,28 +1,37 @@
-FORMAT: trick
-  Gemini gemini-flash-latest: HTTP 503
-  TRICK nahi bani: दिए गए PYQ में परिवहन से संबंधित कोई सूची या क्रम नहीं है जिसे 3-7 हिस्सों की ट्रिक से याद किया जा सके।
+FORMAT: list
   Gemini gemini-flash-latest: HTTP 503
   Gemini gemini-flash-latest: HTTP 503
-TRICK: भारत के प्रमुख बांध कौन-कौन से हैं?  (Geography / नदी घाटी परियोजनाएँ (River Valley Projec)
-Awaaz: Gemini ek baar me (gemini-3.8-flash-tts / hi-in-storyteller-6), 28.4s, 8 line
-TRICK REEL TAIYAR: generated_reels/science_pyq_reel.mp4 (31s)
+  Gemini gemini-2.5-flash: HTTP 503
+  Gemini gemini-2.5-flash-lite: HTTP 404
+  Gemini gemini-2.0-flash: HTTP 404
+  Groq llama-3.3-70b-versatile: HTTP 404
+  Gemini gemini-flash-latest: HTTP 503
+  Gemini gemini-flash-latest: HTTP 503
+  Gemini gemini-2.5-flash: HTTP 503
+  Gemini gemini-2.5-flash-lite: HTTP 404
+  Gemini gemini-2.0-flash: HTTP 404
+  Groq llama-3.3-70b-versatile: HTTP 404
+LIST REEL TAIYAR: generated_reels/science_pyq_reel.mp4 (10s)
 
 CAPTION:
-🧠 भारत के प्रमुख बांध कौन-कौन से हैं? - ट्रिक से 1 बार में याद!
+📚 रसायन विज्ञान के 7 PYQ - RRB, SSC, Police, Patwari, Army, State Exams के लिए (Save करो)
 
-✍️ ट्रिक: हीरा अल भा टि सर
-• हीरा = हीराकुंड (महानदी)
-• अल = अलमट्टी (कृष्णा)
-• भा = भाखड़ा (सतलुज)
-• टि = टिहरी (भागीरथी)
-• सर = सरदार (नर्मदा)
+1. अधातुओं में से कौन सी चमकदार होती है? → आयोडीन
+2. आधुनिक आवर्त सारणी के किस समूह में हैलोजन रखा जाता है? → 17th
+3. आधुनिक आवर्त सारणी के उस समूह का नाम बताएं, जिसमें सभी तत्व गैस हैं? → समूह 18
+4. कार्बन के किस रूप का उपयोग शुष्क स्नेहक के रूप में किया जाता है? → ग्रेफाइट
+5. किन तत्वों की बाह्यतम कोशिका में 7 संयोजक इलेक्ट्रॉन होते हैं? → हैलोजन
+6. कौन से समूह में शामिल तत्व रंगहीन, स्वादहीन और गंध रहित गैसें हैं? → शून्य समूह
+7. फॉस्फोरिक एसिड का रासायनिक सूत्र क्या है? → H3PO4
 
-📝 Exam में पूछा गया: हीराकुंड बांध किस नदी पर है? → महानदी
-
-💬 अगली ट्रिक किस टॉपिक की चाहिए? कमेंट करो!
-📤 Save करो + उस दोस्त को भेजो जो ये हमेशा भूलता है
-🎯 Patwari / Lekhpal + हर GS exam के लिए
+💬 कितने पहले से आते थे? कमेंट करो: 7/7?
+📤 Save करो + उस दोस्त को भेजो जो exam की तैयारी कर रहा है।
+Science GK Questions | RRB NTPC, Group D, SSC GD, State Exam PYQ
 ⏱ MinuteMe_GS - एक मिनट, एक PYQ - पक्का!
+📲 Free test / notes: WhatsApp 8989971379
 
-#gktricks #gkinhindi #gkpyq #patwari #lekhpal #geography
-MANUAL MODE: reel ready_reels/ me rakhi (Instagram pe post nahi hui): reel_0117.mp4
+#gkquiz #rrbntpc #sscgd #gkpyq #chemistry
+  IG container: 17909851818568651
+  upload try 1: HTTP 200 {"success":true,"message":"Upload Successful."}
+  IG processing: FINISHED
+INSTAGRAM PE POST HO GAYA: 17976847964936016
