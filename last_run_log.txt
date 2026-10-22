@@ -1,26 +1,43 @@
-FORMAT: kahani
-  Gemini gemini-flash-latest fail: HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeout=90)
-KAHANI: भारत की राजभाषा  (Polity / राज भाषा (Official Language))
-  Kahani: 9 page, 15 chitra bane
-Awaaz: Gemini TTS ek baar me (gemini-3.8-flash-lite-tts / hi-in-tutor-1)
-KAHANI REEL TAIYAR: generated_reels/science_pyq_reel.mp4 (62s)
+FORMAT: list
+  Gemini gemini-flash-latest: HTTP 503
+  Gemini gemini-flash-latest: HTTP 429
+  Gemini gemini-2.5-flash: HTTP 503
+  Gemini gemini-2.5-flash-lite: HTTP 404
+  Gemini gemini-2.0-flash: HTTP 404
+  Groq llama-3.3-70b-versatile: HTTP 404
+  Gemini gemini-flash-latest: HTTP 429
+  Gemini gemini-flash-latest: HTTP 429
+  Gemini gemini-flash-latest: HTTP 429
+  Gemini gemini-2.5-flash: HTTP 429
+  Gemini gemini-2.5-flash-lite: HTTP 404
+  Gemini gemini-2.0-flash: HTTP 404
+  Groq llama-3.3-70b-versatile: HTTP 404
+  Gemini gemini-flash-latest: HTTP 429
+  Gemini gemini-2.5-flash: HTTP 429
+  Gemini gemini-2.5-flash-lite: HTTP 404
+  Gemini gemini-2.0-flash: HTTP 404
+  Groq llama-3.3-70b-versatile: HTTP 404
+LIST REEL TAIYAR: generated_reels/science_pyq_reel.mp4 (10s)
 
 CAPTION:
-📖 हिंदी को देश की राजभाषा कैसे बनाया गया? भारत की राजभाषा - कहानी से याद करो!
+📚 जीव विज्ञान के 7 PYQ - RRB, SSC, Police, Patwari, Army, State Exams के लिए (Save करो)
 
-📝 Exam में पूछा गया:
-• भारतीय संविधान के किस अनुच्छेद में हिंदी को संघ की राजभाषा घोषित किया गया? → अनुच्छेद 343
-• संविधान की 8वीं अनुसूची में कुल कितनी भाषाओं को मान्यता दी गई है? → 22
-• शास्त्रीय भाषा घोषित करने का निर्णय भारत सरकार ने किस वर्ष लिया था? → 2004
+1. मानव शुक्राणु में कितने गुणसूत्र मौजूद हैं? → 23
+2. मानवों में लिंग गुणसूत्रों के कितने युग्म मौजूद होते हैं? → 1 युग्म
+3. वंशागति के नियमों (laws of inheritance) का प्रतिपादन किसने किया? → ग्रेगर मेंडेल
+4. वैज्ञानिक जी. जे. मेंडल का निधन कब हुआ? → 1884
+5. भारत में डी.एन.ए. फिंगरप्रिंटिंग के पिता के रूप में किसे जाना जाता है? → लालजी सिंह
+6. एक लंबा वृक्ष अपने अपशिष्ट उत्पादों को कहाँ संग्रहीत कर सकता है? → पुराने जाइलम (हार्टवुड) में
+7. किस प्रकार की कोशिका से त्वचा बनी है? → अधिचर्म कोशिका
 
-📤 Save करो + उस दोस्त को भेजो जिसे ये topic याद नहीं रहता!
-🎯 Army / Agniveer + हर GS exam के लिए
+💬 कितने पहले से आते थे? कमेंट करो: 7/7?
+📤 Save करो + उस दोस्त को भेजो जो exam की तैयारी कर रहा है।
+Science GK Questions | RRB NTPC, Group D, SSC GD, State Exam PYQ
 ⏱ MinuteMe_GS - एक मिनट, एक PYQ - पक्का!
+📲 Free test / notes: WhatsApp 8989971379
 
-#gkstory #gkinhindi #gkpyq #agniveer #armygk #polity
-  IG container: 17909865561568651
-  upload try 1: HTTP 400 {"debug_info":{"retriable":false,"type":"ProcessingFailedError","message":"Request processing failed"}}
-  upload try 2: HTTP 200 {"success":true,"message":"Upload Successful."}
+#gkquiz #rrbntpc #sscgd #gkpyq #biology
+  IG container: 17909867031568651
+  upload try 1: HTTP 200 {"success":true,"message":"Upload Successful."}
   IG processing: FINISHED
-INSTAGRAM PE POST HO GAYA: 18056346767580530
-CAROUSEL POST HO GAYA: 18122593189945242
+INSTAGRAM PE POST HO GAYA: 17908138473657371
