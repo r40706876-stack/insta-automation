@@ -1,43 +1,41 @@
-FORMAT: list
+FORMAT: mega
   Gemini gemini-flash-latest: HTTP 503
-  Gemini gemini-flash-latest: HTTP 429
-  Gemini gemini-2.5-flash: HTTP 503
+  Mega AI jaanch: 51 me se 26 sahi
+  Groq llama-3.3-70b-versatile: HTTP 404
+  Groq openai/gpt-oss-120b: HTTP 400
+  Groq llama-3.1-8b-instant: HTTP 404
+  Gemini gemini-flash-latest: HTTP 503
+  Mega AI jaanch: 3 me se 3 sahi
+  Groq llama-3.3-70b-versatile: HTTP 404
+  Mega AI jaanch: 3 me se 3 sahi
+  Gemini gemini-flash-latest: HTTP 503
+  Mega AI jaanch: 46 me se 31 sahi
+  Groq llama-3.3-70b-versatile: HTTP 404
+  Groq openai/gpt-oss-120b: HTTP 400
+  Groq llama-3.1-8b-instant: HTTP 404
+  Gemini gemini-flash-latest: HTTP 503
+  Gemini gemini-2.5-flash fail: HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeout=90)
   Gemini gemini-2.5-flash-lite: HTTP 404
   Gemini gemini-2.0-flash: HTTP 404
   Groq llama-3.3-70b-versatile: HTTP 404
-  Gemini gemini-flash-latest: HTTP 429
-  Gemini gemini-flash-latest: HTTP 429
-  Gemini gemini-flash-latest: HTTP 429
-  Gemini gemini-2.5-flash: HTTP 429
-  Gemini gemini-2.5-flash-lite: HTTP 404
-  Gemini gemini-2.0-flash: HTTP 404
-  Groq llama-3.3-70b-versatile: HTTP 404
-  Gemini gemini-flash-latest: HTTP 429
-  Gemini gemini-2.5-flash: HTTP 429
-  Gemini gemini-2.5-flash-lite: HTTP 404
-  Gemini gemini-2.0-flash: HTTP 404
-  Groq llama-3.3-70b-versatile: HTTP 404
-LIST REEL TAIYAR: generated_reels/science_pyq_reel.mp4 (10s)
+  Groq openai/gpt-oss-120b: HTTP 400
+  Groq llama-3.1-8b-instant: HTTP 404
+  Mega awaaz: gemini-3.8-flash-tts / hi-in-storyteller-6
+MEGA REEL TAIYAR: generated_reels/science_pyq_reel.mp4 (23.1s, 5 page, 100 sawal)
 
 CAPTION:
-📚 जीव विज्ञान के 7 PYQ - RRB, SSC, Police, Patwari, Army, State Exams के लिए (Save करो)
+📚 "रसायन विज्ञान (Chemistry)" के 100 सबसे महत्वपूर्ण प्रश्न - सभी सरकारी परीक्षाओं के लिए
 
-1. मानव शुक्राणु में कितने गुणसूत्र मौजूद हैं? → 23
-2. मानवों में लिंग गुणसूत्रों के कितने युग्म मौजूद होते हैं? → 1 युग्म
-3. वंशागति के नियमों (laws of inheritance) का प्रतिपादन किसने किया? → ग्रेगर मेंडेल
-4. वैज्ञानिक जी. जे. मेंडल का निधन कब हुआ? → 1884
-5. भारत में डी.एन.ए. फिंगरप्रिंटिंग के पिता के रूप में किसे जाना जाता है? → लालजी सिंह
-6. एक लंबा वृक्ष अपने अपशिष्ट उत्पादों को कहाँ संग्रहीत कर सकता है? → पुराने जाइलम (हार्टवुड) में
-7. किस प्रकार की कोशिका से त्वचा बनी है? → अधिचर्म कोशिका
+⏸️ हर पेज पर रोककर पढ़ो (स्क्रीन दबाकर रखो)
+📌 अभी SAVE करो - exam से पहले 1 बार ज़रूर revise करना
+📤 उस दोस्त को भेजो जो SSC / Railway / Police की तैयारी कर रहा है
+💬 कितने पहले से आते थे? कमेंट करो!
 
-💬 कितने पहले से आते थे? कमेंट करो: 7/7?
-📤 Save करो + उस दोस्त को भेजो जो exam की तैयारी कर रहा है।
-Science GK Questions | RRB NTPC, Group D, SSC GD, State Exam PYQ
+रसायन विज्ञान (Chemistry) GK | RRB NTPC, Group D, SSC GD, CGL, MTS, Police, Patwari, State Exam PYQ
 ⏱ MinuteMe_GS - एक मिनट, एक PYQ - पक्का!
-📲 Free test / notes: WhatsApp 8989971379
 
-#gkquiz #rrbntpc #sscgd #gkpyq #biology
-  IG container: 17909867031568651
+#gk #gkquiz #gkpyq #sscgd #rrbntpc #rrbgroupd #policebharti #chemistry
+  IG container: 17909909442568651
   upload try 1: HTTP 200 {"success":true,"message":"Upload Successful."}
   IG processing: FINISHED
-INSTAGRAM PE POST HO GAYA: 17908138473657371
+INSTAGRAM PE POST HO GAYA: 18122440984728031
