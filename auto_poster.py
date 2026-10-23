@@ -3303,12 +3303,15 @@ def pick_format(ep):
     # din ki 3 reel samay ke hisaab se (IST): subah 7 PYQ list, dopahar quiz notebook, raat MEGA revision
     # (MEGA = sabse zyada save wali reel -> raat 8 baje ke sabse bade peak pe)
     # GitHub kabhi ghanton der se chalata hai -> format samay se nahi, kaunsa schedule chala usse tay ho
-    by_cron = {"15 1 * * *": "list", "15 7 * * *": "kahani", "15 11 * * *": "trick", "45 13 * * *": "mega"}
+    # 5 reel/din, beech me ~3 ghante -> ek reel doosri ke views na kaate (23 Oct: dono kahani roz)
+    by_cron = {"15 1 * * *": "list", "15 5 * * *": "kahani_pages", "15 8 * * *": "trick",
+               "45 11 * * *": "kahani_page", "45 14 * * *": "mega"}
     cron = os.getenv("CRON_SLOT", "").strip()
     if cron in by_cron:
         return by_cron[cron]
     h = time.gmtime(time.time() + 19800).tm_hour
-    return "list" if h < 11 else ("kahani" if h < 15 else ("trick" if h < 18 else "mega"))   # dopahar: quiz ki jagah kahani (quiz ka skip zyada)
+    return ("list" if h < 10 else "kahani_pages" if h < 13 else "trick" if h < 16 else "kahani_page" if h < 19
+            else "mega")
 
 
 # ---------- HAR EXAM KI AUDIENCE: GS sab me aata hai -> har reel alag exam waalon ko bulaye ----------

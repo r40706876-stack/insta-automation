@@ -1,13 +1,14 @@
-name: Science PYQ Reel (din me 3 baar)
+name: Science PYQ Reel (din me 5 baar)
 
 on:
   schedule:
     # GitHub UTC time maanta hai (India = UTC + 5:30). GitHub aksar 10-30 min der se chalata hai.
     # Exam students Insta sabse zyada: subah padhai se pehle, dopahar break, raat 8-10 (sabse bada peak).
-    - cron: "15 1 * * *"     # subah ~7:00  -> 7 PYQ list (jaldi revision)
-    - cron: "15 7 * * *"     # dopahar ~1:00 -> KAHANI (purani / nayi 1-page baari-baari) + carousel
-    - cron: "15 11 * * *"    # shaam ~4:45-5:15 -> TRICK card (ek page, bina awaaz)
-    - cron: "45 13 * * *"    # raat ~7:45-8:15 -> MEGA revision (save wali reel, sabse bade peak pe)
+    - cron: "15 1 * * *"     # subah ~7:00   -> 7 PYQ list
+    - cron: "15 5 * * *"     # ~11:00        -> KAHANI purani (chitra page + awaaz) + carousel
+    - cron: "15 8 * * *"     # dopahar ~2:00 -> TRICK card (bina awaaz)
+    - cron: "45 11 * * *"    # shaam ~5:30   -> KAHANI nayi (1 page + awaaz) + carousel
+    - cron: "45 14 * * *"    # raat ~8:30    -> MEGA revision (sabse bada peak)
   workflow_dispatch:
     inputs:
       format:
