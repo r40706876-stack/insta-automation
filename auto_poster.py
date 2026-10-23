@@ -66,7 +66,7 @@ except Exception:
 
 import numpy as np
 import requests
-from PIL import Image, ImageDraw, ImageFont, ImageChops, features
+from PIL import Image, ImageDraw, ImageFont, ImageChops, ImageFilter, features
 
 
 # ============================== CONFIG ==============================
@@ -6013,6 +6013,7 @@ def page_title(d, text, cx, y, max_w, size=80, min_size=50, col=PEN_BLUE, max_li
 
 def page_header(d, title, label, cx, max_w, band, size=80):
     """Laal patti + title + 'Day N/100 • label • SAVE करो' + exam patti (7 PYQ jaisa). Return: neeche ka y."""
+    callout_sticker(d, cx)
     challenge_band(d, band, cx=cx, max_w=max_w)
     y = page_title(d, title, cx, 212, max_w - 20, size=size, min_size=50)
     d.text((cx, y + 22), f"{day_tag()}  •  {label}  •  SAVE करो", font=get_font(34), fill=PEN_RED, anchor="mm")
@@ -6029,10 +6030,43 @@ def page_footer(cv, d, y, prompt, x=CX0):
     d.text((x + 85, y + 63), prompt, font=fp, fill=PEN_RED, anchor="lm")
 
 
+CALLOUT = "Group D • NTPC • SSC वाले, रुको!"
+PUNCH_T = 0.6                       # pehle second ka 'thak' zoom (skip kam: aankh ruke)
+
+
+def callout_sticker(d, cx, y=78):
+    """Sabse upar peela tircha patta: exam wale ko seedha bulana (baaki log waise bhi jaate)."""
+    f = get_font(36)
+    w = text_w(CALLOUT, f) + 60
+    d.rounded_rectangle((cx - w / 2 + 5, y - 27, cx + w / 2 + 5, y + 33), radius=14, fill=(150, 110, 0))
+    d.rounded_rectangle((cx - w / 2, y - 32, cx + w / 2, y + 28), radius=14, fill=(255, 214, 0))
+    d.text((cx, y - 2), CALLOUT, font=f, fill=INK, anchor="mm")
+
+
+def punch_frame(base, t):
+    """0-PUNCH_T sec: page halka sa uchhal kar baithta hai (zoom + jhatka). Frame 0 = poora page (cover)."""
+    if t <= 0 or t >= PUNCH_T:
+        return base
+    p = t / PUNCH_T
+    sc = 1 + 0.075 * math.sin(math.pi * p) * (1 - 0.4 * p)
+    dx = int(10 * math.sin(p * math.pi * 6) * (1 - p))
+    w2, h2 = int(W / sc), int(H / sc)
+    x0, y0 = (W - w2) // 2 + dx, (H - h2) // 3
+    return base.crop((x0, y0, x0 + w2, y0 + h2)).resize((W, H), Image.BILINEAR)
+
+
+def punch_key(fi):
+    t = fi / FPS
+    return ("punch", fi) if 0 < t < PUNCH_T else None
+
+
 def card_reel(frame, dur, out, seed=0):
     """Ek hi frame + beat music (seamless loop) -> reel. Wahi frame cover/thumbnail (pehla frame = poora maal)."""
     music = beat_music(dur, seed=seed)
-    encode_frames(lambda fi: frame, int(dur * FPS), music, out, key=lambda fi: 0)
+    add_at(music, sfx_thud(0.55), 0.03)
+    music = np.clip(music, -0.98, 0.98)
+    encode_frames(lambda fi: punch_frame(frame, fi / FPS), int(dur * FPS), music, out,
+                  key=lambda fi: punch_key(fi) or 0)
     frame.save(os.path.join(os.path.dirname(out) or ".", "thumbnail.jpg"), quality=92)
     return dur
 
@@ -6048,7 +6082,9 @@ def _trick_rows(tc):
     return out
 
 
-def trick_card(tc):
+def trick_card(tc, info=None):
+    """info (dict) -> animation ke liye har hisse ki jagah (trick patti, har line, jawab)."""
+    info = {} if info is None else info
     resolve_font()
     cv = _paper(W, H)
     d = ImageDraw.Draw(cv)
@@ -6086,6 +6122,7 @@ def trick_card(tc):
     # trick patti
     d.rounded_rectangle((CX0 + 6, y + 6, CX1 + 6, y + trick_h + 6), radius=22, fill=(200, 150, 40))
     d.rounded_rectangle((CX0, y, CX1, y + trick_h), radius=22, fill=(255, 241, 170), outline=PEN_RED, width=4)
+    info["trick"] = (CX0, y, CX1, y + trick_h)
     tline_y = y + 22
     for k, ln in enumerate(tl[:2]):
         t = " ".join(ln)
@@ -6106,6 +6143,8 @@ def trick_card(tc):
         d.ellipse((CX0 + 10, ry, CX0 + 10 + kw, ry + fs * 1.5), outline=K_RED, width=5)
         d.text((CX0 + 10 + kw / 2, ry + fs * 0.75), key, font=fk, fill=K_RED, anchor="mm")
         d.text((CX0 + 10 + kw + 22, ry + fs * 0.75), "=  " + full, font=ff, fill=PEN_BLUE, anchor="lm")
+        info.setdefault("rows", []).append({"box": (CX0 + 2, ry - 6, CX0 + 10 + kw + 22 + text_w("=  " + full, ff) + 16,
+                                                    ry + fs * 1.5 + 6)})
     y += row_h * n + 30 + gap
     # PYQ dabba
     if pyq:
@@ -6120,15 +6159,104 @@ def trick_card(tc):
         d.text((CX0 + 30, qy + 4), "Ans :  ", font=fa, fill=PEN_BLUE, anchor="la")
         d.text((CX0 + 30 + text_w("Ans :  ", fa), qy + 4), clean_text(str(pyq["a"])), font=fa, fill=PEN_BLUE,
                anchor="la")
+        info["answer"] = (CX0 + 20, qy - 2, CX0 + 44 + text_w("Ans :  " + clean_text(str(pyq["a"])), fa), qy + 58)
     page_footer(cv, d, 1597, f"कितने याद थे?  कमेंट करो __/{n}   •   दोस्तों को भेजो")
     return cv
 
 
+LOOP4 = 4.0                         # ek-screen reel: 4s, 120 BPM ke 2 bar -> aakhri frame = pehla frame (seamless loop)
+
+
+def _ease(x):
+    x = clamp(x)
+    return x * x * (3 - 2 * x)
+
+
+def _pop(cv, base, box, k, marker=True):
+    """Ek hissa: peela marker baayein se daayein + halka sa uthna (k: 0->1->0)."""
+    x0, y0, x1, y1 = [int(v) for v in box]
+    if k <= 0:
+        return cv
+    if marker:
+        ov = Image.new("RGB", (x1 - x0, y1 - y0), (255, 255, 255))
+        ImageDraw.Draw(ov).rounded_rectangle((0, 0, max(10, int((x1 - x0) * min(1, k * 1.6))), y1 - y0 - 1),
+                                             radius=14, fill=(255, 228, 95))
+        patch = ImageChops.multiply(base.crop((x0, y0, x1, y1)), ov)
+    else:
+        patch = base.crop((x0, y0, x1, y1))
+    sc = 1 + 0.06 * math.sin(math.pi * min(1, k))
+    pw, ph = int((x1 - x0) * sc), int((y1 - y0) * sc)
+    patch = patch.resize((pw, ph), Image.BICUBIC)
+    sh = Image.new("RGBA", (pw + 30, ph + 30), (0, 0, 0, 0))
+    ImageDraw.Draw(sh).rounded_rectangle((15, 19, pw + 15, ph + 19), radius=16, fill=(0, 0, 0, int(60 * k)))
+    sh = sh.filter(ImageFilter.GaussianBlur(9))
+    cx_, cy_ = (x0 + x1) / 2, (y0 + y1) / 2
+    cv.paste(sh, (int(cx_ - pw / 2 - 15), int(cy_ - ph / 2 - 15)), sh)
+    cv.paste(patch, (int(cx_ - pw / 2), int(cy_ - ph / 2)))
+    return cv
+
+
+def _sheen(cv, box, p):
+    """Chamak ki patti ek kinare se doosre tak (p 0->1)."""
+    x0, y0, x1, y1 = [int(v) for v in box]
+    w, h = x1 - x0, y1 - y0
+    band = Image.new("L", (w, h), 0)
+    bd = ImageDraw.Draw(band)
+    cx_ = -160 + (w + 320) * p
+    bd.polygon([(cx_ - 70, h), (cx_ + 10, 0), (cx_ + 80, 0), (cx_, h)], fill=150)
+    band = band.filter(ImageFilter.GaussianBlur(14))
+    region = cv.crop((x0, y0, x1, y1))
+    region.paste(Image.new("RGB", (w, h), (255, 255, 255)), (0, 0), band)
+    cv.paste(region, (x0, y0))
+    return cv
+
+
+def loop4_reel(base, info, out, seed=0):
+    """4s ek-screen reel, editor jaisa: 0-0.5 'thak' zoom, chamak trick patti pe, har line beat pe marker+uthna,
+    jawab pe marker, aakhri 0.4s wapas saaf page -> loop me jodd nahi dikhta. Pehla frame = poora page (cover)."""
+    rows = [r["box"] for r in info.get("rows", [])]
+    ans = info.get("answer")
+    trick = info.get("trick")
+    t_rows0, t_rows1 = 1.0, 3.0 if ans else 3.5
+    step = (t_rows1 - t_rows0) / max(1, len(rows))
+    beats = []
+
+    def frame_at(fi):
+        t = fi / FPS
+        if t < PUNCH_T:
+            return punch_frame(base, t)
+        cv = base.copy()
+        if trick and 0.45 <= t < 1.05:
+            cv = _sheen(cv, trick, (t - 0.45) / 0.6)
+        for i, b in enumerate(rows):
+            s0 = t_rows0 + i * step
+            if s0 <= t < s0 + step * 1.15:
+                cv = _pop(cv, base, b, math.sin(math.pi * _ease((t - s0) / (step * 1.15))))
+        if ans and 3.0 <= t < 3.65:
+            cv = _pop(cv, base, ans, math.sin(math.pi * _ease((t - 3.0) / 0.65)))
+        return cv
+
+    for i in range(len(rows)):
+        beats.append(t_rows0 + i * step)
+    music = beat_music(LOOP4, seed=seed)
+    add_at(music, sfx_thud(0.5), 0.03)
+    add_at(music, sfx_whoosh(0.3, 0.25), 0.42)
+    for b in beats:
+        add_at(music, sfx_pop(0.3), b)
+    if ans:
+        add_at(music, sfx_ding(0.3), 3.05)
+    music = np.clip(music, -0.98, 0.98)
+    encode_frames(frame_at, int(LOOP4 * FPS), music, out, key=lambda fi: fi if fi / FPS < 3.7 else "end")
+    base.save(os.path.join(os.path.dirname(out) or ".", "thumbnail.jpg"), quality=92)
+    return LOOP4
+
+
 def build_trick_card_reel(tc, out):
-    frame = trick_card(tc)
-    card_reel(frame, CARD_DUR, out, seed=len(tc["lines"]))
-    print(f"TRICK CARD REEL TAIYAR: {out} ({CARD_DUR:.0f}s)")
-    return CARD_DUR
+    info = {}
+    frame = trick_card(tc, info)
+    loop4_reel(frame, info, out, seed=len(tc["lines"]))
+    print(f"TRICK CARD REEL TAIYAR: {out} ({LOOP4:.0f}s loop)")
+    return LOOP4
 
 
 # ---------- KAHANI 1 PAGE: poori kahani 7 line ki 'kahani-yatra' + chitra ----------
@@ -6305,7 +6433,7 @@ def build_kahani_page_reel(story, out, rot=0):
             starts = [0.15 + sum(durs[:k]) for k in range(len(durs))]
             dur = 0.15 + sum(durs) + 1.2
     if starts is None or len(starts) != len(speeches):
-        card_reel(base, KAHANI_PAGE_DUR, out, seed=len(rows))
+        loop4_reel(base, {"rows": rows}, out, seed=len(rows))
         print(f"KAHANI 1-PAGE REEL TAIYAR (bina awaaz): {out} ({KAHANI_PAGE_DUR:.0f}s)")
         return base
     base.save(os.path.join(os.path.dirname(out) or ".", "thumbnail.jpg"), quality=92)
@@ -6323,7 +6451,7 @@ def build_kahani_page_reel(story, out, rot=0):
     def render(fi):
         s = state(fi)
         if not s:
-            return base
+            return punch_frame(base, fi / FPS)
         x0, y0, x1, y1 = rows[s[0] - 1]["box"]
         ov = Image.new("RGB", (W, H), (255, 255, 255))
         ImageDraw.Draw(ov).rounded_rectangle((x0, y0, x0 + max(14, (x1 - x0) * s[1] / steps), y1), radius=12,
@@ -6339,7 +6467,9 @@ def build_kahani_page_reel(story, out, rot=0):
     for k in range(1, len(rows) + 1):
         add_at(music, sfx_pop(0.22), starts[k])
     music = np.clip(music, -0.98, 0.98)
-    encode_frames(render, int(dur * FPS), music, out, key=lambda fi: state(fi) or "base")
+    add_at(music, sfx_thud(0.55), 0.03)
+    music = np.clip(music, -0.98, 0.98)
+    encode_frames(render, int(dur * FPS), music, out, key=lambda fi: state(fi) or punch_key(fi) or "base")
     print(f"KAHANI 1-PAGE REEL TAIYAR (awaaz + marker): {out} ({dur:.0f}s)")
     return base
 
