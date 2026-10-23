@@ -1,23 +1,70 @@
-FORMAT: kahani_short
+FORMAT: kahani_pages
+  Gemini gemini-flash-latest: HTTP 503
+KAHANI: भारत के प्रमुख शहर  (Geography / भारत में परिवहन (Transport in India))
+  Cloudflare flux-1-schnell: 429 {"errors":[{"message":"AiError: AiError: you have used up your daily free allocation of 10,000 neurons, please upgrade t
+  Cloudflare stable-diffusion-xl-lightning: 429 {"errors":[{"message":"AiError: AiError: you have used up your daily free allocation of 10,000 neurons, please upgrade t
+  Cloudflare flux-1-schnell: 429 {"errors":[{"message":"AiError: AiError: you have used up your daily free allocation of 10,000 neurons, please upgrade t
+  Cloudflare stable-diffusion-xl-lightning: 429 {"errors":[{"message":"AiError: AiError: you have used up your daily free allocation of 10,000 neurons, please upgrade t
+  Cloudflare flux-1-schnell: 429 {"errors":[{"message":"AiError: AiError: you have used up your daily free allocation of 10,000 neurons, please upgrade t
+  Cloudflare stable-diffusion-xl-lightning: 429 {"errors":[{"message":"AiError: AiError: you have used up your daily free allocation of 10,000 neurons, please upgrade t
+  Cloudflare flux-1-schnell: 429 {"errors":[{"message":"AiError: AiError: you have used up your daily free allocation of 10,000 neurons, please upgrade t
+  Cloudflare stable-diffusion-xl-lightning: 429 {"errors":[{"message":"AiError: AiError: you have used up your daily free allocation of 10,000 neurons, please upgrade t
+  Cloudflare flux-1-schnell: 429 {"errors":[{"message":"AiError: AiError: you have used up your daily free allocation of 10,000 neurons, please upgrade t
+  Cloudflare stable-diffusion-xl-lightning: 429 {"errors":[{"message":"AiError: AiError: you have used up your daily free allocation of 10,000 neurons, please upgrade t
+  Cloudflare flux-1-schnell: 429 {"errors":[{"message":"AiError: AiError: you have used up your daily free allocation of 10,000 neurons, please upgrade t
+  Cloudflare stable-diffusion-xl-lightning: 429 {"errors":[{"message":"AiError: AiError: you have used up your daily free allocation of 10,000 neurons, please upgrade t
+  Cloudflare flux-1-schnell: 429 {"errors":[{"message":"AiError: AiError: you have used up your daily free allocation of 10,000 neurons, please upgrade t
+  Cloudflare stable-diffusion-xl-lightning: 429 {"errors":[{"message":"AiError: AiError: you have used up your daily free allocation of 10,000 neurons, please upgrade t
+  Cloudflare flux-1-schnell: 429 {"errors":[{"message":"AiError: AiError: you have used up your daily free allocation of 10,000 neurons, please upgrade t
+  Cloudflare stable-diffusion-xl-lightning: 429 {"errors":[{"message":"AiError: AiError: you have used up your daily free allocation of 10,000 neurons, please upgrade t
+  Cloudflare flux-1-schnell: 429 {"errors":[{"message":"AiError: AiError: you have used up your daily free allocation of 10,000 neurons, please upgrade t
+  Cloudflare stable-diffusion-xl-lightning: 429 {"errors":[{"message":"AiError: AiError: you have used up your daily free allocation of 10,000 neurons, please upgrade t
+  Cloudflare flux-1-schnell: 429 {"errors":[{"message":"AiError: AiError: you have used up your daily free allocation of 10,000 neurons, please upgrade t
+  Cloudflare stable-diffusion-xl-lightning: 429 {"errors":[{"message":"AiError: AiError: you have used up your daily free allocation of 10,000 neurons, please upgrade t
+  Cloudflare flux-1-schnell: 429 {"errors":[{"message":"AiError: AiError: you have used up your daily free allocation of 10,000 neurons, please upgrade t
+  Cloudflare stable-diffusion-xl-lightning: 429 {"errors":[{"message":"AiError: AiError: you have used up your daily free allocation of 10,000 neurons, please upgrade t
+  Cloudflare flux-1-schnell: 429 {"errors":[{"message":"AiError: AiError: you have used up your daily free allocation of 10,000 neurons, please upgrade t
+  Cloudflare stable-diffusion-xl-lightning: 429 {"errors":[{"message":"AiError: AiError: you have used up your daily free allocation of 10,000 neurons, please upgrade t
+  Cloudflare flux-1-schnell: 429 {"errors":[{"message":"AiError: AiError: you have used up your daily free allocation of 10,000 neurons, please upgrade t
+  Cloudflare stable-diffusion-xl-lightning: 429 {"errors":[{"message":"AiError: AiError: you have used up your daily free allocation of 10,000 neurons, please upgrade t
+  Cloudflare flux-1-schnell: 429 {"errors":[{"message":"AiError: AiError: you have used up your daily free allocation of 10,000 neurons, please upgrade t
+  Cloudflare stable-diffusion-xl-lightning: 429 {"errors":[{"message":"AiError: AiError: you have used up your daily free allocation of 10,000 neurons, please upgrade t
+  Cloudflare flux-1-schnell: 429 {"errors":[{"message":"AiError: AiError: you have used up your daily free allocation of 10,000 neurons, please upgrade t
+  Cloudflare stable-diffusion-xl-lightning: 429 {"errors":[{"message":"AiError: AiError: you have used up your daily free allocation of 10,000 neurons, please upgrade t
+  Kahani: 9 page, 0 chitra bane
+KAHANI ROKI: sirf 0/15 chitra bane (Cloudflare quota?) -> list format
   Gemini gemini-flash-latest: HTTP 503
   Gemini gemini-flash-latest: HTTP 503
-KAHANI: भारत की राजधानियाँ  (Geography / भारत में परिवहन (Transport in India))
-  Kahani: 7 page, 11 chitra bane
-  KAHANI REEL: purana chitra-page + awaaz
-Awaaz: Gemini TTS ek baar me (gemini-3.8-flash-tts / hi-in-storyteller-6)
-KAHANI REEL TAIYAR: generated_reels/science_pyq_reel.mp4 (48s)
+  Gemini gemini-flash-latest fail: HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeout=90)
+  Gemini gemini-flash-latest: HTTP 503
+  Gemini gemini-flash-latest fail: HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeout=90)
+  Gemini gemini-2.5-flash: HTTP 503
+  Gemini gemini-2.5-flash-lite: HTTP 404
+  Gemini gemini-2.0-flash: HTTP 404
+  Groq llama-3.3-70b-versatile: HTTP 404
+  Gemini gemini-flash-latest fail: HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeout=90)
+  Gemini gemini-flash-latest: HTTP 503
+LIST REEL TAIYAR: generated_reels/science_pyq_reel.mp4 (10s)
 
 CAPTION:
-📖 भारत की राजधानियाँ याद करना मुश्किल क्यों? भारत की राजधानियाँ - कहानी से याद करो!
+📚 इतिहास के 7 PYQ - RRB, SSC, Police, Patwari, Army, State Exams के लिए (Save करो)
 
-📝 Exam में पूछा गया:
-• आंध्र प्रदेश की प्रस्तावित राजधानी क्या थी? → अमरावती
-• झारखंड की राजधानी क्या है? → रांची
-• उत्तराखंड की शीतकालीन राजधानी क्या है? → देहरादून
+1. खजुराहो के मंदिरों का निर्माण किस राजवंश के शासनकाल में हुआ था? → चंदेल राजवंश
+2. जलियाँवाला बाग नरसंहार किस वर्ष घटित हुआ? → 1919
+3. स्वामी महावीर का जन्म कहां हुआ था? → कुंडग्राम
+4. आगरा शहर को किसने बसाया? → सिकंदर लोदी
+5. सुन्नी और शिया किस धर्म या पंथ के दो प्रमुख संप्रदाय हैं? → इस्लाम
+6. हिंदू धर्म में 'अद्वैत' का सिद्धांत किसने प्रतिपादित किया? → आदि शंकराचार्य
+7. प्रतिहार राजवंश का संस्थापक कौन था? → हरिश्चंद्र
 
-📤 Save करो + उस दोस्त को भेजो जिसे ये topic याद नहीं रहता!
-🎯 Railway NTPC / Group D + हर GS exam के लिए
+💬 कितने पहले से आते थे? कमेंट करो: 7/7?
+📤 Save करो + उस दोस्त को भेजो जो exam की तैयारी कर रहा है।
+इतिहास GK Questions | RRB NTPC, Group D, SSC GD, State Exam PYQ
 ⏱ MinuteMe_GS - एक मिनट, एक PYQ - पक्का!
+📲 Free test / notes: WhatsApp 8989971379
 
-#gkstory #gkinhindi #gkpyq #rrbntpc #rrbgroupd #geography
-MANUAL MODE: reel ready_reels/ me rakhi (Instagram pe post nahi hui): reel_0126.mp4
+#gkquiz #rrbntpc #sscgd #gkpyq #history
+  IG container: 17910103662568651
+  upload try 1: HTTP 200 {"success":true,"message":"Upload Successful."}
+  IG processing: FINISHED
+INSTAGRAM PE POST HO GAYA: 18105793097630354
