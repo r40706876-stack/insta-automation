@@ -4156,7 +4156,8 @@ def list_rows_info(items):
     for f, lh, lines in blocks:
         h = lh * len(lines) + 2 + int(size * 1.35)
         w = max(text_w(" ".join(l), f) for l in lines)
-        rows.append({"box": (128, y - 6, min(W - 20, 140 + w + 14), y + h - 4)})
+        wa = text_w("Ans :  " + str(items[len(rows)]["a"]), get_font(size + 2)) + 35
+        rows.append({"box": (128, y - 6, min(W - 30, 140 + max(w, wa) + 14), y + h - 4)})
         y += h + gap
     return {"rows": rows}
 
@@ -4165,7 +4166,7 @@ def build_list_reel(subject, items, out):
     resolve_font()
     frame = render_list_frame(subject, items)
     # 23 Oct: wahi winner page; bas shuru me 'thak' zoom + har sawal pe baari-baari peela marker (10s, seamless loop)
-    loop4_reel(frame, list_rows_info(items), out, seed=len(items), dur=LIST_DUR)
+    loop4_reel(frame, list_rows_info(items), out, seed=len(items), dur=LIST_DUR, lift=False)
     print(f"LIST REEL TAIYAR: {out} ({LIST_DUR:.0f}s)")
     return LIST_DUR
 
@@ -6316,9 +6317,10 @@ def _ease(x):
     return x * x * (3 - 2 * x)
 
 
-def _pop(cv, base, box, k, marker=True):
-    """Ek hissa: peela marker baayein se daayein + halka sa uthna (k: 0->1->0)."""
+def _pop(cv, base, box, k, marker=True, lift=True):
+    """Ek hissa: peela marker baayein se daayein + halka sa uthna (k: 0->1->0). lift=False: sirf marker, jagah pe."""
     x0, y0, x1, y1 = [int(v) for v in box]
+    x1 = min(x1, W - 24)
     if k <= 0:
         return cv
     if marker:
@@ -6328,6 +6330,9 @@ def _pop(cv, base, box, k, marker=True):
         patch = ImageChops.multiply(base.crop((x0, y0, x1, y1)), ov)
     else:
         patch = base.crop((x0, y0, x1, y1))
+    if not lift:
+        cv.paste(patch, (x0, y0))
+        return cv
     sc = 1 + 0.06 * math.sin(math.pi * min(1, k))
     pw, ph = int((x1 - x0) * sc), int((y1 - y0) * sc)
     patch = patch.resize((pw, ph), Image.BICUBIC)
@@ -6355,7 +6360,7 @@ def _sheen(cv, box, p):
     return cv
 
 
-def loop4_reel(base, info, out, seed=0, dur=None):
+def loop4_reel(base, info, out, seed=0, dur=None, lift=True):
     """4s ek-screen reel, editor jaisa: 0-0.5 'thak' zoom, chamak trick patti pe, har line beat pe marker+uthna,
     jawab pe marker, aakhri 0.4s wapas saaf page -> loop me jodd nahi dikhta. Pehla frame = poora page (cover)."""
     dur = dur or LOOP4
@@ -6377,7 +6382,7 @@ def loop4_reel(base, info, out, seed=0, dur=None):
         for i, b in enumerate(rows):
             s0 = t_rows0 + i * step
             if s0 <= t < s0 + step * 1.15:
-                cv = _pop(cv, base, b, math.sin(math.pi * _ease((t - s0) / (step * 1.15))))
+                cv = _pop(cv, base, b, math.sin(math.pi * _ease((t - s0) / (step * 1.15))), lift=lift)
         if ans and t_rows1 <= t < t_rows1 + 0.65:
             cv = _pop(cv, base, ans, math.sin(math.pi * _ease((t - t_rows1) / 0.65)))
         return cv
