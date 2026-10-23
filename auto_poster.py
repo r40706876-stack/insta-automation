@@ -4135,12 +4135,32 @@ def render_list_frame(subject, items):
     return cv
 
 
+def list_rows_info(items):
+    """render_list_frame jaisa hi hisaab -> har sawal+jawab ki jagah (peele marker ke liye)."""
+    top, bottom = 420, 1580
+    for size in (42, 40, 38, 36, 34, 32):
+        blocks = []
+        for k, it in enumerate(items):
+            f, s_, lines = fit_lines(f"{k + 1}. {it['q']}", 900, 2, size, size)
+            blocks.append((f, int(s_ * 1.22), lines[:2]))
+        need = sum(lh * len(ls) + int(size * 1.35) for _, lh, ls in blocks)
+        if need + 14 * (len(items) - 1) <= bottom - top:
+            break
+    gap = max(0, (bottom - top - need) / max(1, len(items) - 1))
+    y, rows = top, []
+    for f, lh, lines in blocks:
+        h = lh * len(lines) + 2 + int(size * 1.35)
+        w = max(text_w(" ".join(l), f) for l in lines)
+        rows.append({"box": (128, y - 6, min(W - 20, 140 + w + 14), y + h - 4)})
+        y += h + gap
+    return {"rows": rows}
+
+
 def build_list_reel(subject, items, out):
     resolve_font()
     frame = render_list_frame(subject, items)
-    music = beat_music(LIST_DUR, seed=len(items))
-    encode_frames(lambda fi: frame, int(LIST_DUR * FPS), music, out, key=lambda fi: 0)
-    frame.save(os.path.join(os.path.dirname(out) or ".", "thumbnail.jpg"), quality=92)
+    # 23 Oct: wahi winner page; bas shuru me 'thak' zoom + har sawal pe baari-baari peela marker (10s, seamless loop)
+    loop4_reel(frame, list_rows_info(items), out, seed=len(items), dur=LIST_DUR)
     print(f"LIST REEL TAIYAR: {out} ({LIST_DUR:.0f}s)")
     return LIST_DUR
 
@@ -4880,6 +4900,8 @@ def build_mega_reel(subject, items, out, rot=0):
             return end_img
         p = page_at(t)
         cur = first_img if p == 0 and t < first - 0.4 else imgs[p]
+        if p == 0 and t < PUNCH_T:
+            return punch_frame(cur, t)
         k = (t - starts[p]) / MEGA_SLIDE if p > 0 else 1.0
         if k >= 1:
             return cur
@@ -4895,6 +4917,8 @@ def build_mega_reel(subject, items, out, rot=0):
         p = page_at(t)
         if p > 0 and t - starts[p] < MEGA_SLIDE:
             return fi
+        if p == 0 and 0 < t < PUNCH_T:
+            return fi
         return ("p", p, p == 0 and t < first - 0.4)
 
     music = beat_music(total, seed=len(items)) * 0.32
@@ -4903,6 +4927,7 @@ def build_mega_reel(subject, items, out, rot=0):
     for s0 in starts[1:]:
         add_at(music, sfx_whoosh(0.3, 0.4), s0 - 0.05)
     add_at(music, sfx_ding(0.4), end_t)
+    add_at(music, sfx_thud(0.5), 0.03)
     music = np.clip(music, -0.98, 0.98)
     encode_frames(render, int(total * FPS), music, out, key=key)
     first_img.save(os.path.join(os.path.dirname(out) or ".", "thumbnail.jpg"), quality=92)
@@ -6211,13 +6236,15 @@ def _sheen(cv, box, p):
     return cv
 
 
-def loop4_reel(base, info, out, seed=0):
+def loop4_reel(base, info, out, seed=0, dur=None):
     """4s ek-screen reel, editor jaisa: 0-0.5 'thak' zoom, chamak trick patti pe, har line beat pe marker+uthna,
     jawab pe marker, aakhri 0.4s wapas saaf page -> loop me jodd nahi dikhta. Pehla frame = poora page (cover)."""
+    dur = dur or LOOP4
     rows = [r["box"] for r in info.get("rows", [])]
     ans = info.get("answer")
     trick = info.get("trick")
-    t_rows0, t_rows1 = 1.0, 3.0 if ans else 3.5
+    t_rows0 = 1.0 if trick else 0.7
+    t_rows1 = dur - (1.0 if ans else 0.5)
     step = (t_rows1 - t_rows0) / max(1, len(rows))
     beats = []
 
@@ -6232,23 +6259,24 @@ def loop4_reel(base, info, out, seed=0):
             s0 = t_rows0 + i * step
             if s0 <= t < s0 + step * 1.15:
                 cv = _pop(cv, base, b, math.sin(math.pi * _ease((t - s0) / (step * 1.15))))
-        if ans and 3.0 <= t < 3.65:
-            cv = _pop(cv, base, ans, math.sin(math.pi * _ease((t - 3.0) / 0.65)))
+        if ans and t_rows1 <= t < t_rows1 + 0.65:
+            cv = _pop(cv, base, ans, math.sin(math.pi * _ease((t - t_rows1) / 0.65)))
         return cv
 
     for i in range(len(rows)):
         beats.append(t_rows0 + i * step)
-    music = beat_music(LOOP4, seed=seed)
+    music = beat_music(dur, seed=seed)
     add_at(music, sfx_thud(0.5), 0.03)
     add_at(music, sfx_whoosh(0.3, 0.25), 0.42)
     for b in beats:
         add_at(music, sfx_pop(0.3), b)
     if ans:
-        add_at(music, sfx_ding(0.3), 3.05)
+        add_at(music, sfx_ding(0.3), t_rows1 + 0.05)
     music = np.clip(music, -0.98, 0.98)
-    encode_frames(frame_at, int(LOOP4 * FPS), music, out, key=lambda fi: fi if fi / FPS < 3.7 else "end")
+    calm = (t_rows1 + 0.7) if ans else (t_rows1 + step * 0.2 + 0.05)
+    encode_frames(frame_at, int(dur * FPS), music, out, key=lambda fi: fi if fi / FPS < calm else "end")
     base.save(os.path.join(os.path.dirname(out) or ".", "thumbnail.jpg"), quality=92)
-    return LOOP4
+    return dur
 
 
 def build_trick_card_reel(tc, out):
