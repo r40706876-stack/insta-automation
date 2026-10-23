@@ -5016,7 +5016,8 @@ Sirf JSON do:
 }}"""
 
 KAHANI_CHECK = """Ye ek Hindi GK kahani ka JSON hai jo exam students ko jayega. Har tathya (naam, saal, sankhya, sthan)
-jaancho ('slides' aur 'saar' dono ki har line). Galat ya sandigdh tathya ko sahi karo ya hata do; Hindi spelling theek karo; 'keys' ke shabd text me
+jaancho ('slides' aur 'saar' dono ki har line), aur AAJ ({today}) ke hisaab se bhi (badla hua tathya / purana PYQ
+jawab ho to sahi karo ya hata do). Galat ya sandigdh tathya ko sahi karo ya hata do; Hindi spelling theek karo; 'keys' ke shabd text me
 hubahu hone chahiye. Structure aur kahani ka andaaz waisa hi rakho. Agar topic hi galat/bhramak ho to
 {{"reject": "wajah"}} do. Warna sirf sudhra hua poora JSON do.
 JSON:
@@ -5061,7 +5062,7 @@ def kahani_story(key, qs):
     if not js:
         return None
     for fn in (_gemini, _groq):                      # doosri baar: tathya jaanch
-        chk = fn(KAHANI_CHECK.format(js=json.dumps(js, ensure_ascii=False)))
+        chk = fn(KAHANI_CHECK.format(js=json.dumps(js, ensure_ascii=False), today=time.strftime("%B %Y")))
         if chk and chk.get("reject"):
             print("  KAHANI CHHODI (jaanch):", str(chk["reject"])[:150])
             return None
@@ -5788,7 +5789,8 @@ Sirf JSON:
 }}"""
 
 TRICK_CHECK = """Ye ek Hindi GK mnemonic trick ka JSON hai jo exam students ko jayegi. Jaancho: (1) har 'full' tathya
-sahi aur poora hai, (2) 'lines' ka kram aur sankhya sahi hai (koi chhoota/faltu nahi), (3) har 'key' sach me
+sahi, poora aur AAJ ({today}) ke hisaab se bhi sahi hai (jaise suchi me baad me jude naam - shastriya bhashayen
+ab 11 hain; purana/badla hua tathya ya badla hua PYQ jawab ho to {{"reject": "purana tathya"}}), (2) 'lines' ka kram aur sankhya sahi hai (koi chhoota/faltu nahi), (3) har 'key' sach me
 'trick' ka hissa hai aur usi kram me, (4) pyq ka jawab sahi hai, (5) Hindi spelling. Galti ho to sudhaar kar
 poora JSON do; agar trick bhramak hai aur sudhar nahi sakti to {{"reject": "wajah"}}. Sirf JSON.
 JSON:
@@ -5826,7 +5828,7 @@ def trick_content(key, qs):
         print("  TRICK nahi bani:", str((js or {}).get("reject"))[:120])
         return None
     for fn in (_gemini, _groq):
-        chk = fn(TRICK_CHECK.format(js=json.dumps(js, ensure_ascii=False)))
+        chk = fn(TRICK_CHECK.format(js=json.dumps(js, ensure_ascii=False), today=time.strftime("%B %Y")))
         if chk and chk.get("reject"):
             print("  TRICK CHHODI (jaanch):", str(chk["reject"])[:120])
             return None
@@ -6385,6 +6387,7 @@ def loop4_reel(base, info, out, seed=0, dur=None, lift=True):
 def build_trick_card_reel(tc, out):
     info = {}
     frame = trick_card(tc, info)
+    info = {"trick": info.get("trick")}          # user: peela marker nahi -> sirf shuru ka zoom + trick patti pe chamak
     loop4_reel(frame, info, out, seed=len(tc["lines"]))
     print(f"TRICK CARD REEL TAIYAR: {out} ({LOOP4:.0f}s loop)")
     return LOOP4
