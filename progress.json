@@ -1,6 +1,6 @@
 {
  "next_seq": 110,
- "episode": 123,
+ "episode": 124,
  "posted": [
   "684d76bcbc",
   "6bb20b4a07",
@@ -305,7 +305,17 @@
   "0ae496ab7c",
   "bdfc504201",
   "9b6de58bef",
-  "e467ae8663"
+  "e467ae8663",
+  "8f3faaa482",
+  "8afb7cdbce",
+  "9a4e13eea7",
+  "4c86eaff82",
+  "34c637048b",
+  "826eda7815",
+  "4c282649a6",
+  "66bbeeefdb",
+  "eb6b6aee6b",
+  "09159fdfd9"
  ],
  "skipped": {
   "bdd1ce5a8b": "उत्तर कुंजी वर्तमान स्थिति के अनुसार गलत है।",
@@ -321,10 +331,11 @@
   "6abdde7452": "फॉन्ट गड़बड़ी के कारण सूत्र पूरी तरह विकृत (F = उश् स्/्2) हो गया है।"
  },
  "last": {
-  "seq": 1686,
-  "id": "e467ae8663",
-  "time": "2026-10-23 06:09",
-  "format": "list"
+  "seq": 2640,
+  "id": "09159fdfd9",
+  "time": "2026-10-23 10:14",
+  "format": "kahani",
+  "topic": "गोलीय दर्पण"
  },
  "carousel_queue": [
   {
@@ -1265,14 +1276,17 @@
  "kahani_chapters": [
   "विजयनगर/बहमनी साम्राज्य (Vijaynagar/Bahmani Empire)|",
   "ऊतक (Tissues)|पादप ऊतक (Plant Tissues)",
-  "राज भाषा (Official Language)|"
+  "राज भाषा (Official Language)|",
+  "विद्युत (Electricity)|प्रतिरोध (Resistance)",
+  "प्रकाश (Light)|सोनार/रडार (Sonar/Radar)"
  ],
- "kahani_n": 3,
+ "kahani_n": 4,
  "kahani_log": {
-  "reel": "18056346767580530",
-  "carousel": "18122593189945242",
+  "reel": "17891516145456644",
+  "carousel": "18097116251414264",
   "cover": true,
-  "time": "2026-10-22 05:56"
+  "variant": "page",
+  "time": "2026-10-23 10:14"
  },
  "carousel_folder_log": {
   "carousel": "18138965326714200",

@@ -1,47 +1,39 @@
-FORMAT: list
+FORMAT: kahani_pages
   Gemini gemini-flash-latest fail: HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeout=90)
   Gemini gemini-2.5-flash: HTTP 503
   Gemini gemini-2.5-flash-lite: HTTP 404
   Gemini gemini-2.0-flash: HTTP 404
   Groq llama-3.3-70b-versatile: HTTP 404
+  Groq openai/gpt-oss-120b: HTTP 400
+  Groq llama-3.1-8b-instant: HTTP 404
   Gemini gemini-flash-latest fail: HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeout=90)
-  Gemini gemini-2.5-flash: HTTP 503
-  Gemini gemini-2.5-flash-lite: HTTP 404
-  Gemini gemini-2.0-flash: HTTP 404
-  Groq llama-3.3-70b-versatile: HTTP 404
-  Gemini gemini-flash-latest: HTTP 503
-  Gemini gemini-flash-latest: HTTP 503
-  Gemini gemini-2.5-flash: HTTP 503
-  Gemini gemini-2.5-flash-lite: HTTP 404
-  Gemini gemini-2.0-flash: HTTP 404
-  Groq llama-3.3-70b-versatile: HTTP 404
-  Gemini gemini-flash-latest fail: HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeout=90)
-  Gemini gemini-2.5-flash: HTTP 503
-  Gemini gemini-2.5-flash-lite: HTTP 404
-  Gemini gemini-2.0-flash: HTTP 404
-  Groq llama-3.3-70b-versatile: HTTP 404
-  Gemini gemini-flash-latest: HTTP 429
-LIST REEL TAIYAR: generated_reels/science_pyq_reel.mp4 (10s)
+KAHANI: गोलीय दर्पण  (Physics / प्रकाश (Light))
+  Kahani: 9 page, 15 chitra bane
+  KAHANI REEL: naya 1 page + awaaz
+Awaaz: Gemini ek baar me (gemini-3.8-flash-lite-tts / hi-in-tutor-1), 33.6s, 9 line
+KAHANI 1-PAGE REEL TAIYAR (awaaz + marker): generated_reels/science_pyq_reel.mp4 (35s)
 
 CAPTION:
-📚 भौतिक विज्ञान के 7 PYQ - RRB, SSC, Police, Patwari, Army, State Exams के लिए (Save करो)
+📖 क्या आप जानते हैं, दर्पण भी बातें करते हैं? गोलीय दर्पण - 1 पेज में पूरी कहानी!
+🖼️ पूरी कहानी चित्रों के साथ - प्रोफ़ाइल पर (carousel)
 
-1. किसी पिंड का भार न्यूनतम कहाँ पर होता है? → भूमध्य रेखा पर
-2. किसी वस्तु का भार सर्वाधिक होता है? → ध्रुवों पर
-3. किसी वस्तु पर लगने वाले गुरुत्वाकर्षण बल को कहा जाता है। → भार
-4. कौन सा बल हमारे सौर मंडल की संरचना को बनाए रखता है? → गुरुत्वाकर्षण
-5. थ्रस्ट प्रति इकाई क्षेत्र को क्या कहा जाता है? → दाब
-6. मुक्त रूप से गिरने के दौरान, पिण्ड किस स्थिति में होता है? → भारहीनता
-7. चुंबकीय क्षेत्र में परिवर्तन द्वारा प्रेरित धारा उत्पन्न कराने की प्रक्रिया क्या कहलाती है? → विद्युत चुंबकीय प्रेरण
+📝 Exam में पूछा गया:
+• किसमें उत्तल दर्पण का उपयोग होता है? → रियर-व्यू मिरर
+• अभिसारी दर्पण किसे कहते हैं? → अवतल दर्पण
+• मुख्य फोकस पर रखी वस्तु के प्रतिबिंब का आकार क्या होता है? → अत्यधिक आवर्धित
 
-💬 कितने पहले से आते थे? कमेंट करो: 7/7?
-📤 Save करो + उस दोस्त को भेजो जो exam की तैयारी कर रहा है।
-Science GK Questions | RRB NTPC, Group D, SSC GD, State Exam PYQ
+📤 Save करो + उस दोस्त को भेजो जिसे ये topic याद नहीं रहता!
+🎯 Army / Agniveer + हर GS exam के लिए
 ⏱ MinuteMe_GS - एक मिनट, एक PYQ - पक्का!
-📲 Free test / notes: WhatsApp 8989971379
 
-#gkquiz #rrbntpc #sscgd #gkpyq #physics
-  IG container: 17910027528568651
+#gkstory #gkinhindi #gkpyq #agniveer #armygk #physics
+  IG container: 17910052038568651
+  upload try 1: HTTP 400 {"debug_info":{"retriable":false,"type":"ProcessingFailedError","message":"Request processing failed"}}
+  upload try 2: HTTP 400 {"debug_info":{"retriable":false,"type":"ProcessingFailedError","message":"{\"success\":false,\"error\":{\"message\":\"The ig container is not in the 
+  upload try 3: HTTP 400 {"debug_info":{"retriable":false,"type":"ProcessingFailedError","message":"{\"success\":false,\"error\":{\"message\":\"The ig container is not in the 
+  Instagram koshish 1 fail: IG upload fail: 400 {"debug_info":{"retriable":false,"type":"ProcessingFailedError","message":"{\"success\":false,\"error\":{\"message\":\"The ig container is not in the status to upload a video\"}}"}}
+  IG container: 17910052542568651
   upload try 1: HTTP 200 {"success":true,"message":"Upload Successful."}
   IG processing: FINISHED
-INSTAGRAM PE POST HO GAYA: 18095170304456831
+INSTAGRAM PE POST HO GAYA: 17891516145456644
+CAROUSEL POST HO GAYA: 18097116251414264
