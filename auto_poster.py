@@ -6385,12 +6385,13 @@ def loop4_reel(base, info, out, seed=0, dur=None, lift=True):
 
 
 def build_trick_card_reel(tc, out):
-    info = {}
-    frame = trick_card(tc, info)
-    info = {"trick": info.get("trick")}          # user: peela marker nahi -> sirf shuru ka zoom + trick patti pe chamak
-    loop4_reel(frame, info, out, seed=len(tc["lines"]))
-    print(f"TRICK CARD REEL TAIYAR: {out} ({LOOP4:.0f}s loop)")
-    return LOOP4
+    """User (23 Oct): bilkul normal - ek static card + music, 7 PYQ jaisa 10s (na zoom, na marker)."""
+    frame = trick_card(tc)
+    music = beat_music(CARD_DUR, seed=len(tc["lines"]))
+    encode_frames(lambda fi: frame, int(CARD_DUR * FPS), music, out, key=lambda fi: 0)
+    frame.save(os.path.join(os.path.dirname(out) or ".", "thumbnail.jpg"), quality=92)
+    print(f"TRICK CARD REEL TAIYAR: {out} ({CARD_DUR:.0f}s, static)")
+    return CARD_DUR
 
 
 # ---------- KAHANI 1 PAGE: poori kahani 7 line ki 'kahani-yatra' + chitra ----------
