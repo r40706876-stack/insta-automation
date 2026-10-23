@@ -1,35 +1,47 @@
 FORMAT: list
   Gemini gemini-flash-latest fail: HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeout=90)
+  Gemini gemini-2.5-flash: HTTP 503
+  Gemini gemini-2.5-flash-lite: HTTP 404
+  Gemini gemini-2.0-flash: HTTP 404
+  Groq llama-3.3-70b-versatile: HTTP 404
   Gemini gemini-flash-latest fail: HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeout=90)
+  Gemini gemini-2.5-flash: HTTP 503
+  Gemini gemini-2.5-flash-lite: HTTP 404
+  Gemini gemini-2.0-flash: HTTP 404
+  Groq llama-3.3-70b-versatile: HTTP 404
   Gemini gemini-flash-latest: HTTP 503
-  Gemini gemini-flash-latest fail: HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeout=90)
   Gemini gemini-flash-latest: HTTP 503
   Gemini gemini-2.5-flash: HTTP 503
   Gemini gemini-2.5-flash-lite: HTTP 404
   Gemini gemini-2.0-flash: HTTP 404
   Groq llama-3.3-70b-versatile: HTTP 404
   Gemini gemini-flash-latest fail: HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeout=90)
+  Gemini gemini-2.5-flash: HTTP 503
+  Gemini gemini-2.5-flash-lite: HTTP 404
+  Gemini gemini-2.0-flash: HTTP 404
+  Groq llama-3.3-70b-versatile: HTTP 404
+  Gemini gemini-flash-latest: HTTP 429
 LIST REEL TAIYAR: generated_reels/science_pyq_reel.mp4 (10s)
 
 CAPTION:
-📚 राजव्यवस्था के 7 PYQ - RRB, SSC, Police, Patwari, Army, State Exams के लिए (Save करो)
+📚 भौतिक विज्ञान के 7 PYQ - RRB, SSC, Police, Patwari, Army, State Exams के लिए (Save करो)
 
-1. भारत के संविधान की मसौदा समिति के अध्यक्ष कौन थे? → डॉ. बी. आर. अम्बेडकर
-2. भारत के संविधान में 'भाईचारे' की भावना किस देश से प्रेरित है? → फ्रांस
-3. भारत में कौन-सा दिन संविधान दिवस के रूप में मनाया जाता है? → 26 नवंबर
-4. संविधान सभा ने किस दिन भारत के राष्ट्रीय ध्वज को अपनाया था? → 22 जुलाई 1947
-5. भारत के पहले उप प्रधानमंत्री कौन थे और वह किस राजनीतिक दल के थे? → सरदार वल्लभभाई पटेल, आईएनसी
-6. भारत के पहले उपप्रधानमंत्री कौन थे? → सरदार वल्लभभाई पटेल
-7. भारत सरकार की संघीय कार्यपालिका का प्रमुख कौन होता है? → प्रधानमंत्री
+1. किसी पिंड का भार न्यूनतम कहाँ पर होता है? → भूमध्य रेखा पर
+2. किसी वस्तु का भार सर्वाधिक होता है? → ध्रुवों पर
+3. किसी वस्तु पर लगने वाले गुरुत्वाकर्षण बल को कहा जाता है। → भार
+4. कौन सा बल हमारे सौर मंडल की संरचना को बनाए रखता है? → गुरुत्वाकर्षण
+5. थ्रस्ट प्रति इकाई क्षेत्र को क्या कहा जाता है? → दाब
+6. मुक्त रूप से गिरने के दौरान, पिण्ड किस स्थिति में होता है? → भारहीनता
+7. चुंबकीय क्षेत्र में परिवर्तन द्वारा प्रेरित धारा उत्पन्न कराने की प्रक्रिया क्या कहलाती है? → विद्युत चुंबकीय प्रेरण
 
 💬 कितने पहले से आते थे? कमेंट करो: 7/7?
 📤 Save करो + उस दोस्त को भेजो जो exam की तैयारी कर रहा है।
-राजव्यवस्था GK Questions | RRB NTPC, Group D, SSC GD, State Exam PYQ
+Science GK Questions | RRB NTPC, Group D, SSC GD, State Exam PYQ
 ⏱ MinuteMe_GS - एक मिनट, एक PYQ - पक्का!
 📲 Free test / notes: WhatsApp 8989971379
 
-#gkquiz #rrbntpc #sscgd #gkpyq #polity
-  IG container: 17910012498568651
+#gkquiz #rrbntpc #sscgd #gkpyq #physics
+  IG container: 17910027528568651
   upload try 1: HTTP 200 {"success":true,"message":"Upload Successful."}
   IG processing: FINISHED
-INSTAGRAM PE POST HO GAYA: 18206545459373744
+INSTAGRAM PE POST HO GAYA: 18095170304456831
