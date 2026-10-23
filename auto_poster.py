@@ -3303,7 +3303,7 @@ PEN_RED = (200, 30, 40)
 
 def pick_format(ep):
     if REEL_FORMAT in ("loop", "list", "classic", "triple", "quiz", "galti", "mega", "kahani", "carousel_folder", "trick",
-                       "kahani_page", "kahani_pages"):
+                       "kahani_page", "kahani_pages", "kahani_short"):
         return REEL_FORMAT
     # din ki 3 reel samay ke hisaab se (IST): subah 7 PYQ list, dopahar quiz notebook, raat MEGA revision
     # (MEGA = sabse zyada save wali reel -> raat 8 baje ke sabse bade peak pe)
@@ -4989,6 +4989,7 @@ def run_mega(bank, st, ep, args):
 # Hindi text code khud likhta hai (spelling pakki). Pehle page -> reel (video), phir wahi page -> carousel.
 
 KAHANI_SLIDES = 7                   # cover + 7 kahani + 1 PYQ = 9 (API carousel max 10)
+KAHANI_SHORT = os.getenv("REEL_FORMAT", "").strip().lower() == "kahani_short"   # jaanch: ~45s wali chhoti kahani
 KAHANI_PAGE_SEC = 5.0               # reel me har page kitni der
 KAHANI_W, KAHANI_H = 1080, 1350     # carousel 4:5
 KAHANI_DIR = "kahani_out"
@@ -5065,8 +5066,12 @@ def kahani_story(key, qs):
     rows = "\n".join(f"- {clean_text(q['question'])} | {clean_text(str(q['options'][q['answer']]))}" for q in qs)
     chap = key[1] + (f" / {key[2]}" if key[2] else "")
     js = None
+    prompt = KAHANI_PROMPT.format(chapter=chap, rows=rows)
+    if KAHANI_SHORT:                                  # chhoti: 5 slide, har block 9 shabd tak
+        prompt = prompt.replace("7 page ki kahani", "5 page ki kahani").replace("max 15 shabd", "max 9 shabd") \
+            .replace("// theek 7", "// theek 5")
     for fn in (_gemini, _groq):
-        js = fn(KAHANI_PROMPT.format(chapter=chap, rows=rows))
+        js = fn(prompt)
         if js and len(js.get("slides") or []) >= 5:
             break
         js = None
@@ -5080,7 +5085,7 @@ def kahani_story(key, qs):
         if chk and len(chk.get("slides") or []) >= 5:
             js = chk
             break
-    js["slides"] = js["slides"][:KAHANI_SLIDES]
+    js["slides"] = js["slides"][:5 if KAHANI_SHORT else KAHANI_SLIDES]
     js["pyq"] = [p for p in (js.get("pyq") or []) if p.get("q") and p.get("a")][:3]
     return js
 
@@ -5397,6 +5402,11 @@ def build_kahani_pages(story, key):
 def kahani_speeches(story):
     """Har page par jo likha hai wahi bolna (cover / kahani / PYQ)."""
     hk = clean_text(story.get("hook") or "")
+    if KAHANI_SHORT:
+        out = [f"{hk} चलो, कहानी से समझते हैं!" if hk else f"{clean_text(story['topic'])}... चलो, कहानी से समझते हैं!"]
+        out += [" ".join(clean_text(b.get("text", "")) for b in (sl.get("blocks") or [])) for sl in story["slides"]]
+        out.append("ये सवाल exam में आ चुके हैं। Save करो, Follow करो!")
+        return [to_speech(t) for t in out]
     out = [f"{hk} चलो, कहानी से समझते हैं... एक बार सुन लिया, तो कभी नहीं भूलोगे!" if hk else
            f"{clean_text(story['topic'])}. एक बार ध्यान से सुन लो, पूरी कहानी से हमेशा याद रहेगा।"]
     for sl in story["slides"]:
@@ -5414,7 +5424,7 @@ def build_kahani_reel(pages, out, speeches=None, rot=0):
     if speeches and len(speeches) == n:
         _TTS_STYLE[0] = STORY_TTS_STYLE
         try:
-            voices = [speed_voice(v[0], 1.08)                     # kahani thodi tez: reel lambi na ho
+            voices = [speed_voice(v[0], 1.15 if KAHANI_SHORT else 1.08)   # kahani thodi tez: reel lambi na ho
                       for v in make_voices([{"segs": [(None, None, t)]} for t in speeches], rot)]
         except Exception as exc:
             print("  Kahani awaaz nahi bani:", str(exc)[:150])
@@ -6840,7 +6850,7 @@ def main():
         if run_trick(bank, st, ep, args):
             return
         fmt = "list"
-    if fmt in ("kahani", "kahani_page", "kahani_pages"):
+    if fmt in ("kahani", "kahani_page", "kahani_pages", "kahani_short"):
         if run_kahani(bank, st, ep, args):
             return
         fmt = "list"

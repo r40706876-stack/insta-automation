@@ -12,7 +12,7 @@ on:
   workflow_dispatch:
     inputs:
       format:
-        description: "auto / mega / list / kahani / kahani_page / kahani_pages / trick / quiz"
+        description: "auto / mega / list / kahani / kahani_pages / kahani_short / trick / quiz"
         default: "auto"
       post_mode:
         description: "publish = Instagram par daalo, manual = sirf repo ke ready_reels/ me (jaanch ke liye)"
