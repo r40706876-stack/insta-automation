@@ -5012,6 +5012,9 @@ Kaam: inme se ek chhota, saaf TOPIC chuno jise 7 page ki kahani me samjhaya ja s
 ek prakriya, ek ang). Kahani me in PYQ ke jawab zaroor aayein. Sirf pakke, textbook wale tathya - koi kalpanik
 tathya, galat saal ya naam nahi. Bhasha bilkul aasan bolchal wali Hindi (Devanagari), chhote vakya, film jaisi.
 
+KAHANI KO FILMI BANAO: kirdar ho (naam ya 'ek chhota sa ...'), chhote dialogue "..." me, mazedaar upma
+(jaise 'दिल्ली = देश का दिल'), aur har slide ka DOOSRA block jigyasa pe khatam ho (jaise 'पर तभी...',
+'और फिर हुआ कमाल!', 'अब असली ट्विस्ट सुनो...') taki dekhne wala agla page dekhe. Aakhri slide me kahani ka seekh.
 ZAROORI: har slide me THEEK 2 blocks aur 2 imgs (ek block = ek chhota scene). 1 block wali slide galat hai.
 Sirf JSON do:
 {{
@@ -5175,6 +5178,10 @@ def _wavy(d, x1, x2, y, col, amp=3, w=4):
         d.line(pts, fill=col, width=w)
 
 
+_LAST_RICH = []
+_KAHANI_LAYOUT = {}                 # page no. -> [('text', x, y, lh, n, widths) / ('img', box)]
+
+
 def draw_rich(d, text, keys, x, y, max_w, size, base=K_BLUE, max_lines=4):
     """Rangin shabd + key shabd ke neeche hath se kheenchi line. Return: neeche ka y."""
     for s in (size, size - 4, size - 8, size - 12):
@@ -5182,6 +5189,8 @@ def draw_rich(d, text, keys, x, y, max_w, size, base=K_BLUE, max_lines=4):
         if len(lines) <= max_lines:
             break
     lh = int(s * 1.42)
+    _LAST_RICH[:] = [lh, min(len(lines), max_lines), s,
+                     [sum(ww for _, _, ww in ln) + sp * (len(ln) - 1) for ln in lines[:max_lines]]]
     for li, ln in enumerate(lines[:max_lines]):
         cx = x
         yy = y + li * lh
@@ -5338,16 +5347,23 @@ def kahani_page(slide, imgs, i, n):
     fitted = [_fit_img(imgs[k] if k < len(imgs) else None, MAXW, img_h) for k in range(len(blocks))]
     used = sum(th) + sum(im.height + 40 for im in fitted if im is not None) + 18 * len(blocks)
     y = top + max(0, (bottom - top - used) / 2)          # bacha hissa upar-neeche barabar (khaali page na lage)
+    lay = []
     for k, b in enumerate(blocks):
+        y0 = y
         y = draw_rich(d, clean_text(b.get("text", "")), b.get("keys"), X, y, MAXW, fs) + 18
+        lh, nl, sz, widths = _LAST_RICH
+        el = [("text", X, y0, lh, nl, sz, widths)]
         im = fitted[k]
         if im is not None:
             pos = 0.5 if len(blocks) == 1 else (0.85 if k % 2 == 0 else 0.1)
             xx = X + (MAXW - im.width) * pos
             cv.paste(im, (int(xx), int(y)), im)
+            el.append(("img", (int(xx), int(y), int(xx) + im.width, int(y) + im.height)))
             y += im.height + 40
         else:
             y += 30
+        lay.append(el)
+    _KAHANI_LAYOUT[i] = lay
     _brand_small(cv, d)
     return cv
 
@@ -5382,6 +5398,7 @@ def build_kahani_pages(story, key):
     os.makedirs(IMG_DIR, exist_ok=True)
     tag = re.sub(r"[^a-z0-9]", "", str(abs(hash(story["topic"]))))[:10]
     n = len(story["slides"]) + 2
+    _KAHANI_LAYOUT.clear()
     cover_img = kahani_image(story.get("cover_img"), os.path.join(IMG_DIR, f"k_{tag}_c.png"))
     story["_cover"] = cover_img
     pages = [kahani_cover(story, cover_img, n)]
@@ -5461,6 +5478,74 @@ def build_kahani_reel(pages, out, speeches=None, rot=0):
             k += 1
         return k, t - starts[k]
 
+    paper = _kahani_paper()
+    pen = pen_sprite(100)
+    plan = {}                                         # page -> [(kind, data, t0, t1)]
+    blanks = {}
+    for k in range(1, n - 1):
+        lay = _KAHANI_LAYOUT.get(k + 1) or []
+        if not lay:
+            continue
+        sp_len = (len(voices[k]) / SR) if voices else (durs[k] - 0.6)
+        words = [max(1.0, sum(sum(e[6]) for e in blk if e[0] == "text")) for blk in lay]
+        tw = float(sum(words))
+        acc, items = 0.3, []
+        for bi, blk in enumerate(lay):
+            win = sp_len * words[bi] / tw
+            for e in blk:
+                if e[0] == "text":
+                    items.append(("text", e, acc, acc + win * 0.85))
+                else:
+                    items.append(("img", e[1], acc + win * 0.75, acc + win * 0.75 + 0.35))
+                    add_at(music, sfx_pop(0.25), starts[k] + acc + win * 0.75)
+            acc += win
+        plan[k] = items
+        b = pages[k].copy()
+        for kind, e, _, _ in items:
+            box = ((e[1] - 6, e[2] - 4, KAHANI_W - 40, e[2] + e[3] * e[4] + int(e[5] * 0.35))
+                   if kind == "text" else e)
+            b.paste(paper.crop(box), box[:2])
+        blanks[k] = b
+
+    def build(k, tt):
+        if k not in plan:
+            return pages[k]
+        cv_ = blanks[k].copy()
+        pen_at = None
+        for kind, e, t0, t1 in plan[k]:
+            if tt < t0:
+                continue
+            f = clamp((tt - t0) / max(0.05, t1 - t0))
+            if kind == "text":
+                _, x, y0, lh, nl, sz, widths = e
+                tot = float(sum(widths)) or 1.0
+                done = f * tot
+                for li in range(nl):
+                    w_ = widths[li]
+                    show = clamp(done, 0, w_)
+                    done -= w_
+                    if show <= 0:
+                        break
+                    box = (x - 6, y0 + li * lh - 4, int(x + show) + 2, y0 + (li + 1) * lh + int(sz * 0.35))
+                    cv_.paste(pages[k].crop(box), box[:2])
+                    if show < w_ and f < 1:
+                        pen_at = (int(x + show) - 8, int(y0 + li * lh + lh * 0.55 - 90))
+            else:
+                x0, y0, x1, y1 = e
+                reg = pages[k].crop(e)
+                if f < 1:
+                    sc = 0.6 + 0.4 * ease_out_back(f)
+                    rw, rh = max(1, int(reg.width * sc)), max(1, int(reg.height * sc))
+                    reg = reg.resize((rw, rh), Image.BICUBIC)
+                    cv_.paste(reg, (int((x0 + x1 - rw) / 2), int((y0 + y1 - rh) / 2)))
+                else:
+                    bob = int(4 * math.sin((tt - t1) * 2.4))
+                    cv_.paste(paper.crop((x0, y0 - 6, x1, y1 + 6)), (x0, y0 - 6))
+                    cv_.paste(reg, (x0, y0 + bob))
+        if pen_at:
+            cv_.paste(pen, pen_at, pen)
+        return cv_
+
     def push(pg, tt, d_):                             # page pe dheere-dheere andar jaata camera (editor wala)
         z = 1 + 0.045 * ease_in_out(clamp(tt / max(1.0, d_)))
         w2, h2 = int(pg.width / z), int(pg.height / z)
@@ -5473,12 +5558,12 @@ def build_kahani_reel(pages, out, speeches=None, rot=0):
         cv = bg.copy()
         if k > 0 and tt < 0.45:                       # naya page daayein se aata hai (halka ghoom ke)
             p = ease_out_cubic(tt / 0.45)
-            old = push(pages[k - 1], durs[k - 1], durs[k - 1])
+            old = push(build(k - 1, durs[k - 1]), durs[k - 1], durs[k - 1])
             cv.paste(old, (int(-W * 0.25 * p), py))
-            new = pages[k].rotate(4 * (1 - p), resample=Image.BICUBIC, expand=False, fillcolor=(32, 26, 22))
+            new = build(k, 0).rotate(4 * (1 - p), resample=Image.BICUBIC, expand=False, fillcolor=(32, 26, 22))
             cv.paste(new, (int(W * (1 - p)), py))
         else:
-            cv.paste(push(pages[k], tt, durs[k]), (0, py))
+            cv.paste(push(build(k, tt), tt, durs[k]), (0, py))
         if k == 0 and t < PUNCH_T:
             return punch_frame(cv, t)
         return cv
@@ -5487,6 +5572,8 @@ def build_kahani_reel(pages, out, speeches=None, rot=0):
         k, tt = page_at(fi / FPS)
         if k == 0 and fi / FPS < PUNCH_T:
             return ("p", fi)
+        if k in plan:
+            return (k, fi)
         return (k, int(tt * FPS)) if (k > 0 and tt < 0.45) else (k, int(tt * 10))
 
     encode_frames(render, int(dur * FPS), music, out, key=key)
