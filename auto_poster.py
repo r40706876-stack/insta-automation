@@ -3297,7 +3297,8 @@ PEN_RED = (200, 30, 40)
 
 
 def pick_format(ep):
-    if REEL_FORMAT in ("loop", "list", "classic", "triple", "quiz", "galti", "mega", "kahani", "carousel_folder", "trick"):
+    if REEL_FORMAT in ("loop", "list", "classic", "triple", "quiz", "galti", "mega", "kahani", "carousel_folder", "trick",
+                       "kahani_page", "kahani_pages"):
         return REEL_FORMAT
     # din ki 3 reel samay ke hisaab se (IST): subah 7 PYQ list, dopahar quiz notebook, raat MEGA revision
     # (MEGA = sabse zyada save wali reel -> raat 8 baje ke sabse bade peak pe)
@@ -4666,7 +4667,7 @@ def _mega_fits(q, a, size=MEGA_MIN_FONT):
 
 
 MEGA_TEXT_W = 900
-MEGA_ROW0, MEGA_ROW_H = 332, 61
+MEGA_ROW0, MEGA_ROW_H = 372, 61                # upar laal 'kitne aate hain' patti ki jagah
 
 
 def pick_mega(bank, st):
@@ -4756,16 +4757,14 @@ def _mega_paper(subject):
 def render_mega_page(subject, rows, start, page, pages, total):
     cv = _mega_paper(subject).copy()
     d = ImageDraw.Draw(cv)
-    # sabse upar: kis-kis ke liye (bharosa + 'mere exam ka hai')
-    t1 = "सभी सरकारी परीक्षाओं के लिए"
-    f1 = get_font(50)
-    w1 = text_w(t1, f1) + 80
-    d.rounded_rectangle((W / 2 - w1 / 2, 70, W / 2 + w1 / 2, 150), radius=40, fill=(255, 255, 255),
-                        outline=(40, 40, 70), width=4)
-    d.text((W / 2, 110), t1, font=f1, fill=INK, anchor="mm")
-    place(cv, stopwatch_sprite(78, (page + 1) / pages), 100, 110)
+    # sabse upar: 7 PYQ wali laal patti (khud ko jaancho -> poora page padhte hain, score comment karte hain)
+    challenge_band(d, f"{total} में से कितने आते हैं?  सच बताना!", cx=W / 2, cy=104, max_w=W - 330,
+                   sizes=(46, 44, 42, 40, 38, 36, 34, 32))
+    place(cv, stopwatch_sprite(78, (page + 1) / pages), 100, 104)
     pg = pill_sprite(f"पेज {page + 1}/{pages}", 26, WHITE, PEN_RED, WHITE)
-    place(cv, pg, W - 70 - pg.width / 2, 110)
+    place(cv, pg, W - 70 - pg.width / 2, 104)
+    # kis-kis ke liye (bharosa + 'mere exam ka hai')
+    d.text((W / 2, 184), "सभी सरकारी परीक्षाओं के लिए", font=get_font(40), fill=INK, anchor="mm")
     # title: "भौतिक विज्ञान (Physics)" के 100 सबसे महत्वपूर्ण प्रश्न  (ank laal)
     title = mega_title(subject, total)
     ft = next(get_font(z) for z in (50, 46, 42, 40, 38, 36) if text_w(title, get_font(z)) <= W - 120)
@@ -4773,12 +4772,12 @@ def render_mega_page(subject, rows, start, page, pages, total):
     words = title.split()
     x = W / 2 - (sum(text_w(w_, ft) for w_ in words) + sp * (len(words) - 1)) / 2
     for w_ in words:
-        d.text((x, 205), w_, font=ft, fill=PEN_RED if w_.isdigit() else (60, 30, 150), anchor="lm")
+        d.text((x, 243), w_, font=ft, fill=PEN_RED if w_.isdigit() else (60, 30, 150), anchor="lm")
         x += text_w(w_, ft) + sp
     t2 = f"{day_tag()}  •  {SERIES_NAME}  •  SSC • Railway • Police • State Exams"
     f2 = next(get_font(z) for z in (30, 28, 26, 24, 22) if text_w(t2, get_font(z)) <= W - 140)
-    d.text((W / 2, 262), t2, font=f2, fill=PEN_RED, anchor="mm")
-    d.line((140, 292, W - 140, 292), fill=(60, 30, 150), width=4)
+    d.text((W / 2, 300), t2, font=f2, fill=PEN_RED, anchor="mm")
+    d.line((140, 330, W - 140, 330), fill=(60, 30, 150), width=4)
     # 20 line: (n) sawal?  jawab
     size = next(z for z in (38, 36, 34, 32, MEGA_MIN_FONT)
                 if all(text_w(f"{start + len(rows)}. {r['q']}  {r['a']}", get_font(z)) <= MEGA_TEXT_W for r in rows))
@@ -4791,7 +4790,10 @@ def render_mega_page(subject, rows, start, page, pages, total):
         d.text((79, y + 1), str(n), font=fn, fill=(60, 30, 150), anchor="mm")
         d.text((116, y), r["q"], font=f, fill=INK, anchor="lm")
         d.text((116 + text_w(r["q"] + "  ", f), y), r["a"], font=f, fill=PEN_BLUE, anchor="lm")
-    # neeche: SAVE patta + brand
+    # neeche: score comment (7 PYQ jaisa) + SAVE patta + brand
+    tp = f"कितने आते हैं?  कमेंट करो __/{total}   •   दोस्तों को भेजो"
+    fp = next((get_font(z) for z in (34, 32, 30, 28) if text_w(tp, get_font(z)) <= W - 160), get_font(28))
+    d.text((W / 2, 1604), tp, font=fp, fill=PEN_RED, anchor="mm")
     t3 = "SAVE करो  -  Exam से पहले 1 बार ज़रूर देखना!"
     f3 = get_font(38)
     w3 = text_w(t3, f3) + 70
@@ -4863,9 +4865,7 @@ def build_mega_reel(subject, items, out, rot=0):
         starts.append(first + (p - 1) * MEGA_PAGE_DUR)
     end_t = starts[-1] + MEGA_PAGE_DUR
     total = end_t + MEGA_END
-    stamp = _skip_stamp()
-    first_img = imgs[0].copy()
-    place(first_img, stamp, W / 2, 1590, angle=-3)
+    first_img = imgs[0].copy()          # 'Skip mat karna' thappa hata: uski jagah har page pe score comment ka nyota
     end_img = mega_end_card(imgs[-1])
 
     def page_at(t):
@@ -4993,11 +4993,13 @@ Sirf JSON do:
     "imgs": ["English scene description for block 1 (characters, action, objects; NO text)",
              "English scene description for block 2"]}}
  ],
+ "saar": [ {{"text": "poori kahani ka ek mod EK line me, max 11 shabd, isme upar ke kisi PYQ ka sahi jawab ho",
+             "keys": ["us jawab ke 1-3 shabd, text me hubahu"], "pyq": true}} ],   // theek 7, kahani ke kram me; pyq=true sirf tab jab line upar diye kisi PYQ ka jawab de
  "pyq": [ {{"q": "PYQ sawal (upar wale me se, chhota karke)", "a": "sahi jawab (max 4 shabd)"}} ]   // 3
 }}"""
 
 KAHANI_CHECK = """Ye ek Hindi GK kahani ka JSON hai jo exam students ko jayega. Har tathya (naam, saal, sankhya, sthan)
-jaancho. Galat ya sandigdh tathya ko sahi karo ya hata do; Hindi spelling theek karo; 'keys' ke shabd text me
+jaancho ('slides' aur 'saar' dono ki har line). Galat ya sandigdh tathya ko sahi karo ya hata do; Hindi spelling theek karo; 'keys' ke shabd text me
 hubahu hone chahiye. Structure aur kahani ka andaaz waisa hi rakho. Agar topic hi galat/bhramak ho to
 {{"reject": "wajah"}} do. Warna sirf sudhra hua poora JSON do.
 JSON:
@@ -5581,16 +5583,22 @@ def run_kahani(bank, st, ep, args):
         paths.append(p)
     os.makedirs(OUTPUT_DIR, exist_ok=True)
     out = os.path.join(OUTPUT_DIR, FINAL_VIDEO)
-    build_kahani_reel(pages, out, kahani_speeches(story), ep)
     thumb = os.path.join(OUTPUT_DIR, "thumbnail.jpg")
-    kahani_poster(story, story.get("_cover"), W, H).save(thumb, quality=93)
+    variant = kahani_variant(st) if kahani_saar(story) else "pages"
+    print("  KAHANI REEL:", "naya 1 page + awaaz" if variant == "page" else "purana chitra-page + awaaz")
+    if variant == "page":
+        build_kahani_page_reel(story, out, ep)            # thumbnail.jpg = wahi page (cover me hi poora maal)
+    else:                                                 # purana: page-dar-page + awaaz
+        build_kahani_reel(pages, out, kahani_speeches(story), ep)
+        kahani_poster(story, story.get("_cover"), W, H).save(thumb, quality=93)
     caption = kahani_caption(story, key, ep)
-    Path(os.path.join(OUTPUT_DIR, "caption.txt")).write_text(caption, encoding="utf-8")
-    print("\nCAPTION:\n" + caption)
+    reel_caption = kahani_page_caption(caption) if variant == "page" else caption
+    Path(os.path.join(OUTPUT_DIR, "caption.txt")).write_text(reel_caption, encoding="utf-8")
+    print("\nCAPTION:\n" + reel_caption)
     if args.no_post or DRY_RUN:
         return True
     if POST_MODE == "manual":
-        save_ready(out, caption, ep)
+        save_ready(out, reel_caption, ep)
         import shutil
         dst = os.path.join(READY_DIR, f"reel_{ep:04d}_kahani")
         shutil.rmtree(dst, ignore_errors=True)
@@ -5598,12 +5606,13 @@ def run_kahani(bank, st, ep, args):
         return True                                  # jaanch run: progress nahi badla (topic agli baar asli post hoga)
     else:
         cover = _public_url(thumb)
-        pid = post_reel(out, caption, 0, cover)
+        pid = post_reel(out, reel_caption, 0, cover)
         if not pid:
             save_progress(st)
             return True
         cid = post_carousel(paths, caption)                 # reel ke turant baad wahi kahani carousel me
-        st["kahani_log"] = {"reel": pid, "carousel": cid, "cover": bool(cover), "time": time.strftime("%Y-%m-%d %H:%M")}
+        st["kahani_log"] = {"reel": pid, "carousel": cid, "cover": bool(cover), "variant": variant,
+                            "time": time.strftime("%Y-%m-%d %H:%M")}
     st["posted"] += [q["id"] for q in qs]
     st.setdefault("kahani_chapters", []).append("|".join(key[1:]))
     st["kahani_n"] = int(st.get("kahani_n", 0)) + 1
@@ -5803,6 +5812,8 @@ def gemini_voice_timed(speeches, rot=0):
 
 
 def build_trick_reel(tc, out, rot=0):
+    if TRICK_STYLE != "anim":                       # naya: poori trick ek card pe (7 PYQ jaisa)
+        return build_trick_card_reel(tc, out)
     resolve_font()
     els = trick_layout(tc)
     speeches = trick_speeches(tc)
@@ -5932,6 +5943,419 @@ def run_trick(bank, st, ep, args):
                   "format": "trick", "topic": tc["hook"]}
     save_progress(st)
     return True
+
+
+# ---------- 7 PYQ ka nuskha baaki formats me (data: 21-22 Oct 2026) ----------
+# MinuteMe ki aakhri 12 reel: 7 PYQ list (10s, EK static page, sab kuch pehle frame me, upar laal patti
+# 'इनमें से कितने आते हैं? सच बताना!', sirf music) -> 3.6K + 1.5K views. Kahani (45-62s, page-dar-page + awaaz)
+# -> 60-116, Trick (23-27s, pen se likhti + awaaz, pehla frame khaali copy) -> 133-186.
+# Isliye (user ki manzoori, 23 Oct): Trick = poori trick EK card pe, 10s, BINA awaaz.
+# Kahani: purana format (chitra wale page + awaaz + carousel) chalta rahega; naya '1 page me poori kahani'
+# (awaaz ke saath, boli ja rahi line pe peela marker) usi 1 baje slot pe baari-baari -> dono ka asli muqabla.
+# Purana style wapas: TRICK_STYLE=anim | kahani hamesha purani: KAHANI_STYLE=pages | hamesha nayi: KAHANI_STYLE=page
+
+TRICK_STYLE = os.getenv("TRICK_STYLE", "card").strip().lower()       # card | anim (purana)
+KAHANI_STYLE = os.getenv("KAHANI_STYLE", "ab").strip().lower()       # ab (baari-baari) | page (nayi) | pages (purani)
+CARD_DUR = 10.0                     # 7 PYQ jitna: padhte-padhte reel 2-3 baar loop
+KAHANI_PAGE_DUR = 12.0              # 1-page kahani, agar awaaz na bane (sirf music, 120 BPM ke 6 bar)
+KP_SWIPE = 0.35                     # boli ja rahi line pe peela marker itni der me khinchta hai
+NAVY = (18, 32, 72)
+GOLD = (255, 225, 90)
+EXAMS_PILL = "RRB • SSC • Police • Patwari • Army • State Exams"
+CX0, CX1 = 180, W - 50              # spiral copy pe likhne ki jagah
+
+
+def challenge_band(d, text, cx=W / 2, cy=155, max_w=W - 140, sizes=(50, 46, 42, 38, 34)):
+    """7 PYQ wali laal patti (wahi rang, wahi naap): pehli nazar me 'khud ko jaancho' wala khel."""
+    fh = next((get_font(z) for z in sizes if text_w(text, get_font(z)) + 70 <= max_w), get_font(sizes[-1]))
+    wh = text_w(text, fh) + 70
+    d.rounded_rectangle((cx - wh / 2 + 6, cy - 29, cx + wh / 2 + 6, cy + 41), radius=18, fill=(120, 10, 20))
+    d.rounded_rectangle((cx - wh / 2, cy - 35, cx + wh / 2, cy + 35), radius=18, fill=PEN_RED)
+    d.text((cx, cy), text, font=fh, fill=WHITE, anchor="mm")
+
+
+def exam_pill(d, cx, cy, text=EXAMS_PILL, max_w=W - 300):
+    fe = next((get_font(z) for z in (32, 30, 28, 26, 24) if text_w(text, get_font(z)) + 40 <= max_w), get_font(22))
+    we = text_w(text, fe) + 40
+    d.rounded_rectangle((cx - we / 2, cy - 20, cx + we / 2, cy + 20), radius=20, fill=NAVY)
+    d.text((cx, cy), text, font=fe, fill=GOLD, anchor="mm")
+
+
+def _balanced_lines(words, f, max_w):
+    """2 line me barabar baanto (akela 'हैं?' neeche na latke). Na ho sake -> None."""
+    best = None
+    for i in range(1, len(words)):
+        wa, wb = text_w(" ".join(words[:i]), f), text_w(" ".join(words[i:]), f)
+        if wa <= max_w and wb <= max_w and (best is None or max(wa, wb) < best[0]):
+            best = (max(wa, wb), [list(words[:i]), list(words[i:])])
+    return best[1] if best else None
+
+
+def page_title(d, text, cx, y, max_w, size=80, min_size=50, col=PEN_BLUE, max_lines=2):
+    """Bada neela title (2 line tak) + neeche neeli line. Return: neeche ka y."""
+    f, sz, lines = fit_lines(text, max_w, max_lines, size, min_size)
+    if len(lines) == 2:
+        lines = _balanced_lines([w_ for ln in lines for w_ in ln], f, max_w) or lines
+    lh = int(sz * 1.2)
+    widest = 0
+    for k, ln in enumerate(lines[:max_lines]):
+        t = " ".join(ln)
+        d.text((cx, y + k * lh), t, font=f, fill=col, anchor="mt")
+        widest = max(widest, text_w(t, f))
+    y += lh * min(len(lines), max_lines) + 8
+    half = min(max_w, widest + 40) / 2
+    d.line((cx - half, y, cx + half, y), fill=col, width=5)
+    return y + 10
+
+
+def page_header(d, title, label, cx, max_w, band, size=80):
+    """Laal patti + title + 'Day N/100 • label • SAVE करो' + exam patti (7 PYQ jaisa). Return: neeche ka y."""
+    challenge_band(d, band, cx=cx, max_w=max_w)
+    y = page_title(d, title, cx, 212, max_w - 20, size=size, min_size=50)
+    d.text((cx, y + 22), f"{day_tag()}  •  {label}  •  SAVE करो", font=get_font(34), fill=PEN_RED, anchor="mm")
+    exam_pill(d, cx, y + 74, max_w=max_w)
+    return y + 108
+
+
+def page_footer(cv, d, y, prompt, x=CX0):
+    """7 PYQ jaisa neeche: stopwatch + handle + score comment ka nyota."""
+    sw = stopwatch_sprite(70, 0.0)
+    cv.paste(sw, (int(x), int(y)), sw)
+    d.text((x + 85, y + 21), BRAND_HANDLE, font=get_font(36), fill=INK, anchor="lm")
+    fp = next((get_font(z) for z in (30, 28, 26, 24) if text_w(prompt, get_font(z)) <= W - x - 120), get_font(24))
+    d.text((x + 85, y + 63), prompt, font=fp, fill=PEN_RED, anchor="lm")
+
+
+def card_reel(frame, dur, out, seed=0):
+    """Ek hi frame + beat music (seamless loop) -> reel. Wahi frame cover/thumbnail (pehla frame = poora maal)."""
+    music = beat_music(dur, seed=seed)
+    encode_frames(lambda fi: frame, int(dur * FPS), music, out, key=lambda fi: 0)
+    frame.save(os.path.join(os.path.dirname(out) or ".", "thumbnail.jpg"), quality=92)
+    return dur
+
+
+# ---------- TRICK CARD: sawal + trick + har hissa + PYQ - sab ek saath ----------
+
+def _trick_rows(tc):
+    out = []
+    for ln in tc["lines"]:
+        key = clean_text(str(ln["key"]))
+        full = clean_text(str(ln["full"]))
+        out.append((key, full))
+    return out
+
+
+def trick_card(tc):
+    resolve_font()
+    cv = _paper(W, H)
+    d = ImageDraw.Draw(cv)
+    cx, mw = (CX0 + CX1) / 2, CX1 - CX0
+    y = page_header(d, clean_text(tc["hook"]), "Trick से याद करो", cx, mw, "इनमें से कितने याद थे?  सच बताना!",
+                    size=72)
+    top, bottom = y + 10, 1570
+    # 1) trick patti (peela highlighter, laal kinara)
+    lab = "ट्रिक :"
+    fl = get_font(56)
+    lw = text_w(lab + "  ", fl)
+    ft, szt, tl = fit_lines(clean_text(tc["trick"]), mw - 90 - lw, 2, 96, 50)
+    trick_h = int(szt * 1.3) * len(tl[:2]) + 44
+    # 2) har hissa: (gol ghere me key)  =  matlab
+    rows = _trick_rows(tc)
+    n = len(rows)
+    pyq = tc.get("pyq") if isinstance(tc.get("pyq"), dict) else None
+    if pyq and not (clean_text(str(pyq.get("q") or "")) and clean_text(str(pyq.get("a") or ""))):
+        pyq = None
+    for fs in (66, 62, 58, 54, 50, 46, 42):
+        fk = get_font(fs + 6)
+        ff = get_font(fs)
+        row_h = int(fs * 1.75)
+        if pyq:
+            fq, szq, ql = fit_lines(clean_text(str(pyq["q"])), mw - 70, 2, 40, 32)
+            pyq_h = 62 + int(szq * 1.3) * len(ql[:2]) + 62
+        else:
+            pyq_h = 0
+        need = trick_h + 30 + row_h * n + (30 + pyq_h if pyq else 0)
+        widest = max(max(text_w(k, fk) + 44, fs * 1.6) + 22 + text_w("=  " + f_, ff) for k, f_ in rows)
+        if need <= bottom - top and widest <= mw - 20:
+            break
+    gap = max(0, min(70, (bottom - top - need) / (3 if pyq else 2)))
+    y = top + gap / 2
+    # trick patti
+    d.rounded_rectangle((CX0 + 6, y + 6, CX1 + 6, y + trick_h + 6), radius=22, fill=(200, 150, 40))
+    d.rounded_rectangle((CX0, y, CX1, y + trick_h), radius=22, fill=(255, 241, 170), outline=PEN_RED, width=4)
+    tline_y = y + 22
+    for k, ln in enumerate(tl[:2]):
+        t = " ".join(ln)
+        x0 = CX0 + 34
+        if k == 0:
+            d.text((x0, tline_y + szt * 0.62), lab, font=fl, fill=PEN_BLUE, anchor="lm")
+        x1 = x0 + lw
+        d.text((x1, tline_y + szt * 0.62), t, font=ft, fill=K_GREEN, anchor="lm")
+        _wavy(d, x1, x1 + text_w(t, ft), tline_y + szt * 1.2, K_RED, amp=5, w=6)
+        tline_y += int(szt * 1.3)
+    y += trick_h + 30 + gap
+    # hisse
+    fk = get_font(fs + 6)
+    ff = get_font(fs)
+    for k, (key, full) in enumerate(rows):
+        ry = y + k * row_h
+        kw = max(text_w(key, fk) + 44, fs * 1.6)
+        d.ellipse((CX0 + 10, ry, CX0 + 10 + kw, ry + fs * 1.5), outline=K_RED, width=5)
+        d.text((CX0 + 10 + kw / 2, ry + fs * 0.75), key, font=fk, fill=K_RED, anchor="mm")
+        d.text((CX0 + 10 + kw + 22, ry + fs * 0.75), "=  " + full, font=ff, fill=PEN_BLUE, anchor="lm")
+    y += row_h * n + 30 + gap
+    # PYQ dabba
+    if pyq:
+        d.rectangle((CX0 + 8, y + 8, CX1 + 8, y + pyq_h + 8), fill=(30, 60, 90))
+        d.rectangle((CX0, y, CX1, y + pyq_h), fill=(226, 244, 246), outline=(30, 60, 90), width=4)
+        d.text((CX0 + 30, y + 34), "Exam में पूछा गया :", font=get_font(36), fill=PEN_RED, anchor="lm")
+        qy = y + 62
+        for ln in ql[:2]:
+            d.text((CX0 + 30, qy), " ".join(ln), font=fq, fill=INK, anchor="la")
+            qy += int(szq * 1.3)
+        fa = get_font(42)
+        d.text((CX0 + 30, qy + 4), "Ans :  ", font=fa, fill=PEN_BLUE, anchor="la")
+        d.text((CX0 + 30 + text_w("Ans :  ", fa), qy + 4), clean_text(str(pyq["a"])), font=fa, fill=PEN_BLUE,
+               anchor="la")
+    page_footer(cv, d, 1597, f"कितने याद थे?  कमेंट करो __/{n}   •   दोस्तों को भेजो")
+    return cv
+
+
+def build_trick_card_reel(tc, out):
+    frame = trick_card(tc)
+    card_reel(frame, CARD_DUR, out, seed=len(tc["lines"]))
+    print(f"TRICK CARD REEL TAIYAR: {out} ({CARD_DUR:.0f}s)")
+    return CARD_DUR
+
+
+# ---------- KAHANI 1 PAGE: poori kahani 7 line ki 'kahani-yatra' + chitra ----------
+
+def kahani_saar(story):
+    """AI ka 'saar' (7 line, har line me ek PYQ ka jawab). Kam ho -> [] (tab purana reel style)."""
+    out = []
+    for x in story.get("saar") or []:
+        if not isinstance(x, dict):
+            continue
+        t = clean_text(str(x.get("text") or ""))
+        if not t:
+            continue
+        keys = [clean_text(str(k)) for k in (x.get("keys") or []) if str(k).strip()]
+        out.append({"text": t, "keys": keys, "pyq": bool(x.get("pyq"))})
+    return out[:7] if len(out) >= 5 else []
+
+
+def _balanced_rich(text, keys, max_w, size):
+    """_rich_layout jaisa, par 2 line ho to dono line lagbhag barabar (ek shabd akela na latke)."""
+    f, lines, sp = _rich_layout(text, keys, max_w, size)
+    if len(lines) != 2:
+        return f, lines, sp
+    toks = [t for ln in lines for t in ln]
+    best = None
+    for i in range(1, len(toks)):
+        a, b = toks[:i], toks[i:]
+        wa = sum(t[2] for t in a) + sp * (len(a) - 1)
+        wb = sum(t[2] for t in b) + sp * (len(b) - 1)
+        if wa > max_w or wb > max_w:
+            continue
+        cost = max(wa, wb) + (400 if (a[-1][1] and a[-1][1] == b[0][1]) else 0)    # key phrase ko mat todo
+        if best is None or cost < best[0]:
+            best = (cost, [a, b])
+    return (f, best[1], sp) if best else (f, lines, sp)
+
+
+def _pyq_tag():
+    f = get_font(24)
+    w = int(text_w("PYQ", f)) + 22
+    im = Image.new("RGBA", (w, 38), (0, 0, 0, 0))
+    dd = ImageDraw.Draw(im)
+    dd.rounded_rectangle((0, 0, w - 1, 37), radius=10, fill=PEN_RED + (255,))
+    dd.text((w / 2, 19), "PYQ", font=f, fill=WHITE + (255,), anchor="mm")
+    return im
+
+
+def kahani_one_page(story, img, info=None):
+    """info (dict) diya ho to info['rows'] = har line ki jagah + text (awaaz wale marker ke liye)."""
+    resolve_font()
+    cv = _paper(W, H)
+    d = ImageDraw.Draw(cv)
+    cx, mw = (CX0 + CX1) / 2, CX1 - CX0
+    saar = kahani_saar(story)
+    n = len(saar)
+    y = page_header(d, clean_text(story["topic"]), "कहानी से याद करो", cx, mw,
+                    "इनमें से कितनी बातें पता थीं?  सच बताना!", size=78)
+    # chitra + kahani ka sawal (hook)
+    hook = clean_text(story.get("hook") or "")
+    extra = clean_text(story.get("topic_extra") or "")
+    pic = 230
+    im = _fit_img(img, pic, pic) if img is not None else None
+    bx0 = CX0 + pic + 30
+    fh, szh, hl = fit_lines(hook or "एक बार पढ़ लो, पूरी कहानी हमेशा याद रहेगी!", CX1 - bx0 - 50, 3, 50, 34)
+    box_h = max(pic - 20, len(hl[:3]) * int(szh * 1.32) + (56 if extra else 0) + 40)
+    y0 = y + 6
+    if im is not None:
+        cv.paste(im, (int(CX0 + (pic - im.width) / 2), int(y0 + (box_h - im.height) / 2)), im)
+    else:
+        sw = stopwatch_sprite(pic - 40, 0.25)
+        cv.paste(sw, (int(CX0 + 20), int(y0 + (box_h - sw.height) / 2)), sw)
+    d.rectangle((bx0 + 8, y0 + 8, CX1 + 8, y0 + box_h + 8), fill=(30, 60, 90))
+    d.rectangle((bx0, y0, CX1, y0 + box_h), fill=(226, 244, 246), outline=(30, 60, 90), width=4)
+    ty = y0 + (box_h - len(hl[:3]) * int(szh * 1.32) - (50 if extra else 0)) / 2
+    for ln in hl[:3]:
+        d.text(((bx0 + CX1) / 2, ty), " ".join(ln), font=fh, fill=K_BLUE, anchor="mt")
+        ty += int(szh * 1.32)
+    if extra:
+        d.text(((bx0 + CX1) / 2, ty + 8), f"({extra})", font=get_font(38), fill=K_RED, anchor="mt")
+    y = y0 + box_h + 34
+    # kahani-yatra: number ghera -> line (key shabd laal/hare + lehardar line), PYQ wali line pe chhota thappa
+    top, bottom = y, 1520
+    tag = _pyq_tag()
+    tx = CX0 + 74
+    tmax = CX1 - tx - tag.width - 12
+    fits = False
+    while not fits:
+        for fs in (48, 46, 44, 42, 40, 38, 36):
+            lays = [_balanced_rich(s["text"], s["keys"], tmax, fs) for s in saar]
+            lh = int(fs * 1.38)
+            hs = [lh * min(2, len(L[1])) for L in lays]
+            if sum(hs) + 22 * (n - 1) <= bottom - top and all(len(L[1]) <= 2 for L in lays):
+                fits = True
+                break
+        if not fits and n > 5:                           # bahut lamba -> aakhri line chhodo (page bahar na jaaye)
+            saar, n = saar[:-1], n - 1
+        else:
+            break
+    gap = max(22, min(56, (bottom - top - sum(hs)) / max(1, n - 1)))
+    ys = []
+    for k in range(n):
+        ys.append(y)
+        y += hs[k] + gap
+    for k in range(n - 1):                               # dot-dot kahani ka raasta
+        x = CX0 + 30
+        yy = ys[k] + 54
+        while yy < ys[k + 1] - 4:
+            d.line((x, yy, x, min(yy + 12, ys[k + 1] - 4)), fill=(140, 160, 210), width=4)
+            yy += 22
+    for k, s in enumerate(saar):
+        f, lines, sp = lays[k]
+        yy = ys[k]
+        d.ellipse((CX0 + 6, yy, CX0 + 54, yy + 48), fill=K_BLUE if not s["pyq"] else PEN_RED)
+        d.text((CX0 + 30, yy + 25), str(k + 1), font=get_font(30), fill=WHITE, anchor="mm")
+        for li, ln in enumerate(lines[:2]):
+            x = tx
+            ly = yy + li * lh
+            for w_, m, ww in ln:
+                d.text((x, ly), w_, font=f, fill=m or K_BLUE, anchor="la")
+                if m:
+                    _wavy(d, x, x + ww, ly + fs * 1.16, K_GREEN if m == K_RED else K_RED)
+                x += ww + sp
+        if s["pyq"]:
+            cv.paste(tag, (int(CX1 - tag.width), int(yy + 6)), tag)
+        if info is not None:
+            roww = max(sum(t[2] for t in ln) + sp * (len(ln) - 1) for ln in lines[:2])
+            info.setdefault("rows", []).append({"box": (tx - 14, yy - 4, tx + roww + 14, yy + hs[k] + 2),
+                                                "text": s["text"]})
+    # poori kahani carousel me
+    t = "पूरी कहानी चित्रों के साथ  -  प्रोफ़ाइल पर"
+    ftt = get_font(34)
+    wt = text_w(t, ftt) + 50
+    d.rounded_rectangle((cx - wt / 2, 1532, cx + wt / 2, 1580), radius=24, fill=NAVY)
+    d.text((cx, 1556), t, font=ftt, fill=GOLD, anchor="mm")
+    page_footer(cv, d, 1597, f"कितनी बातें पता थीं?  कमेंट करो __/{n}   •   दोस्तों को भेजो")
+    return cv
+
+
+_HI_NUM = {3: "तीन", 4: "चार", 5: "पाँच", 6: "छह", 7: "सात"}
+
+
+def kahani_page_speeches(story, rows):
+    """Jo page pe likha hai wahi bolna: sawal -> har line -> score comment ka nyota."""
+    hk = clean_text(story.get("hook") or "")
+    n = _HI_NUM.get(len(rows), str(len(rows)))
+    first = f"{hk} पूरी कहानी, सिर्फ {n} लाइन में!" if hk else \
+        f"{clean_text(story['topic'])}... पूरी कहानी, सिर्फ {n} लाइन में!"
+    out = [first] + [r["text"] for r in rows]
+    out.append("इनमें से कितनी बातें पता थीं? कमेंट में बताओ... और Save कर लो!")
+    return [to_speech(t) for t in out]
+
+
+def build_kahani_page_reel(story, out, rot=0):
+    """Pehla frame = poora page (cover bhi yahi). Awaaz har line padhti hai, us line ke peeche peela marker.
+    Awaaz na bane -> 12s sirf music (7 PYQ jaisa)."""
+    resolve_font()
+    info = {}
+    base = kahani_one_page(story, story.get("_cover"), info)
+    rows = info.get("rows") or []
+    speeches = kahani_page_speeches(story, rows)
+    full, voices, starts, dur = None, None, None, 0.0
+    one = gemini_voice_timed(speeches, rot)               # poori awaaz EK baar me (top-3 awaaz baari-baari)
+    if one:
+        full, vst = one
+        starts = [x + 0.15 for x in vst]
+        dur = 0.15 + len(full) / SR + 1.2
+    else:
+        try:
+            voices = [v[0] for v in make_voices([{"segs": [(None, None, t)]} for t in speeches], rot)]
+        except Exception as exc:
+            print("  Kahani-page awaaz nahi bani:", str(exc)[:150])
+        if voices:
+            durs = [max(1.2, len(v) / SR + 0.25) for v in voices]
+            starts = [0.15 + sum(durs[:k]) for k in range(len(durs))]
+            dur = 0.15 + sum(durs) + 1.2
+    if starts is None or len(starts) != len(speeches):
+        card_reel(base, KAHANI_PAGE_DUR, out, seed=len(rows))
+        print(f"KAHANI 1-PAGE REEL TAIYAR (bina awaaz): {out} ({KAHANI_PAGE_DUR:.0f}s)")
+        return base
+    base.save(os.path.join(os.path.dirname(out) or ".", "thumbnail.jpg"), quality=92)
+    steps = 8
+
+    def state(fi):                                        # (line no., marker kitna khincha) ya None
+        t = fi / FPS
+        k = 0
+        while k + 1 < len(starts) and t >= starts[k + 1]:
+            k += 1
+        if 1 <= k <= len(rows):
+            return k, min(steps, max(1, int((t - starts[k]) / KP_SWIPE * steps) + 1))
+        return None
+
+    def render(fi):
+        s = state(fi)
+        if not s:
+            return base
+        x0, y0, x1, y1 = rows[s[0] - 1]["box"]
+        ov = Image.new("RGB", (W, H), (255, 255, 255))
+        ImageDraw.Draw(ov).rounded_rectangle((x0, y0, x0 + max(14, (x1 - x0) * s[1] / steps), y1), radius=12,
+                                             fill=(255, 230, 105))
+        return ImageChops.multiply(base, ov)              # marker text ke PEECHE (akshar kaale hi rahein)
+
+    music = beat_music(dur, seed=len(rows)) * 0.15
+    if full is not None:
+        add_at(music, full.astype(np.float32), 0.15, 1.0)
+    else:
+        for k, v in enumerate(voices):
+            add_at(music, v.astype(np.float32), starts[k], 1.0)
+    for k in range(1, len(rows) + 1):
+        add_at(music, sfx_pop(0.22), starts[k])
+    music = np.clip(music, -0.98, 0.98)
+    encode_frames(render, int(dur * FPS), music, out, key=lambda fi: state(fi) or "base")
+    print(f"KAHANI 1-PAGE REEL TAIYAR (awaaz + marker): {out} ({dur:.0f}s)")
+    return base
+
+
+def kahani_variant(st):
+    """'page' = naya 1-page, 'pages' = purana chitra-page. Default: har kahani pe baari-baari (same slot)."""
+    if REEL_FORMAT in ("kahani_page", "kahani_pages"):          # haath se chalaya run: jo maanga wahi
+        return REEL_FORMAT[len("kahani_"):]
+    if KAHANI_STYLE in ("page", "pages"):
+        return KAHANI_STYLE
+    return "page" if int(st.get("kahani_n", 0)) % 2 == 1 else "pages"
+
+
+def kahani_page_caption(caption):
+    """Naye 1-page reel ka caption: report me alag gina jaaye ('1 पेज में पूरी कहानी') + carousel ka pata."""
+    lines = caption.split("\n")
+    lines[0] = lines[0].replace("कहानी से याद करो!", "1 पेज में पूरी कहानी!")
+    lines.insert(1, "🖼️ पूरी कहानी चित्रों के साथ - प्रोफ़ाइल पर (carousel)")
+    return "\n".join(lines)
 
 
 # ---------- TRIPLE: "3 सवाल, 16 सेकंड" challenge (score comment + dost ko challenge = share) ----------
@@ -6078,6 +6502,8 @@ def _fmt_of(caption, ptype):
     c = caption or ""
     if ptype == "CAROUSEL_ALBUM":
         return "carousel"
+    if "1 पेज में पूरी कहानी" in c:
+        return "kahani_page"
     if "कहानी से याद" in c:
         return "kahani"
     if "ट्रिक से" in c or "ट्रिक:" in c:
@@ -6231,7 +6657,7 @@ def main():
         if run_trick(bank, st, ep, args):
             return
         fmt = "list"
-    if fmt == "kahani":
+    if fmt in ("kahani", "kahani_page", "kahani_pages"):
         if run_kahani(bank, st, ep, args):
             return
         fmt = "list"

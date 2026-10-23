@@ -5,13 +5,13 @@ on:
     # GitHub UTC time maanta hai (India = UTC + 5:30). GitHub aksar 10-30 min der se chalata hai.
     # Exam students Insta sabse zyada: subah padhai se pehle, dopahar break, raat 8-10 (sabse bada peak).
     - cron: "15 1 * * *"     # subah ~7:00  -> 7 PYQ list (jaldi revision)
-    - cron: "15 7 * * *"     # dopahar ~1:00 -> KAHANI (reel + carousel)
-    - cron: "15 11 * * *"    # shaam ~4:45-5:15 -> TRICK se yaad karo (sawal-hook + trick + awaaz)
+    - cron: "15 7 * * *"     # dopahar ~1:00 -> KAHANI (purani / nayi 1-page baari-baari) + carousel
+    - cron: "15 11 * * *"    # shaam ~4:45-5:15 -> TRICK card (ek page, bina awaaz)
     - cron: "45 13 * * *"    # raat ~7:45-8:15 -> MEGA revision (save wali reel, sabse bade peak pe)
   workflow_dispatch:
     inputs:
       format:
-        description: "auto / mega / list / kahani / trick / quiz"
+        description: "auto / mega / list / kahani / kahani_page / kahani_pages / trick / quiz"
         default: "auto"
       post_mode:
         description: "publish = Instagram par daalo, manual = sirf repo ke ready_reels/ me (jaanch ke liye)"
