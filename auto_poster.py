@@ -736,27 +736,58 @@ def _parse_json(raw):
             return None
 
 
-def _gemini(prompt):
+def gemini_text_models():
+    """Account me jo text models abhi chalu hain (naye pehle). Purane naam (404) apne aap hat jaate hain."""
+    if "text_models" in _CACHE:
+        return _CACHE["text_models"]
+    bad = ("tts", "image", "live", "embed", "audio", "vision", "thinking-exp", "learnlm", "gemma", "aqa", "robotics")
+    names = [n for n in _gemini_model_names() if "flash" in n and not any(b in n for b in bad)
+             and not re.search(r"-\d{2}-\d{2}$|preview-\d", n)]
+    names.sort(key=lambda n: (_model_ver(n), "lite" not in n, n.endswith("latest")), reverse=True)
+    out = []
+    for n in ["gemini-flash-latest"] + names + ["gemini-2.5-flash"]:
+        if n not in out and (not names or n in names or n == "gemini-flash-latest"):
+            out.append(n)
+    _CACHE["text_models"] = out[:4] or ["gemini-flash-latest", "gemini-2.5-flash"]
+    print("  Gemini text models:", ", ".join(_CACHE["text_models"]))
+    return _CACHE["text_models"]
+
+
+def _gemini_call(prompt, search=False):
+    """Har model 2 baar tak (503/429/timeout pe 6-12s ruk ke). Mile -> JSON, warna None."""
     if not GEMINI_API_KEY:
         return None
-    for model in ("gemini-flash-latest", "gemini-2.5-flash", "gemini-2.5-flash-lite", "gemini-2.0-flash"):
-        try:
-            r = requests.post(
-                f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent",
-                params={"key": GEMINI_API_KEY},
-                json={"contents": [{"parts": [{"text": prompt}]}],
-                      "generationConfig": {"temperature": 0.2, "responseMimeType": "application/json"}},
-                timeout=90)
-            if r.status_code != 200:
-                print(f"  Gemini {model}: HTTP {r.status_code}")
-                continue
-            txt = r.json()["candidates"][0]["content"]["parts"][0]["text"]
-            js = _parse_json(txt)
-            if js:
-                return js
-        except Exception as exc:
-            print(f"  Gemini {model} fail:", str(exc)[:120])
+    body = {"contents": [{"parts": [{"text": prompt}]}], "generationConfig": {"temperature": 0.2}}
+    if search:
+        body["tools"] = [{"google_search": {}}]
+    else:
+        body["generationConfig"]["responseMimeType"] = "application/json"
+    for model in gemini_text_models():
+        for attempt in range(2):
+            try:
+                r = requests.post(
+                    f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent",
+                    params={"key": GEMINI_API_KEY}, json=body, timeout=(15, 75))
+                if r.status_code in (429, 500, 503, 504):
+                    print(f"  Gemini {model}: HTTP {r.status_code} (koshish {attempt + 1})")
+                    time.sleep(6 * (attempt + 1))
+                    continue
+                if r.status_code != 200:
+                    print(f"  Gemini {model}: HTTP {r.status_code}")
+                    break
+                parts = r.json()["candidates"][0]["content"]["parts"]
+                js = _parse_json(" ".join(p.get("text", "") for p in parts))
+                if js:
+                    return js
+                break
+            except Exception as exc:
+                print(f"  Gemini {model} fail (koshish {attempt + 1}):", str(exc)[:100])
+                time.sleep(4)
     return None
+
+
+def _gemini(prompt):
+    return _gemini_call(prompt)
 
 
 def _groq(prompt):
@@ -6676,26 +6707,10 @@ Sirf JSON: {{"ok": [{{"q": "...", "a": "..."}}]}}"""
 
 
 def _gemini_search(prompt):
-    """Gemini + Google Search grounding (taaza khabar). JSON text se nikaalte hain. Fail -> None."""
+    """Gemini + Google Search grounding (taaza khabar). Fail -> None."""
     if not GEMINI_API_KEY or DRY_RUN:
         return None
-    for model in ("gemini-2.5-flash", "gemini-flash-latest", "gemini-2.0-flash"):
-        try:
-            r = requests.post(
-                f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent",
-                params={"key": GEMINI_API_KEY},
-                json={"contents": [{"parts": [{"text": prompt}]}], "tools": [{"google_search": {}}],
-                      "generationConfig": {"temperature": 0.2}}, timeout=120)
-            if r.status_code != 200:
-                print(f"  Gemini-search {model}: HTTP {r.status_code}")
-                continue
-            parts = r.json()["candidates"][0]["content"]["parts"]
-            js = _parse_json(" ".join(p.get("text", "") for p in parts))
-            if js:
-                return js
-        except Exception as exc:
-            print(f"  Gemini-search {model} fail:", str(exc)[:120])
-    return None
+    return _gemini_call(prompt, search=True)
 
 
 def _ca_ok(q, a):
@@ -6711,15 +6726,18 @@ def pick_current(st):
     js = _gemini_search(CA_PROMPT.format(today=today, since=since, used="; ".join(used) or "-"))
     items = [{"q": clean_text(x.get("q", "")), "a": clean_text(x.get("a", ""))}
              for x in (js or {}).get("items", []) if isinstance(x, dict) and _ca_ok(x.get("q", ""), x.get("a", ""))]
-    if len(items) < 5:
+    if len(items) < 3:
         print(f"  Current affairs: sirf {len(items)} mile")
         return []
     rows = "\n".join(f"- {x['q']} | {x['a']}" for x in items)
     chk = _gemini_search(CA_CHECK.format(today=today, rows=rows))
     good = [{"q": clean_text(x.get("q", "")), "a": clean_text(x.get("a", ""))}
             for x in (chk or {}).get("ok", []) if isinstance(x, dict) and _ca_ok(x.get("q", ""), x.get("a", ""))]
-    if chk is None or len(good) < 5:
-        print(f"  Current affairs jaanch: {len(good)} sahi -> aaj nahi")
+    if chk is None:                                   # jaanch hi nahi chali -> bina jaanche nahi daalenge
+        print("  Current affairs jaanch nahi chali -> aaj nahi")
+        return []
+    if len(good) < 3:
+        print(f"  Current affairs jaanch: sirf {len(good)} sahi -> aaj nahi")
         return []
     return good[:7]
 
@@ -6737,13 +6755,13 @@ def current_page(items):
     y = page_header(d, f"{current_month_hi()} के {len(items)} करंट अफेयर्स", "Current Affairs", cx, mw,
                     "इनमें से कितने पता हैं?  सच बताना!", size=70)
     top, bottom = y + 10, 1575
-    for size in (42, 40, 38, 36, 34, 32):
+    for size in (52, 48, 44, 42, 40, 38, 36, 34, 32):
         bl = [fit_lines(f"{k + 1}. {it['q']}", 870, 2, size, size) for k, it in enumerate(items)]
         need = sum(int(sz * 1.22) * len(ls[:2]) + int(size * 1.35) for _, sz, ls in bl)
         if need + 12 * (len(items) - 1) <= bottom - top:
             break
-    gap = max(0, (bottom - top - need) / max(1, len(items) - 1))
-    yy = top
+    gap = max(0, min(90, (bottom - top - need) / max(1, len(items) - 1)))
+    yy = top + max(0, (bottom - top - need - gap * (len(items) - 1)) / 2)
     fa = get_font(size + 2)
     for (f, sz, ls), it in zip(bl, items):
         for j, ln in enumerate(ls[:2]):
