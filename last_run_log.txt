@@ -1,26 +1,19 @@
-FORMAT: kahani_pages
-  Gemini gemini-flash-latest fail: HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeout=90)
-  Gemini gemini-2.5-flash: HTTP 503
-  Gemini gemini-2.5-flash-lite: HTTP 404
-  Gemini gemini-2.0-flash: HTTP 404
-  Groq llama-3.3-70b-versatile: HTTP 404
+FORMAT: kahani_short
   Gemini gemini-flash-latest: HTTP 503
-  KAHANI CHHODI (jaanch): कहानी का अधिकांश भाग 'भारत के नए राजधानियों (2014-2020)' विषय से संबंधित नहीं है। इसमें एयर इंडिया, झारखंड, त्रिपुरा, पुष्कर, कन्याकुमारी, संथाल जनजात
-  Gemini gemini-flash-latest fail: HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeout=90)
-  Gemini gemini-flash-latest fail: HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeout=90)
-KAHANI: नदी का सफर: बांधों की कहानी  (Geography / नदी घाटी परियोजनाएँ (River Valley Projec)
-  Kahani: 9 page, 15 chitra bane
+  Gemini gemini-flash-latest: HTTP 503
+KAHANI: भारत की राजधानियाँ  (Geography / भारत में परिवहन (Transport in India))
+  Kahani: 7 page, 11 chitra bane
   KAHANI REEL: purana chitra-page + awaaz
 Awaaz: Gemini TTS ek baar me (gemini-3.8-flash-tts / hi-in-storyteller-6)
-KAHANI REEL TAIYAR: generated_reels/science_pyq_reel.mp4 (83s)
+KAHANI REEL TAIYAR: generated_reels/science_pyq_reel.mp4 (48s)
 
 CAPTION:
-📖 नदियाँ सिर्फ पानी नहीं, कहानी भी सुनाती हैं? नदी का सफर: बांधों की कहानी - कहानी से याद करो!
+📖 भारत की राजधानियाँ याद करना मुश्किल क्यों? भारत की राजधानियाँ - कहानी से याद करो!
 
 📝 Exam में पूछा गया:
-• किस बांध के लोग आज भी संघर्ष कर रहे हैं? → तवा बांध
-• हीराकुंड बांध किस नदी पर है? → महानदी
-• बड़े बांधों से संबंधित समस्या क्या नहीं है? → सिंचाई के लिए जल का संग्रहण
+• आंध्र प्रदेश की प्रस्तावित राजधानी क्या थी? → अमरावती
+• झारखंड की राजधानी क्या है? → रांची
+• उत्तराखंड की शीतकालीन राजधानी क्या है? → देहरादून
 
 📤 Save करो + उस दोस्त को भेजो जिसे ये topic याद नहीं रहता!
 🎯 Railway NTPC / Group D + हर GS exam के लिए
