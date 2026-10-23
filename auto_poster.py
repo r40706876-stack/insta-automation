@@ -4140,33 +4140,12 @@ def render_list_frame(subject, items):
     return cv
 
 
-def list_rows_info(items):
-    """render_list_frame jaisa hi hisaab -> har sawal+jawab ki jagah (peele marker ke liye)."""
-    top, bottom = 420, 1580
-    for size in (42, 40, 38, 36, 34, 32):
-        blocks = []
-        for k, it in enumerate(items):
-            f, s_, lines = fit_lines(f"{k + 1}. {it['q']}", 900, 2, size, size)
-            blocks.append((f, int(s_ * 1.22), lines[:2]))
-        need = sum(lh * len(ls) + int(size * 1.35) for _, lh, ls in blocks)
-        if need + 14 * (len(items) - 1) <= bottom - top:
-            break
-    gap = max(0, (bottom - top - need) / max(1, len(items) - 1))
-    y, rows = top, []
-    for f, lh, lines in blocks:
-        h = lh * len(lines) + 2 + int(size * 1.35)
-        w = max(text_w(" ".join(l), f) for l in lines)
-        wa = text_w("Ans :  " + str(items[len(rows)]["a"]), get_font(size + 2)) + 35
-        rows.append({"box": (128, y - 6, min(W - 30, 140 + max(w, wa) + 14), y + h - 4)})
-        y += h + gap
-    return {"rows": rows}
-
-
 def build_list_reel(subject, items, out):
     resolve_font()
     frame = render_list_frame(subject, items)
-    # 23 Oct: wahi winner page; bas shuru me 'thak' zoom + har sawal pe baari-baari peela marker (10s, seamless loop)
-    loop4_reel(frame, list_rows_info(items), out, seed=len(items), dur=LIST_DUR, lift=False)
+    music = beat_music(LIST_DUR, seed=len(items))
+    encode_frames(lambda fi: frame, int(LIST_DUR * FPS), music, out, key=lambda fi: 0)
+    frame.save(os.path.join(os.path.dirname(out) or ".", "thumbnail.jpg"), quality=92)
     print(f"LIST REEL TAIYAR: {out} ({LIST_DUR:.0f}s)")
     return LIST_DUR
 
