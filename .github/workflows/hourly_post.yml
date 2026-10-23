@@ -1,14 +1,8 @@
 name: Science PYQ Reel (din me 5 baar)
 
 on:
-  schedule:
-    # GitHub UTC time maanta hai (India = UTC + 5:30). GitHub aksar 10-30 min der se chalata hai.
-    # Exam students Insta sabse zyada: subah padhai se pehle, dopahar break, raat 8-10 (sabse bada peak).
-    - cron: "15 1 * * *"     # subah ~7:00   -> 7 PYQ list
-    - cron: "15 5 * * *"     # ~11:00        -> KAHANI purani (chitra page + awaaz) + carousel
-    - cron: "15 8 * * *"     # dopahar ~2:00 -> TRICK card (bina awaaz)
-    - cron: "45 11 * * *"    # shaam ~5:30   -> KAHANI (chitra page + kahani awaaz) + carousel
-    - cron: "45 14 * * *"    # raat ~8:30    -> MEGA revision (sabse bada peak)
+  # v2 (2026-10-23): GitHub ka schedule 45-90 min der se chalta tha -> ab "timer.yml" theek samay par isse
+  # chalata hai (format ke saath). Yahan schedule band (warna dohri post).
   workflow_dispatch:
     inputs:
       format:
@@ -28,7 +22,7 @@ concurrency:
 jobs:
   post:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 50
     steps:
       - uses: actions/checkout@v4
 
@@ -37,7 +31,14 @@ jobs:
           python-version: "3.11"
 
       - name: System packages (video + Hindi text shaping)
-        run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg libraqm0
+        timeout-minutes: 20
+        run: |
+          for i in 1 2 3; do
+            timeout 300 sudo apt-get -o Acquire::Retries=3 -o Acquire::http::Timeout=30 update -qq && \
+            timeout 420 sudo apt-get -o Acquire::Retries=3 install -y -qq --no-install-recommends ffmpeg libraqm0 && break
+            echo "apt koshish $i fail - dobara"; sleep 20
+          done
+          which ffmpeg
 
       - name: Python packages
         run: pip install -r requirements.txt
