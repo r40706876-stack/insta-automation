@@ -27,7 +27,7 @@ jobs:
           REPO: ${{ github.repository }}
         run: |
           # IST samay = format (pehle wale schedule jaise, ab theek samay par)
-          SLOTS="06:45=list 10:45=kahani_pages 13:45=trick 17:15=kahani_pages 20:15=mega"
+          SLOTS="06:45=list 10:00=current 13:00=trap 15:30=farak 17:15=kahani_pages 20:15=mega 22:30=trick"
           NOW=$(date +%s)
           BEST=""; BESTT=0
           for d in today tomorrow; do

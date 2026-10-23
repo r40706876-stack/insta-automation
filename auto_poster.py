@@ -3303,20 +3303,21 @@ PEN_RED = (200, 30, 40)
 
 def pick_format(ep):
     if REEL_FORMAT in ("loop", "list", "classic", "triple", "quiz", "galti", "mega", "kahani", "carousel_folder", "trick",
-                       "kahani_page", "kahani_pages", "kahani_short"):
+                       "kahani_page", "kahani_pages", "kahani_short", "current", "trap", "farak"):
         return REEL_FORMAT
     # din ki 3 reel samay ke hisaab se (IST): subah 7 PYQ list, dopahar quiz notebook, raat MEGA revision
     # (MEGA = sabse zyada save wali reel -> raat 8 baje ke sabse bade peak pe)
     # GitHub kabhi ghanton der se chalata hai -> format samay se nahi, kaunsa schedule chala usse tay ho
     # 5 reel/din, beech me ~3 ghante -> ek reel doosri ke views na kaate (23 Oct: dono kahani roz)
-    by_cron = {"15 1 * * *": "list", "15 5 * * *": "kahani_pages", "15 8 * * *": "trick",
-               "45 11 * * *": "kahani_pages", "45 14 * * *": "mega"}
+    # 23 Oct (user): 7 PYQ 7:00, Current 10:00, Jaal 1:00, Farak 3:30, Kahani 5:30, MEGA 8:30, Trick (awaaz) 10:30
+    by_cron = {"15 1 * * *": "list", "35 4 * * *": "current", "35 7 * * *": "trap", "5 10 * * *": "farak",
+               "45 11 * * *": "kahani_pages", "45 14 * * *": "mega", "5 17 * * *": "trick"}
     cron = os.getenv("CRON_SLOT", "").strip()
     if cron in by_cron:
         return by_cron[cron]
     h = time.gmtime(time.time() + 19800).tm_hour
-    return ("list" if h < 10 else "kahani_pages" if h < 13 else "trick" if h < 16 else "kahani_pages" if h < 19
-            else "mega")
+    return ("list" if h < 9 else "current" if h < 12 else "trap" if h < 15 else "farak" if h < 17
+            else "kahani_pages" if h < 20 else "mega" if h < 22 else "trick")
 
 
 # ---------- HAR EXAM KI AUDIENCE: GS sab me aata hai -> har reel alag exam waalon ko bulaye ----------
@@ -6083,7 +6084,7 @@ def run_trick(bank, st, ep, args):
 # (awaaz ke saath, boli ja rahi line pe peela marker) usi 1 baje slot pe baari-baari -> dono ka asli muqabla.
 # Purana style wapas: TRICK_STYLE=anim | kahani hamesha purani: KAHANI_STYLE=pages | hamesha nayi: KAHANI_STYLE=page
 
-TRICK_STYLE = os.getenv("TRICK_STYLE", "card").strip().lower()       # card | anim (purana)
+TRICK_STYLE = os.getenv("TRICK_STYLE", "anim").strip().lower()       # card | anim (purana)
 KAHANI_STYLE = os.getenv("KAHANI_STYLE", "pages").strip().lower()       # ab (baari-baari) | page (nayi) | pages (purani)
 CARD_DUR = 10.0                     # 7 PYQ jitna: padhte-padhte reel 2-3 baar loop
 KAHANI_PAGE_DUR = 12.0              # 1-page kahani, agar awaaz na bane (sirf music, 120 BPM ke 6 bar)
@@ -6626,6 +6627,362 @@ def kahani_page_caption(caption):
     return "\n".join(lines)
 
 
+# ---------- NAYE EK-PAGE FORMAT (23 Oct): CURRENT AFFAIRS, EXAM KE JAAL, FARAK PEHCHANO ----------
+# Teeno 7 PYQ jaise ek static page, 4 sec ki reel (120 BPM ke 2 bar -> music + page seamless loop).
+
+ONE_PAGE_DUR = 4.0
+
+
+def static_loop_reel(frame, out, seed=0, dur=ONE_PAGE_DUR):
+    music = beat_music(dur, seed=seed)
+    encode_frames(lambda fi: frame, int(dur * FPS), music, out, key=lambda fi: 0)
+    frame.save(os.path.join(os.path.dirname(out) or ".", "thumbnail.jpg"), quality=92)
+    print(f"EK-PAGE REEL TAIYAR: {out} ({dur:.0f}s loop)")
+    return dur
+
+
+def _one_page_post(st, ep, args, out, caption, fmt, on_success):
+    Path(os.path.join(OUTPUT_DIR, "caption.txt")).write_text(caption, encoding="utf-8")
+    print("\nCAPTION:\n" + caption)
+    if args.no_post or DRY_RUN:
+        return True
+    if POST_MODE == "manual":
+        save_ready(out, caption, ep)
+        return True
+    if not post_reel(out, caption, 0):
+        save_progress(st)
+        return True
+    on_success()
+    st["episode"] = ep
+    st["last"] = {"time": time.strftime("%Y-%m-%d %H:%M"), "format": fmt}
+    save_progress(st)
+    return True
+
+
+# ===== 1) CURRENT AFFAIRS (Gemini + Google Search se taaza, phir doosri baar search se jaanch) =====
+
+CA_PROMPT = """Aaj {today} hai. Pichhle 15 din ({since} se aaj tak) ki Bharat ki 7 sabse zaroori CURRENT AFFAIRS
+khabrein Google Search se dhoondho jo SSC / Railway / Police / State sarkari exam me poochhi ja sakti hain
+(khel, yojana, niyukti, puraskar, ISRO/raksha, arthvyavastha, rajya). Sirf pakki, kai sources me chhapi khabar.
+Har ek ko ek chhota Hindi sawal + jawab banao. Ye pehle aa chuke hain, inhe mat dohrao: {used}
+Sirf JSON do (koi aur text nahi):
+{{"items": [{{"q": "Hindi sawal, max 14 shabd, '?' ke saath", "a": "jawab, max 5 shabd"}}]}}"""
+
+CA_CHECK = """Aaj {today} hai. Neeche sarkari exam ke liye current affairs sawal-jawab hain. Har ek ko Google Search
+se jaancho: tathya, naam, sankhya, tareekh bilkul sahi aur taaza ho. Galat ya sandigdh ko hata do, chhoti
+galti (spelling/sankhya) sahi karo.
+{rows}
+Sirf JSON: {{"ok": [{{"q": "...", "a": "..."}}]}}"""
+
+
+def _gemini_search(prompt):
+    """Gemini + Google Search grounding (taaza khabar). JSON text se nikaalte hain. Fail -> None."""
+    if not GEMINI_API_KEY or DRY_RUN:
+        return None
+    for model in ("gemini-2.5-flash", "gemini-flash-latest", "gemini-2.0-flash"):
+        try:
+            r = requests.post(
+                f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent",
+                params={"key": GEMINI_API_KEY},
+                json={"contents": [{"parts": [{"text": prompt}]}], "tools": [{"google_search": {}}],
+                      "generationConfig": {"temperature": 0.2}}, timeout=120)
+            if r.status_code != 200:
+                print(f"  Gemini-search {model}: HTTP {r.status_code}")
+                continue
+            parts = r.json()["candidates"][0]["content"]["parts"]
+            js = _parse_json(" ".join(p.get("text", "") for p in parts))
+            if js:
+                return js
+        except Exception as exc:
+            print(f"  Gemini-search {model} fail:", str(exc)[:120])
+    return None
+
+
+def _ca_ok(q, a):
+    q, a = clean_text(q), clean_text(a)
+    return bool(q and a and len(q.split()) <= 18 and len(a.split()) <= 7 and not re.search(r"[^ऀ-ॿ -~‐-‧₹≈×]", q + a))
+
+
+def pick_current(st):
+    import datetime as _dt
+    ist = _dt.datetime.utcnow() + _dt.timedelta(hours=5, minutes=30)
+    today, since = ist.strftime("%d %B %Y"), (ist - _dt.timedelta(days=15)).strftime("%d %B %Y")
+    used = st.get("ca_used", [])[-60:]
+    js = _gemini_search(CA_PROMPT.format(today=today, since=since, used="; ".join(used) or "-"))
+    items = [{"q": clean_text(x.get("q", "")), "a": clean_text(x.get("a", ""))}
+             for x in (js or {}).get("items", []) if isinstance(x, dict) and _ca_ok(x.get("q", ""), x.get("a", ""))]
+    if len(items) < 5:
+        print(f"  Current affairs: sirf {len(items)} mile")
+        return []
+    rows = "\n".join(f"- {x['q']} | {x['a']}" for x in items)
+    chk = _gemini_search(CA_CHECK.format(today=today, rows=rows))
+    good = [{"q": clean_text(x.get("q", "")), "a": clean_text(x.get("a", ""))}
+            for x in (chk or {}).get("ok", []) if isinstance(x, dict) and _ca_ok(x.get("q", ""), x.get("a", ""))]
+    if chk is None or len(good) < 5:
+        print(f"  Current affairs jaanch: {len(good)} sahi -> aaj nahi")
+        return []
+    return good[:7]
+
+
+def current_month_hi():
+    m = ["जनवरी", "फरवरी", "मार्च", "अप्रैल", "मई", "जून", "जुलाई", "अगस्त", "सितंबर", "अक्टूबर", "नवंबर", "दिसंबर"]
+    ist = time.gmtime(time.time() + 19800)
+    return f"{m[ist.tm_mon - 1]} {ist.tm_year}"
+
+
+def current_page(items):
+    cv = _paper(W, H)
+    d = ImageDraw.Draw(cv)
+    cx, mw = (CX0 + CX1) / 2, CX1 - CX0
+    y = page_header(d, f"{current_month_hi()} के {len(items)} करंट अफेयर्स", "Current Affairs", cx, mw,
+                    "इनमें से कितने पता हैं?  सच बताना!", size=70)
+    top, bottom = y + 10, 1575
+    for size in (42, 40, 38, 36, 34, 32):
+        bl = [fit_lines(f"{k + 1}. {it['q']}", 870, 2, size, size) for k, it in enumerate(items)]
+        need = sum(int(sz * 1.22) * len(ls[:2]) + int(size * 1.35) for _, sz, ls in bl)
+        if need + 12 * (len(items) - 1) <= bottom - top:
+            break
+    gap = max(0, (bottom - top - need) / max(1, len(items) - 1))
+    yy = top
+    fa = get_font(size + 2)
+    for (f, sz, ls), it in zip(bl, items):
+        for j, ln in enumerate(ls[:2]):
+            d.text((CX0 - 20, yy + j * int(sz * 1.22)), " ".join(ln), font=f, fill=INK, anchor="la")
+        yy += int(sz * 1.22) * len(ls[:2]) + 2
+        d.text((CX0 + 15, yy), "Ans :  " + it["a"], font=fa, fill=PEN_BLUE, anchor="la")
+        yy += int(size * 1.35) + gap
+    page_footer(cv, d, 1597, f"कितने पता थे?  कमेंट करो __/{len(items)}   •   SAVE करो")
+    return cv
+
+
+def run_current(bank, st, ep, args):
+    items = pick_current(st)
+    if not items:
+        return False
+    os.makedirs(OUTPUT_DIR, exist_ok=True)
+    out = os.path.join(OUTPUT_DIR, FINAL_VIDEO)
+    resolve_font()
+    static_loop_reel(current_page(items), out, seed=len(items))
+    lines = [f"📰 {current_month_hi()} के {len(items)} करंट अफेयर्स - SSC, Railway, Police, State Exams (Save करो)", ""]
+    lines += [f"{k + 1}. {it['q']} → {it['a']}" for k, it in enumerate(items)]
+    lines += ["", "💬 कितने पता थे? कमेंट करो: 7/7?", "📤 उस दोस्त को भेजो जो करंट अफेयर्स में कमज़ोर है!",
+              f"⏱ {BRAND} - {BRAND_TAGLINE}", "", "#currentaffairs #currentaffairs2026 #gkquiz #sscgd #rrbntpc"]
+
+    def done():
+        st["ca_used"] = (st.get("ca_used", []) + [it["q"] for it in items])[-200:]
+    return _one_page_post(st, ep, args, out, "\n".join(lines), "current", done)
+
+
+# ===== 2) EXAM KE JAAL: bank ke asli PYQ + AI batata hai sabse lalchane wala galat option =====
+
+TRAP_SUBJ = ["Biology", "Physics", "Chemistry", "Geography", "History", "Polity", "Traditional GK", "Economics",
+             "Environment"]
+TRAP_PROMPT = """Ye Indian sarkari exam ke PYQ hain: id | sawal | options | sahi jawab.
+{rows}
+Inme se THEEK 6 aise chuno jo (1) aasaan aur mashhoor tathya hon, (2) jinme zyadatar students ek KHAAS galat
+option chun lete hain (jaal), (3) jawab aaj bhi sahi ho. Har ek ke liye wo lalchane wala galat option ka akshar do.
+Sawal ko chhota karo (max 9 shabd, matlab wahi).
+Sirf JSON: {{"items": [{{"id": "...", "q": "chhota sawal?", "wrong": "a/b/c/d"}}]}}"""
+
+
+def pick_trap(bank, st):
+    used = set(st.get("trap_used", []))
+    n0 = int(st.get("trap_n", 0))
+    for k in range(len(TRAP_SUBJ)):
+        subj = TRAP_SUBJ[(n0 + k) % len(TRAP_SUBJ)]
+        pool = [q for q in bank if q["subject"] == subj and q["id"] not in used and list_ok(q)
+                and all(len(str(v).split()) <= 4 for v in q["options"].values())]
+        pool.sort(key=lambda q: -int(q.get("times_asked") or 1))
+        pool = pool[:45]
+        if len(pool) < 12:
+            continue
+        rows = "\n".join(f"{q['id']} | {clean_text(q['question'])} | " +
+                         " ; ".join(f"{L}) {clean_text(str(v))}" for L, v in q["options"].items()) +
+                         f" | {q['answer']}" for q in pool)
+        js = None
+        for fn in (_gemini, _groq):
+            js = None if DRY_RUN else fn(TRAP_PROMPT.format(rows=rows))
+            if js and isinstance(js.get("items"), list):
+                break
+        by = {q["id"]: q for q in pool}
+        items = []
+        for e in (js or {}).get("items", []):
+            q = by.get(str((e or {}).get("id")))
+            w = str((e or {}).get("wrong", "")).strip().lower()[:1]
+            if not q or w not in q["options"] or w == q["answer"]:
+                continue
+            qq = clean_text(e.get("q") or q["question"])
+            if len(qq.split()) > 12:
+                qq = clean_text(q["question"])
+            items.append({"id": q["id"], "q": qq, "wrong": clean_text(str(q["options"][w])),
+                          "right": clean_text(str(q["options"][q["answer"]]))})
+        if len(items) >= 5:
+            return subj, items[:6], (n0 + k) % len(TRAP_SUBJ)
+    return None, [], n0
+
+
+def trap_page(items):
+    cv = _paper(W, H)
+    d = ImageDraw.Draw(cv)
+    cx, mw = (CX0 + CX1) / 2, CX1 - CX0
+    y = page_header(d, f"Exam के {len(items)} जाल - 90% लोग गलत करते हैं", "Trap पकड़ो", cx, mw,
+                    "तुम कितने में फँसे?  सच बताना!", size=70)
+    top, bottom = y + 15, 1575
+    rh = (bottom - top) / len(items)
+    for k, it in enumerate(items):
+        yy = top + k * rh
+        fq, szq, ql = fit_lines(f"{k + 1}. {it['q']}", 880, 1, 42, 30)
+        d.text((CX0 - 20, yy), " ".join(ql[0]), font=fq, fill=INK, anchor="la")
+        ly = yy + 66
+        x = CX0 + 20
+        fw = next(get_font(z) for z in (40, 36, 32, 28)
+                  if text_w(it["wrong"], get_font(z)) + text_w(it["right"], get_font(z + 4)) + 240 <= CX1 - x)
+        fr = get_font(fw.size + 4)
+        d.ellipse((x, ly + 4, x + 40, ly + 44), outline=PEN_RED, width=4)
+        d.line((x + 10, ly + 14, x + 30, ly + 34), fill=PEN_RED, width=5)
+        d.line((x + 30, ly + 14, x + 10, ly + 34), fill=PEN_RED, width=5)
+        tw = text_w(it["wrong"], fw)
+        d.text((x + 55, ly + 22), it["wrong"], font=fw, fill=(150, 150, 160), anchor="lm")
+        d.line((x + 52, ly + 24, x + 60 + tw, ly + 24), fill=PEN_RED, width=5)
+        x2 = x + 120 + tw
+        d.ellipse((x2, ly + 4, x2 + 40, ly + 44), fill=K_GREEN)
+        d.line((x2 + 9, ly + 25, x2 + 17, ly + 33), fill=WHITE, width=5)
+        d.line((x2 + 17, ly + 33, x2 + 31, ly + 14), fill=WHITE, width=5)
+        d.text((x2 + 55, ly + 22), it["right"], font=fr, fill=K_GREEN, anchor="lm")
+    page_footer(cv, d, 1597, f"कितनों में फँसे?  कमेंट करो __/{len(items)}   •   दोस्त को भेजो")
+    return cv
+
+
+def run_trap(bank, st, ep, args):
+    subj, items, idx = pick_trap(bank, st)
+    if not items:
+        print("Trap nahi bana -> list format")
+        return False
+    os.makedirs(OUTPUT_DIR, exist_ok=True)
+    out = os.path.join(OUTPUT_DIR, FINAL_VIDEO)
+    resolve_font()
+    static_loop_reel(trap_page(items), out, seed=len(items))
+    lines = [f"⚠️ Exam के {len(items)} जाल - 90% लोग गलत करते हैं! ({subj_names(subj)[0]})", ""]
+    lines += [f"{k + 1}. {it['q']} ❌ {it['wrong']} ✅ {it['right']}" for k, it in enumerate(items)]
+    lines += ["", "💬 तुम कितनों में फँसे? कमेंट करो!", "📤 उस दोस्त को भेजो जो इनमें गलती करता है",
+              f"⏱ {BRAND} - {BRAND_TAGLINE}", "", f"#gkquiz #gkpyq #sscgd #rrbntpc {SUBJ_TAGS.get(subj, '#gk')}"]
+
+    def done():
+        st["trap_used"] = (st.get("trap_used", []) + [it["id"] for it in items])[-3000:]
+        st["trap_n"] = idx + 1
+    return _one_page_post(st, ep, args, out, "\n".join(lines), "trap", done)
+
+
+# ===== 3) FARAK PEHCHANO: ek jaisi lagne wali 2 cheezein, 5 farak (bank ke chapter se, AI + jaanch) =====
+
+FARAK_PROMPT = """Tum Hindi GK teacher ho. Neeche ek chapter ke asli PYQ hain:
+CHAPTER: {chapter}
+{rows}
+Is chapter se 2 aisi cheezein chuno jinme students sabse zyada confuse hote hain (jaise अवतल-उत्तल दर्पण,
+धमनी-शिरा, लोकसभा-राज्यसभा) aur unke 5 pakke textbook farak do. Har khana max 4 shabd, Hindi.
+Agar is chapter me aisa joda nahi to {{"reject": "wajah"}}.
+Sirf JSON: {{"a": "pehli cheez (max 3 shabd)", "b": "doosri cheez (max 3 shabd)",
+ "rows": [{{"label": "kis baat ka farak (max 2 shabd)", "a": "...", "b": "..."}}]}}   // theek 5"""
+
+FARAK_CHECK = """Ye ek Hindi GK 'farak' table ka JSON hai jo exam students ko jayegi. Har khana textbook ke hisaab
+se aur aaj ({today}) bhi sahi hai ya nahi jaancho; galat ko sahi karo, Hindi spelling theek karo.
+Bhramak ho to {{"reject": "wajah"}}. Warna sirf sudhra JSON.
+JSON:
+{js}"""
+
+
+def pick_farak(bank, st):
+    done = set(st.get("farak_chapters", []))
+    groups = {}
+    for q in bank:
+        if "विविध" in q["chapter"] or "Misc" in q["chapter"]:
+            continue
+        groups.setdefault((q["subject"], q["chapter"], q.get("sub") or ""), []).append(q)
+    cands = sorted(((len(v), key) for key, v in groups.items() if len(v) >= 6 and "|".join(key[1:]) not in done),
+                   reverse=True)
+    n0 = int(st.get("farak_n", 0))
+    order = TRAP_SUBJ[n0 % len(TRAP_SUBJ):] + TRAP_SUBJ[:n0 % len(TRAP_SUBJ)]
+    cands.sort(key=lambda c: order.index(c[1][0]) if c[1][0] in order else 99)
+    for _, key in cands[:6]:
+        qs = sorted(groups[key], key=lambda q: -int(q.get("times_asked") or 1))[:14]
+        rows = "\n".join(f"- {clean_text(q['question'])} | {clean_text(str(q['options'][q['answer']]))}" for q in qs)
+        chap = key[1] + (f" / {key[2]}" if key[2] else "")
+        js = None
+        for fn in (_gemini, _groq):
+            js = None if DRY_RUN else fn(FARAK_PROMPT.format(chapter=chap, rows=rows))
+            if js and (js.get("reject") or len(js.get("rows") or []) >= 4):
+                break
+        st.setdefault("farak_chapters", []).append("|".join(key[1:]))
+        if not js or js.get("reject"):
+            continue
+        chk = None
+        for fn in (_gemini, _groq):
+            chk = fn(FARAK_CHECK.format(js=json.dumps(js, ensure_ascii=False), today=time.strftime("%B %Y")))
+            if chk:
+                break
+        if not chk or chk.get("reject") or len(chk.get("rows") or []) < 4:
+            continue
+        rows_ = [(clean_text(str(r.get("label", ""))), clean_text(str(r.get("a", ""))), clean_text(str(r.get("b", ""))))
+                 for r in chk["rows"] if isinstance(r, dict)]
+        rows_ = [r for r in rows_ if all(r)][:5]
+        if len(rows_) >= 4 and chk.get("a") and chk.get("b"):
+            return key, {"a": clean_text(chk["a"]), "b": clean_text(chk["b"]), "rows": rows_}
+    return None, None
+
+
+def farak_page(fk):
+    cv = _paper(W, H)
+    d = ImageDraw.Draw(cv)
+    cx, mw = (CX0 + CX1) / 2, CX1 - CX0
+    y = page_header(d, f"{fk['a']} vs {fk['b']}", "फ़र्क पहचानो", cx, mw, "Exam में यहीं फँसते हैं!  फ़र्क याद करो",
+                    size=70)
+    rows = fk["rows"]
+    c2 = CX0 + 230
+    c3 = c2 + (CX1 - c2) / 2
+    y += 20
+    for x0, x1, t, col in ((c2 - 6, c3 - 10, fk["a"], (30, 90, 200)), (c3 + 4, CX1, fk["b"], (205, 30, 45))):
+        d.rounded_rectangle((x0, y, x1, y + 80), radius=18, fill=col)
+        f, sz, ls = fit_lines(t, x1 - x0 - 20, 1, 48, 28)
+        d.text(((x0 + x1) / 2, y + 40), " ".join(ls[0]), font=f, fill=WHITE, anchor="mm")
+    y += 105
+    rh = (1520 - y) / len(rows)
+    for k, (lab, a, b) in enumerate(rows):
+        yy = y + k * rh
+        if k % 2 == 0:
+            d.rectangle((CX0, yy, CX1, yy + rh - 8), fill=(255, 246, 205))
+        fl, szl, ll = fit_lines(lab, 210, 2, 36, 26)
+        for j, ln in enumerate(ll[:2]):
+            d.text((CX0 + 10, yy + rh / 2 - 4 - (len(ll[:2]) - 1) * szl * 0.62 + j * szl * 1.25), " ".join(ln),
+                   font=fl, fill=PEN_RED, anchor="lm")
+        for x0, x1, t, col in ((c2, c3 - 10, a, PEN_BLUE), (c3 + 4, CX1, b, (160, 20, 35))):
+            f, sz, ls = fit_lines(t, x1 - x0 - 20, 2, 40, 26)
+            ty = yy + rh / 2 - 4 - (len(ls[:2]) - 1) * sz * 0.62
+            for j, ln in enumerate(ls[:2]):
+                d.text(((x0 + x1) / 2, ty + j * sz * 1.25), " ".join(ln), font=f, fill=col, anchor="mm")
+    d.line((c3 - 3, y - 10, c3 - 3, 1515), fill=(180, 180, 190), width=3)
+    page_footer(cv, d, 1597, "ऐसे और जोड़े चाहिए? कमेंट करो  •  दोस्तों को भेजो")
+    return cv
+
+
+def run_farak(bank, st, ep, args):
+    key, fk = pick_farak(bank, st)
+    if not fk:
+        print("Farak nahi bana -> list format")
+        return False
+    os.makedirs(OUTPUT_DIR, exist_ok=True)
+    out = os.path.join(OUTPUT_DIR, FINAL_VIDEO)
+    resolve_font()
+    static_loop_reel(farak_page(fk), out, seed=len(fk["rows"]))
+    lines = [f"🔍 फ़र्क पहचानो: {fk['a']} vs {fk['b']} - Exam में यहीं फँसते हैं!", ""]
+    lines += [f"• {lab}: {a} | {b}" for lab, a, b in fk["rows"]]
+    lines += ["", "💬 अगला कौन-सा जोड़ा चाहिए? कमेंट करो!", "📌 SAVE करो - exam से पहले 1 बार देखना",
+              f"⏱ {BRAND} - {BRAND_TAGLINE}", "", f"#gkquiz #gkpyq #sscgd #rrbntpc {SUBJ_TAGS.get(key[0], '#gk')}"]
+
+    def done():
+        st["farak_n"] = int(st.get("farak_n", 0)) + 1
+    return _one_page_post(st, ep, args, out, "\n".join(lines), "farak", done)
+
+
 # ---------- TRIPLE: "3 सवाल, 16 सेकंड" challenge (score comment + dost ko challenge = share) ----------
 
 TRI_DUR = 16.0                      # 120 BPM ke 8 bar; 3 sawal x 5.33s
@@ -6770,6 +7127,12 @@ def _fmt_of(caption, ptype):
     c = caption or ""
     if ptype == "CAROUSEL_ALBUM":
         return "carousel"
+    if "करंट अफेयर्स" in c:
+        return "current"
+    if "जाल" in c and "❌" in c:
+        return "trap"
+    if "फ़र्क पहचानो" in c:
+        return "farak"
     if "1 पेज में पूरी कहानी" in c:
         return "kahani_page"
     if "कहानी से याद" in c:
@@ -6921,6 +7284,11 @@ def main():
         if not cid:
             raise SystemExit("Carousel post nahi hua")
         return
+    for name, fn in (("current", run_current), ("trap", run_trap), ("farak", run_farak)):
+        if fmt == name:
+            if fn(bank, st, ep, args):
+                return
+            fmt = "list"
     if fmt == "trick":
         if run_trick(bank, st, ep, args):
             return

@@ -1,4 +1,4 @@
-name: Science PYQ Reel (din me 5 baar)
+name: Science PYQ Reel (din me 7 baar)
 
 on:
   # v2 (2026-10-23): GitHub ka schedule 45-90 min der se chalta tha -> ab "timer.yml" theek samay par isse
@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
     inputs:
       format:
-        description: "auto / mega / list / kahani / kahani_pages / kahani_short / trick / quiz"
+        description: "auto / mega / list / kahani / kahani_pages / kahani_short / current / trap / farak / trick / quiz"
         default: "auto"
       post_mode:
         description: "publish = Instagram par daalo, manual = sirf repo ke ready_reels/ me (jaanch ke liye)"
