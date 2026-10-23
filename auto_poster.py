@@ -1183,6 +1183,9 @@ def _fake_voice(text):
 
 USE_GEMINI_TTS = os.getenv("USE_GEMINI_TTS", "1") != "0"
 GEMINI_TTS_STYLE = "friendly, energetic Indian teacher, natural Hindi, brisk pace"
+STORY_TTS_STYLE = ("excited Hindi storyteller telling a gripping story to students: expressive, curious tone, "
+                   "dramatic pauses, emphasis on names, years and key words, brisk pace")
+_TTS_STYLE = [GEMINI_TTS_STYLE]          # kahani reel ke dauraan STORY_TTS_STYLE
 VOICE_SPEEDUP = float(os.getenv("VOICE_SPEEDUP", "1.06"))
 PREBUILT_VOICES = ["Kore", "Charon", "Sulafat", "Puck", "Aoede", "Achird"]
 _CACHE = {}
@@ -1304,18 +1307,20 @@ def _tts_bodies(model, lines, voice):
         script = " <long pause> ".join(lines)
         return [
             (gen_url, {"contents": [{"role": "user", "parts": [{"text": script,
-                                                                 "speech_metadata": {"style": GEMINI_TTS_STYLE}}]}],
+                                                                 "speech_metadata": {"style": _TTS_STYLE[0]}}]}],
                        "generationConfig": {"responseModalities": ["AUDIO"],
                                             "speechConfig": {"voiceConfig": {"voice": voice}}}}),
             (f"{base}/interactions", {
                 "model": model,
                 "input": [{"type": "user_input", "content": [{
                     "type": "text", "text": script,
-                    "annotations": [{"type": "speech_metadata", "style": GEMINI_TTS_STYLE}]}]}],
+                    "annotations": [{"type": "speech_metadata", "style": _TTS_STYLE[0]}]}]}],
                 "response_format": {"type": "audio"},
                 "generation_config": {"speech_config": [{"voice": voice}]}}),
         ]
     script = "\n\n".join(lines)
+    if _TTS_STYLE[0] is not GEMINI_TTS_STYLE:            # purane model: style bolkar batao (padha nahi jaata)
+        script = "Read this Hindi story aloud like an excited storyteller, with expression and emphasis:\n\n" + script
     return [(gen_url, {"contents": [{"parts": [{"text": script}]}],
                        "generationConfig": {"responseModalities": ["AUDIO"],
                                             "speechConfig": {"voiceConfig": {"prebuiltVoiceConfig":
@@ -3305,12 +3310,12 @@ def pick_format(ep):
     # GitHub kabhi ghanton der se chalata hai -> format samay se nahi, kaunsa schedule chala usse tay ho
     # 5 reel/din, beech me ~3 ghante -> ek reel doosri ke views na kaate (23 Oct: dono kahani roz)
     by_cron = {"15 1 * * *": "list", "15 5 * * *": "kahani_pages", "15 8 * * *": "trick",
-               "45 11 * * *": "kahani_page", "45 14 * * *": "mega"}
+               "45 11 * * *": "kahani_pages", "45 14 * * *": "mega"}
     cron = os.getenv("CRON_SLOT", "").strip()
     if cron in by_cron:
         return by_cron[cron]
     h = time.gmtime(time.time() + 19800).tm_hour
-    return ("list" if h < 10 else "kahani_pages" if h < 13 else "trick" if h < 16 else "kahani_page" if h < 19
+    return ("list" if h < 10 else "kahani_pages" if h < 13 else "trick" if h < 16 else "kahani_pages" if h < 19
             else "mega")
 
 
@@ -5392,7 +5397,7 @@ def build_kahani_pages(story, key):
 def kahani_speeches(story):
     """Har page par jo likha hai wahi bolna (cover / kahani / PYQ)."""
     hk = clean_text(story.get("hook") or "")
-    out = [f"{hk} पूरी कहानी सुनो, हमेशा याद रहेगा।" if hk else
+    out = [f"{hk} चलो, कहानी से समझते हैं... एक बार सुन लिया, तो कभी नहीं भूलोगे!" if hk else
            f"{clean_text(story['topic'])}. एक बार ध्यान से सुन लो, पूरी कहानी से हमेशा याद रहेगा।"]
     for sl in story["slides"]:
         out.append(" ".join(clean_text(b.get("text", "")) for b in (sl.get("blocks") or [])))
@@ -5407,11 +5412,14 @@ def build_kahani_reel(pages, out, speeches=None, rot=0):
     n = len(pages)
     voices = None
     if speeches and len(speeches) == n:
+        _TTS_STYLE[0] = STORY_TTS_STYLE
         try:
             voices = [speed_voice(v[0], 1.08)                     # kahani thodi tez: reel lambi na ho
                       for v in make_voices([{"segs": [(None, None, t)]} for t in speeches], rot)]
         except Exception as exc:
             print("  Kahani awaaz nahi bani:", str(exc)[:150])
+        finally:
+            _TTS_STYLE[0] = GEMINI_TTS_STYLE
     if voices:
         durs = [max(2.5, len(v) / SR + 0.4) for v in voices]
         durs[-1] = max(durs[-1], 4.0)                    # aakhri page (PYQ) padhne ka samay
@@ -5421,7 +5429,8 @@ def build_kahani_reel(pages, out, speeches=None, rot=0):
     dur = sum(durs)
     bg = Image.new("RGB", (W, H), (32, 26, 22))
     d = ImageDraw.Draw(bg)
-    d.text((W / 2, 150), "कहानी से याद करो", font=get_font(78), fill=(255, 220, 90), anchor="mm")
+    callout_sticker(d, W / 2, y=62)
+    d.text((W / 2, 160), "कहानी से याद करो", font=get_font(78), fill=(255, 220, 90), anchor="mm")
     d.text((W / 2, 235), f"{day_tag()}  •  {SERIES_NAME}", font=get_font(40), fill=WHITE, anchor="mm")
     sw = stopwatch_sprite(56, 0.0)
     bg.paste(sw, (int(W / 2 - 170), 1765), sw)
@@ -5430,6 +5439,7 @@ def build_kahani_reel(pages, out, speeches=None, rot=0):
     music = beat_music(dur, seed=n) * (0.16 if voices else 0.8)
     for k in range(1, n):
         add_at(music, sfx_whoosh(0.3, 0.3), starts[k] - 0.15)
+    add_at(music, sfx_thud(0.5), 0.03)
     if voices:
         for k, v in enumerate(voices):
             add_at(music, v.astype(np.float32), starts[k] + 0.3, 1.0)
@@ -5441,21 +5451,33 @@ def build_kahani_reel(pages, out, speeches=None, rot=0):
             k += 1
         return k, t - starts[k]
 
+    def push(pg, tt, d_):                             # page pe dheere-dheere andar jaata camera (editor wala)
+        z = 1 + 0.045 * ease_in_out(clamp(tt / max(1.0, d_)))
+        w2, h2 = int(pg.width / z), int(pg.height / z)
+        x0, y0 = (pg.width - w2) // 2, (pg.height - h2) // 3
+        return pg.crop((x0, y0, x0 + w2, y0 + h2)).resize(pg.size, Image.BILINEAR)
+
     def render(fi):
         t = fi / FPS
         k, tt = page_at(t)
         cv = bg.copy()
-        if k > 0 and tt < 0.45:                       # naya page daayein se aata hai
+        if k > 0 and tt < 0.45:                       # naya page daayein se aata hai (halka ghoom ke)
             p = ease_out_cubic(tt / 0.45)
-            cv.paste(pages[k - 1], (int(-W * 0.25 * p), py))
-            cv.paste(pages[k], (int(W * (1 - p)), py))
+            old = push(pages[k - 1], durs[k - 1], durs[k - 1])
+            cv.paste(old, (int(-W * 0.25 * p), py))
+            new = pages[k].rotate(4 * (1 - p), resample=Image.BICUBIC, expand=False, fillcolor=(32, 26, 22))
+            cv.paste(new, (int(W * (1 - p)), py))
         else:
-            cv.paste(pages[k], (0, py))
+            cv.paste(push(pages[k], tt, durs[k]), (0, py))
+        if k == 0 and t < PUNCH_T:
+            return punch_frame(cv, t)
         return cv
 
     def key(fi):
         k, tt = page_at(fi / FPS)
-        return (k, int(tt * FPS)) if (k > 0 and tt < 0.45) else (k, -1)
+        if k == 0 and fi / FPS < PUNCH_T:
+            return ("p", fi)
+        return (k, int(tt * FPS)) if (k > 0 and tt < 0.45) else (k, int(tt * 10))
 
     encode_frames(render, int(dur * FPS), music, out, key=key)
     print(f"KAHANI REEL TAIYAR: {out} ({dur:.0f}s)")
@@ -5983,7 +6005,7 @@ def run_trick(bank, st, ep, args):
 # Purana style wapas: TRICK_STYLE=anim | kahani hamesha purani: KAHANI_STYLE=pages | hamesha nayi: KAHANI_STYLE=page
 
 TRICK_STYLE = os.getenv("TRICK_STYLE", "card").strip().lower()       # card | anim (purana)
-KAHANI_STYLE = os.getenv("KAHANI_STYLE", "ab").strip().lower()       # ab (baari-baari) | page (nayi) | pages (purani)
+KAHANI_STYLE = os.getenv("KAHANI_STYLE", "pages").strip().lower()       # ab (baari-baari) | page (nayi) | pages (purani)
 CARD_DUR = 10.0                     # 7 PYQ jitna: padhte-padhte reel 2-3 baar loop
 KAHANI_PAGE_DUR = 12.0              # 1-page kahani, agar awaaz na bane (sirf music, 120 BPM ke 6 bar)
 KP_SWIPE = 0.35                     # boli ja rahi line pe peela marker itni der me khinchta hai

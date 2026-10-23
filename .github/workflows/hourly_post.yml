@@ -7,7 +7,7 @@ on:
     - cron: "15 1 * * *"     # subah ~7:00   -> 7 PYQ list
     - cron: "15 5 * * *"     # ~11:00        -> KAHANI purani (chitra page + awaaz) + carousel
     - cron: "15 8 * * *"     # dopahar ~2:00 -> TRICK card (bina awaaz)
-    - cron: "45 11 * * *"    # shaam ~5:30   -> KAHANI nayi (1 page + awaaz) + carousel
+    - cron: "45 11 * * *"    # shaam ~5:30   -> KAHANI (chitra page + kahani awaaz) + carousel
     - cron: "45 14 * * *"    # raat ~8:30    -> MEGA revision (sabse bada peak)
   workflow_dispatch:
     inputs:
