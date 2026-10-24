@@ -1,80 +1,30 @@
-FORMAT: current
+FORMAT: trap
   Gemini text models: gemini-flash-latest, gemini-3.8-flash, gemini-3.7-flash, gemini-3.6-flash
-  Gemini gemini-flash-latest: HTTP 429 (koshish 1)
-  Gemini gemini-flash-latest: HTTP 429 (koshish 2)
-  Gemini gemini-3.8-flash: HTTP 429 (koshish 1)
-  Gemini gemini-3.8-flash: HTTP 429 (koshish 2)
-  Gemini gemini-3.7-flash: HTTP 429 (koshish 1)
-  Gemini gemini-3.7-flash: HTTP 429 (koshish 2)
-  Gemini gemini-3.6-flash: HTTP 429 (koshish 1)
-  Gemini gemini-3.6-flash: HTTP 429 (koshish 2)
-  Current affairs: sirf 0 mile
-  Gemini gemini-flash-latest: HTTP 429 (koshish 1)
-  Gemini gemini-flash-latest: HTTP 429 (koshish 2)
-  Gemini gemini-3.8-flash: HTTP 429 (koshish 1)
-  Gemini gemini-3.8-flash: HTTP 429 (koshish 2)
-  Gemini gemini-flash-latest: HTTP 429 (koshish 1)
-  Gemini gemini-flash-latest: HTTP 429 (koshish 2)
-  Gemini gemini-3.8-flash fail (koshish 1): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
-  Gemini gemini-3.8-flash: HTTP 429 (koshish 2)
-  Gemini gemini-3.7-flash: HTTP 429 (koshish 1)
-  Gemini gemini-3.7-flash: HTTP 429 (koshish 2)
+  Gemini gemini-flash-latest: HTTP 503 (koshish 1)
+  Gemini gemini-flash-latest fail (koshish 2): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
+  Gemini gemini-3.8-flash: HTTP 503 (koshish 1)
+  Gemini gemini-3.8-flash fail (koshish 2): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
+  Gemini gemini-3.7-flash fail (koshish 1): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
+  Gemini gemini-3.7-flash fail (koshish 2): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
   Gemini gemini-3.6-flash: HTTP 503 (koshish 1)
-  Gemini gemini-flash-latest: HTTP 429 (koshish 1)
-  Gemini gemini-flash-latest: HTTP 429 (koshish 2)
-  Gemini gemini-3.8-flash: HTTP 429 (koshish 1)
-  Gemini gemini-3.8-flash: HTTP 429 (koshish 2)
-  Gemini gemini-3.7-flash: HTTP 429 (koshish 1)
-  Gemini gemini-3.7-flash: HTTP 429 (koshish 2)
-  Gemini gemini-flash-latest: HTTP 429 (koshish 1)
-  Gemini gemini-flash-latest: HTTP 429 (koshish 2)
-  Gemini gemini-3.8-flash: HTTP 429 (koshish 1)
-  Gemini gemini-3.8-flash: HTTP 429 (koshish 2)
-  Gemini gemini-3.7-flash: HTTP 429 (koshish 1)
-  Gemini gemini-3.7-flash: HTTP 429 (koshish 2)
-  Gemini gemini-flash-latest: HTTP 429 (koshish 1)
-  Gemini gemini-flash-latest: HTTP 429 (koshish 2)
-  Gemini gemini-3.8-flash: HTTP 429 (koshish 1)
-  Gemini gemini-3.8-flash: HTTP 429 (koshish 2)
-  Gemini gemini-3.7-flash: HTTP 429 (koshish 1)
-  Gemini gemini-3.7-flash: HTTP 429 (koshish 2)
-  Gemini gemini-3.6-flash: HTTP 503 (koshish 1)
-  Gemini gemini-3.6-flash: HTTP 503 (koshish 2)
-  Groq llama-3.3-70b-versatile: HTTP 404
-  Gemini gemini-flash-latest: HTTP 429 (koshish 1)
-  Gemini gemini-flash-latest: HTTP 429 (koshish 2)
-  Gemini gemini-3.8-flash: HTTP 429 (koshish 1)
-  Gemini gemini-3.8-flash: HTTP 429 (koshish 2)
-  Gemini gemini-3.7-flash: HTTP 429 (koshish 1)
-  Gemini gemini-3.7-flash: HTTP 429 (koshish 2)
-  Gemini gemini-3.6-flash: HTTP 503 (koshish 1)
-  Gemini gemini-flash-latest: HTTP 429 (koshish 1)
-  Gemini gemini-flash-latest: HTTP 429 (koshish 2)
-  Gemini gemini-3.8-flash: HTTP 429 (koshish 1)
-  Gemini gemini-3.8-flash: HTTP 429 (koshish 2)
-  Gemini gemini-3.7-flash: HTTP 429 (koshish 1)
-  Gemini gemini-3.7-flash: HTTP 429 (koshish 2)
-LIST REEL TAIYAR: generated_reels/science_pyq_reel.mp4 (10s)
+EK-PAGE REEL TAIYAR: generated_reels/science_pyq_reel.mp4 (4s loop)
 
 CAPTION:
-📚 पर्यावरण के 7 PYQ - RRB, SSC, Police, Patwari, Army, State Exams के लिए (Save करो)
+⚠️ Exam के 6 जाल - 90% लोग गलत करते हैं! (जीव विज्ञान)
 
-1. भारत में मणिकरण भूतापीय ऊर्जा संयंत्र कहाँ स्थित है? → हिमाचल प्रदेश
-2. उत्तराखंड में कितने राष्ट्रीय उद्यान हैं? → 6
-3. चंदोली राष्ट्रीय उद्यान किस राज्य में स्थित है? → महाराष्ट्र
-4. ताडोबा राष्ट्रीय उद्यान, भारत के किस राज्य में स्थित है? → महाराष्ट्र
-5. भारत के उस राज्य की पहचान करें जिसमें बांदीपुर राष्ट्रीय उद्यान स्थित है? → कर्नाटक
-6. मंजीरा मगरमच्छ वन्यजीव अभ्यारण्य कहाँ स्थित है? → तेलंगाना
-7. वन्य घुड़खर वन्यजीव अभ्यारण्य कहाँ स्थित है? → गुजरात
+1. भारत में DNA फिंगरप्रिंटिंग का जनक कौन है? ❌ सर एलेक जेफ्रीज ✅ लालजी सिंह
+2. जीवन अकार्बनिक पदार्थों से विकसित हुआ, किसने सुझाया? ❌ स्टेनली एल मिलर ✅ जेबीएस हल्दाने
+3. ऑक्सैलिक एसिड का प्राकृतिक स्रोत क्या है? ❌ इमली ✅ टमाटर
+4. मेंडेलियन कारक आमतौर पर क्या कहलाते हैं? ❌ डीएनए ✅ जीन
+5. 'ओरिजिन ऑफ स्पीशीज' पुस्तक किसने लिखी? ❌ जीन-बैप्टिस्ट डी लैमार्कâ ✅ चार्ल्स डार्विन
+6. नारियल की छाल किस ऊतक से बनती है? ❌ पैरेनकाइमा ✅ स्क्लेरेनकाइमा
 
-💬 कितने पहले से आते थे? कमेंट करो: 7/7?
-📤 Save करो + उस दोस्त को भेजो जो exam की तैयारी कर रहा है।
-पर्यावरण GK Questions | RRB NTPC, Group D, SSC GD, State Exam PYQ
+💬 तुम कितनों में फँसे? कमेंट करो!
+📤 उस दोस्त को भेजो जो इनमें गलती करता है
 ⏱ MinuteMe_GS - एक मिनट, एक PYQ - पक्का!
-📲 Free test / notes: WhatsApp 8989971379
 
-#gkquiz #rrbntpc #sscgd #gkpyq #environment
-  IG container: 17910181416568651
+#gkquiz #gkpyq #sscgd #rrbntpc #biology
+  IG container: 17910199677568651
   upload try 1: HTTP 200 {"success":true,"message":"Upload Successful."}
   IG processing: FINISHED
-INSTAGRAM PE POST HO GAYA: 18606243694064418
+INSTAGRAM PE POST HO GAYA: 18039687440849600
