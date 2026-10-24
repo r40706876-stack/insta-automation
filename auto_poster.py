@@ -959,7 +959,9 @@ def hook_line(q, ep):
     y = yrs[-1] if yrs else ""
     if n >= 2:
         return [f"ये सवाल {n} पेपर में आया!", f"{n} पेपर में आया ये सवाल!",
-                f"{n} बार पेपर में आ चुका!"][ep % 3]
+                f"{n} बार पेपर में आ चुका!",
+                f"कोई नहीं बताता - ये सवाल {n} पेपर में आया!",     # formula 3
+                f"ये मत छोड़ना! {n} पेपर में आ चुका!"][ep % 5]      # formula 2
     # 1 baar wala: sirf "paper me aaya" kamzor hook tha -> chunauti (sach hi, koi nakli % nahi)
     return [f"RRB {y} का सवाल - 3 सेकंड में बताओ!", f"Railway {y} में आया - आप कर पाओगे?",
             f"Exam में पूछा गया - जवाब दो!"][ep % 3].replace("  ", " ")
@@ -3748,13 +3750,24 @@ def upcoming_year():
 def exam_hook(data):
     n, ep = data["times_asked"], data["episode"]
     if n >= 2:
-        return [f"{n} बार आ चुका - फिर आ सकता है!", "बार-बार पूछा जाने वाला सवाल!",
-                "Repeat सवाल - इस बार मत छोड़ना!"][ep % 3]
+        pool = [f"{n} बार आ चुका - फिर आ सकता है!", "बार-बार पूछा जाने वाला सवाल!",
+                "Repeat सवाल - इस बार मत छोड़ना!",
+                f"कोई नहीं बताता - ये {n} बार आ चुका!",                          # formula 3
+                f"{AUD_SHORT[ep % len(AUD_SHORT)]} वालों, ये {n} बार पूछा गया!"]    # formula 14
+        return pool[ep % len(pool)]
     aud = AUD_SHORT[ep % len(AUD_SHORT)]
     pool = [f"{aud} {upcoming_year()} में आ सकता है!", f"{aud} की तैयारी है? ये ज़रूर देखो!",
             "Exam से पहले ये ज़रूर देखो!", "ये गलत किया तो नंबर कटेंगे!", "Selection वाले इसे नहीं छोड़ते!",
-            "10 सेकंड दो - 1 नंबर पक्का!", "अगले Exam का Important सवाल!"]
+            "10 सेकंड दो - 1 नंबर पक्का!", "अगले Exam का Important सवाल!"] + [h for _, h in exam_hook_extra(aud)]
     return pool[ep % len(pool)]
+
+
+def exam_hook_extra(aud):
+    """instagram-agent-skill ke Hindi hook formulas (formula id, line) - sirf sach wali baatein, koi nakli % nahi."""
+    return [(14, f"{aud} वालों, ये सवाल मत छोड़ना!"),        # Seedhi pukaar
+            (20, "पूरी किताब नहीं, बस ये सवाल पक्का करो!"),     # Ijaazat
+            (2, "रटना बंद करो - ये सवाल समझ लो!"),              # Ulta hukm
+            (10, "GS में नंबर कटते हैं? ये 10 सेकंड देखो!")]   # Agar aisa hai
 
 
 # ---------- chitron wale options (Cloudflare) ----------
@@ -4969,7 +4982,7 @@ def mega_caption(subject, items):
         f"{hi} ({en}) GK | RRB NTPC, Group D, SSC GD, CGL, MTS, Police, Patwari, State Exam PYQ",
         f"⏱ {BRAND} - {BRAND_TAGLINE}",
         "",
-        f"#gk #gkquiz #gkpyq #sscgd #rrbntpc #rrbgroupd #policebharti {SUBJ_TAGS.get(subject, '#gk')}",
+        f"#gkquiz #gkpyq #sscgd #rrbntpc {SUBJ_TAGS.get(subject, '#gk')}",   # Instagram: max 5 hashtag
     ])
 
 
