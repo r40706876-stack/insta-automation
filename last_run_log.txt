@@ -1,32 +1,38 @@
-FORMAT: mega
+FORMAT: trick
   Gemini text models: gemini-flash-latest, gemini-3.8-flash, gemini-3.7-flash, gemini-3.6-flash
-  Gemini gemini-flash-latest: HTTP 503 (koshish 1) {   "error": {     "code": 503,     "message": "This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later
+  Gemini gemini-flash-latest fail (koshish 1): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
   Gemini gemini-flash-latest: HTTP 429 (koshish 2) 
   Gemini gemini-3.8-flash: HTTP 503 (koshish 1) {   "error": {     "code": 503,     "message": "This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later
-  Gemini gemini-3.8-flash: HTTP 503 (koshish 2) 
+  Gemini gemini-3.8-flash: HTTP 429 (koshish 2) 
   Gemini gemini-3.7-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
   Gemini gemini-3.7-flash: HTTP 429 (koshish 2) 
-  Gemini gemini-3.6-flash fail (koshish 1): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
-  Gemini gemini-3.6-flash fail (koshish 2): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
-  Groq llama-3.3-70b-versatile: HTTP 404
-  Groq openai/gpt-oss-120b: HTTP 400
-  Groq llama-3.1-8b-instant: HTTP 404
-  Mega awaaz: gemini-3.8-flash-lite-tts / hi-in-tutor-1
-MEGA REEL TAIYAR: generated_reels/science_pyq_reel.mp4 (16.8s, 3 page, 60 sawal)
+  Gemini gemini-flash-latest: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-flash-latest: HTTP 429 (koshish 2) 
+  Gemini gemini-3.8-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-3.8-flash: HTTP 429 (koshish 2) 
+  Gemini gemini-3.7-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-3.7-flash: HTTP 429 (koshish 2) 
+TRICK: प्राचीन ग्रंथ और उनके लेखक कैसे याद रखें?  (History / प्राचीनकालीन साहित्य एवं साहित्यकार (Anc)
+Awaaz: Gemini ek baar me (gemini-3.1-flash-tts-preview / Sulafat), 25.8s, 6 line
+TRICK REEL TAIYAR: generated_reels/science_pyq_reel.mp4 (28s)
 
 CAPTION:
-📚 "जीव विज्ञान (Biology)" के 60 सबसे महत्वपूर्ण प्रश्न - सभी सरकारी परीक्षाओं के लिए
+🧠 प्राचीन ग्रंथ और उनके लेखक कैसे याद रखें? - ट्रिक से 1 बार में याद!
 
-⏸️ हर पेज पर रोककर पढ़ो (स्क्रीन दबाकर रखो)
-📌 अभी SAVE करो - exam से पहले 1 बार ज़रूर revise करना
-📤 उस दोस्त को भेजो जो SSC / Railway / Police की तैयारी कर रहा है
-💬 कितने पहले से आते थे? कमेंट करो!
+✍️ ट्रिक: काली रघु, विशाख मुद्रा, भरत नाट्य
+• काली रघु = कालिदास - रघुवंशम
+• विशाख मुद्रा = विशाखदत्त - मुद्राराक्षस
+• भरत नाट्य = भरत मुनि - नाट्यशास्त्र
 
-जीव विज्ञान (Biology) GK | RRB NTPC, Group D, SSC GD, CGL, MTS, Police, Patwari, State Exam PYQ
+📝 Exam में पूछा गया: निम्नलिखित में से किसने संस्कृत नाटक 'मुद्राराक्षस' लिखा था? → विशाखदत्त
+
+💬 अगली ट्रिक किस टॉपिक की चाहिए? कमेंट करो!
+📤 Save करो + उस दोस्त को भेजो जो ये हमेशा भूलता है
+🎯 Police भर्ती + हर GS exam के लिए
 ⏱ MinuteMe_GS - एक मिनट, एक PYQ - पक्का!
 
-#gk #gkquiz #gkpyq #sscgd #rrbntpc #rrbgroupd #policebharti #biology
-  IG container: 17910257286568651
+#gktricks #gkinhindi #gkpyq #policebharti #upsi #history
+  IG container: 17910284280568651
   upload try 1: HTTP 200 {"success":true,"message":"Upload Successful."}
   IG processing: FINISHED
-INSTAGRAM PE POST HO GAYA: 18120298352051336
+INSTAGRAM PE POST HO GAYA: 18424737823153440

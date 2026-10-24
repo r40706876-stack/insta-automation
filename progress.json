@@ -1,6 +1,6 @@
 {
  "next_seq": 110,
- "episode": 133,
+ "episode": 134,
  "posted": [
   "684d76bcbc",
   "6bb20b4a07",
@@ -360,10 +360,11 @@
   "75097dc3b3": "मध्य प्रदेश में वर्तमान में 11 (या 12) राष्ट्रीय उद्यान हैं (कूणो राष्ट्रीय उद्यान 2018 में शामिल), इसलिए 10 उत्तर पुराना/गलत है।"
  },
  "last": {
-  "seq": 3903,
-  "id": "14a42713c5",
-  "time": "2026-10-24 14:50",
-  "format": "mega"
+  "seq": 1132,
+  "id": "88824f7a59",
+  "time": "2026-10-24 17:05",
+  "format": "trick",
+  "topic": "प्राचीन ग्रंथ और उनके लेखक कैसे याद रखें?"
  },
  "carousel_queue": [
   {
@@ -1385,9 +1386,10 @@
   "विद्युत (Electricity)|प्रतिरोध (Resistance)",
   "भारत में परिवहन (Transport in India)|थल परिवहन (Land Transport)",
   "नदी घाटी परियोजनाएँ (River Valley Projects)|",
-  "राज भाषा (Official Language)|"
+  "राज भाषा (Official Language)|",
+  "प्राचीनकालीन साहित्य एवं साहित्यकार (Ancient Literature and Litterateur)|"
  ],
- "trick_n": 3,
+ "trick_n": 4,
  "trap_used": [
   "de9e07d173",
   "404eed533c",
