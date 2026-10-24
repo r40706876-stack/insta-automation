@@ -1,30 +1,24 @@
-FORMAT: trap
+FORMAT: current
   Gemini text models: gemini-flash-latest, gemini-3.8-flash, gemini-3.7-flash, gemini-3.6-flash
-  Gemini gemini-flash-latest: HTTP 503 (koshish 1)
-  Gemini gemini-flash-latest fail (koshish 2): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
-  Gemini gemini-3.8-flash: HTTP 503 (koshish 1)
-  Gemini gemini-3.8-flash fail (koshish 2): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
-  Gemini gemini-3.7-flash fail (koshish 1): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
-  Gemini gemini-3.7-flash fail (koshish 2): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
-  Gemini gemini-3.6-flash: HTTP 503 (koshish 1)
 EK-PAGE REEL TAIYAR: generated_reels/science_pyq_reel.mp4 (4s loop)
 
 CAPTION:
-⚠️ Exam के 6 जाल - 90% लोग गलत करते हैं! (जीव विज्ञान)
+📰 अक्टूबर 2026 के 7 करंट अफेयर्स - SSC, Railway, Police, State Exams (Save करो)
 
-1. भारत में DNA फिंगरप्रिंटिंग का जनक कौन है? ❌ सर एलेक जेफ्रीज ✅ लालजी सिंह
-2. जीवन अकार्बनिक पदार्थों से विकसित हुआ, किसने सुझाया? ❌ स्टेनली एल मिलर ✅ जेबीएस हल्दाने
-3. ऑक्सैलिक एसिड का प्राकृतिक स्रोत क्या है? ❌ इमली ✅ टमाटर
-4. मेंडेलियन कारक आमतौर पर क्या कहलाते हैं? ❌ डीएनए ✅ जीन
-5. 'ओरिजिन ऑफ स्पीशीज' पुस्तक किसने लिखी? ❌ जीन-बैप्टिस्ट डी लैमार्कâ ✅ चार्ल्स डार्विन
-6. नारियल की छाल किस ऊतक से बनती है? ❌ पैरेनकाइमा ✅ स्क्लेरेनकाइमा
+1. ISRO NavIC प्रणाली बहाल करने के लिए कौन सा उपग्रह लॉन्च करेगा? → NVS-03
+2. भारतीय सेना का नया भूमि युद्ध सिद्धांत किसने जारी किया? → राजनाथ सिंह
+3. IMF ने 2026-27 के लिए भारत की वृद्धि दर कितनी अनुमानित की? → 7%
+4. कौन सी रोजगार योजना सक्रिय रूप से लागू की जा रही है? → प्रधानमंत्री विकसित भारत रोजगार योजना
+5. एशियाई पैरा खेलों 2026 में भारत ने कितने पदक जीते? → 114 पदक
+6. ONGC के नए अध्यक्ष के रूप में किसे नियुक्त किया गया? → सुनील कुमार
+7. कौन सा राज्य पहला रक्षा एक्सपो आयोजित करेगा? → तेलंगाना
 
-💬 तुम कितनों में फँसे? कमेंट करो!
-📤 उस दोस्त को भेजो जो इनमें गलती करता है
+💬 कितने पता थे? कमेंट करो: 7/7?
+📤 उस दोस्त को भेजो जो करंट अफेयर्स में कमज़ोर है!
 ⏱ MinuteMe_GS - एक मिनट, एक PYQ - पक्का!
 
-#gkquiz #gkpyq #sscgd #rrbntpc #biology
-  IG container: 17910199677568651
+#currentaffairs #currentaffairs2026 #gkquiz #sscgd #rrbntpc
+  IG container: 17910202287568651
   upload try 1: HTTP 200 {"success":true,"message":"Upload Successful."}
   IG processing: FINISHED
-INSTAGRAM PE POST HO GAYA: 18039687440849600
+INSTAGRAM PE POST HO GAYA: 18100538435562269
