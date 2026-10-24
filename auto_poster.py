@@ -762,14 +762,18 @@ def _gemini_call(prompt, search=False):
         body["tools"] = [{"google_search": {}}]
     else:
         body["generationConfig"]["responseMimeType"] = "application/json"
-    for model in gemini_text_models():
+    models = gemini_text_models()
+    if search:          # free tier me search sirf kuch models pe (naye wale 429 dete hain) -> 2.5 pehle
+        models = ["gemini-2.5-flash", "gemini-2.5-flash-lite"] + [m for m in models if "2.5" not in m]
+    for model in models:
         for attempt in range(2):
             try:
                 r = requests.post(
                     f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent",
                     params={"key": GEMINI_API_KEY}, json=body, timeout=(15, 75))
                 if r.status_code in (429, 500, 503, 504):
-                    print(f"  Gemini {model}: HTTP {r.status_code} (koshish {attempt + 1})")
+                    print(f"  Gemini {model}: HTTP {r.status_code} (koshish {attempt + 1})",
+                          (r.text[:160].replace("\n", " ") if attempt == 0 else ""))
                     time.sleep(6 * (attempt + 1))
                     continue
                 if r.status_code != 200:
@@ -6829,6 +6833,8 @@ def pick_trap(bank, st):
             w = str((e or {}).get("wrong", "")).strip().lower()[:1]
             if not q or w not in q["options"] or w == q["answer"]:
                 continue
+            if _MEGA_JUNK.search(clean_text(str(q["options"][w])) + " " + clean_text(str(q["options"][q["answer"]]))):
+                continue                                  # toota akshar (jaise 'लैमार्कâ') -> chhodo
             qq = clean_text(e.get("q") or q["question"])
             if len(qq.split()) > 12:
                 qq = clean_text(q["question"])
