@@ -1,35 +1,34 @@
-FORMAT: farak
+FORMAT: kahani_pages
   Gemini text models: gemini-flash-latest, gemini-3.8-flash, gemini-3.7-flash, gemini-3.6-flash
-  Gemini gemini-flash-latest fail (koshish 1): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
-  Gemini gemini-flash-latest fail (koshish 2): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
-  Gemini gemini-3.8-flash fail (koshish 1): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
-  Gemini gemini-3.8-flash fail (koshish 2): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
-  Gemini gemini-3.7-flash: HTTP 503 (koshish 1) {   "error": {     "code": 503,     "message": "This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later
-  Gemini gemini-3.7-flash: HTTP 503 (koshish 2) 
-  Gemini gemini-3.6-flash: HTTP 503 (koshish 1) {   "error": {     "code": 503,     "message": "This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later
   Gemini gemini-flash-latest: HTTP 503 (koshish 1) {   "error": {     "code": 503,     "message": "This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later
-  Gemini gemini-flash-latest fail (koshish 2): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
+  Gemini gemini-flash-latest: HTTP 503 (koshish 2) 
   Gemini gemini-3.8-flash: HTTP 503 (koshish 1) {   "error": {     "code": 503,     "message": "This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later
-  Gemini gemini-3.8-flash fail (koshish 2): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
+  Gemini gemini-3.8-flash: HTTP 503 (koshish 2) 
+  Gemini gemini-3.7-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-3.7-flash: HTTP 429 (koshish 2) 
+  Gemini gemini-flash-latest: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-flash-latest: HTTP 429 (koshish 2) 
+  Gemini gemini-3.8-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-3.8-flash: HTTP 429 (koshish 2) 
   Gemini gemini-3.7-flash fail (koshish 1): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
-  Gemini gemini-3.7-flash: HTTP 503 (koshish 2) 
-EK-PAGE REEL TAIYAR: generated_reels/science_pyq_reel.mp4 (4s loop)
-
-CAPTION:
-🔍 फ़र्क पहचानो: जाइलम vs फ्लोएम - Exam में यहीं फँसते हैं!
-
-• मुख्य कार्य: जल और खनिज लवणों का संवहन | भोजन (पोषण) का संवहन
-• संवहन दिशा: केवल ऊपर की ओर (एकदिशीय) | ऊपर और नीचे दोनों ओर (द्विदिशीय)
-• कोशिका प्रकृति: मुख्य रूप से मृत | मुख्य रूप से जीवित
-• मुख्य घटक: वाहिकाएं और वाहिनीकाएं | चालनी नलिकाएं और सह-कोशिकाएं
-• यांत्रिक सहायता: पौधे को अधिक मजबूती प्रदान करता है | कम मजबूती प्रदान करता है
-
-💬 अगला कौन-सा जोड़ा चाहिए? कमेंट करो!
-📌 SAVE करो - exam से पहले 1 बार देखना
-⏱ MinuteMe_GS - एक मिनट, एक PYQ - पक्का!
-
-#gkquiz #gkpyq #sscgd #rrbntpc #biology
-  IG container: 17910216012568651
-  upload try 1: HTTP 200 {"success":true,"message":"Upload Successful."}
-  IG processing: FINISHED
-INSTAGRAM PE POST HO GAYA: 17965983789232250
+  Gemini gemini-3.7-flash: HTTP 429 (koshish 2) 
+  Gemini gemini-3.6-flash: HTTP 503 (koshish 1) {   "error": {     "code": 503,     "message": "This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later
+  Gemini gemini-3.6-flash: HTTP 503 (koshish 2) 
+  Groq llama-3.3-70b-versatile: HTTP 404
+KAHANI: भारत की अनोखी यात्रा  (Geography / भारत में परिवहन (Transport in India))
+  Kahani: 9 page, 15 chitra bane
+  KAHANI REEL: purana chitra-page + awaaz
+Awaaz: Gemini TTS ek baar me (gemini-3.8-flash-lite-tts / hi-in-tutor-1)
+Traceback (most recent call last):
+  File "/home/runner/work/insta-automation/insta-automation/auto_poster.py", line 7422, in <module>
+    main()
+  File "/home/runner/work/insta-automation/insta-automation/auto_poster.py", line 7321, in main
+    if run_kahani(bank, st, ep, args):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/insta-automation/insta-automation/auto_poster.py", line 5756, in run_kahani
+    build_kahani_reel(pages, out, kahani_speeches(story), ep)
+  File "/home/runner/work/insta-automation/insta-automation/auto_poster.py", line 5524, in build_kahani_reel
+    b.paste(paper.crop(box), box[:2])
+  File "/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/PIL/Image.py", line 1935, in paste
+    self.im.paste(source, box)
+TypeError: 'float' object cannot be interpreted as an integer
