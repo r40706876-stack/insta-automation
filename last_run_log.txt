@@ -1,78 +1,67 @@
-FORMAT: kahani_short
-  Gemini gemini-flash-latest: HTTP 503
-  Gemini gemini-flash-latest fail: HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeout=90)
-KAHANI: भारत की हवाई यात्रा  (Geography / भारत में परिवहन (Transport in India))
-  Cloudflare flux-1-schnell: 429 {"errors":[{"message":"AiError: AiError: you have used up your daily free allocation of 10,000 neurons, please upgrade t
-  Cloudflare stable-diffusion-xl-lightning: 429 {"errors":[{"message":"AiError: AiError: you have used up your daily free allocation of 10,000 neurons, please upgrade t
-  Cloudflare flux-1-schnell: 429 {"errors":[{"message":"AiError: AiError: you have used up your daily free allocation of 10,000 neurons, please upgrade t
-  Cloudflare stable-diffusion-xl-lightning: 429 {"errors":[{"message":"AiError: AiError: you have used up your daily free allocation of 10,000 neurons, please upgrade t
-  Cloudflare flux-1-schnell: 429 {"errors":[{"message":"AiError: AiError: you have used up your daily free allocation of 10,000 neurons, please upgrade t
-  Cloudflare stable-diffusion-xl-lightning: 429 {"errors":[{"message":"AiError: AiError: you have used up your daily free allocation of 10,000 neurons, please upgrade t
-  Cloudflare flux-1-schnell: 429 {"errors":[{"message":"AiError: AiError: you have used up your daily free allocation of 10,000 neurons, please upgrade t
-  Cloudflare stable-diffusion-xl-lightning: 429 {"errors":[{"message":"AiError: AiError: you have used up your daily free allocation of 10,000 neurons, please upgrade t
-  Cloudflare flux-1-schnell: 429 {"errors":[{"message":"AiError: AiError: you have used up your daily free allocation of 10,000 neurons, please upgrade t
-  Cloudflare stable-diffusion-xl-lightning: 429 {"errors":[{"message":"AiError: AiError: you have used up your daily free allocation of 10,000 neurons, please upgrade t
-  Cloudflare flux-1-schnell: 429 {"errors":[{"message":"AiError: AiError: you have used up your daily free allocation of 10,000 neurons, please upgrade t
-  Cloudflare stable-diffusion-xl-lightning: 429 {"errors":[{"message":"AiError: AiError: you have used up your daily free allocation of 10,000 neurons, please upgrade t
-  Cloudflare flux-1-schnell: 429 {"errors":[{"message":"AiError: AiError: you have used up your daily free allocation of 10,000 neurons, please upgrade t
-  Cloudflare stable-diffusion-xl-lightning: 429 {"errors":[{"message":"AiError: AiError: you have used up your daily free allocation of 10,000 neurons, please upgrade t
-  Cloudflare flux-1-schnell: 429 {"errors":[{"message":"AiError: AiError: you have used up your daily free allocation of 10,000 neurons, please upgrade t
-  Cloudflare stable-diffusion-xl-lightning: 429 {"errors":[{"message":"AiError: AiError: you have used up your daily free allocation of 10,000 neurons, please upgrade t
-  Cloudflare flux-1-schnell: 429 {"errors":[{"message":"AiError: AiError: you have used up your daily free allocation of 10,000 neurons, please upgrade t
-  Cloudflare stable-diffusion-xl-lightning: 429 {"errors":[{"message":"AiError: AiError: you have used up your daily free allocation of 10,000 neurons, please upgrade t
-  Cloudflare flux-1-schnell: 429 {"errors":[{"message":"AiError: AiError: you have used up your daily free allocation of 10,000 neurons, please upgrade t
-  Cloudflare stable-diffusion-xl-lightning: 429 {"errors":[{"message":"AiError: AiError: you have used up your daily free allocation of 10,000 neurons, please upgrade t
-  Cloudflare flux-1-schnell: 429 {"errors":[{"message":"AiError: AiError: you have used up your daily free allocation of 10,000 neurons, please upgrade t
-  Cloudflare stable-diffusion-xl-lightning: 429 {"errors":[{"message":"AiError: AiError: you have used up your daily free allocation of 10,000 neurons, please upgrade t
-  Kahani: 7 page, 0 chitra bane
-KAHANI ROKI: sirf 0/11 chitra bane (Cloudflare quota?) -> list format
-  Gemini gemini-flash-latest: HTTP 429
-  Gemini gemini-flash-latest fail: HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeout=90)
-  Gemini gemini-2.5-flash: HTTP 429
-  Gemini gemini-2.5-flash-lite: HTTP 404
-  Gemini gemini-2.0-flash: HTTP 404
+FORMAT: list
+  Gemini text models: gemini-flash-latest, gemini-3.8-flash, gemini-3.7-flash, gemini-3.6-flash
+  Gemini gemini-flash-latest: HTTP 429 (koshish 1)
+  Gemini gemini-flash-latest fail (koshish 2): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
+  Gemini gemini-3.8-flash: HTTP 429 (koshish 1)
+  Gemini gemini-3.8-flash: HTTP 429 (koshish 2)
+  Gemini gemini-3.7-flash fail (koshish 1): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
+  Gemini gemini-3.7-flash fail (koshish 2): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
+  Gemini gemini-flash-latest: HTTP 429 (koshish 1)
+  Gemini gemini-flash-latest fail (koshish 2): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
+  Gemini gemini-3.8-flash: HTTP 429 (koshish 1)
+  Gemini gemini-3.8-flash: HTTP 429 (koshish 2)
+  Gemini gemini-3.7-flash: HTTP 429 (koshish 1)
+  Gemini gemini-3.7-flash: HTTP 429 (koshish 2)
+  Gemini gemini-flash-latest: HTTP 429 (koshish 1)
+  Gemini gemini-flash-latest: HTTP 429 (koshish 2)
+  Gemini gemini-3.8-flash: HTTP 429 (koshish 1)
+  Gemini gemini-3.8-flash: HTTP 429 (koshish 2)
+  Gemini gemini-3.7-flash: HTTP 429 (koshish 1)
+  Gemini gemini-3.7-flash: HTTP 429 (koshish 2)
+  Gemini gemini-3.6-flash: HTTP 503 (koshish 1)
+  Gemini gemini-flash-latest: HTTP 429 (koshish 1)
+  Gemini gemini-flash-latest: HTTP 429 (koshish 2)
+  Gemini gemini-3.8-flash: HTTP 429 (koshish 1)
+  Gemini gemini-3.8-flash: HTTP 429 (koshish 2)
+  Gemini gemini-3.7-flash: HTTP 429 (koshish 1)
+  Gemini gemini-3.7-flash: HTTP 429 (koshish 2)
+  Gemini gemini-3.6-flash: HTTP 503 (koshish 1)
+  Gemini gemini-3.6-flash: HTTP 503 (koshish 2)
   Groq llama-3.3-70b-versatile: HTTP 404
-  Gemini gemini-flash-latest: HTTP 429
-  Gemini gemini-2.5-flash: HTTP 429
-  Gemini gemini-2.5-flash-lite: HTTP 404
-  Gemini gemini-2.0-flash: HTTP 404
-  Groq llama-3.3-70b-versatile: HTTP 404
-  Gemini gemini-flash-latest: HTTP 429
-  Gemini gemini-2.5-flash: HTTP 429
-  Gemini gemini-2.5-flash-lite: HTTP 404
-  Gemini gemini-2.0-flash: HTTP 404
-  Groq llama-3.3-70b-versatile: HTTP 404
-  Gemini gemini-flash-latest: HTTP 429
-  Gemini gemini-2.5-flash: HTTP 429
-  Gemini gemini-2.5-flash-lite: HTTP 404
-  Gemini gemini-2.0-flash: HTTP 404
-  Groq llama-3.3-70b-versatile: HTTP 404
-  Gemini gemini-flash-latest: HTTP 503
-  Gemini gemini-2.5-flash: HTTP 429
-  Gemini gemini-2.5-flash-lite: HTTP 404
-  Gemini gemini-2.0-flash: HTTP 404
-  Groq llama-3.3-70b-versatile: HTTP 404
-  Groq openai/gpt-oss-120b: HTTP 429
-  Groq llama-3.1-8b-instant: HTTP 404
-  Gemini gemini-flash-latest: HTTP 429
+  Gemini gemini-flash-latest: HTTP 429 (koshish 1)
+  Gemini gemini-flash-latest: HTTP 429 (koshish 2)
+  Gemini gemini-3.8-flash: HTTP 429 (koshish 1)
+  Gemini gemini-3.8-flash: HTTP 429 (koshish 2)
+  Gemini gemini-3.7-flash: HTTP 429 (koshish 1)
+  Gemini gemini-3.7-flash: HTTP 429 (koshish 2)
+  Gemini gemini-3.6-flash: HTTP 503 (koshish 1)
+  Gemini gemini-flash-latest: HTTP 429 (koshish 1)
+  Gemini gemini-flash-latest: HTTP 429 (koshish 2)
+  Gemini gemini-3.8-flash: HTTP 429 (koshish 1)
+  Gemini gemini-3.8-flash: HTTP 429 (koshish 2)
+  Gemini gemini-3.7-flash: HTTP 429 (koshish 1)
+  Gemini gemini-3.7-flash: HTTP 429 (koshish 2)
 LIST REEL TAIYAR: generated_reels/science_pyq_reel.mp4 (10s)
 
 CAPTION:
-📚 सामान्य ज्ञान के 7 PYQ - RRB, SSC, Police, Patwari, Army, State Exams के लिए (Save करो)
+📚 भूगोल के 7 PYQ - RRB, SSC, Police, Patwari, Army, State Exams के लिए (Save करो)
 
-1. वार्षिक नौका दौड़ महोत्सव किस राज्य में आयोजित किया जाता है? → केरल
-2. सांस्कृतिक उत्सव 'त्रिशूर पुरम्' किस राज्य में मनाया जाता है? → केरल
-3. सामाजिक त्यौहार 'नुआखाई' भारत के किस राज्य से सम्बन्धित है? → ओडिशा
-4. सिंधु दर्शन उत्सव भारत के किस भाग में मनाया जाता है? → लद्दाख
-5. चलो लोकू (Chalo Loku) उत्सव किस राज्य में मनाया जाता है? → अरुणाचल प्रदेश
-6. 2021 में बीबीसी इंडियन स्पोट्सवुमन ऑफ o ईयर अवार्ड का तीसरा संस्करण किसने जीता? → मीराबाई चानू
-7. इंडियन प्रीमियर लीग (आईपीएल) 2022 का फाइनल मैच कहां खेला गया था? → नरेंद्र मोदी स्टेडियम, अहमदाबाद
+1. भारत का कौन सा राज्य चावल का अग्रणी उत्पादक है? → पश्चिम बंगाल
+2. भारत का कौन सा राज्य जूट का अग्रणी उत्पादक है? → पश्चिम बंगाल
+3. भारत का कौन सा राज्य ज्वार का सबसे बड़ा उत्पादक है? → महाराष्ट्र
+4. भारत का कौन सा राज्य रबर का अग्रणी उत्पादक है? → केरल
+5. भारत का कौन-सा राज्य कपास का अग्रणी उत्पादक है? → महाराष्ट्र
+6. भारत का कौन-सा राज्य गन्ने का अग्रणी उत्पादक है? → उत्तर प्रदेश
+7. भारत का कौन-सा राज्य गेहूँ का अग्रणी उत्पादक है? → उत्तर-प्रदेश
 
 💬 कितने पहले से आते थे? कमेंट करो: 7/7?
 📤 Save करो + उस दोस्त को भेजो जो exam की तैयारी कर रहा है।
-GK GK Questions | RRB NTPC, Group D, SSC GD, State Exam PYQ
+भूगोल GK Questions | RRB NTPC, Group D, SSC GD, State Exam PYQ
 ⏱ MinuteMe_GS - एक मिनट, एक PYQ - पक्का!
 📲 Free test / notes: WhatsApp 8989971379
 
-#gkquiz #rrbntpc #sscgd #gkpyq #gk
-MANUAL MODE: reel ready_reels/ me rakhi (Instagram pe post nahi hui): reel_0127.mp4
+#gkquiz #rrbntpc #sscgd #gkpyq #geography
+  IG container: 17910156534568651
+  upload try 1: HTTP 200 {"success":true,"message":"Upload Successful."}
+  IG processing: FINISHED
+INSTAGRAM PE POST HO GAYA: 18117248371823332
