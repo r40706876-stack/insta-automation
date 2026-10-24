@@ -1,13 +1,27 @@
-FORMAT: list
+FORMAT: current
   Gemini text models: gemini-flash-latest, gemini-3.8-flash, gemini-3.7-flash, gemini-3.6-flash
   Gemini gemini-flash-latest: HTTP 429 (koshish 1)
-  Gemini gemini-flash-latest fail (koshish 2): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
+  Gemini gemini-flash-latest: HTTP 429 (koshish 2)
   Gemini gemini-3.8-flash: HTTP 429 (koshish 1)
   Gemini gemini-3.8-flash: HTTP 429 (koshish 2)
-  Gemini gemini-3.7-flash fail (koshish 1): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
-  Gemini gemini-3.7-flash fail (koshish 2): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
+  Gemini gemini-3.7-flash: HTTP 429 (koshish 1)
+  Gemini gemini-3.7-flash: HTTP 429 (koshish 2)
+  Gemini gemini-3.6-flash: HTTP 429 (koshish 1)
+  Gemini gemini-3.6-flash: HTTP 429 (koshish 2)
+  Current affairs: sirf 0 mile
   Gemini gemini-flash-latest: HTTP 429 (koshish 1)
-  Gemini gemini-flash-latest fail (koshish 2): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
+  Gemini gemini-flash-latest: HTTP 429 (koshish 2)
+  Gemini gemini-3.8-flash: HTTP 429 (koshish 1)
+  Gemini gemini-3.8-flash: HTTP 429 (koshish 2)
+  Gemini gemini-flash-latest: HTTP 429 (koshish 1)
+  Gemini gemini-flash-latest: HTTP 429 (koshish 2)
+  Gemini gemini-3.8-flash fail (koshish 1): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
+  Gemini gemini-3.8-flash: HTTP 429 (koshish 2)
+  Gemini gemini-3.7-flash: HTTP 429 (koshish 1)
+  Gemini gemini-3.7-flash: HTTP 429 (koshish 2)
+  Gemini gemini-3.6-flash: HTTP 503 (koshish 1)
+  Gemini gemini-flash-latest: HTTP 429 (koshish 1)
+  Gemini gemini-flash-latest: HTTP 429 (koshish 2)
   Gemini gemini-3.8-flash: HTTP 429 (koshish 1)
   Gemini gemini-3.8-flash: HTTP 429 (koshish 2)
   Gemini gemini-3.7-flash: HTTP 429 (koshish 1)
@@ -18,7 +32,6 @@ FORMAT: list
   Gemini gemini-3.8-flash: HTTP 429 (koshish 2)
   Gemini gemini-3.7-flash: HTTP 429 (koshish 1)
   Gemini gemini-3.7-flash: HTTP 429 (koshish 2)
-  Gemini gemini-3.6-flash: HTTP 503 (koshish 1)
   Gemini gemini-flash-latest: HTTP 429 (koshish 1)
   Gemini gemini-flash-latest: HTTP 429 (koshish 2)
   Gemini gemini-3.8-flash: HTTP 429 (koshish 1)
@@ -44,24 +57,24 @@ FORMAT: list
 LIST REEL TAIYAR: generated_reels/science_pyq_reel.mp4 (10s)
 
 CAPTION:
-📚 भूगोल के 7 PYQ - RRB, SSC, Police, Patwari, Army, State Exams के लिए (Save करो)
+📚 पर्यावरण के 7 PYQ - RRB, SSC, Police, Patwari, Army, State Exams के लिए (Save करो)
 
-1. भारत का कौन सा राज्य चावल का अग्रणी उत्पादक है? → पश्चिम बंगाल
-2. भारत का कौन सा राज्य जूट का अग्रणी उत्पादक है? → पश्चिम बंगाल
-3. भारत का कौन सा राज्य ज्वार का सबसे बड़ा उत्पादक है? → महाराष्ट्र
-4. भारत का कौन सा राज्य रबर का अग्रणी उत्पादक है? → केरल
-5. भारत का कौन-सा राज्य कपास का अग्रणी उत्पादक है? → महाराष्ट्र
-6. भारत का कौन-सा राज्य गन्ने का अग्रणी उत्पादक है? → उत्तर प्रदेश
-7. भारत का कौन-सा राज्य गेहूँ का अग्रणी उत्पादक है? → उत्तर-प्रदेश
+1. भारत में मणिकरण भूतापीय ऊर्जा संयंत्र कहाँ स्थित है? → हिमाचल प्रदेश
+2. उत्तराखंड में कितने राष्ट्रीय उद्यान हैं? → 6
+3. चंदोली राष्ट्रीय उद्यान किस राज्य में स्थित है? → महाराष्ट्र
+4. ताडोबा राष्ट्रीय उद्यान, भारत के किस राज्य में स्थित है? → महाराष्ट्र
+5. भारत के उस राज्य की पहचान करें जिसमें बांदीपुर राष्ट्रीय उद्यान स्थित है? → कर्नाटक
+6. मंजीरा मगरमच्छ वन्यजीव अभ्यारण्य कहाँ स्थित है? → तेलंगाना
+7. वन्य घुड़खर वन्यजीव अभ्यारण्य कहाँ स्थित है? → गुजरात
 
 💬 कितने पहले से आते थे? कमेंट करो: 7/7?
 📤 Save करो + उस दोस्त को भेजो जो exam की तैयारी कर रहा है।
-भूगोल GK Questions | RRB NTPC, Group D, SSC GD, State Exam PYQ
+पर्यावरण GK Questions | RRB NTPC, Group D, SSC GD, State Exam PYQ
 ⏱ MinuteMe_GS - एक मिनट, एक PYQ - पक्का!
 📲 Free test / notes: WhatsApp 8989971379
 
-#gkquiz #rrbntpc #sscgd #gkpyq #geography
-  IG container: 17910156534568651
+#gkquiz #rrbntpc #sscgd #gkpyq #environment
+  IG container: 17910181416568651
   upload try 1: HTTP 200 {"success":true,"message":"Upload Successful."}
   IG processing: FINISHED
-INSTAGRAM PE POST HO GAYA: 18117248371823332
+INSTAGRAM PE POST HO GAYA: 18606243694064418
