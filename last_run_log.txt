@@ -1,34 +1,32 @@
-FORMAT: kahani_pages
+FORMAT: mega
   Gemini text models: gemini-flash-latest, gemini-3.8-flash, gemini-3.7-flash, gemini-3.6-flash
   Gemini gemini-flash-latest: HTTP 503 (koshish 1) {   "error": {     "code": 503,     "message": "This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later
-  Gemini gemini-flash-latest: HTTP 503 (koshish 2) 
+  Gemini gemini-flash-latest: HTTP 429 (koshish 2) 
   Gemini gemini-3.8-flash: HTTP 503 (koshish 1) {   "error": {     "code": 503,     "message": "This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later
   Gemini gemini-3.8-flash: HTTP 503 (koshish 2) 
   Gemini gemini-3.7-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
   Gemini gemini-3.7-flash: HTTP 429 (koshish 2) 
-  Gemini gemini-flash-latest: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
-  Gemini gemini-flash-latest: HTTP 429 (koshish 2) 
-  Gemini gemini-3.8-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
-  Gemini gemini-3.8-flash: HTTP 429 (koshish 2) 
-  Gemini gemini-3.7-flash fail (koshish 1): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
-  Gemini gemini-3.7-flash: HTTP 429 (koshish 2) 
-  Gemini gemini-3.6-flash: HTTP 503 (koshish 1) {   "error": {     "code": 503,     "message": "This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later
-  Gemini gemini-3.6-flash: HTTP 503 (koshish 2) 
+  Gemini gemini-3.6-flash fail (koshish 1): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
+  Gemini gemini-3.6-flash fail (koshish 2): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
   Groq llama-3.3-70b-versatile: HTTP 404
-KAHANI: भारत की अनोखी यात्रा  (Geography / भारत में परिवहन (Transport in India))
-  Kahani: 9 page, 15 chitra bane
-  KAHANI REEL: purana chitra-page + awaaz
-Awaaz: Gemini TTS ek baar me (gemini-3.8-flash-lite-tts / hi-in-tutor-1)
-Traceback (most recent call last):
-  File "/home/runner/work/insta-automation/insta-automation/auto_poster.py", line 7422, in <module>
-    main()
-  File "/home/runner/work/insta-automation/insta-automation/auto_poster.py", line 7321, in main
-    if run_kahani(bank, st, ep, args):
-       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/insta-automation/insta-automation/auto_poster.py", line 5756, in run_kahani
-    build_kahani_reel(pages, out, kahani_speeches(story), ep)
-  File "/home/runner/work/insta-automation/insta-automation/auto_poster.py", line 5524, in build_kahani_reel
-    b.paste(paper.crop(box), box[:2])
-  File "/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/PIL/Image.py", line 1935, in paste
-    self.im.paste(source, box)
-TypeError: 'float' object cannot be interpreted as an integer
+  Groq openai/gpt-oss-120b: HTTP 400
+  Groq llama-3.1-8b-instant: HTTP 404
+  Mega awaaz: gemini-3.8-flash-lite-tts / hi-in-tutor-1
+MEGA REEL TAIYAR: generated_reels/science_pyq_reel.mp4 (16.8s, 3 page, 60 sawal)
+
+CAPTION:
+📚 "जीव विज्ञान (Biology)" के 60 सबसे महत्वपूर्ण प्रश्न - सभी सरकारी परीक्षाओं के लिए
+
+⏸️ हर पेज पर रोककर पढ़ो (स्क्रीन दबाकर रखो)
+📌 अभी SAVE करो - exam से पहले 1 बार ज़रूर revise करना
+📤 उस दोस्त को भेजो जो SSC / Railway / Police की तैयारी कर रहा है
+💬 कितने पहले से आते थे? कमेंट करो!
+
+जीव विज्ञान (Biology) GK | RRB NTPC, Group D, SSC GD, CGL, MTS, Police, Patwari, State Exam PYQ
+⏱ MinuteMe_GS - एक मिनट, एक PYQ - पक्का!
+
+#gk #gkquiz #gkpyq #sscgd #rrbntpc #rrbgroupd #policebharti #biology
+  IG container: 17910257286568651
+  upload try 1: HTTP 200 {"success":true,"message":"Upload Successful."}
+  IG processing: FINISHED
+INSTAGRAM PE POST HO GAYA: 18120298352051336
