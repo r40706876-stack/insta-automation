@@ -1,6 +1,6 @@
 {
  "next_seq": 110,
- "episode": 140,
+ "episode": 141,
  "posted": [
   "684d76bcbc",
   "6bb20b4a07",
@@ -370,10 +370,11 @@
   "75097dc3b3": "मध्य प्रदेश में वर्तमान में 11 (या 12) राष्ट्रीय उद्यान हैं (कूणो राष्ट्रीय उद्यान 2018 में शामिल), इसलिए 10 उत्तर पुराना/गलत है।"
  },
  "last": {
-  "seq": 1779,
-  "id": "f1aab8b80c",
-  "time": "2026-10-25 14:51",
-  "format": "mega"
+  "seq": 1077,
+  "id": "71bea81d4c",
+  "time": "2026-10-25 17:08",
+  "format": "trick",
+  "topic": "अग्रस्थ मेरिस्टेम कहाँ मिलता है?"
  },
  "carousel_queue": [
   {
@@ -1437,9 +1438,11 @@
   "भारत में परिवहन (Transport in India)|थल परिवहन (Land Transport)",
   "नदी घाटी परियोजनाएँ (River Valley Projects)|",
   "राज भाषा (Official Language)|",
-  "प्राचीनकालीन साहित्य एवं साहित्यकार (Ancient Literature and Litterateur)|"
+  "प्राचीनकालीन साहित्य एवं साहित्यकार (Ancient Literature and Litterateur)|",
+  "मानव शरीर (Human Body)|प्रजनन तंत्र (Reproductive System)",
+  "ऊतक (Tissues)|पादप ऊतक (Plant Tissues)"
  ],
- "trick_n": 4,
+ "trick_n": 5,
  "trap_used": [
   "de9e07d173",
   "404eed533c",
