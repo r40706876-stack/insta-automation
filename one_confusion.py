@@ -68,7 +68,7 @@ def render(k,t,dur):
     d.rounded_rectangle((80,1640,80+920*min(1,(k+t/dur)/5),1649),radius=5,fill=TEAL)
     txt(d,'@MinuteMe_GS  •  Science समझो',1710,35,MUTED)
     if k==0:
-        txt(d,'चाँद पर 60 kg → 10 kg?',335,72)
+        txt(d,'चाँद पर 60 kg या 10 kg?',335,72)
         txt(d,'द्रव्यमान कितना रहेगा?',433,61,RED)
         p=min(1,t/max(1,dur-.8)); x=275+530*p
         globe(d,265,1070,155); globe(d,815,1070,155,True)
@@ -79,7 +79,7 @@ def render(k,t,dur):
         txt(d,'जवाब चुनो…',590,45,MUTED)
     elif k==1:
         txt(d,'60 kg ही रहेगा!',350,90,TEAL)
-        txt(d,'द्रव्यमान ≠ भार',490,80,RED)
+        txt(d,'द्रव्यमान और भार अलग!',490,62,RED)
         globe(d,270,1090,160);globe(d,810,1090,160,True)
         person(d,270,820,t);person(d,810,820,t)
         for x in (270,810):
@@ -92,25 +92,25 @@ def render(k,t,dur):
         for i in range(6):arrow(d,145+i*50,915,105+10*math.sin(t*4),TEAL)
         arrow(d,810,915,65+7*math.sin(t*4),RED)
         txt(d,'पृथ्वी',1430,58,x=270);txt(d,'चाँद',1430,58,x=810)
-        txt(d,'गुरुत्वीय खिंचाव ≈ 1/6',1540,56,RED)
+        txt(d,'गुरुत्वीय खिंचाव ~ 1/6',1540,56,RED)
         txt(d,'द्रव्यमान दोनों पर 60 kg',520,52,TEAL)
     elif k==3:
         txt(d,'किलो और न्यूटन का फ़र्क',345,68)
         txt(d,'भार = द्रव्यमान × g',465,64,TEAL)
-        for x,moon,name,num in [(270,False,'पृथ्वी','588 N'),(810,True,'चाँद','≈ 98 N')]:
+        for x,moon,name,num in [(270,False,'पृथ्वी','588 N'),(810,True,'चाँद','~ 98 N')]:
             globe(d,x,800,145,moon)
             txt(d,name,1020,54,x=x)
             panel(d,(x-210,1110,x+210,1300),'#DFF0E8' if not moon else '#FFE4D8')
             txt(d,num,1205,77,TEAL if not moon else RED,x=x)
         txt(d,'द्रव्यमान: kg   |   भार: N',1460,60)
-        txt(d,'g: पृथ्वी ≈ 9.8 m/s²',1550,40,MUTED)
+        txt(d,'g: पृथ्वी ~ 9.8 m/s²',1550,40,MUTED)
     else:
         txt(d,'अब बिना देखे बताओ!',345,77)
         txt(d,'पृथ्वी पर भार = 120 N',500,65)
         globe(d,540,900,180,True,t)
         txt(d,'चाँद पर भार = ?',1210,83,RED)
         if t>=dur-1.7:
-            panel(d,(175,1360,905,1510),'#DFF0E8');txt(d,'120 ÷ 6 ≈ 20 N',1435,65,TEAL)
+            panel(d,(175,1360,905,1510),'#DFF0E8');txt(d,'120 ÷ 6 ~ 20 N',1435,65,TEAL)
         else:
             txt(d,'120 N     /     20 N',1435,66)
         txt(d,'अपने study partner को जाँचो',1570,42,MUTED)
