@@ -1,6 +1,6 @@
 {
  "next_seq": 110,
- "episode": 138,
+ "episode": 139,
  "posted": [
   "684d76bcbc",
   "6bb20b4a07",
@@ -343,7 +343,17 @@
   "18a86a559b",
   "fe91f8b7e1",
   "94ec29db0b",
-  "ee7cc34443"
+  "ee7cc34443",
+  "02764837be",
+  "2dd29bbd55",
+  "0bd1e87827",
+  "1f9a94d4a6",
+  "7d61785bc6",
+  "9b426de53b",
+  "bf5b199c45",
+  "f0b260457f",
+  "a07201d624",
+  "057b77b47c"
  ],
  "skipped": {
   "bdd1ce5a8b": "उत्तर कुंजी वर्तमान स्थिति के अनुसार गलत है।",
@@ -360,8 +370,11 @@
   "75097dc3b3": "मध्य प्रदेश में वर्तमान में 11 (या 12) राष्ट्रीय उद्यान हैं (कूणो राष्ट्रीय उद्यान 2018 में शामिल), इसलिए 10 उत्तर पुराना/गलत है।"
  },
  "last": {
-  "time": "2026-10-25 10:10",
-  "format": "farak"
+  "seq": 1675,
+  "id": "057b77b47c",
+  "time": "2026-10-25 12:43",
+  "format": "kahani",
+  "topic": "भारत की अनोखी हवाई यात्रा"
  },
  "carousel_queue": [
   {
@@ -1364,15 +1377,16 @@
   "ऊतक (Tissues)|पादप ऊतक (Plant Tissues)",
   "राज भाषा (Official Language)|",
   "विद्युत (Electricity)|प्रतिरोध (Resistance)",
-  "प्रकाश (Light)|सोनार/रडार (Sonar/Radar)"
+  "प्रकाश (Light)|सोनार/रडार (Sonar/Radar)",
+  "भारत में परिवहन (Transport in India)|थल परिवहन (Land Transport)"
  ],
- "kahani_n": 4,
+ "kahani_n": 5,
  "kahani_log": {
-  "reel": "17891516145456644",
-  "carousel": "18097116251414264",
+  "reel": "18128117113880557",
+  "carousel": "18091526981238667",
   "cover": true,
-  "variant": "page",
-  "time": "2026-10-23 10:14"
+  "variant": "pages",
+  "time": "2026-10-25 12:43"
  },
  "carousel_folder_log": {
   "carousel": "18138965326714200",
