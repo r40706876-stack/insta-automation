@@ -1,24 +1,29 @@
-FORMAT: current
+FORMAT: trap
   Gemini text models: gemini-flash-latest, gemini-3.8-flash, gemini-3.7-flash, gemini-3.6-flash
+  Gemini gemini-flash-latest fail (koshish 1): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
+  Gemini gemini-flash-latest fail (koshish 2): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
+  Gemini gemini-3.8-flash fail (koshish 1): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
+  Gemini gemini-3.8-flash fail (koshish 2): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
+  Gemini gemini-3.7-flash: HTTP 503 (koshish 1) {   "error": {     "code": 503,     "message": "This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later
+  Gemini gemini-3.7-flash fail (koshish 2): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
 EK-PAGE REEL TAIYAR: generated_reels/science_pyq_reel.mp4 (4s loop)
 
 CAPTION:
-📰 अक्टूबर 2026 के 7 करंट अफेयर्स - SSC, Railway, Police, State Exams (Save करो)
+⚠️ Exam के 6 जाल - 90% लोग गलत करते हैं! (भौतिक विज्ञान)
 
-1. किस देश ने T20I में 200 जीत दर्ज कीं? → भारत ने.
-2. पहला भूपेन हजारिका राष्ट्रीय पुरस्कार किसे मिलेगा? → उषा मंगेशकर को.
-3. 2026 का नोबेल शांति पुरस्कार किसे मिला? → नवी पिल्लै को.
-4. अक्टूबर 2026 में RBI रेपो रेट कितनी हुई? → 5.50%.
-5. अक्टूबर में भारत की खुदरा महंगाई कितनी हो सकती है? → 6% से अधिक.
-6. PM मोदी ने कहाँ RBI डेटा सेंटर खोला? → भुवनेश्वर में.
-7. कॉमनवेल्थ कबड्डी चैंपियनशिप में किसने जीत दर्ज की? → भारतीय टीमों ने.
+1. उत्तल लेंस की वक्रता त्रिज्या 40cm, क्षमता होगी? ❌ + 2.5 D ✅ + 5.0 D
+2. मोटरगाड़ी का ओडोमीटर क्या मापता है? ❌ चाल ✅ दूरी
+3. किसी पिण्ड का भार न्यूनतम कहाँ होता है? ❌ ध्रुवों पर ✅ भूमध्य रेखा पर
+4. तरंग की आवृत्ति दोगुनी होने पर तरंगदैर्ध्य होगी? ❌ मूल का दो गुना ✅ मूल का आधा
+5. वायुमंडल की अनुपस्थिति में आकाश का रंग होगा? ❌ नीला ✅ काला
+6. प्रकाश वर्ष द्वारा किसे मापा जाता है? ❌ वेग ✅ दूरी
 
-💬 कितने पता थे? कमेंट करो: 7/7?
-📤 उस दोस्त को भेजो जो करंट अफेयर्स में कमज़ोर है!
+💬 तुम कितनों में फँसे? कमेंट करो!
+📤 उस दोस्त को भेजो जो इनमें गलती करता है
 ⏱ MinuteMe_GS - एक मिनट, एक PYQ - पक्का!
 
-#currentaffairs #currentaffairs2026 #gkquiz #sscgd #rrbntpc
-  IG container: 17910363759568651
+#gkquiz #gkpyq #sscgd #rrbntpc #physics
+  IG container: 17910389274568651
   upload try 1: HTTP 200 {"success":true,"message":"Upload Successful."}
   IG processing: FINISHED
-INSTAGRAM PE POST HO GAYA: 17931891921161878
+INSTAGRAM PE POST HO GAYA: 18085868903330276
