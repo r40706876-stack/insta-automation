@@ -1,31 +1,61 @@
-FORMAT: farak
+FORMAT: kahani_pages
   Gemini text models: gemini-flash-latest, gemini-3.8-flash, gemini-3.7-flash, gemini-3.6-flash
   Gemini gemini-flash-latest fail (koshish 1): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
-  Gemini gemini-flash-latest fail (koshish 2): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
-  Gemini gemini-3.8-flash fail (koshish 1): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
+  Gemini gemini-flash-latest: HTTP 503 (koshish 2) 
+  Gemini gemini-3.8-flash: HTTP 503 (koshish 1) {   "error": {     "code": 503,     "message": "This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later
   Gemini gemini-3.8-flash: HTTP 503 (koshish 2) 
   Gemini gemini-3.7-flash: HTTP 503 (koshish 1) {   "error": {     "code": 503,     "message": "This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later
-  Gemini gemini-3.7-flash: HTTP 503 (koshish 2) 
+  Gemini gemini-3.7-flash: HTTP 429 (koshish 2) 
   Gemini gemini-flash-latest: HTTP 503 (koshish 1) {   "error": {     "code": 503,     "message": "This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later
-  Gemini gemini-flash-latest fail (koshish 2): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
-  Gemini gemini-3.8-flash fail (koshish 1): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
-EK-PAGE REEL TAIYAR: generated_reels/science_pyq_reel.mp4 (4s loop)
+  Gemini gemini-flash-latest: HTTP 429 (koshish 2) 
+  Gemini gemini-3.8-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-3.8-flash: HTTP 429 (koshish 2) 
+  Gemini gemini-3.7-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-3.7-flash: HTTP 429 (koshish 2) 
+KAHANI: भारत का ऐतिहासिक सफर  (Geography / भारत में परिवहन (Transport in India))
+  Kahani: 9 page, 15 chitra bane
+  KAHANI REEL: purana chitra-page + awaaz
+  Gemini awaaz: scenes ki lambai script se mel nahi khaati
+Gemini awaaz scenes me sahi nahi kati -> edge-tts
+KAHANI REEL TAIYAR: generated_reels/science_pyq_reel.mp4 (80s)
 
 CAPTION:
-🔍 फ़र्क पहचानो: प्रतिरोध vs प्रतिरोधकता - Exam में यहीं फँसते हैं!
+📖 1932 में एयर इंडिया की शुरुआत किसने की? भारत का ऐतिहासिक सफर - कहानी से याद करो!
 
-• SI मात्रक: ओम (Ω) | ओम-मीटर (Ω·m)
-• प्रतीक: R | ρ (रो)
-• प्रकृति: चालक का गुण (आकार पर निर्भर) | पदार्थ का अंतर्निहित गुण
-• लंबाई पर निर्भरता: लंबाई पर निर्भर करता है (R l) | लंबाई से स्वतंत्र
-• क्षेत्रफल पर निर्भरता: क्षेत्रफल पर निर्भर करता है (R 1/A) | क्षेत्रफल से स्वतंत्र
+📝 Exam में पूछा गया:
+• एयर इंडिया की शुरुआत किस वर्ष हुई? → 1932
+• झारखंड की राजधानी क्या है? → रांची
+• आंध्र प्रदेश की नई राजधानी कौन-सी है? → अमरावती
 
-💬 अगला कौन-सा जोड़ा चाहिए? कमेंट करो!
-📌 SAVE करो - exam से पहले 1 बार देखना
+📤 Save करो + उस दोस्त को भेजो जिसे ये topic याद नहीं रहता!
+🎯 SSC GD / MTS / CGL + हर GS exam के लिए
 ⏱ MinuteMe_GS - एक मिनट, एक PYQ - पक्का!
 
-#gkquiz #gkpyq #sscgd #rrbntpc #physics
-  IG container: 17910409731568651
-  upload try 1: HTTP 200 {"success":true,"message":"Upload Successful."}
-  IG processing: FINISHED
-INSTAGRAM PE POST HO GAYA: 18434132398199322
+#gkstory #gkinhindi #gkpyq #sscgd #ssccgl #geography
+  IG container: 17910421092568651
+  upload try 1: HTTP 400 {"debug_info":{"retriable":false,"type":"ProcessingFailedError","message":"Request processing failed"}}
+  upload try 2: HTTP 500 {"debug_info":{"retriable":false,"type":"ProcessingFailedError","message":"{\"success\":false,\"error\":{\"message\":\"{\\\"message\\\":\\\"Video Tran
+  upload try 3: HTTP 400 {"debug_info":{"retriable":false,"type":"ProcessingFailedError","message":"Request processing failed"}}
+  Instagram koshish 1 fail: IG upload fail: 400 {"debug_info":{"retriable":false,"type":"ProcessingFailedError","message":"Request processing failed"}}
+  IG container: 17910421677568651
+  upload try 1: HTTP 400 {"debug_info":{"retriable":false,"type":"ProcessingFailedError","message":"Request processing failed"}}
+  upload try 2: HTTP 500 {"debug_info":{"retriable":false,"type":"ProcessingFailedError","message":"{\"success\":false,\"error\":{\"message\":\"{\\\"message\\\":\\\"Video Tran
+  upload try 3: HTTP 400 {"debug_info":{"retriable":false,"type":"ProcessingFailedError","message":"Request processing failed"}}
+  Instagram koshish 2 fail: IG upload fail: 400 {"debug_info":{"retriable":false,"type":"ProcessingFailedError","message":"Request processing failed"}}
+  IG container: 17910422298568651
+  upload try 1: HTTP 400 {"debug_info":{"retriable":false,"type":"ProcessingFailedError","message":"Request processing failed"}}
+  upload try 2: HTTP 500 {"debug_info":{"retriable":false,"type":"ProcessingFailedError","message":"{\"success\":false,\"error\":{\"message\":\"{\\\"message\\\":\\\"Video Tran
+  upload try 3: HTTP 400 {"debug_info":{"retriable":false,"type":"ProcessingFailedError","message":"Request processing failed"}}
+  Instagram koshish 3 fail: IG upload fail: 400 {"debug_info":{"retriable":false,"type":"ProcessingFailedError","message":"Request processing failed"}}
+Traceback (most recent call last):
+  File "/home/runner/work/insta-automation/insta-automation/auto_poster.py", line 7435, in <module>
+    main()
+  File "/home/runner/work/insta-automation/insta-automation/auto_poster.py", line 7334, in main
+    if run_kahani(bank, st, ep, args):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/insta-automation/insta-automation/auto_poster.py", line 5786, in run_kahani
+    pid = post_reel(out, reel_caption, 0, cover)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/insta-automation/insta-automation/auto_poster.py", line 3136, in post_reel
+    raise RuntimeError(f"Instagram upload 3 baar fail: {last}")
+RuntimeError: Instagram upload 3 baar fail: IG upload fail: 400 {"debug_info":{"retriable":false,"type":"ProcessingFailedError","message":"Request processing failed"}}
