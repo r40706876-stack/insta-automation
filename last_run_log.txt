@@ -1,29 +1,31 @@
-FORMAT: trap
+FORMAT: farak
   Gemini text models: gemini-flash-latest, gemini-3.8-flash, gemini-3.7-flash, gemini-3.6-flash
   Gemini gemini-flash-latest fail (koshish 1): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
   Gemini gemini-flash-latest fail (koshish 2): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
   Gemini gemini-3.8-flash fail (koshish 1): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
-  Gemini gemini-3.8-flash fail (koshish 2): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
+  Gemini gemini-3.8-flash: HTTP 503 (koshish 2) 
   Gemini gemini-3.7-flash: HTTP 503 (koshish 1) {   "error": {     "code": 503,     "message": "This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later
-  Gemini gemini-3.7-flash fail (koshish 2): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
+  Gemini gemini-3.7-flash: HTTP 503 (koshish 2) 
+  Gemini gemini-flash-latest: HTTP 503 (koshish 1) {   "error": {     "code": 503,     "message": "This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later
+  Gemini gemini-flash-latest fail (koshish 2): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
+  Gemini gemini-3.8-flash fail (koshish 1): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
 EK-PAGE REEL TAIYAR: generated_reels/science_pyq_reel.mp4 (4s loop)
 
 CAPTION:
-⚠️ Exam के 6 जाल - 90% लोग गलत करते हैं! (भौतिक विज्ञान)
+🔍 फ़र्क पहचानो: प्रतिरोध vs प्रतिरोधकता - Exam में यहीं फँसते हैं!
 
-1. उत्तल लेंस की वक्रता त्रिज्या 40cm, क्षमता होगी? ❌ + 2.5 D ✅ + 5.0 D
-2. मोटरगाड़ी का ओडोमीटर क्या मापता है? ❌ चाल ✅ दूरी
-3. किसी पिण्ड का भार न्यूनतम कहाँ होता है? ❌ ध्रुवों पर ✅ भूमध्य रेखा पर
-4. तरंग की आवृत्ति दोगुनी होने पर तरंगदैर्ध्य होगी? ❌ मूल का दो गुना ✅ मूल का आधा
-5. वायुमंडल की अनुपस्थिति में आकाश का रंग होगा? ❌ नीला ✅ काला
-6. प्रकाश वर्ष द्वारा किसे मापा जाता है? ❌ वेग ✅ दूरी
+• SI मात्रक: ओम (Ω) | ओम-मीटर (Ω·m)
+• प्रतीक: R | ρ (रो)
+• प्रकृति: चालक का गुण (आकार पर निर्भर) | पदार्थ का अंतर्निहित गुण
+• लंबाई पर निर्भरता: लंबाई पर निर्भर करता है (R l) | लंबाई से स्वतंत्र
+• क्षेत्रफल पर निर्भरता: क्षेत्रफल पर निर्भर करता है (R 1/A) | क्षेत्रफल से स्वतंत्र
 
-💬 तुम कितनों में फँसे? कमेंट करो!
-📤 उस दोस्त को भेजो जो इनमें गलती करता है
+💬 अगला कौन-सा जोड़ा चाहिए? कमेंट करो!
+📌 SAVE करो - exam से पहले 1 बार देखना
 ⏱ MinuteMe_GS - एक मिनट, एक PYQ - पक्का!
 
 #gkquiz #gkpyq #sscgd #rrbntpc #physics
-  IG container: 17910389274568651
+  IG container: 17910409731568651
   upload try 1: HTTP 200 {"success":true,"message":"Upload Successful."}
   IG processing: FINISHED
-INSTAGRAM PE POST HO GAYA: 18085868903330276
+INSTAGRAM PE POST HO GAYA: 18434132398199322
