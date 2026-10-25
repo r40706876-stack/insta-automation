@@ -1,25 +1,24 @@
-FORMAT: list
-LIST REEL TAIYAR: generated_reels/science_pyq_reel.mp4 (10s)
+FORMAT: current
+  Gemini text models: gemini-flash-latest, gemini-3.8-flash, gemini-3.7-flash, gemini-3.6-flash
+EK-PAGE REEL TAIYAR: generated_reels/science_pyq_reel.mp4 (4s loop)
 
 CAPTION:
-📚 इस हफ्ते के 7 PYQ - Revision - RRB, SSC, Police, Patwari, Army, State Exams के लिए (Save करो)
+📰 अक्टूबर 2026 के 7 करंट अफेयर्स - SSC, Railway, Police, State Exams (Save करो)
 
-1. जैविक अपशिष्ट निपटान की सर्वोत्तम विधि कौन-सी है? → भस्मीकरण
-2. महाराष्ट्र में गोवर्धन पारिस्थितिकी गाँव की स्थापना किस संगठन ने की है? → इस्कॉन
-3. किस जीवाणु की उपस्थिति जल प्रदूषण का सूचक है? → ई. कोलाई कोलीफॉर्म
-4. रोगाणु मुक्त पेयजल बनाने के लिए किस रसायन का उपयोग किया जा सकता है? → CaOCl2
-5. वायुमंडल में ओजोन का स्तर कम होना कब से शुरू हुआ? → 1980
-6. अधिकांश नवीकरणीय ऊर्जा स्रोतों से होने वाली हानि है: → अस्थिर आपूर्ति
-7. ऊर्जा के पारंपरिक स्रोत के एक उदाहरण की पहचान करें- → प्राकृतिक गैस
+1. किस देश ने T20I में 200 जीत दर्ज कीं? → भारत ने.
+2. पहला भूपेन हजारिका राष्ट्रीय पुरस्कार किसे मिलेगा? → उषा मंगेशकर को.
+3. 2026 का नोबेल शांति पुरस्कार किसे मिला? → नवी पिल्लै को.
+4. अक्टूबर 2026 में RBI रेपो रेट कितनी हुई? → 5.50%.
+5. अक्टूबर में भारत की खुदरा महंगाई कितनी हो सकती है? → 6% से अधिक.
+6. PM मोदी ने कहाँ RBI डेटा सेंटर खोला? → भुवनेश्वर में.
+7. कॉमनवेल्थ कबड्डी चैंपियनशिप में किसने जीत दर्ज की? → भारतीय टीमों ने.
 
-💬 कितने पहले से आते थे? कमेंट करो: 7/7?
-📤 Save करो + उस दोस्त को भेजो जो exam की तैयारी कर रहा है।
-GK GK Questions | RRB NTPC, Group D, SSC GD, State Exam PYQ
+💬 कितने पता थे? कमेंट करो: 7/7?
+📤 उस दोस्त को भेजो जो करंट अफेयर्स में कमज़ोर है!
 ⏱ MinuteMe_GS - एक मिनट, एक PYQ - पक्का!
-📲 Free test / notes: WhatsApp 8989971379
 
-#gkquiz #rrbntpc #sscgd #gkpyq #gk
-  IG container: 17910341193568651
+#currentaffairs #currentaffairs2026 #gkquiz #sscgd #rrbntpc
+  IG container: 17910363759568651
   upload try 1: HTTP 200 {"success":true,"message":"Upload Successful."}
   IG processing: FINISHED
-INSTAGRAM PE POST HO GAYA: 17986947564083913
+INSTAGRAM PE POST HO GAYA: 17931891921161878
