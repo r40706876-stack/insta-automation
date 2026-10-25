@@ -1,39 +1,49 @@
-FORMAT: kahani_pages
+FORMAT: mega
   Gemini text models: gemini-flash-latest, gemini-3.8-flash, gemini-3.7-flash, gemini-3.6-flash
+  Gemini gemini-flash-latest: HTTP 503 (koshish 1) {   "error": {     "code": 503,     "message": "This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later
+  Gemini gemini-flash-latest: HTTP 503 (koshish 2) 
+  Gemini gemini-3.8-flash: HTTP 503 (koshish 1) {   "error": {     "code": 503,     "message": "This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later
+  Gemini gemini-3.8-flash: HTTP 429 (koshish 2) 
+  Gemini gemini-3.7-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-3.7-flash: HTTP 429 (koshish 2) 
+  Gemini gemini-3.6-flash: HTTP 503 (koshish 1) {   "error": {     "code": 503,     "message": "This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later
+  Gemini gemini-3.6-flash: HTTP 503 (koshish 2) 
+  Groq llama-3.3-70b-versatile: HTTP 404
+  Mega AI jaanch: 10 me se 1 sahi
+  Gemini gemini-flash-latest: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-flash-latest: HTTP 429 (koshish 2) 
+  Gemini gemini-3.8-flash: HTTP 503 (koshish 1) {   "error": {     "code": 503,     "message": "This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later
+  Gemini gemini-3.8-flash: HTTP 429 (koshish 2) 
+  Gemini gemini-3.7-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-3.7-flash: HTTP 429 (koshish 2) 
+  Gemini gemini-3.6-flash: HTTP 503 (koshish 1) {   "error": {     "code": 503,     "message": "This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later
+  Gemini gemini-3.6-flash: HTTP 503 (koshish 2) 
+  Groq llama-3.3-70b-versatile: HTTP 404
+  Groq openai/gpt-oss-120b: HTTP 400
+  Groq llama-3.1-8b-instant: HTTP 404
   Gemini gemini-flash-latest: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
   Gemini gemini-flash-latest: HTTP 429 (koshish 2) 
   Gemini gemini-3.8-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
   Gemini gemini-3.8-flash: HTTP 429 (koshish 2) 
   Gemini gemini-3.7-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
   Gemini gemini-3.7-flash: HTTP 429 (koshish 2) 
-  Gemini gemini-flash-latest: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
-  Gemini gemini-flash-latest: HTTP 429 (koshish 2) 
-  Gemini gemini-3.8-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
-  Gemini gemini-3.8-flash: HTTP 429 (koshish 2) 
-  Gemini gemini-3.7-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
-  Gemini gemini-3.7-flash: HTTP 429 (koshish 2) 
-KAHANI: भारत की अनोखी हवाई यात्रा  (Geography / भारत में परिवहन (Transport in India))
-  Kahani: 9 page, 15 chitra bane
-  KAHANI REEL: purana chitra-page + awaaz
-Awaaz: Gemini TTS ek baar me (gemini-3.8-flash-lite-tts / hi-in-tutor-1)
-KAHANI REEL TAIYAR: generated_reels/science_pyq_reel.mp4 (65s)
+  Mega AI jaanch: 58 me se 53 sahi
+  Mega awaaz: gemini-3.1-flash-tts-preview / Sulafat
+MEGA REEL TAIYAR: generated_reels/science_pyq_reel.mp4 (15.3s, 2 page, 40 sawal)
 
 CAPTION:
-📖 1932 में JRD टाटा ने क्या कमाल किया? भारत की अनोखी हवाई यात्रा - कहानी से याद करो!
+📚 "भूगोल (Geography)" के 40 सबसे महत्वपूर्ण प्रश्न - सभी सरकारी परीक्षाओं के लिए
 
-📝 Exam में पूछा गया:
-• एयर इंडिया की शुरुआत जे.आर.डी. टाटा द्वारा किस वर्ष की गई? → 1932
-• आंध्र प्रदेश की नई राजधानी क्या है? → अमरावती
-• भारत की मुख्य भूमि का सबसे दक्षिणी बिंदु कौन सा है? → कन्याकुमारी
+⏸️ हर पेज पर रोककर पढ़ो (स्क्रीन दबाकर रखो)
+📌 अभी SAVE करो - exam से पहले 1 बार ज़रूर revise करना
+📤 उस दोस्त को भेजो जो SSC / Railway / Police की तैयारी कर रहा है
+💬 कितने पहले से आते थे? कमेंट करो!
 
-📤 Save करो + उस दोस्त को भेजो जिसे ये topic याद नहीं रहता!
-🎯 SSC GD / MTS / CGL + हर GS exam के लिए
+भूगोल (Geography) GK | RRB NTPC, Group D, SSC GD, CGL, MTS, Police, Patwari, State Exam PYQ
 ⏱ MinuteMe_GS - एक मिनट, एक PYQ - पक्का!
 
-#gkstory #gkinhindi #gkpyq #sscgd #ssccgl #geography
-  IG container: 17910429237568651
-  upload try 1: HTTP 400 {"debug_info":{"retriable":false,"type":"ProcessingFailedError","message":"Request processing failed"}}
-  upload try 2: HTTP 200 {"success":true,"message":"Upload Successful."}
+#gkquiz #gkpyq #sscgd #rrbntpc #geography
+  IG container: 17910453600568651
+  upload try 1: HTTP 200 {"success":true,"message":"Upload Successful."}
   IG processing: FINISHED
-INSTAGRAM PE POST HO GAYA: 18128117113880557
-CAROUSEL POST HO GAYA: 18091526981238667
+INSTAGRAM PE POST HO GAYA: 18117243389102761
