@@ -3118,6 +3118,21 @@ def _upload_once(video_file, caption, thumb_ms=0, cover_url=None):
     return pub["id"]
 
 
+def _ig_safe_copy(src):
+    """Instagram ke liye sabse saral encoding (CFR 30, H.264 high 4.1, 6 Mbps tak, AAC 44.1k)."""
+    dst = src.replace(".mp4", "_ig.mp4")
+    cmd = ["ffmpeg", "-y", "-v", "error", "-i", src, "-c:v", "libx264", "-profile:v", "high", "-level", "4.1",
+           "-pix_fmt", "yuv420p", "-r", "30", "-vsync", "cfr", "-b:v", "4500k", "-maxrate", "6000k", "-bufsize", "9000k",
+           "-g", "60", "-c:a", "aac", "-ar", "44100", "-ac", "2", "-b:a", "128k", "-movflags", "+faststart", dst]
+    try:
+        subprocess.run(cmd, check=True, timeout=600)
+        print("  IG ke liye video dobara encode kiya:", dst, os.path.getsize(dst) // 1024, "KB")
+        return dst
+    except Exception as exc:
+        print("  Dobara encode nahi hua:", str(exc)[:120])
+        return None
+
+
 def post_reel(video_file, caption, thumb_ms=0, cover_url=None):
     """Poori upload 3 baar tak (har baar naya container). Fail = exception (progress aage nahi badhta)."""
     if not IG_ACCESS_TOKEN or not IG_USER_ID:
@@ -3125,6 +3140,8 @@ def post_reel(video_file, caption, thumb_ms=0, cover_url=None):
         return None
     last = None
     for attempt in range(3):
+        if attempt == 1 and last is not None and "ProcessingFailed" in str(last):
+            video_file = _ig_safe_copy(video_file) or video_file    # Instagram transcode fail -> saral encoding
         try:
             pid = _upload_once(video_file, caption, thumb_ms, cover_url if attempt == 0 else None)
             print("INSTAGRAM PE POST HO GAYA:", pid)
