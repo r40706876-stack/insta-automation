@@ -2,6 +2,9 @@ name: Visual subject schedule preview - no publication
 on:
   push:
     paths: [.github/workflows/visual_subject_preview.yml]
+concurrency:
+  group: viewer-preview-only
+  cancel-in-progress: true
 permissions:
   contents: write
 jobs:
@@ -41,3 +44,5 @@ jobs:
 # Final visual review: wind clears the mountain crest.
 
 # Rebuild distinct four-scene viewer retry including visible WhatsApp banner.
+
+# Include physically corrected expanding air parcel and over-crest wind path.
