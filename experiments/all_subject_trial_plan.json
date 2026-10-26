@@ -31,20 +31,23 @@
       "approved_sha256": "362676ec756e628e6be3b63df8aac74fd26fd7fa09e99253a82af3aa564742d3"
     },
     {
-      "id": "current",
-      "publish_utc": "2026-10-26T18:00:00.000Z",
-      "approved_sha256": "1ed75a75c2d7190e483a6b22127e553e8bcc8453e12e0ea4fde144784015b12d"
-    },
-    {
       "id": "static_gk",
-      "publish_utc": "2026-10-26T20:00:00.000Z",
+      "publish_utc": "2026-10-26T18:00:00.000Z",
       "approved_sha256": "ac6305d56ea926b42590100a91715bbacc2ae8641d4e035352dfc447d76f96b2"
     }
   ],
   "snapshot_age_hours": 24,
   "snapshot_tolerance_minutes": 30,
   "review_not_before_utc": "2026-10-27T20:45:00Z",
-  "note": "First 26 Oct 13:30 IST; seventh 27 Oct 01:30 IST. Snapshot each at >=24h; final review 28 Oct 01:45 IST or after all snapshots. Posting time is a confound; one reel per subject is only a pilot.",
+  "note": "User revised 26 Oct: geography 21:30 IST, static GK 23:30 IST; no 27 Oct 01:30 post. Regular seven-slot schedule starts 27 Oct 05:00 IST. Current-affairs trial cancelled. Preserve completed receipts; retain 24h snapshots for published reels.",
   "approved": true,
-  "approval_note": "User authorized seven public reels at two-hour intervals; all seven final files visually reviewed and checked as 20-second H264+AAC videos."
+  "approval_note": "User authorized seven public reels at two-hour intervals; all seven final files visually reviewed and checked as 20-second H264+AAC videos.",
+  "cancelled_slots": [
+    {
+      "id": "current",
+      "publish_utc": "2026-10-26T18:00:00.000Z",
+      "approved_sha256": "1ed75a75c2d7190e483a6b22127e553e8bcc8453e12e0ea4fde144784015b12d",
+      "reason": "User moved current affairs to regular 05:00 IST from 27 Oct; cancel trial slot."
+    }
+  ]
 }
