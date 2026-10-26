@@ -50,3 +50,5 @@ jobs:
 # Final typography check: no unsupported arrow glyph; exact rain-shadow title.
 
 # Next topic: animated sea breeze / land breeze. Build preview only.
+
+# Final pacing pass: at least 20 seconds, matching visual and narration speed.
