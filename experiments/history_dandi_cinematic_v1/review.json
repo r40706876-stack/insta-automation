@@ -1,0 +1,34 @@
+{
+  "duration": 22,
+  "scene_seconds": [
+    5,
+    5,
+    6,
+    6
+  ],
+  "voice": "Gemini gemini-2.5-flash-preview-tts / Charon (male)",
+  "sha256": "9c4a1da7c42e81347d70b0138b845eac5b7330368dd83eb54920b335e3053942",
+  "speech": [
+    "रोज़ के नमक पर भी टैक्स! गांधीजी ने नमक को ही आंदोलन क्यों बनाया?",
+    "नमक सबकी जरूरत था। उस पर लगने वाला कर गरीबों पर भी बोझ था।",
+    "बारह मार्च उन्नीस सौ तीस को गांधीजी साबरमती से दांडी के लिए पैदल निकले।",
+    "छह अप्रैल को दांडी में नमक कानून तोड़ा। नमक, अंग्रेजी राज के विरोध का प्रतीक बना।"
+  ],
+  "build_only": true,
+  "sources": [
+    "https://rajghat.gov.in/chronology",
+    "https://www.gandhiheritageportal.org/dandi-march-details",
+    "https://www.publicationsdivision.nic.in/catalog/view/theme/default/images/new_ngm_final/timeline/pages/page14.html"
+  ],
+  "visuals": [
+    "rotating projected 3D salt crystals",
+    "moving symbolic tax coins",
+    "two animated bowls",
+    "geographic coastal map with schematic journey line",
+    "labelled AI historical illustration"
+  ],
+  "map_source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_110m_land.geojson",
+  "map_note": "Regional geographic coastline, not a political boundary map. Journey line schematic, not a surveyed exact path.",
+  "historical_image": "AI illustration, explicitly labelled; not an archival photo",
+  "tax_note": "No claim that the salt tax was repealed on 6 April 1930"
+}
