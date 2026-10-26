@@ -48,14 +48,14 @@ def render(sc,t,duration):
   d.polygon([(70,900),(350,450),(650,900)],fill='#849b89',outline=INK)
   for j in range(15):
    u=(t*.16+j/15)%1
-   x=50+620*u;y=850-350*math.sin(math.pi*u)
+   x=50+620*u;y=850-500*math.sin(math.pi*u)
    d.ellipse((x-6,y-6,x+6,y+6),fill=BLUE if u<.5 else GOLD)
   arrow(d,(60,700),(240,490),BLUE);arrow(d,(440,500),(640,750),GOLD)
   for j in range(9):
    x=100+j*18;y=620+(t*150+j*37)%230
    d.line((x,y,x-8,y+22),fill=BLUE,width=5)
-  label(d,'हवा ऊपर → ठंडी',170,380,30,BLUE)
-  label(d,'नीचे → गर्म',540,960,30,RED)
+  label(d,'ऊपर उठी हवा: ठंडी',170,380,30,BLUE)
+  label(d,'उतरती हवा: गर्म',540,960,30,RED)
  elif kind=='bottle':
   for i in range(2):
    x=190+i*340;shrink=(50*p if i==0 else 4*p) if reveal else 0
