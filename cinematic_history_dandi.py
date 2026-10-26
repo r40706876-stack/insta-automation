@@ -68,8 +68,8 @@ def plate(im,x,y,t,col):
   crystal(im,x+(j-1.5)*20,y-170+150*q,8+j%2*2,t+j)
 def proj(lon,lat):return(60+(lon-70.8)/3*600,410+(23.5-lat)/3.2*630)
 # Regional maps need more detail than the 110m world-globe texture.
-MAP_GEO='https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_50m_land.geojson'
-mapfile=ROOT/'land50m.geojson'
+MAP_GEO='https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_10m_land.geojson'
+mapfile=ROOT/'land10m.geojson'
 if not mapfile.exists():
  import requests
  response=requests.get(MAP_GEO,timeout=60);response.raise_for_status();mapfile.write_text(response.text)
@@ -88,7 +88,7 @@ for ring in maprings:
  pts=[proj(lon,lat) for lon,lat,*_ in ring]
  if len(pts)>2:draw.polygon(pts,fill=255)
 shadow=Image.new('RGB',(720,1280),'#7b674d')
-mapim.paste(shadow,(7,12),mask)
+mapim.paste(shadow,(3,5),mask)
 yy,xx=np.mgrid[0:1280,0:720];rng=np.random.default_rng(9);noise=rng.normal(0,1.5,(1280,720))
 land=np.zeros((1280,720,3),np.uint8)
 for k,base in enumerate((200,183,139)):land[:,:,k]=np.clip(base+10*np.sin(xx*.008)+noise-yy*.008,0,255)
