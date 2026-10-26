@@ -1,0 +1,58 @@
+{
+  "ok": true,
+  "title": "हेस्टिंग्स की कलकत्ता मदरसा",
+  "scenes": [
+    {
+      "label": "प्रश्न: कहाँ?",
+      "speech": "1781 में मुस्लिम कानून के अध्ययन के लिए मदरसा कहाँ स्थापित हुआ?",
+      "image": "A historic 18th century Indian cityscape of Calcutta with a colonial building labeled \"Madrasa for Muslim Law\", Warren Hastings observing, detailed sepia illustration",
+      "kind": "reveal"
+    },
+    {
+      "label": "हेस्टिंग्स का पद",
+      "speech": "वॉरेन हेस्टिंग्स 1781 में भारत के पहले गवर्नर जनरल बने, बंगाल का पहला",
+      "image": "Portrait of Warren Hastings in Governor General attire, standing before a map of Bengal, 18th-century style illustration",
+      "kind": "reveal"
+    },
+    {
+      "label": "मदरसा की स्थापना",
+      "speech": "वह ने 1781 में कलकत्ता में मुस्लिम कानून के अध्ययन के लिए मदरसा स्थापित किया",
+      "image": "Illustration of a madrasa building in 1781 Calcutta with scholars studying Islamic law, colonial architecture, detailed",
+      "kind": "process"
+    },
+    {
+      "label": "स्मरण प्रश्न",
+      "speech": "वॉरेन हेस्टिंग्स ने किस शहर में मदरसा स्थापित किया? उत्तर: वास्तव में कलकत्ता",
+      "image": "A quiz style illustration showing a question mark over a map of India highlighting Calcutta, with answer text appearing",
+      "kind": "quiz"
+    }
+  ],
+  "question_hash": "78102b09e5ae9d8d193230a4198c31ff1dfb39013a13f13c064256c104c7331a",
+  "reference": {
+    "subject": "History",
+    "subject_hi": "इतिहास",
+    "chapter": "गवर्नर/गवर्नर जनरल/वायसराय (Governors/Governors General/Viceroys)",
+    "sub": "",
+    "question": "1781 में, भारत के पहले गवर्नर जनरल वॉरेन हेस्टिंग्स ने मुस्लिम कानून के अध्ययन और शिक्षण के लिए _____ में मदरसा की स्थापना की।",
+    "options": {
+      "a": "मुंबई",
+      "b": "दिल्ली",
+      "c": "बिहार",
+      "d": "कलकत्ता"
+    },
+    "answer": "d",
+    "exams": [
+      "RRB Group-D 16-10-2018 (Shift-III)",
+      "RRB Group-D 28-09-2018 (Shift-I)",
+      "RRB Group-D 28-09-2018 (Shift-III"
+    ],
+    "explanation": "वर्ष 1781 में भारत के पहले गवर्नर जनरल वॉरेन हेस्टिंग्स ने मुस्लिम कानून के अध्ययन और शिक्षण के लिए कलकत्ता में मदरसा की स्थापना की थी। वॉरेन हेस्टिंग्स, रेग्यूलेटिंग एक्ट के तहत बंगाल का पहला गवर्नर जनरल था। यह भारत का पहला गवर्नर जनरल भी था।",
+    "times_asked": 3,
+    "years": [
+      "2018"
+    ],
+    "id": "4c9ad648fa",
+    "seq": 4
+  },
+  "subject": "History"
+}
