@@ -8,6 +8,7 @@ on:
 
 permissions:
   contents: write
+  actions: read
 
 concurrency:
   group: all-subject-trial
@@ -40,10 +41,15 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           PYTHONUNBUFFERED: '1'
+          GH_TOKEN: ${{ github.token }}
         run: |
-          MODE=$(python -c "import json; r=json.load(open('experiments/all_subject_trial_request.json')); assert r['mode'] in ('build','publish'); print(r['mode'])")
+          MODE=$(python -c "import json; r=json.load(open('experiments/all_subject_trial_request.json')); assert r['mode'] in ('build','publish','recover'); print(r['mode'])")
           SUBJECT=$(python -c "import json; print(json.load(open('experiments/all_subject_trial_request.json')).get('id',''))")
-          if [ -n "$SUBJECT" ]; then
+          if [ "$MODE" = "recover" ]; then
+            mkdir -p experiments/all_subject_trial_20261026
+            gh api repos/r40706876-stack/insta-automation/actions/artifacts/12633682279/zip > /tmp/gs-trial.zip
+            unzip -o /tmp/gs-trial.zip -d experiments/all_subject_trial_20261026
+          elif [ -n "$SUBJECT" ]; then
             python all_subject_trial.py "$MODE" --id "$SUBJECT"
           else
             python all_subject_trial.py "$MODE"
@@ -56,8 +62,11 @@ jobs:
           git add experiments/all_subject_trial_20261026
           if ! git diff --cached --quiet; then
             git commit -m 'Save Seven Subject GS Trial experiment result [skip ci]'
-            git pull --rebase
-            git push
+            for attempt in 1 2 3 4; do
+              git pull --rebase && git push && exit 0
+              sleep $((attempt * 2))
+            done
+            exit 1
           fi
       - uses: actions/upload-artifact@v4
         if: always()
