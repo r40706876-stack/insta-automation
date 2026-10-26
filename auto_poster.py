@@ -7319,7 +7319,7 @@ def main():
     # Temporary, user-authorized isolated trial; normal posting resumes automatically.
     import datetime as _trial_dt
     _trial_plan_path = Path("experiments/all_subject_trial_plan.json")
-    if _trial_plan_path.exists() and not (args.no_post or args.preview or args.carousel_test):
+    if _trial_plan_path.exists() and os.getenv("GS_REGULAR_SCHEDULE") != "20261026-v2" and not (args.no_post or args.preview or args.carousel_test):
         _trial_plan = json.loads(_trial_plan_path.read_text(encoding="utf-8"))
         _trial_now = _trial_dt.datetime.now(_trial_dt.timezone.utc)
         _trial_from = _trial_dt.datetime.fromisoformat(_trial_plan["regular_posts_paused_from_utc"].replace("Z", "+00:00"))
@@ -7329,6 +7329,10 @@ def main():
             return
 
     bank = load_bank()
+    requested_subject = os.getenv("GS_SUBJECT", "").strip()
+    if requested_subject:
+        bank = [q for q in bank if q.get("subject") == requested_subject]
+        if not bank: raise RuntimeError("No questions for scheduled subject: " + requested_subject)
     st = load_progress()
     if args.carousel_test:          # jaanch: pehle 3 sawal se ek carousel (progress nahi badalta)
         items = [carousel_item(prepare_data(q, None, q["seq"])) for q in bank[:3]]
