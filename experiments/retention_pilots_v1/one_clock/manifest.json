@@ -1,0 +1,27 @@
+{
+  "experiment": "one_clock",
+  "duration": 23.862040816326534,
+  "scene_seconds": [
+    4.900839002267574,
+    3.0120408163265306,
+    5.49,
+    3.822199546485261,
+    6.636961451247165
+  ],
+  "speech": [
+    "अरुणाचल में सूरज पहले, गुजरात में बाद में। फिर घड़ी एक क्यों?",
+    "देश के लिए एक मानक समय चुना गया है।",
+    "यह है बयासी दशमलव पाँच डिग्री पूर्व देशांतर, मिर्जापुर के पास।",
+    "इसी मानक रेखा से भारतीय मानक समय तय होता है।",
+    "घड़ी देशभर में एक। अब बताओ, मानक देशांतर कितना? बयासी दशमलव पाँच पूर्व।"
+  ],
+  "sources": [
+    "https://ncert.nic.in/textbook/pdf/kegy303.pdf"
+  ],
+  "sha256": "b19825c846432feb0d96b5dd4609d6db071c2df4f1b0c4a8eb841b17d462506d",
+  "research": [
+    "https://creators.instagram.com/blog/helping-creators-of-all-sizes-break-through",
+    "https://creators.instagram.com/faq"
+  ],
+  "hypothesis": "Immediate moving visual + specific question; no intro; explanation before CTA. Not a promised skip rate."
+}

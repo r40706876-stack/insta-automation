@@ -1,0 +1,28 @@
+{
+  "experiment": "rail_gap",
+  "duration": 19.4381179138322,
+  "scene_seconds": [
+    2.95249433106576,
+    4.457256235827664,
+    3.579773242630386,
+    3.6361904761904764,
+    4.812403628117914
+  ],
+  "speech": [
+    "पटरी का ये गैप भर दिया तो? गर्मी में क्या होगा?",
+    "जोड़ वाली पटरी में यह जगह फैलाव के लिए छोड़ी जाती है।",
+    "गर्मी बढ़ी, लोहा लंबा हुआ। देखो, गैप कम हो रहा है।",
+    "फैलने की जगह न मिले, तो पटरी में तनाव बढ़ सकता है।",
+    "अब ठंड में गैप बढ़ेगा या घटेगा? बढ़ेगा, क्योंकि लोहा सिकुड़ेगा।"
+  ],
+  "sources": [
+    "https://sathee.iitk.ac.in/sathee-neet/notes-class-11/physics/thermal-properties-of-matter/",
+    "https://rdso.indianrailways.gov.in/works/uploads/File/Handbook%20on%20maintenance%20of%20Switch%20expansion%20joint%283%29.pdf"
+  ],
+  "sha256": "db38034240fe512018c6e3c4d74c0ef1a2d6c00fe1395a6b715c56ff0b3040c6",
+  "research": [
+    "https://creators.instagram.com/blog/helping-creators-of-all-sizes-break-through",
+    "https://creators.instagram.com/faq"
+  ],
+  "hypothesis": "Immediate moving visual + specific question; no intro; explanation before CTA. Not a promised skip rate."
+}

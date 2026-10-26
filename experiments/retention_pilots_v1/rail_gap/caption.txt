@@ -1,0 +1,12 @@
+पटरी का गैप भर दिया तो? | रोज़ दिखता है, Science छिपी है — 01
+
+जोड़ वाली रेलवे पटरी में expansion gap तापीय प्रसार के लिए जगह देता है।
+गर्मी में रेल लंबी होने पर गैप कम हो सकता है; ठंड में सिकुड़ने पर बढ़ सकता है। फैलाव रोकने पर तापीय तनाव बढ़ता है।
+चित्र में फैलाव बढ़ा-चढ़ाकर दिखाया गया है ताकि concept साफ हो। यह jointed rail का सरलीकृत उदाहरण है। आधुनिक LWR/CWR में thermal movement का प्रबंध अलग होता है; हर रेल जोड़ को यही चित्र न समझें।
+
+खुद जाँचो: ठंड में gap बढ़ेगा या घटेगा? अपने Railway/SSC वाले study partner को भेजो।
+स्रोत: IIT Kanpur SATHEE, Thermal Properties of Matter; Indian Railways RDSO, Switch Expansion Joint Handbook.
+https://sathee.iitk.ac.in/sathee-neet/notes-class-11/physics/thermal-properties-of-matter/
+Concept practice, verified PYQ का दावा नहीं।
+
+#MinuteMeGS #RailwayExam #SSC #Physics #ScienceHindi
