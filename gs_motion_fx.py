@@ -11,6 +11,8 @@ def perspective_card(canvas,center,size,rows,font,accent='#49ddf5',angle=0,tilt=
  tile=Image.new('RGBA',(w*scale,h*scale));d=ImageDraw.Draw(tile)
  for y in range(h*scale):
   q=y/max(1,h*scale-1);d.line((0,y,w*scale,y),fill=(int(22-7*q),int(56-15*q),int(79-20*q),255))
+ corners=Image.new('L',tile.size);ImageDraw.Draw(corners).rounded_rectangle((0,0,w*scale-1,h*scale-1),24*scale,fill=255)
+ tile.putalpha(corners)
  d.rounded_rectangle((2,2,w*scale-3,h*scale-3),24*scale,outline=accent,width=3*scale)
  d.rounded_rectangle((25*scale,15*scale,(w-25)*scale,22*scale),3*scale,fill=accent)
  for j,(s,n,col) in enumerate(rows):
