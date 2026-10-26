@@ -1,0 +1,24 @@
+{
+  "experiment": "map_three_01",
+  "source": "https://sathee.iitk.ac.in/ncert-books/class-11/geography/india-physical-environment/chapter-03-drainage-system/",
+  "speech": [
+    "नर्मदा का पानी किस तरफ जाएगा? अरब सागर, या बंगाल की खाड़ी? दिशा चुनो।",
+    "शुरुआत यहाँ, अमरकंटक से। बस इस जगह को नक्शे में पकड़ लो।",
+    "अब रास्ता देखो। नर्मदा पश्चिम बहकर अरब सागर में मिलती है।",
+    "उत्तर में विंध्य, दक्षिण में सतपुड़ा। इनके बीच भ्रंश घाटी में नर्मदा बहती है।",
+    "अब नाम छिपा दिए! शुरुआत कहाँ? समुद्र कौन सा? उत्तर का पर्वत? अमरकंटक, अरब सागर, विंध्य।"
+  ],
+  "scene_seconds": [
+    4.799160997732426,
+    4.101904761904762,
+    4.094512471655329,
+    5.129433106575964,
+    6.111473922902494
+  ],
+  "duration": 24.236485260770973,
+  "sha256": "0536ddb9654b6c7aec09e8e44823fb4b44ed9e3b4f4bdf17904ce8fd1967d537",
+  "map_sources": [
+    "https://github.com/nvkelso/natural-earth-vector/blob/master/geojson/ne_10m_rivers_lake_centerlines.geojson",
+    "https://github.com/geohacker/india/blob/master/state/india_state.geojson"
+  ]
+}
