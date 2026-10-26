@@ -1,0 +1,48 @@
+{
+  "trial": "all_subject_trial_20261026",
+  "timezone": "Asia/Kolkata",
+  "format": "20 seconds; five equal-purpose scenes; hi-IN-SwaraNeural; no PYQ provenance claims",
+  "regular_posts_paused_from_utc": "2026-10-26T07:15:00Z",
+  "regular_posts_paused_until_utc": "2026-10-27T22:00:00Z",
+  "slots": [
+    {
+      "id": "history",
+      "publish_utc": "2026-10-26T08:00:00.000Z",
+      "approved_sha256": null
+    },
+    {
+      "id": "economics",
+      "publish_utc": "2026-10-26T10:00:00.000Z",
+      "approved_sha256": null
+    },
+    {
+      "id": "science",
+      "publish_utc": "2026-10-26T12:00:00.000Z",
+      "approved_sha256": null
+    },
+    {
+      "id": "polity",
+      "publish_utc": "2026-10-26T14:00:00.000Z",
+      "approved_sha256": null
+    },
+    {
+      "id": "geography",
+      "publish_utc": "2026-10-26T16:00:00.000Z",
+      "approved_sha256": null
+    },
+    {
+      "id": "current",
+      "publish_utc": "2026-10-26T18:00:00.000Z",
+      "approved_sha256": null
+    },
+    {
+      "id": "static_gk",
+      "publish_utc": "2026-10-26T20:00:00.000Z",
+      "approved_sha256": null
+    }
+  ],
+  "snapshot_age_hours": 24,
+  "snapshot_tolerance_minutes": 30,
+  "review_not_before_utc": "2026-10-27T20:15:00Z",
+  "note": "First 26 Oct 13:30 IST; seventh 27 Oct 01:30 IST. Snapshot each at >=24h; final review 28 Oct 01:45 IST or after all snapshots. Posting time is a confound; one reel per subject is only a pilot."
+}
