@@ -59,7 +59,7 @@ def build():
   f.setnchannels(1);f.setsampwidth(2);f.setframerate(e.SR);f.writeframes((np.clip(mix,-.98,.98)*32767).astype('<i2').tobytes())
  e.resolve_font()
  def text(d,txt,y,size,col):
-  lines=e.wrap_words(txt,e.get_font(size),640)
+  lines=[' '.join(x) for x in e.wrap_words(txt,e.get_font(size),640)]
   for j,line in enumerate(lines):d.text((360,y+j*size*1.35),line,font=e.get_font(size),fill=col,anchor='mm',stroke_width=2,stroke_fill='#081725')
  def frame(fi):
   t=fi/FPS;k=max(i for i,x in enumerate(starts) if x<=t);lt=t-starts[k];q=lt/ds[k]
