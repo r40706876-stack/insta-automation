@@ -7,7 +7,7 @@
     6
   ],
   "voice": "Gemini gemini-2.5-flash-preview-tts / Charon (male)",
-  "sha256": "9c4a1da7c42e81347d70b0138b845eac5b7330368dd83eb54920b335e3053942",
+  "sha256": "070189d3c5830ef2e6fbdccf8303f70dc845a0cd6f049b3ccbb8f98e5eaec20c",
   "speech": [
     "रोज़ के नमक पर भी टैक्स! गांधीजी ने नमक को ही आंदोलन क्यों बनाया?",
     "नमक सबकी जरूरत था। उस पर लगने वाला कर गरीबों पर भी बोझ था।",
@@ -27,7 +27,7 @@
     "geographic coastal map with schematic journey line",
     "labelled AI historical illustration"
   ],
-  "map_source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_110m_land.geojson",
+  "map_source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_50m_land.geojson",
   "map_note": "Regional geographic coastline, not a political boundary map. Journey line schematic, not a surveyed exact path.",
   "historical_image": "AI illustration, explicitly labelled; not an archival photo",
   "tax_note": "No claim that the salt tax was repealed on 6 April 1930"
