@@ -36,7 +36,7 @@ jobs:
           git add experiments/viewer_retry_rainshadow_v2
           git diff --cached --quiet && exit 0
           git commit -m 'Save scheduled visual experiment preview [skip ci]'
-          git pull --rebase
+          git pull --rebase -X theirs
           git push
 
 # Retry first sourced preview after script validation failed.
@@ -46,3 +46,5 @@ jobs:
 # Rebuild distinct four-scene viewer retry including visible WhatsApp banner.
 
 # Include physically corrected expanding air parcel and over-crest wind path.
+
+# Final typography check: no unsupported arrow glyph; exact rain-shadow title.
