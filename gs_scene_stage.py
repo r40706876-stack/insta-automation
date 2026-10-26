@@ -3,8 +3,8 @@ import math
 from PIL import Image, ImageDraw, ImageFont
 import one_confusion as legacy
 import retention_pilots as pilots
-VERSION=6
-KINDS={'rail','sunrise','river','gravity','quantity','timeline','process','inertia','water'}
+VERSION=7
+KINDS={'rail','sunrise','river','gravity','quantity','timeline','process','inertia','water','rainshadow','bottle'}
 BG='#f6f3ea'; INK='#172f45'; BLUE='#087fa4'; RED='#d94d41'; GOLD='#edb649'
 def font(n): return ImageFont.truetype('Mukta-ExtraBold.ttf',n)
 def label(d,s,x,y,n=30,c=INK):
@@ -43,6 +43,30 @@ def render(sc,t,duration):
   layer=river.background(False,not reveal).copy();ld=ImageDraw.Draw(layer)
   river.river(ld,p,False)
   im.paste(layer.crop((40,520,1040,1300)).resize((700,600)),(10,330))
+ elif kind=='rainshadow':
+  d.rectangle((20,880,700,1010),fill='#ead8a6')
+  d.polygon([(70,900),(350,450),(650,900)],fill='#849b89',outline=INK)
+  for j in range(15):
+   u=(t*.16+j/15)%1
+   x=50+620*u;y=850-350*math.sin(math.pi*u)
+   d.ellipse((x-6,y-6,x+6,y+6),fill=BLUE if u<.5 else GOLD)
+  arrow(d,(60,700),(240,490),BLUE);arrow(d,(440,500),(640,750),GOLD)
+  for j in range(9):
+   x=100+j*18;y=620+(t*150+j*37)%230
+   d.line((x,y,x-8,y+22),fill=BLUE,width=5)
+  label(d,'हवा ऊपर → ठंडी',170,380,30,BLUE)
+  label(d,'नीचे → गर्म',540,960,30,RED)
+ elif kind=='bottle':
+  for i in range(2):
+   x=190+i*340;shrink=(50*p if i==0 else 4*p) if reveal else 0
+   d.rounded_rectangle((x-90+shrink,430,x+90-shrink,900),35,fill='#cbe9ef',outline=BLUE,width=5)
+   d.rectangle((x-40,390,x+40,435),fill=INK)
+   for j in range(18):
+    xx=x+(-65+(j%3)*60)*(1-shrink/100)
+    yy=490+(j//3)*65+5*math.sin(t*3+j)
+    d.ellipse((xx-6,yy-6,xx+6,yy+6),fill=BLUE if i else GOLD)
+   if reveal:arrow(d,(x-145,680),(x-90+shrink,680),RED)
+  label(d,'हवा',190,960,38,BLUE);label(d,'पानी',530,960,38,BLUE)
  elif kind=='gravity':
   legacy.globe(d,170,760,130);legacy.globe(d,550,760,130,True)
   # Same person crosses both worlds without changing size.
