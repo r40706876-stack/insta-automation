@@ -124,14 +124,14 @@ def render(sc,t,duration):
  # One coherent coastal location with different camera shots.
  if phase=='question':
   hot=t<duration*.58
-  hero(pd,414,600,t,hop=hot,cool=not hot,scale=.9)
+  hero(pd,414,570,t,hop=hot,cool=not hot,scale=.9)
   if hot:
    for j in range(4):
     xx=365+j*31;yy=595-((t*65+j*19)%58)
     pd.arc((xx,yy,xx+19,yy+25),210,340,fill='#df693d',width=3)
   else:
    for j in range(4):
-    xx=180+((t*150+j*67)%220);yy=380+j*24
+    xx=70+((t*150+j*67)%180);yy=380+j*24
     pd.arc((xx,yy,xx+85,yy+15),180,345,fill=BLUE,width=4)
   label(pd,'आह! गरम रेत!' if hot else 'अरे… ठंडी हवा!',300,140,38,'#a94b27' if hot else BLUE)
   panel=camera(panel,1.12+.08*math.sin(p*math.pi),(390,370))
@@ -146,15 +146,15 @@ def render(sc,t,duration):
   label(pd,'गरम हवा ऊपर उठी',340,145,36,'#a95127')
   panel=camera(panel,1.18,(405,325-35*p))
  elif phase=='demonstrate':
-  hero(pd,430,600,t,cool=True,scale=.95)
+  hero(pd,430,570,t,cool=True,scale=.95)
   for j in range(6):
-   xx=20+((t*155+j*88)%380);yy=340+j*22
+   xx=20+((t*155+j*88)%240);yy=340+j*22
    pd.arc((xx,yy,xx+86,yy+18),185,350,fill='#eefaff',width=5)
   stream(pd,[(70,360),(240,360),(395,360)],t,BLUE,9)
   label(pd,'समुद्र की ठंडी हवा आई',330,125,37,BLUE)
   panel=camera(panel,1.08+.13*motion.ease(p),(365+40*p,365))
  else:
-  hero(pd,430,600,t,cool=True,scale=.85)
+  hero(pd,430,570,t,cool=True,scale=.85)
   stream(pd,[(535,395),(535,285),(535,205)],t,GOLD,8)
   stream(pd,[(70,365),(250,365),(395,365)],t,BLUE,8)
   label(pd,'गरम हवा ऊपर',350,125,37,'#a95127')
