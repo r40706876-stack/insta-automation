@@ -3066,9 +3066,14 @@ def _with_series(caption):
 
 def _upload_once(video_file, caption, thumb_ms=0, cover_url=None):
     """Ek koshish: container -> (10s ruko) -> rupload -> FINISHED -> publish."""
+    import gs_publication as publication
+    resolve_font()
+    video_file = publication.prepare_video(video_file, get_font)
     body = {"media_type": "REELS", "upload_type": "resumable", "caption": _with_series(caption),
             "thumb_offset": str(int(thumb_ms)),      # cover = ant wala poster frame
             "share_to_feed": "true", "access_token": IG_ACCESS_TOKEN}
+    publication.container_policy(body)
+    print("Collab invitation requested: @" + publication.HANDLE)
     if cover_url:                                # alag se bana sundar cover photo
         body["cover_url"] = cover_url
     r = requests.post(f"{GRAPH}{IG_USER_ID}/media", data=body, timeout=60).json()
