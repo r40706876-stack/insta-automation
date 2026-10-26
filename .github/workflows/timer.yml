@@ -36,6 +36,9 @@ jobs:
             for s in $SLOTS; do
               T=${s%%=*}; J=${s##*=}
               TS=$(TZ=Asia/Kolkata date -d "$d $T" +%s)
+              # Revised regular schedule begins tomorrow; tonight is reserved for the trial.
+              START=$(TZ=Asia/Kolkata date -d '2026-10-27 00:00' +%s)
+              if [ "$TS" -lt "$START" ]; then continue; fi
               if [ $TS -gt $((NOW+60)) ] && { [ -z "$BEST" ] || [ $TS -lt $BESTT ]; }; then BEST=$J; BESTT=$TS; BESTS=$T; fi
             done
           done
