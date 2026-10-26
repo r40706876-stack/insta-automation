@@ -6,7 +6,7 @@ from PIL import Image,ImageDraw,ImageOps,ImageFilter
 import auto_poster as e
 import gs_scene_stage as motion
 DAY=os.getenv('GS_TARGET_DATE') or datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=5,minutes=30))).date().isoformat()
-ROOT=Path('experiments/daily_visual_gs')/DAY
+ROOT=Path(os.getenv('GS_VISUAL_OUTPUT','experiments/daily_visual_gs/'+DAY))
 ROOT.mkdir(parents=True,exist_ok=True)
 W,H,FPS=720,1280,24
 COLORS=['#46e6ff','#ffe46b','#ff91ae','#95ffc1']
@@ -20,17 +20,18 @@ def script():
  used=set()
  for f in ROOT.parent.glob('*/script.json'):
   used.add(json.loads(f.read_text()).get('question_hash'))
- bank=e.load_bank();eligible=[]
+ bank=json.loads(os.environ['GS_REFERENCE_JSON']) if os.getenv('GS_REFERENCE_JSON') else e.load_bank();eligible=[]
  for q in bank:
   digest=hashlib.sha256(q.get('question','').encode()).hexdigest()
-  if digest not in used and q.get('answer') in q.get('options',{}) and len(q.get('explanation',''))>50:eligible.append((digest,q))
+  if digest not in used and q.get('answer') in q.get('options',{}) and len(q.get('explanation',''))>10:eligible.append((digest,q))
  # Rotate across every subject present in the source bank.
  subjects=sorted(set(str(q.get('subject','GS')) for _,q in eligible))
  assert subjects,'Source bank exhausted'
- subject=subjects[datetime.date.fromisoformat(DAY).toordinal()%len(subjects)]
+ subject=os.getenv('GS_VISUAL_SUBJECT') or subjects[datetime.date.fromisoformat(DAY).toordinal()%len(subjects)]
+ assert subject in subjects,'No grounded source for requested subject'
  pool=[x for x in eligible if str(x[1].get('subject','GS'))==subject]
  for digest,q in pool[:15]:
-  prompt='''Create a Hindi GS motion explainer ONLY from the reference. Return JSON {ok:boolean,title:Hindi <=8 words,scenes:[{label:Hindi <=7 words,speech:Hindi 12-22 words,animation:{type:rail|sunrise|river|gravity|quantity|timeline|process|inertia|water,phase:question|explain|demonstrate|recall,labels:[2-3 short Hindi labels, each <=26 characters],amounts:[integer,integer],years:[integer,integer]}}]}. Exactly four scenes. Every scene must show the same narrated concept with a matching physical or logical transformation. Concrete question, two explanation steps, recall. Simple conversational Hindi; no humming/filler. Supported scenes have STRICT semantics: rail = jointed railway thermal expansion only, heating makes the gap narrower; sunrise = India IST 82.5 E only with real map and synchronized clocks; river = Narmada westward to Arabian Sea only; gravity = same mass on Earth/Moon with weaker lunar pull only; quantity = compare two counts 1..12, supply unequal amounts grounded in reference, no invented numbers; timeline = 2-3 distinct sorted exact years and matching events; inertia = braking bus, feet stop with floor, upper body continues only; water = evaporation rising and rain falling only; process = animate 2-3 named institutional/causal steps in the order explicitly supported by reference. Do not use process as a generic fallback for a physical concept. Do not select animations for merely related keywords. No invented facts, dates or unverified causal claims. No answer in question/recall labels until reveal. If no mechanism fits, return ok:false. Reference: '''+json.dumps(q,ensure_ascii=False)
+  prompt='''Create a Hindi GS motion explainer ONLY from the reference. Return JSON {ok:boolean,title:Hindi <=8 words,scenes:[{label:Hindi <=7 words,speech:Hindi 12-22 words,animation:{type:rail|sunrise|river|gravity|quantity|timeline|process|inertia|water|rainshadow|bottle,phase:question|explain|demonstrate|recall,labels:[2-3 short Hindi labels, each <=26 characters],amounts:[integer,integer],years:[integer,integer]}}]}. Exactly four scenes. Target 18-26 seconds, 45-60 Hindi words total. First speech 8-12 words about an everyday concrete puzzle, never a greeting. Start showing the mechanism by second 2. No title-reading or waiting countdown. Last scene applies the SAME lesson to a new example or asks a clear visual test, answer only in final 1.5 seconds. Every scene must show the same narrated concept with a matching physical or logical transformation. Concrete question, two explanation steps, recall. Simple conversational Hindi; no humming/filler. Supported scenes have STRICT semantics: rainshadow = moist wind rises over a mountain and rains on windward side, then descends warmer and drier on leeward side; bottle = sealed flexible bottle, air compresses appreciably while liquid water compresses very little under ordinary hand pressure;  rail = jointed railway thermal expansion only, heating makes the gap narrower; sunrise = India IST 82.5 E only with real map and synchronized clocks; river = Narmada westward to Arabian Sea only; gravity = same mass on Earth/Moon with weaker lunar pull only; quantity = compare two counts 1..12, supply unequal amounts grounded in reference, no invented numbers; timeline = 2-3 distinct sorted exact years and matching events; inertia = braking bus, feet stop with floor, upper body continues only; water = evaporation rising and rain falling only; process = animate 2-3 named institutional/causal steps in the order explicitly supported by reference. Do not use process as a generic fallback for a physical concept. Do not select animations for merely related keywords. No invented facts, dates or unverified causal claims. No answer in question/recall labels until reveal. If no mechanism fits, return ok:false. Reference: '''+json.dumps(q,ensure_ascii=False)
   s=e._groq(prompt) or e._gemini(prompt)
   if not s or not s.get('ok') or len(s.get('scenes',[]))!=4:continue
   try:
