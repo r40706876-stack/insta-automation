@@ -1,0 +1,30 @@
+{
+  "duration": 41,
+  "scene_seconds": [
+    4,
+    7,
+    8,
+    6,
+    8,
+    8
+  ],
+  "speech": [
+    "समुद्र बगल में, फिर भी रेगिस्तान! बारिश कहाँ गई?",
+    "दक्षिण अमेरिका का अटाकामा देखो। इसके तट पर ठंडी हम्बोल्ट धारा उत्तर की ओर बहती है।",
+    "ठंडा समुद्र, कम वाष्पीकरण। ऊपर गर्म हवा की परत, नीचे की नम हवा को ऊपर उठने से रोकती है।",
+    "नमी से तट पर कोहरा बन सकता है। लेकिन कोहरा होना, बारिश होना नहीं है।",
+    "नीचे उतरती सूखी हवा और एंडीज़ की वर्षाछाया भी सूखे में योगदान देती हैं। सिर्फ धारा कारण नहीं।",
+    "याद रखो। समुद्र पास होना काफी नहीं। बारिश के लिए नम हवा का ऊपर उठकर ठंडा होना भी जरूरी है।"
+  ],
+  "sources": [
+    "https://prod-01-asg-www-climate.woc.noaa.gov/news-features/event-tracker/flooding-chile%E2%80%99s-atacama-desert-after-years%E2%80%99-worth-rain-one-day",
+    "https://pubs.usgs.gov/gip/deserts/types/",
+    "https://science.nasa.gov/earth/earth-observatory/cloudy-earth-85843/"
+  ],
+  "map_source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_110m_land.geojson",
+  "map_license": "Natural Earth public domain",
+  "cloudflare_image": true,
+  "synthetic_photo_label": true,
+  "publication": "demo only",
+  "sha256": "7d5b97cf2845b244faa8e7feee7043c3af00a9d8435eac14b111ab5f829ec3e9"
+}
