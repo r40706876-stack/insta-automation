@@ -4,6 +4,7 @@ from pathlib import Path
 import numpy as np
 from PIL import Image,ImageDraw,ImageOps,ImageFilter
 import auto_poster as e
+import gs_motion as motion
 DAY=os.getenv('GS_TARGET_DATE') or datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=5,minutes=30))).date().isoformat()
 ROOT=Path('experiments/daily_visual_gs')/DAY
 ROOT.mkdir(parents=True,exist_ok=True)
@@ -12,7 +13,13 @@ COLORS=['#46e6ff','#ffe46b','#ff91ae','#95ffc1']
 def save(name,obj): (ROOT/name).write_text(json.dumps(obj,ensure_ascii=False,indent=2))
 def script():
  p=ROOT/'script.json'
- if p.exists():return json.loads(p.read_text())
+ if p.exists():
+  cached=json.loads(p.read_text())
+  if cached.get('renderer_version')==motion.VERSION:return cached
+  cached['renderer_version']=motion.VERSION
+  for sc in cached['scenes']:
+   sc.setdefault('motion',{'type':'flow','nodes':[sc['label']],'icon':'book'})
+  save('script.json',cached);return cached
  used=set()
  for f in ROOT.parent.glob('*/script.json'):
   used.add(json.loads(f.read_text()).get('question_hash'))
@@ -26,13 +33,13 @@ def script():
  subject=subjects[datetime.date.fromisoformat(DAY).toordinal()%len(subjects)]
  pool=[x for x in eligible if str(x[1].get('subject','GS'))==subject]
  for digest,q in pool[:15]:
-  prompt='''Create a beautiful 25-40 second Hindi GS concept explainer from ONLY the supplied reference. No invented facts, dates, exam claims, statistics, or current affairs. Return JSON {ok:boolean,title:Hindi <=8 words,scenes:[{label:Hindi <=8 words,speech:Hindi 12-22 words,image:English detailed illustration prompt,kind:one of reveal,compare,process,quiz}]} with exactly 4 scenes. Start with a concrete visual question; explain simply in two steps; end with a recall question and its answer in speech. Each scene visually shows the specific concept, not generic books/students. Use no hmm/uh/humming/filler, no music descriptions. If source is unclear/outdated return ok:false. Reference: '''+json.dumps(q,ensure_ascii=False)
+  prompt='''Create a beautiful 25-40 second Hindi GS concept explainer from ONLY the supplied reference. No invented facts, dates, exam claims, statistics, or current affairs. Return JSON {ok:boolean,title:Hindi <=8 words,scenes:[{label:Hindi <=8 words,speech:Hindi 12-22 words,image:English detailed illustration prompt,kind:one of reveal,compare,process,quiz,motion:{type:one of flow,timeline,compare,location,nodes:[2-3 short Hindi factual labels <=5 words each],icon:book or none}}]} with exactly 4 scenes. Write spoken Hindi that a 12-year-old understands. Use short complete sentences, familiar words, no formal textbook phrasing. Each sentence must explain one thing. Do not introduce unverified causal claims just to make a hook. Motion nodes must show the same facts being narrated in order. Start with a concrete visual question; explain simply in two steps; end with a recall question and its answer in speech. Each scene visually shows the specific concept, not generic books/students. Use no hmm/uh/humming/filler, no music descriptions. If source is unclear/outdated return ok:false. Reference: '''+json.dumps(q,ensure_ascii=False)
   s=e._groq(prompt) or e._gemini(prompt)
   if not s or not s.get('ok') or len(s.get('scenes',[]))!=4:continue
   if any(not 5<=len(x.get('speech','').split())<=28 or len(x.get('label',''))>65 for x in s['scenes']):continue
   audit=e._groq('Verify script against reference. Return JSON {ok:boolean}. Reject unsupported or incorrect claims. Reference:'+json.dumps(q,ensure_ascii=False)+' Script:'+json.dumps(s,ensure_ascii=False))
   if not audit or audit.get('ok') is not True:continue
-  s.update(question_hash=digest,reference=q,subject=subject);save('script.json',s);return s
+  s.update(renderer_version=motion.VERSION,question_hash=digest,reference=q,subject=subject);save('script.json',s);return s
  raise RuntimeError('No grounded script passed validation')
 def build():
  s=script();e.W=W;e.H=H;e.FPS=FPS
@@ -46,9 +53,10 @@ def build():
    Image.open(io.BytesIO(b)).convert('RGB').save(p,quality=94)
   images.append(ImageOps.fit(Image.open(p).convert('RGB'),(W,H)))
  vv=e.make_voices([{'segs':[(None,None,x['speech'])]} for x in s['scenes']],rot=0)
- audio=[]
+ audio=[];word_times=[]
  for v in vv:
-  a,_=e._compress_pauses(v[0],max_pause=.22)
+  a,remap=e._compress_pauses(v[0],max_pause=.22)
+  word_times.append([(remap(a),remap(b),w) for a,b,w in (v[1] or [])])
   if len(a)<e.SR*.6 or np.max(np.abs(a))<.005:raise RuntimeError('Missing real narration')
   audio.append(a)
  ds=[len(a)/e.SR+.35 for a in audio];starts=np.cumsum([0]+ds[:-1]).tolist();total=sum(ds)
@@ -69,12 +77,19 @@ def build():
   for y in range(H):
    opacity=int(180*max(0,1-y/430)+215*max(0,(y-690)/590))
    d.line((0,y,W,y),fill=(3,14,27,opacity))
-  im=Image.alpha_composite(im,overlay);d=ImageDraw.Draw(im)
+  im=Image.alpha_composite(im,overlay)
+  im=motion.render(im,s['scenes'][k].get('motion',{}),lt,ds[k]);d=ImageDraw.Draw(im)
   d.text((36,45),'MINUTE ME GS',font=e.get_font(23),fill=COLORS[0])
   text(d,s['title'],155,48,COLORS[1]);text(d,s['scenes'][k]['label'],850,48,COLORS[k])
   words=s['scenes'][k]['speech'].split();chunks=[' '.join(words[i:i+6]) for i in range(0,len(words),6)]
   idx=min(len(chunks)-1,int(max(0,lt-.1)/max(.1,ds[k]-.35)*len(chunks)))
-  text(d,chunks[idx],1040,34,'white')
+  timed=word_times[k]
+  if timed:
+   wi=max([i for i,(a,b,w) in enumerate(timed) if a<=max(0,lt-.1)] or [0]);group=timed[(wi//5)*5:(wi//5)*5+5]
+   line=' '.join(w for a,b,w in group)
+   text(d,line,1040,36,'white')
+   active=timed[wi][2];text(d,active,1120,40,COLORS[k])
+  else:text(d,chunks[idx],1040,34,'white')
   if s['scenes'][k].get('kind')=='quiz':
    d.ellipse((314,610,406,702),fill='#102b43',outline=COLORS[1],width=4)
    d.text((360,652),str(max(1,3-int(lt))),font=e.get_font(46),fill=COLORS[1],anchor='mm')
@@ -87,7 +102,7 @@ def build():
  p.stdin.close();assert p.wait()==0
  check=subprocess.run(['ffmpeg','-hide_banner','-i',str(out),'-vf','blackdetect=d=0.15:pix_th=0.10','-f','null','-'],capture_output=True,text=True)
  assert check.returncode==0 and 'black_start:' not in check.stderr,'Decode/black-frame validation failed'
- save('validated.json',{'duration':total,'sha256':hashlib.sha256(out.read_bytes()).hexdigest(),'voice':'Edge TTS, no music/humming','date':DAY})
+ save('validated.json',{'duration':total,'sha256':hashlib.sha256(out.read_bytes()).hexdigest(),'voice':'Edge TTS, no music/humming','date':DAY,'renderer_version':motion.VERSION})
  frame(0).save(ROOT/'cover.jpg');return s
 if __name__=='__main__':
  import sys
@@ -95,6 +110,7 @@ if __name__=='__main__':
   receipt=ROOT/'published.json'
   if receipt.exists():print(receipt.read_text());raise SystemExit()
   assert (ROOT/'validated.json').exists(),'Build must pass first'
+  assert json.loads((ROOT/'validated.json').read_text()).get('renderer_version')==motion.VERSION,'Old photo-only renderer blocked'
   assert not (ROOT/'publish_started.json').exists(),'Uncertain prior attempt: inspect account before retry'
   s=json.loads((ROOT/'script.json').read_text());out=ROOT/'reel.mp4'
   assert hashlib.sha256(out.read_bytes()).hexdigest()==json.loads((ROOT/'validated.json').read_text())['sha256']
@@ -105,4 +121,4 @@ if __name__=='__main__':
   assert pid;save('published.json',{'media_id':pid,'date':DAY})
   obj=e.requests.get(e.GRAPH+pid,params={'fields':'permalink','access_token':e.IG_ACCESS_TOKEN},timeout=30).json();save('published.json',{'media_id':pid,'permalink':obj.get('permalink'),'date':DAY})
  else:
-  if os.getenv('GS_FORCE_BUILD')=='1' or not (ROOT/'validated.json').exists():build()
+  if os.getenv('GS_FORCE_BUILD')=='1' or not (ROOT/'validated.json').exists() or json.loads((ROOT/'validated.json').read_text()).get('renderer_version')!=motion.VERSION:build()
