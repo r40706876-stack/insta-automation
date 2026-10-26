@@ -7,7 +7,7 @@
     6
   ],
   "voice": "edge-tts hi-IN-SwaraNeural",
-  "sha256": "37aa063b4ce2243ea6b80da388dc21c90d2af366581d4de4a8c9659115be55c4",
+  "sha256": "c6cd42755dc018c3ab6a844c228a23fa1621859d0ab26bcb436dec4cdbf0b9da",
   "build_only": true,
   "renderer": "reference polished shaded globe + custom full-frame coast layers",
   "reference_code": "polished_gs.py",
