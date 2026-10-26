@@ -2,7 +2,7 @@
 import math
 from PIL import Image,ImageDraw,ImageFilter
 import auto_poster as e
-VERSION=2
+VERSION=3
 C=['#46e6ff','#ffe46b','#ff91ae','#95ffc1']
 def ease(x):
  x=max(0,min(1,x));return 1-(1-x)**3
@@ -15,30 +15,56 @@ def arrow(d,a,b,col,p=1):
  ang=math.atan2(yy-y,xx-x)
  d.polygon([(xx,yy),(xx-17*math.cos(ang-.5),yy-17*math.sin(ang-.5)),(xx-17*math.cos(ang+.5),yy-17*math.sin(ang+.5))],fill=col)
 def book(d,x,y,t,col):
+ x+=8*math.sin(t*.9)
  opening=ease(t/.7);w=70*opening
  d.polygon([(x,y+12),(x-w,y-8),(x-w,y+74),(x,y+94)],fill='#eaf3f4',outline=col,width=3)
  d.polygon([(x,y+12),(x+w,y-8),(x+w,y+74),(x,y+94)],fill='#fff9df',outline=col,width=3)
  for j in range(4):
   d.line((x-w+10,y+12+j*13,x-10,y+30+j*13),fill='#8095a3',width=2)
   d.line((x+10,y+30+j*13,x+w-10,y+12+j*13),fill='#8095a3',width=2)
+# Pages lift and turn independently of the background camera.
+def turning_page(d,x,y,t):
+ a=(t*.7)%1;w=100*math.cos(a*math.pi)
+ d.polygon([(x,y),(x+w,y-30*math.sin(a*math.pi)),(x+w,y+85),(x,y+105)],fill='#fff8d9',outline='#53ddeb',width=2)
+
+def building(d,x,y,t,col):
+ # Walls rise, the roof settles, then arches and windows are revealed.
+ p=ease(t/.9);top=y-170*p
+ d.rectangle((x-150,top,x+150,y),fill='#e3bd81',outline='#fff2ca',width=3)
+ if t>.35:
+  q=ease((t-.35)/.65);roof=top-45*q
+  d.polygon([(x-170,top),(x,roof),(x+170,top)],fill='#f8dba1',outline=col,width=3)
+ if t>.8:
+  for j in range(5):
+   xx=x-115+j*57;q=ease((t-.8-j*.12)/.4)
+   d.rounded_rectangle((xx-16,y-105*q,xx+16,y),16,fill='#335c70',outline='#fff0c8',width=2)
+ for j in range(9):
+  if t>1.2:
+   xx=x-130+j*32;d.ellipse((xx,y+14,xx+4,y+18),fill=col)
+ label(d,'सांकेतिक शिक्षण चित्र',x,y+45,21,'#eaf4f6',400)
+
 def render(im,plan,t,dur):
  """Every scene contains a paced explanatory graphic, not just a camera move."""
  layer=Image.new('RGBA',im.size);d=ImageDraw.Draw(layer)
- d.rounded_rectangle((34,390,686,825),30,fill=(5,23,39,225),outline=(92,178,200,130),width=2)
+ d.rounded_rectangle((34,630,686,825),24,fill=(5,23,39,180),outline=(92,178,200,110),width=2)
+ # The illustration itself animates above the compact explanation.
+ if plan.get('icon')=='building':building(d,360,590,t,C[1])
+ elif plan.get('icon')=='book':
+  book(d,360,415,t,C[1]);turning_page(d,360,425,t)
  nodes=plan.get('nodes',[])[:3];typ=plan.get('type','flow')
  if typ=='timeline':
-  d.line((110,620,610,620),fill='#456273',width=5)
+  d.line((110,740,610,620),fill='#456273',width=5)
   d.line((110,620,110+500*ease(t/max(1,dur-.8)),620),fill=C[1],width=6)
   for j,n in enumerate(nodes):
    p=ease((t-j*.8)/.5);x=120+j*240
    d.ellipse((x-11*p,620-11*p,x+11*p,620+11*p),fill=C[j])
-   if p>.1:label(d,n,x,520 if j%2==0 else 715,30,C[j],185)
+   if p>.1:label(d,n,x,680 if j%2==0 else 790,30,C[j],185)
  elif typ=='compare':
   for j,n in enumerate(nodes[:2]):
-   p=ease((t-j*.7)/.5);x=190+j*340;yy=600+(1-p)*70
-   d.rounded_rectangle((x-140,yy-125,x+140,yy+125),20,fill=(20,51,68,255),outline=C[j],width=3)
+   p=ease((t-j*.7)/.5);x=190+j*340;yy=725+(1-p)*30
+   d.rounded_rectangle((x-140,yy-65,x+140,yy+65),20,fill=(20,51,68,255),outline=C[j],width=3)
    label(d,n,x,yy,34,C[j],240)
-  if t>1.2:arrow(d,(340,600),(380,600),C[1],ease((t-1.2)/.5))
+  if t>1.2:arrow(d,(340,725),(380,725),C[1],ease((t-1.2)/.5))
  elif typ=='location':
   # Locator rings deliberately indicate a named place, not a fabricated map.
   x,y=360,540
@@ -49,11 +75,11 @@ def render(im,plan,t,dur):
   if len(nodes)>1:label(d,nodes[1],360,770,28,'white',560)
  else:
   for j,n in enumerate(nodes):
-   p=ease((t-j*.7)/.5);y=465+j*143+(1-p)*25
+   p=ease((t-j*.7)/.5);y=670+j*63+(1-p)*25
    if p<=0:continue
-   d.rounded_rectangle((110,y-43,610,y+43),18,fill=(18,49,66,255),outline=C[j],width=3)
-   label(d,n,360,y,33,C[j],450)
-   if j<min(2,len(nodes)-1):arrow(d,(360,y+49),(360,y+87),C[j],ease((t-j*.7-.3)/.4))
- if plan.get('icon')=='book':book(d,605,294,t,C[1])
+   d.rounded_rectangle((110,y-25,610,y+25),18,fill=(18,49,66,255),outline=C[j],width=3)
+   label(d,n,360,y,29,C[j],450)
+   if j<min(2,len(nodes)-1):arrow(d,(360,y+27),(360,y+36),C[j],ease((t-j*.7-.3)/.4))
+ 
  im.alpha_composite(layer)
  return im
