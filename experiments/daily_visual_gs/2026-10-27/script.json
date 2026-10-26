@@ -1,30 +1,63 @@
 {
   "ok": true,
-  "title": "कलकत्ता मदरसा: 1781",
+  "title": "यह मदरसा किसने खुलवाया?",
   "scenes": [
     {
-      "label": "प्रश्न: कहाँ?",
-      "speech": "1781 में मुस्लिम कानून के अध्ययन के लिए मदरसा कहाँ स्थापित हुआ?",
+      "label": "एक शहर, एक साल",
+      "speech": "सत्रह सौ इक्यासी। अंग्रेज़ों के दौर में एक मदरसा खुला। किस शहर में? पहले तस्वीर से अंदाज़ा लगाओ।",
       "image": "A historic 18th century Indian cityscape of Calcutta with a colonial building labeled \"Madrasa for Muslim Law\", Warren Hastings observing, detailed sepia illustration",
-      "kind": "reveal"
+      "kind": "reveal",
+      "motion": {
+        "type": "timeline",
+        "nodes": [
+          "1781",
+          "कौन-सा शहर?"
+        ],
+        "icon": "book"
+      }
     },
     {
-      "label": "मुस्लिम कानून की पढ़ाई",
-      "speech": "यहाँ मुस्लिम कानून का अध्ययन और शिक्षण होता था। इस संस्था की स्थापना वॉरेन हेस्टिंग्स ने की थी।",
+      "label": "यहाँ क्या पढ़ाते थे?",
+      "speech": "यहाँ मुस्लिम कानून पढ़ाया जाता था। आसान भाषा में, उस कानून को पढ़ने और समझने की जगह।",
       "image": "Portrait of Warren Hastings in Governor General attire, standing before a map of Bengal, 18th-century style illustration",
-      "kind": "reveal"
+      "kind": "reveal",
+      "motion": {
+        "type": "flow",
+        "nodes": [
+          "मुस्लिम कानून",
+          "पढ़ना और समझना"
+        ],
+        "icon": "book"
+      }
     },
     {
-      "label": "मदरसा की स्थापना",
-      "speech": "याद रखो, वर्ष अठारह नहीं, सत्रह सौ इक्यासी। शहर कलकत्ता, जिसे आज कोलकाता कहते हैं।",
+      "label": "शहर: कलकत्ता",
+      "speech": "यह मदरसा कलकत्ता में खुला था। इसे वॉरेन हेस्टिंग्स ने स्थापित किया था। शहर और नाम साथ याद रखो।",
       "image": "Illustration of a madrasa building in 1781 Calcutta with scholars studying Islamic law, colonial architecture, detailed",
-      "kind": "process"
+      "kind": "process",
+      "motion": {
+        "type": "flow",
+        "nodes": [
+          "वॉरेन हेस्टिंग्स",
+          "कलकत्ता मदरसा",
+          "1781"
+        ],
+        "icon": "book"
+      }
     },
     {
-      "label": "स्मरण प्रश्न",
-      "speech": "अब बताओ, सत्रह सौ इक्यासी में यह मदरसा किस शहर में स्थापित हुआ? जवाब है, कलकत्ता।",
+      "label": "अब बिना देखे बताओ",
+      "speech": "अब बताओ, शहर कौन-सा था? कलकत्ता। और साल? सत्रह सौ इक्यासी। अपने पढ़ाई वाले दोस्त से भी पूछकर देखो।",
       "image": "A quiz style illustration showing a question mark over a map of India highlighting Calcutta, with answer text appearing",
-      "kind": "quiz"
+      "kind": "quiz",
+      "motion": {
+        "type": "compare",
+        "nodes": [
+          "शहर: कलकत्ता",
+          "साल: 1781"
+        ],
+        "icon": "none"
+      }
     }
   ],
   "question_hash": "78102b09e5ae9d8d193230a4198c31ff1dfb39013a13f13c064256c104c7331a",
@@ -54,5 +87,6 @@
     "id": "4c9ad648fa",
     "seq": 4
   },
-  "subject": "History"
+  "subject": "History",
+  "renderer_version": 2
 }
