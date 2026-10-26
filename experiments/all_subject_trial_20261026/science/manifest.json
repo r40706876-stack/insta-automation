@@ -1,0 +1,23 @@
+{
+  "id": "science",
+  "subject": "विज्ञान",
+  "title": "बस रुकी, शरीर आगे क्यों?",
+  "duration": 20,
+  "scene_seconds": [
+    3.6,
+    3.8,
+    4.4,
+    3.8,
+    4.4
+  ],
+  "voice": "hi-IN-SwaraNeural",
+  "source": "https://sathee.iitk.ac.in/ncert-books/ncert-books-theory/class-11/nbt-phy-11/phy-11-chapter-4-laws-of-motion/",
+  "speech": [
+    "बस ने ब्रेक लगाया। शरीर आगे क्यों झुका?",
+    "बस धीमी हुई, पैर फर्श के साथ रुकने लगे।",
+    "ऊपरी शरीर अपनी चाल बनाए रखना चाहता है। यही जड़त्व है।",
+    "न्यूटन का पहला नियम, अवस्था बदलने का विरोध।",
+    "अब बस अचानक चले तो झटका किधर? पीछे।"
+  ],
+  "sha256": "e05da9f7831c0b979d8ceb77b7c07388d4c875f2ad75ce77703ded7a02520fd0"
+}
