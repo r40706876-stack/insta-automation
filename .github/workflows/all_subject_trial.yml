@@ -4,6 +4,8 @@ on:
   push:
     branches: [main]
     paths: [experiments/all_subject_trial_request.json]
+  schedule:
+    - cron: '0 14,16,18,20 26 10 *'
   workflow_dispatch:
 
 permissions:
@@ -43,6 +45,17 @@ jobs:
           PYTHONUNBUFFERED: '1'
           GH_TOKEN: ${{ github.token }}
         run: |
+          if [ "${{ github.event_name }}" = schedule ]; then
+            python - <<'PY'
+          import json,datetime,pathlib
+          plan=json.load(open('experiments/all_subject_trial_plan.json'))
+          now=datetime.datetime.now(datetime.timezone.utc)
+          eligible=[s for s in plan['slots'] if not pathlib.Path('experiments/all_subject_trial_20261026',s['id'],'published.json').exists() and 0<=(now-datetime.datetime.fromisoformat(s['publish_utc'].replace('Z','+00:00'))).total_seconds()<=3000]
+          if not eligible: raise SystemExit('No eligible slot: refusing unrelated/late publication')
+          s=eligible[0]
+          pathlib.Path('experiments/all_subject_trial_request.json').write_text(json.dumps(dict(mode='publish',id=s['id'],trial=plan['trial'],scheduled_utc=s['publish_utc'])))
+          PY
+          fi
           MODE=$(python -c "import json; r=json.load(open('experiments/all_subject_trial_request.json')); assert r['mode'] in ('build','publish','recover'); print(r['mode'])")
           SUBJECT=$(python -c "import json; print(json.load(open('experiments/all_subject_trial_request.json')).get('id',''))")
           if [ "$MODE" = "recover" ]; then
