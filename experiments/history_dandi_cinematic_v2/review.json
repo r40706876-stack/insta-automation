@@ -1,0 +1,37 @@
+{
+  "duration": 25.267437641723355,
+  "scene_seconds": [
+    5.112471655328798,
+    6.534988662131519,
+    6.907482993197279,
+    6.712494331065759
+  ],
+  "voice": "edge-tts hi-IN-SwaraNeural",
+  "sha256": "a6601b7b1a549f4d283346ba855e928a24de7dd9382cf6e9d55c80ec4b22605f",
+  "speech": [
+    "बारह मार्च या छह अप्रैल? दांडी यात्रा में किस दिन क्या हुआ?",
+    "बारह मार्च उन्नीस सौ तीस: गांधीजी साबरमती से दांडी की यात्रा पर निकले।",
+    "छह अप्रैल उन्नीस सौ तीस: दांडी में नमक कानून तोड़ा। दोनों घटनाएँ अलग हैं।",
+    "अब दोस्त से बिना वीडियो दिखाए पूछो: यात्रा कब शुरू हुई, नमक कानून कब तोड़ा?"
+  ],
+  "build_only": true,
+  "sources": [
+    "https://rajghat.gov.in/chronology",
+    "https://www.gandhiheritageportal.org/dandi-march-details",
+    "https://www.publicationsdivision.nic.in/catalog/view/theme/default/images/new_ngm_final/timeline/pages/page14.html"
+  ],
+  "visuals": [
+    "perspective-projected anti-aliased date cards",
+    "illuminated detailed coastline",
+    "geographic animated march trace",
+    "3D salt-to-shore transition",
+    "two-event revision card"
+  ],
+  "map_source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_10m_land.geojson",
+  "map_note": "Regional geographic coastline, not a political boundary map. Journey line schematic, not a surveyed exact path.",
+  "historical_image": "AI illustration, explicitly labelled; not an archival photo",
+  "tax_note": "No claim that the salt tax was repealed on 6 April 1930",
+  "share_hypothesis": "A study partner can test event/date matching; final card is a reusable revision reference. Unproven until audience testing.",
+  "fps": 30,
+  "motion_fx_version": 1
+}
