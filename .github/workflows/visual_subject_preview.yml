@@ -16,7 +16,7 @@ jobs:
       - run: |
           pip install --timeout 30 --retries 1 -r requirements.txt imageio-ffmpeg
           python -c "import imageio_ffmpeg,os; p='/usr/local/bin/ffmpeg'; os.path.exists(p) or os.symlink(imageio_ffmpeg.get_ffmpeg_exe(),p)"
-      - run: python scheduled_visual_gs.py
+      - run: python -m py_compile viewer_retry_rainshadow.py && python viewer_retry_rainshadow.py
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
@@ -30,7 +30,7 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
-          git add experiments/scheduled_visual_gs
+          git add experiments/viewer_retry_rainshadow_v2
           git diff --cached --quiet && exit 0
           git commit -m 'Save scheduled visual experiment preview [skip ci]'
           git pull --rebase
@@ -39,3 +39,5 @@ jobs:
 # Retry first sourced preview after script validation failed.
 
 # Final visual review: wind clears the mountain crest.
+
+# Rebuild distinct four-scene viewer retry including visible WhatsApp banner.
