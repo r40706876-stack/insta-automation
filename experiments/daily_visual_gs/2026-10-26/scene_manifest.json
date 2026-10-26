@@ -1,0 +1,38 @@
+{
+  "renderer_version": 5,
+  "scenes": [
+    {
+      "type": "inertia",
+      "phase": "question",
+      "labels": [
+        "पैर धीमे",
+        "शरीर आगे"
+      ]
+    },
+    {
+      "type": "inertia",
+      "phase": "explain",
+      "labels": [
+        "पैर धीमे",
+        "शरीर आगे"
+      ]
+    },
+    {
+      "type": "inertia",
+      "phase": "demonstrate",
+      "labels": [
+        "पैर धीमे",
+        "शरीर आगे"
+      ]
+    },
+    {
+      "type": "inertia",
+      "phase": "recall",
+      "labels": [
+        "पैर धीमे",
+        "शरीर आगे"
+      ]
+    }
+  ],
+  "no_photo_fallback": true
+}
