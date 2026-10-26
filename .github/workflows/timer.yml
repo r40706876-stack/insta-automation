@@ -4,6 +4,8 @@ name: Timer (theek samay par reel)
 # hourly_post.yml ko us slot ke format ke saath chalata hai, fir khud ko dobara chala deta hai.
 # Public repo = minute free. Backup: har 6 ghante schedule timer ko jaga deta hai (chain toot jaaye to bhi).
 on:
+  push:
+    paths: [.github/workflows/timer.yml]
   workflow_dispatch:
   schedule:
     - cron: '29 */6 * * *'
