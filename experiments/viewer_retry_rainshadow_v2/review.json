@@ -1,10 +1,10 @@
 {
-  "duration": 21.525555555555556,
-  "sha256": "19afc996ecc99445446941a8d154965f5d9c84423ca81eb4edad5041479a4ccd",
-  "voice": "edge-tts hi-IN-SwaraNeural",
+  "duration": 18.11079365079365,
+  "sha256": "1d5cd055739d76b961468289892477e7662f67f02d54327ff0ba5847978d271e",
+  "voice": "Gemini gemini-2.5-flash-preview-tts / Charon (male)",
   "date": "2026-10-27",
   "renderer_version": 7,
-  "final_sha256": "96584f176a875af967e7d5fb0d11915e508eefed0f73630c6ca2a8ccf8c2520d",
+  "final_sha256": "a8ad6d8f7b221ed01d2141ab365e876f691e821a0cd266fd445b8be40f386f6d",
   "build_only": true,
   "review_status": "awaiting human visual review; not automatically rated",
   "whatsapp": "+91 89892 79637"
