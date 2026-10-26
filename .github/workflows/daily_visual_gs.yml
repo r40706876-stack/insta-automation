@@ -44,6 +44,7 @@ jobs:
           PYTHONUNBUFFERED: '1'
         run: |
           if [ "${{ github.event_name }}" = push ]; then
+            export GS_FORCE_BUILD=1
             export GS_TARGET_DATE=$(python -c "import json;print(json.load(open('experiments/daily_visual_build_request.json'))['date'])")
           fi
           if [ "$MODE" = publish ] || [ "$EVENT_SCHEDULE" = '30 12 * * *' ]; then
