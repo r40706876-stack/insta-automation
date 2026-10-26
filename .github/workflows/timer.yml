@@ -42,9 +42,10 @@ jobs:
               if [ $TS -gt $((NOW+60)) ] && { [ -z "$BEST" ] || [ $TS -lt $BESTT ]; }; then BEST=$J; BESTT=$TS; BESTS=$T; fi
             done
           done
-          W=$((BESTT-NOW))
+          W=$((BESTT-NOW-3600))
+          if [ "$W" -lt 0 ]; then W=0; fi
           echo "Agla: $BEST, $(TZ=Asia/Kolkata date -d @$BESTT '+%d %b %H:%M IST') ($W sec baad)"
-          if [ $W -le 19800 ]; then
+          if [ $W -le 16200 ]; then
             sleep $W
             SUBJECT=""
             case "$BEST" in
@@ -56,9 +57,10 @@ jobs:
                 DAYS=$((BESTT / 86400))
                 if [ $((DAYS % 2)) -eq 0 ]; then SUBJECT=Polity; else SUBJECT=Economics; fi ;;
             esac
-            gh workflow run hourly_post.yml -R "$REPO" --ref main -f format="$BEST" -f subject="$SUBJECT" -f regular_slot="$BESTS" -f post_mode=publish && echo "reel ($BEST / $SUBJECT) chalayi"
-            sleep 90
+            gh workflow run hourly_post.yml -R "$REPO" --ref main -f format="$BEST" -f subject="$SUBJECT" -f regular_slot="$BESTS" -f target_utc="$(date -u -d @$BESTT +%Y-%m-%dT%H:%M:%SZ)" -f post_mode=publish && echo "reel ($BEST / $SUBJECT) chalayi"
+            REST=$((BESTT-$(date +%s)+90))
+            if [ "$REST" -gt 0 ]; then sleep "$REST"; fi
           else
-            sleep 19800
+            sleep 16200
           fi
           gh workflow run timer.yml -R "$REPO" --ref main && echo "timer dobara chalu"
