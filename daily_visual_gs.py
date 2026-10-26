@@ -39,7 +39,7 @@ def script():
   if any(sc.get('motion',{}).get('icon') not in ('motion','balance','quantity','water','orbit','book','building','none') for sc in s['scenes']):continue
   if any(sc.get('motion',{}).get('type') not in ('flow','timeline','compare','location') or not 2<=len(sc.get('motion',{}).get('nodes',[]))<=3 for sc in s['scenes']):continue
   if any(not 5<=len(x.get('speech','').split())<=28 or len(x.get('label',''))>65 for x in s['scenes']):continue
-  audit=e._groq('Verify script AND animation semantics against reference. Reject mismatched animations, misleading demonstrations, formal/awkward Hindi, weak generic opening, filler or answer leaks in quiz imagery. Do not merely trust the source's explanation if it contains a contradictory date/title. Return JSON {ok:boolean}. Reject unsupported or incorrect claims. Reference:'+json.dumps(q,ensure_ascii=False)+' Script:'+json.dumps(s,ensure_ascii=False))
+  audit=e._groq('Verify script AND animation semantics against reference. Reject mismatched animations, misleading demonstrations, formal/awkward Hindi, weak generic opening, filler or answer leaks in quiz imagery. Do not merely trust the source explanation if it contains a contradictory date/title. Return JSON {ok:boolean}. Reject unsupported or incorrect claims. Reference:'+json.dumps(q,ensure_ascii=False)+' Script:'+json.dumps(s,ensure_ascii=False))
   if not audit or audit.get('ok') is not True:continue
   s.update(renderer_version=motion.VERSION,question_hash=digest,reference=q,subject=subject);save('script.json',s);return s
  raise RuntimeError('No grounded script passed validation')
