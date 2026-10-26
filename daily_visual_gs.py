@@ -48,7 +48,7 @@ def build():
  vv=e.make_voices([{'segs':[(None,None,x['speech'])]} for x in s['scenes']],rot=0)
  audio=[]
  for v in vv:
-  a=e._compress_pauses(v[0],max_pause=.22)
+  a,_=e._compress_pauses(v[0],max_pause=.22)
   if len(a)<e.SR*.6 or np.max(np.abs(a))<.005:raise RuntimeError('Missing real narration')
   audio.append(a)
  ds=[len(a)/e.SR+.35 for a in audio];starts=np.cumsum([0]+ds[:-1]).tolist();total=sum(ds)
