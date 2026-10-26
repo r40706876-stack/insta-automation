@@ -27,21 +27,31 @@ jobs:
           REPO: ${{ github.repository }}
         run: |
           # IST samay = format (pehle wale schedule jaise, ab theek samay par)
-          SLOTS="06:45=list 10:00=current 13:00=kahani_pages 17:15=kahani_pages 20:15=mega 22:30=trick"
+          SLOTS="05:00=current 07:00=list 10:00=list_Geography 13:00=list_History 17:00=mega 20:00=list_Static 22:00=list_Alternate"
           NOW=$(date +%s)
           BEST=""; BESTT=0
           for d in today tomorrow; do
             for s in $SLOTS; do
               T=${s%%=*}; J=${s##*=}
               TS=$(TZ=Asia/Kolkata date -d "$d $T" +%s)
-              if [ $TS -gt $((NOW+60)) ] && { [ -z "$BEST" ] || [ $TS -lt $BESTT ]; }; then BEST=$J; BESTT=$TS; fi
+              if [ $TS -gt $((NOW+60)) ] && { [ -z "$BEST" ] || [ $TS -lt $BESTT ]; }; then BEST=$J; BESTT=$TS; BESTS=$T; fi
             done
           done
           W=$((BESTT-NOW))
           echo "Agla: $BEST, $(TZ=Asia/Kolkata date -d @$BESTT '+%d %b %H:%M IST') ($W sec baad)"
           if [ $W -le 19800 ]; then
             sleep $W
-            gh workflow run hourly_post.yml -R "$REPO" --ref main -f format=$BEST -f post_mode=publish && echo "reel ($BEST) chalayi"
+            SUBJECT=""
+            case "$BEST" in
+              list_Geography) BEST=list; SUBJECT=Geography ;;
+              list_History) BEST=list; SUBJECT=History ;;
+              list_Static) BEST=list; SUBJECT="Traditional GK" ;;
+              list_Alternate)
+                BEST=list
+                DAYS=$((BESTT / 86400))
+                if [ $((DAYS % 2)) -eq 0 ]; then SUBJECT=Polity; else SUBJECT=Economics; fi ;;
+            esac
+            gh workflow run hourly_post.yml -R "$REPO" --ref main -f format="$BEST" -f subject="$SUBJECT" -f regular_slot="$BESTS" -f post_mode=publish && echo "reel ($BEST / $SUBJECT) chalayi"
             sleep 90
           else
             sleep 19800
