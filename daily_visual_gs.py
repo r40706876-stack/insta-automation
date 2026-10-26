@@ -105,4 +105,4 @@ if __name__=='__main__':
   assert pid;save('published.json',{'media_id':pid,'date':DAY})
   obj=e.requests.get(e.GRAPH+pid,params={'fields':'permalink','access_token':e.IG_ACCESS_TOKEN},timeout=30).json();save('published.json',{'media_id':pid,'permalink':obj.get('permalink'),'date':DAY})
  else:
-  if not (ROOT/'validated.json').exists():build()
+  if os.getenv('GS_FORCE_BUILD')=='1' or not (ROOT/'validated.json').exists():build()
