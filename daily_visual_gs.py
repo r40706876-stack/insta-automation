@@ -43,6 +43,14 @@ def script():
  raise RuntimeError('No grounded script passed validation')
 def build():
  s=script();e.W=W;e.H=H;e.FPS=FPS
+ e.resolve_font()
+ # Reject static stages before paying for voice/encoding. Compare the actual teaching area.
+ for sc in s['scenes']:
+  motion.validate(sc)
+  a=np.asarray(motion.render(sc,.2,4),dtype=np.float32)[300:1050]
+  b=np.asarray(motion.render(sc,3.5,4),dtype=np.float32)[300:1050]
+  assert np.abs(a-b).mean()>.05,'Static educational stage rejected'
+
  e.USE_GEMINI_TTS=False;e.VOICE_NAME='hi-IN-SwaraNeural';e.VOICE_RATE='+8%';e.VOICE_PITCH='+0Hz'
  vv=e.make_voices([{'segs':[(None,None,x['speech'])]} for x in s['scenes']],rot=0)
  audio=[];word_times=[]
