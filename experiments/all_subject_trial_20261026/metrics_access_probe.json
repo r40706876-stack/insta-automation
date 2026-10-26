@@ -1,0 +1,19 @@
+{
+  "media_id": "18121456249987192",
+  "metrics": {},
+  "errors": {
+    "reels_skip_rate": {
+      "code": 10,
+      "message": "(#10) Application does not have permission for this action"
+    }
+  },
+  "media": {
+    "id": "18121456249987192",
+    "comments_count": 0,
+    "like_count": 3,
+    "permalink": "https://www.instagram.com/reel/De8XuW1E0wv/",
+    "timestamp": "2026-10-26T03:58:49+0000"
+  },
+  "permission_blocked": true,
+  "captured_utc": "2026-10-26T07:21:33.909585+00:00"
+}

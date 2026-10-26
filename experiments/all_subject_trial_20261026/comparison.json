@@ -1,0 +1,11 @@
+{
+  "trial": "all_subject_trial_20261026",
+  "all_snapshots_ready": false,
+  "captured_count": 0,
+  "rows": [],
+  "limitations": [
+    "One reel per subject; publication time and sample size confound subject comparisons.",
+    "Skip rate is the direct reels_skip_rate API metric, never average watch time or retention.",
+    "If API access is denied, native Instagram Insights screenshots are required."
+  ]
+}
