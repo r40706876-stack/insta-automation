@@ -1,7 +1,7 @@
 {
-  "duration": 41,
+  "duration": 41.14900226757369,
   "scene_seconds": [
-    4,
+    4.149002267573696,
     7,
     8,
     6,
@@ -26,5 +26,5 @@
   "cloudflare_image": true,
   "synthetic_photo_label": true,
   "publication": "demo only",
-  "sha256": "7d5b97cf2845b244faa8e7feee7043c3af00a9d8435eac14b111ab5f829ec3e9"
+  "sha256": "b77aed57ee53e7783dea6cc7f01976f20695bedba060895f270753860f1d41a4"
 }
