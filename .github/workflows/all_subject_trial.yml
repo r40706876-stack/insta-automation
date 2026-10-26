@@ -1,0 +1,66 @@
+name: Seven Subject GS Trial - isolated format experiment
+
+on:
+  push:
+    branches: [main]
+    paths: [experiments/all_subject_trial_request.json]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: all-subject-trial
+  cancel-in-progress: true
+
+jobs:
+  experiment:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install renderer and narration dependencies
+        timeout-minutes: 6
+        run: |
+          if ! command -v ffmpeg >/dev/null; then
+            timeout 90 sudo apt-get -o Acquire::Retries=1 -o Acquire::http::Timeout=20 update -qq
+            timeout 90 sudo apt-get -o Acquire::Retries=1 -o Acquire::http::Timeout=20 install -y -qq ffmpeg libraqm0
+          fi
+          pip install --timeout 30 --retries 1 -r requirements.txt
+          curl --fail --location --max-time 45 --retry 2 https://raw.githubusercontent.com/google/fonts/main/ofl/mukta/Mukta-ExtraBold.ttf -o Mukta-ExtraBold.ttf
+      - name: Build or publish reviewed experiment
+        env:
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          PYTHONUNBUFFERED: '1'
+        run: |
+          MODE=$(python -c "import json; r=json.load(open('experiments/all_subject_trial_request.json')); assert r['mode'] in ('build','publish'); print(r['mode'])")
+          SUBJECT=$(python -c "import json; print(json.load(open('experiments/all_subject_trial_request.json')).get('id',''))")
+          if [ -n "$SUBJECT" ]; then
+            python all_subject_trial.py "$MODE" --id "$SUBJECT"
+          else
+            python all_subject_trial.py "$MODE"
+          fi
+      - name: Preserve video and publication receipt
+        if: always()
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git add experiments/all_subject_trial_20261026
+          if ! git diff --cached --quiet; then
+            git commit -m 'Save Seven Subject GS Trial experiment result [skip ci]'
+            git pull --rebase
+            git push
+          fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: seven-subject-gs
+          path: experiments/all_subject_trial_20261026
