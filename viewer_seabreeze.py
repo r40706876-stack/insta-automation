@@ -144,9 +144,16 @@ lines=[
 s={'ok':True,'title':'दिन–रात हवा का रास्ता उलटा क्यों?','renderer_version':motion.VERSION,'subject':'Geography','question_hash':hashlib.sha256(b'coastal-breeze-v1').hexdigest(),'reference':reference,'scenes':[{'label':a,'speech':b,'animation':{'type':'seabreeze','phase':phase,'labels':['समुद्र','जमीन']}} for (a,b),phase in zip(lines,['question','explain','demonstrate','recall'])]}
 (ROOT/'script.json').write_text(json.dumps(s,ensure_ascii=False,indent=2))
 v.build();e.resolve_font()
-final=promo.prepare_video(ROOT/'reel.mp4',e.get_font)
+manifest=json.loads((ROOT/'validated.json').read_text())
+source=ROOT/'reel.mp4';original_duration=manifest['duration']
+# Pace the entire scene and its narration together; preserve vocal pitch.
+if original_duration<20:
+ factor=20/original_duration;source=ROOT/'paced.mp4'
+ subprocess.run(['ffmpeg','-y','-v','error','-i',str(ROOT/'reel.mp4'),'-vf',f'setpts={factor}*PTS','-af',f'atempo={1/factor}','-c:v','libx264','-profile:v','main','-pix_fmt','yuv420p','-crf','19','-preset','fast','-c:a','aac','-movflags','+faststart',str(source)],check=True)
+ manifest['duration']=20
+final=promo.prepare_video(source,e.get_font)
 shutil.copyfile(final,ROOT/'preview_with_whatsapp.mp4')
-manifest=json.loads((ROOT/'validated.json').read_text());duration=manifest['duration']
+duration=manifest['duration']
 check=subprocess.run(['ffmpeg','-v','error','-i',str(ROOT/'preview_with_whatsapp.mp4'),'-f','null','-'],capture_output=True,text=True)
 assert check.returncode==0,'Final branded video must decode'
 sheet=Image.new('RGB',(1440,2560),'white')
@@ -155,6 +162,6 @@ for i,frac in enumerate((.12,.38,.64,.9)):
  subprocess.run(['ffmpeg','-y','-v','error','-ss',str(duration*frac),'-i',str(ROOT/'preview_with_whatsapp.mp4'),'-frames:v','1',str(jpg)],check=True)
  sheet.paste(Image.open(jpg).convert('RGB'),((i%2)*720,(i//2)*1280))
 sheet.thumbnail((1000,1800));sheet.save(ROOT/'review_sheet.jpg',quality=88)
-manifest.update(final_sha256=hashlib.sha256((ROOT/'preview_with_whatsapp.mp4').read_bytes()).hexdigest(),build_only=True,review_status='Needs visual editorial review; technical validation is not audience validation',whatsapp=promo.PHONE,source=reference['sources'],topic='Sea breeze and land breeze')
+manifest.update(original_duration=original_duration,final_sha256=hashlib.sha256((ROOT/'preview_with_whatsapp.mp4').read_bytes()).hexdigest(),build_only=True,review_status='Needs visual editorial review; technical validation is not audience validation',whatsapp=promo.PHONE,source=reference['sources'],topic='Sea breeze and land breeze')
 (ROOT/'review.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2))
 print(json.dumps(manifest,ensure_ascii=False))
