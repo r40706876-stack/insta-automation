@@ -1,0 +1,38 @@
+{
+  "renderer_version": 7,
+  "scenes": [
+    {
+      "type": "rainshadow",
+      "phase": "question",
+      "labels": [
+        "ऊपर: ठंडी हवा",
+        "नीचे: गर्म हवा"
+      ]
+    },
+    {
+      "type": "rainshadow",
+      "phase": "explain",
+      "labels": [
+        "ऊपर: ठंडी हवा",
+        "नीचे: गर्म हवा"
+      ]
+    },
+    {
+      "type": "rainshadow",
+      "phase": "demonstrate",
+      "labels": [
+        "ऊपर: ठंडी हवा",
+        "नीचे: गर्म हवा"
+      ]
+    },
+    {
+      "type": "rainshadow",
+      "phase": "recall",
+      "labels": [
+        "ऊपर: ठंडी हवा",
+        "नीचे: गर्म हवा"
+      ]
+    }
+  ],
+  "no_photo_fallback": true
+}

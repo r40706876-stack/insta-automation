@@ -1,0 +1,70 @@
+{
+  "ok": true,
+  "title": "पहाड़ के दो तरफ बारिश अलग क्यों?",
+  "subject": "Geography",
+  "renderer_version": 7,
+  "reference": {
+    "subject": "Geography",
+    "question": "rainshadow-first-trial: एक पहाड़ की दो तरफ बारिश अलग क्यों?",
+    "options": {
+      "a": "नम हवा ऊपर उठकर ठंडी होती है; दूसरी ओर उतरती हवा गर्म और अपेक्षाकृत सूखी होती है।"
+    },
+    "answer": "a",
+    "explanation": "नम हवा पहाड़ पर ऊपर उठती और ठंडी होती है। संघनन से बादल और वर्षा बन सकते हैं। दूसरी तरफ नीचे उतरती हवा गर्म होती है और अपेक्षाकृत कम वर्षा होती है। यह सरलीकृत वर्षाछाया का मॉडल है; बारिश पूरी तरह शून्य होना जरूरी नहीं।",
+    "sources": [
+      "https://cloudatlas.wmo.int/orographic-influences-on-the-windward-side.html",
+      "https://www.noaa.gov/jetstream/appendix/weather-glossary-r"
+    ]
+  },
+  "question_hash": "77005639be34c914832efa5bff8ea5e00c5dbee3425b7ce4447c2622d0b092f0",
+  "scenes": [
+    {
+      "label": "एक पहाड़। बारिश अलग क्यों?",
+      "speech": "एक पहाड़ की दो तरफ बारिश अलग क्यों? नम हवा का रास्ता देखो।",
+      "animation": {
+        "type": "rainshadow",
+        "phase": "question",
+        "labels": [
+          "ऊपर: ठंडी हवा",
+          "नीचे: गर्म हवा"
+        ]
+      }
+    },
+    {
+      "label": "ऊपर उठी हवा ठंडी हुई",
+      "speech": "हवा पहाड़ पर ऊपर चढ़ती है। ठंडी होने पर बादल और बारिश बन सकते हैं।",
+      "animation": {
+        "type": "rainshadow",
+        "phase": "explain",
+        "labels": [
+          "ऊपर: ठंडी हवा",
+          "नीचे: गर्म हवा"
+        ]
+      }
+    },
+    {
+      "label": "दूसरी तरफ क्या हुआ?",
+      "speech": "दूसरी तरफ हवा नीचे उतरकर गर्म होती है। यहाँ अक्सर कम बारिश होती है।",
+      "animation": {
+        "type": "rainshadow",
+        "phase": "demonstrate",
+        "labels": [
+          "ऊपर: ठंडी हवा",
+          "नीचे: गर्म हवा"
+        ]
+      }
+    },
+    {
+      "label": "किस तरफ बारिश कम?",
+      "speech": "अब बताओ, हवा जिस तरफ नीचे उतरे, वहाँ बारिश ज्यादा या कम? अक्सर कम।",
+      "animation": {
+        "type": "rainshadow",
+        "phase": "recall",
+        "labels": [
+          "ऊपर: ठंडी हवा",
+          "नीचे: गर्म हवा"
+        ]
+      }
+    }
+  ]
+}
