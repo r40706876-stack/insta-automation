@@ -7,7 +7,7 @@
     6.712494331065759
   ],
   "voice": "edge-tts hi-IN-SwaraNeural",
-  "sha256": "a6601b7b1a549f4d283346ba855e928a24de7dd9382cf6e9d55c80ec4b22605f",
+  "sha256": "cde1e473f8f4c9057414dafdae31a6530da1f10b747b1d96e03c5efbf21a35a8",
   "speech": [
     "बारह मार्च या छह अप्रैल? दांडी यात्रा में किस दिन क्या हुआ?",
     "बारह मार्च उन्नीस सौ तीस: गांधीजी साबरमती से दांडी की यात्रा पर निकले।",
@@ -21,7 +21,7 @@
     "https://www.publicationsdivision.nic.in/catalog/view/theme/default/images/new_ngm_final/timeline/pages/page14.html"
   ],
   "visuals": [
-    "perspective-projected anti-aliased date cards",
+    "rotating 3D salt crystal and perspective-projected anti-aliased date cards",
     "illuminated detailed coastline",
     "geographic animated march trace",
     "3D salt-to-shore transition",
