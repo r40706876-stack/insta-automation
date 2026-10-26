@@ -4,7 +4,7 @@ from pathlib import Path
 import numpy as np
 from PIL import Image,ImageDraw,ImageOps,ImageFilter
 import auto_poster as e
-DAY=datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=5,minutes=30))).date().isoformat()
+DAY=os.getenv('GS_TARGET_DATE') or datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=5,minutes=30))).date().isoformat()
 ROOT=Path('experiments/daily_visual_gs')/DAY
 ROOT.mkdir(parents=True,exist_ok=True)
 W,H,FPS=720,1280,24
@@ -104,4 +104,5 @@ if __name__=='__main__':
   pid=e._upload_once(str(out),caption,0)
   assert pid;save('published.json',{'media_id':pid,'date':DAY})
   obj=e.requests.get(e.GRAPH+pid,params={'fields':'permalink','access_token':e.IG_ACCESS_TOKEN},timeout=30).json();save('published.json',{'media_id':pid,'permalink':obj.get('permalink'),'date':DAY})
- else:build()
+ else:
+  if not (ROOT/'validated.json').exists():build()
