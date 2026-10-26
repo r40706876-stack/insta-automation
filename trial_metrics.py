@@ -67,5 +67,7 @@ def main():
     md+=['','A missing/permission-blocked metric is not zero. One post per subject cannot establish a causal winner.']
     (ROOT/'comparison.md').write_text('\n'.join(md))
     if all_ready:(ROOT/'snapshots_complete.flag').write_text(now.isoformat())
+    deadline=max(parse(s['publish_utc']) for s in plan['slots'])+datetime.timedelta(hours=28)
+    if now>=deadline:(ROOT/'observer_timeout.flag').write_text(now.isoformat())
     print('CAPTURED',len(rows),'of',len(plan['slots']))
 if __name__=='__main__':main()
