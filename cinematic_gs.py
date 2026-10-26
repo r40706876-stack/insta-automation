@@ -114,7 +114,7 @@ def render(k,t,dur):
  if k==0:
   if PHOTO:
    ph=ImageOps.fit(PHOTO,(624,650));z=1+.045*ease(t/dur);ph=ph.resize((int(624*z),int(650*z)));ph=ImageOps.fit(ph,(624,650));im.paste(ph,(48,290));d=ImageDraw.Draw(im)
-   tag(d,'समुद्र',185,875,BLUE);tag(d,'रेगिस्तान',520,875,GOLD)
+   tag(d,'समुद्र',520,875,BLUE);tag(d,'रेगिस्तान',185,875,GOLD)
    text(d,'AI कल्पना • वास्तविक स्थान का फोटो नहीं',360,970,16,'#a9bdcd')
   else:cutaway(d,t,False)
   tag(d,'इतना पानी… फिर भी सूखा?',360,350,GOLD,27)
