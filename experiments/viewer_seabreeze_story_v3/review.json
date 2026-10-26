@@ -1,0 +1,16 @@
+{
+  "duration": 20,
+  "sha256": "a05a76b423f18c943502e68c33e79b508059584d03c60adf6a6798bbc78f2946",
+  "voice": "Gemini gemini-2.5-flash-preview-tts / Charon (male)",
+  "date": "2026-10-27",
+  "renderer_version": 7,
+  "original_duration": 16.64859410430839,
+  "final_sha256": "d87855667d49018c35e63fcb7cc692f516257ad3ed5d6fcf134a3a98077a77ec",
+  "build_only": true,
+  "review_status": "Needs visual editorial review; technical validation is not audience validation",
+  "whatsapp": "+91 89892 79637",
+  "source": [
+    "https://www.noaa.gov/jetstream/ocean/sea-breeze"
+  ],
+  "topic": "Hot sand / cool wind: acted story, close-up, air mechanism"
+}

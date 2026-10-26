@@ -1,0 +1,64 @@
+{
+  "ok": true,
+  "title": "पैर जल रहे… हवा ठंडी कैसे?",
+  "renderer_version": 7,
+  "subject": "Geography",
+  "question_hash": "2e56943b0004166287a88592fc19c2bd26107a193a92e6ec0661e82499a7f000",
+  "reference": {
+    "question": "Why can coastal surface wind reverse between day and night?",
+    "explanation": "Idealized local circulation: land generally warms and cools faster than nearby water. Daytime sea breeze flows inland at the surface, with rising air over warm land and return flow aloft. With cooler land at night a land breeze can flow offshore, with return flow aloft. Larger-scale winds can prevent or modify this pattern; it is not guaranteed every night.",
+    "sources": [
+      "https://www.noaa.gov/jetstream/ocean/sea-breeze"
+    ]
+  },
+  "scenes": [
+    {
+      "label": "पैर गरम… हवा ठंडी?",
+      "speech": "अरे! रेत इतनी गरम, फिर ये हवा ठंडी कैसे?",
+      "animation": {
+        "type": "seabreeze",
+        "phase": "question",
+        "labels": [
+          "समुद्र",
+          "जमीन"
+        ]
+      }
+    },
+    {
+      "label": "जमीन से शुरू होती है बात",
+      "speech": "धूप में जमीन जल्दी गरम होती है। ऊपर की हवा भी गरम होकर उठती है।",
+      "animation": {
+        "type": "seabreeze",
+        "phase": "explain",
+        "labels": [
+          "समुद्र",
+          "जमीन"
+        ]
+      }
+    },
+    {
+      "label": "अब हवा का रास्ता देखो",
+      "speech": "तब समुद्र की ठंडी हवा जमीन की तरफ आती है। यही हवा हमें ठंडक देती है।",
+      "animation": {
+        "type": "seabreeze",
+        "phase": "demonstrate",
+        "labels": [
+          "समुद्र",
+          "जमीन"
+        ]
+      }
+    },
+    {
+      "label": "एक बार में याद रखो",
+      "speech": "गरम हवा ऊपर, समुद्र की हवा हमारी तरफ। यही समुद्री समीर है।",
+      "animation": {
+        "type": "seabreeze",
+        "phase": "recall",
+        "labels": [
+          "समुद्र",
+          "जमीन"
+        ]
+      }
+    }
+  ]
+}

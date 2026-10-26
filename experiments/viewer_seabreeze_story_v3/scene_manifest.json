@@ -1,0 +1,38 @@
+{
+  "renderer_version": 7,
+  "scenes": [
+    {
+      "type": "seabreeze",
+      "phase": "question",
+      "labels": [
+        "समुद्र",
+        "जमीन"
+      ]
+    },
+    {
+      "type": "seabreeze",
+      "phase": "explain",
+      "labels": [
+        "समुद्र",
+        "जमीन"
+      ]
+    },
+    {
+      "type": "seabreeze",
+      "phase": "demonstrate",
+      "labels": [
+        "समुद्र",
+        "जमीन"
+      ]
+    },
+    {
+      "type": "seabreeze",
+      "phase": "recall",
+      "labels": [
+        "समुद्र",
+        "जमीन"
+      ]
+    }
+  ],
+  "no_photo_fallback": true
+}
