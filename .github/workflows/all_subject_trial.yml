@@ -30,11 +30,8 @@ jobs:
       - name: Install renderer and narration dependencies
         timeout-minutes: 6
         run: |
-          if ! command -v ffmpeg >/dev/null; then
-            timeout 90 sudo apt-get -o Acquire::Retries=1 -o Acquire::http::Timeout=20 update -qq
-            timeout 90 sudo apt-get -o Acquire::Retries=1 -o Acquire::http::Timeout=20 install -y -qq ffmpeg libraqm0
-          fi
-          pip install --timeout 30 --retries 1 -r requirements.txt
+          pip install --timeout 30 --retries 1 -r requirements.txt imageio-ffmpeg
+          python -c "import imageio_ffmpeg,os; p='/usr/local/bin/ffmpeg'; os.path.exists(p) or os.symlink(imageio_ffmpeg.get_ffmpeg_exe(),p)"
           curl --fail --location --max-time 45 --retry 2 https://raw.githubusercontent.com/google/fonts/main/ofl/mukta/Mukta-ExtraBold.ttf -o Mukta-ExtraBold.ttf
       - name: Build or publish reviewed experiment
         env:
