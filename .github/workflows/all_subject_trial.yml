@@ -5,7 +5,7 @@ on:
     branches: [main]
     paths: [experiments/all_subject_trial_request.json]
   schedule:
-    - cron: '0 14,16,18,20 26 10 *'
+    - cron: '0 16,18 26 10 *'
   workflow_dispatch:
 
 permissions:
