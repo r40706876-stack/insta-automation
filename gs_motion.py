@@ -2,7 +2,7 @@
 import math
 from PIL import Image,ImageDraw,ImageFilter
 import auto_poster as e
-VERSION=3
+VERSION=4
 C=['#46e6ff','#ffe46b','#ff91ae','#95ffc1']
 def ease(x):
  x=max(0,min(1,x));return 1-(1-x)**3
@@ -43,21 +43,57 @@ def building(d,x,y,t,col):
    xx=x-130+j*32;d.ellipse((xx,y+14,xx+4,y+18),fill=col)
  label(d,'सांकेतिक शिक्षण चित्र',x,y+45,21,'#eaf4f6',400)
 
+def concept(d,kind,t):
+ # State changes are visible in the objects, independent of camera movement.
+ if kind=='motion':
+  x=170+min(t,2)*100
+  d.line((70,570,650,570),fill='#e6f8ff',width=5)
+  d.rounded_rectangle((x-60,470,x+60,550),15,fill=C[0],outline='white',width=3)
+  for xx in (x-38,x+38):d.ellipse((xx-13,537,xx+13,563),fill='#18364a',outline='white',width=3)
+  if t<2:arrow(d,(x-110,510),(x-70,510),C[1])
+  else:
+   bx=x+min(100,(t-2)*65);d.ellipse((bx-15,410,bx+15,440),fill=C[2]);d.line((x,515,bx,450),fill=C[2],width=9)
+ elif kind=='balance':
+  a=.25*math.sin(t*1.8);cx,cy=360,460
+  d.polygon([(340,590),(380,590),(360,470)],fill=C[1])
+  left=(cx-160,cy+160*a);right=(cx+160,cy-160*a)
+  d.line((*left,*right),fill='white',width=7)
+  for x,y in (left,right):
+   d.line((x,y,x,y+70),fill=C[0],width=3);d.arc((x-55,y+30,x+55,y+110),0,180,fill=C[0],width=5)
+ elif kind=='quantity':
+  for side in range(2):
+   count=8 if side==0 else max(4,8-int(t*2))
+   x=180+side*350
+   for j in range(count):
+    yy=570-j*18;d.ellipse((x-55,yy-10,x+55,yy+10),fill=C[side],outline='#795d22',width=2)
+ elif kind=='water':
+  d.rectangle((110,520,610,580),fill='#17619b')
+  for j in range(10):
+   q=(t*.22+j*.1)%1;x=150+j*42;y=510-q*160
+   d.ellipse((x-4,y-7,x+4,y+7),fill=C[0])
+  d.rounded_rectangle((190,330,530,385),28,fill='#dff7ff')
+ elif kind=='orbit':
+  d.ellipse((240,360,480,600),outline=C[0],width=3)
+  d.ellipse((325,445,395,515),fill=C[1])
+  x=360+120*math.cos(t*1.4);y=480+120*math.sin(t*1.4)
+  d.ellipse((x-16,y-16,x+16,y+16),fill=C[2])
+
 def render(im,plan,t,dur):
  """Every scene contains a paced explanatory graphic, not just a camera move."""
  layer=Image.new('RGBA',im.size);d=ImageDraw.Draw(layer)
  d.rounded_rectangle((34,630,686,825),24,fill=(5,23,39,180),outline=(92,178,200,110),width=2)
  # The illustration itself animates above the compact explanation.
- if plan.get('icon')=='building':building(d,360,590,t,C[1])
+ if plan.get('icon') in ('motion','balance','quantity','water','orbit'):concept(d,plan['icon'],t)
+ elif plan.get('icon')=='building':building(d,360,590,t,C[1])
  elif plan.get('icon')=='book':
   book(d,360,415,t,C[1]);turning_page(d,360,425,t)
  nodes=plan.get('nodes',[])[:3];typ=plan.get('type','flow')
  if typ=='timeline':
-  d.line((110,740,610,620),fill='#456273',width=5)
-  d.line((110,620,110+500*ease(t/max(1,dur-.8)),620),fill=C[1],width=6)
+  d.line((110,740,610,740),fill='#456273',width=5)
+  d.line((110,740,110+500*ease(t/max(1,dur-.8)),740),fill=C[1],width=6)
   for j,n in enumerate(nodes):
    p=ease((t-j*.8)/.5);x=120+j*240
-   d.ellipse((x-11*p,620-11*p,x+11*p,620+11*p),fill=C[j])
+   d.ellipse((x-11*p,740-11*p,x+11*p,740+11*p),fill=C[j])
    if p>.1:label(d,n,x,680 if j%2==0 else 790,30,C[j],185)
  elif typ=='compare':
   for j,n in enumerate(nodes[:2]):
