@@ -1,6 +1,1 @@
-{
-  "mode": "publish",
-  "id": "polity",
-  "trial": "all_subject_trial_20261026",
-  "scheduled_utc": "2026-10-26T14:00:00.000Z"
-}
+{"mode":"publish","id":"geography","trial":"all_subject_trial_20261026","scheduled_utc":"2026-10-26T16:00:00.000Z"}
