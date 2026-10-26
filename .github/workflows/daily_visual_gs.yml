@@ -1,5 +1,7 @@
 name: Daily visual GS - 6 PM IST
 on:
+  push:
+    paths: [experiments/daily_visual_build_request.json]
   schedule:
     - cron: '30 11 * * *'
     - cron: '30 12 * * *'
@@ -41,6 +43,9 @@ jobs:
           EVENT_SCHEDULE: ${{ github.event.schedule }}
           PYTHONUNBUFFERED: '1'
         run: |
+          if [ "${{ github.event_name }}" = push ]; then
+            export GS_TARGET_DATE=$(python -c "import json;print(json.load(open('experiments/daily_visual_build_request.json'))['date'])")
+          fi
           if [ "$MODE" = publish ] || [ "$EVENT_SCHEDULE" = '30 12 * * *' ]; then
             python daily_visual_gs.py --publish
           else
