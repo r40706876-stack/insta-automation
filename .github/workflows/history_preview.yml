@@ -1,0 +1,48 @@
+name: History cinematic preview - build only
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/history_preview.yml
+      - cinematic_history_dandi_v2.py
+      - gs_motion_fx.py
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: history-cinematic-preview
+  cancel-in-progress: true
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Dependencies and syntax checks
+        run: |
+          pip install --timeout 30 --retries 1 -r requirements.txt imageio-ffmpeg
+          python -c "import imageio_ffmpeg,os; p='/usr/local/bin/ffmpeg'; os.path.exists(p) or os.symlink(imageio_ffmpeg.get_ffmpeg_exe(),p)"
+          python -m py_compile gs_motion_fx.py cinematic_history_dandi_v2.py
+      - name: Render preview without publication
+        env:
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          POST_MODE: manual
+          PYTHONUNBUFFERED: '1'
+        run: python cinematic_history_dandi_v2.py
+      - name: Preserve preview and diagnostics
+        if: always()
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          test -d experiments/history_dandi_cinematic_v2 || exit 0
+          git add experiments/history_dandi_cinematic_v2
+          git diff --cached --quiet && exit 0
+          git commit -m 'Save history date-matching preview [skip ci]'
+          git pull --rebase -X theirs
+          git push
