@@ -1,0 +1,38 @@
+{
+  "renderer_version": 7,
+  "scenes": [
+    {
+      "type": "rainshadow",
+      "phase": "question",
+      "labels": [
+        "नम हवा ऊपर",
+        "गर्म हवा नीचे"
+      ]
+    },
+    {
+      "type": "rainshadow",
+      "phase": "explain",
+      "labels": [
+        "नम हवा ऊपर",
+        "गर्म हवा नीचे"
+      ]
+    },
+    {
+      "type": "rainshadow",
+      "phase": "demonstrate",
+      "labels": [
+        "नम हवा ऊपर",
+        "गर्म हवा नीचे"
+      ]
+    },
+    {
+      "type": "rainshadow",
+      "phase": "recall",
+      "labels": [
+        "नम हवा ऊपर",
+        "गर्म हवा नीचे"
+      ]
+    }
+  ],
+  "no_photo_fallback": true
+}

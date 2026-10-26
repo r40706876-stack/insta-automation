@@ -1,0 +1,65 @@
+{
+  "ok": true,
+  "title": "पहाड़ बदला… बारिश गायब?",
+  "renderer_version": 7,
+  "question_hash": "a704228ad6b02a18430a4f158411576493c2db46ce9f2a96fac1096d87f3a5c7",
+  "reference": {
+    "question": "Rain shadow: moist air rises over mountains, may condense and rain; descending leeward air warms.",
+    "explanation": "Simplified orographic model. Sufficient moisture is necessary; leeward rainfall is lower, not necessarily zero. Reversed-wind question assumes sufficient moisture arrives from the right.",
+    "sources": [
+      "https://cloudatlas.wmo.int/orographic-influences-on-the-windward-side.html",
+      "https://www.noaa.gov/jetstream/appendix/weather-glossary-r"
+    ]
+  },
+  "subject": "Geography",
+  "scenes": [
+    {
+      "label": "एक पहाड़, दो अलग नज़ारे!",
+      "speech": "इधर छाता चाहिए, पहाड़ के उस पार सूखा! बारिश का ये फर्क क्यों?",
+      "animation": {
+        "type": "rainshadow",
+        "phase": "question",
+        "labels": [
+          "नम हवा ऊपर",
+          "गर्म हवा नीचे"
+        ]
+      }
+    },
+    {
+      "label": "बादल ऐसे बनते हैं",
+      "speech": "नम हवा पहाड़ पर चढ़कर ठंडी होती है। बादल बनते हैं, फिर बारिश हो सकती है।",
+      "animation": {
+        "type": "rainshadow",
+        "phase": "explain",
+        "labels": [
+          "नम हवा ऊपर",
+          "गर्म हवा नीचे"
+        ]
+      }
+    },
+    {
+      "label": "सूखी तरफ का राज़",
+      "speech": "दूसरी तरफ उतरती हवा गर्म होती है। इसलिए वहाँ अक्सर बारिश कम होती है।",
+      "animation": {
+        "type": "rainshadow",
+        "phase": "demonstrate",
+        "labels": [
+          "नम हवा ऊपर",
+          "गर्म हवा नीचे"
+        ]
+      }
+    },
+    {
+      "label": "दोस्त का छोटा टेस्ट",
+      "speech": "अब नम हवा उलटी तरफ से आए, तो बारिश कहाँ होगी? दोस्त को पूछो!",
+      "animation": {
+        "type": "rainshadow",
+        "phase": "recall",
+        "labels": [
+          "नम हवा ऊपर",
+          "गर्म हवा नीचे"
+        ]
+      }
+    }
+  ]
+}
