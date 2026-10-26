@@ -165,6 +165,8 @@ def brand(im):
 def frame(k,t):
  im=p.background(t)
  if k==0:
+  # Keep the historical object in motion between the two readable date planes.
+  crystal(im,360,720+5*math.sin(t*1.7),35,t*1.2)
   fx.perspective_card(im,(360,555),(490,220),[('12 मार्च 1930',55,CYAN),('किस घटना की तारीख?',32,WHITE)],e.get_font,CYAN,angle=.4*(1-fx.ease(t/.65))+.035*math.sin(t),tilt=-.08)
   fx.perspective_card(im,(360,885),(490,220),[('6 अप्रैल 1930',55,GOLD),('किस घटना की तारीख?',32,WHITE)],e.get_font,GOLD,angle=-.4*(1-fx.ease((t-.1)/.65))-.035*math.sin(t),tilt=.08)
   d=ImageDraw.Draw(im);text(d,'एक यात्रा, दो अलग घटनाएँ',360,1105,33,WHITE)
@@ -204,6 +206,6 @@ assert check.returncode==0 and 'black_start:' not in check.stderr
 sheet=Image.new('RGB',(1440,2560))
 for k in range(4):sheet.paste(frame(k,ds[k]*.6),((k%2)*720,(k//2)*1280))
 sheet.thumbnail((1000,1800));sheet.save(ROOT/'review_sheet.jpg',quality=92)
-review={'duration':total,'scene_seconds':ds,'voice':e._CACHE.get('voice_used'),'sha256':hashlib.sha256(out.read_bytes()).hexdigest(),'speech':lines,'build_only':True,'sources':['https://rajghat.gov.in/chronology','https://www.gandhiheritageportal.org/dandi-march-details','https://www.publicationsdivision.nic.in/catalog/view/theme/default/images/new_ngm_final/timeline/pages/page14.html'],'visuals':['perspective-projected anti-aliased date cards','illuminated detailed coastline','geographic animated march trace','3D salt-to-shore transition','two-event revision card'],'map_source':MAP_GEO,'map_note':'Regional geographic coastline, not a political boundary map. Journey line schematic, not a surveyed exact path.','historical_image':'AI illustration, explicitly labelled; not an archival photo','tax_note':'No claim that the salt tax was repealed on 6 April 1930','share_hypothesis':'A study partner can test event/date matching; final card is a reusable revision reference. Unproven until audience testing.','fps':FPS,'motion_fx_version':fx.VERSION}
+review={'duration':total,'scene_seconds':ds,'voice':e._CACHE.get('voice_used'),'sha256':hashlib.sha256(out.read_bytes()).hexdigest(),'speech':lines,'build_only':True,'sources':['https://rajghat.gov.in/chronology','https://www.gandhiheritageportal.org/dandi-march-details','https://www.publicationsdivision.nic.in/catalog/view/theme/default/images/new_ngm_final/timeline/pages/page14.html'],'visuals':['rotating 3D salt crystal and perspective-projected anti-aliased date cards','illuminated detailed coastline','geographic animated march trace','3D salt-to-shore transition','two-event revision card'],'map_source':MAP_GEO,'map_note':'Regional geographic coastline, not a political boundary map. Journey line schematic, not a surveyed exact path.','historical_image':'AI illustration, explicitly labelled; not an archival photo','tax_note':'No claim that the salt tax was repealed on 6 April 1930','share_hypothesis':'A study partner can test event/date matching; final card is a reusable revision reference. Unproven until audience testing.','fps':FPS,'motion_fx_version':fx.VERSION}
 (ROOT/'review.json').write_text(json.dumps(review,ensure_ascii=False,indent=2))
 print(json.dumps(review,ensure_ascii=False))
