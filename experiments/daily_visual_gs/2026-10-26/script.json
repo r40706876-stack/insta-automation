@@ -1,0 +1,70 @@
+{
+  "ok": true,
+  "renderer_version": 4,
+  "title": "ब्रेक लगा… शरीर आगे क्यों?",
+  "subject": "Science",
+  "question_hash": "inertia-bus-demo-v4",
+  "reference": {
+    "question": "बस अचानक रुकने पर यात्री आगे क्यों झुकता है?",
+    "answer": "गति का जड़त्व; पैर बस के साथ धीमे होते हैं, ऊपरी शरीर आगे बढ़ता रहता है।"
+  },
+  "scenes": [
+    {
+      "label": "बस रुकी। शरीर क्यों नहीं?",
+      "speech": "बस ने अचानक ब्रेक लगाया। तुम आगे झुक गए। किसी ने धक्का भी नहीं दिया, फिर ऐसा क्यों हुआ?",
+      "image": "Side view inside a modern Indian city bus, a standing adult passenger safely holding a rail, bright daylight, educational illustration, teal bus and warm yellow accents, leave central space, no words no text",
+      "kind": "reveal",
+      "motion": {
+        "type": "compare",
+        "nodes": [
+          "बस धीमी हुई",
+          "शरीर आगे बढ़ा"
+        ],
+        "icon": "motion"
+      }
+    },
+    {
+      "label": "पैर बस के साथ धीमे हुए",
+      "speech": "तुम्हारे पैर बस के फर्श पर टिके हैं। बस धीमी हुई, तो फर्श के साथ पैर भी धीमे होने लगे।",
+      "image": "Detailed side view closeup of shoes planted firmly on the floor inside a teal city bus, rail visible, clear bright educational illustration, no text no arrows",
+      "kind": "process",
+      "motion": {
+        "type": "flow",
+        "nodes": [
+          "फर्श से संपर्क",
+          "पैर धीमे हुए"
+        ],
+        "icon": "motion"
+      }
+    },
+    {
+      "label": "ऊपरी शरीर चलता रहा",
+      "speech": "लेकिन ऊपरी शरीर आगे बढ़ता रहा। अपनी गति बनाए रखने की इस प्रवृत्ति को जड़त्व कहते हैं। इसलिए तुम आगे झुकते हो।",
+      "image": "Side view of a clothed standing passenger leaning slightly forward inside a bus while feet remain planted, holding a handrail, bright clear educational illustration, no text",
+      "kind": "process",
+      "motion": {
+        "type": "flow",
+        "nodes": [
+          "पैर धीमे",
+          "ऊपरी शरीर आगे",
+          "गति का जड़त्व"
+        ],
+        "icon": "motion"
+      }
+    },
+    {
+      "label": "अब उल्टा सोचो",
+      "speech": "अब बस अचानक चल पड़े, तो झटका किधर लगेगा? पीछे। पैर बस के साथ आगे बढ़ेंगे, ऊपरी शरीर पहले वाली हालत में रहेगा।",
+      "image": "Bright side view of a stationary teal city bus at an Indian street bus stop, ready to depart, cinematic educational illustration, no text no question marks",
+      "kind": "quiz",
+      "motion": {
+        "type": "compare",
+        "nodes": [
+          "ब्रेक: आगे झुकना",
+          "चलना: पीछे झुकना"
+        ],
+        "icon": "none"
+      }
+    }
+  ]
+}
