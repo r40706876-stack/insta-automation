@@ -68,3 +68,5 @@ jobs:
 # History preview: 3D salt, tax, geographic journey and sourced dates; never publish.
 
 # History map QA: finer coastline detail for the regional Gujarat shot.
+
+# Final regional-map pass: 10m coastline and subtle relief instead of coarse polygon edges.
