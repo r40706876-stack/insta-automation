@@ -4,7 +4,7 @@ on:
     paths: [experiments/daily_visual_build_request.json]
   schedule:
     - cron: '30 11 * * *'
-    - cron: '30 12 * * *'
+    - cron: '15 12 * * *'
   workflow_dispatch:
     inputs:
       mode:
@@ -19,7 +19,7 @@ concurrency:
 jobs:
   daily:
     runs-on: ubuntu-latest
-    timeout-minutes: 55
+    timeout-minutes: 75
     steps:
       - uses: actions/checkout@v4
         with:
@@ -47,7 +47,11 @@ jobs:
             export GS_FORCE_BUILD=1
             export GS_TARGET_DATE=$(python -c "import json;print(json.load(open('experiments/daily_visual_build_request.json'))['date'])")
           fi
-          if [ "$MODE" = publish ] || [ "$EVENT_SCHEDULE" = '30 12 * * *' ]; then
+          if [ "$MODE" = publish ] || [ "$EVENT_SCHEDULE" = '15 12 * * *' ]; then
+            if [ "$EVENT_SCHEDULE" = '15 12 * * *' ]; then
+              export GS_TARGET_UTC=$(python -c "import datetime;z=datetime.timezone(datetime.timedelta(hours=5,minutes=30));d=datetime.datetime.now(z).replace(hour=18,minute=0,second=0,microsecond=0);print(d.astimezone(datetime.timezone.utc).isoformat())")
+              echo "Preflight: daily reel due at 18:00 IST; prepare upload now"
+            fi
             python daily_visual_gs.py --publish
           else
             python daily_visual_gs.py
