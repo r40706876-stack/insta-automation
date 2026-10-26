@@ -41,6 +41,22 @@ def script():
   if not audit or audit.get('ok') is not True:continue
   s.update(renderer_version=motion.VERSION,question_hash=digest,reference=q,subject=subject);save('script.json',s);return s
  raise RuntimeError('No grounded script passed validation')
+def gemini_male_once(lines,rot):
+ last='Gemini key unavailable'
+ if not e.GEMINI_API_KEY:raise RuntimeError(last)
+ for model in ('gemini-2.5-flash-preview-tts','gemini-2.5-pro-preview-tts'):
+  for url,body in e._tts_bodies(model,lines,'Charon'):
+   try:
+    r=e.requests.post(url,params={'key':e.GEMINI_API_KEY},json=body,timeout=60)
+    if r.status_code!=200:
+     last=f'{model}: HTTP {r.status_code}';continue
+    got=e._find_audio(r.json())
+    if got:
+     arr=e._pcm_to_array(*got)
+     if len(arr)>e.SR:return arr,model+' / Charon (male)'
+   except e.requests.RequestException:last='Gemini network failure'
+ raise RuntimeError(last)
+
 def build():
  s=script();e.W=W;e.H=H;e.FPS=FPS
  e.resolve_font()
@@ -51,7 +67,9 @@ def build():
   b=np.asarray(motion.render(sc,3.5,4),dtype=np.float32)[300:1050]
   assert np.abs(a-b).mean()>.05,'Static educational stage rejected'
 
- e.USE_GEMINI_TTS=False;e.VOICE_NAME='hi-IN-SwaraNeural';e.VOICE_RATE='+8%';e.VOICE_PITCH='+0Hz'
+ e.USE_GEMINI_TTS=True;e.VOICE_NAME='hi-IN-SwaraNeural';e.VOICE_RATE='+8%';e.VOICE_PITCH='+0Hz'
+ e.gemini_tts_once=gemini_male_once
+ e._TTS_STYLE[0]='Clear conversational Hindi, friendly male teacher. Speech only. No humming, singing, music or filler sounds.'
  vv=e.make_voices([{'segs':[(None,None,x['speech'])]} for x in s['scenes']],rot=0)
  audio=[];word_times=[]
  for v in vv:
@@ -69,20 +87,29 @@ def build():
  def text(d,txt,y,size,col):
   lines=[' '.join(x) for x in e.wrap_words(txt,e.get_font(size),640)]
   for j,line in enumerate(lines):d.text((360,y+j*size*1.35),line,font=e.get_font(size),fill=col,anchor='mm',stroke_width=0)
+ def coloured_caption(d,group,active,y):
+  words=[w for a,b,w in group];f=e.get_font(32);gap=d.textlength(' ',font=f)
+  widths=[d.textlength(w,font=f) for w in words];x=(720-sum(widths)-gap*(len(words)-1))/2
+  for j,(w,width) in enumerate(zip(words,widths)):
+   if j==active:d.rounded_rectangle((x-5,y-23,x+width+5,y+25),7,fill='#ffd86a')
+   d.text((x,y),w,font=f,fill='#a83830' if j==active else '#172f45',anchor='lm');x+=width+gap
  def frame(fi):
   t=fi/FPS;k=max(i for i,x in enumerate(starts) if x<=t);lt=t-starts[k];q=lt/ds[k]
   im=motion.render(s['scenes'][k],lt,ds[k]);d=ImageDraw.Draw(im)
   d.text((36,45),'MINUTE ME GS',font=e.get_font(23),fill='#087f80')
-  text(d,s['title'],145,44,'#172f45');text(d,s['scenes'][k]['label'],245,32,'#087f80')
+  text(d,s['title'],145,44,'#a83830');text(d,s['scenes'][k]['label'],245,32,'#087f80')
   words=s['scenes'][k]['speech'].split();chunks=[' '.join(words[i:i+6]) for i in range(0,len(words),6)]
   idx=min(len(chunks)-1,int(max(0,lt-.1)/max(.1,ds[k]-.35)*len(chunks)))
   timed=word_times[k]
   if timed:
    wi=max([i for i,(a,b,w) in enumerate(timed) if a<=max(0,lt-.1)] or [0]);group=timed[(wi//5)*5:(wi//5)*5+5]
    line=' '.join(w for a,b,w in group)
-   text(d,line,1140,32,'#172f45')
+   coloured_caption(d,group,wi%5,1140)
 
-  else:text(d,chunks[idx],1140,32,'#172f45')
+  else:
+   # Gemini has no word timestamps: phrase highlight only.
+   d.rounded_rectangle((35,1108,685,1186),16,fill='#ffe8b3')
+   text(d,chunks[idx],1140,32,'#a83830')
   d.rounded_rectangle((40,1197,680,1204),3,fill='#52697b');d.rounded_rectangle((40,1197,40+640*t/total,1204),3,fill=COLORS[k])
   d.text((360,1240),'चलता शिक्षण मॉडल • सांकेतिक',font=e.get_font(19),fill='#53696d',anchor='mm')
   return im.convert('RGB')
@@ -93,7 +120,7 @@ def build():
  check=subprocess.run(['ffmpeg','-hide_banner','-i',str(out),'-vf','blackdetect=d=0.15:pix_th=0.10','-f','null','-'],capture_output=True,text=True)
  assert check.returncode==0 and 'black_start:' not in check.stderr,'Decode/black-frame validation failed'
  save('scene_manifest.json',{'renderer_version':motion.VERSION,'scenes':[x['animation'] for x in s['scenes']],'no_photo_fallback':True})
- save('validated.json',{'duration':total,'sha256':hashlib.sha256(out.read_bytes()).hexdigest(),'voice':'Edge TTS, no music/humming','date':DAY,'renderer_version':motion.VERSION})
+ save('validated.json',{'duration':total,'sha256':hashlib.sha256(out.read_bytes()).hexdigest(),'voice':e._CACHE.get('voice_used','unknown'),'date':DAY,'renderer_version':motion.VERSION})
  frame(0).save(ROOT/'cover.jpg');return s
 if __name__=='__main__':
  import sys
