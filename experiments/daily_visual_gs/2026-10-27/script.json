@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "title": "हेस्टिंग्स की कलकत्ता मदरसा",
+  "title": "कलकत्ता मदरसा: 1781",
   "scenes": [
     {
       "label": "प्रश्न: कहाँ?",
@@ -9,20 +9,20 @@
       "kind": "reveal"
     },
     {
-      "label": "हेस्टिंग्स का पद",
-      "speech": "वॉरेन हेस्टिंग्स 1781 में भारत के पहले गवर्नर जनरल बने, बंगाल का पहला",
+      "label": "मुस्लिम कानून की पढ़ाई",
+      "speech": "यहाँ मुस्लिम कानून का अध्ययन और शिक्षण होता था। इस संस्था की स्थापना वॉरेन हेस्टिंग्स ने की थी।",
       "image": "Portrait of Warren Hastings in Governor General attire, standing before a map of Bengal, 18th-century style illustration",
       "kind": "reveal"
     },
     {
       "label": "मदरसा की स्थापना",
-      "speech": "वह ने 1781 में कलकत्ता में मुस्लिम कानून के अध्ययन के लिए मदरसा स्थापित किया",
+      "speech": "याद रखो, वर्ष अठारह नहीं, सत्रह सौ इक्यासी। शहर कलकत्ता, जिसे आज कोलकाता कहते हैं।",
       "image": "Illustration of a madrasa building in 1781 Calcutta with scholars studying Islamic law, colonial architecture, detailed",
       "kind": "process"
     },
     {
       "label": "स्मरण प्रश्न",
-      "speech": "वॉरेन हेस्टिंग्स ने किस शहर में मदरसा स्थापित किया? उत्तर: वास्तव में कलकत्ता",
+      "speech": "अब बताओ, सत्रह सौ इक्यासी में यह मदरसा किस शहर में स्थापित हुआ? जवाब है, कलकत्ता।",
       "image": "A quiz style illustration showing a question mark over a map of India highlighting Calcutta, with answer text appearing",
       "kind": "quiz"
     }
