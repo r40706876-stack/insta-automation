@@ -1,0 +1,54 @@
+name: Animated GS coast demo - build only
+on:
+  push:
+    branches: [main]
+    paths: [experiments/cinematic_demo_request.json]
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: cinematic-gs-demo
+  cancel-in-progress: false
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Dependencies
+        run: |
+          pip install --timeout 30 --retries 1 -r requirements.txt
+          curl --fail --location --max-time 45 --retry 2 https://raw.githubusercontent.com/google/fonts/main/ofl/mukta/Mukta-ExtraBold.ttf -o Mukta-ExtraBold.ttf
+          ffmpeg -version | head -1
+      - name: Generate art, narration and animated demo
+        env:
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          PYTHONUNBUFFERED: '1'
+        run: python cinematic_gs.py
+      - name: Preserve demo
+        if: always()
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git add experiments/cinematic_coast_v1
+          if ! git diff --cached --quiet; then
+            git commit -m 'Save original animated coast demo [skip ci]'
+            for attempt in 1 2 3 4; do
+              git pull --rebase && git push && exit 0
+              sleep 2
+            done
+            exit 1
+          fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: cinematic-coast-demo
+          path: experiments/cinematic_coast_v1
