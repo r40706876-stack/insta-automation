@@ -19,8 +19,10 @@ jobs:
       - run: |
           pip install --timeout 30 --retries 1 -r requirements.txt imageio-ffmpeg
           python -c "import imageio_ffmpeg,os; p='/usr/local/bin/ffmpeg'; os.path.exists(p) or os.symlink(imageio_ffmpeg.get_ffmpeg_exe(),p)"
-      - run: python -m py_compile viewer_seabreeze_story.py && python viewer_seabreeze_story.py
+      - run: python -m py_compile cinematic_seabreeze.py && python cinematic_seabreeze.py
         env:
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           GS_TARGET_UTC: '2026-10-27T04:30:00Z'
@@ -33,7 +35,7 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
-          git add experiments/viewer_seabreeze_story_v3
+          git add experiments/cinematic_seabreeze_v4
           git diff --cached --quiet && exit 0
           git commit -m 'Save scheduled visual experiment preview [skip ci]'
           git pull --rebase -X theirs
@@ -58,3 +60,5 @@ jobs:
 # User-authorized story pass: acted hook, camera shots, scarf, quiet sound design.
 
 # Final framing pass: leg/label separation and unobstructed facial reaction.
+
+# Restore reference shaded globe quality; new coast art and full-frame causal layers.
