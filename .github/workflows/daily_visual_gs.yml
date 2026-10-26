@@ -1,0 +1,66 @@
+name: Daily visual GS - 6 PM IST
+on:
+  schedule:
+    - cron: '30 11 * * *'
+    - cron: '30 12 * * *'
+  workflow_dispatch:
+    inputs:
+      mode:
+        type: choice
+        options: [build, publish]
+        default: build
+permissions:
+  contents: write
+concurrency:
+  group: daily-visual-gs
+  cancel-in-progress: false
+jobs:
+  daily:
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Dependencies
+        run: |
+          pip install --timeout 30 --retries 1 -r requirements.txt imageio-ffmpeg
+          python -c "import imageio_ffmpeg,os; os.symlink(imageio_ffmpeg.get_ffmpeg_exe(),'/usr/local/bin/ffmpeg')"
+      - name: Build or publish
+        env:
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          MODE: ${{ inputs.mode }}
+          EVENT_SCHEDULE: ${{ github.event.schedule }}
+          PYTHONUNBUFFERED: '1'
+        run: |
+          if [ "$MODE" = publish ] || [ "$EVENT_SCHEDULE" = '30 12 * * *' ]; then
+            python daily_visual_gs.py --publish
+          else
+            python daily_visual_gs.py
+          fi
+      - name: Preserve daily video and publication state
+        if: always()
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git add experiments/daily_visual_gs || exit 0
+          git diff --cached --quiet && exit 0
+          git commit -m 'Save daily visual GS result [skip ci]'
+          for attempt in 1 2 3; do
+            git pull --rebase && git push && exit 0
+            sleep 2
+          done
+          exit 1
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: daily-visual-gs
+          path: experiments/daily_visual_gs
