@@ -100,15 +100,21 @@ titles=['गरम रेत… ठंडी हवा कैसे?','समु
 e.USE_GEMINI_TTS=True;e.VOICE_NAME='hi-IN-SwaraNeural';e.VOICE_RATE='+0%';e.VOICE_PITCH='+0Hz'
 e.gemini_tts_once=voice_engine.gemini_male_once
 e._TTS_STYLE[0]='Clear calm conversational Hindi male teacher. Unhurried, easy to understand. Speech only, no humming, filler, singing or music.'
-vv=e.make_voices([{'segs':[(None,None,s)]} for s in lines],rot=0)
-audio=[e._compress_pauses(x[0],max_pause=.25)[0] for x in vv]
-assert all(len(a)>e.SR*.5 and np.max(np.abs(a))>.005 for a in audio)
-ds=[max(len(a)/e.SR+.4,m) for a,m in zip(audio,(4.5,4.5,6,6))]
-starts=np.cumsum([0]+ds[:-1]).tolist();duration=sum(ds)
-mix=np.zeros(math.ceil(duration*e.SR),dtype=np.float32)
-for i,a in enumerate(audio):e.add_at(mix,a,starts[i]+.15)
-with wave.open(str(ROOT/'voice.wav'),'wb') as w:
- w.setnchannels(1);w.setsampwidth(2);w.setframerate(e.SR);w.writeframes((np.clip(mix,-.97,.97)*32767).astype('<i2').tobytes())
+cached=json.loads((ROOT/'review.json').read_text()) if (ROOT/'review.json').exists() else {}
+if cached.get('speech')==lines and (ROOT/'voice.wav').exists():
+ ds=cached['scene_seconds'];starts=np.cumsum([0]+ds[:-1]).tolist();duration=sum(ds)
+ e._CACHE['voice_used']=cached.get('voice')
+else:
+ vv=e.make_voices([{'segs':[(None,None,s)]} for s in lines],rot=0)
+ audio=[e._compress_pauses(x[0],max_pause=.25)[0] for x in vv]
+ assert all(len(a)>e.SR*.5 and np.max(np.abs(a))>.005 for a in audio)
+ ds=[max(len(a)/e.SR+.4,m) for a,m in zip(audio,(4.5,4.5,6,6))]
+ starts=np.cumsum([0]+ds[:-1]).tolist();duration=sum(ds)
+ mix=np.zeros(math.ceil(duration*e.SR),dtype=np.float32)
+ for i,a in enumerate(audio):e.add_at(mix,a,starts[i]+.15)
+ with wave.open(str(ROOT/'voice.wav'),'wb') as w:
+  w.setnchannels(1);w.setsampwidth(2);w.setframerate(e.SR);w.writeframes((np.clip(mix,-.97,.97)*32767).astype('<i2').tobytes())
+ 
 # Built-in safe-area notes banner: preserve the full-frame cinematic background.
 def brand(im):
  d=ImageDraw.Draw(im);txt(d,'MINUTE ME GS',145,62,23,CYAN)
@@ -132,8 +138,8 @@ def frame(k,t):
  brand(im);p.title(im,titles[k],t,y=294,col=GOLD if k<3 else CYAN,n=59)
  d=ImageDraw.Draw(im)
  if k==0:
-  pill(d,'रेत गरम',185,920,GOLD,32)
-  pill(d,'हवा ठंडी?',535,1040,CYAN,32)
+  pill(d,'रेत गरम',565,650,GOLD,32)
+  pill(d,'हवा ठंडी?',180,910,CYAN,32)
   txt(d,'AI से बना तटीय शिक्षण दृश्य',360,1130,19,WHITE)
  elif k==2:txt(d,'गरम होकर हवा ऊपर जाती है',360,1125,31,WHITE)
  elif k==3:txt(d,'समुद्र से आने वाली हवा = समुद्री समीर',360,1125,29,WHITE)
