@@ -67,11 +67,24 @@ def plate(im,x,y,t,col):
   q=(t*.35+j/4)%1
   crystal(im,x+(j-1.5)*20,y-170+150*q,8+j%2*2,t+j)
 def proj(lon,lat):return(60+(lon-70.8)/3*600,410+(23.5-lat)/3.2*630)
+# Regional maps need more detail than the 110m world-globe texture.
+MAP_GEO='https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_50m_land.geojson'
+mapfile=ROOT/'land50m.geojson'
+if not mapfile.exists():
+ import requests
+ response=requests.get(MAP_GEO,timeout=60);response.raise_for_status();mapfile.write_text(response.text)
+maprings=[]
+for feature in json.loads(mapfile.read_text())['features']:
+ geom=feature['geometry'];polys=geom['coordinates'] if geom['type']=='MultiPolygon' else [geom['coordinates']]
+ for poly in polys:
+  ring=poly[0]
+  if max(pt[0] for pt in ring)<70.5 or min(pt[0] for pt in ring)>74 or max(pt[1] for pt in ring)<20 or min(pt[1] for pt in ring)>24:continue
+  maprings.append(ring)
 # A public-domain geographic coastline, with a labelled schematic march corridor.
 mapim=Image.new('RGB',(720,1280),'#103b54');md=ImageDraw.Draw(mapim)
 for j in range(15):md.line((0,400+j*46,720,400+j*46),fill='#18435a',width=1)
 mask=Image.new('L',(720,1280));draw=ImageDraw.Draw(mask)
-for ring in p.c.LAND:
+for ring in maprings:
  pts=[proj(lon,lat) for lon,lat,*_ in ring]
  if len(pts)>2:draw.polygon(pts,fill=255)
 shadow=Image.new('RGB',(720,1280),'#7b674d')
@@ -191,6 +204,6 @@ assert check.returncode==0 and 'black_start:' not in check.stderr
 sheet=Image.new('RGB',(1440,2560))
 for k in range(4):sheet.paste(frame(k,ds[k]*.6),((k%2)*720,(k//2)*1280))
 sheet.thumbnail((1000,1800));sheet.save(ROOT/'review_sheet.jpg',quality=92)
-review={'duration':total,'scene_seconds':ds,'voice':e._CACHE.get('voice_used'),'sha256':hashlib.sha256(out.read_bytes()).hexdigest(),'speech':lines,'build_only':True,'sources':['https://rajghat.gov.in/chronology','https://www.gandhiheritageportal.org/dandi-march-details','https://www.publicationsdivision.nic.in/catalog/view/theme/default/images/new_ngm_final/timeline/pages/page14.html'],'visuals':['rotating projected 3D salt crystals','moving symbolic tax coins','two animated bowls','geographic coastal map with schematic journey line','labelled AI historical illustration'],'map_source':p.c.GEO,'map_note':'Regional geographic coastline, not a political boundary map. Journey line schematic, not a surveyed exact path.','historical_image':'AI illustration, explicitly labelled; not an archival photo','tax_note':'No claim that the salt tax was repealed on 6 April 1930'}
+review={'duration':total,'scene_seconds':ds,'voice':e._CACHE.get('voice_used'),'sha256':hashlib.sha256(out.read_bytes()).hexdigest(),'speech':lines,'build_only':True,'sources':['https://rajghat.gov.in/chronology','https://www.gandhiheritageportal.org/dandi-march-details','https://www.publicationsdivision.nic.in/catalog/view/theme/default/images/new_ngm_final/timeline/pages/page14.html'],'visuals':['rotating projected 3D salt crystals','moving symbolic tax coins','two animated bowls','geographic coastal map with schematic journey line','labelled AI historical illustration'],'map_source':MAP_GEO,'map_note':'Regional geographic coastline, not a political boundary map. Journey line schematic, not a surveyed exact path.','historical_image':'AI illustration, explicitly labelled; not an archival photo','tax_note':'No claim that the salt tax was repealed on 6 April 1930'}
 (ROOT/'review.json').write_text(json.dumps(review,ensure_ascii=False,indent=2))
 print(json.dumps(review,ensure_ascii=False))
