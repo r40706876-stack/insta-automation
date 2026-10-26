@@ -1,6 +1,7 @@
 {
-  "duration": 27.477528344671203,
-  "sha256": "f9b24a3d940389050ec1a5a29087a45d23f51c5fe26178cc38b8743b38f13cda",
+  "duration": 30.86548752834467,
+  "sha256": "8177bb888e8483053fee8257ca3483df2faec3b8f2908e1a5c54b933f6944724",
   "voice": "Edge TTS, no music/humming",
-  "date": "2026-10-27"
+  "date": "2026-10-27",
+  "renderer_version": 2
 }
