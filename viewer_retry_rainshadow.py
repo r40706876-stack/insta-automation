@@ -98,7 +98,7 @@ def render(sc,t,duration):
   points=[(100+290*i/40,875-350*i/40) for i in range(41)]
   d.line(points,fill='#ffffff',width=10)
   motion.arrow(d,points[-5],points[-1],BLUE)
-  air(d,x,y,t,True,r=54-18*q)
+  air(d,x,y,t,True,r=36+18*q)
   # Thermometer visibly falls without fabricated temperatures.
   d.rounded_rectangle((565,520,593,775),13,fill='white',outline=INK,width=3)
   d.rectangle((574,750-185*(1-q),584,775),fill=BLUE)
@@ -133,7 +133,7 @@ def render(sc,t,duration):
   txt(d,'अब हवा उलटी चले तो?',350,365,35,TEAL)
   for j in range(12):
    u=(t*.18+j/12)%1
-   x=650-570*u;y=850-310*math.sin(math.pi*u)
+   x=650-570*u;y=850-430*math.sin(math.pi*u)
    d.ellipse((x-4,y-4,x+4,y+4),fill=BLUE if u<.6 else GOLD)
   for x,s in [(170,'A'),(580,'B')]:
    d.ellipse((x-25,675,x+25,725),fill='white',outline=INK,width=3)
