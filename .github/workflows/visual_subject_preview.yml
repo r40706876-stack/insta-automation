@@ -19,7 +19,7 @@ jobs:
       - run: |
           pip install --timeout 30 --retries 1 -r requirements.txt imageio-ffmpeg
           python -c "import imageio_ffmpeg,os; p='/usr/local/bin/ffmpeg'; os.path.exists(p) or os.symlink(imageio_ffmpeg.get_ffmpeg_exe(),p)"
-      - run: python -m py_compile cinematic_seabreeze.py && python cinematic_seabreeze.py
+      - run: python -m py_compile cinematic_history_dandi.py && python cinematic_history_dandi.py
         env:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
@@ -35,7 +35,7 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
-          git add experiments/cinematic_seabreeze_v4
+          git add experiments/history_dandi_cinematic_v1
           git diff --cached --quiet && exit 0
           git commit -m 'Save scheduled visual experiment preview [skip ci]'
           git pull --rebase -X theirs
@@ -64,3 +64,5 @@ jobs:
 # Restore reference shaded globe quality; new coast art and full-frame causal layers.
 
 # Final scene review: anchor sand label over sand and reuse unchanged narration.
+
+# History preview: 3D salt, tax, geographic journey and sourced dates; never publish.
