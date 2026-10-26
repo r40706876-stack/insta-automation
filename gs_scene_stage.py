@@ -3,7 +3,7 @@ import math
 from PIL import Image, ImageDraw, ImageFont
 import one_confusion as legacy
 import retention_pilots as pilots
-VERSION=5
+VERSION=6
 KINDS={'rail','sunrise','river','gravity','quantity','timeline','process','inertia','water'}
 BG='#f6f3ea'; INK='#172f45'; BLUE='#087fa4'; RED='#d94d41'; GOLD='#edb649'
 def font(n): return ImageFont.truetype('Mukta-ExtraBold.ttf',n)
@@ -51,6 +51,12 @@ def render(sc,t,duration):
   arrow(d,(550,940),(550,980),RED)
  elif kind=='inertia':
   q=ease(min(1,t/2));shift=80*q;lean=65*ease((t-2)/1.2)
+  d.rounded_rectangle((25,910,695,990),18,fill='#d9e3e4')
+  travel=160*min(t,2)
+  for j in range(6):
+   x=(j*155-travel)%850-80;d.rectangle((x,945,x+70,953),fill='white')
+  for j in range(3):
+   x=(j*260-travel*.3)%850-80;d.rounded_rectangle((x,330,x+100,415),8,fill='#d8e8e6')
   d.rounded_rectangle((50+shift,450,580+shift,850),35,fill='#2d9fbc',outline=INK,width=5)
   d.rounded_rectangle((85+shift,485,545+shift,715),20,fill='#d6f1f3')
   for x in (150+shift,490+shift):
@@ -58,8 +64,18 @@ def render(sc,t,duration):
    z=min(t,2)*5;d.line((x-35*math.cos(z),850-35*math.sin(z),x+35*math.cos(z),850+35*math.sin(z)),fill='white',width=7)
   feet=330+shift;head=feet+lean
   d.line((feet,790,feet,685,head,600),fill=INK,width=20)
+  d.line((feet,700,feet-28,790,feet-55,790),fill=INK,width=14)
+  d.line((feet,700,feet+25,790,feet+48,790),fill=INK,width=14)
+  d.line((head-10,620,head+40,665,head+75,640),fill=BLUE,width=13)
+  if m['phase']=='explain':
+   r=22+8*math.sin(t*4)
+   for fx in (feet-40,feet+35):d.ellipse((fx-r,790-r,fx+r,790+r),outline=GOLD,width=5)
   d.ellipse((head-30,535,head+30,595),fill='#efb18c',outline=INK,width=3)
-  arrow(d,(feet,630),(head+100,630),RED)
+  if t>1.8:
+   arrow(d,(feet,630),(head+100,630),RED)
+   for j in range(3):
+    x=feet+((t*90+j*35)%120);d.ellipse((x-4,622,x+4,630),fill=GOLD)
+  d.rounded_rectangle((52+shift,700,68+shift,770),5,fill=RED if t>=2 else '#9fc2c4')
   label(d,'ब्रेक',590,400,34,RED)
  elif kind=='quantity':
   a,b=m['amounts'];n=a+(b-a)*p
@@ -95,5 +111,10 @@ def render(sc,t,duration):
    d.rounded_rectangle((x-270,y-70,x+270,y+70),24,fill=('#d2ece8','#ffe5b0','#dbe8f7')[i],outline=BLUE,width=4)
    label(d,s if reveal else '?',x,y,40)
  if kind not in ('timeline','process'):
-  for i,s in enumerate(ns[:2]):label(d,s if reveal else 'देखो और सोचो',190+340*i,1060,29)
+  if reveal:
+   for i,s in enumerate(ns[:2]):
+    x=190+340*i;col=BLUE if i==0 else RED
+    d.rounded_rectangle((x-150,1020,x+150,1090),16,fill='#e0efeb' if i==0 else '#ffe0d1')
+    label(d,s,x,1055,29,col)
+  else:label(d,'देखो… फिर जवाब दो',360,1055,32,BLUE)
  return im
