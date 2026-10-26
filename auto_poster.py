@@ -3066,6 +3066,9 @@ def _with_series(caption):
 
 def _upload_once(video_file, caption, thumb_ms=0, cover_url=None):
     """Ek koshish: container -> (10s ruko) -> rupload -> FINISHED -> publish."""
+    from gs_schedule import Slot
+    slot = Slot(video_file)
+    if slot.cached: return slot.cached
     import gs_publication as publication
     resolve_font()
     video_file = publication.prepare_video(video_file, get_font)
@@ -3110,6 +3113,7 @@ def _upload_once(video_file, caption, thumb_ms=0, cover_url=None):
             raise RuntimeError(f"IG processing {status}: {st}")
     if status != "FINISHED":
         raise RuntimeError("IG processing time-out")
+    slot.before_publish()
     pub = {}
     for k in range(3):
         pub = requests.post(f"{GRAPH}{IG_USER_ID}/media_publish",
@@ -3120,6 +3124,7 @@ def _upload_once(video_file, caption, thumb_ms=0, cover_url=None):
         time.sleep(20)
     if not pub.get("id"):
         raise RuntimeError(f"IG publish fail: {pub}")
+    slot.complete(pub["id"])
     return pub["id"]
 
 
