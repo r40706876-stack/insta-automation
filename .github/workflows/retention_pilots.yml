@@ -11,7 +11,7 @@ permissions:
 
 concurrency:
   group: retention-pilots-experiment
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   experiment:
@@ -25,11 +25,14 @@ jobs:
         with:
           python-version: '3.11'
       - name: Install renderer and narration dependencies
+        timeout-minutes: 6
         run: |
-          sudo apt-get update -qq
-          sudo apt-get install -y -qq ffmpeg libraqm0
-          pip install -r requirements.txt
-          curl --fail --location --retry 3 https://raw.githubusercontent.com/google/fonts/main/ofl/mukta/Mukta-ExtraBold.ttf -o Mukta-ExtraBold.ttf
+          if ! command -v ffmpeg >/dev/null; then
+            timeout 90 sudo apt-get -o Acquire::Retries=1 -o Acquire::http::Timeout=20 update -qq
+            timeout 90 sudo apt-get -o Acquire::Retries=1 -o Acquire::http::Timeout=20 install -y -qq ffmpeg libraqm0
+          fi
+          pip install --timeout 30 --retries 1 -r requirements.txt
+          curl --fail --location --max-time 45 --retry 2 https://raw.githubusercontent.com/google/fonts/main/ofl/mukta/Mukta-ExtraBold.ttf -o Mukta-ExtraBold.ttf
       - name: Build or publish reviewed experiment
         env:
           IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
