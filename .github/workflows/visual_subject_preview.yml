@@ -19,7 +19,7 @@ jobs:
       - run: |
           pip install --timeout 30 --retries 1 -r requirements.txt imageio-ffmpeg
           python -c "import imageio_ffmpeg,os; p='/usr/local/bin/ffmpeg'; os.path.exists(p) or os.symlink(imageio_ffmpeg.get_ffmpeg_exe(),p)"
-      - run: python -m py_compile viewer_seabreeze_simple.py && python viewer_seabreeze_simple.py
+      - run: python -m py_compile viewer_seabreeze_story.py && python viewer_seabreeze_story.py
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
@@ -33,7 +33,7 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
-          git add experiments/viewer_seabreeze_simple_v2
+          git add experiments/viewer_seabreeze_story_v3
           git diff --cached --quiet && exit 0
           git commit -m 'Save scheduled visual experiment preview [skip ci]'
           git pull --rebase -X theirs
@@ -54,3 +54,5 @@ jobs:
 # Final pacing pass: at least 20 seconds, matching visual and narration speed.
 
 # Simplify after user feedback: daytime only, remove night and upper return flow.
+
+# User-authorized story pass: acted hook, camera shots, scarf, quiet sound design.
