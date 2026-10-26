@@ -108,6 +108,8 @@ def build():
 if __name__=='__main__':
  import sys
  if '--publish' in sys.argv:
+  hold=ROOT/'publication_hold.json'
+  assert not hold.exists(),'Publication held: user rejected this episode; rebuild and review required'
   receipt=ROOT/'published.json'
   if receipt.exists():print(receipt.read_text());raise SystemExit()
   assert (ROOT/'validated.json').exists(),'Build must pass first'
