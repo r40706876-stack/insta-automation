@@ -151,7 +151,7 @@ def build():
   b=e.cf_image('Cinematic aerial oblique view of a barren coastal desert meeting deep blue Pacific ocean, dramatic contrast between immense ocean and extremely dry rocky ochre land, realistic educational illustration, sophisticated natural lighting, no text, no labels, no arrows, no buildings, vertical composition')
   if not b:raise RuntimeError('Cloudflare did not return an image; preserve diagnostic and stop')
   Image.open(io.BytesIO(b)).convert('RGB').save(OUT/'coast_ai.jpg',quality=95)
- prepare();e.FPS=FPS
+ prepare();e.FPS=FPS;e.W=W;e.H=H
  voices=e.make_voices([{'segs':[(None,None,s)]} for s in SPEECH],rot=0)
  arr=[v[0] for v in voices]
  if any(len(a)<e.SR*.5 or np.max(np.abs(a))<.001 for a in arr):raise RuntimeError('Narration missing')
