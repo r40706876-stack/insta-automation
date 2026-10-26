@@ -1,0 +1,25 @@
+{
+  "duration": 21.06249433106576,
+  "scene_seconds": [
+    4.550000000000001,
+    4.51249433106576,
+    6,
+    6
+  ],
+  "voice": "edge-tts hi-IN-SwaraNeural",
+  "sha256": "37aa063b4ce2243ea6b80da388dc21c90d2af366581d4de4a8c9659115be55c4",
+  "build_only": true,
+  "renderer": "reference polished shaded globe + custom full-frame coast layers",
+  "reference_code": "polished_gs.py",
+  "new_cloudflare_asset": true,
+  "speech": [
+    "रेत इतनी गरम, फिर समुद्र से ठंडी हवा क्यों आती है?",
+    "भारत के समुद्री तट पर दिन का ये आसान मॉडल देखो।",
+    "धूप से जमीन जल्दी गरम होती है। ऊपर की हवा भी गरम होकर उठती है।",
+    "तब समुद्र की ठंडी हवा जमीन की तरफ आती है। इसे समुद्री समीर कहते हैं।"
+  ],
+  "sources": [
+    "https://www.noaa.gov/jetstream/ocean/sea-breeze"
+  ],
+  "editorial_review": "Required; renderer success does not establish shares or retention"
+}
