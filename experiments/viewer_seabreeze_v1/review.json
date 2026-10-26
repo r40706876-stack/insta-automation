@@ -1,0 +1,15 @@
+{
+  "duration": 16.196326530612247,
+  "sha256": "a6c0e8520616909867fda86e172f1a325cbb3e584fce176541f5028879869e09",
+  "voice": "Gemini gemini-2.5-flash-preview-tts / Charon (male)",
+  "date": "2026-10-27",
+  "renderer_version": 7,
+  "final_sha256": "2298427a8fba57dfbd78efea9dbd0860e745bd20ef821d3249be5856ede6e1f9",
+  "build_only": true,
+  "review_status": "Needs visual editorial review; technical validation is not audience validation",
+  "whatsapp": "+91 89892 79637",
+  "source": [
+    "https://www.noaa.gov/jetstream/ocean/sea-breeze"
+  ],
+  "topic": "Sea breeze and land breeze"
+}

@@ -1,0 +1,64 @@
+{
+  "ok": true,
+  "title": "दिन–रात हवा का रास्ता उलटा क्यों?",
+  "renderer_version": 7,
+  "subject": "Geography",
+  "question_hash": "a60b3a41a60cec024a9dc5d6028b8525d4158db67b03ce5c2b46eaff62e45405",
+  "reference": {
+    "question": "Why can coastal surface wind reverse between day and night?",
+    "explanation": "Idealized local circulation: land generally warms and cools faster than nearby water. Daytime sea breeze flows inland at the surface, with rising air over warm land and return flow aloft. With cooler land at night a land breeze can flow offshore, with return flow aloft. Larger-scale winds can prevent or modify this pattern; it is not guaranteed every night.",
+    "sources": [
+      "https://www.noaa.gov/jetstream/ocean/sea-breeze"
+    ]
+  },
+  "scenes": [
+    {
+      "label": "हवा ने रास्ता क्यों बदला?",
+      "speech": "समुद्र किनारे हवा दिन और रात में उलटी क्यों चल सकती है?",
+      "animation": {
+        "type": "seabreeze",
+        "phase": "question",
+        "labels": [
+          "समुद्र",
+          "जमीन"
+        ]
+      }
+    },
+    {
+      "label": "दिन का रास्ता देखो",
+      "speech": "दिन में जमीन जल्दी गर्म होती है। गर्म हवा ऊपर उठे, तो समुद्र की ठंडी हवा आती है।",
+      "animation": {
+        "type": "seabreeze",
+        "phase": "explain",
+        "labels": [
+          "समुद्र",
+          "जमीन"
+        ]
+      }
+    },
+    {
+      "label": "रात होते ही फर्क",
+      "speech": "रात में जमीन जल्दी ठंडी होती है। हवा जमीन से समुद्र की ओर चल सकती है।",
+      "animation": {
+        "type": "seabreeze",
+        "phase": "demonstrate",
+        "labels": [
+          "समुद्र",
+          "जमीन"
+        ]
+      }
+    },
+    {
+      "label": "याद रखने की आसान ट्रिक",
+      "speech": "आने की जगह से नाम याद करो: समुद्र से समुद्री समीर, जमीन से स्थलीय समीर।",
+      "animation": {
+        "type": "seabreeze",
+        "phase": "recall",
+        "labels": [
+          "समुद्र",
+          "जमीन"
+        ]
+      }
+    }
+  ]
+}
