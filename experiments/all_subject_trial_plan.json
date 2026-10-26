@@ -8,41 +8,43 @@
     {
       "id": "history",
       "publish_utc": "2026-10-26T08:00:00.000Z",
-      "approved_sha256": null
+      "approved_sha256": "5c5c95252286517b438035799fad6eddf91ac12a2734b7cff6a7a0c7623457ff"
     },
     {
       "id": "economics",
       "publish_utc": "2026-10-26T10:00:00.000Z",
-      "approved_sha256": null
+      "approved_sha256": "9e759ac662bda9ed4b49ff3af21776cf85df7eaee4e1b11c5db3b7b089cbe19b"
     },
     {
       "id": "science",
       "publish_utc": "2026-10-26T12:00:00.000Z",
-      "approved_sha256": null
+      "approved_sha256": "e05da9f7831c0b979d8ceb77b7c07388d4c875f2ad75ce77703ded7a02520fd0"
     },
     {
       "id": "polity",
       "publish_utc": "2026-10-26T14:00:00.000Z",
-      "approved_sha256": null
+      "approved_sha256": "ee2a727eb6c2dbac5b05b01c22282001367a17cc2a0be06b0e48385d7983a21f"
     },
     {
       "id": "geography",
       "publish_utc": "2026-10-26T16:00:00.000Z",
-      "approved_sha256": null
+      "approved_sha256": "362676ec756e628e6be3b63df8aac74fd26fd7fa09e99253a82af3aa564742d3"
     },
     {
       "id": "current",
       "publish_utc": "2026-10-26T18:00:00.000Z",
-      "approved_sha256": null
+      "approved_sha256": "1ed75a75c2d7190e483a6b22127e553e8bcc8453e12e0ea4fde144784015b12d"
     },
     {
       "id": "static_gk",
       "publish_utc": "2026-10-26T20:00:00.000Z",
-      "approved_sha256": null
+      "approved_sha256": "ac6305d56ea926b42590100a91715bbacc2ae8641d4e035352dfc447d76f96b2"
     }
   ],
   "snapshot_age_hours": 24,
   "snapshot_tolerance_minutes": 30,
-  "review_not_before_utc": "2026-10-27T20:15:00Z",
-  "note": "First 26 Oct 13:30 IST; seventh 27 Oct 01:30 IST. Snapshot each at >=24h; final review 28 Oct 01:45 IST or after all snapshots. Posting time is a confound; one reel per subject is only a pilot."
+  "review_not_before_utc": "2026-10-27T20:45:00Z",
+  "note": "First 26 Oct 13:30 IST; seventh 27 Oct 01:30 IST. Snapshot each at >=24h; final review 28 Oct 01:45 IST or after all snapshots. Posting time is a confound; one reel per subject is only a pilot.",
+  "approved": true,
+  "approval_note": "User authorized seven public reels at two-hour intervals; all seven final files visually reviewed and checked as 20-second H264+AAC videos."
 }
