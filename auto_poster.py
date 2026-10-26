@@ -7316,6 +7316,18 @@ def main():
         weekly_report()
         return
 
+    # Temporary, user-authorized isolated trial; normal posting resumes automatically.
+    import datetime as _trial_dt
+    _trial_plan_path = Path("experiments/all_subject_trial_plan.json")
+    if _trial_plan_path.exists() and not (args.no_post or args.preview or args.carousel_test):
+        _trial_plan = json.loads(_trial_plan_path.read_text(encoding="utf-8"))
+        _trial_now = _trial_dt.datetime.now(_trial_dt.timezone.utc)
+        _trial_from = _trial_dt.datetime.fromisoformat(_trial_plan["regular_posts_paused_from_utc"].replace("Z", "+00:00"))
+        _trial_until = _trial_dt.datetime.fromisoformat(_trial_plan["regular_posts_paused_until_utc"].replace("Z", "+00:00"))
+        if _trial_from <= _trial_now < _trial_until:
+            print("Regular posting temporarily paused for seven-subject trial until", _trial_until.isoformat())
+            return
+
     bank = load_bank()
     st = load_progress()
     if args.carousel_test:          # jaanch: pehle 3 sawal se ek carousel (progress nahi badalta)
