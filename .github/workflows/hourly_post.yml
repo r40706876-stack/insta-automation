@@ -66,13 +66,19 @@ jobs:
             echo "Old timer request blocked: use the new regular schedule slot"
             exit 0
           fi
-          python -u auto_poster.py 2>&1 | sed -u -E 's/(access_token=|key=|Bearer )[^&" ]+/\1***/g' | tee last_run_log.txt
+          if [ -n "$GS_SUBJECT" ] || [ "$REEL_FORMAT" = current ]; then
+            ENTRY=scheduled_visual_gs.py
+          else
+            ENTRY=auto_poster.py
+          fi
+          python -u "$ENTRY" 2>&1 | sed -u -E 's/(access_token=|key=|Bearer )[^&" ]+/\1***/g' | tee last_run_log.txt
 
       - name: Progress save
         if: always()
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add experiments/scheduled_visual_gs 2>/dev/null || true
           git add experiments/regular_schedule 2>/dev/null || true
           git add progress.json
           git add last_run_log.txt 2>/dev/null || true
