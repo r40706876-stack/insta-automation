@@ -35,3 +35,5 @@ jobs:
           git commit -m 'Save scheduled visual experiment preview [skip ci]'
           git pull --rebase
           git push
+
+# Retry first sourced preview after script validation failed.
