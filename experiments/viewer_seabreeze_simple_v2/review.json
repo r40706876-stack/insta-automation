@@ -1,0 +1,16 @@
+{
+  "duration": 21.175578231292516,
+  "sha256": "be94eee5e3c5a15d312cffd7536d1baf162adc07f92dbd9509c15230586f0a2d",
+  "voice": "edge-tts hi-IN-SwaraNeural",
+  "date": "2026-10-27",
+  "renderer_version": 7,
+  "original_duration": 21.175578231292516,
+  "final_sha256": "63c710f96f20a51a322a598644d62a9af1de62006facbff0dffe32e51782388c",
+  "build_only": true,
+  "review_status": "Needs visual editorial review; technical validation is not audience validation",
+  "whatsapp": "+91 89892 79637",
+  "source": [
+    "https://www.noaa.gov/jetstream/ocean/sea-breeze"
+  ],
+  "topic": "Daytime sea breeze only: one cause per scene"
+}

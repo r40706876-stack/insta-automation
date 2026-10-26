@@ -1,0 +1,64 @@
+{
+  "ok": true,
+  "title": "दिन में ठंडी समुद्री हवा कैसे?",
+  "renderer_version": 7,
+  "subject": "Geography",
+  "question_hash": "016df9c3691b96737cfa5fb1c86b5de59a0e3f07e6dae0cb3bb13dc06ba0c7d0",
+  "reference": {
+    "question": "Why can coastal surface wind reverse between day and night?",
+    "explanation": "Idealized local circulation: land generally warms and cools faster than nearby water. Daytime sea breeze flows inland at the surface, with rising air over warm land and return flow aloft. With cooler land at night a land breeze can flow offshore, with return flow aloft. Larger-scale winds can prevent or modify this pattern; it is not guaranteed every night.",
+    "sources": [
+      "https://www.noaa.gov/jetstream/ocean/sea-breeze"
+    ]
+  },
+  "scenes": [
+    {
+      "label": "गरम रेत, ठंडी हवा?",
+      "speech": "रेत गरम है, फिर समुद्र से ठंडी हवा क्यों आती है?",
+      "animation": {
+        "type": "seabreeze",
+        "phase": "question",
+        "labels": [
+          "समुद्र",
+          "जमीन"
+        ]
+      }
+    },
+    {
+      "label": "पहले जमीन गरम हुई",
+      "speech": "जमीन जल्दी गरम होती है। उसके ऊपर की हवा गरम होकर ऊपर उठती है।",
+      "animation": {
+        "type": "seabreeze",
+        "phase": "explain",
+        "labels": [
+          "समुद्र",
+          "जमीन"
+        ]
+      }
+    },
+    {
+      "label": "अब ठंडी हवा को देखो",
+      "speech": "समुद्र के ऊपर की ठंडी हवा जमीन की तरफ आती है। यही ठंडी हवा हमें लगती है।",
+      "animation": {
+        "type": "seabreeze",
+        "phase": "demonstrate",
+        "labels": [
+          "समुद्र",
+          "जमीन"
+        ]
+      }
+    },
+    {
+      "label": "बस इतनी सी बात",
+      "speech": "जमीन गरम, हवा ऊपर, समुद्र की हवा अंदर। इसी को समुद्री समीर कहते हैं।",
+      "animation": {
+        "type": "seabreeze",
+        "phase": "recall",
+        "labels": [
+          "समुद्र",
+          "जमीन"
+        ]
+      }
+    }
+  ]
+}
