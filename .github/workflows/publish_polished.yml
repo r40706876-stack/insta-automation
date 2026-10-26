@@ -1,0 +1,32 @@
+name: Publish approved polished GS reel
+on:
+  push:
+    paths: [.github/workflows/publish_polished.yml]
+permissions:
+  contents: write
+concurrency:
+  group: polished-gs-once
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements.txt
+      - run: python publish_polished.py
+        env:
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+      - name: Save receipt
+        if: always()
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git add experiments/polished_publish/published.json || exit 0
+          git diff --cached --quiet && exit 0
+          git commit -m 'Save polished GS publication receipt [skip ci]'
+          git pull --rebase
+          git push
