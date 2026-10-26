@@ -109,7 +109,7 @@ def render(sc,t,duration):
    cloud(d,330,520,z,'#789cb5')
    if p>.55:rain(d,245,565,t,140,265)
   txt(d,'नम हवा ऊपर चढ़ी',258,365,34,TEAL)
-  txt(d,'ठंडी हुई → बादल बने',310,870,31,BLUE)
+  txt(d,'ठंडी हुई: बादल बने',310,870,31,BLUE)
   txt(d,'पर्याप्त नमी हो तो बारिश',350,1040,28,BLUE)
  elif phase=='demonstrate':
   # Follow the parcel on the other slope; warm expansion is visible.
@@ -151,7 +151,7 @@ lines=[
  ('बादल ऐसे बनते हैं','नम हवा पहाड़ पर चढ़कर ठंडी होती है। बादल बनते हैं, फिर बारिश हो सकती है।'),
  ('सूखी तरफ का राज़','दूसरी तरफ उतरती हवा गर्म होती है। इसलिए वहाँ अक्सर बारिश कम होती है।'),
  ('दोस्त का छोटा टेस्ट','अब नम हवा उलटी तरफ से आए, तो बारिश कहाँ होगी? दोस्त को पूछो!')]
-script={'ok':True,'title':'पहाड़ बदला… बारिश गायब?','renderer_version':motion.VERSION,'question_hash':hashlib.sha256(b'viewer-retry-v2').hexdigest(),'reference':reference,'subject':'Geography','scenes':[{'label':label,'speech':speech,'animation':{'type':'rainshadow','phase':phase,'labels':['नम हवा ऊपर','गर्म हवा नीचे']}} for (label,speech),phase in zip(lines,['question','explain','demonstrate','recall'])]}
+script={'ok':True,'title':'पहाड़ के पार बारिश कम क्यों?','renderer_version':motion.VERSION,'question_hash':hashlib.sha256(b'viewer-retry-v2').hexdigest(),'reference':reference,'subject':'Geography','scenes':[{'label':label,'speech':speech,'animation':{'type':'rainshadow','phase':phase,'labels':['नम हवा ऊपर','गर्म हवा नीचे']}} for (label,speech),phase in zip(lines,['question','explain','demonstrate','recall'])]}
 (ROOT/'script.json').write_text(json.dumps(script,ensure_ascii=False,indent=2))
 v.build()
 e.resolve_font()
