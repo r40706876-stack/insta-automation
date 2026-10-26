@@ -14,6 +14,9 @@ on:
       regular_slot:
         description: "Required timer slot for regular publication"
         default: ""
+      target_utc:
+        description: "Exact intended publication instant in UTC"
+        default: ""
       post_mode:
         description: "publish = Instagram par daalo, manual = sirf repo ke ready_reels/ me (jaanch ke liye)"
         default: "publish"
@@ -28,7 +31,7 @@ concurrency:
 jobs:
   post:
     runs-on: ubuntu-latest
-    timeout-minutes: 50
+    timeout-minutes: 100
     steps:
       - uses: actions/checkout@v4
 
@@ -36,18 +39,10 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: System packages (video + Hindi text shaping)
-        timeout-minutes: 20
+      - name: Fast video dependencies
         run: |
-          for i in 1 2 3; do
-            timeout 300 sudo apt-get -o Acquire::Retries=3 -o Acquire::http::Timeout=30 update -qq && \
-            timeout 420 sudo apt-get -o Acquire::Retries=3 install -y -qq --no-install-recommends ffmpeg libraqm0 && break
-            echo "apt koshish $i fail - dobara"; sleep 20
-          done
-          which ffmpeg
-
-      - name: Python packages
-        run: pip install -r requirements.txt
+          pip install --timeout 30 --retries 1 -r requirements.txt imageio-ffmpeg
+          python -c "import imageio_ffmpeg,os; p='/usr/local/bin/ffmpeg'; os.path.exists(p) or os.symlink(imageio_ffmpeg.get_ffmpeg_exe(),p)"
 
       - name: Reel banao + Instagram pe daalo
         env:
@@ -58,6 +53,7 @@ jobs:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           IMGBB_KEY: ${{ secrets.IMGBB_KEY }}
+          GS_TARGET_UTC: ${{ github.event.inputs.target_utc }}
           GS_SUBJECT: ${{ github.event.inputs.subject }}
           GS_REGULAR_SCHEDULE: '20261026-v2'
           REGULAR_SLOT: ${{ github.event.inputs.regular_slot }}
@@ -66,7 +62,7 @@ jobs:
           POST_MODE: ${{ github.event.inputs.post_mode || 'publish' }}   # 'manual' likho to Instagram pe post nahi, repo ke ready_reels/ me reel milegi
         run: |
           set -o pipefail
-          if [ "$POST_MODE" = publish ] && [ -z "$REGULAR_SLOT" ]; then
+          if [ "$POST_MODE" = publish ] && { [ -z "$REGULAR_SLOT" ] || [ -z "$GS_TARGET_UTC" ]; }; then
             echo "Old timer request blocked: use the new regular schedule slot"
             exit 0
           fi
@@ -77,6 +73,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add experiments/regular_schedule 2>/dev/null || true
           git add progress.json
           git add last_run_log.txt 2>/dev/null || true
           git add carousels 2>/dev/null || true
