@@ -48,7 +48,7 @@ for j,z in enumerate(holes):
  v=math.sqrt(2*G*(H-z));T=math.sqrt(2*z/G)
  pts=[(.22+v*T*i/48,0,z-.5*G*(T*i/48)**2) for i in range(49)]
  streams.append(line('Flowing jet '+str(j),pts,.032,cyan,tank))
- drops.append([sphere('Moving water parcel '+str(j)+' '+str(i),(0,0,0),cyan,tank,.052 if j==0 else .065) for i in range(36)])
+ drops.append([sphere('Moving water parcel '+str(j)+' '+str(i),(0,0,0),cyan,tank,.052 if j==0 else .065) for i in range(12)])
  # Splash rings animate at the real ballistic impact point.
  for k in range(2):
   x=.22+v*T;line('Splash pool',[(x+.18*math.cos(a),.18*math.sin(a),.02) for a in [i*math.tau/20 for i in range(21)]],.017,cyan,tank)
@@ -86,13 +86,13 @@ for frame in range(1,N+1):
   cap.location=(.22+opening*.6,0,z+opening*.48);cap.scale=(0,0,0) if opening>.999 else (1-opening*.35,)*3;cap.keyframe_insert(data_path='location',frame=frame);cap.keyframe_insert(data_path='scale',frame=frame)
   v=math.sqrt(2*G*(head-z));T=math.sqrt(2*z/G);stream.data.bevel_factor_end=min(1,max(0,(t-opened_at)/T)) if showflow else 0;stream.data.keyframe_insert(data_path='bevel_factor_end',frame=frame)
   for i,o in enumerate(parcels):
-   age=((t-opened_at)+i*T/36)%T;active=showflow and (t-opened_at)>=age;o.location=(.22+v*age,0,z-.5*G*age**2);o.scale=(1,1,1) if active else (0,0,0);o.keyframe_insert(data_path='location',frame=frame);o.keyframe_insert(data_path='scale',frame=frame)
+   age=((t-opened_at)+i*T/12)%T;active=showflow and (t-opened_at)>=age;o.location=(.22+v*age,0,z-.5*G*age**2);o.scale=(1,1,1) if active else (0,0,0);o.keyframe_insert(data_path='location',frame=frame);o.keyframe_insert(data_path='scale',frame=frame)
   assert head>z and v>0
  # Equal-area force arrows grow in a depth-dependent sequence, never reverse magnitude.
  for group in (tankArrows,damArrows):
   for j,o in enumerate(group):
    show=(k==3 or k>=4);pulse=.92+.08*math.sin(t*3+j);o.scale=(pulse,pulse,pulse) if show else (0,0,0);o.keyframe_insert(data_path='scale',frame=frame)
- value=1. if k==0 else frac(t,starts[4]+.4,starts[4]+2.8) if k>=4 else 0
+ value=frac(t,.08,1.15) if k==0 else frac(t,starts[4]+.4,starts[4]+2.8) if k>=4 else 0
  wide.value=value;wide.keyframe_insert(data_path='value',frame=frame)
  base.scale.x=.2+.8*value;base.location.x=-.575+.925*value;base.keyframe_insert(data_path='scale',frame=frame);base.keyframe_insert(data_path='location',frame=frame)
  for o,j in ripples:o.location.x=.045*math.sin(t*2+j);o.keyframe_insert(data_path='location',frame=frame)
@@ -107,7 +107,7 @@ for o in bpy.data.objects:
   for fc in o.animation_data.action.fcurves:
    for p in fc.keyframe_points:p.interpolation='LINEAR'
 s.frame_start=1;s.frame_end=N
-(R/'motion.json').write_text(json.dumps(track));(R/'scene_checks.json').write_text(json.dumps({'frames':N,'fps':FPS,'photo_assets':0,'actual_3d':True,'deeper_outlet_faster_verified':True,'ballistic_water_parcels':72,'base_widens_not_top':True,'schematic_not_construction_design':True},indent=2))
+(R/'motion.json').write_text(json.dumps(track));(R/'scene_checks.json').write_text(json.dumps({'frames':N,'fps':FPS,'photo_assets':0,'actual_3d':True,'deeper_outlet_faster_verified':True,'ballistic_water_parcels':24,'base_widens_not_top':True,'schematic_not_construction_design':True},indent=2))
 bpy.ops.wm.save_as_mainfile(filepath=str(R/'scene.blend'))
 if os.getenv('STUDIO_PROOF'):
  s.frame_set(int(os.getenv('STUDIO_PROOF_FRAME','400')));s.render.image_settings.file_format='PNG';s.render.filepath=str(R/'proof.png');bpy.ops.render.render(write_still=True)
