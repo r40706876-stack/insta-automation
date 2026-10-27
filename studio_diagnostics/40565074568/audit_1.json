@@ -1,0 +1,32 @@
+{
+  "ok": false,
+  "reasons": [
+    "Scene 5: The 'coin' object with 'move' action and 'दान' (donation) label does not directly demonstrate the narration 'लाखों लोग नमक बनाने में मदद करते, यह अहिंसक शक्ति दिखाता है।' (Millions of people helped make salt, this shows non-violent power.). While financial support is a form of participation, the object's action does not visually represent 'making salt' or the 'non-violent power' derived from that specific act, failing the requirement that EACH listed 3D object and action actually demonstrates the narration."
+  ],
+  "scene_checks": [
+    {
+      "scene": 1,
+      "mechanism_matches": true
+    },
+    {
+      "scene": 2,
+      "mechanism_matches": true
+    },
+    {
+      "scene": 3,
+      "mechanism_matches": true
+    },
+    {
+      "scene": 4,
+      "mechanism_matches": true
+    },
+    {
+      "scene": 5,
+      "mechanism_matches": false
+    },
+    {
+      "scene": 6,
+      "mechanism_matches": true
+    }
+  ]
+}
