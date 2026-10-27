@@ -1,0 +1,44 @@
+{
+  "sha256": "71360f84be711a4215e1a980ec6c56471c5a863b78ea3a41a7c1c262a5be1504",
+  "duration": 33.73832199546485,
+  "voice": "edge-tts hi-IN-SwaraNeural",
+  "speech": [
+    "बगावत मेरठ में हुई। फिर सिपाही दिल्ली क्यों पहुँचे?",
+    "नौ मई, अठारह सौ सत्तावन। मेरठ में पचासी सिपाहियों को सज़ा मिली।",
+    "दस मई: विद्रोह भड़का। साथियों को छुड़ाकर सिपाही दिल्ली की ओर बढ़े।",
+    "ग्यारह मई: दिल्ली पहुँचकर उन्होंने बहादुर शाह ज़फ़र से नेतृत्व माँगा।",
+    "ज़फ़र मुगल बादशाह थे। साझा नेतृत्व का प्रतीक। हर मोर्चे के सेनापति नहीं।",
+    "याद रखो: नौ सज़ा, दस मेरठ का विद्रोह, ग्यारह दिल्ली। दोस्त से यही क्रम पूछो।"
+  ],
+  "scene_seconds": [
+    4.5,
+    5.626825396825397,
+    5.545260770975056,
+    5.193378684807256,
+    6.075442176870748,
+    6.797414965986394
+  ],
+  "build_only": true,
+  "changes": [
+    "People and visible event relationships replace symbolic lock-only scene",
+    "Four-frame walking sepoy sprite animation",
+    "Clean schematic journey inset",
+    "Soldiers-to-emperor explanation with labels",
+    "Three-event illustrated recall instead of text-only cards"
+  ],
+  "image_note": "AI historical reconstructions, not archival photos; uniforms and exact staging are illustrative",
+  "map_note": "North up, Meerut north-east of Delhi; route schematic",
+  "sources": [
+    "https://www.cbse.gov.in/cbsenew/ebooks/ANO-SD-SW.pdf",
+    "https://sathee.iitk.ac.in/sathee-railway-exams/student-corner/general-knowledge/indian-history/revolt-1857/"
+  ],
+  "performance": "No measured engagement claim",
+  "validation": {
+    "full_decode": true,
+    "black_segments_detected": false,
+    "voice_peak_db": -2.2,
+    "voice_mean_db": -18.9,
+    "visual_review": "Full-duration two-second contact sequence plus six larger scene samples; 85 remains fixed; upper WhatsApp placement checked"
+  },
+  "source_code_path": "gs_history_people_v2.py"
+}
