@@ -1,13 +1,32 @@
+  Groq llama-3.3-70b-versatile: HTTP 404
+  Groq llama-3.3-70b-versatile: HTTP 404
+  Groq llama-3.3-70b-versatile: HTTP 404
+  Groq llama-3.3-70b-versatile: HTTP 404
+  Groq llama-3.3-70b-versatile: HTTP 404
+  Groq openai/gpt-oss-120b: HTTP 429
+  Groq llama-3.1-8b-instant: HTTP 404
+  Groq llama-3.3-70b-versatile: HTTP 404
+  Groq openai/gpt-oss-120b: HTTP 429
+  Groq llama-3.1-8b-instant: HTTP 404
+  Gemini text models: gemini-flash-latest, gemini-3.8-flash, gemini-3.7-flash, gemini-3.6-flash
+  Groq llama-3.3-70b-versatile: HTTP 404
+  Groq llama-3.3-70b-versatile: HTTP 404
+  Groq llama-3.3-70b-versatile: HTTP 404
+  Groq llama-3.3-70b-versatile: HTTP 404
+  Groq openai/gpt-oss-120b: HTTP 429
+  Groq llama-3.1-8b-instant: HTTP 404
+  Gemini gemini-flash-latest: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-flash-latest fail (koshish 2): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
+  Gemini gemini-3.8-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-3.8-flash: HTTP 429 (koshish 2) 
+  Gemini gemini-3.7-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-3.7-flash: HTTP 429 (koshish 2) 
+  Groq llama-3.3-70b-versatile: HTTP 404
   Gemini awaaz: scenes ke beech ruk nahi mile
 Gemini awaaz scenes me sahi nahi kati -> edge-tts
-Traceback (most recent call last):
-  File "/home/runner/work/insta-automation/insta-automation/scheduled_visual_gs.py", line 52, in <module>
-    sys.argv=['daily_visual_gs.py','--publish'];runpy.run_path('daily_visual_gs.py',run_name='__main__')
-                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "<frozen runpy>", line 291, in run_path
-  File "<frozen runpy>", line 98, in _run_module_code
-  File "<frozen runpy>", line 88, in _run_code
-  File "daily_visual_gs.py", line 130, in <module>
-    assert not hold.exists(),'Publication held: user rejected this episode; rebuild and review required'
-           ^^^^^^^^^^^^^^^^^
-AssertionError: Publication held: user rejected this episode; rebuild and review required
+SCHEDULE: video ready; target 2026-10-27T07:30:00Z
+Collab invitation requested: @ar_publication
+  IG container: 17910821550568651
+  upload try 1: HTTP 200 {"success":true,"message":"Upload Successful."}
+  IG processing: FINISHED
+REMINDER: reel ready, publication due within 10 minutes: 2026-10-27T07:30:00Z

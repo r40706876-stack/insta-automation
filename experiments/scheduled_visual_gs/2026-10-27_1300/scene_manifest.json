@@ -1,0 +1,70 @@
+{
+  "renderer_version": 7,
+  "scenes": [
+    {
+      "type": "timeline",
+      "phase": "question",
+      "labels": [
+        "इब्न बतूता",
+        "मूल निवास?"
+      ],
+      "amounts": [
+        0,
+        0
+      ],
+      "years": [
+        1304,
+        1333
+      ]
+    },
+    {
+      "type": "timeline",
+      "phase": "explain",
+      "labels": [
+        "1304: मोरक्को में जन्म",
+        "1333: भारत आगमन"
+      ],
+      "amounts": [
+        0,
+        0
+      ],
+      "years": [
+        1304,
+        1333
+      ]
+    },
+    {
+      "type": "process",
+      "phase": "demonstrate",
+      "labels": [
+        "1333: दिल्ली का काजी",
+        "1342: चीन में राजदूत"
+      ],
+      "amounts": [
+        0,
+        0
+      ],
+      "years": [
+        1333,
+        1342
+      ]
+    },
+    {
+      "type": "timeline",
+      "phase": "recall",
+      "labels": [
+        "मूल निवासी देश?",
+        "उत्तर: मोरक्को"
+      ],
+      "amounts": [
+        0,
+        0
+      ],
+      "years": [
+        1304,
+        1333
+      ]
+    }
+  ],
+  "no_photo_fallback": true
+}
