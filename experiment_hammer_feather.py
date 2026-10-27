@@ -72,10 +72,19 @@ e.USE_GEMINI_TTS=True;e.VOICE_NAME='hi-IN-SwaraNeural';e.VOICE_RATE='+0%';e.VOIC
 e.gemini_tts_once=voices.gemini_male_once
 e._TTS_STYLE[0]='Clear unhurried conversational Hindi male documentary teacher. Keep the question energetic and the explanation clear. Speech only, no humming, singing, music or filler.'
 cached=json.loads((ROOT/'review.json').read_text()) if (ROOT/'review.json').exists() else {}
-if cached.get('speech')==lines and (ROOT/'voice.wav').exists():
+if cached.get('speech')==lines and cached.get('voice_strategy')=='per_scene_charon_v1' and (ROOT/'voice.wav').exists():
  ds=cached['scene_seconds'];e._CACHE['voice_used']=cached.get('voice')
 else:
- vv=e.make_voices([{'segs':[(None,None,s)]} for s in lines],rot=0)
+ try:
+  vv=[];labels=[]
+  for speech in lines:
+   arr,label=voices.gemini_male_once([speech],0)
+   vv.append((arr,None,speech,None));labels.append(label)
+  e._CACHE['voice_used']='Gemini Charon (male), separately generated scenes: '+', '.join(sorted(set(labels)))
+ except Exception as exc:
+  print('Gemini per-scene voice unavailable:',str(exc)[:160])
+  e.USE_GEMINI_TTS=False
+  vv=e.make_voices([{'segs':[(None,None,s)]} for s in lines],rot=0)
  audio=[e._compress_pauses(v[0],max_pause=.25)[0] for v in vv]
  assert all(len(a)>e.SR*.5 and np.max(np.abs(a))>.005 for a in audio)
  ds=[max(len(a)/e.SR+.55,m) for a,m in zip(audio,(4.5,6,6,5))]
@@ -160,5 +169,5 @@ assert check.returncode==0 and 'black_start:' not in check.stderr
 sheet=Image.new('RGB',(1440,2560))
 for k in range(4):sheet.paste(frame(k,ds[k]*.6),((k%2)*720,(k//2)*1280))
 sheet.thumbnail((1000,1800));sheet.save(ROOT/'review_sheet.jpg',quality=92)
-review={'duration':total,'scene_seconds':ds,'voice':e._CACHE.get('voice_used'),'sha256':hashlib.sha256(out.read_bytes()).hexdigest(),'speech':lines,'build_only':True,'sources':['https://science.nasa.gov/resource/the-apollo-15-hammer-feather-drop/'],'visuals':['bevelled steel and wood hammer','curved feather barbs','translucent glass chamber','air resistance arrows','animated vacuum pump and gauge','synchronised accelerating drops'],'share_hypothesis':'Ask a friend to predict before revealing the vacuum result. Not a claim of measured audience performance.','model_note':'Same height, simultaneous release, negligible air resistance. Distances and durations schematic.'}
+review={'voice_strategy':'per_scene_charon_v1','duration':total,'scene_seconds':ds,'voice':e._CACHE.get('voice_used'),'sha256':hashlib.sha256(out.read_bytes()).hexdigest(),'speech':lines,'build_only':True,'sources':['https://science.nasa.gov/resource/the-apollo-15-hammer-feather-drop/'],'visuals':['bevelled steel and wood hammer','curved feather barbs','translucent glass chamber','air resistance arrows','animated vacuum pump and gauge','synchronised accelerating drops'],'share_hypothesis':'Ask a friend to predict before revealing the vacuum result. Not a claim of measured audience performance.','model_note':'Same height, simultaneous release, negligible air resistance. Distances and durations schematic.'}
 (ROOT/'review.json').write_text(json.dumps(review,ensure_ascii=False,indent=2));print(json.dumps(review,ensure_ascii=False))
