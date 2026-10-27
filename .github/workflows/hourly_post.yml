@@ -62,6 +62,12 @@ jobs:
           POST_MODE: ${{ github.event.inputs.post_mode || 'publish' }}   # 'manual' likho to Instagram pe post nahi, repo ke ready_reels/ me reel milegi
         run: |
           set -o pipefail
+          if [ "$POST_MODE" = publish ] && { [ "$REEL_FORMAT" = current ] || [ "$GS_SUBJECT" = "Current Affairs" ]; }; then
+            if python -c "import json,pathlib,sys; p=pathlib.Path('experiments/current_affairs_hold.json'); sys.exit(0 if p.exists() and json.loads(p.read_text()).get('held') else 1)"; then
+              echo "CURRENT AFFAIRS HELD: user requested no publication"
+              exit 0
+            fi
+          fi
           if [ "$POST_MODE" = publish ] && { [ -z "$REGULAR_SLOT" ] || [ -z "$GS_TARGET_UTC" ]; }; then
             echo "Old timer request blocked: use the new regular schedule slot"
             exit 0
