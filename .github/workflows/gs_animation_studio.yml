@@ -46,8 +46,16 @@ jobs:
           PY
       - name: Install operating-system rendering libraries
         run: |
+          sudo python - <<'PYFIX'
+          from pathlib import Path
+          files=[p for p in Path('/etc/apt').rglob('*') if p.is_file() and p.suffix in {'.list','.sources','.txt'}]
+          for p in files:
+              if not p.exists():continue
+              s=p.read_text().replace('http://azure.archive.ubuntu.com/ubuntu','https://archive.ubuntu.com/ubuntu').replace('http://archive.ubuntu.com/ubuntu','https://archive.ubuntu.com/ubuntu').replace('http://security.ubuntu.com/ubuntu','https://security.ubuntu.com/ubuntu')
+              p.write_text(s)
+          PYFIX
           timeout 240 sudo apt-get update -qq -o Acquire::Retries=1 -o Acquire::http::Timeout=30
-          timeout 240 sudo apt-get install -y -o Dpkg::Lock::Timeout=60 -o Acquire::Retries=1 -o Acquire::http::Timeout=30 ffmpeg xvfb xauth libegl1 libegl-mesa0 libgl1 libgl1-mesa-dri libxrender1 libxi6 libxkbcommon0
+          timeout 240 sudo env DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends -o Dpkg::Lock::Timeout=60 -o Acquire::Retries=1 -o Acquire::http::Timeout=30 ffmpeg xvfb xauth libegl1 libegl-mesa0 libgl1 libgl1-mesa-dri libxrender1 libxi6 libxkbcommon0
       - name: Install known working Python voice and text packages
         run: pip install --timeout 30 --retries 2 Pillow==13.0.0 numpy==2.4.6 requests==2.34.2 edge-tts==7.3.1
       - name: Download verified Blender with a bounded official mirror fallback
