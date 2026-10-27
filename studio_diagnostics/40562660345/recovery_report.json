@@ -1,0 +1,26 @@
+{
+  "topic": "new_topic",
+  "run_id": "40562660345",
+  "attempt": "1",
+  "status": "failed",
+  "events": [
+    {
+      "stage": "plan_new_topic",
+      "status": "started",
+      "log": "0_plan_new_topic.log"
+    },
+    {
+      "stage": "plan_new_topic",
+      "status": "failed",
+      "code": "process_failed",
+      "detail": "Source unavailable: www.india.gov.in HTTPError\nSource unavailable: www.mkgandhi.org HTTPError\nSource unavailable: www.gandhimuseum.org HTTPError\nTraceback (most recent call last):\n  File \"/home/runner/work/insta-automation/insta-automation/gs_animation_studio/planner.py\", line 152, in <module>\n    generate(sys.argv[1],sys.argv[2],os.getenv('STUDIO_TOPIC_TEXT','').strip(),os.getenv('STUDIO_SUBJECT','auto'),os.getenv('STUDIO_REFERENCE_TEXT',''))\n  File \"/home/runner/work/insta-automation/insta-automation/gs_animation_studio/planner.py\", line 128, in generate\n    if not evidence:raise RuntimeError('No readable factual reference. Retry or paste a source into reference_text; no unrelated old topic is substituted.')\n                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nRuntimeError: No readable factual reference. Retry or paste a source into reference_text; no unrelated old topic is substituted.\n"
+    }
+  ],
+  "repairs": [],
+  "injected_failures": [],
+  "instagram_publish": false,
+  "failure": {
+    "type": "StageError",
+    "message": "plan_new_topic: process_failed"
+  }
+}

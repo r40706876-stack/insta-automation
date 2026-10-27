@@ -1,0 +1,10 @@
+Source unavailable: www.india.gov.in HTTPError
+Source unavailable: www.mkgandhi.org HTTPError
+Source unavailable: www.gandhimuseum.org HTTPError
+Traceback (most recent call last):
+  File "/home/runner/work/insta-automation/insta-automation/gs_animation_studio/planner.py", line 152, in <module>
+    generate(sys.argv[1],sys.argv[2],os.getenv('STUDIO_TOPIC_TEXT','').strip(),os.getenv('STUDIO_SUBJECT','auto'),os.getenv('STUDIO_REFERENCE_TEXT',''))
+  File "/home/runner/work/insta-automation/insta-automation/gs_animation_studio/planner.py", line 128, in generate
+    if not evidence:raise RuntimeError('No readable factual reference. Retry or paste a source into reference_text; no unrelated old topic is substituted.')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: No readable factual reference. Retry or paste a source into reference_text; no unrelated old topic is substituted.
