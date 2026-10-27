@@ -61,3 +61,5 @@ jobs:
           git commit -m 'Save cinematic history film and production review [skip ci]'
           git pull --rebase -X theirs
           git push
+
+# Use the reviewed imagegen historical illustration committed with this revision.
