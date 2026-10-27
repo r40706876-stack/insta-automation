@@ -8,10 +8,10 @@ permissions:
   contents: write
 concurrency:
   group: gs-history-documentary-preview
-  cancel-in-progress: false
+  cancel-in-progress: true
 jobs:
   film:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04-arm
     timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
@@ -21,7 +21,7 @@ jobs:
       - name: Install voice and compositor dependencies
         run: |
           pip install --timeout 30 --retries 1 -r requirements.txt imageio-ffmpeg
-          python -c "import imageio_ffmpeg,os; p='/usr/local/bin/ffmpeg'; os.path.exists(p) or os.symlink(imageio_ffmpeg.get_ffmpeg_exe(),p)"
+          if ! command -v ffmpeg >/dev/null; then sudo apt-get update -qq; sudo apt-get install -y --no-install-recommends ffmpeg; fi
           python -m py_compile gs_history_blender.py gs_history_film.py
       - name: Prepare original voice and illustration
         env:
