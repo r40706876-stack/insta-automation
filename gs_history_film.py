@@ -7,13 +7,13 @@ ROOT=Path(os.environ.get('GS_FILM_ROOT','experiments/meerut_delhi_film'));ROOT.m
 W,H,FPS=720,1280,30
 GOLD='#ffdb87';CYAN='#69dbdf';WHITE='#f5eedc';RED='#ff9b78'
 SPEECH=[
- 'बगावत मेरठ में हुई थी। फिर सिपाही रात भर चलकर दिल्ली क्यों पहुँचे?',
- 'नौ मई, अठारह सौ सत्तावन। मेरठ में पचासी सिपाहियों को सज़ा दी गई।',
- 'अगले दिन विद्रोह भड़का। कैद साथियों को छुड़ाया गया। फिर रास्ता दिल्ली की ओर मुड़ा।',
- 'ग्यारह मई को वे दिल्ली पहुँचे। उन्होंने बहादुर शाह ज़फ़र को अपना नेता बनाने की माँग की।',
- 'ज़फ़र मुगल बादशाह थे। वह इस विद्रोह के साझा, सांकेतिक नेता बने। हर मोर्चे पर लड़ाई खुद नहीं चला रहे थे।',
- 'याद रखो: नौ को सज़ा, दस को मेरठ में विद्रोह, ग्यारह को दिल्ली। अब अपने दोस्त से इन तीन दिनों की कहानी पूछो।']
-HEAD=['मेरठ की बगावत दिल्ली क्यों गई?','9 मई 1857 • मेरठ','10 मई • कैद से विद्रोह तक','11 मई • दिल्ली पहुँचे','एक नाम, साझा नेतृत्व का प्रतीक','9 → 10 → 11 मई : कहानी याद रखो']
+ 'बगावत मेरठ में हुई। फिर सिपाही दिल्ली क्यों पहुँचे?',
+ 'नौ मई, अठारह सौ सत्तावन। मेरठ में पचासी सिपाहियों को सज़ा मिली।',
+ 'दस मई: विद्रोह भड़का। साथियों को छुड़ाकर सिपाही दिल्ली की ओर बढ़े।',
+ 'ग्यारह मई: दिल्ली पहुँचकर उन्होंने बहादुर शाह ज़फ़र से नेतृत्व माँगा।',
+ 'ज़फ़र मुगल बादशाह थे। साझा नेतृत्व का प्रतीक। हर मोर्चे के सेनापति नहीं।',
+ 'याद रखो: नौ सज़ा, दस मेरठ का विद्रोह, ग्यारह दिल्ली। दोस्त से यही क्रम पूछो।']
+HEAD=['मेरठ की बगावत दिल्ली क्यों गई?','9 मई 1857 • मेरठ','10 मई • कैद से विद्रोह तक','11 मई • दिल्ली पहुँचे','एक नाम, साझा नेतृत्व का प्रतीक','9 / 10 / 11 मई : कहानी याद रखो']
 EARTH='https://eoimages.gsfc.nasa.gov/images/imagerecords/73000/73909/world.topo.bathy.200412.3x5400x2700.jpg'
 SOURCES=['https://www.cbse.gov.in/cbsenew/ebooks/ANO-SD-SW.pdf','https://sathee.iitk.ac.in/sathee-railway-exams/student-corner/general-knowledge/indian-history/revolt-1857/','https://www.pib.gov.in/newsite/erelcontent.aspx?lang=2&reg=48&relid=27529']
 def download(url,path):
@@ -23,7 +23,7 @@ def download(url,path):
 def prepare():
  import auto_poster as e
  import daily_visual_gs as voices
- e.resolve_font();e.VOICE_NAME='hi-IN-SwaraNeural';e.VOICE_RATE='+0%';e.VOICE_PITCH='+0Hz'
+ e.resolve_font();e.VOICE_NAME='hi-IN-SwaraNeural';e.VOICE_RATE='+8%';e.VOICE_PITCH='+0Hz'
  e._TTS_STYLE[0]='Speak clear engaging Hindi as a male history storyteller. Speech only. No music, humming, filler or singing.'
  old=json.loads((ROOT/'audio.json').read_text()) if (ROOT/'audio.json').exists() else {}
  if old.get('speech')!=SPEECH or not (ROOT/'voice.wav').exists():
@@ -111,11 +111,26 @@ def mapshot(t,progress=1,overview=False):
  for name,(x,y) in pins.items():
   rr=10+5*math.sin(t*3);d.ellipse((x-rr,y-rr,x+rr,y+rr),outline=GOLD,width=2);d.ellipse((x-5,y-5,x+5,y+5),fill=GOLD)
   tag(d,name,x+(0 if name=='मेरठ' else 15),y-50,33)
- text(d,'N ↑',633,420,25,CYAN)
+ text(d,'उत्तर',633,420,25,CYAN)
  text(d,'भौगोलिक स्थान सही • यात्रा-पथ सांकेतिक',360,1060,20,WHITE)
  text(d,'पृष्ठभूमि: NASA Blue Marble • आधुनिक भू-दृश्य',360,1090,17,'#c7c5b7')
  return shade(im)
 photo=Image.open(ROOT/'meerut_night.jpg').convert('RGB')
+fort_art=Image.open(ROOT/'delhi_arrival.jpg').convert('RGB')
+def arrival(t,duration):
+ # Separate foreground and background camera motion, dust and light; illustration is labelled.
+ ph=ImageOps.fit(fort_art,(W,H));z=1+.055*ease(t/duration)
+ back=ImageOps.fit(ph.resize((round(W*z),round(H*z)),Image.Resampling.LANCZOS),(W,H))
+ # Near paving moves slightly faster than the gateway, producing restrained depth parallax.
+ front=ImageOps.fit(ph.resize((round(W*(z+.015)),round(H*(z+.015))),Image.Resampling.LANCZOS),(W,H))
+ mask=Image.new('L',(W,H));md=ImageDraw.Draw(mask)
+ for y in range(900,H):md.line((0,y,W,y),fill=round(255*(y-900)/(H-900)))
+ back=Image.composite(front,back,mask)
+ layer=Image.new('RGBA',(W,H));d=ImageDraw.Draw(layer)
+ for j in range(24):
+  x=(j*113+t*8)%W;y=600+(j*73-t*13)%530
+  d.ellipse((x,y,x+2,y+2),fill=(255,212,143,105))
+ return shade(Image.alpha_composite(back.convert('RGBA'),layer).convert('RGB'))
 audio=json.loads((ROOT/'audio.json').read_text());ds=audio['seconds'];starts=np.cumsum([0]+ds[:-1]).tolist();total=sum(ds)
 # Decode genuine rendered 3D inserts; no static-image replacement permitted.
 clips={}
@@ -158,23 +173,24 @@ def frame(k,t):
  elif k==2:
   im=shade(shot('chains',min(4,t/ds[k]*4)));d=ImageDraw.Draw(im)
   tag(d,'कैद साथियों को छुड़ाया',360,425,36,CYAN)
-  if t>ds[k]*.5:text(d,'अगला कदम → दिल्ली',360,1080,40,GOLD)
+  if t>ds[k]*.5:text(d,'अगला कदम: दिल्ली',360,1080,40,GOLD)
   text(d,'मुक्ति का सांकेतिक 3D दृश्य',360,1150,19,WHITE)
  elif k==3:
   u=t/ds[k]
   if u<.57:im=mapshot(t,ease(u/.52));d=ImageDraw.Draw(im);tag(d,'रातभर दिल्ली की ओर',360,1125,31,CYAN)
   else:
-   im=shade(shot('fort',4*ease((u-.57)/.43)));d=ImageDraw.Draw(im)
+   model=shade(shot('fort',4*ease((u-.57)/.43)))
+   q=ease((u-.66)/.16);im=Image.blend(model,arrival(t,ds[k]),q);d=ImageDraw.Draw(im)
    tag(d,'बहादुर शाह ज़फ़र',360,410,35,GOLD)
    text(d,'नेतृत्व की माँग',360,1090,39,WHITE)
-   text(d,'लाल किले से प्रेरित सांकेतिक 3D मॉडल',360,1150,18,WHITE)
+   text(d,'AI पुनर्निर्माण और सांकेतिक 3D मॉडल',360,1150,18,WHITE)
  elif k==4:
-  im=shade(shot('fort',min(4,t/ds[k]*4)));d=ImageDraw.Draw(im)
+  im=arrival(t,ds[k]);d=ImageDraw.Draw(im)
   tag(d,'मुगल बादशाह • बहादुर शाह ज़फ़र',360,420,31,GOLD)
   for j,(s,col) in enumerate([('साझे नेतृत्व का प्रतीक',GOLD),('हर मोर्चे के सेनापति नहीं',CYAN)]):
    if t>j*1.3:
     y=940+j*105;d.rounded_rectangle((58,y-37,662,y+37),12,fill='#10252c',outline=col,width=2);text(d,s,360,y,36,col)
-  text(d,'सांकेतिक मॉडल • वास्तविक ऐतिहासिक फुटेज नहीं',360,1155,17,WHITE)
+  text(d,'AI से बना सांकेतिक दृश्य • ऐतिहासिक फोटो नहीं',360,1155,17,WHITE)
  else:
   im=mapshot(t,1);overlay=Image.new('RGBA',(W,H),(4,15,20,135));im=Image.alpha_composite(im.convert('RGBA'),overlay).convert('RGB');d=ImageDraw.Draw(im)
   rows=[('9 मई','सज़ा • मेरठ'),('10 मई','विद्रोह • मेरठ'),('11 मई','दिल्ली • ज़फ़र से नेतृत्व की माँग')]
@@ -203,5 +219,5 @@ if '--sheet' not in sys.argv:
 sheet=Image.new('RGB',(1440,3840))
 for k in range(6):sheet.paste(frame(k,ds[k]*.65),((k%2)*720,(k//2)*1280))
 sheet.thumbnail((1000,2667));sheet.save(ROOT/'review_sheet.jpg',quality=93)
-review={'duration':total,'scene_seconds':ds,'speech':SPEECH,'voice':audio['voice'],'renderer':'Blender 4.2 Eevee actual animated iron links and fort architecture; geographic perspective maps; original AI historical background; Pillow compositing','source_reference':'User supplied 160.937s study reference; technique studied, no source footage or script copied','build_only':True,'sources':SOURCES,'map_source':EARTH,'map_note':'Modern physical geography for location only; no 1857 political borders. Travel path schematic.','share_hypothesis':'Retell three consecutive dates with places and event roles, then quiz a study partner. Not verified audience performance.','sha256':hashlib.sha256(out.read_bytes()).hexdigest() if out.exists() else None}
+review={'duration':total,'scene_seconds':ds,'speech':SPEECH,'voice':audio['voice'],'renderer':'Blender 4.2 Eevee actual animated iron links and fort architecture; geographic perspective maps; original AI historical background; Pillow compositing','image_source':'Built-in imagegen historical reconstructions; no archival photo claim','source_reference':'User supplied 160.937s study reference; technique studied, no source footage or script copied','build_only':True,'sources':SOURCES,'map_source':EARTH,'map_note':'Modern physical geography for location only; no 1857 political borders. Travel path schematic.','share_hypothesis':'Retell three consecutive dates with places and event roles, then quiz a study partner. Not verified audience performance.','sha256':hashlib.sha256(out.read_bytes()).hexdigest() if out.exists() else None}
 (ROOT/'review.json').write_text(json.dumps(review,ensure_ascii=False,indent=2));print(json.dumps(review,ensure_ascii=False))
