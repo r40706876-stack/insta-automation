@@ -1,0 +1,31 @@
+{
+  "duration": 27.087482993197277,
+  "scene_seconds": [
+    6.0075056689342405,
+    6,
+    6,
+    9.079977324263039
+  ],
+  "voice": "edge-tts hi-IN-SwaraNeural",
+  "sha256": "dd94f280d439cb237b3ed8ac43c18f4515ec36856661665a8f833ae6b8a4bc0d",
+  "speech": [
+    "हथौड़ा या पंख? हवा हटा दें, तो पहले कौन गिरेगा? जवाब सोचो।",
+    "हवा में पंख धीरे गिरता है। हवा उसे ज्यादा रोकती है।",
+    "अब इस बर्तन से हवा निकाल दी। दोनों को एक ही ऊँचाई से साथ छोड़ते हैं।",
+    "दोनों साथ पहुँचते हैं! हवा का विरोध न हो, तो दोनों समान तेजी से गिरते हैं। दोस्त से भी पहले अनुमान पूछो।"
+  ],
+  "build_only": true,
+  "sources": [
+    "https://science.nasa.gov/resource/the-apollo-15-hammer-feather-drop/"
+  ],
+  "visuals": [
+    "bevelled steel and wood hammer",
+    "curved feather barbs",
+    "translucent glass chamber",
+    "air resistance arrows",
+    "animated vacuum pump and gauge",
+    "synchronised accelerating drops"
+  ],
+  "share_hypothesis": "Ask a friend to predict before revealing the vacuum result. Not a claim of measured audience performance.",
+  "model_note": "Same height, simultaneous release, negligible air resistance. Distances and durations schematic."
+}
