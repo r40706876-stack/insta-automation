@@ -1,0 +1,10 @@
+{
+  "frames": 1016,
+  "fps": 24,
+  "whole_scene_3d": true,
+  "photo_assets": 0,
+  "gate_pressure_interlock_verified": true,
+  "ship_clearance_verified": true,
+  "lift_max": 2.6,
+  "level_note": "Schematic model units, not metres or a complete Panama Canal replica"
+}
