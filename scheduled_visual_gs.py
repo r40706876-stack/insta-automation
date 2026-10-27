@@ -2,6 +2,11 @@
 import os,json,datetime,runpy,sys
 from pathlib import Path
 import auto_poster as e
+hold=Path('experiments/current_affairs_hold.json')
+is_current=os.environ.get('REEL_FORMAT')=='current' or os.environ.get('GS_SUBJECT')=='Current Affairs'
+if os.environ.get('POST_MODE')=='publish' and is_current and hold.exists() and json.loads(hold.read_text()).get('held'):
+ print('CURRENT AFFAIRS HELD: user requested no publication; other slots continue',flush=True)
+ raise SystemExit(0)
 target=os.environ.get('GS_TARGET_UTC')
 assert target,'Explicit slot target required'
 dt=datetime.datetime.fromisoformat(target.replace('Z','+00:00')).astimezone(datetime.timezone(datetime.timedelta(hours=5,minutes=30)))
