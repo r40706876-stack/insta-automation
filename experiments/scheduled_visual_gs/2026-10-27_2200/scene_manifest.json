@@ -1,0 +1,70 @@
+{
+  "renderer_version": 7,
+  "scenes": [
+    {
+      "type": "process",
+      "phase": "question",
+      "labels": [
+        "ग्लोबल NGO",
+        "मुख्यालय खोज"
+      ],
+      "amounts": [
+        0,
+        0
+      ],
+      "years": [
+        2018,
+        2018
+      ]
+    },
+    {
+      "type": "process",
+      "phase": "explain",
+      "labels": [
+        "भ्रष्टाचार निवारण",
+        "वार्षिक मूल्यांकन"
+      ],
+      "amounts": [
+        0,
+        0
+      ],
+      "years": [
+        2018,
+        2018
+      ]
+    },
+    {
+      "type": "process",
+      "phase": "demonstrate",
+      "labels": [
+        "मूल्यांकन प्रक्रिया",
+        "जर्मन संस्था"
+      ],
+      "amounts": [
+        0,
+        0
+      ],
+      "years": [
+        2018,
+        2018
+      ]
+    },
+    {
+      "type": "process",
+      "phase": "recall",
+      "labels": [
+        "मुख्यालय स्थल",
+        "बर्लिन, जर्मनी"
+      ],
+      "amounts": [
+        0,
+        0
+      ],
+      "years": [
+        2018,
+        2018
+      ]
+    }
+  ],
+  "no_photo_fallback": true
+}
