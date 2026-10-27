@@ -1,0 +1,42 @@
+name: Publish authorized Geography replacement once
+on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/geo_recovery.yml]
+permissions:
+  contents: write
+concurrency:
+  group: minuteme-geo-recovery-20261027
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install upload dependencies
+        run: |
+          pip install --timeout 30 --retries 1 -r requirements.txt imageio-ffmpeg
+          python -c "import imageio_ffmpeg,os; p='/usr/local/bin/ffmpeg'; os.path.exists(p) or os.symlink(imageio_ffmpeg.get_ffmpeg_exe(),p)"
+          python -m py_compile publish_geo_recovery.py
+      - name: Set receipt commit identity
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+      - name: Publish the exact reviewed Geography export once
+        env:
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          PYTHONUNBUFFERED: '1'
+        run: python -u publish_geo_recovery.py
+      - name: Preserve attempt and publication receipts
+        if: always()
+        run: |
+          git add experiments/manual_geo_recovery_20261027_1000 experiments/cinematic_seabreeze_v4 experiments/regular_schedule 2>/dev/null || true
+          git diff --cached --quiet && exit 0
+          git commit -m 'Preserve Geography recovery receipts [skip ci]'
+          git pull --rebase -X theirs
+          git push
