@@ -70,7 +70,7 @@ lines=['हथौड़ा या पंख? हवा हटा दें, त�
 titles=['हवा हटे तो पहले कौन गिरेगा?','हवा पंख को ज्यादा रोकती है','अब हवा निकालकर देखो','हवा नहीं: दोनों साथ!']
 e.USE_GEMINI_TTS=True;e.VOICE_NAME='hi-IN-SwaraNeural';e.VOICE_RATE='+0%';e.VOICE_PITCH='+0Hz'
 e.gemini_tts_once=voices.gemini_male_once
-e._TTS_STYLE[0]='Clear unhurried conversational Hindi male documentary teacher. Dates must be intelligible. Speech only, no humming, singing, music or filler.'
+e._TTS_STYLE[0]='Clear unhurried conversational Hindi male documentary teacher. Keep the question energetic and the explanation clear. Speech only, no humming, singing, music or filler.'
 cached=json.loads((ROOT/'review.json').read_text()) if (ROOT/'review.json').exists() else {}
 if cached.get('speech')==lines and (ROOT/'voice.wav').exists():
  ds=cached['scene_seconds'];e._CACHE['voice_used']=cached.get('voice')
@@ -104,7 +104,7 @@ def frame(k,t):
   tube(im,360,t,True)
   # Deliberately slow teaching model, not measured physical fall times.
   q=max(0,t-.6);h=min(1,(q/1.4)**2);f=min(1,q/5.1)
-  hammer(im,305,535+365*h,.75);feather(im,415,535+365*f,t,.75,True)
+  hammer(im,285,535+361.5*h,1.05);feather(im,435,522.4+361.5*f,t,1.05,True)
   d=ImageDraw.Draw(im);text(d,'हवा मौजूद है',360,384,33,CYAN)
   if .9<t<4.5:
    for x in (400,430):
@@ -112,7 +112,7 @@ def frame(k,t):
   text(d,'पंख को हवा का ज्यादा विरोध',360,1120,33,RED)
  elif k==2:
   q=ease(t/3);tube(im,360,t,True,q)
-  hammer(im,305,535,.75);feather(im,415,535,t,.75)
+  hammer(im,285,535,1.05);feather(im,435,522.4,t,1.05)
   d=ImageDraw.Draw(im);text(d,'हवा निकाल रहे हैं',360,384,33,GOLD)
   # Vacuum pump, exhaust path, visibly falling gauge and escaping particles.
   d.rounded_rectangle((510,880,650,1020),18,fill='#254454',outline=CYAN,width=2)
@@ -127,13 +127,14 @@ def frame(k,t):
   d.line((cx,cy,cx+60*math.cos(a),cy+60*math.sin(a)),fill=GOLD,width=5)
   text(d,'कम हवा',380,1135,30,CYAN)
  else:
-  tube(im,360,t,False);q=max(0,t-.75);f=min(1,(q/1.7)**2)
-  yy=535+365*f
-  hammer(im,305,yy,.75);feather(im,415,yy,t,.75)
+  tube(im,360,t,False);replay=t>=4.4;local=t-4.4 if replay else t;q=max(0,local-.75);f=min(1,(q/1.7)**2)
+  yy=535+361.5*f
+  hammer(im,285,yy,1.05);feather(im,435,yy-12.6,t,1.05)
   d=ImageDraw.Draw(im);text(d,'हवा नहीं है • एक साथ छोड़ा',360,384,31,CYAN)
-  d.line((275,yy-42,445,yy-42),fill=GOLD,width=2)
+  d.line((245,yy-44,470,yy-44),fill=GOLD,width=2)
+  if replay:text(d,'एक बार फिर देखो',360,1060,27,CYAN)
   if f>=1:
-   for x in (305,415):
+   for x in (285,435):
     r=8+35*min(1,max(0,q-1.7));d.ellipse((x-r,970-r,x+r,970+r),outline=GOLD,width=3)
    text(d,'दोनों एक साथ पहुँचे',360,1100,37,GOLD)
   else:text(d,'एक ऊँचाई • एक साथ शुरुआत',360,1100,29,WHITE)
