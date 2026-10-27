@@ -1,32 +1,31 @@
-  Groq llama-3.3-70b-versatile: HTTP 404
-  Groq llama-3.3-70b-versatile: HTTP 404
-  Groq llama-3.3-70b-versatile: HTTP 404
-  Groq llama-3.3-70b-versatile: HTTP 404
-  Groq llama-3.3-70b-versatile: HTTP 404
-  Groq openai/gpt-oss-120b: HTTP 429
-  Groq llama-3.1-8b-instant: HTTP 404
-  Groq llama-3.3-70b-versatile: HTTP 404
-  Groq openai/gpt-oss-120b: HTTP 429
-  Groq llama-3.1-8b-instant: HTTP 404
+FORMAT: mega
   Gemini text models: gemini-flash-latest, gemini-3.8-flash, gemini-3.7-flash, gemini-3.6-flash
-  Groq llama-3.3-70b-versatile: HTTP 404
-  Groq llama-3.3-70b-versatile: HTTP 404
-  Groq llama-3.3-70b-versatile: HTTP 404
-  Groq llama-3.3-70b-versatile: HTTP 404
-  Groq openai/gpt-oss-120b: HTTP 429
-  Groq llama-3.1-8b-instant: HTTP 404
-  Gemini gemini-flash-latest: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-flash-latest fail (koshish 1): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
   Gemini gemini-flash-latest fail (koshish 2): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
-  Gemini gemini-3.8-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
-  Gemini gemini-3.8-flash: HTTP 429 (koshish 2) 
-  Gemini gemini-3.7-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
-  Gemini gemini-3.7-flash: HTTP 429 (koshish 2) 
-  Groq llama-3.3-70b-versatile: HTTP 404
-  Gemini awaaz: scenes ke beech ruk nahi mile
-Gemini awaaz scenes me sahi nahi kati -> edge-tts
-SCHEDULE: video ready; target 2026-10-27T07:30:00Z
+  Gemini gemini-3.8-flash fail (koshish 1): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
+  Gemini gemini-3.8-flash: HTTP 503 (koshish 2) 
+  Gemini gemini-3.7-flash fail (koshish 1): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
+  Gemini gemini-3.7-flash fail (koshish 2): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
+  Mega AI jaanch: 83 me se 53 sahi
+  Mega awaaz: gemini-3.8-flash-lite-tts / hi-in-tutor-1
+MEGA REEL TAIYAR: generated_reels/science_pyq_reel.mp4 (13.5s, 2 page, 40 sawal)
+
+CAPTION:
+📚 "अर्थशास्त्र (Economics)" के 40 सबसे महत्वपूर्ण प्रश्न - सभी सरकारी परीक्षाओं के लिए
+
+⏸️ हर पेज पर रोककर पढ़ो (स्क्रीन दबाकर रखो)
+📌 अभी SAVE करो - exam से पहले 1 बार ज़रूर revise करना
+📤 उस दोस्त को भेजो जो SSC / Railway / Police की तैयारी कर रहा है
+💬 कितने पहले से आते थे? कमेंट करो!
+
+अर्थशास्त्र (Economics) GK | RRB NTPC, Group D, SSC GD, CGL, MTS, Police, Patwari, State Exam PYQ
+⏱ MinuteMe_GS - एक मिनट, एक PYQ - पक्का!
+
+#gkquiz #gkpyq #sscgd #rrbntpc #economics
+SCHEDULE: video ready; target 2026-10-27T11:30:00Z
 Collab invitation requested: @ar_publication
-  IG container: 17910821550568651
+  IG container: 17910853404568651
   upload try 1: HTTP 200 {"success":true,"message":"Upload Successful."}
   IG processing: FINISHED
-REMINDER: reel ready, publication due within 10 minutes: 2026-10-27T07:30:00Z
+REMINDER: reel ready, publication due within 10 minutes: 2026-10-27T11:30:00Z
+INSTAGRAM PE POST HO GAYA: 18121155742949332
