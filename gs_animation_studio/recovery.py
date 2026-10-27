@@ -157,7 +157,7 @@ class Recovery:
    receipt={'topic':self.topic,'run_id':self.run_id,'attempt':self.attempt,'commit':os.getenv('GITHUB_SHA'),'built_on_github':bool(os.getenv('GITHUB_ACTIONS')),'elapsed_seconds':round(time.time()-self.started,2),'sha256':hashlib.sha256((self.root/'final.mp4').read_bytes()).hexdigest(),'instagram_publish':False,'recovery_verified':fault}
    atomic(self.root/'build_receipt.json',receipt)
    self.report.update(status='passed',output=str(self.root.relative_to(self.repo)),sha256=receipt['sha256']);self.write()
-   keep={'final.mp4','voice.flac','audio.json','file_checks.json','scene_checks.json','build_receipt.json','recipe.json','contact_sheet.jpg','scene.blend','sources.json','request.json','audit_0.json','audit_1.json','audit_2.json'}
+   keep={'final.mp4','voice.flac','audio.json','file_checks.json','scene_checks.json','build_receipt.json','recipe.json','contact_sheet.jpg','scene.blend','layout_repairs.json','sources.json','request.json','audit_0.json','audit_1.json','audit_2.json'}
    for p in self.root.iterdir():
     if p.is_file() and p.name not in keep:p.unlink()
    self.call('compress_scene',['xz','-f','-T2','-6',str(self.root/'scene.blend')],timeout=120)

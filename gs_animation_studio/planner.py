@@ -46,18 +46,44 @@ def reference(url):
     data+=block
     if len(data)>1500000:raise ValueError('Reference too large')
    if 'pdf' in r.headers.get('Content-Type',''):raise ValueError('Provide an HTML reference or pasted source text')
-   text=data.decode(r.encoding or 'utf-8',errors='replace');text=re.sub(r'<(script|style)[\s\S]*?</\1>',' ',text,flags=re.I);text=html.unescape(re.sub('<[^>]+>',' ',text));text=re.sub(r'\s+',' ',text).strip()
+   text=data.decode(r.encoding or 'utf-8',errors='replace');text=re.sub(r'<(script|style|nav|header|footer)[\s\S]*?</\1>',' ',text,flags=re.I);text=html.unescape(re.sub('<[^>]+>',' ',text));text=re.sub(r'\s+',' ',text).strip()
    if len(text)<400:raise ValueError('Insufficient readable source')
    return {'url':url,'text':text[:24000],'sha256':hashlib.sha256(text.encode()).hexdigest()}
  raise ValueError('Too many reference redirects')
 
 def vec(v,lo,hi):return isinstance(v,list) and len(v)==3 and all(isinstance(x,(int,float)) and not isinstance(x,bool) and math.isfinite(x) and lo<=x<=hi for x in v)
+def normalize_layout(p):
+ # These are schematic composition coordinates, not physical measurements.
+ # Fit a generated stage without altering text, dates, object identities or actions.
+ import copy
+ p=copy.deepcopy(p);repairs=[]
+ for k,sc in enumerate(p.get('scenes',[])):
+  if not isinstance(sc,dict):continue
+  objects=sc.get('objects',[])
+  coords=[o[key] for o in objects if isinstance(o,dict) for key in ('pos','to') if vec(o.get(key),-100,100)]
+  fx=min(1,3.0/max([abs(v[0]) for v in coords]+[3.0]));fy=min(1,1.6/max([abs(v[1]) for v in coords]+[1.6]))
+  labels=0
+  for o in objects:
+   if not isinstance(o,dict):continue
+   for key in ('pos','to'):
+    if vec(o.get(key),-100,100):
+     old=o[key];o[key]=[round(old[0]*fx,4),round(old[1]*fy,4),max(0,min(4,old[2]))]
+     if o[key]!=old:repairs.append({'scene':k+1,'object':o.get('id'),'repair':'fit_'+key})
+   if vec(o.get('size'),0,100):
+    old=o['size'];o['size']=[max(.25,min(2,x)) for x in old]
+    if old!=o['size']:repairs.append({'scene':k+1,'object':o.get('id'),'repair':'fit_size'})
+   if o.get('label'):
+    labels+=1
+    if labels>3:o['label']='';repairs.append({'scene':k+1,'object':o.get('id'),'repair':'remove_excess_label'})
+ return p,repairs
+
 def validate(p):
  if not isinstance(p,dict):raise ValueError('Plan must be object')
  if not isinstance(p.get('title'),str) or not 3<=len(p['title'])<=80:raise ValueError('Invalid title')
  scenes=p.get('scenes',[])
  if len(scenes)!=6:raise ValueError('Exactly six scenes required')
  for s in scenes:
+  if not isinstance(s,dict):raise ValueError('Scene must be object')
   if not isinstance(s.get('speech'),str) or not 8<=len(s['speech'].split())<=25:raise ValueError('Each scene needs 8-25 conversational Hindi words')
   if len(s.get('heading',''))>52 or len(s.get('explanation',''))>80:raise ValueError('Screen text too long')
   if not s.get('heading') or not s.get('explanation') or not s.get('teaches'):raise ValueError('Missing teaching purpose')
@@ -65,6 +91,7 @@ def validate(p):
   if not 2<=len(objects)<=7:raise ValueError('Scene needs 2-7 meaningful objects')
   ids=set();moving=0
   for o in objects:
+   if not isinstance(o,dict):raise ValueError('Asset must be object')
    if not re.fullmatch(r'[a-z][a-z0-9_]{0,24}',str(o.get('id',''))) or o['id'] in ids:raise ValueError('Invalid/duplicate object id')
    ids.add(o['id'])
    if o.get('kind') not in KINDS or o.get('action') not in ACTIONS:raise ValueError('Unsupported scene operation')
@@ -100,11 +127,13 @@ def generate(root,repo,topic_text='',subject='auto',source_text=''):
    except Exception as exc:print('Source unavailable:',urllib.parse.urlparse(url).hostname,type(exc).__name__,flush=True)
   if not evidence:raise RuntimeError('No readable factual reference. Retry or paste a source into reference_text; no unrelated old topic is substituted.')
  (root/'sources.json').write_text(json.dumps([{k:v for k,v in e.items() if k!='text'} | {'excerpt':e['text'][:900]} for e in evidence],ensure_ascii=False,indent=2))
+ for e in evidence:e['text']=e['text'][:9000]
  errors=[]
  for attempt in range(3):
   prompt=CONTRACT+'\nKINDS='+','.join(sorted(KINDS))+'\nACTIONS='+','.join(sorted(ACTIONS))+'\n'+brief+'\nSelected topic:'+topic_text+'\nEVIDENCE:'+json.dumps(evidence,ensure_ascii=False)+'\nPrevious rejection reasons:'+json.dumps(errors)
   p,provider=ask(prompt)
   try:
+   p,layout_repairs=normalize_layout(p)
    validate(p)
    if not re.fullmatch(r'[a-z0-9_]{3,70}',str(p.get('topic_key',''))):raise ValueError('Stable topic_key required')
    if not source_text and not topic_text:raise ValueError('Missing topic')
@@ -112,6 +141,7 @@ def generate(root,repo,topic_text='',subject='auto',source_text=''):
    audit,auditor=ask('Independently fact-check this proposed Hindi video against EVIDENCE. Verify exact user topic, all dates/numbers, simple language, no answer confusion, and that EACH listed 3D object and action actually demonstrates the narration. Reject decorative unrelated animation, overlapping objects, misleading analogies, floating feet, wrong directions, or simply reading text. Supported engine contract: '+CONTRACT+'\nReturn JSON {ok:boolean,reasons:[string],scene_checks:[{scene:integer,mechanism_matches:boolean}]}. User topic:'+topic_text+' Previous topics to avoid in automatic mode:'+json.dumps(history,ensure_ascii=False)+' Evidence:'+json.dumps(evidence,ensure_ascii=False)+' Plan:'+json.dumps(p,ensure_ascii=False))
    (root/f'audit_{attempt}.json').write_text(json.dumps(audit,ensure_ascii=False,indent=2))
    if audit.get('ok') is not True or len(audit.get('scene_checks',[]))!=6 or any(x.get('mechanism_matches') is not True for x in audit['scene_checks']):raise ValueError('Audit: '+str(audit.get('reasons')))
+   (root/'layout_repairs.json').write_text(json.dumps(layout_repairs,indent=2))
    p.update(speech=[s['speech'] for s in p['scenes']],titles=[[s['heading'],s['explanation']] for s in p['scenes']],requested_topic=topic_text,planner=provider,auditor=auditor,dynamic=True)
    (root/'recipe.json').write_text(json.dumps(p,ensure_ascii=False,indent=2));return p
   except (ValueError,TypeError,KeyError) as exc:errors.append(str(exc));print('Plan repair',attempt+1,str(exc)[:300],flush=True)
