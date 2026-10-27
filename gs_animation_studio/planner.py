@@ -91,6 +91,16 @@ def normalize_layout(p):
     if labels>3:o['label']='';repairs.append({'scene':k+1,'object':o.get('id'),'repair':'remove_excess_label'})
  return p,repairs
 
+def check_quantities(p,evidence):
+ # Do not allow an AI to turn a vague mass movement into an invented headcount.
+ convert=str.maketrans('०१२३४५६७८९','0123456789')
+ source=' '.join(e['text'] for e in evidence).lower().translate(convert)
+ speech=' '.join(sc['speech'] for sc in p['scenes']).translate(convert)
+ for number in re.findall(r'\d+(?:\.\d+)?',speech):
+  if number not in re.findall(r'\d+(?:\.\d+)?',source):raise ValueError('Unsupported numerical claim: '+number)
+ for hi,en in [('लाख','lakh'),('करोड़','crore'),('हजार','thousand'),('हज़ार','thousand')]:
+  if hi in speech and hi not in source and en not in source:raise ValueError('Unsupported quantity word: '+hi)
+
 def validate(p):
  if not isinstance(p,dict):raise ValueError('Plan must be object')
  if not isinstance(p.get('title'),str) or not 3<=len(p['title'])<=80:raise ValueError('Invalid title')
@@ -177,7 +187,7 @@ def generate(root,repo,topic_text='',subject='auto',source_text=''):
      for sc,txt in zip(p['scenes'],short['texts']):sc['heading']=txt['heading'];sc['explanation']=txt['explanation']
    diag=Path(os.getenv('STUDIO_DIAGNOSTICS',str(root)));diag.mkdir(parents=True,exist_ok=True)
    (diag/f'plan_attempt_{attempt}.json').write_text(json.dumps(p,ensure_ascii=False,indent=2))
-   validate(p)
+   validate(p);check_quantities(p,evidence)
    if not re.fullmatch(r'[a-z0-9_]{3,70}',str(p.get('topic_key',''))):raise ValueError('Stable topic_key required')
    if not source_text and not topic_text:raise ValueError('Missing topic')
    if automatic and any(p['topic_key']==h.get('topic_key') for h in history):raise ValueError('Already generated topic; choose another')

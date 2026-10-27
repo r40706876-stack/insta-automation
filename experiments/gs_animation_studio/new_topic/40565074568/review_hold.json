@@ -1,0 +1,17 @@
+{
+  "technical_checks_passed": true,
+  "editorial_approved": false,
+  "publish_allowed": false,
+  "reviewer": "Codex",
+  "issues": [
+    "Narration includes an unsupported लाखों headcount.",
+    "Boiling is not adequately demonstrated by the flowing-water asset.",
+    "Final causal wording and the visual framing need improvement."
+  ],
+  "followup_engine_changes": [
+    "Block unsupported quantities before rendering.",
+    "Use closer framing for two- and three-object scenes."
+  ],
+  "note": "This build proves new-topic generation and rendering. It is not an approved publication.",
+  "sha256": "c278b2e94a3813b47377e47ceef75b4045fc9d7081070f5b4574464222b03775"
+}

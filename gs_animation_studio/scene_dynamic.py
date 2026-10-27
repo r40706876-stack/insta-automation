@@ -156,7 +156,8 @@ for frame in range(1,N+1):
    piston=details['piston'];piston.location.z=1+.6*math.sin(q*math.tau*2);piston.keyframe_insert(data_path='location',frame=frame)
   for j,el in enumerate(details.get('electrons',[])):
    a=q*math.tau*2+j*2;el.location=(math.cos(a),math.sin(a),0);el.keyframe_insert(data_path='location',frame=frame)
- target=Vector((k*30,0,1.6));cam.location=target+Vector((3.6,-17,9.5));cam.rotation_euler=(target-cam.location).to_track_quat('-Z','Y').to_euler();cam.keyframe_insert(data_path='location',frame=frame);cam.keyframe_insert(data_path='rotation_euler',frame=frame)
+ cam.data.ortho_scale=8.8 if len(sets[k])<=2 else 10.4 if len(sets[k])==3 else 12.0;cam.data.keyframe_insert(data_path='ortho_scale',frame=frame)
+ target=Vector((k*30,0,1.0));cam.location=target+Vector((3.6,-17,9.5));cam.rotation_euler=(target-cam.location).to_track_quat('-Z','Y').to_euler();cam.keyframe_insert(data_path='location',frame=frame);cam.keyframe_insert(data_path='rotation_euler',frame=frame)
  bpy.context.view_layer.update()
  for spec,o,details in sets[k]:
   if spec.get('label'):
@@ -167,6 +168,9 @@ for o in bpy.data.objects:
  if o.animation_data and o.animation_data.action:
   for fc in o.animation_data.action.fcurves:
    for key in fc.keyframe_points:key.interpolation='CONSTANT' if o in (cam,stage) else 'LINEAR'
+if cam.data.animation_data and cam.data.animation_data.action:
+ for fc in cam.data.animation_data.action.fcurves:
+  for key in fc.keyframe_points:key.interpolation='CONSTANT'
 s.frame_start=1;s.frame_end=N
 (R/'motion.json').write_text(json.dumps(track));(R/'scene_checks.json').write_text(json.dumps({'frames':N,'fps':FPS,'actual_3d':True,'photo_assets':0,'distinct_sets':6,'data_driven_objects':sum(len(x) for x in sets),'schematic_not_exact_reconstruction':True},indent=2))
 bpy.ops.wm.save_as_mainfile(filepath=str(R/'scene.blend'));s.render.image_settings.file_format='FFMPEG';s.render.ffmpeg.format='MPEG4';s.render.ffmpeg.codec='H264';s.render.ffmpeg.constant_rate_factor='HIGH';s.render.filepath=str(R/'silent_3d.mp4');bpy.ops.render.render(animation=True)

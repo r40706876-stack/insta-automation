@@ -1,7 +1,7 @@
 import copy,json,os,sys,tempfile,unittest
 from pathlib import Path
 from unittest.mock import patch
-from planner import validate,public_url,generate,normalize_layout
+from planner import validate,public_url,generate,normalize_layout,check_quantities
 
 def plan():
  return {'title':'नमक पर कानून क्यों?','topic_key':'salt_law','share_reason':'नमक सत्याग्रह का कारण याद रहे','recall':'किस कानून को चुनौती दी?', 'scenes':[{'heading':'नमक पर कानून','explanation':'कानून तोड़ना अहिंसक विरोध था','speech':'नमक रोज की जरूरत था और उस पर अंग्रेजों का नियंत्रण था।','teaches':'नमक कानून का विरोध','objects':[{'id':'person','kind':'person','color':'#ffffff','pos':[-1,0,0],'to':[1,0,0],'size':[.6,.6,.6],'action':'walk','label':'लोग'},{'id':'salt','kind':'salt','color':'#1a80bb','pos':[2,0,0],'size':[.7,.7,.7],'action':'grow','label':'नमक'}]} for _ in range(6)]}
@@ -10,6 +10,9 @@ class NewTopicTests(unittest.TestCase):
   p=plan();p['scenes'][0]['objects'][0]['pos']=[-10,0,-1];p['scenes'][0]['objects'][0]['size']=[.1,3,.7]
   fixed,repairs=normalize_layout(p);validate(fixed)
   self.assertTrue(repairs);self.assertEqual(p['scenes'][0]['speech'],fixed['scenes'][0]['speech']);self.assertEqual(fixed['scenes'][0]['objects'][0]['action'],'walk')
+ def test_unverified_mass_headcount_is_blocked(self):
+  p=plan();p['scenes'][0]['speech']='लाखों लोग नमक बनाने आए और सबने कानून को चुनौती दी।'
+  with self.assertRaises(ValueError):check_quantities(p,[{'text':'A mass civil disobedience movement began.'}])
  def test_new_topic_data_passes(self):validate(plan())
  def test_static_poster_is_rejected(self):
   p=plan()
