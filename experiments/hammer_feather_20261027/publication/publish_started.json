@@ -1,0 +1,6 @@
+{
+  "started_utc": "2026-10-27T10:40:21.910250+00:00",
+  "source_sha256": "45529384a2746736a67079ccccd8982f5cd141a1e9e3a6bd2636d94c4ca89ef7",
+  "authorized_late_publish": true,
+  "user_instruction": "User requested a new experiment and immediate publication"
+}
