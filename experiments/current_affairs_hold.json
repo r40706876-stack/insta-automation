@@ -1,0 +1,6 @@
+{
+  "held": true,
+  "reason": "User instructed: current affairs video must not be published for now.",
+  "requested_utc": "2026-10-27T01:20:01Z",
+  "resume": "Only after an explicit user instruction to resume current affairs publication."
+}
