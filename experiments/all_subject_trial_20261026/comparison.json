@@ -1,8 +1,33 @@
 {
   "trial": "all_subject_trial_20261026",
   "all_snapshots_ready": false,
-  "captured_count": 0,
-  "rows": [],
+  "captured_count": 1,
+  "rows": [
+    {
+      "media_id": "17926427856202655",
+      "metrics": {},
+      "errors": {
+        "reels_skip_rate": {
+          "code": 10,
+          "message": "(#10) Application does not have permission for this action"
+        }
+      },
+      "media": {
+        "id": "17926427856202655",
+        "comments_count": 0,
+        "like_count": 15,
+        "permalink": "https://www.instagram.com/reel/De816iHDQD0/",
+        "timestamp": "2026-10-26T08:22:38+0000"
+      },
+      "permission_blocked": true,
+      "captured_utc": "2026-10-27T09:28:22.693415+00:00",
+      "id": "history",
+      "subject": "इतिहास",
+      "published_utc": "2026-10-26T08:22:38+00:00",
+      "age_hours": 25.096,
+      "within_24h_window": false
+    }
+  ],
   "limitations": [
     "One reel per subject; publication time and sample size confound subject comparisons.",
     "Skip rate is the direct reels_skip_rate API metric, never average watch time or retention.",
