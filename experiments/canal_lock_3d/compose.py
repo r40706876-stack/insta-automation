@@ -32,6 +32,9 @@ def overlay(im,i):
  if k==0:
   p=pins['ship'];arrow(d,(p[0]+105,p[1]-80),(p[0]+12,p[1]-15),GOLD)
   d.rounded_rectangle((max(35,p[0]+40),p[1]-134,max(35,p[0]+40)+150,p[1]-93),12,fill=(10,39,55));text(d,(max(35,p[0]+40)+75,p[1]-114),'जहाज़',29,GOLD)
+ if k in (2,3):
+  text(d,(510,330),'ऊँची झील',27,COL)
+  arrow(d,(535,352),pins['high'],COL,3)
  if k in (2,3) and t>starts[2]+2.05:
   # Fixed meter makes the physical rise measurable even on a small phone.
   x,y=64,410;h=175;p=(row['level']-1)/1.6

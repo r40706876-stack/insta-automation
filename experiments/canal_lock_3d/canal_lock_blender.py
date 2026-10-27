@@ -9,7 +9,7 @@ ds=meta['seconds'];starts=[sum(ds[:i]) for i in range(6)];total=sum(ds);FPS=24;N
 bpy.ops.object.select_all(action='SELECT');bpy.ops.object.delete(use_global=False)
 s=bpy.context.scene;s.render.engine='BLENDER_WORKBENCH';s.render.resolution_x=720;s.render.resolution_y=1280;s.render.resolution_percentage=100;s.render.fps=FPS
 sh=s.display.shading;sh.light='STUDIO';sh.studiolight_rotate_z=.4;sh.color_type='MATERIAL';sh.show_shadows=True;sh.show_cavity=True;sh.cavity_type='BOTH';sh.curvature_ridge_factor=1.4;sh.curvature_valley_factor=1.1;sh.show_specular_highlight=True;sh.show_object_outline=True;sh.object_outline_color=(.025,.055,.075);sh.background_type='WORLD';s.world.color=(.018,.039,.063)
-s.display.render_aa='16';s.view_settings.view_transform='Standard';s.render.image_settings.color_mode='RGB'
+s.display.render_aa='8';s.view_settings.view_transform='Standard';s.render.image_settings.color_mode='RGB'
 def mat(name,col):m=bpy.data.materials.new(name);m.diffuse_color=(*col,1);return m
 sand=mat('Pale engineered concrete',(.69,.72,.68));stone=mat('Dark wall edge',(.25,.36,.4));water=mat('Visible water volume',(.025,.39,.58));highwater=mat('Upper reservoir',(.04,.49,.64));navy=mat('Ship steel',(.035,.1,.17));white=mat('Ship white',(.92,.95,.93));gold=mat('Warm cargo',(.97,.58,.1));orange=mat('Orange cargo',(.94,.29,.09));blue=mat('Teal cargo',(.05,.62,.65));gateM=mat('Mitre gate panels',(.18,.28,.31));brass=mat('Gate edge',(.74,.55,.19));red=mat('Valve handle',(.92,.2,.15));flowM=mat('Flow tracer',(.2,.91,1));floorM=mat('Navy stage',(.035,.075,.1))
 def box(name,loc,size,material,bevel=.03,parent=None):
@@ -40,10 +40,10 @@ for side in (-1,1):
  # Near wall is cut down so the water surface and boat movement remain visible.
  height=3.2 if side==-1 else .32
  box('Far lock wall' if side==-1 else 'Cutaway near lock wall',(side*1.3,0,height/2),(.32,4.4,height),sand)
- for y in (-4.5,4.5):box('Reservoir bank',(side*1.3,y,1.6),(.32,4.8,3.2),sand)
+ for y in (-4.5,4.5):box('Reservoir bank',(side*1.3,y,height/2),(.32,4.8,height),sand)
  # Repeating coping blocks, bollards and railings make the model spatially readable.
  for y in [j*.8-6.4 for j in range(17)]:
-  if side==-1 or abs(y)>2.4:
+  if side==-1:
    box('Coping',(side*1.3,y,3.24),(.4,.72,.12),white,.02)
 for z in (1,1.4,1.8,2.2,2.6):line('Fixed level mark',[(-1.105,-.65,z),(-1.105,.65,z)],.025,gold)
 # Detailed small container vessel, all parts parented to a single moving root.
@@ -138,7 +138,7 @@ s.frame_start=1;s.frame_end=N
 (R/'motion.json').write_text(json.dumps(track));(R/'scene_checks.json').write_text(json.dumps({'frames':N,'fps':FPS,'whole_scene_3d':True,'photo_assets':0,'gate_pressure_interlock_verified':True,'ship_clearance_verified':True,'lift_max':2.6,'level_note':'Schematic model units, not metres or a complete Panama Canal replica'},indent=2))
 bpy.ops.wm.save_as_mainfile(filepath=str(R/'canal_lock.blend'))
 if os.environ.get('CANAL_STILL')=='1':
- s.frame_set(round((starts[3]+ds[3]*.5)*FPS));s.render.image_settings.file_format='PNG';s.render.filepath=str(R/'proof.png');bpy.ops.render.render(write_still=True)
+ s.frame_set(int(os.environ.get('CANAL_PROOF_FRAME',round((starts[3]+ds[3]*.5)*FPS))));s.render.image_settings.file_format='PNG';s.render.filepath=str(R/'proof.png');bpy.ops.render.render(write_still=True)
 else:
  s.render.image_settings.file_format='FFMPEG';s.render.ffmpeg.format='MPEG4';s.render.ffmpeg.codec='H264';s.render.ffmpeg.constant_rate_factor='HIGH';s.render.filepath=str(R/'silent_3d.mp4');bpy.ops.render.render(animation=True)
 print('CANAL_FULL_3D_RENDER_DONE',N)

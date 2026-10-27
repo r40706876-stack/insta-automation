@@ -6,6 +6,8 @@ Motion: ship enters the chamber, two hinged gate leaves close, supply valve rota
 
 This is one schematic teaching chamber, not a scale replica of the whole canal. Model height units are not metres. Panama uses multiple lock chambers; never describe a single chamber as a 26-metre lift. Water flows from the higher reservoir by gravity.
 
+The editable Blender scene is included as `canal_lock.blend.xz` (run `xz -dk canal_lock.blend.xz` to open it).
+
 ## Rebuild
 Blender 4.2.0, FFmpeg, Python 3 with Pillow and numpy.
 ```
