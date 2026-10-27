@@ -1,7 +1,7 @@
 {
   "trial": "all_subject_trial_20261026",
   "all_snapshots_ready": false,
-  "captured_count": 1,
+  "captured_count": 3,
   "rows": [
     {
       "media_id": "17926427856202655",
@@ -25,6 +25,54 @@
       "subject": "इतिहास",
       "published_utc": "2026-10-26T08:22:38+00:00",
       "age_hours": 25.096,
+      "within_24h_window": false
+    },
+    {
+      "media_id": "17882596968630197",
+      "metrics": {},
+      "errors": {
+        "reels_skip_rate": {
+          "code": 10,
+          "message": "(#10) Application does not have permission for this action"
+        }
+      },
+      "media": {
+        "id": "17882596968630197",
+        "comments_count": 0,
+        "like_count": 6,
+        "permalink": "https://www.instagram.com/reel/De9BoUhAeHK/",
+        "timestamp": "2026-10-26T10:05:00+0000"
+      },
+      "permission_blocked": true,
+      "captured_utc": "2026-10-27T15:29:50.760335+00:00",
+      "id": "economics",
+      "subject": "अर्थशास्त्र",
+      "published_utc": "2026-10-26T10:05:00+00:00",
+      "age_hours": 29.414,
+      "within_24h_window": false
+    },
+    {
+      "media_id": "17869874706679195",
+      "metrics": {},
+      "errors": {
+        "reels_skip_rate": {
+          "code": 10,
+          "message": "(#10) Application does not have permission for this action"
+        }
+      },
+      "media": {
+        "id": "17869874706679195",
+        "comments_count": 2,
+        "like_count": 6,
+        "permalink": "https://www.instagram.com/reel/De9hiTbknj-/",
+        "timestamp": "2026-10-26T14:43:43+0000"
+      },
+      "permission_blocked": true,
+      "captured_utc": "2026-10-27T15:29:51.137319+00:00",
+      "id": "polity",
+      "subject": "राजव्यवस्था",
+      "published_utc": "2026-10-26T14:43:43+00:00",
+      "age_hours": 24.769,
       "within_24h_window": false
     }
   ],
