@@ -1,0 +1,39 @@
+name: Build true 3D canal lock demo
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  render:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    env:
+      CANAL_ROOT: ${{ github.workspace }}/experiments/canal_lock_3d
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install rendering dependencies
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y ffmpeg libegl1 libgl1 libxrender1 libxi6 libxkbcommon0
+          pip install Pillow numpy
+          curl -fL --retry 3 https://download.blender.org/release/Blender4.2/blender-4.2.0-linux-x64.tar.xz -o /tmp/blender.tar.xz
+          mkdir -p /tmp/blender
+          tar -xf /tmp/blender.tar.xz -C /tmp/blender --strip-components=1
+      - name: Rebuild narration and genuine 3D motion
+        run: |
+          ffmpeg -y -i "$CANAL_ROOT/voice.flac" "$CANAL_ROOT/voice.wav"
+          /tmp/blender/blender -b -t 4 --python "$CANAL_ROOT/canal_lock_blender.py"
+          python "$CANAL_ROOT/compose.py"
+          ffmpeg -v error -i "$CANAL_ROOT/panama_water_lift_3d.mp4" -f null -
+      - name: Keep reviewable MP4 and editable Blender scene
+        uses: actions/upload-artifact@v4
+        with:
+          name: panama-genuine-3d-review
+          path: |
+            experiments/canal_lock_3d/panama_water_lift_3d.mp4
+            experiments/canal_lock_3d/canal_lock.blend
+            experiments/canal_lock_3d/scene_checks.json
+          retention-days: 30
