@@ -1,0 +1,24 @@
+{
+  "media_id": "18134105788775017",
+  "metrics": {},
+  "errors": {
+    "reels_skip_rate": {
+      "code": 10,
+      "message": "(#10) Application does not have permission for this action"
+    }
+  },
+  "media": {
+    "id": "18134105788775017",
+    "comments_count": 0,
+    "like_count": 18,
+    "permalink": "https://www.instagram.com/reel/De9rB1ik5nH/",
+    "timestamp": "2026-10-26T16:06:46+0000"
+  },
+  "permission_blocked": true,
+  "captured_utc": "2026-10-27T20:12:12.394790+00:00",
+  "id": "geography",
+  "subject": "भूगोल",
+  "published_utc": "2026-10-26T16:06:46+00:00",
+  "age_hours": 28.091,
+  "within_24h_window": false
+}

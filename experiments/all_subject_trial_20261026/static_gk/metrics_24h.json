@@ -1,0 +1,24 @@
+{
+  "media_id": "18376034638245991",
+  "metrics": {},
+  "errors": {
+    "reels_skip_rate": {
+      "code": 10,
+      "message": "(#10) Application does not have permission for this action"
+    }
+  },
+  "media": {
+    "id": "18376034638245991",
+    "comments_count": 0,
+    "like_count": 2,
+    "permalink": "https://www.instagram.com/reel/De94g-FCMHJ/",
+    "timestamp": "2026-10-26T18:04:39+0000"
+  },
+  "permission_blocked": true,
+  "captured_utc": "2026-10-27T20:12:12.654219+00:00",
+  "id": "static_gk",
+  "subject": "सामान्य ज्ञान",
+  "published_utc": "2026-10-26T18:04:39+00:00",
+  "age_hours": 26.126,
+  "within_24h_window": false
+}

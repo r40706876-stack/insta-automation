@@ -1,7 +1,7 @@
 {
   "trial": "all_subject_trial_20261026",
   "all_snapshots_ready": false,
-  "captured_count": 3,
+  "captured_count": 5,
   "rows": [
     {
       "media_id": "17926427856202655",
@@ -73,6 +73,54 @@
       "subject": "राजव्यवस्था",
       "published_utc": "2026-10-26T14:43:43+00:00",
       "age_hours": 24.769,
+      "within_24h_window": false
+    },
+    {
+      "media_id": "18134105788775017",
+      "metrics": {},
+      "errors": {
+        "reels_skip_rate": {
+          "code": 10,
+          "message": "(#10) Application does not have permission for this action"
+        }
+      },
+      "media": {
+        "id": "18134105788775017",
+        "comments_count": 0,
+        "like_count": 18,
+        "permalink": "https://www.instagram.com/reel/De9rB1ik5nH/",
+        "timestamp": "2026-10-26T16:06:46+0000"
+      },
+      "permission_blocked": true,
+      "captured_utc": "2026-10-27T20:12:12.394790+00:00",
+      "id": "geography",
+      "subject": "भूगोल",
+      "published_utc": "2026-10-26T16:06:46+00:00",
+      "age_hours": 28.091,
+      "within_24h_window": false
+    },
+    {
+      "media_id": "18376034638245991",
+      "metrics": {},
+      "errors": {
+        "reels_skip_rate": {
+          "code": 10,
+          "message": "(#10) Application does not have permission for this action"
+        }
+      },
+      "media": {
+        "id": "18376034638245991",
+        "comments_count": 0,
+        "like_count": 2,
+        "permalink": "https://www.instagram.com/reel/De94g-FCMHJ/",
+        "timestamp": "2026-10-26T18:04:39+0000"
+      },
+      "permission_blocked": true,
+      "captured_utc": "2026-10-27T20:12:12.654219+00:00",
+      "id": "static_gk",
+      "subject": "सामान्य ज्ञान",
+      "published_utc": "2026-10-26T18:04:39+00:00",
+      "age_hours": 26.126,
       "within_24h_window": false
     }
   ],
