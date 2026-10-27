@@ -1,0 +1,16 @@
+Source unavailable: gandhismriti.gov.in SSLError
+Source unavailable: www.mkgandhi.org HTTPError
+Source unavailable: www.india.gov.in HTTPError
+Source unavailable: www.britannica.com HTTPError
+Source unavailable: www.dandimemorial.in gaierror
+Source unavailable: www.oxfordcollege.ac ValueError
+Source unavailable: vertexaisearch.cloud.google.com HTTPError
+Plan repair 1 Screen text too long
+Plan repair 2 Screen text too long
+Plan repair 3 Exactly six scenes required
+Traceback (most recent call last):
+  File "/home/runner/work/insta-automation/insta-automation/gs_animation_studio/planner.py", line 177, in <module>
+    generate(sys.argv[1],sys.argv[2],os.getenv('STUDIO_TOPIC_TEXT','').strip(),os.getenv('STUDIO_SUBJECT','auto'),os.getenv('STUDIO_REFERENCE_TEXT',''))
+  File "/home/runner/work/insta-automation/insta-automation/gs_animation_studio/planner.py", line 173, in generate
+    raise RuntimeError('New-topic plan failed validation after three attempts: '+str(errors))
+RuntimeError: New-topic plan failed validation after three attempts: ['Screen text too long', 'Screen text too long', 'Exactly six scenes required']
