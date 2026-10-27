@@ -38,3 +38,4 @@ def prepare(root,recipe):
 if __name__=='__main__':
  import sys
  r=Path(sys.argv[1]);prepare(r,json.loads((r/'recipe.json').read_text()))
+

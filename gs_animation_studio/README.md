@@ -1,6 +1,8 @@
 # GS Animation Studio: manual runs and recovery
 
 Actions → GS Animation Studio → Run workflow → select a supported topic and voice.
+Choose `new_topic` (default). Enter any GS topic in `topic_text`, e.g. `दांडी मार्च में नमक क्यों चुना गया?` or `चुनाव में बहुमत कैसे बनता है?`. Leave the text blank to select a fresh topic automatically; choose a subject if wanted. `reference_text` is optional source text; otherwise the planner fetches readable sources. Previous generated topics are supplied to selection to discourage repetitions. Explicitly requesting an older topic is allowed.
+
 Default mode prefers Gemini Charon male; when unavailable it uses the approved female fallback. This workflow builds a review video; it does not publish to Instagram.
 
 ## Automatic recovery
@@ -14,6 +16,8 @@ Default mode prefers Gemini Charon male; when unavailable it uses the approved f
 
 `verify_recovery` optionally introduces syntax damage to a staged scene and silent audio to the new export, then requires both repair paths and all original checks to pass. The repository source and reviewed snapshots are never damaged.
 
-Recovery currently supports the two reviewed recipes (dam_pressure and canal_lock). New topics need their own reviewed scene, narration and checks. It cannot certify factual/storytelling quality or repair every unknown bug.
+New topics use a bounded JSON scene planner, source-based AI audit, and a procedural 3D actor engine. Six different compositions animate people/vehicles/mechanisms, with animated Hindi labels and narration. The AI never executes generated Python. Available 3D assets/actions are a reusable toolkit, not a fixed topic list. All six scenes must show actual pixel motion, in addition to the original decode/audio/black-screen checks.
+
+New topics require a working Gemini or Groq text API and a working voice service. Service/source/audit failures stop visibly rather than substituting an unrelated old lesson. Voice cache recovery is allowed only for matching existing reviewed scripts. AI fact/visual audits are not human certification: inspect the preview before publication. Complex custom simulations outside this actor toolkit may need a dedicated renderer. Number of topics is open-ended; API quotas and rendering time still apply.
 
 Diagnostics: Actions artifact `GS-Studio-diagnostics-<run>-<attempt>` and `studio_diagnostics/`. Passing reels remain under `experiments/gs_animation_studio/<topic>/<run>/`.

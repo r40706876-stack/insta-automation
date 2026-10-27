@@ -17,7 +17,9 @@ def region(t,roi):
  im=np.array(Image.frombytes('RGB',(720,1280),raw),dtype=np.float32)
  x1,y1,x2,y2=roi;return im[y1:y2,x1:x2]
 starts=np.cumsum([0]+meta['seconds'][:-1]);motion_checks={}
-if (r/'recipe.json').exists():
+if (r/'recipe.json').exists() and json.loads((r/'recipe.json').read_text()).get('dynamic'):
+ samples=[('scene_'+str(k+1)+'_teaching_motion',starts[k]+meta['seconds'][k]*.2,starts[k]+meta['seconds'][k]*.7,(75,420,620,1000)) for k in range(6)]
+elif (r/'recipe.json').exists():
  opened=starts[1]+max(.5,meta['seconds'][1]*.55)
  samples=[('caps_move',opened-.4,opened+.05,(230,440,380,700)),('water_flows',starts[2]+.4,starts[2]+.9,(350,500,630,940)),('dam_base_widens',starts[4]+.45,starts[4]+2.8,(250,600,560,950))]
 else:
@@ -28,3 +30,4 @@ for name,t1,t2,roi in samples:
  motion_checks[name]={'changed_fraction':round(fraction,5)}
 checks={'duration_seconds':dur,'dimensions':[720,1280],'fps':video['r_frame_rate'],'decoded_without_errors':True,'black_intervals':0,'audio_mean_db':mean,'audio_peak_db':peak,'sha256':hashlib.sha256(p.read_bytes()).hexdigest(),'voice':meta.get('voice'),'published':False,'actual_rendered_motion_checks':motion_checks}
 (r/'file_checks.json').write_text(json.dumps(checks,indent=2));print(json.dumps(checks,indent=2),flush=True)
+

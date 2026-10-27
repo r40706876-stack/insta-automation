@@ -3,10 +3,23 @@ on:
   workflow_dispatch:
     inputs:
       topic:
-        description: 'विषय: dam_pressure = बाँध; canal_lock = पनामा नहर'
+        description: 'new_topic = नया विषय लिखें या खाली छोड़ें; अन्य दो पुराने demo हैं'
         type: choice
-        options: [dam_pressure, canal_lock]
-        default: dam_pressure
+        options: [new_topic, dam_pressure, canal_lock]
+        default: new_topic
+      topic_text:
+        description: 'अपना विषय हिंदी में लिखें; खाली = हर बार नया विषय'
+        type: string
+        default: ''
+      subject:
+        description: 'खाली विषय के लिए विषय-क्षेत्र'
+        type: choice
+        options: [auto, भूगोल, इतिहास, विज्ञान, राजव्यवस्था, अर्थशास्त्र, स्टैटिक जीके, पर्यावरण]
+        default: auto
+      reference_text:
+        description: 'वैकल्पिक: प्रमाणित स्रोत का पाठ; खाली = AI स्रोत खोजेगा'
+        type: string
+        default: ''
       voice:
         description: 'auto = Gemini male, उपलब्ध न हो तो female fallback'
         type: choice
@@ -37,23 +50,12 @@ jobs:
         env:
           INPUT_TOPIC: ${{ inputs.topic }}
           INPUT_VOICE: ${{ inputs.voice }}
+          INPUT_TOPIC_TEXT: ${{ inputs.topic_text }}
+          INPUT_SUBJECT: ${{ inputs.subject }}
+          INPUT_REFERENCE_TEXT: ${{ inputs.reference_text }}
           INPUT_TEST: ${{ inputs.verify_recovery }}
           EVENT_NAME: ${{ github.event_name }}
-        run: |
-          python - <<'PY'
-          import os,json
-          r=json.load(open('experiments/gs_animation_studio_request.json'))
-          topic=os.getenv('INPUT_TOPIC') or r['topic']
-          voice=os.getenv('INPUT_VOICE') or r.get('voice','auto')
-          assert topic in ['dam_pressure','canal_lock']
-          assert voice in ['auto','female_fallback']
-          test=(os.getenv('INPUT_TEST')=='true') if os.getenv('EVENT_NAME')=='workflow_dispatch' else r.get('verify_recovery',False) is True
-          rid=os.environ['GITHUB_RUN_ID'];attempt=os.getenv('GITHUB_RUN_ATTEMPT','1')
-          folder=rid if attempt=='1' else rid+'-attempt-'+attempt
-          with open(os.environ['GITHUB_ENV'],'a') as f:
-              f.write('STUDIO_TOPIC='+topic+'\nSTUDIO_VOICE='+voice+'\nSTUDIO_VERIFY_RECOVERY='+str(int(test))+'\nSTUDIO_DIAGNOSTICS=studio_diagnostics/'+folder+'\n')
-          print('Topic:',topic,'Voice preference:',voice,'Mode: build only')
-          PY
+        run: python gs_animation_studio/select_request.py
       - name: Install operating-system rendering libraries
         run: |
           sudo python - <<'PYFIX'
@@ -81,11 +83,12 @@ jobs:
           timeout 120 tar -xf /tmp/blender.tar.xz -C /tmp/blender --strip-components=1
           /tmp/blender/blender --version
       - name: Verify recovery safety rules
-        run: python -m unittest discover -s gs_animation_studio -p test_recovery.py -v
+        run: python -m unittest discover -s gs_animation_studio -p 'test_*.py' -v
       - name: Create voice and render the complete 3D lesson
         id: build
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           BLENDER_BIN: /tmp/blender/blender
           PYTHONUNBUFFERED: '1'
         run: python -u gs_animation_studio.py --topic "$STUDIO_TOPIC"

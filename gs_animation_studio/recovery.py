@@ -7,7 +7,7 @@ def gitsha(data):return hashlib.sha1(b'blob '+str(len(data)).encode()+b'\0'+data
 def atomic(path,value):
  path=Path(path);path.parent.mkdir(parents=True,exist_ok=True);tmp=path.with_suffix('.tmp');tmp.write_text(json.dumps(value,ensure_ascii=False,indent=2));tmp.replace(path)
 def redact(s):
- for k in ('GEMINI_API_KEY','GITHUB_TOKEN','GH_TOKEN'):
+ for k in ('GEMINI_API_KEY','GROQ_API_KEY','GITHUB_TOKEN','GH_TOKEN'):
   if os.getenv(k):s=s.replace(os.environ[k],'***')
  return s
 class StageError(RuntimeError):
@@ -15,7 +15,7 @@ class StageError(RuntimeError):
 class Recovery:
  def __init__(self,topic,repo=None,base=None):
   self.repo=Path(repo) if repo else BASE.parent;self.base=Path(base) if base else BASE;self.topic=topic
-  assert topic in ('dam_pressure','canal_lock')
+  assert topic in ('dam_pressure','canal_lock','new_topic')
   self.run_id=os.getenv('GITHUB_RUN_ID',str(time.time_ns()));self.attempt=os.getenv('GITHUB_RUN_ATTEMPT','1');assert self.run_id.isdigit() and self.attempt.isdigit()
   self.folder=self.run_id if self.attempt=='1' else self.run_id+'-attempt-'+self.attempt
   self.root=self.repo/'experiments/gs_animation_studio'/topic/self.folder
@@ -157,7 +157,7 @@ class Recovery:
    receipt={'topic':self.topic,'run_id':self.run_id,'attempt':self.attempt,'commit':os.getenv('GITHUB_SHA'),'built_on_github':bool(os.getenv('GITHUB_ACTIONS')),'elapsed_seconds':round(time.time()-self.started,2),'sha256':hashlib.sha256((self.root/'final.mp4').read_bytes()).hexdigest(),'instagram_publish':False,'recovery_verified':fault}
    atomic(self.root/'build_receipt.json',receipt)
    self.report.update(status='passed',output=str(self.root.relative_to(self.repo)),sha256=receipt['sha256']);self.write()
-   keep={'final.mp4','voice.flac','audio.json','file_checks.json','scene_checks.json','build_receipt.json','recipe.json','contact_sheet.jpg','scene.blend'}
+   keep={'final.mp4','voice.flac','audio.json','file_checks.json','scene_checks.json','build_receipt.json','recipe.json','contact_sheet.jpg','scene.blend','sources.json','request.json','audit_0.json','audit_1.json','audit_2.json'}
    for p in self.root.iterdir():
     if p.is_file() and p.name not in keep:p.unlink()
    self.call('compress_scene',['xz','-f','-T2','-6',str(self.root/'scene.blend')],timeout=120)
@@ -179,8 +179,12 @@ class Recovery:
      f.write('\nDetailed attempts are in recovery_report.json and the diagnostics artifact. No Instagram publication.\n')
 
 def main():
- p=argparse.ArgumentParser();p.add_argument('--topic',choices=['dam_pressure','canal_lock'],required=True);a=p.parse_args()
- r=Recovery(a.topic);ok=r.run()
+ p=argparse.ArgumentParser();p.add_argument('--topic',choices=['dam_pressure','canal_lock','new_topic'],required=True);a=p.parse_args()
+ if a.topic=='new_topic':
+  from dynamic import DynamicRecovery
+  r=DynamicRecovery()
+ else:r=Recovery(a.topic)
+ ok=r.run()
  with open(os.environ.get('GITHUB_OUTPUT','/tmp/studio-output'),'a') as f:f.write('output='+str(r.root.relative_to(r.repo))+'\n')
  raise SystemExit(0 if ok else 1)
 if __name__=='__main__':main()
