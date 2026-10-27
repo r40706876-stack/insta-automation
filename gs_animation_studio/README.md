@@ -16,7 +16,7 @@ The Notes/WhatsApp banner is preserved in the upper safe region; AR Publications
 
 ## Physics of the dam lesson
 
-Gauge pressure grows with depth in a static fluid. Equal-area arrows illustrate the force exerted by that pressure. Outlet speeds use the ideal small-orifice Torricelli relation; each moving parcel follows a ballistic curve after exiting. The large-reservoir/small-outlet approximation makes free-surface motion very small during the short demonstration. The lowest outlet does **not always** give the greatest horizontal range; the script teaches exit speed, not that incorrect generalization.
+Gauge pressure grows with depth in a static fluid. Equal-area arrows illustrate the force exerted by that pressure. Outlet speeds use the ideal small-orifice Torricelli relation; each moving parcel follows a ballistic curve after exiting. The large-reservoir/small-outlet approximation makes free-surface motion very small during the short demonstration. The lowest outlet does **not always** give the greatest horizontal range; the script teaches exit speed, not that incorrect generalization. Water markers are deliberately spaced at 12 per jet: at 24 fps this avoids the apparent reverse flow caused by a dense, regular moving pattern. The opening shot also widens the actual 3D base within its first second.
 
 The dam is a cutaway schematic of a concrete gravity dam. This is not a universal shape for all dams or an engineering construction design. Front walls are removed to show the mechanism. Base growth is an explanatory transformation, not a claim about construction in water.
 
