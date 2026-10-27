@@ -1,7 +1,7 @@
 {
-  "duration": 19.807596371882084,
-  "sha256": "82ed9c703eea6e49581e7228139caed883699a52d11f24c1a85566ca071ca638",
-  "voice": "Gemini gemini-2.5-flash-preview-tts / Charon (male)",
+  "duration": 21.458707482993198,
+  "sha256": "590da21644c2342f8db80c4b71c6496f70b56ddd19d8109645a36e992abf308b",
+  "voice": "edge-tts hi-IN-SwaraNeural",
   "date": "2026-10-27",
   "renderer_version": 7
 }
