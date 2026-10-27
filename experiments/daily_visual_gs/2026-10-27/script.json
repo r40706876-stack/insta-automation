@@ -1,92 +1,115 @@
 {
   "ok": true,
-  "title": "यह मदरसा किसने खुलवाया?",
+  "title": "गुलाम वंश का 84 साल शासन",
   "scenes": [
     {
-      "label": "एक शहर, एक साल",
-      "speech": "सत्रह सौ इक्यासी। अंग्रेज़ों के दौर में एक मदरसा खुला। किस शहर में? पहले तस्वीर से अंदाज़ा लगाओ।",
-      "image": "A historic 18th century Indian cityscape of Calcutta with a colonial building labeled \"Madrasa for Muslim Law\", Warren Hastings observing, detailed sepia illustration",
-      "kind": "reveal",
-      "motion": {
+      "label": "पहला सवाल",
+      "speech": "क्या आप जानते हैं 84 साल तक चलने वाली चीज़?",
+      "animation": {
         "type": "timeline",
-        "nodes": [
-          "1781",
-          "कौन-सा शहर?"
+        "phase": "question",
+        "labels": [
+          "शुरुआत",
+          "समाप्ति"
         ],
-        "icon": "building"
+        "amounts": [
+          0,
+          0
+        ],
+        "years": [
+          1206,
+          1290
+        ]
       }
     },
     {
-      "label": "यहाँ क्या पढ़ाते थे?",
-      "speech": "यहाँ मुस्लिम कानून पढ़ाया जाता था। आसान भाषा में, उस कानून को पढ़ने और समझने की जगह।",
-      "image": "Portrait of Warren Hastings in Governor General attire, standing before a map of Bengal, 18th-century style illustration",
-      "kind": "reveal",
-      "motion": {
-        "type": "flow",
-        "nodes": [
-          "मुस्लिम कानून",
-          "पढ़ना और समझना"
+      "label": "समयरेखा",
+      "speech": "1206 में कुतुबुद्दीन ऐबक ने गुलाम वंश की स्थापना की, दिल्ली में सत्ता मिली।",
+      "animation": {
+        "type": "timeline",
+        "phase": "explain",
+        "labels": [
+          "शुरुआत",
+          "समाप्ति"
         ],
-        "icon": "book"
+        "amounts": [
+          0,
+          0
+        ],
+        "years": [
+          1206,
+          1290
+        ]
       }
     },
     {
-      "label": "शहर: कलकत्ता",
-      "speech": "यह मदरसा कलकत्ता में खुला था। इसे वॉरेन हेस्टिंग्स ने स्थापित किया था। शहर और नाम साथ याद रखो।",
-      "image": "Illustration of a madrasa building in 1781 Calcutta with scholars studying Islamic law, colonial architecture, detailed",
-      "kind": "process",
-      "motion": {
-        "type": "flow",
-        "nodes": [
-          "वॉरेन हेस्टिंग्स",
-          "कलकत्ता मदरसा",
-          "1781"
+      "label": "विस्तार",
+      "speech": "इस वंश ने 1290 तक शासन किया, कुल 84 साल, भारत में इस्लामी शासन की नींव रखी।",
+      "animation": {
+        "type": "timeline",
+        "phase": "demonstrate",
+        "labels": [
+          "शुरुआत",
+          "समाप्ति"
         ],
-        "icon": "building"
+        "amounts": [
+          0,
+          0
+        ],
+        "years": [
+          1206,
+          1290
+        ]
       }
     },
     {
-      "label": "अब बिना देखे बताओ",
-      "speech": "अब बताओ, शहर कौन-सा था? कलकत्ता। और साल? सत्रह सौ इक्यासी। अपने पढ़ाई वाले दोस्त से भी पूछकर देखो।",
-      "image": "A quiz style illustration showing a question mark over a map of India highlighting Calcutta, with answer text appearing",
-      "kind": "quiz",
-      "motion": {
-        "type": "compare",
-        "nodes": [
-          "शहर: कलकत्ता",
-          "साल: 1781"
+      "label": "प्रश्न",
+      "speech": "तो कौन सा वंश 84 साल तक दिल्ली पर शासन करता रहा?",
+      "animation": {
+        "type": "timeline",
+        "phase": "recall",
+        "labels": [
+          "शुरुआत",
+          "समाप्ति"
         ],
-        "icon": "none"
+        "amounts": [
+          0,
+          0
+        ],
+        "years": [
+          1206,
+          1290
+        ]
       }
     }
   ],
-  "question_hash": "78102b09e5ae9d8d193230a4198c31ff1dfb39013a13f13c064256c104c7331a",
+  "renderer_version": 7,
+  "question_hash": "654a176d2d0601e34ed32468a6ad8b35b991fcb1d8645cbf36e7bcf6446219de",
   "reference": {
     "subject": "History",
     "subject_hi": "इतिहास",
-    "chapter": "गवर्नर/गवर्नर जनरल/वायसराय (Governors/Governors General/Viceroys)",
+    "chapter": "दिल्ली सल्तनत (Delhi Sultanate)",
     "sub": "",
-    "question": "1781 में, भारत के पहले गवर्नर जनरल वॉरेन हेस्टिंग्स ने मुस्लिम कानून के अध्ययन और शिक्षण के लिए _____ में मदरसा की स्थापना की।",
+    "question": "–––लगभग 84 वर्ष तक उपमहाद्वीप में शासन करने वाला प्रथम मुस्लिम वंश था।",
     "options": {
-      "a": "मुंबई",
-      "b": "दिल्ली",
-      "c": "बिहार",
-      "d": "कलकत्ता"
+      "a": "मुगल वंश",
+      "b": "खिलजी वंश",
+      "c": "तुगलक वंश",
+      "d": "गुलाम वंश"
     },
     "answer": "d",
     "exams": [
-      "RRB Group-D 16-10-2018 (Shift-III)",
-      "RRB Group-D 28-09-2018 (Shift-I)",
-      "RRB Group-D 28-09-2018 (Shift-III"
+      "RRB Group-D 02-10-2018 (Shift-II)",
+      "RRB Group-D 20-09-2018 (Shift-I)",
+      "RRB Group-D 22-10-2018 (Shift-III)"
     ],
-    "explanation": "वर्ष 1781 में भारत के पहले गवर्नर जनरल वॉरेन हेस्टिंग्स ने मुस्लिम कानून के अध्ययन और शिक्षण के लिए कलकत्ता में मदरसा की स्थापना की थी। वॉरेन हेस्टिंग्स, रेग्यूलेटिंग एक्ट के तहत बंगाल का पहला गवर्नर जनरल था। यह भारत का पहला गवर्नर जनरल भी था।",
+    "explanation": "गुलाम वंश या मामलूक वंश मध्यकालीन भारत का एक राजवंश था। इस वंश का पहला शासक कुतुबुद्दीन ऐबक (1206-1210 ई.) था जिसे मुहम्मद गोरी ने पृथ्वीराज चौहान को हराने के बाद भारत के प्रदेशों का सूबेदार नियुक्त किया। मध्यकालीन भारत की प्रथम महिला शासिका रजिया सुल्तान (1236-1240 ई.) भी मामलूक वंश (गुलाम वंश) से संबंधित थी। इस वंश ने दिल्ली की सत्ता पर 1206-1290 ई. (लगभग 84 वर्ष) तक शासन किया तथा भारत में इस्लामी शासन की नींव डाली।",
     "times_asked": 3,
     "years": [
       "2018"
     ],
-    "id": "4c9ad648fa",
-    "seq": 4
+    "id": "44458aff99",
+    "seq": 24
   },
-  "subject": "History",
-  "renderer_version": 3
+  "subject": "History"
 }

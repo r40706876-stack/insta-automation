@@ -1,0 +1,70 @@
+{
+  "renderer_version": 7,
+  "scenes": [
+    {
+      "type": "timeline",
+      "phase": "question",
+      "labels": [
+        "शुरुआत",
+        "समाप्ति"
+      ],
+      "amounts": [
+        0,
+        0
+      ],
+      "years": [
+        1206,
+        1290
+      ]
+    },
+    {
+      "type": "timeline",
+      "phase": "explain",
+      "labels": [
+        "शुरुआत",
+        "समाप्ति"
+      ],
+      "amounts": [
+        0,
+        0
+      ],
+      "years": [
+        1206,
+        1290
+      ]
+    },
+    {
+      "type": "timeline",
+      "phase": "demonstrate",
+      "labels": [
+        "शुरुआत",
+        "समाप्ति"
+      ],
+      "amounts": [
+        0,
+        0
+      ],
+      "years": [
+        1206,
+        1290
+      ]
+    },
+    {
+      "type": "timeline",
+      "phase": "recall",
+      "labels": [
+        "शुरुआत",
+        "समाप्ति"
+      ],
+      "amounts": [
+        0,
+        0
+      ],
+      "years": [
+        1206,
+        1290
+      ]
+    }
+  ],
+  "no_photo_fallback": true
+}
