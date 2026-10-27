@@ -1,0 +1,15 @@
+{
+  "source_sha256": "58742ad1baa35bcc1890841ed9bc7e63164aa6a92b083f8154fe30b794aa6446",
+  "engine": "Blender 4.2 EEVEE_NEXT",
+  "fps": 12,
+  "frames_per_shot": 48,
+  "note": "Actual mesh, material, lighting and camera keyframe animation; not image-only zoom.",
+  "chains": {
+    "sha256": "a76c1eea1c7c37c0297d430be5916d9a11c0cb648a855e13db800077ee2eeec3",
+    "bytes": 704607
+  },
+  "fort": {
+    "sha256": "89174addb00596700ff6e1667c741f4e0c3527a70ca470d38e9bba2e0ea247e8",
+    "bytes": 1132691
+  }
+}
