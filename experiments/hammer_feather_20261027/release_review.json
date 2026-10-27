@@ -1,0 +1,17 @@
+{
+  "approved_sha256": "45529384a2746736a67079ccccd8982f5cd141a1e9e3a6bd2636d94c4ca89ef7",
+  "reviewed_video_commit": "b0ba1d99dc3bfed3b533829c27722ac082ddfcb4",
+  "voice": "Gemini Charon (male), separately generated scenes: gemini-2.5-flash-preview-tts / Charon (male)",
+  "checks": [
+    "Downloaded MP4 SHA256 matches review",
+    "Decoded entire 24.3 second video and AAC audio",
+    "Inspected 12 sampled video frames and full scene contact sheet",
+    "No detected black segments",
+    "Audio mean -15.9 dB; peak -1.2 dB",
+    "WhatsApp banner is at top safe area, no AR brand displayed",
+    "Same-height model release and same-time contact; schematic timing labelled",
+    "NASA source verified"
+  ],
+  "authorized_action": "User explicitly requested one new experiment and immediate public release",
+  "performance_claim": "No guarantee of shares or retention; friend-prediction hypothesis to test"
+}
