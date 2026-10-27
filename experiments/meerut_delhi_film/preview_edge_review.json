@@ -1,0 +1,43 @@
+{
+  "duration": 43.236054421768706,
+  "scene_seconds": [
+    5.558004535147392,
+    7.238004535147392,
+    7.214013605442177,
+    6.038004535147392,
+    8.606009070294784,
+    8.582018140589568
+  ],
+  "speech": [
+    "बगावत मेरठ में हुई। फिर सिपाही दिल्ली क्यों पहुँचे?",
+    "नौ मई, अठारह सौ सत्तावन। मेरठ में पचासी सिपाहियों को सज़ा मिली।",
+    "दस मई: विद्रोह भड़का। साथियों को छुड़ाकर सिपाही दिल्ली की ओर बढ़े।",
+    "ग्यारह मई: दिल्ली पहुँचकर उन्होंने बहादुर शाह ज़फ़र से नेतृत्व माँगा।",
+    "ज़फ़र मुगल बादशाह थे। साझा नेतृत्व का प्रतीक। हर मोर्चे के सेनापति नहीं।",
+    "याद रखो: नौ सज़ा, दस मेरठ का विद्रोह, ग्यारह दिल्ली। दोस्त से यही क्रम पूछो।"
+  ],
+  "voice": "Edge hi-IN-SwaraNeural preview; Gemini master waiting for GitHub runner",
+  "renderer": "Blender 4.2 Eevee actual animated iron links and fort architecture; geographic perspective maps; original AI historical background; Pillow compositing",
+  "image_source": "Built-in imagegen historical reconstructions; no archival photo claim",
+  "source_reference": "User supplied 160.937s study reference; technique studied, no source footage or script copied",
+  "build_only": true,
+  "sources": [
+    "https://www.cbse.gov.in/cbsenew/ebooks/ANO-SD-SW.pdf",
+    "https://sathee.iitk.ac.in/sathee-railway-exams/student-corner/general-knowledge/indian-history/revolt-1857/",
+    "https://www.pib.gov.in/newsite/erelcontent.aspx?lang=2&reg=48&relid=27529"
+  ],
+  "map_source": "https://eoimages.gsfc.nasa.gov/images/imagerecords/73000/73909/world.topo.bathy.200412.3x5400x2700.jpg",
+  "map_note": "Modern physical geography for location only; no 1857 political borders. Travel path schematic.",
+  "share_hypothesis": "Retell three consecutive dates with places and event roles, then quiz a study partner. Not verified audience performance.",
+  "sha256": "eb9c774dad3f5af78e720a03155c132865186d6f7effd4d38f8549bf99cf3a41",
+  "preview_type": "Local Edge Swara preview; Gemini GitHub master separately queued",
+  "checks": [
+    "Complete MP4 decoded without errors",
+    "No black segment detected",
+    "720x1280 at 30 fps, 43.236 seconds",
+    "Inspected final full-duration 3-second filmstrip and six-scene contact sheet",
+    "Phone banner above Instagram caption area",
+    "Unsupported arrow glyphs removed",
+    "Historical images and travel route explicitly labelled schematic"
+  ]
+}
