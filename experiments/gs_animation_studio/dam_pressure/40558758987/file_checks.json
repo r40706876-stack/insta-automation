@@ -1,0 +1,26 @@
+{
+  "duration_seconds": 40.75,
+  "dimensions": [
+    720,
+    1280
+  ],
+  "fps": "24/1",
+  "decoded_without_errors": true,
+  "black_intervals": 0,
+  "audio_mean_db": -17.3,
+  "audio_peak_db": -1.2,
+  "sha256": "c72947f570834ab17be5b0d3ac04f8fdbe394f317ee83cbcee8088774b6d3b92",
+  "voice": "Edge / Swara female fallback",
+  "published": false,
+  "actual_rendered_motion_checks": {
+    "caps_move": {
+      "changed_fraction": 0.02513
+    },
+    "water_flows": {
+      "changed_fraction": 0.02043
+    },
+    "dam_base_widens": {
+      "changed_fraction": 0.49631
+    }
+  }
+}

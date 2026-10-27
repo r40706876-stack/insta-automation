@@ -1,0 +1,120 @@
+{
+  "topic": "dam_pressure",
+  "run_id": "40558758987",
+  "attempt": "1",
+  "status": "passed",
+  "events": [
+    {
+      "stage": "inputs",
+      "status": "passed"
+    },
+    {
+      "stage": "voice_generate",
+      "status": "started",
+      "log": "1_voice_generate.log"
+    },
+    {
+      "stage": "voice_generate",
+      "status": "passed"
+    },
+    {
+      "stage": "voice_decode",
+      "status": "started",
+      "log": "3_voice_decode.log"
+    },
+    {
+      "stage": "voice_decode",
+      "status": "passed"
+    },
+    {
+      "stage": "render",
+      "status": "recovery_required",
+      "reason": "StageError",
+      "detail": "renderer: code_error"
+    },
+    {
+      "stage": "render_safe",
+      "status": "started",
+      "log": "6_render_safe.log"
+    },
+    {
+      "stage": "render_safe",
+      "status": "passed"
+    },
+    {
+      "stage": "compose",
+      "status": "started",
+      "log": "8_compose.log"
+    },
+    {
+      "stage": "compose",
+      "status": "passed"
+    },
+    {
+      "stage": "inject_silent_audio",
+      "status": "started",
+      "log": "10_inject_silent_audio.log"
+    },
+    {
+      "stage": "inject_silent_audio",
+      "status": "passed"
+    },
+    {
+      "stage": "validate",
+      "status": "started",
+      "log": "12_validate.log"
+    },
+    {
+      "stage": "validate",
+      "status": "failed",
+      "code": "process_failed",
+      "detail": "Traceback (most recent call last):\n  File \"/home/runner/work/insta-automation/insta-automation/gs_animation_studio/verify_output.py\", line 9, in <module>\n    mean=float(re.search(r'mean_volume: ([\\-\\d.]+)',run.stderr)[1]);peak=float(re.search(r'max_volume: ([\\-\\d.]+)',run.stderr)[1]);assert mean>-35 and peak<=0\n                                                                                                                                          ^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "stage": "audio_repair",
+      "status": "started",
+      "log": "14_audio_repair.log"
+    },
+    {
+      "stage": "audio_repair",
+      "status": "passed"
+    },
+    {
+      "stage": "validate",
+      "status": "started",
+      "log": "16_validate.log"
+    },
+    {
+      "stage": "validate",
+      "status": "passed"
+    },
+    {
+      "stage": "compress_scene",
+      "status": "started",
+      "log": "18_compress_scene.log"
+    },
+    {
+      "stage": "compress_scene",
+      "status": "passed"
+    }
+  ],
+  "repairs": [
+    {
+      "action": "restore_reviewed_renderer",
+      "commit": "935b82a2eccf6ca310544fa4f3b54cb7b3b95e37"
+    },
+    {
+      "action": "software_render_retry"
+    },
+    {
+      "action": "remux_matching_voice_and_normalize_audio"
+    }
+  ],
+  "injected_failures": [
+    "isolated_renderer_syntax_error",
+    "isolated_silent_audio"
+  ],
+  "instagram_publish": false,
+  "output": "experiments/gs_animation_studio/dam_pressure/40558758987",
+  "sha256": "c72947f570834ab17be5b0d3ac04f8fdbe394f317ee83cbcee8088774b6d3b92"
+}

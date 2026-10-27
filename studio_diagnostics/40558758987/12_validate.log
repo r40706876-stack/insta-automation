@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "/home/runner/work/insta-automation/insta-automation/gs_animation_studio/verify_output.py", line 9, in <module>
+    mean=float(re.search(r'mean_volume: ([\-\d.]+)',run.stderr)[1]);peak=float(re.search(r'max_volume: ([\-\d.]+)',run.stderr)[1]);assert mean>-35 and peak<=0
+                                                                                                                                          ^^^^^^^^^^^^^^^^^^^^
+AssertionError
