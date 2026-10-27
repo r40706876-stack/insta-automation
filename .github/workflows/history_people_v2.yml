@@ -1,0 +1,44 @@
+name: History people presentation v2
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install compositor
+        run: |
+          pip install pillow numpy imageio-ffmpeg
+          python -c "import imageio_ffmpeg,os,shutil; shutil.which('ffmpeg') or os.symlink(imageio_ffmpeg.get_ffmpeg_exe(),'/usr/local/bin/ffmpeg')"
+      - name: Verify artwork and prepare reviewed voice
+        run: |
+          python - <<'PY'
+          import pathlib,json,hashlib,subprocess,shutil
+          root=pathlib.Path('experiments/meerut_delhi_people_v2')
+          assets=root/'assets'
+          manifest=json.loads((root/'assets_manifest.json').read_text())
+          for name,info in manifest.items():
+              assert hashlib.sha256((assets/name).read_bytes()).hexdigest()==info['sha256'],name
+          src=pathlib.Path('experiments/meerut_delhi_film/history_story_notes_safe_v2.mp4')
+          assert hashlib.sha256(src.read_bytes()).hexdigest()=='34deff463ebc424bf295b47e50e9e66d467af3fa46c4ba57fb568a34fe1a9395'
+          shutil.copyfile('experiments/meerut_delhi_film/Mukta.ttf',assets/'Mukta.ttf')
+          subprocess.run(['ffmpeg','-v','error','-y','-i',str(src),'-vn','-ac','1','-ar','44100',str(assets/'voice.wav')],check=True)
+          PY
+      - name: Build full story preview
+        run: python gs_history_people_v2.py
+      - name: Persist preview and review
+        if: always()
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git add experiments/meerut_delhi_people_v2
+          git diff --cached --quiet && exit 0
+          git commit -m 'Save people-based history presentation [skip ci]'
+          git pull --rebase -X theirs
+          git push

@@ -1,0 +1,18 @@
+{
+  "walk.png": {
+    "bytes": 782267,
+    "sha256": "b2ecee6726676f03ee924655d41e0402c2b622a86c78feb997643e82452e9ff1"
+  },
+  "punishment.png": {
+    "bytes": 2327919,
+    "sha256": "710387ff73c192bcb6b658ffdfb65c4b28e8a1aae0785e987c65dbc160e693c7"
+  },
+  "court.png": {
+    "bytes": 2433969,
+    "sha256": "87a248cc40492cb2476605fa6b466d8977e28a5d49b8554e54fe06017653c247"
+  },
+  "release.png": {
+    "bytes": 2438265,
+    "sha256": "bc07d5eb1f62f218a13d211fe1fbfb92ee753379c3240755472f55f3daf0fa18"
+  }
+}
