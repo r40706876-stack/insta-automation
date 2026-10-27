@@ -27,6 +27,28 @@ class NewTopicTests(unittest.TestCase):
  def test_six_scene_contract(self):
   p=plan();p['scenes']=p['scenes'][:1]
   with self.assertRaises(ValueError):validate(p)
+ def test_automatic_selection_rejects_previous_topic(self):
+  with tempfile.TemporaryDirectory() as tmp:
+   repo=Path(tmp);old=repo/'experiments/gs_animation_studio/new_topic/1';old.mkdir(parents=True);(old/'recipe.json').write_text(json.dumps(plan()))
+   root=repo/'new';root.mkdir()
+   with patch.dict(os.environ,{'STUDIO_TOPIC_TEXT':''}),patch('planner.ask',side_effect=[(plan(),'test')]*3):
+    with self.assertRaises(RuntimeError):generate(root,repo,'','auto','Verified source')
+   self.assertFalse((root/'recipe.json').exists())
+ def test_explicit_topic_request_can_repeat(self):
+  with tempfile.TemporaryDirectory() as tmp:
+   repo=Path(tmp);old=repo/'experiments/gs_animation_studio/new_topic/1';old.mkdir(parents=True);(old/'recipe.json').write_text(json.dumps(plan()))
+   root=repo/'new';root.mkdir();audit={'ok':True,'scene_checks':[{'scene':i,'mechanism_matches':True} for i in range(6)]}
+   with patch.dict(os.environ,{'STUDIO_TOPIC_TEXT':'नमक कानून'}),patch('planner.ask',side_effect=[(plan(),'test'),(audit,'test')]):
+    result=generate(root,repo,'नमक कानून','इतिहास','Verified source')
+   self.assertEqual(result['requested_topic'],'नमक कानून');self.assertTrue((root/'recipe.json').exists())
+ def test_automatic_alias_of_old_concept_is_rejected(self):
+  with tempfile.TemporaryDirectory() as tmp:
+   repo=Path(tmp);old=repo/'experiments/gs_animation_studio/new_topic/1';old.mkdir(parents=True);(old/'recipe.json').write_text(json.dumps(plan()))
+   root=repo/'new';root.mkdir();alias=plan();alias['topic_key']='different_name_same_salt_law'
+   audit={'ok':True,'novel_topic':False,'scene_checks':[{'scene':i,'mechanism_matches':True} for i in range(6)]}
+   with patch.dict(os.environ,{'STUDIO_TOPIC_TEXT':''}),patch('planner.ask',side_effect=[(alias,'test'),(audit,'test')]*3):
+    with self.assertRaises(RuntimeError):generate(root,repo,'','auto','Verified source')
+   self.assertFalse((root/'recipe.json').exists())
  def test_audit_failure_never_becomes_recipe(self):
   with tempfile.TemporaryDirectory() as tmp:
    root=Path(tmp);bad={'ok':False,'reasons':['incorrect fact'],'scene_checks':[]}
