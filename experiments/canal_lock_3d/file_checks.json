@@ -1,0 +1,36 @@
+{
+  "duration_seconds": 42.333333,
+  "dimensions": [
+    720,
+    1280
+  ],
+  "fps": "24/1",
+  "decoded_without_errors": true,
+  "black_intervals": 0,
+  "audio_mean_db": -17.3,
+  "audio_peak_db": -1.3,
+  "sha256": "92924810eab107c067404ca8eba6e121417862e09242da50755ec0e3823eb3f6",
+  "actual_rendered_motion_checks": {
+    "ship_entry": {
+      "mean_pixel_difference": 7.538,
+      "changed_fraction": 0.1649
+    },
+    "gate_closure": {
+      "mean_pixel_difference": 5.301,
+      "changed_fraction": 0.1085
+    },
+    "actual_lift": {
+      "mean_pixel_difference": 7.015,
+      "changed_fraction": 0.1272
+    },
+    "upper_gate_opening": {
+      "mean_pixel_difference": 2.472,
+      "changed_fraction": 0.0577
+    },
+    "ship_departure": {
+      "mean_pixel_difference": 3.069,
+      "changed_fraction": 0.0571
+    }
+  },
+  "video_published": false
+}
