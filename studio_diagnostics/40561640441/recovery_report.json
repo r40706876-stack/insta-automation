@@ -1,0 +1,26 @@
+{
+  "topic": "new_topic",
+  "run_id": "40561640441",
+  "attempt": "1",
+  "status": "failed",
+  "events": [
+    {
+      "stage": "plan_new_topic",
+      "status": "started",
+      "log": "0_plan_new_topic.log"
+    },
+    {
+      "stage": "plan_new_topic",
+      "status": "failed",
+      "code": "process_failed",
+      "detail": "Source unavailable: www.india.gov.in HTTPError\nSource unavailable: www.ias.ac.in HTTPError\nPlan repair 1 Object outside stage\nPlan repair 2 Bad object scale\nPlan repair 3 Too many labels\nTraceback (most recent call last):\n  File \"/home/runner/work/insta-automation/insta-automation/gs_animation_studio/planner.py\", line 122, in <module>\n    generate(sys.argv[1],sys.argv[2],os.getenv('STUDIO_TOPIC_TEXT','').strip(),os.getenv('STUDIO_SUBJECT','auto'),os.getenv('STUDIO_REFERENCE_TEXT',''))\n  File \"/home/runner/work/insta-automation/insta-automation/gs_animation_studio/planner.py\", line 118, in generate\n    raise RuntimeError('New-topic plan failed validation after three attempts: '+str(errors))\nRuntimeError: New-topic plan failed validation after three attempts: ['Object outside stage', 'Bad object scale', 'Too many labels']\n"
+    }
+  ],
+  "repairs": [],
+  "injected_failures": [],
+  "instagram_publish": false,
+  "failure": {
+    "type": "StageError",
+    "message": "plan_new_topic: process_failed"
+  }
+}
