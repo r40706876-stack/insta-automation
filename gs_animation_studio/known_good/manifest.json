@@ -1,0 +1,16 @@
+{
+  "approved_commit": "935b82a2eccf6ca310544fa4f3b54cb7b3b95e37",
+  "files": {
+    "known_good/dam_pressure/scene.py": "248c90377287f89ff64ebc780d889b7e1e31c805",
+    "known_good/dam_pressure/compose.py": "e16556628f67af0f972af872b94972eb182675c8",
+    "known_good/dam_pressure/recipe.json": "61515412cfa00b36dd2ced5b9ccd4c35b99ef7fe",
+    "known_good/canal_lock/scene.py": "cef0300f38bc4ab23a49a8f1d083fac3d730b159",
+    "known_good/canal_lock/compose.py": "e1d8341e31eadbe1271730821405255fb73e7426",
+    "known_good/canal_lock/audio.json": "d70dcfe4746e7dfde29d5a2682cf7726c8603d57",
+    "known_good/dam_pressure/voice.flac": "d40a3db1767e1315c8a20a6baa3cdcafef9a94a0",
+    "known_good/dam_pressure/audio.json": "53d807be95cab9952d1f098fbbba9dc7b47e1fec",
+    "known_good/canal_lock/voice.flac": "99aaa76f75f235d8147d942df8edd321e7872c2d",
+    "known_good/Mukta.ttf": "9fa75689789460aaef09850bdf37c1a53527946c",
+    "known_good/OFL.txt": "12057d5a1c20c7476c62a7509756036dc6fb6ed8"
+  }
+}

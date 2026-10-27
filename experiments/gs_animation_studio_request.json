@@ -1,5 +1,1 @@
-{
-  "topic": "dam_pressure",
-  "voice": "female_fallback",
-  "request_id": "dam-pressure-official-ubuntu-mirror-recovery-20261027"
-}
+{"topic": "dam_pressure", "voice": "female_fallback", "verify_recovery": true, "request_id": "bounded-recovery-verification-20261027"}
