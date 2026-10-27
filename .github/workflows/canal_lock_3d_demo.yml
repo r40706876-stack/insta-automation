@@ -1,8 +1,14 @@
 name: Build true 3D canal lock demo
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths: [.github/workflows/canal_lock_3d_demo.yml]
 permissions:
-  contents: read
+  contents: write
+concurrency:
+  group: canal-lock-genuine-3d-build
+  cancel-in-progress: false
 jobs:
   render:
     runs-on: ubuntu-24.04
@@ -14,26 +20,61 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - name: Install rendering dependencies
+      - name: Install Blender and rendering dependencies
         run: |
           sudo apt-get update -qq
-          sudo apt-get install -y ffmpeg libegl1 libgl1 libxrender1 libxi6 libxkbcommon0
+          sudo apt-get install -y ffmpeg xvfb xauth libegl1 libegl-mesa0 libgl1 libgl1-mesa-dri libxrender1 libxi6 libxkbcommon0
           pip install Pillow numpy
           curl -fL --retry 3 https://download.blender.org/release/Blender4.2/blender-4.2.0-linux-x64.tar.xz -o /tmp/blender.tar.xz
           mkdir -p /tmp/blender
           tar -xf /tmp/blender.tar.xz -C /tmp/blender --strip-components=1
-      - name: Rebuild narration and genuine 3D motion
+          /tmp/blender/blender --version
+      - name: Remove the checked-in export before generating a fresh video
         run: |
-          ffmpeg -y -i "$CANAL_ROOT/voice.flac" "$CANAL_ROOT/voice.wav"
-          /tmp/blender/blender -b -t 4 --python "$CANAL_ROOT/canal_lock_blender.py"
+          rm -f "$CANAL_ROOT/panama_water_lift_3d.mp4" "$CANAL_ROOT/silent_3d.mp4" "$CANAL_ROOT/canal_lock.blend" "$CANAL_ROOT/file_checks.json"
+          date -u +%s > /tmp/canal-build-start
+          ffmpeg -y -v error -i "$CANAL_ROOT/voice.flac" "$CANAL_ROOT/voice.wav"
+      - name: Render all 1016 frames on the GitHub runner
+        run: |
+          xvfb-run -a /tmp/blender/blender -b -t 4 --python "$CANAL_ROOT/canal_lock_blender.py"
           python "$CANAL_ROOT/compose.py"
-          ffmpeg -v error -i "$CANAL_ROOT/panama_water_lift_3d.mp4" -f null -
-      - name: Keep reviewable MP4 and editable Blender scene
+      - name: Decode and verify the actual GitHub-made MP4
+        run: |
+          python "$CANAL_ROOT/verify.py"
+          python - <<'PY'
+          import os,json,hashlib,time,platform
+          from pathlib import Path
+          import PIL,numpy
+          r=Path(os.environ['CANAL_ROOT'])
+          p=r/'panama_water_lift_3d.mp4'
+          assert p.stat().st_mtime >= int(Path('/tmp/canal-build-start').read_text())
+          receipt={'run_id':os.environ['GITHUB_RUN_ID'],'commit':os.environ['GITHUB_SHA'],'runner':os.environ['RUNNER_NAME'],'built_on_github':True,'checked_in_video_deleted_before_build':True,'sha256':hashlib.sha256(p.read_bytes()).hexdigest(),'bytes':p.stat().st_size,'completed_unix':time.time(),'python':platform.python_version(),'pillow':PIL.__version__,'numpy':numpy.__version__,'instagram_publish':False}
+          (r/'github_build_receipt.json').write_text(json.dumps(receipt,indent=2))
+          print(json.dumps(receipt,indent=2))
+          PY
+      - name: Keep the MP4, checks and editable Blender scene
         uses: actions/upload-artifact@v4
         with:
-          name: panama-genuine-3d-review
+          name: panama-genuine-3d-github-build
           path: |
             experiments/canal_lock_3d/panama_water_lift_3d.mp4
             experiments/canal_lock_3d/canal_lock.blend
             experiments/canal_lock_3d/scene_checks.json
+            experiments/canal_lock_3d/file_checks.json
+            experiments/canal_lock_3d/contact_sheet.jpg
+            experiments/canal_lock_3d/github_build_receipt.json
           retention-days: 30
+      - name: Persist the GitHub-made video separately from the published original
+        run: |
+          git fetch origin main
+          git worktree add --detach "$RUNNER_TEMP/canal-results" origin/main
+          result="$RUNNER_TEMP/canal-results/experiments/canal_lock_3d/github_build"
+          mkdir -p "$result"
+          cp "$CANAL_ROOT/panama_water_lift_3d.mp4" "$CANAL_ROOT/scene_checks.json" "$CANAL_ROOT/file_checks.json" "$CANAL_ROOT/contact_sheet.jpg" "$CANAL_ROOT/github_build_receipt.json" "$result/"
+          cd "$RUNNER_TEMP/canal-results"
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git add experiments/canal_lock_3d/github_build
+          git commit -m 'Save fresh GitHub-rendered canal reel and provenance [skip ci]'
+          git pull --rebase origin main
+          git push origin HEAD:main
