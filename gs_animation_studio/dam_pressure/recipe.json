@@ -1,0 +1,15 @@
+{
+  "id":"dam_pressure",
+  "title":"बाँध नीचे मोटा क्यों होता है?",
+  "speech":[
+    "बाँध की दीवार नीचे मोटी, ऊपर पतली। उल्टा क्यों नहीं बनाते?",
+    "इस टंकी में बराबर के दो छेद हैं। दोनों को एक साथ खोलते हैं।",
+    "देखो, नीचे वाले छेद से पानी ज़्यादा तेज़ निकलता है। वहाँ पानी का दबाव ज़्यादा है।",
+    "पानी में जितना नीचे जाओ, ऊपर के पानी की वजह से दबाव उतना बढ़ता है।",
+    "इसलिए ऐसे कंक्रीट के बाँधों में नीचे ज़्यादा मोटा हिस्सा रखते हैं, ताकि बढ़ता धक्का सह सके।",
+    "याद रखो: गहराई ज़्यादा, पानी का दबाव ज़्यादा। अब समझ आया बाँध नीचे मोटा क्यों है?"
+  ],
+  "titles":[["नीचे मोटा… ऊपर पतला!","बाँध को उल्टा क्यों नहीं बनाते?"],["एक टंकी, दो बराबर छेद","दोनों ढक्कन एक साथ हटे"],["नीचे से पानी ज़्यादा तेज़","यहाँ दबाव ज़्यादा है"],["गहराई बढ़ी, दबाव बढ़ा","बड़े तीर = ज़्यादा धक्का"],["इसलिए नीचे ज़्यादा मोटा","कंक्रीट के गुरुत्वीय बाँध का मॉडल"],["अब बाँध देखो तो याद रखना","गहराई ज़्यादा = दबाव ज़्यादा"]],
+  "sources":["https://openstax.org/books/university-physics-volume-1/pages/14-2-measuring-pressure","https://openstax.org/books/college-physics-2e/pages/12-3-the-most-general-applications-of-bernoullis-equation"],
+  "science_notes":["Hydrostatic gauge pressure is proportional to depth, not container volume.","Jet exit speed follows Torricelli. Do not generalize that the lowest hole always gives the greatest horizontal range.","This is a cutaway teaching model of a concrete gravity dam, not all dam types or a construction design.","The large reservoir/small orifices approximation keeps the free-surface level almost constant during the demonstration."]
+}

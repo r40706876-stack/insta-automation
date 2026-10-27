@@ -1,0 +1,82 @@
+name: GS Animation Studio
+on:
+  workflow_dispatch:
+    inputs:
+      topic:
+        description: 'विषय: dam_pressure = बाँध; canal_lock = पनामा नहर'
+        type: choice
+        options: [dam_pressure, canal_lock]
+        default: dam_pressure
+      voice:
+        description: 'auto = Gemini male, उपलब्ध न हो तो female fallback'
+        type: choice
+        options: [auto, female_fallback]
+        default: auto
+  push:
+    branches: [main]
+    paths: [experiments/gs_animation_studio_request.json]
+permissions:
+  contents: write
+concurrency:
+  group: gs-animation-studio
+  cancel-in-progress: false
+jobs:
+  studio:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Select the requested lesson
+        env:
+          INPUT_TOPIC: ${{ inputs.topic }}
+          INPUT_VOICE: ${{ inputs.voice }}
+        run: |
+          python - <<'PY'
+          import os,json
+          r=json.load(open('experiments/gs_animation_studio_request.json'))
+          topic=os.getenv('INPUT_TOPIC') or r['topic']
+          voice=os.getenv('INPUT_VOICE') or r.get('voice','auto')
+          assert topic in ['dam_pressure','canal_lock']
+          assert voice in ['auto','female_fallback']
+          with open(os.environ['GITHUB_ENV'],'a') as f:f.write('STUDIO_TOPIC='+topic+'\nSTUDIO_VOICE='+voice+'\n')
+          print('Topic:',topic,'Voice preference:',voice,'Mode: build only')
+          PY
+      - name: Install Blender and audio dependencies
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y ffmpeg xvfb xauth libegl1 libegl-mesa0 libgl1 libgl1-mesa-dri libxrender1 libxi6 libxkbcommon0
+          pip install Pillow numpy requests edge-tts
+          curl -fL --retry 3 https://download.blender.org/release/Blender4.2/blender-4.2.0-linux-x64.tar.xz -o /tmp/blender.tar.xz
+          mkdir -p /tmp/blender
+          tar -xf /tmp/blender.tar.xz -C /tmp/blender --strip-components=1
+      - name: Create voice and render the complete 3D lesson
+        id: build
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          BLENDER_BIN: /tmp/blender/blender
+          PYTHONUNBUFFERED: '1'
+        run: python -u gs_animation_studio.py --topic "$STUDIO_TOPIC"
+      - name: Downloadable full reel and editable scene
+        uses: actions/upload-artifact@v4
+        with:
+          name: GS-Animation-Studio-${{ env.STUDIO_TOPIC }}-${{ github.run_id }}
+          path: ${{ steps.build.outputs.output }}
+          retention-days: 30
+      - name: Save the new GitHub-made review video
+        env:
+          OUTPUT_PATH: ${{ steps.build.outputs.output }}
+        run: |
+          git fetch origin main
+          git worktree add --detach "$RUNNER_TEMP/studio-results" origin/main
+          mkdir -p "$RUNNER_TEMP/studio-results/$OUTPUT_PATH"
+          cp -a "$OUTPUT_PATH/." "$RUNNER_TEMP/studio-results/$OUTPUT_PATH/"
+          cd "$RUNNER_TEMP/studio-results"
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git add "$OUTPUT_PATH"
+          git commit -m "Save GS Animation Studio $STUDIO_TOPIC render [skip ci]"
+          git pull --rebase origin main
+          git push origin HEAD:main
