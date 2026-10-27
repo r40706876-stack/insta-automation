@@ -1,13 +1,14 @@
 {
-  "duration": 27.087482993197277,
+  "voice_strategy": "per_scene_charon_v1",
+  "duration": 24.32190476190476,
   "scene_seconds": [
-    6.0075056689342405,
+    4.960952380952381,
     6,
     6,
-    9.079977324263039
+    7.360952380952381
   ],
-  "voice": "edge-tts hi-IN-SwaraNeural",
-  "sha256": "dd94f280d439cb237b3ed8ac43c18f4515ec36856661665a8f833ae6b8a4bc0d",
+  "voice": "Gemini Charon (male), separately generated scenes: gemini-2.5-flash-preview-tts / Charon (male)",
+  "sha256": "45529384a2746736a67079ccccd8982f5cd141a1e9e3a6bd2636d94c4ca89ef7",
   "speech": [
     "हथौड़ा या पंख? हवा हटा दें, तो पहले कौन गिरेगा? जवाब सोचो।",
     "हवा में पंख धीरे गिरता है। हवा उसे ज्यादा रोकती है।",
