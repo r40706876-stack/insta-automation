@@ -1,6 +1,32 @@
-SCHEDULE: video ready; target 2026-10-28T07:30:00Z
+FORMAT: mega
+  Gemini text models: gemini-flash-latest, gemini-3.8-flash, gemini-3.7-flash, gemini-3.6-flash
+  Gemini gemini-flash-latest fail (koshish 1): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
+  Gemini gemini-flash-latest fail (koshish 2): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
+  Gemini gemini-3.8-flash: HTTP 503 (koshish 1) {   "error": {     "code": 503,     "message": "This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later
+  Gemini gemini-3.8-flash: HTTP 503 (koshish 2) 
+  Gemini gemini-3.7-flash fail (koshish 1): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
+  Gemini gemini-3.7-flash: HTTP 503 (koshish 2) 
+  Gemini gemini-3.6-flash fail (koshish 1): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
+  Mega AI jaanch: 74 me se 51 sahi
+  Mega awaaz: gemini-3.8-flash-tts / hi-in-storyteller-6
+MEGA REEL TAIYAR: generated_reels/science_pyq_reel.mp4 (14.3s, 2 page, 40 sawal)
+
+CAPTION:
+📚 "सामान्य ज्ञान" के 40 सबसे महत्वपूर्ण प्रश्न - सभी सरकारी परीक्षाओं के लिए
+
+⏸️ हर पेज पर रोककर पढ़ो (स्क्रीन दबाकर रखो)
+📌 अभी SAVE करो - exam से पहले 1 बार ज़रूर revise करना
+📤 उस दोस्त को भेजो जो SSC / Railway / Police की तैयारी कर रहा है
+💬 कितने पहले से आते थे? कमेंट करो!
+
+सामान्य ज्ञान (GK) GK | RRB NTPC, Group D, SSC GD, CGL, MTS, Police, Patwari, State Exam PYQ
+⏱ MinuteMe_GS - एक मिनट, एक PYQ - पक्का!
+
+#gkquiz #gkpyq #sscgd #rrbntpc #gk
+SCHEDULE: video ready; target 2026-10-28T11:30:00Z
 Collab invitation requested: @ar_publication
-  IG container: 17911011111568651
+  IG container: 17911035273568651
   upload try 1: HTTP 200 {"success":true,"message":"Upload Successful."}
   IG processing: FINISHED
-REMINDER: reel ready, publication due within 10 minutes: 2026-10-28T07:30:00Z
+REMINDER: reel ready, publication due within 10 minutes: 2026-10-28T11:30:00Z
+INSTAGRAM PE POST HO GAYA: 18181595695430081
