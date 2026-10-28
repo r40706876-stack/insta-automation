@@ -1,75 +1,12 @@
-FORMAT: list
-  Gemini text models: gemini-flash-latest, gemini-3.8-flash, gemini-3.7-flash, gemini-3.6-flash
-  Gemini gemini-flash-latest: HTTP 503 (koshish 1) {   "error": {     "code": 503,     "message": "This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later
-  Gemini gemini-flash-latest: HTTP 503 (koshish 2) 
-  Gemini gemini-3.8-flash: HTTP 503 (koshish 1) {   "error": {     "code": 503,     "message": "This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later
-  Gemini gemini-3.8-flash: HTTP 429 (koshish 2) 
-  Gemini gemini-3.7-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
-  Gemini gemini-3.7-flash: HTTP 429 (koshish 2) 
-  Gemini gemini-3.6-flash: HTTP 503 (koshish 1) {   "error": {     "code": 503,     "message": "This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later
-  Gemini gemini-flash-latest: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
-  Gemini gemini-flash-latest: HTTP 429 (koshish 2) 
-  Gemini gemini-3.8-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
-  Gemini gemini-3.8-flash: HTTP 429 (koshish 2) 
-  Gemini gemini-3.7-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
-  Gemini gemini-3.7-flash: HTTP 503 (koshish 2) 
-  Gemini gemini-flash-latest: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
-  Gemini gemini-flash-latest: HTTP 429 (koshish 2) 
-  Gemini gemini-3.8-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
-  Gemini gemini-3.8-flash: HTTP 429 (koshish 2) 
-  Gemini gemini-3.7-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
-  Gemini gemini-3.7-flash: HTTP 429 (koshish 2) 
-  Gemini gemini-flash-latest: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
-  Gemini gemini-flash-latest: HTTP 429 (koshish 2) 
-  Gemini gemini-3.8-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
-  Gemini gemini-3.8-flash: HTTP 429 (koshish 2) 
-  Gemini gemini-3.7-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
-  Gemini gemini-3.7-flash: HTTP 429 (koshish 2) 
-  Gemini gemini-flash-latest: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
-  Gemini gemini-flash-latest: HTTP 429 (koshish 2) 
-  Gemini gemini-3.8-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
-  Gemini gemini-3.8-flash: HTTP 429 (koshish 2) 
-  Gemini gemini-3.7-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
-  Gemini gemini-3.7-flash: HTTP 429 (koshish 2) 
-  Gemini gemini-3.6-flash: HTTP 503 (koshish 1) {   "error": {     "code": 503,     "message": "This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later
-  Gemini gemini-3.6-flash: HTTP 503 (koshish 2) 
   Groq llama-3.3-70b-versatile: HTTP 404
-  Gemini gemini-flash-latest: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
-  Gemini gemini-flash-latest: HTTP 429 (koshish 2) 
-  Gemini gemini-3.8-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
-  Gemini gemini-3.8-flash: HTTP 429 (koshish 2) 
-  Gemini gemini-3.7-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
-  Gemini gemini-3.7-flash: HTTP 429 (koshish 2) 
-  Gemini gemini-flash-latest: HTTP 503 (koshish 1) {   "error": {     "code": 503,     "message": "This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later
-  Gemini gemini-flash-latest: HTTP 429 (koshish 2) 
-  Gemini gemini-3.8-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
-  Gemini gemini-3.8-flash: HTTP 429 (koshish 2) 
-  Gemini gemini-3.7-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
-  Gemini gemini-3.7-flash: HTTP 429 (koshish 2) 
-LIST REEL TAIYAR: generated_reels/science_pyq_reel.mp4 (10s)
-
-CAPTION:
-📚 राजव्यवस्था के 7 PYQ - RRB, SSC, Police, Patwari, Army, State Exams के लिए (Save करो)
-
-1. मंत्रिपरिषद (भारत सरकार) का अध्यक्ष कौन होता है? → प्रधानमंत्री
-2. आजादी के बाद भारत में पहले आम चुनाव कब हुए थे? → 1952
-3. भारत का प्रथम मुख्य चुनाव आयुक्त कौन था? → सुकुमार सेन
-4. निम्नलिखित में से कौन सा भारत में शहरी स्थानीय शासन का एक अंग है? → नगर पंचायत
-5. पंचायती राज व्यवस्था सबसे पहले भारत के किस राज्य में लागू की गई थी? → राजस्थान
-6. प्रत्येक ग्राम पंचायत का प्रतिनिधित्व कितने सरपंच करते हैं? → एक
-7. भारत में पंचायत निकाय का कार्यकाल कितना होता है? → 5 वर्ष
-
-💬 कितने पहले से आते थे? कमेंट करो: 7/7?
-📤 Save करो + उस दोस्त को भेजो जो exam की तैयारी कर रहा है।
-राजव्यवस्था GK Questions | RRB NTPC, Group D, SSC GD, State Exam PYQ
-⏱ MinuteMe_GS - एक मिनट, एक PYQ - पक्का!
-📲 Free test / notes: WhatsApp 8989971379
-
-#gkquiz #rrbntpc #sscgd #gkpyq #polity
-SCHEDULE: video ready; target 2026-10-28T01:30:00Z
+  Groq llama-3.3-70b-versatile: HTTP 404
+  Groq llama-3.3-70b-versatile: HTTP 404
+  Groq llama-3.3-70b-versatile: HTTP 404
+  Gemini awaaz: scenes ke beech ruk nahi mile
+Gemini awaaz scenes me sahi nahi kati -> edge-tts
+SCHEDULE: video ready; target 2026-10-28T04:30:00Z
 Collab invitation requested: @ar_publication
-  IG container: 17910965781568651
+  IG container: 17910985698568651
   upload try 1: HTTP 200 {"success":true,"message":"Upload Successful."}
   IG processing: FINISHED
-REMINDER: reel ready, publication due within 10 minutes: 2026-10-28T01:30:00Z
-INSTAGRAM PE POST HO GAYA: 18144769498614162
+REMINDER: reel ready, publication due within 10 minutes: 2026-10-28T04:30:00Z

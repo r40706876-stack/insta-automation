@@ -1,0 +1,115 @@
+{
+  "ok": true,
+  "title": "भारत के पड़ोसी का चयन",
+  "scenes": [
+    {
+      "label": "पज़ल: कौन पड़ोसी?",
+      "speech": "आपके घर के दरवाज़े के पास कौन सा कुंजी फिट होती है?",
+      "animation": {
+        "type": "process",
+        "phase": "question",
+        "labels": [
+          "कुंजी पहचान",
+          "दरवाज़ा"
+        ],
+        "amounts": [
+          1,
+          1
+        ],
+        "years": [
+          2018,
+          2018
+        ]
+      }
+    },
+    {
+      "label": "पहला कदम: मानचित्र",
+      "speech": "पहले भारत के मानचित्र में सभी सीमाएँ देखें और पड़ोसी देशों को पहचानें।",
+      "animation": {
+        "type": "process",
+        "phase": "explain",
+        "labels": [
+          "मानचित्र देखना",
+          "सीमा पहचान"
+        ],
+        "amounts": [
+          1,
+          1
+        ],
+        "years": [
+          2018,
+          2018
+        ]
+      }
+    },
+    {
+      "label": "दूसरा कदम: विकल्प",
+      "speech": "अब विकल्पों में से नेपाल को चुनें, क्योंकि वह सूची में है।",
+      "animation": {
+        "type": "process",
+        "phase": "demonstrate",
+        "labels": [
+          "विकल्प छाँटें",
+          "नेपाल चुनें"
+        ],
+        "amounts": [
+          1,
+          1
+        ],
+        "years": [
+          2018,
+          2018
+        ]
+      }
+    },
+    {
+      "label": "अंतिम परीक्षण",
+      "speech": "अब देखें, भारत के नक्शे पर कौन-सा देश पड़ोसी दिखता है, नेपाल या चीन?",
+      "animation": {
+        "type": "process",
+        "phase": "recall",
+        "labels": [
+          "नक्शा देखना",
+          "पड़ोसी पहचान"
+        ],
+        "amounts": [
+          1,
+          1
+        ],
+        "years": [
+          2018,
+          2018
+        ]
+      }
+    }
+  ],
+  "renderer_version": 7,
+  "question_hash": "0f5d042f51a967be089059ca9e643793364f7a0e4288acb2d0dbb8ce19974753",
+  "reference": {
+    "subject": "Geography",
+    "subject_hi": "भूगोल",
+    "chapter": "विविध (Miscellaneous)",
+    "sub": "",
+    "question": "निम्नलिखित में से कौन सा देश, भारत का पड़ोसी है?",
+    "options": {
+      "a": "ईरान",
+      "b": "फ्रांस",
+      "c": "इराक",
+      "d": "नेपाल"
+    },
+    "answer": "d",
+    "exams": [
+      "RRB Group-D 15-11-2018 (Shift-III)",
+      "RRB Group-D 16-11-2018 (Shift-I)",
+      "RRB Group-D 16-11-2018 (Shift-III)"
+    ],
+    "explanation": "भारत की सीमाओं से 7 देशों की सीमाएं लगती हैं। ये देश हैं- बंाग्लादेश, पाकिस्तान, अफगानिस्तान, चीन, भूटान, नेपाल और म्यांमार।",
+    "times_asked": 3,
+    "years": [
+      "2018"
+    ],
+    "id": "3dbe568d0f",
+    "seq": 16
+  },
+  "subject": "Geography"
+}

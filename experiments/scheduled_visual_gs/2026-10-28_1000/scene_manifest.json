@@ -1,0 +1,70 @@
+{
+  "renderer_version": 7,
+  "scenes": [
+    {
+      "type": "process",
+      "phase": "question",
+      "labels": [
+        "कुंजी पहचान",
+        "दरवाज़ा"
+      ],
+      "amounts": [
+        1,
+        1
+      ],
+      "years": [
+        2018,
+        2018
+      ]
+    },
+    {
+      "type": "process",
+      "phase": "explain",
+      "labels": [
+        "मानचित्र देखना",
+        "सीमा पहचान"
+      ],
+      "amounts": [
+        1,
+        1
+      ],
+      "years": [
+        2018,
+        2018
+      ]
+    },
+    {
+      "type": "process",
+      "phase": "demonstrate",
+      "labels": [
+        "विकल्प छाँटें",
+        "नेपाल चुनें"
+      ],
+      "amounts": [
+        1,
+        1
+      ],
+      "years": [
+        2018,
+        2018
+      ]
+    },
+    {
+      "type": "process",
+      "phase": "recall",
+      "labels": [
+        "नक्शा देखना",
+        "पड़ोसी पहचान"
+      ],
+      "amounts": [
+        1,
+        1
+      ],
+      "years": [
+        2018,
+        2018
+      ]
+    }
+  ],
+  "no_photo_fallback": true
+}
