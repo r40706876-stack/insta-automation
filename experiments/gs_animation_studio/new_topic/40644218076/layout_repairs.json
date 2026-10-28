@@ -1,0 +1,37 @@
+[
+  {
+    "scene": 3,
+    "object": "object_0",
+    "repair": "fit_pos"
+  },
+  {
+    "scene": 3,
+    "object": "object_0",
+    "repair": "fit_to"
+  },
+  {
+    "scene": 3,
+    "object": "object_1",
+    "repair": "fit_pos"
+  },
+  {
+    "scene": 3,
+    "object": "object_1",
+    "repair": "fit_to"
+  },
+  {
+    "scene": 3,
+    "object": "object_2",
+    "repair": "fit_pos"
+  },
+  {
+    "scene": 3,
+    "object": "object_3",
+    "repair": "fit_pos"
+  },
+  {
+    "scene": 3,
+    "object": "object_3",
+    "repair": "remove_excess_label"
+  }
+]

@@ -1,0 +1,11 @@
+[
+  {
+    "url": "user-provided",
+    "excerpt": "Verified question-bank reference; do not add claims beyond this reference: {\"subject\": \"History\", \"subject_hi\": \"इतिहास\", \"chapter\": \"गवर्नर/गवर्नर जनरल/वायसराय (Governors/Governors General/Viceroys)\", \"sub\": \"\", \"question\": \"1781 में, भारत के पहले गवर्नर जनरल वॉरेन हेस्टिंग्स ने मुस्लिम कानून के अध्ययन और शिक्षण के लिए _____ में मदरसा की स्थापना की।\", \"options\": {\"a\": \"मुंबई\", \"b\": \"दिल्ली\", \"c\": \"बिहार\", \"d\": \"कलकत्ता\"}, \"answer\": \"d\", \"exams\": [\"RRB Group-D 16-10-2018 (Shift-III)\", \"RRB Group-D 28-09-2018 (Shift-I)\", \"RRB Group-D 28-09-2018 (Shift-III\"], \"explanation\": \"वर्ष 1781 में भारत के पहले गवर्नर जनरल वॉरेन हेस्टिंग्स ने मुस्लिम कानून के अध्ययन और शिक्षण के लिए कलकत्ता में मदरसा की स्थापना की थी। वॉरेन हेस्टिंग्स, रेग्यूलेटिंग एक्ट के तहत बंगाल का पहला गवर्नर जनरल था। यह भारत का पहला गवर्नर जनरल भी था।\", \"times_asked\": 3, \"years\": [\"2018\"], \"id\": \"4c9ad648fa\", \"seq\": 4}"
+  },
+  {
+    "url": "https://www.naturalearthdata.com/downloads/110m-physical-vectors/110m-land/",
+    "publisher": "Natural Earth, public-domain physical coastline geometry",
+    "note": "Modern Gujarat outline is separately attributed in dandi_map.LICENSE; routes are schematic."
+  }
+]

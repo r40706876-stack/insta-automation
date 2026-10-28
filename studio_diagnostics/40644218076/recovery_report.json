@@ -1,0 +1,87 @@
+{
+  "topic": "new_topic",
+  "run_id": "40644218076",
+  "attempt": "1",
+  "status": "passed",
+  "events": [
+    {
+      "stage": "plan_new_topic",
+      "status": "started",
+      "log": "0_plan_new_topic.log"
+    },
+    {
+      "stage": "plan_new_topic",
+      "status": "passed"
+    },
+    {
+      "stage": "inputs",
+      "status": "passed",
+      "requested_topic": "1781 में, भारत के पहले गवर्नर जनरल वॉरेन हेस्टिंग्स ने मुस्लिम कानून के अध्ययन और शिक्षण के लिए _____ में मदरसा की स्थापना की।"
+    },
+    {
+      "stage": "voice_generate",
+      "status": "started",
+      "log": "3_voice_generate.log"
+    },
+    {
+      "stage": "voice_generate",
+      "status": "passed"
+    },
+    {
+      "stage": "voice_decode",
+      "status": "started",
+      "log": "5_voice_decode.log"
+    },
+    {
+      "stage": "voice_decode",
+      "status": "passed"
+    },
+    {
+      "stage": "render",
+      "status": "started",
+      "log": "7_render.log"
+    },
+    {
+      "stage": "render",
+      "status": "passed"
+    },
+    {
+      "stage": "compose",
+      "status": "started",
+      "log": "9_compose.log"
+    },
+    {
+      "stage": "compose",
+      "status": "passed"
+    },
+    {
+      "stage": "validate",
+      "status": "started",
+      "log": "11_validate.log"
+    },
+    {
+      "stage": "validate",
+      "status": "passed"
+    },
+    {
+      "stage": "compress_scene",
+      "status": "started",
+      "log": "13_compress_scene.log"
+    },
+    {
+      "stage": "compress_scene",
+      "status": "passed"
+    }
+  ],
+  "repairs": [
+    {
+      "action": "restore_reviewed_renderer",
+      "engine": "data-driven-3d",
+      "same_recipe": true
+    }
+  ],
+  "injected_failures": [],
+  "instagram_publish": false,
+  "output": "experiments/gs_animation_studio/new_topic/40644218076",
+  "sha256": "491c21e9dcf11436fbd91308a723419c755e370cc09b1646f7a931e487d8f6df"
+}
