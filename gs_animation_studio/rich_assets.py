@@ -155,6 +155,7 @@ def animate_ocean(details,t,frame):
  for j,o in enumerate(details['crests']):o.location.y=-.75*((t*.45+j*.19)%1);key(o,'location',frame)
 
 def world_coasts(parent):
+ from mathutils.geometry import tessellate_polygon
  data=json.loads((R/'world_land.json').read_text())
  for f in data['features']:
   geom=f['geometry'];rings=[p[0] for p in geom['coordinates']] if geom['type']=='MultiPolygon' else [geom['coordinates'][0]]
@@ -162,7 +163,32 @@ def world_coasts(parent):
    pts=[]
    for lon,lat,*_ in ring:
     lon=math.radians(lon);lat=math.radians(lat);pts.append((1.06*math.cos(lat)*math.sin(lon),-1.06*math.cos(lat)*math.cos(lon),1.2+1.06*math.sin(lat)))
-   if len(pts)>2:line('Real continent coastline',pts,.015,green,parent)
+   if len(pts)>2:
+    # Tessellate in geographic coordinates, then refine and project every vertex
+    # onto the sphere: large triangles must not cut through the blue globe.
+    flat=[];last=None
+    for lon,lat,*_ in ring:
+     if last is not None:
+      while lon-last>180:lon-=360
+      while lon-last< -180:lon+=360
+     flat.append(Vector((lon,lat,0)));last=lon
+    if (flat[0]-flat[-1]).length<.001:flat.pop()
+    verts=[];faces=[]
+    def triangle(a,b,c,depth=0):
+     if depth<5 and max((a-b).length,(a-c).length,(b-c).length)>8:
+      ab=(a+b)/2;bc=(b+c)/2;ca=(c+a)/2
+      for x,y,z in ((a,ab,ca),(ab,b,bc),(ca,bc,c),(ab,bc,ca)):triangle(x,y,z,depth+1)
+      return
+     ids=[]
+     for v in (a,b,c):
+      lon=math.radians(v.x);lat=math.radians(v.y);ids.append(len(verts));verts.append((1.068*math.cos(lat)*math.sin(lon),-1.068*math.cos(lat)*math.cos(lon),1.2+1.068*math.sin(lat)))
+     faces.append(tuple(ids))
+    if len(flat)>2:
+     for a,b,c in tessellate_polygon([flat]):triangle(a,b,c)
+    if faces:
+     mesh=bpy.data.meshes.new('Sourced filled continent');mesh.from_pydata(verts,[],faces);mesh.update();o=bpy.data.objects.new('Real geographic land surface',mesh);bpy.context.collection.objects.link(o);o.parent=parent;mesh.materials.append(land)
+     for poly in mesh.polygons:poly.use_smooth=True
+    line('Real continent coastline',pts,.008,green,parent)
 
 def environment(setting,parent):
  if setting=='coast':return ocean_asset(parent)
@@ -179,3 +205,48 @@ def environment(setting,parent):
  elif setting=='space':
   for j in range(28):sphere('Background star',(-4+(j*1.37)%8,3, .3+(j*1.71)%5),.018,white,parent)
  return {}
+
+
+
+def terrain_asset(parent):
+ """Connected mountain relief: multiple ridges, foothills and altitude snow."""
+ verts=[];faces=[];steps=36
+ for j in range(steps+1):
+  y=-1.15+2.3*j/steps
+  for i in range(steps+1):
+   x=-1.4+2.8*i/steps
+   envelope=max(0,1-(x/1.5)**4)*max(0,1-(y/1.3)**4)
+   h=.12+envelope*(.55+.48*math.sin(3*x+1.6*y)**2+.55*math.exp(-((x-.25)**2+(y+.15)**2)*2))
+   verts.append((x,y,h))
+ for j in range(steps):
+  for i in range(steps):
+   a=j*(steps+1)+i;faces.append((a,a+1,a+steps+2,a+steps+1))
+ mesh=bpy.data.meshes.new('Connected mountain relief');mesh.from_pydata(verts,[],faces);mesh.update()
+ o=bpy.data.objects.new('Mountain ridges and foothills',mesh);bpy.context.collection.objects.link(o);o.parent=parent
+ for material in (brown,green,white):mesh.materials.append(material)
+ for poly in mesh.polygons:
+  z=sum(verts[i][2] for i in poly.vertices)/len(poly.vertices);poly.material_index=2 if z>1.25 else 1 if z<.55 else 0
+ return o
+
+def rock_layers(parent):
+ """Continuous cross-section layers with shape-key shortening and buckling."""
+ result=[]
+ for layer in range(5):
+  verts=[];faces=[];n=64
+  for i in range(n+1):
+   x=-1.5+3*i/n
+   for y,z in ((-.3,0),(.3,0),(.3,.09),(-.3,.09)):verts.append((x,y,.18+layer*.15+z))
+  for i in range(n):
+   a=4*i
+   for j in range(4):faces.append((a+j,a+(j+1)%4,a+4+(j+1)%4,a+4+j))
+  faces.extend([(3,2,1,0),(4*n,4*n+1,4*n+2,4*n+3)])
+  mesh=bpy.data.meshes.new('Continuous rock stratum');mesh.from_pydata(verts,[],faces);mesh.update()
+  o=bpy.data.objects.new('Folding rock layer '+str(layer),mesh);bpy.context.collection.objects.link(o);o.parent=parent;mesh.materials.append(sand if layer%2 else brown)
+  o.shape_key_add(name='Uncompressed');fold=o.shape_key_add(name='Shortened folded crust')
+  for v in fold.data:
+   x=v.co.x;v.co.x=x*.68;v.co.z+=.55*math.exp(-(x/.9)**2)+.18*math.sin(x*6+layer*.12)
+  result.append(fold)
+ return {'fold_keys':result}
+
+def animate_folds(details,q,frame):
+ for fold in details.get('fold_keys',[]):fold.value=ease(q);fold.keyframe_insert(data_path='value',frame=frame)

@@ -69,7 +69,8 @@ def asset(spec,parent):
    for i in range(4):sphere('Crater',(.55*math.cos(i*2),-.8,1.2+.5*math.sin(i*2)),.2,dark,g)
  elif kind=='tree':
   cyl('Trunk',(0,0,.6),.15,1.2,dark,g);cone('Foliage',(0,0,1.4),.8,1.6,m,g)
- elif kind=='mountain':cone('Mountain',(0,0,1.2),1.3,2.4,m,g);cone('Snow',(0,0,2.15),.32,.6,white,g)
+ elif kind=='mountain':rich.terrain_asset(g)
+ elif kind=='rock_layers':details.update(rich.rock_layers(g))
  elif kind=='coin':
   cyl('Coin',(0,0,.9),.65,.2,m,g,(math.pi/2,0,0));line('Coin motif',[(-.25,-.13,.6),(0,-.13,1.2),(.25,-.13,.6)],.06,white,g)
  elif kind=='salt':
@@ -135,6 +136,7 @@ for frame in range(1,N+1):
  t=(frame-1)/FPS;k=max(i for i,a in enumerate(starts) if a<=t);q=min(1,(t-starts[k])/ds[k]);e=ease(q);s.frame_set(frame);pins={};annotations=[];stage.location.z=-100 if any(sp['kind']=='map' for sp,_,_ in sets[k]) or plan['scenes'][k].get('setting')=='space' else 0;stage.location.x=k*30;stage.keyframe_insert(data_path='location',frame=frame)
  if plan['scenes'][k].get('_environment'):rich.animate_ocean(plan['scenes'][k]['_environment'],t,frame)
  for spec,o,details in sets[k]:
+  aq=q;window=spec.get('animation_window',[0,1]);q=max(0,min(1,(aq-window[0])/(window[1]-window[0])));e=ease(q)
   p=Vector(spec['pos']);size=Vector(spec['size']);action=spec['action'];o.rotation_euler=(0,0,0)
   if action in ('move','walk','rise','fall','flow'):
    # Flow cycles discrete parcels; causal actors move once towards the explicit destination.
@@ -144,6 +146,7 @@ for frame in range(1,N+1):
   elif action=='grow':size*=.25+.75*e
   elif action=='pulse':size*=.87+.13*math.sin(q*math.tau*2)
   o.location=p;o.scale=size;o.keyframe_insert(data_path='location',frame=frame);o.keyframe_insert(data_path='scale',frame=frame);o.keyframe_insert(data_path='rotation_euler',frame=frame)
+  if 'fold_keys' in details:rich.animate_folds(details,q,frame)
   if 'human' in details:
    h=details['human'];pickup=spec.get('gesture')=='collect';poseq=max(0,min(1,(q-.4)/.6)) if pickup else q;rich.pose(h,poseq,frame,walk=action=='walk' and (not pickup or q<.45),collect=pickup,hold=spec.get('gesture')=='hold')
    if action=='walk' and 'to' in spec:
@@ -165,10 +168,11 @@ for frame in range(1,N+1):
    beam=details['beam'];beam.rotation_euler.y=.22*math.sin(q*math.tau);beam.keyframe_insert(data_path='rotation_euler',frame=frame)
   if 'piston' in details:
    piston=details['piston'];piston.location.z=1+.6*math.sin(q*math.tau*2);piston.keyframe_insert(data_path='location',frame=frame)
+  q=aq;e=ease(q)
   for j,el in enumerate(details.get('electrons',[])):
    a=q*math.tau*2+j*2;el.location=(math.cos(a),math.sin(a),0);el.keyframe_insert(data_path='location',frame=frame)
  cam.data.ortho_scale=(11.5 if any(sp['kind']=='map' for sp,_,_ in sets[k]) else 8.8 if len(sets[k])<=2 else 10.4 if len(sets[k])==3 else 12.0)-.12*ease(q);cam.data.keyframe_insert(data_path='ortho_scale',frame=frame)
- target=Vector((k*30,0,1.0));cam.location=target+(Vector((0,-20,0)) if any(sp['kind']=='map' for sp,_,_ in sets[k]) else Vector((3.6,-17,9.5)));cam.rotation_euler=(target-cam.location).to_track_quat('-Z','Y').to_euler();cam.keyframe_insert(data_path='location',frame=frame);cam.keyframe_insert(data_path='rotation_euler',frame=frame)
+ target=Vector((k*30,0,1.0));cam.location=target+(Vector((0,-20,0)) if any(sp['kind']=='map' for sp,_,_ in sets[k]) else ({'front':Vector((0,-20,3)), 'top':Vector((0,-.01,20)), 'oblique':Vector((3.6,-17,9.5))}[plan['scenes'][k].get('camera_view','oblique')]));cam.rotation_euler=(target-cam.location).to_track_quat('-Z','Y').to_euler();cam.keyframe_insert(data_path='location',frame=frame);cam.keyframe_insert(data_path='rotation_euler',frame=frame)
  bpy.context.view_layer.update()
  for spec,o,details in sets[k]:
   for label,point in details.get('map_markers',[]):
@@ -185,9 +189,10 @@ if cam.data.animation_data and cam.data.animation_data.action:
  for fc in cam.data.animation_data.action.fcurves:
   for key in fc.keyframe_points:key.interpolation='CONSTANT'
 s.frame_start=1;s.frame_end=N
-(R/'motion.json').write_text(json.dumps(track));(R/'scene_checks.json').write_text(json.dumps({'frames':N,'fps':FPS,'actual_3d':True,'quality_version':'rich_3d_v1','articulated_people':True,'source_based_maps':True,'photo_assets':0,'distinct_sets':6,'data_driven_objects':sum(len(x) for x in sets),'schematic_not_exact_reconstruction':True},indent=2))
+(R/'motion.json').write_text(json.dumps(track));(R/'scene_checks.json').write_text(json.dumps({'frames':N,'fps':FPS,'actual_3d':True,'quality_version':'rich_3d_v1','articulated_people':any(sp['kind'] in ('person','soldier') for sc in sets for sp,_,_ in sc),'source_based_maps':any(sp['kind'] in ('map','planet') for sc in sets for sp,_,_ in sc),'continuous_rock_layers':any(sp['kind']=='rock_layers' for sc in sets for sp,_,_ in sc),'terrain_relief':any(sp['kind']=='mountain' for sc in sets for sp,_,_ in sc),'photo_assets':0,'distinct_sets':6,'data_driven_objects':sum(len(x) for x in sets),'schematic_not_exact_reconstruction':True},indent=2))
 bpy.ops.wm.save_as_mainfile(filepath=str(R/'scene.blend'));s.render.image_settings.file_format='FFMPEG';s.render.ffmpeg.format='MPEG4';s.render.ffmpeg.codec='H264';s.render.ffmpeg.constant_rate_factor='HIGH';s.render.filepath=str(R/'silent_3d.mp4');
 if os.getenv('STUDIO_PREVIEW_FRAME'):
  s.frame_set(int(os.environ['STUDIO_PREVIEW_FRAME']));s.render.image_settings.file_format='JPEG';s.render.filepath=str(R/'preview.jpg');bpy.ops.render.render(write_still=True)
 else:bpy.ops.render.render(animation=True)
 print('DYNAMIC_3D_DONE',N,flush=True)
+

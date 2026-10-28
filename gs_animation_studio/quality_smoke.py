@@ -14,7 +14,7 @@ def test_plan():
  scenes=[
   ('इतिहास • पात्र','coast',[obj('gandhi','person',[-1.5,0,0],'walk',[-.5,0,0],role='gandhi',gesture='collect',interact_with='salt'),obj('salt','salt',[.5,-.8,0],'grow')]),
   ('अर्थशास्त्र • लेनदेन','institution',[obj('citizen','person',[-1.5,0,0],'walk',[-.5,0,0]),obj('coin','coin',[.1,0,.5],'move',[1.2,0,.5])]),
-  ('विज्ञान • मशीन','laboratory',[obj('gear','gear',[-1,0,0],'spin'),obj('piston','piston',[1,0,0],'rise',[1,0,.9])]),
+  ('भूविज्ञान • परतें','neutral',[obj('strata','rock_layers',[-1.1,0,0],'compress',size=[.7]*3),obj('relief','mountain',[1.2,0,0],'grow',size=[.65]*3)]),
   ('राजव्यवस्था • मतदान','institution',[obj('citizen','person',[-1.4,0,0],'walk',[-.4,0,0]),obj('ballot','ballot',[1,0,0],'pulse')]),
   ('भूगोल • नक्शा','neutral',[obj('map','map',[0,0,0],'trace',map_region='gujarat',route=[[72.5802,23.0608],[72.8014,20.8867]],markers=[{'at':[72.58,23.06],'label':'साबरमती'},{'at':[72.80,20.89],'label':'दांडी'}],size=[1.2]*3),obj('arrow','arrow',[-1.8,-.4,0],'move',[-1,-.4,0],size=[.3]*3)]),
   ('अंतरिक्ष • तटरेखा','space',[obj('earth','planet',[-1.1,0,0],'spin'),obj('moon','moon',[1.2,0,0],'orbit')])]
@@ -32,6 +32,7 @@ def render(root,blender):
  env=dict(os.environ,STUDIO_ROOT=str(root),STUDIO_PREVIEW_FRAME='12',LIBGL_ALWAYS_SOFTWARE='1')
  prefix=['xvfb-run','-a'] if shutil.which('xvfb-run') else []
  subprocess.run(prefix+[blender,'-b','-t','4','--python',str(BASE/'scene_dynamic.py')],env=env,check=True,timeout=240)
+ checks_meta=json.loads((root/'scene_checks.json').read_text());assert checks_meta.get('continuous_rock_layers') and checks_meta.get('terrain_relief') and checks_meta.get('source_based_maps')
  # Render both phases of each real 3D set, not title/zoom-only placeholders.
  frames=[k*48+d for k in range(6) for d in (12,35)]
  code="import bpy;from pathlib import Path;s=bpy.context.scene;s.render.image_settings.file_format='JPEG';root=Path("+repr(str(root))+");[(s.frame_set(f),setattr(s.render,'filepath',str(root/('frame_'+str(f)+'.jpg'))),bpy.ops.render.render(write_still=True)) for f in "+repr(frames)+"]"
@@ -48,3 +49,4 @@ if __name__=='__main__':
  p=argparse.ArgumentParser();p.add_argument('--render',action='store_true');p.add_argument('--root',default='/tmp/gs-quality-preview');args=p.parse_args()
  if args.render:render(args.root,os.getenv('BLENDER_BIN','/tmp/blender/blender'))
  else:test_plan();print('RICH_PLAN_PASSED')
+

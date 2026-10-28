@@ -33,6 +33,11 @@ if (r/'recipe.json').exists():
  recipe=json.loads((r/'recipe.json').read_text());quality_version=recipe.get('quality_version')
  if quality_version=='rich_3d_v1':
   scene_checks=json.loads((r/'scene_checks.json').read_text());assert scene_checks.get('quality_version')==quality_version
-  assert scene_checks.get('articulated_people') and scene_checks.get('source_based_maps')
+  objects=[o for sc in recipe['scenes'] for o in sc['objects']]
+  if any(o['kind'] in ('person','soldier') for o in objects):assert scene_checks.get('articulated_people')
+  if any(o['kind'] in ('map','planet') for o in objects):assert scene_checks.get('source_based_maps')
+  if any(o['kind']=='rock_layers' for o in objects):assert scene_checks.get('continuous_rock_layers')
+  if any(o['kind']=='mountain' for o in objects):assert scene_checks.get('terrain_relief')
 checks={'notes_banner':{'version':'studio-notes-v1','phone':'+91 89892 79637','safe_area':[36,64,636,151]} if quality_version=='rich_3d_v1' else None,'quality_version':quality_version,'duration_seconds':dur,'dimensions':[720,1280],'fps':video['r_frame_rate'],'decoded_without_errors':True,'black_intervals':0,'audio_mean_db':mean,'audio_peak_db':peak,'sha256':hashlib.sha256(p.read_bytes()).hexdigest(),'voice':meta.get('voice'),'published':False,'actual_rendered_motion_checks':motion_checks}
 (r/'file_checks.json').write_text(json.dumps(checks,indent=2));print(json.dumps(checks,indent=2),flush=True)
+
