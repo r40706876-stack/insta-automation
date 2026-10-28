@@ -1,0 +1,16 @@
+Source unavailable: www.nasa.gov HTTPError
+Source unavailable: mausam.imd.gov.in HTTPError
+Source unavailable: www.isro.gov.in HTTPError
+Source unavailable: www.ncbi.nlm.nih.gov ValueError
+Source unavailable: www.ncbi.nlm.nih.gov ValueError
+Source unavailable: www.frontiersin.org HTTPError
+Source unavailable: vertexaisearch.cloud.google.com ValueError
+Plan repair 1 Each scene needs 8-25 conversational Hindi words
+Plan repair 2 Meaningful movement needs a visible path
+Plan repair 3 Meaningful movement needs a visible path
+Traceback (most recent call last):
+  File "/home/runner/work/insta-automation/insta-automation/gs_animation_studio/planner.py", line 225, in <module>
+    generate(sys.argv[1],sys.argv[2],os.getenv('STUDIO_TOPIC_TEXT','').strip(),os.getenv('STUDIO_SUBJECT','auto'),os.getenv('STUDIO_REFERENCE_TEXT',''))
+  File "/home/runner/work/insta-automation/insta-automation/gs_animation_studio/planner.py", line 221, in generate
+    raise RuntimeError('New-topic plan failed validation after three attempts: '+str(errors))
+RuntimeError: New-topic plan failed validation after three attempts: ['Each scene needs 8-25 conversational Hindi words', 'Meaningful movement needs a visible path', 'Meaningful movement needs a visible path']

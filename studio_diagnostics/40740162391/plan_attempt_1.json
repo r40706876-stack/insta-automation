@@ -1,0 +1,524 @@
+{
+  "title": "सड़क पर पेंट फेड क्यों होता है?",
+  "subject": "स्टैटिक जीके",
+  "topic_key": "road_paint_fade_causes",
+  "share_reason": "सड़क पेंट फेड के कारण याद रखो, प्रश्न आसानी से हल हो",
+  "recall": "सड़क पेंट फेड सूर्य, बारिश, ऑक्सीजन से होता है।",
+  "scenes": [
+    {
+      "heading": "सड़क पेंट फेड क्यों?",
+      "explanation": "रोजमर्रा का सवाल",
+      "speech": "सड़क पर बने निशान और पेंट समय के साथ फेड क्यों हो जाते हैं? क्या आपने कभी इस पर गौर किया है?",
+      "teaches": "पेंट फेडिंग की जिज्ञासा जगाना",
+      "setting": "neutral",
+      "visual_action": "सड़क पर पेंट पर सूरज और बारिश का असर दिखना।",
+      "text_color": "#FFFFFF",
+      "explanation_color": "#FFFF00",
+      "camera_view": "front",
+      "objects": [
+        {
+          "kind": "box",
+          "action": "none",
+          "label": "सड़क पेंट",
+          "id": "paint_box_1",
+          "color": "#FFD700",
+          "pos": [
+            0,
+            0,
+            0
+          ],
+          "size": [
+            1.5,
+            0.25,
+            1.5
+          ]
+        },
+        {
+          "kind": "sun",
+          "action": "rise",
+          "label": "सूरज",
+          "id": "sun_1",
+          "color": "#FFD700",
+          "pos": [
+            -2,
+            1.5,
+            0
+          ],
+          "size": [
+            0.8,
+            0.8,
+            0.8
+          ],
+          "to": [
+            -2,
+            1.5,
+            0.5
+          ],
+          "animation_window": [
+            0,
+            0.5
+          ]
+        },
+        {
+          "kind": "water",
+          "action": "flow",
+          "label": "बारिश",
+          "id": "water_1",
+          "color": "#18A9DD",
+          "pos": [
+            2,
+            1.5,
+            0
+          ],
+          "size": [
+            0.6,
+            0.6,
+            0.6
+          ],
+          "to": [
+            2,
+            0,
+            0
+          ],
+          "animation_window": [
+            0.5,
+            1
+          ]
+        }
+      ],
+      "quiz_card": {
+        "question": "सड़क पर पेंट फेड क्यों होता है?",
+        "answer": "सूरज की UV, बारिश और ऑक्सीजन",
+        "reveal_after": 2.5,
+        "answer_color": "#73efb2"
+      }
+    },
+    {
+      "heading": "सूरज की UV किरणें",
+      "explanation": "रंग तोड़ती हैं",
+      "speech": "सूरज की अल्ट्रावायलेट (UV) किरणें पेंट के रंगीन पिगमेंट को रासायनिक रूप से तोड़ देती हैं, जिससे उसका रंग हल्का हो जाता है।",
+      "teaches": "UV प्रकाश से पिगमेंट का टूटना",
+      "setting": "neutral",
+      "visual_action": "सूरज की UV किरणें पेंट पर पड़कर उसे फेड करती हैं।",
+      "text_color": "#FFFFFF",
+      "explanation_color": "#FFFF00",
+      "camera_view": "oblique",
+      "objects": [
+        {
+          "kind": "sun",
+          "action": "pulse",
+          "label": "सूरज",
+          "id": "sun_2",
+          "color": "#FFD700",
+          "pos": [
+            -2,
+            1.5,
+            0
+          ],
+          "size": [
+            0.8,
+            0.8,
+            0.8
+          ]
+        },
+        {
+          "kind": "arrow",
+          "action": "move",
+          "label": "UV किरणें",
+          "id": "arrow_1",
+          "color": "#9933FF",
+          "pos": [
+            -1.5,
+            1,
+            0
+          ],
+          "size": [
+            0.5,
+            0.25,
+            0.25
+          ],
+          "to": [
+            0,
+            0.1,
+            0
+          ]
+        },
+        {
+          "kind": "box",
+          "action": "fall",
+          "label": "फेडिंग पेंट",
+          "id": "paint_box_2",
+          "color": "#FFD700",
+          "pos": [
+            0,
+            0,
+            0
+          ],
+          "size": [
+            1.5,
+            0.25,
+            1.5
+          ],
+          "to": [
+            0,
+            -0.1,
+            0
+          ],
+          "animation_window": [
+            0.5,
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "बारिश का पानी",
+      "explanation": "रसायन घुलते हैं",
+      "speech": "बारिश का पानी पेंट के कुछ रंगीन रसायनों को घोलकर बहा ले जाता है, जिससे पेंट का रंग धीरे-धीरे फीका पड़ जाता है।",
+      "teaches": "पानी से पिगमेंट का घुलना",
+      "setting": "neutral",
+      "visual_action": "बादल से बारिश का पानी पेंट पर बहता है और रंग को बहा ले जाता है।",
+      "text_color": "#FFFFFF",
+      "explanation_color": "#FFFF00",
+      "camera_view": "top",
+      "objects": [
+        {
+          "kind": "cloud",
+          "action": "move",
+          "label": "बादल",
+          "id": "cloud_1",
+          "color": "#CCCCCC",
+          "pos": [
+            -2,
+            1.6,
+            0
+          ],
+          "size": [
+            1,
+            0.5,
+            1
+          ],
+          "to": [
+            0,
+            1.6,
+            0
+          ]
+        },
+        {
+          "kind": "water",
+          "action": "flow",
+          "label": "बारिश",
+          "id": "water_2",
+          "color": "#18A9DD",
+          "pos": [
+            0,
+            1.2,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            0,
+            0.0,
+            0
+          ]
+        },
+        {
+          "kind": "box",
+          "action": "fall",
+          "label": "फेडिंग पेंट",
+          "id": "paint_box_3",
+          "color": "#FFD700",
+          "pos": [
+            0,
+            0.0,
+            0
+          ],
+          "size": [
+            1.5,
+            0.25,
+            1.5
+          ],
+          "to": [
+            0,
+            -0.08,
+            0
+          ],
+          "animation_window": [
+            0.5,
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "हवा में ऑक्सीजन",
+      "explanation": "रासायनिक प्रतिक्रिया",
+      "speech": "हवा में मौजूद ऑक्सीजन पेंट के घटकों के साथ रासायनिक प्रतिक्रिया करती है, जिसे ऑक्सीकरण कहते हैं, और रंग बदल जाता है।",
+      "teaches": "ऑक्सीजन से ऑक्सीकरण और रंग परिवर्तन",
+      "setting": "laboratory",
+      "visual_action": "ऑक्सीजन पेंट के साथ प्रतिक्रिया करके उसे फेड करती है।",
+      "text_color": "#FFFFFF",
+      "explanation_color": "#FFFF00",
+      "camera_view": "front",
+      "objects": [
+        {
+          "kind": "atom",
+          "action": "orbit",
+          "label": "ऑक्सीजन",
+          "id": "oxygen_atom",
+          "color": "#FF0000",
+          "pos": [
+            -1.5,
+            0.5,
+            0
+          ],
+          "size": [
+            0.5,
+            0.5,
+            0.5
+          ]
+        },
+        {
+          "kind": "box",
+          "action": "pulse",
+          "label": "पेंट",
+          "id": "paint_box_4",
+          "color": "#FFD700",
+          "pos": [
+            0,
+            0,
+            0
+          ],
+          "size": [
+            1.5,
+            0.25,
+            1.5
+          ]
+        },
+        {
+          "kind": "arrow",
+          "action": "move",
+          "label": "प्रतिक्रिया",
+          "id": "reaction_arrow",
+          "color": "#00FF00",
+          "pos": [
+            -0.5,
+            0.5,
+            0
+          ],
+          "size": [
+            0.4,
+            0.25,
+            0.25
+          ],
+          "to": [
+            0.5,
+            0.5,
+            0
+          ],
+          "animation_window": [
+            0.3,
+            0.8
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "तीनों का संयुक्त असर",
+      "explanation": "धीरे-धीरे फेडिंग",
+      "speech": "सूर्य की UV किरणें, बारिश का पानी और हवा में ऑक्सीजन मिलकर लगातार पेंट को धीरे-धीरे फेड करते रहते हैं, जिससे वह कमजोर हो जाता है।",
+      "teaches": "सभी कारणों का संयुक्त प्रभाव",
+      "setting": "neutral",
+      "visual_action": "सूरज, बारिश और हवा तीनों मिलकर पेंट को लगातार फेड करते हैं।",
+      "text_color": "#FFFFFF",
+      "explanation_color": "#FFFF00",
+      "camera_view": "oblique",
+      "objects": [
+        {
+          "kind": "sun",
+          "action": "pulse",
+          "label": "सूरज",
+          "id": "sun_3",
+          "color": "#FFD700",
+          "pos": [
+            -2,
+            1.5,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        {
+          "kind": "water",
+          "action": "flow",
+          "label": "बारिश",
+          "id": "water_3",
+          "color": "#18A9DD",
+          "pos": [
+            0,
+            1.5,
+            0
+          ],
+          "size": [
+            0.6,
+            0.6,
+            0.6
+          ],
+          "to": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "cloud",
+          "action": "move",
+          "label": "हवा",
+          "id": "cloud_2",
+          "color": "#CCCCCC",
+          "pos": [
+            2,
+            1.5,
+            0
+          ],
+          "size": [
+            0.8,
+            0.4,
+            0.8
+          ],
+          "to": [
+            1,
+            1.5,
+            0
+          ]
+        },
+        {
+          "kind": "box",
+          "action": "fall",
+          "label": "",
+          "id": "paint_box_5",
+          "color": "#FFD700",
+          "pos": [
+            0,
+            0,
+            0
+          ],
+          "size": [
+            1.5,
+            0.25,
+            1.5
+          ],
+          "to": [
+            0,
+            -0.2,
+            0
+          ],
+          "animation_window": [
+            0.2,
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "सारांश और सीख",
+      "explanation": "मुख्य कारण",
+      "speech": "तो, सड़क पर पेंट फेड होने के मुख्य कारण हैं: सूरज की UV किरणें, बारिश का पानी और हवा में ऑक्सीजन।",
+      "teaches": "पेंट फेडिंग के तीन मुख्य कारण दोहराना",
+      "setting": "neutral",
+      "visual_action": "फेड हुए पेंट के साथ तीनों कारणों को एक साथ दिखाना।",
+      "text_color": "#FFFFFF",
+      "explanation_color": "#FFFF00",
+      "camera_view": "front",
+      "objects": [
+        {
+          "kind": "sun",
+          "action": "none",
+          "label": "सूरज",
+          "id": "sun_4",
+          "color": "#FFD700",
+          "pos": [
+            -1.5,
+            1.5,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        {
+          "kind": "water",
+          "action": "none",
+          "label": "बारिश",
+          "id": "water_4",
+          "color": "#18A9DD",
+          "pos": [
+            0,
+            1.5,
+            0
+          ],
+          "size": [
+            0.6,
+            0.6,
+            0.6
+          ]
+        },
+        {
+          "kind": "cloud",
+          "action": "none",
+          "label": "ऑक्सीजन",
+          "id": "cloud_3",
+          "color": "#CCCCCC",
+          "pos": [
+            1.5,
+            1.5,
+            0
+          ],
+          "size": [
+            0.8,
+            0.4,
+            0.8
+          ]
+        },
+        {
+          "kind": "box",
+          "action": "none",
+          "label": "",
+          "id": "paint_box_6",
+          "color": "#8B8000",
+          "pos": [
+            0,
+            0,
+            0
+          ],
+          "size": [
+            1.5,
+            0.25,
+            1.5
+          ]
+        }
+      ],
+      "quiz_card": {
+        "question": "पेंट फेड के मुख्य कारण क्या हैं?",
+        "answer": "सूरज, बारिश, ऑक्सीजन",
+        "reveal_after": 2.5,
+        "answer_color": "#73efb2"
+      }
+    }
+  ],
+  "share_card": {
+    "kind": "exam_confusion",
+    "recipient": "GS परीक्षा की तैयारी करने वाले मित्र",
+    "benefit": "सड़क पेंट फेड के मुख्य कारण समझो, परीक्षा में मदद मिलेगी।",
+    "cta": "यह रील देखो और सीखो!"
+  }
+}
