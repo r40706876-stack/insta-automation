@@ -131,7 +131,7 @@ def mapxy(lonlat):return ((lonlat[0]-71.5)*.93,0,(lonlat[1]-22)*.93+1.6)
 for k in range(6):
  g=empty('Dandi set '+str(k));g.location.x=k*30;sets.append(g)
  if k in (0,3,4,5):seas[k]=coast(g)
- else:box('Stage floor',(0,0,-.18),(12,8,.2),mat('Blue floor '+str(k),(.026,.075,.1)),g)
+ elif k!=2:box('Stage floor',(0,0,-.18),(12,8,.2),mat('Blue floor '+str(k),(.026,.075,.1)),g)
  if k==0:
   actors[k]=[human(g,(0,-.3,0),True,scale=1.25)]
  elif k==1:
@@ -180,7 +180,7 @@ for frame in range(1,N+1):
  if k==3:
   salt_ground.scale=(1,1,1) if q<.55 else (0,0,0);key(salt_ground,'scale',frame)
  # The dedicated map is front-on; coast shots have sea visible behind human figures.
- target=offset+Vector((0,0,1.3 if k!=2 else 1.65));cam.data.ortho_scale=(11.8 if k==2 else 8.2 if k==4 else 7.4)-.15*ease(q)
+ target=offset+Vector((.22 if k==2 else 0,0,1.3 if k!=2 else 1.65));cam.data.ortho_scale=(13.0 if k==2 else 8.2 if k==4 else 7.4)-.15*ease(q)
  cam.location=target+(Vector((0,-20,0)) if k==2 else Vector((2.3,-18,9)))
  cam.rotation_euler=(target-cam.location).to_track_quat('-Z','Y').to_euler();key(cam,'location',frame);key(cam,'rotation_euler',frame);cam.data.keyframe_insert(data_path='ortho_scale',frame=frame)
  bpy.context.view_layer.update();annotations=[]
