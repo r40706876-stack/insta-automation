@@ -1,0 +1,1095 @@
+{
+  "title": "3 सबसे ज्यादा, फिर भी बहुमत नहीं?",
+  "topic_key": "largest_party_vs_majority_seven_members_demo",
+  "subject": "राजव्यवस्था",
+  "requested_topic": "सबसे बड़ा दल और बहुमत में आसान अंतर",
+  "dynamic": true,
+  "quality_version": "rich_3d_v1",
+  "topic_policy": "easy_single_concept_v1",
+  "share_reason": "पढ़ाई वाले दोस्त की सबसे बड़ा दल और बहुमत के बीच की आम उलझन दूर करने के लिए।",
+  "recall": "सबसे ज्यादा और आधे से ज्यादा अलग हैं।",
+  "share_card": {
+    "kind": "exam_confusion",
+    "recipient": "प्रतियोगी परीक्षा पढ़ने वाला अपना दोस्त",
+    "benefit": "सबसे बड़ा दल और बहुमत के बीच का आसान अंतर समझना",
+    "cta": "सबसे बड़ा दल और बहुमत में उलझने वाले दोस्त को भेजो"
+  },
+  "scenes": [
+    {
+      "heading": "3 सबसे ज्यादा…",
+      "explanation": "फिर भी बहुमत क्यों नहीं?",
+      "speech": "तीन सबसे ज्यादा हैं। फिर भी बहुमत क्यों नहीं? देखो!",
+      "setting": "neutral",
+      "visual_action": "Seven members remain visible; two smaller colored groups approach and together reach four while the largest single group stays at three.",
+      "teaches": "Distinguish largest single group from more than half in an explicitly fictional seven-member example.",
+      "objects": [
+        {
+          "id": "member_0",
+          "kind": "person",
+          "role": "ordinary",
+          "pos": [
+            -2.5,
+            0.85,
+            0
+          ],
+          "to": [
+            -2.5,
+            0,
+            0
+          ],
+          "size": [
+            0.85,
+            0.85,
+            0.85
+          ],
+          "color": "#41b7ec",
+          "action": "walk",
+          "label": ""
+        },
+        {
+          "id": "member_1",
+          "kind": "person",
+          "role": "ordinary",
+          "pos": [
+            -1.8,
+            0.85,
+            0
+          ],
+          "to": [
+            -1.8,
+            0,
+            0
+          ],
+          "size": [
+            0.85,
+            0.85,
+            0.85
+          ],
+          "color": "#41b7ec",
+          "action": "walk",
+          "label": "नीले: 3"
+        },
+        {
+          "id": "member_2",
+          "kind": "person",
+          "role": "ordinary",
+          "pos": [
+            -1.1,
+            0.85,
+            0
+          ],
+          "to": [
+            -1.1,
+            0,
+            0
+          ],
+          "size": [
+            0.85,
+            0.85,
+            0.85
+          ],
+          "color": "#41b7ec",
+          "action": "walk",
+          "label": ""
+        },
+        {
+          "id": "member_3",
+          "kind": "person",
+          "role": "ordinary",
+          "pos": [
+            0.0,
+            0.85,
+            0
+          ],
+          "to": [
+            0.0,
+            0,
+            0
+          ],
+          "size": [
+            0.85,
+            0.85,
+            0.85
+          ],
+          "color": "#f4c74a",
+          "action": "walk",
+          "label": "पीले: 2"
+        },
+        {
+          "id": "member_4",
+          "kind": "person",
+          "role": "ordinary",
+          "pos": [
+            0.7,
+            0.85,
+            0
+          ],
+          "to": [
+            0.7,
+            0,
+            0
+          ],
+          "size": [
+            0.85,
+            0.85,
+            0.85
+          ],
+          "color": "#f4c74a",
+          "action": "walk",
+          "label": ""
+        },
+        {
+          "id": "member_5",
+          "kind": "person",
+          "role": "ordinary",
+          "pos": [
+            1.8,
+            0.85,
+            0
+          ],
+          "to": [
+            1.8,
+            0,
+            0
+          ],
+          "size": [
+            0.85,
+            0.85,
+            0.85
+          ],
+          "color": "#b381e3",
+          "action": "walk",
+          "label": "बैंगनी: 2"
+        },
+        {
+          "id": "member_6",
+          "kind": "person",
+          "role": "ordinary",
+          "pos": [
+            2.5,
+            0.85,
+            0
+          ],
+          "to": [
+            2.5,
+            0,
+            0
+          ],
+          "size": [
+            0.85,
+            0.85,
+            0.85
+          ],
+          "color": "#b381e3",
+          "action": "walk",
+          "label": ""
+        }
+      ]
+    },
+    {
+      "heading": "मान लो 7 सदस्य",
+      "explanation": "3 नीले • 2 पीले • 2 बैंगनी",
+      "speech": "मान लो सात सदस्य हैं: तीन नीले, दो पीले, दो बैंगनी।",
+      "setting": "neutral",
+      "visual_action": "Seven members remain visible; two smaller colored groups approach and together reach four while the largest single group stays at three.",
+      "teaches": "Distinguish largest single group from more than half in an explicitly fictional seven-member example.",
+      "objects": [
+        {
+          "id": "member_0",
+          "kind": "person",
+          "role": "ordinary",
+          "pos": [
+            -2.5,
+            0.85,
+            0
+          ],
+          "to": [
+            -2.5,
+            0,
+            0
+          ],
+          "size": [
+            0.85,
+            0.85,
+            0.85
+          ],
+          "color": "#41b7ec",
+          "action": "walk",
+          "label": ""
+        },
+        {
+          "id": "member_1",
+          "kind": "person",
+          "role": "ordinary",
+          "pos": [
+            -1.8,
+            0.85,
+            0
+          ],
+          "to": [
+            -1.8,
+            0,
+            0
+          ],
+          "size": [
+            0.85,
+            0.85,
+            0.85
+          ],
+          "color": "#41b7ec",
+          "action": "walk",
+          "label": "नीले: 3"
+        },
+        {
+          "id": "member_2",
+          "kind": "person",
+          "role": "ordinary",
+          "pos": [
+            -1.1,
+            0.85,
+            0
+          ],
+          "to": [
+            -1.1,
+            0,
+            0
+          ],
+          "size": [
+            0.85,
+            0.85,
+            0.85
+          ],
+          "color": "#41b7ec",
+          "action": "walk",
+          "label": ""
+        },
+        {
+          "id": "member_3",
+          "kind": "person",
+          "role": "ordinary",
+          "pos": [
+            0.0,
+            0.85,
+            0
+          ],
+          "to": [
+            0.0,
+            0,
+            0
+          ],
+          "size": [
+            0.85,
+            0.85,
+            0.85
+          ],
+          "color": "#f4c74a",
+          "action": "walk",
+          "label": "पीले: 2"
+        },
+        {
+          "id": "member_4",
+          "kind": "person",
+          "role": "ordinary",
+          "pos": [
+            0.7,
+            0.85,
+            0
+          ],
+          "to": [
+            0.7,
+            0,
+            0
+          ],
+          "size": [
+            0.85,
+            0.85,
+            0.85
+          ],
+          "color": "#f4c74a",
+          "action": "walk",
+          "label": ""
+        },
+        {
+          "id": "member_5",
+          "kind": "person",
+          "role": "ordinary",
+          "pos": [
+            1.8,
+            0.85,
+            0
+          ],
+          "to": [
+            1.8,
+            0,
+            0
+          ],
+          "size": [
+            0.85,
+            0.85,
+            0.85
+          ],
+          "color": "#b381e3",
+          "action": "walk",
+          "label": "बैंगनी: 2"
+        },
+        {
+          "id": "member_6",
+          "kind": "person",
+          "role": "ordinary",
+          "pos": [
+            2.5,
+            0.85,
+            0
+          ],
+          "to": [
+            2.5,
+            0,
+            0
+          ],
+          "size": [
+            0.85,
+            0.85,
+            0.85
+          ],
+          "color": "#b381e3",
+          "action": "walk",
+          "label": ""
+        }
+      ]
+    },
+    {
+      "heading": "बहुमत: आधे से ज्यादा",
+      "explanation": "7 में कम से कम 4",
+      "speech": "बहुमत यानी आधे से ज्यादा। सात में चार सदस्य चाहिए।",
+      "setting": "neutral",
+      "visual_action": "Seven members remain visible; two smaller colored groups approach and together reach four while the largest single group stays at three.",
+      "teaches": "Distinguish largest single group from more than half in an explicitly fictional seven-member example.",
+      "objects": [
+        {
+          "id": "member_0",
+          "kind": "person",
+          "role": "ordinary",
+          "pos": [
+            -2.5,
+            0.85,
+            0
+          ],
+          "to": [
+            -2.5,
+            0,
+            0
+          ],
+          "size": [
+            0.85,
+            0.85,
+            0.85
+          ],
+          "color": "#41b7ec",
+          "action": "walk",
+          "label": ""
+        },
+        {
+          "id": "member_1",
+          "kind": "person",
+          "role": "ordinary",
+          "pos": [
+            -1.8,
+            0.85,
+            0
+          ],
+          "to": [
+            -1.8,
+            0,
+            0
+          ],
+          "size": [
+            0.85,
+            0.85,
+            0.85
+          ],
+          "color": "#41b7ec",
+          "action": "walk",
+          "label": "नीले: 3"
+        },
+        {
+          "id": "member_2",
+          "kind": "person",
+          "role": "ordinary",
+          "pos": [
+            -1.1,
+            0.85,
+            0
+          ],
+          "to": [
+            -1.1,
+            0,
+            0
+          ],
+          "size": [
+            0.85,
+            0.85,
+            0.85
+          ],
+          "color": "#41b7ec",
+          "action": "walk",
+          "label": ""
+        },
+        {
+          "id": "member_3",
+          "kind": "person",
+          "role": "ordinary",
+          "pos": [
+            0.0,
+            1.75,
+            0
+          ],
+          "to": [
+            0.0,
+            0.9,
+            0
+          ],
+          "size": [
+            0.85,
+            0.85,
+            0.85
+          ],
+          "color": "#f4c74a",
+          "action": "walk",
+          "label": "पीले: 2"
+        },
+        {
+          "id": "member_4",
+          "kind": "person",
+          "role": "ordinary",
+          "pos": [
+            0.7,
+            1.75,
+            0
+          ],
+          "to": [
+            0.7,
+            0.9,
+            0
+          ],
+          "size": [
+            0.85,
+            0.85,
+            0.85
+          ],
+          "color": "#f4c74a",
+          "action": "walk",
+          "label": ""
+        },
+        {
+          "id": "member_5",
+          "kind": "person",
+          "role": "ordinary",
+          "pos": [
+            1.8,
+            1.75,
+            0
+          ],
+          "to": [
+            1.8,
+            0.9,
+            0
+          ],
+          "size": [
+            0.85,
+            0.85,
+            0.85
+          ],
+          "color": "#b381e3",
+          "action": "walk",
+          "label": "बैंगनी: 2"
+        },
+        {
+          "id": "member_6",
+          "kind": "person",
+          "role": "ordinary",
+          "pos": [
+            2.5,
+            1.75,
+            0
+          ],
+          "to": [
+            2.5,
+            0.9,
+            0
+          ],
+          "size": [
+            0.85,
+            0.85,
+            0.85
+          ],
+          "color": "#b381e3",
+          "action": "walk",
+          "label": ""
+        }
+      ]
+    },
+    {
+      "heading": "2 + 2 = 4",
+      "explanation": "दो दल साथ आए",
+      "speech": "दो पीले और दो बैंगनी साथ आए। अब चार हैं!",
+      "setting": "neutral",
+      "visual_action": "Seven members remain visible; two smaller colored groups approach and together reach four while the largest single group stays at three.",
+      "teaches": "Distinguish largest single group from more than half in an explicitly fictional seven-member example.",
+      "objects": [
+        {
+          "id": "member_0",
+          "kind": "person",
+          "role": "ordinary",
+          "pos": [
+            -2.5,
+            0.85,
+            0
+          ],
+          "to": [
+            -2.5,
+            0,
+            0
+          ],
+          "size": [
+            0.85,
+            0.85,
+            0.85
+          ],
+          "color": "#41b7ec",
+          "action": "walk",
+          "label": ""
+        },
+        {
+          "id": "member_1",
+          "kind": "person",
+          "role": "ordinary",
+          "pos": [
+            -1.8,
+            0.85,
+            0
+          ],
+          "to": [
+            -1.8,
+            0,
+            0
+          ],
+          "size": [
+            0.85,
+            0.85,
+            0.85
+          ],
+          "color": "#41b7ec",
+          "action": "walk",
+          "label": "अलग: 3"
+        },
+        {
+          "id": "member_2",
+          "kind": "person",
+          "role": "ordinary",
+          "pos": [
+            -1.1,
+            0.85,
+            0
+          ],
+          "to": [
+            -1.1,
+            0,
+            0
+          ],
+          "size": [
+            0.85,
+            0.85,
+            0.85
+          ],
+          "color": "#41b7ec",
+          "action": "walk",
+          "label": ""
+        },
+        {
+          "id": "member_3",
+          "kind": "person",
+          "role": "ordinary",
+          "pos": [
+            0.0,
+            -0.85,
+            0
+          ],
+          "to": [
+            0.0,
+            0,
+            0
+          ],
+          "size": [
+            0.85,
+            0.85,
+            0.85
+          ],
+          "color": "#f4c74a",
+          "action": "walk",
+          "label": ""
+        },
+        {
+          "id": "member_4",
+          "kind": "person",
+          "role": "ordinary",
+          "pos": [
+            0.7,
+            -0.85,
+            0
+          ],
+          "to": [
+            0.7,
+            0,
+            0
+          ],
+          "size": [
+            0.85,
+            0.85,
+            0.85
+          ],
+          "color": "#f4c74a",
+          "action": "walk",
+          "label": "साथ: 4"
+        },
+        {
+          "id": "member_5",
+          "kind": "person",
+          "role": "ordinary",
+          "pos": [
+            2.5,
+            0.8,
+            0
+          ],
+          "to": [
+            1.5,
+            0,
+            0
+          ],
+          "size": [
+            0.85,
+            0.85,
+            0.85
+          ],
+          "color": "#b381e3",
+          "action": "walk",
+          "label": ""
+        },
+        {
+          "id": "member_6",
+          "kind": "person",
+          "role": "ordinary",
+          "pos": [
+            3.2,
+            0.8,
+            0
+          ],
+          "to": [
+            2.2,
+            0,
+            0
+          ],
+          "size": [
+            0.85,
+            0.85,
+            0.85
+          ],
+          "color": "#b381e3",
+          "action": "walk",
+          "label": ""
+        }
+      ]
+    },
+    {
+      "heading": "सबसे बड़ा ≠ बहुमत",
+      "explanation": "3 अलग • 4 साथ",
+      "speech": "नीला दल सबसे बड़ा है। दोनों दूसरे दल मिलकर बहुमत हैं।",
+      "setting": "neutral",
+      "visual_action": "Seven members remain visible; two smaller colored groups approach and together reach four while the largest single group stays at three.",
+      "teaches": "Distinguish largest single group from more than half in an explicitly fictional seven-member example.",
+      "objects": [
+        {
+          "id": "member_0",
+          "kind": "person",
+          "role": "ordinary",
+          "pos": [
+            -2.5,
+            0.85,
+            0
+          ],
+          "to": [
+            -2.5,
+            0,
+            0
+          ],
+          "size": [
+            0.85,
+            0.85,
+            0.85
+          ],
+          "color": "#41b7ec",
+          "action": "walk",
+          "label": ""
+        },
+        {
+          "id": "member_1",
+          "kind": "person",
+          "role": "ordinary",
+          "pos": [
+            -1.8,
+            0.85,
+            0
+          ],
+          "to": [
+            -1.8,
+            0,
+            0
+          ],
+          "size": [
+            0.85,
+            0.85,
+            0.85
+          ],
+          "color": "#41b7ec",
+          "action": "walk",
+          "label": "अलग: 3"
+        },
+        {
+          "id": "member_2",
+          "kind": "person",
+          "role": "ordinary",
+          "pos": [
+            -1.1,
+            0.85,
+            0
+          ],
+          "to": [
+            -1.1,
+            0,
+            0
+          ],
+          "size": [
+            0.85,
+            0.85,
+            0.85
+          ],
+          "color": "#41b7ec",
+          "action": "walk",
+          "label": ""
+        },
+        {
+          "id": "member_3",
+          "kind": "person",
+          "role": "ordinary",
+          "pos": [
+            0.0,
+            -0.85,
+            0
+          ],
+          "to": [
+            0.0,
+            0,
+            0
+          ],
+          "size": [
+            0.85,
+            0.85,
+            0.85
+          ],
+          "color": "#f4c74a",
+          "action": "walk",
+          "label": ""
+        },
+        {
+          "id": "member_4",
+          "kind": "person",
+          "role": "ordinary",
+          "pos": [
+            0.7,
+            -0.85,
+            0
+          ],
+          "to": [
+            0.7,
+            0,
+            0
+          ],
+          "size": [
+            0.85,
+            0.85,
+            0.85
+          ],
+          "color": "#f4c74a",
+          "action": "walk",
+          "label": "साथ: 4"
+        },
+        {
+          "id": "member_5",
+          "kind": "person",
+          "role": "ordinary",
+          "pos": [
+            2.5,
+            0.8,
+            0
+          ],
+          "to": [
+            1.5,
+            0,
+            0
+          ],
+          "size": [
+            0.85,
+            0.85,
+            0.85
+          ],
+          "color": "#b381e3",
+          "action": "walk",
+          "label": ""
+        },
+        {
+          "id": "member_6",
+          "kind": "person",
+          "role": "ordinary",
+          "pos": [
+            3.2,
+            0.8,
+            0
+          ],
+          "to": [
+            2.2,
+            0,
+            0
+          ],
+          "size": [
+            0.85,
+            0.85,
+            0.85
+          ],
+          "color": "#b381e3",
+          "action": "walk",
+          "label": ""
+        }
+      ]
+    },
+    {
+      "heading": "बस यह फर्क याद रखो",
+      "explanation": "सबसे ज्यादा ≠ आधे से ज्यादा",
+      "speech": "याद रखो: सबसे ज्यादा और आधे से ज्यादा अलग हैं।",
+      "setting": "neutral",
+      "visual_action": "Seven members remain visible; two smaller colored groups approach and together reach four while the largest single group stays at three.",
+      "teaches": "Distinguish largest single group from more than half in an explicitly fictional seven-member example.",
+      "objects": [
+        {
+          "id": "member_0",
+          "kind": "person",
+          "role": "ordinary",
+          "pos": [
+            -2.5,
+            0.85,
+            0
+          ],
+          "to": [
+            -2.5,
+            0,
+            0
+          ],
+          "size": [
+            0.85,
+            0.85,
+            0.85
+          ],
+          "color": "#41b7ec",
+          "action": "walk",
+          "label": ""
+        },
+        {
+          "id": "member_1",
+          "kind": "person",
+          "role": "ordinary",
+          "pos": [
+            -1.8,
+            0.85,
+            0
+          ],
+          "to": [
+            -1.8,
+            0,
+            0
+          ],
+          "size": [
+            0.85,
+            0.85,
+            0.85
+          ],
+          "color": "#41b7ec",
+          "action": "walk",
+          "label": "अलग: 3"
+        },
+        {
+          "id": "member_2",
+          "kind": "person",
+          "role": "ordinary",
+          "pos": [
+            -1.1,
+            0.85,
+            0
+          ],
+          "to": [
+            -1.1,
+            0,
+            0
+          ],
+          "size": [
+            0.85,
+            0.85,
+            0.85
+          ],
+          "color": "#41b7ec",
+          "action": "walk",
+          "label": ""
+        },
+        {
+          "id": "member_3",
+          "kind": "person",
+          "role": "ordinary",
+          "pos": [
+            0.0,
+            -0.85,
+            0
+          ],
+          "to": [
+            0.0,
+            0,
+            0
+          ],
+          "size": [
+            0.85,
+            0.85,
+            0.85
+          ],
+          "color": "#f4c74a",
+          "action": "walk",
+          "label": ""
+        },
+        {
+          "id": "member_4",
+          "kind": "person",
+          "role": "ordinary",
+          "pos": [
+            0.7,
+            -0.85,
+            0
+          ],
+          "to": [
+            0.7,
+            0,
+            0
+          ],
+          "size": [
+            0.85,
+            0.85,
+            0.85
+          ],
+          "color": "#f4c74a",
+          "action": "walk",
+          "label": "साथ: 4"
+        },
+        {
+          "id": "member_5",
+          "kind": "person",
+          "role": "ordinary",
+          "pos": [
+            2.5,
+            0.8,
+            0
+          ],
+          "to": [
+            1.5,
+            0,
+            0
+          ],
+          "size": [
+            0.85,
+            0.85,
+            0.85
+          ],
+          "color": "#b381e3",
+          "action": "walk",
+          "label": ""
+        },
+        {
+          "id": "member_6",
+          "kind": "person",
+          "role": "ordinary",
+          "pos": [
+            3.2,
+            0.8,
+            0
+          ],
+          "to": [
+            2.2,
+            0,
+            0
+          ],
+          "size": [
+            0.85,
+            0.85,
+            0.85
+          ],
+          "color": "#b381e3",
+          "action": "walk",
+          "label": ""
+        }
+      ]
+    }
+  ],
+  "reference_text": "NCERT explains majority as more than half the members, and a coalition can command a majority. This reel uses a purely hypothetical example with 7 members, all 7 participating: blue 3, yellow 2, purple 2. The largest individual group has 3, but 3 is not more than half of 7. Yellow 2 plus purple 2 gives 4; 4 is more than half of 7. These are invented teaching numbers explicitly introduced as maan lo, not actual Indian party seats, actual election results, Lok Sabha strength, or a claim about every parliamentary voting threshold. The reel teaches only largest-group versus more-than-half; it does not claim an automatic government appointment rule. Hindi hypothetical numbers: सात, तीन, दो, चार.",
+  "sources": [
+    {
+      "url": "https://www.ncert.nic.in/textbook/pdf/iess404.pdf",
+      "publisher": "NCERT, Working of Institutions; majority party or coalition"
+    },
+    {
+      "url": "https://www.parliament.uk/about/how/elections-and-voting/general/hung-parliament/",
+      "publisher": "UK Parliament; no single party having a majority; general explanatory context"
+    }
+  ],
+  "visual_notes": [
+    "Seven colored figures are fictional members, not real politicians or actual election data",
+    "One figure equals one member throughout",
+    "No claim about automatic appointment of a government or special majority procedures"
+  ],
+  "speech": [
+    "तीन सबसे ज्यादा हैं। फिर भी बहुमत क्यों नहीं? देखो!",
+    "मान लो सात सदस्य हैं: तीन नीले, दो पीले, दो बैंगनी।",
+    "बहुमत यानी आधे से ज्यादा। सात में चार सदस्य चाहिए।",
+    "दो पीले और दो बैंगनी साथ आए। अब चार हैं!",
+    "नीला दल सबसे बड़ा है। दोनों दूसरे दल मिलकर बहुमत हैं।",
+    "याद रखो: सबसे ज्यादा और आधे से ज्यादा अलग हैं।"
+  ],
+  "titles": [
+    [
+      "3 सबसे ज्यादा…",
+      "फिर भी बहुमत क्यों नहीं?"
+    ],
+    [
+      "मान लो 7 सदस्य",
+      "3 नीले • 2 पीले • 2 बैंगनी"
+    ],
+    [
+      "बहुमत: आधे से ज्यादा",
+      "7 में कम से कम 4"
+    ],
+    [
+      "2 + 2 = 4",
+      "दो दल साथ आए"
+    ],
+    [
+      "सबसे बड़ा ≠ बहुमत",
+      "3 अलग • 4 साथ"
+    ],
+    [
+      "बस यह फर्क याद रखो",
+      "सबसे ज्यादा ≠ आधे से ज्यादा"
+    ]
+  ]
+}

@@ -1,0 +1,308 @@
+{
+  "title": "नमक पर कानून क्यों?",
+  "topic_key": "salt_law",
+  "share_reason": "नमक सत्याग्रह का कारण याद रहे",
+  "recall": "किस कानून को चुनौती दी?",
+  "share_card": {
+    "kind": "exam_confusion",
+    "recipient": "इतिहास पढ़ने वाला आपका दोस्त",
+    "benefit": "नमक कानून और अहिंसक विरोध का संबंध समझना",
+    "cta": "नमक सत्याग्रह में उलझने वाले दोस्त को भेजो"
+  },
+  "scenes": [
+    {
+      "setting": "neutral",
+      "visual_action": "A person walks toward the salt display",
+      "heading": "नमक पर कानून",
+      "explanation": "कानून तोड़ना अहिंसक विरोध था",
+      "speech": "नमक रोज की जरूरत था और उस पर अंग्रेजों का नियंत्रण था।",
+      "teaches": "नमक कानून का विरोध",
+      "objects": [
+        {
+          "id": "person",
+          "kind": "person",
+          "color": "#ffffff",
+          "pos": [
+            -1,
+            0,
+            0
+          ],
+          "to": [
+            1,
+            0,
+            0
+          ],
+          "size": [
+            0.6,
+            0.6,
+            0.6
+          ],
+          "action": "walk",
+          "label": "लोग"
+        },
+        {
+          "id": "salt",
+          "kind": "salt",
+          "color": "#1a80bb",
+          "pos": [
+            2,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "action": "grow",
+          "label": "नमक"
+        }
+      ]
+    },
+    {
+      "setting": "neutral",
+      "visual_action": "A person walks toward the salt display",
+      "heading": "नमक पर कानून",
+      "explanation": "कानून तोड़ना अहिंसक विरोध था",
+      "speech": "नमक रोज की जरूरत था और उस पर अंग्रेजों का नियंत्रण था।",
+      "teaches": "नमक कानून का विरोध",
+      "objects": [
+        {
+          "id": "person",
+          "kind": "person",
+          "color": "#ffffff",
+          "pos": [
+            -1,
+            0,
+            0
+          ],
+          "to": [
+            1,
+            0,
+            0
+          ],
+          "size": [
+            0.6,
+            0.6,
+            0.6
+          ],
+          "action": "walk",
+          "label": "लोग"
+        },
+        {
+          "id": "salt",
+          "kind": "salt",
+          "color": "#1a80bb",
+          "pos": [
+            2,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "action": "grow",
+          "label": "नमक"
+        }
+      ]
+    },
+    {
+      "setting": "neutral",
+      "visual_action": "A person walks toward the salt display",
+      "heading": "नमक पर कानून",
+      "explanation": "कानून तोड़ना अहिंसक विरोध था",
+      "speech": "नमक रोज की जरूरत था और उस पर अंग्रेजों का नियंत्रण था।",
+      "teaches": "नमक कानून का विरोध",
+      "objects": [
+        {
+          "id": "person",
+          "kind": "person",
+          "color": "#ffffff",
+          "pos": [
+            -1,
+            0,
+            0
+          ],
+          "to": [
+            1,
+            0,
+            0
+          ],
+          "size": [
+            0.6,
+            0.6,
+            0.6
+          ],
+          "action": "walk",
+          "label": "लोग"
+        },
+        {
+          "id": "salt",
+          "kind": "salt",
+          "color": "#1a80bb",
+          "pos": [
+            2,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "action": "grow",
+          "label": "नमक"
+        }
+      ]
+    },
+    {
+      "setting": "neutral",
+      "visual_action": "A person walks toward the salt display",
+      "heading": "नमक पर कानून",
+      "explanation": "कानून तोड़ना अहिंसक विरोध था",
+      "speech": "नमक रोज की जरूरत था और उस पर अंग्रेजों का नियंत्रण था।",
+      "teaches": "नमक कानून का विरोध",
+      "objects": [
+        {
+          "id": "person",
+          "kind": "person",
+          "color": "#ffffff",
+          "pos": [
+            -1,
+            0,
+            0
+          ],
+          "to": [
+            1,
+            0,
+            0
+          ],
+          "size": [
+            0.6,
+            0.6,
+            0.6
+          ],
+          "action": "walk",
+          "label": "लोग"
+        },
+        {
+          "id": "salt",
+          "kind": "salt",
+          "color": "#1a80bb",
+          "pos": [
+            2,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "action": "grow",
+          "label": "नमक"
+        }
+      ]
+    },
+    {
+      "setting": "neutral",
+      "visual_action": "A person walks toward the salt display",
+      "heading": "नमक पर कानून",
+      "explanation": "कानून तोड़ना अहिंसक विरोध था",
+      "speech": "नमक रोज की जरूरत था और उस पर अंग्रेजों का नियंत्रण था।",
+      "teaches": "नमक कानून का विरोध",
+      "objects": [
+        {
+          "id": "person",
+          "kind": "person",
+          "color": "#ffffff",
+          "pos": [
+            -1,
+            0,
+            0
+          ],
+          "to": [
+            1,
+            0,
+            0
+          ],
+          "size": [
+            0.6,
+            0.6,
+            0.6
+          ],
+          "action": "walk",
+          "label": "लोग"
+        },
+        {
+          "id": "salt",
+          "kind": "salt",
+          "color": "#1a80bb",
+          "pos": [
+            2,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "action": "grow",
+          "label": "नमक"
+        }
+      ]
+    },
+    {
+      "setting": "neutral",
+      "visual_action": "A person walks toward the salt display",
+      "heading": "नमक पर कानून",
+      "explanation": "कानून तोड़ना अहिंसक विरोध था",
+      "speech": "नमक रोज की जरूरत था और उस पर अंग्रेजों का नियंत्रण था।",
+      "teaches": "नमक कानून का विरोध",
+      "objects": [
+        {
+          "id": "person",
+          "kind": "person",
+          "color": "#ffffff",
+          "pos": [
+            -1,
+            0,
+            0
+          ],
+          "to": [
+            1,
+            0,
+            0
+          ],
+          "size": [
+            0.6,
+            0.6,
+            0.6
+          ],
+          "action": "walk",
+          "label": "लोग"
+        },
+        {
+          "id": "salt",
+          "kind": "salt",
+          "color": "#1a80bb",
+          "pos": [
+            2,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "action": "grow",
+          "label": "नमक"
+        }
+      ]
+    }
+  ]
+}
