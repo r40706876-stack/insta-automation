@@ -1,0 +1,13 @@
+{
+  "frames": 1100,
+  "fps": 24,
+  "actual_3d": true,
+  "photo_assets": 0,
+  "distinct_sets": 6,
+  "renderer": "dandi_coast_v3",
+  "deforming_sea": true,
+  "articulated_limbs": true,
+  "source_based_gujarat_outline": true,
+  "route_is_schematic": true,
+  "gandhi_is_stylized_likeness": true
+}

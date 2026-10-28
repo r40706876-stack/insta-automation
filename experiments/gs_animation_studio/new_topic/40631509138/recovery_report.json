@@ -1,0 +1,84 @@
+{
+  "topic": "new_topic",
+  "run_id": "40631509138",
+  "attempt": "1",
+  "status": "passed",
+  "events": [
+    {
+      "stage": "reviewed_recipe",
+      "status": "passed",
+      "recipe": "dandi_v3",
+      "sha256": "d79756c6a44ef5bd7eb21a84ba3fa4aa4a987a89d6cb7d04844911f7256debed"
+    },
+    {
+      "stage": "inputs",
+      "status": "passed",
+      "requested_topic": "दांडी मार्च में नमक क्यों चुना गया?"
+    },
+    {
+      "stage": "voice_generate",
+      "status": "started",
+      "log": "2_voice_generate.log"
+    },
+    {
+      "stage": "voice_generate",
+      "status": "passed"
+    },
+    {
+      "stage": "voice_decode",
+      "status": "started",
+      "log": "4_voice_decode.log"
+    },
+    {
+      "stage": "voice_decode",
+      "status": "passed"
+    },
+    {
+      "stage": "render",
+      "status": "started",
+      "log": "6_render.log"
+    },
+    {
+      "stage": "render",
+      "status": "passed"
+    },
+    {
+      "stage": "compose",
+      "status": "started",
+      "log": "8_compose.log"
+    },
+    {
+      "stage": "compose",
+      "status": "passed"
+    },
+    {
+      "stage": "validate",
+      "status": "started",
+      "log": "10_validate.log"
+    },
+    {
+      "stage": "validate",
+      "status": "passed"
+    },
+    {
+      "stage": "compress_scene",
+      "status": "started",
+      "log": "12_compress_scene.log"
+    },
+    {
+      "stage": "compress_scene",
+      "status": "passed"
+    }
+  ],
+  "repairs": [
+    {
+      "action": "restore_reviewed_renderer",
+      "engine": "data-driven-3d",
+      "same_recipe": true
+    }
+  ],
+  "injected_failures": [],
+  "instagram_publish": false,
+  "output": "experiments/gs_animation_studio/new_topic/40631509138",
+  "sha256": "da481bc6507a7d9ea4fa37a09f3d704014f0894461c6899c4a3d4416ef5d07a0"
+}
