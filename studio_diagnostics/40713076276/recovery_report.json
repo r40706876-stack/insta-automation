@@ -1,0 +1,84 @@
+{
+  "topic": "new_topic",
+  "run_id": "40713076276",
+  "attempt": "1",
+  "status": "passed",
+  "events": [
+    {
+      "stage": "reviewed_recipe",
+      "status": "passed",
+      "recipe": "fold_quiz_v1",
+      "sha256": "82c1cbc61808495e55353c909470c1b1a0099a661960ccd030f0b104ea6a9ae5"
+    },
+    {
+      "stage": "inputs",
+      "status": "passed",
+      "requested_topic": "हिमालय को वलित पर्वत क्यों कहते हैं?"
+    },
+    {
+      "stage": "voice_generate",
+      "status": "started",
+      "log": "2_voice_generate.log"
+    },
+    {
+      "stage": "voice_generate",
+      "status": "passed"
+    },
+    {
+      "stage": "voice_decode",
+      "status": "started",
+      "log": "4_voice_decode.log"
+    },
+    {
+      "stage": "voice_decode",
+      "status": "passed"
+    },
+    {
+      "stage": "render",
+      "status": "started",
+      "log": "6_render.log"
+    },
+    {
+      "stage": "render",
+      "status": "passed"
+    },
+    {
+      "stage": "compose",
+      "status": "started",
+      "log": "8_compose.log"
+    },
+    {
+      "stage": "compose",
+      "status": "passed"
+    },
+    {
+      "stage": "validate",
+      "status": "started",
+      "log": "10_validate.log"
+    },
+    {
+      "stage": "validate",
+      "status": "passed"
+    },
+    {
+      "stage": "compress_scene",
+      "status": "started",
+      "log": "12_compress_scene.log"
+    },
+    {
+      "stage": "compress_scene",
+      "status": "passed"
+    }
+  ],
+  "repairs": [
+    {
+      "action": "restore_reviewed_renderer",
+      "engine": "data-driven-3d",
+      "same_recipe": true
+    }
+  ],
+  "injected_failures": [],
+  "instagram_publish": false,
+  "output": "experiments/gs_animation_studio/new_topic/40713076276",
+  "sha256": "e1c86c1ee4ed1f8147fa14b808b6f88b4c01a9f6d78e51e4e9a5b23e023c7133"
+}

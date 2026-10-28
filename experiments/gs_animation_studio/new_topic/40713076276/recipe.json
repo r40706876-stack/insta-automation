@@ -1,0 +1,437 @@
+{
+  "title": "हिमालय को वलित पर्वत क्यों कहते हैं?",
+  "topic_key": "himalaya_fold_meaning_quiz_v1",
+  "requested_topic": "हिमालय को वलित पर्वत क्यों कहते हैं?",
+  "subject": "भूगोल",
+  "renderer": "fold_quiz_v1",
+  "dynamic": true,
+  "quality_version": "rich_3d_v1",
+  "share_reason": "वलित पर्वत का अर्थ रटने के बजाय चट्टानों की परतें मुड़ते देखकर समझना।",
+  "recall": "वलित यानी मुड़ा हुआ; हिमालय नवीन वलित पर्वत है।",
+  "share_card": {
+    "kind": "exam_confusion",
+    "recipient": "भूगोल की तैयारी करने वाला अपना दोस्त",
+    "benefit": "हिमालय वलित पर्वत क्यों है इसका कारण देखकर समझना",
+    "cta": "वलित पर्वत रटने वाले दोस्त को यह कारण दिखाओ"
+  },
+  "reference_text": "NCERT describes the Himalayas as geologically young and structurally fold mountains. The Indian plate converged with Eurasia, leading to crustal compression, folding, thickening and uplift over millions of years. Folded means bent, मुड़ा हुआ; नवीन वलित पर्वत. The Himalayas were not built as a volcanic cone. The two opening models are alternatives for a question, not a claim that all mountain building has only two possible mechanisms. Plate slabs, continuous strata, terrain and motion are schematic and not a quantitative simulation. Processes occur over crores of years, करोड़ों साल.",
+  "sources": [
+    {
+      "url": "https://www.ncert.nic.in/textbook/pdf/iess102.pdf",
+      "publisher": "NCERT, Contemporary India I, Physical Features of India: young fold mountains"
+    },
+    {
+      "url": "https://pubs.usgs.gov/gip/dynamic/himalaya.html",
+      "publisher": "USGS, This Dynamic Earth: Himalayas and continental collision"
+    },
+    {
+      "url": "https://www.amnh.org/explore/ology/earth/power-of-plate-tectonics/mountains",
+      "publisher": "American Museum of Natural History: plates crumple and fold, raising mountains"
+    }
+  ],
+  "scenes": [
+    {
+      "heading": "हिमालय कैसे बना?",
+      "explanation": "पहले अपना जवाब चुनो",
+      "speech": "हिमालय ज्वालामुखी से बना या प्लेटों की टक्कर से? पहले अपना जवाब सोचो।",
+      "text_color": "#ffad75",
+      "explanation_color": "#ffad75",
+      "setting": "neutral",
+      "camera_view": "front",
+      "visual_action": "Visible alternatives lead to convergence, continuous crustal folding, uplift and a recall question; colors connect each teaching step.",
+      "teaches": "Explain the word fold and link it to Himalayan plate collision and young fold mountain classification.",
+      "objects": [
+        {
+          "id": "volcano",
+          "kind": "mountain",
+          "pos": [
+            -1.45,
+            0,
+            0
+          ],
+          "size": [
+            0.85,
+            0.85,
+            0.85
+          ],
+          "action": "grow",
+          "color": "#ff875e",
+          "label": "ज्वालामुखी?",
+          "label_color": "#ff875e",
+          "model": "volcano"
+        },
+        {
+          "id": "fold_choice",
+          "kind": "rock_layers",
+          "pos": [
+            1.25,
+            0,
+            0
+          ],
+          "size": [
+            0.8,
+            0.8,
+            0.8
+          ],
+          "action": "compress",
+          "color": "#68d9ff",
+          "label": "टक्कर से?",
+          "label_color": "#68d9ff"
+        }
+      ],
+      "quiz_card": {
+        "question": "ज्वालामुखी या टक्कर?",
+        "answer": "चलो, जमीन के अंदर देखते हैं",
+        "reveal_after": 3
+      }
+    },
+    {
+      "heading": "दो प्लेटें पास आईं",
+      "explanation": "पीली: भारतीय • नीली: यूरेशियाई",
+      "speech": "जवाब है प्लेटों की टक्कर। भारतीय प्लेट और यूरेशियाई प्लेट एक दूसरे की ओर बढ़ीं।",
+      "text_color": "#ffe17d",
+      "explanation_color": "#ffe17d",
+      "setting": "neutral",
+      "camera_view": "front",
+      "visual_action": "Visible alternatives lead to convergence, continuous crustal folding, uplift and a recall question; colors connect each teaching step.",
+      "teaches": "Explain the word fold and link it to Himalayan plate collision and young fold mountain classification.",
+      "objects": [
+        {
+          "id": "plate_left",
+          "kind": "box",
+          "pos": [
+            -1.35,
+            0,
+            0.25
+          ],
+          "size": [
+            1,
+            1,
+            1
+          ],
+          "action": "move",
+          "color": "#ffd25b",
+          "label": "पीली प्लेट",
+          "label_color": "#ffd25b",
+          "to": [
+            -0.55,
+            0,
+            0.25
+          ]
+        },
+        {
+          "id": "plate_right",
+          "kind": "box",
+          "pos": [
+            1.35,
+            0,
+            0.25
+          ],
+          "size": [
+            1,
+            1,
+            1
+          ],
+          "action": "move",
+          "color": "#58c9ff",
+          "label": "नीली प्लेट",
+          "label_color": "#58c9ff",
+          "to": [
+            0.55,
+            0,
+            0.25
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "दबाव पड़ा → परतें मुड़ीं",
+      "explanation": "यहाँ रंगीन परतों को देखो",
+      "speech": "टक्कर से चट्टानों की परतों पर दबाव पड़ा। देखो, सीधी परतें कैसे मुड़ रही हैं।",
+      "text_color": "#70dcff",
+      "explanation_color": "#70dcff",
+      "setting": "neutral",
+      "camera_view": "front",
+      "visual_action": "Visible alternatives lead to convergence, continuous crustal folding, uplift and a recall question; colors connect each teaching step.",
+      "teaches": "Explain the word fold and link it to Himalayan plate collision and young fold mountain classification.",
+      "objects": [
+        {
+          "id": "layers",
+          "kind": "rock_layers",
+          "pos": [
+            0,
+            0,
+            0
+          ],
+          "size": [
+            1.35,
+            1.35,
+            1.35
+          ],
+          "action": "compress",
+          "color": "#70dcff",
+          "label": "मुड़ती चट्टानी परतें",
+          "label_color": "#70dcff",
+          "animation_window": [
+            0.15,
+            1
+          ]
+        },
+        {
+          "id": "push_left",
+          "kind": "arrow",
+          "pos": [
+            -2.3,
+            0,
+            0.5
+          ],
+          "size": [
+            0.4,
+            0.4,
+            0.4
+          ],
+          "action": "move",
+          "color": "#ffd25b",
+          "label": "",
+          "label_color": "#ffd25b",
+          "to": [
+            -1.5,
+            0,
+            0.5
+          ]
+        },
+        {
+          "id": "push_right",
+          "kind": "arrow",
+          "pos": [
+            2.3,
+            0,
+            0.5
+          ],
+          "size": [
+            0.4,
+            0.4,
+            0.4
+          ],
+          "action": "move",
+          "color": "#58c9ff",
+          "label": "",
+          "label_color": "#58c9ff",
+          "to": [
+            1.5,
+            0,
+            0.5
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "परतें दबीं → पर्वत उठा",
+      "explanation": "एक झटके में नहीं • करोड़ों साल",
+      "speech": "इसी दबाव से जमीन मोटी हुई और ऊपर उठी। करोड़ों साल में हिमालय बना।",
+      "text_color": "#bba4ff",
+      "explanation_color": "#bba4ff",
+      "setting": "neutral",
+      "camera_view": "front",
+      "visual_action": "Visible alternatives lead to convergence, continuous crustal folding, uplift and a recall question; colors connect each teaching step.",
+      "teaches": "Explain the word fold and link it to Himalayan plate collision and young fold mountain classification.",
+      "objects": [
+        {
+          "id": "layers",
+          "kind": "rock_layers",
+          "pos": [
+            -0.8,
+            0,
+            0
+          ],
+          "size": [
+            1.1,
+            1.1,
+            1.1
+          ],
+          "action": "compress",
+          "color": "#70dcff",
+          "label": "दबाव और मोड़",
+          "label_color": "#70dcff"
+        },
+        {
+          "id": "mountain",
+          "kind": "mountain",
+          "pos": [
+            1.15,
+            0.2,
+            0
+          ],
+          "size": [
+            0.95,
+            0.95,
+            0.95
+          ],
+          "action": "grow",
+          "color": "#9fe4b1",
+          "label": "ऊपर उठा हिमालय",
+          "label_color": "#9fe4b1",
+          "animation_window": [
+            0.4,
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "वलित = मुड़ा हुआ",
+      "explanation": "हिमालय: नवीन वलित पर्वत",
+      "speech": "वलित का आसान मतलब है मुड़ा हुआ। इसलिए हिमालय को नवीन वलित पर्वत कहते हैं।",
+      "text_color": "#73efb2",
+      "explanation_color": "#73efb2",
+      "setting": "neutral",
+      "camera_view": "front",
+      "visual_action": "Visible alternatives lead to convergence, continuous crustal folding, uplift and a recall question; colors connect each teaching step.",
+      "teaches": "Explain the word fold and link it to Himalayan plate collision and young fold mountain classification.",
+      "objects": [
+        {
+          "id": "layers",
+          "kind": "rock_layers",
+          "pos": [
+            0,
+            0,
+            0
+          ],
+          "size": [
+            1.35,
+            1.35,
+            1.35
+          ],
+          "action": "compress",
+          "color": "#73efb2",
+          "label": "मोड़ देखो → वलित समझो",
+          "label_color": "#73efb2"
+        },
+        {
+          "id": "trace_arrow",
+          "kind": "arrow",
+          "pos": [
+            -2,
+            0,
+            0.5
+          ],
+          "size": [
+            0.4,
+            0.4,
+            0.4
+          ],
+          "action": "move",
+          "color": "#ffd25b",
+          "label": "",
+          "label_color": "#ffd25b",
+          "to": [
+            -1.2,
+            0,
+            0.5
+          ]
+        }
+      ],
+      "quiz_card": {
+        "question": "वलित का मतलब क्या हुआ?",
+        "answer": "मुड़ा हुआ — यही दिख रहा है",
+        "reveal_after": 2.5
+      }
+    },
+    {
+      "heading": "अब तुम बताओ…",
+      "explanation": "हिमालय वलित पर्वत क्यों है?",
+      "speech": "अब बताओ, हिमालय वलित पर्वत क्यों है? क्योंकि उसकी चट्टानों की परतें मुड़ी हैं।",
+      "text_color": "#ffcf78",
+      "explanation_color": "#ffcf78",
+      "setting": "neutral",
+      "camera_view": "front",
+      "visual_action": "Visible alternatives lead to convergence, continuous crustal folding, uplift and a recall question; colors connect each teaching step.",
+      "teaches": "Explain the word fold and link it to Himalayan plate collision and young fold mountain classification.",
+      "objects": [
+        {
+          "id": "layers",
+          "kind": "rock_layers",
+          "pos": [
+            -0.8,
+            0,
+            0
+          ],
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ],
+          "action": "compress",
+          "color": "#73efb2",
+          "label": "मुड़ी हुई परतें",
+          "label_color": "#73efb2",
+          "animation_window": [
+            0.4,
+            1
+          ]
+        },
+        {
+          "id": "mountain",
+          "kind": "mountain",
+          "pos": [
+            1.2,
+            0.2,
+            0
+          ],
+          "size": [
+            0.9,
+            0.9,
+            0.9
+          ],
+          "action": "grow",
+          "color": "#9fe4b1",
+          "label": "नवीन वलित पर्वत",
+          "label_color": "#9fe4b1",
+          "animation_window": [
+            0.4,
+            1
+          ]
+        }
+      ],
+      "quiz_card": {
+        "question": "कारण बोलकर देखो…",
+        "answer": "चट्टानों की परतें मुड़ी हैं!",
+        "reveal_after": 3
+      }
+    }
+  ],
+  "speech": [
+    "हिमालय ज्वालामुखी से बना या प्लेटों की टक्कर से? पहले अपना जवाब सोचो।",
+    "जवाब है प्लेटों की टक्कर। भारतीय प्लेट और यूरेशियाई प्लेट एक दूसरे की ओर बढ़ीं।",
+    "टक्कर से चट्टानों की परतों पर दबाव पड़ा। देखो, सीधी परतें कैसे मुड़ रही हैं।",
+    "इसी दबाव से जमीन मोटी हुई और ऊपर उठी। करोड़ों साल में हिमालय बना।",
+    "वलित का आसान मतलब है मुड़ा हुआ। इसलिए हिमालय को नवीन वलित पर्वत कहते हैं।",
+    "अब बताओ, हिमालय वलित पर्वत क्यों है? क्योंकि उसकी चट्टानों की परतें मुड़ी हैं।"
+  ],
+  "titles": [
+    [
+      "हिमालय कैसे बना?",
+      "पहले अपना जवाब चुनो"
+    ],
+    [
+      "दो प्लेटें पास आईं",
+      "पीली: भारतीय • नीली: यूरेशियाई"
+    ],
+    [
+      "दबाव पड़ा → परतें मुड़ीं",
+      "यहाँ रंगीन परतों को देखो"
+    ],
+    [
+      "परतें दबीं → पर्वत उठा",
+      "एक झटके में नहीं • करोड़ों साल"
+    ],
+    [
+      "वलित = मुड़ा हुआ",
+      "हिमालय: नवीन वलित पर्वत"
+    ],
+    [
+      "अब तुम बताओ…",
+      "हिमालय वलित पर्वत क्यों है?"
+    ]
+  ]
+}
