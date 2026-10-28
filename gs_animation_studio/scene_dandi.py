@@ -110,15 +110,16 @@ def pose(h,q,frame,walk=False,collect=False,hold=False):
 # Sea surface is a mesh whose vertices deform; white crest curves travel shoreward.
 def coast(parent):
  box('Sandy coast',(0,-1,-.17),(14,7,.26),sand,parent)
- nx,ny=30,16;verts=[(-7+14*i/nx,1+7*j/ny,0) for j in range(ny+1) for i in range(nx+1)];faces=[]
+ nx,ny=30,16;verts=[(-7+14*i/nx,1+7*j/ny,.08) for j in range(ny+1) for i in range(nx+1)];faces=[]
  for j in range(ny):
   for i in range(nx):
    a=j*(nx+1)+i;faces.append((a,a+1,a+nx+2,a+nx+1))
  mesh=bpy.data.meshes.new('Deforming ocean surface');mesh.from_pydata(verts,[],faces);mesh.update();o=bpy.data.objects.new('Animated sea',mesh);bpy.context.collection.objects.link(o);o.parent=parent;o.data.materials.append(water)
+ for polygon in mesh.polygons:polygon.use_smooth=True
  o.shape_key_add(name='Basis');wave=o.shape_key_add(name='Rolling waves')
- for v in wave.data:v.co.z=.10*math.sin(v.co.x*1.3+v.co.y*2)+.06*math.cos(v.co.y*4)
+ for v in wave.data:v.co.z=.08+.045*math.sin(v.co.x*1.3+v.co.y*2)+.025*math.cos(v.co.y*4)
  crests=[]
- for j in range(5):crests.append(line('Traveling foam',[(-7+i*.28,1.3+j*.9+.11*math.sin(i*.3),.11) for i in range(51)],.025,foam,parent))
+ for j in range(5):crests.append(line('Traveling foam',[(-7+i*.28,1.3+j*.9+.11*math.sin(i*.3),.19) for i in range(51)],.025,foam,parent))
  for i in range(15):
   x=-2+(i%5)*.27;y=-.7+(i//5)*.24;o=box('Natural salt crust',(x,y,.025),(.12,.12,.06),white,parent);o.rotation_euler.z=i*1.17
  return wave,crests
@@ -179,7 +180,7 @@ for frame in range(1,N+1):
  if k==3:
   salt_ground.scale=(1,1,1) if q<.55 else (0,0,0);key(salt_ground,'scale',frame)
  # The dedicated map is front-on; coast shots have sea visible behind human figures.
- target=offset+Vector((0,0,1.3 if k!=2 else 1.65));cam.data.ortho_scale=(8.9 if k==2 else 8.2 if k==4 else 7.4)-.15*ease(q)
+ target=offset+Vector((0,0,1.3 if k!=2 else 1.65));cam.data.ortho_scale=(11.8 if k==2 else 8.2 if k==4 else 7.4)-.15*ease(q)
  cam.location=target+(Vector((0,-20,0)) if k==2 else Vector((2.3,-18,9)))
  cam.rotation_euler=(target-cam.location).to_track_quat('-Z','Y').to_euler();key(cam,'location',frame);key(cam,'rotation_euler',frame);cam.data.keyframe_insert(data_path='ortho_scale',frame=frame)
  bpy.context.view_layer.update();annotations=[]
