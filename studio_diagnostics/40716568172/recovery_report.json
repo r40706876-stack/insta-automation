@@ -1,0 +1,26 @@
+{
+  "topic": "new_topic",
+  "run_id": "40716568172",
+  "attempt": "1",
+  "status": "failed",
+  "events": [
+    {
+      "stage": "plan_new_topic",
+      "status": "started",
+      "log": "0_plan_new_topic.log"
+    },
+    {
+      "stage": "plan_new_topic",
+      "status": "failed",
+      "code": "process_failed",
+      "detail": "Plan repair 1 Every scene needs at least two animated objects, not a static poster\nPlan repair 2 Scene 4: explicit supported setting required\nPlan repair 3 Scene 4: explicit supported setting required\nTraceback (most recent call last):\n  File \"/home/runner/work/insta-automation/insta-automation/gs_animation_studio/planner.py\", line 222, in <module>\n    generate(sys.argv[1],sys.argv[2],os.getenv('STUDIO_TOPIC_TEXT','').strip(),os.getenv('STUDIO_SUBJECT','auto'),os.getenv('STUDIO_REFERENCE_TEXT',''))\n  File \"/home/runner/work/insta-automation/insta-automation/gs_animation_studio/planner.py\", line 218, in generate\n    raise RuntimeError('New-topic plan failed validation after three attempts: '+str(errors))\nRuntimeError: New-topic plan failed validation after three attempts: ['Every scene needs at least two animated objects, not a static poster', 'Scene 4: explicit supported setting required', 'Scene 4: explicit supported setting required']\n"
+    }
+  ],
+  "repairs": [],
+  "injected_failures": [],
+  "instagram_publish": false,
+  "failure": {
+    "type": "StageError",
+    "message": "plan_new_topic: process_failed"
+  }
+}
