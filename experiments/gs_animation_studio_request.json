@@ -1,10 +1,10 @@
 {
   "topic": "new_topic",
-  "topic_text": "भारत कभी एक द्वीप था—एशिया तक कैसे पहुँचा?",
+  "topic_text": "हिमालय को वलित पर्वत क्यों कहते हैं?",
   "subject": "भूगोल",
   "voice": "auto",
-  "reviewed_recipe": "india_drift_v2",
-  "reviewed_recipe_sha256": "1143be7f5002c21fd1270e00c887562da3fa0511081edf5ef7d9a03f67a89b55",
+  "reviewed_recipe": "fold_quiz_v1",
+  "reviewed_recipe_sha256": "82c1cbc61808495e55353c909470c1b1a0099a661960ccd030f0b104ea6a9ae5",
   "verify_recovery": false,
-  "request_id": "india-drift-improved-1793196205512"
+  "request_id": "himalaya-fold-quiz-1793200157961"
 }

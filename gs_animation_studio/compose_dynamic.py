@@ -20,14 +20,25 @@ plan=json.loads((R/'recipe.json').read_text())
 def fit(d,xy,s,n,c,maxw):
  while n>17 and d.textlength(s,font=font(n))>maxw:n-=1
  text(d,xy,s,n,c)
+def rgb(value,default):
+ try:return tuple(int(value[j:j+2],16) for j in (1,3,5)) if isinstance(value,str) and len(value)==7 and value[0]=='#' else default
+ except ValueError:return default
 def overlay(im,i):
- row=motion[i];t=row['t'];k=row['scene'];sc=plan['scenes'][k];age=t-float(starts[k]);q=age/meta['seconds'][k];d=ImageDraw.Draw(im)
+ row=motion[i];t=row['t'];k=row['scene'];sc=plan['scenes'][k];age=t-float(starts[k]);q=age/meta['seconds'][k];d=ImageDraw.Draw(im);accent=rgb(sc.get('text_color'),GOLD);secondary=rgb(sc.get('explanation_color'),(244,248,250))
  d.rounded_rectangle((36,64,636,151),16,fill=(12,40,54),outline=(58,128,147),width=2)
  text(d,(336,89),'सभी प्रतियोगी परीक्षाओं के नोट्स उपलब्ध हैं',25,(244,247,237))
  text(d,(336,124),'WhatsApp: +91 89892 79637',29,GOLD)
  text(d,(40,176),'MINUTE ME GS / ANIMATION STUDIO',19,COL,anchor='lm')
- fit(d,(336,222+int(12*(1-min(1,age/.3)))),sc['heading'],40,GOLD,600)
- fit(d,(336,273),sc['explanation'],30,(244,248,250),600)
+ fit(d,(336,222+int(12*(1-min(1,age/.3)))),sc['heading'],40,accent,600)
+ fit(d,(336,273),sc['explanation'],30,secondary,600)
+ # Optional question/reveal card stays above the mechanism and below the title.
+ card_spec=sc.get('quiz_card')
+ if card_spec:
+  reveal=age>=float(card_spec.get('reveal_after',2))
+  color=rgb(card_spec.get('answer_color'),(96,238,167)) if reveal else accent
+  message=card_spec.get('answer','') if reveal else card_spec.get('question','')
+  d.rounded_rectangle((46,310,626,376),12,fill=(12,39,52),outline=color,width=2)
+  fit(d,(336,342),message,29,color,550)
  occupied=[]
  for obj in sc['objects']:
   if not obj.get('label'):continue
@@ -37,7 +48,7 @@ def overlay(im,i):
   while n>18 and d.textlength(label,font=font(n))>200:n-=1
   w=max(65,d.textlength(label,font=font(n))/2+12)
   if abs(x-ax)+abs(y-ay)>45:arrow(d,(x,y+23),(ax,ay),COL,2)
-  d.rounded_rectangle((x-w,y-23,x+w,y+23),10,fill=(9,35,47),outline=COL,width=2);text(d,(x,y),label,n,(244,248,250))
+  d.rounded_rectangle((x-w,y-23,x+w,y+23),10,fill=(9,35,47),outline=COL,width=2);text(d,(x,y),label,n,rgb(obj.get('label_color'),(244,248,250)))
  # Dedicated scene labels are projected from the actual 3D scene, not guessed object names.
  for item in row.get('annotations',[]):
   ax,ay=item['anchor'];x=max(135,min(535,ax));y=max(350,min(997,ay));label=item['text'];n=25
@@ -56,7 +67,7 @@ def overlay(im,i):
  words=sc['speech'].split();groups=[' '.join(words[j:j+5]) for j in range(0,len(words),5)]
  phrase=groups[min(len(groups)-1,int(max(0,q)*len(groups)))]
  d.rounded_rectangle((36,1050,636,1123),14,fill=(13,40,53),outline=(57,126,143),width=2)
- fit(d,(336,1086),phrase,32,GOLD,560)
+ fit(d,(336,1086),phrase,32,accent,560)
  for j in range(6):
   x=236+j*40;d.ellipse((x-7,1137,x+7,1151),fill=GOLD if j==k else (76,114,130))
  fit(d,(336,1170),'समझाने के लिए सांकेतिक 3D दृश्य',20,(174,197,206),580)
