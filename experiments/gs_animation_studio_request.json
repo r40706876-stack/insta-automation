@@ -1,10 +1,10 @@
 {
   "topic": "new_topic",
-  "topic_text": "सबसे बड़ा दल और बहुमत में आसान अंतर",
-  "subject": "राजव्यवस्था",
+  "topic_text": "भारत कभी एक द्वीप था—एशिया तक कैसे पहुँचा?",
+  "subject": "भूगोल",
   "voice": "auto",
-  "reviewed_recipe": "majority_demo_v1",
-  "reviewed_recipe_sha256": "a3d279a06e909ab810c5fbb588504dbf23ab0014596d97e389be3f6ee2226691",
+  "reviewed_recipe": "india_drift_v1",
+  "reviewed_recipe_sha256": "f3137a7349b66164ed66953f20bc0020e2bdee9ac73844600e5c139b9e440280",
   "verify_recovery": false,
-  "request_id": "majority-share-demo-1793177744412066411"
+  "request_id": "india-drift-youtube-evidence-1793191011654"
 }
