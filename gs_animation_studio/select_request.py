@@ -13,7 +13,7 @@ if len(text)>350 or len(source)>14000:raise ValueError('Topic/source text too lo
 if '\x00' in text+source:raise ValueError('NUL in request')
 test=(os.getenv('INPUT_TEST')=='true') if manual else r.get('verify_recovery',False) is True
 rid=os.environ['GITHUB_RUN_ID'];attempt=os.getenv('GITHUB_RUN_ATTEMPT','1');folder=rid if attempt=='1' else rid+'-attempt-'+attempt
-values={'STUDIO_TOPIC':topic,'STUDIO_VOICE':voice,'STUDIO_TOPIC_TEXT':text,'STUDIO_SUBJECT':subject,'STUDIO_REFERENCE_TEXT':source,'STUDIO_VERIFY_RECOVERY':str(int(test)),'STUDIO_DIAGNOSTICS':'studio_diagnostics/'+folder}
+values={'STUDIO_REVIEWED_RECIPE':str(r.get('reviewed_recipe','')) if not manual else '','STUDIO_REVIEWED_SHA256':str(r.get('reviewed_recipe_sha256','')) if not manual else '','STUDIO_TOPIC':topic,'STUDIO_VOICE':voice,'STUDIO_TOPIC_TEXT':text,'STUDIO_SUBJECT':subject,'STUDIO_REFERENCE_TEXT':source,'STUDIO_VERIFY_RECOVERY':str(int(test)),'STUDIO_DIAGNOSTICS':'studio_diagnostics/'+folder}
 with open(os.environ['GITHUB_ENV'],'a') as f:
  for k,v in values.items():
   import uuid

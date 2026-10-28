@@ -1,0 +1,404 @@
+{
+  "title": "दांडी मार्च में नमक ही क्यों?",
+  "topic_key": "dandi_salt_choice_reviewed_v2",
+  "subject": "इतिहास",
+  "share_reason": "नमक सत्याग्रह में रोज़मर्रा की ज़रूरत और जनभागीदारी का संबंध याद रखने के लिए।",
+  "recall": "नमक चुना क्योंकि वह रोज़मर्रा की साझा ज़रूरत था।",
+  "scenes": [
+    {
+      "heading": "नमक से चुनौती?",
+      "explanation": "रसोई की चीज़, बड़ा विरोध",
+      "speech": "एक चुटकी नमक से अंग्रेजों को चुनौती? गांधी ने आंदोलन के लिए नमक ही क्यों चुना?",
+      "teaches": "An everyday necessity could connect people with political protest.",
+      "objects": [
+        {
+          "id": "citizen",
+          "kind": "person",
+          "pos": [
+            -1.7,
+            0,
+            0
+          ],
+          "to": [
+            -0.8,
+            0,
+            0
+          ],
+          "label": "आम आदमी",
+          "role": "ordinary",
+          "gesture": "point",
+          "action": "walk",
+          "size": [
+            1.1,
+            1.1,
+            1.1
+          ],
+          "color": "#35b7b1"
+        },
+        {
+          "id": "salt",
+          "kind": "salt",
+          "pos": [
+            1,
+            0,
+            0
+          ],
+          "label": "रोज़ की ज़रूरत",
+          "action": "grow",
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "color": "#247c9e"
+        }
+      ]
+    },
+    {
+      "heading": "गरीब पर भी कर",
+      "explanation": "ज़रूरत रोज़ की, बोझ भी",
+      "speech": "नमक रोज़ की ज़रूरत था। इस पर लगने वाला कर गरीब लोगों पर भी बोझ डालता था।",
+      "teaches": "Salt tax affected the poorest; coin transfer schematically illustrates payment, not an exact amount.",
+      "objects": [
+        {
+          "id": "payer",
+          "kind": "person",
+          "pos": [
+            -2.4,
+            0,
+            0
+          ],
+          "to": [
+            -1.5,
+            0,
+            0
+          ],
+          "label": "आम आदमी",
+          "role": "ordinary",
+          "gesture": "point",
+          "action": "walk",
+          "size": [
+            1.1,
+            1.1,
+            1.1
+          ],
+          "color": "#35b7b1"
+        },
+        {
+          "id": "tax_coin",
+          "kind": "coin",
+          "pos": [
+            -0.6,
+            -0.25,
+            0.2
+          ],
+          "to": [
+            1.1,
+            -0.25,
+            0.2
+          ],
+          "label": "नमक कर",
+          "action": "move",
+          "size": [
+            0.55,
+            0.55,
+            0.55
+          ],
+          "color": "#f6bf45"
+        },
+        {
+          "id": "law_book",
+          "kind": "book",
+          "pos": [
+            1.35,
+            0.1,
+            0
+          ],
+          "label": "अंग्रेज़ी कानून",
+          "action": "none",
+          "size": [
+            0.85,
+            0.85,
+            0.85
+          ],
+          "color": "#ba4a4a"
+        }
+      ]
+    },
+    {
+      "heading": "कानून को चुनौती",
+      "explanation": "अहिंसक विरोध का रास्ता",
+      "speech": "गांधी चाहते थे कि आम लोग भी अहिंसक तरीके से अंग्रेजों के कानून को चुनौती दे सकें।",
+      "teaches": "Two peaceful marchers approach together; there is no armed battle.",
+      "objects": [
+        {
+          "id": "gandhi",
+          "kind": "person",
+          "pos": [
+            -1.7,
+            -0.5,
+            0
+          ],
+          "to": [
+            -0.7,
+            -0.5,
+            0
+          ],
+          "label": "गांधी",
+          "role": "gandhi",
+          "gesture": "point",
+          "action": "walk",
+          "size": [
+            1.1,
+            1.1,
+            1.1
+          ],
+          "color": "#f2e9d1"
+        },
+        {
+          "id": "marcher",
+          "kind": "person",
+          "pos": [
+            0.5,
+            0.35,
+            0
+          ],
+          "to": [
+            1.5,
+            0.35,
+            0
+          ],
+          "label": "साथी",
+          "role": "ordinary",
+          "gesture": "",
+          "action": "walk",
+          "size": [
+            1.1,
+            1.1,
+            1.1
+          ],
+          "color": "#35b7b1"
+        }
+      ]
+    },
+    {
+      "heading": "दांडी में नमक उठाया",
+      "explanation": "कानून तोड़ने का प्रतीक",
+      "speech": "वे आश्रम से दांडी तक पैदल गए। समुद्र किनारे नमक उठाकर उन्होंने नमक कानून तोड़ा।",
+      "teaches": "The Gandhi figure walks then visibly collects salt; no boiling or evaporation is claimed.",
+      "objects": [
+        {
+          "id": "gandhi",
+          "kind": "person",
+          "pos": [
+            -1.9,
+            0,
+            0
+          ],
+          "to": [
+            -0.65,
+            0,
+            0
+          ],
+          "label": "नमक उठाया",
+          "role": "gandhi",
+          "gesture": "collect",
+          "action": "walk",
+          "size": [
+            1.1,
+            1.1,
+            1.1
+          ],
+          "color": "#f2e9d1"
+        },
+        {
+          "id": "salt",
+          "kind": "salt",
+          "pos": [
+            0.75,
+            0,
+            0
+          ],
+          "label": "दांडी का नमक",
+          "action": "grow",
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "color": "#247c9e"
+        }
+      ]
+    },
+    {
+      "heading": "साधारण चीज़, साझा विरोध",
+      "explanation": "नमक सत्याग्रह की ताकत",
+      "speech": "एक साधारण चीज़ लोगों के विरोध का प्रतीक बनी। यही नमक सत्याग्रह की ताकत थी।",
+      "teaches": "Two marchers join near salt; these schematic figures do not represent a counted crowd.",
+      "objects": [
+        {
+          "id": "left",
+          "kind": "person",
+          "pos": [
+            -2,
+            -0.45,
+            0
+          ],
+          "to": [
+            -0.8,
+            -0.45,
+            0
+          ],
+          "label": "साझा विरोध",
+          "role": "ordinary",
+          "gesture": "",
+          "action": "walk",
+          "size": [
+            1.1,
+            1.1,
+            1.1
+          ],
+          "color": "#35b7b1"
+        },
+        {
+          "id": "right",
+          "kind": "person",
+          "pos": [
+            2,
+            0.4,
+            0
+          ],
+          "to": [
+            0.8,
+            0.4,
+            0
+          ],
+          "label": "",
+          "role": "ordinary",
+          "gesture": "point",
+          "action": "walk",
+          "size": [
+            1.1,
+            1.1,
+            1.1
+          ],
+          "color": "#35b7b1"
+        },
+        {
+          "id": "shared_salt",
+          "kind": "salt",
+          "pos": [
+            0,
+            0,
+            0
+          ],
+          "label": "नमक",
+          "action": "none",
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "color": "#247c9e"
+        }
+      ]
+    },
+    {
+      "heading": "नमक ही क्यों?",
+      "explanation": "आम ज़रूरत से आम लोग जुड़े",
+      "speech": "याद रखो: नमक रोज़मर्रा की ज़रूरत था। इसलिए उससे जुड़ा विरोध आम लोगों को जोड़ सकता था।",
+      "teaches": "Recall the link between a shared daily necessity and participation, without claiming the tax was automatically abolished.",
+      "objects": [
+        {
+          "id": "learner",
+          "kind": "person",
+          "pos": [
+            -1.8,
+            0,
+            0
+          ],
+          "to": [
+            -0.8,
+            0,
+            0
+          ],
+          "label": "रोज़ की ज़रूरत",
+          "role": "ordinary",
+          "gesture": "collect",
+          "action": "walk",
+          "size": [
+            1.1,
+            1.1,
+            1.1
+          ],
+          "color": "#35b7b1"
+        },
+        {
+          "id": "recall_salt",
+          "kind": "salt",
+          "pos": [
+            0.75,
+            0,
+            0
+          ],
+          "label": "लोगों को जोड़ना",
+          "action": "grow",
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "color": "#247c9e"
+        }
+      ]
+    }
+  ],
+  "speech": [
+    "एक चुटकी नमक से अंग्रेजों को चुनौती? गांधी ने आंदोलन के लिए नमक ही क्यों चुना?",
+    "नमक रोज़ की ज़रूरत था। इस पर लगने वाला कर गरीब लोगों पर भी बोझ डालता था।",
+    "गांधी चाहते थे कि आम लोग भी अहिंसक तरीके से अंग्रेजों के कानून को चुनौती दे सकें।",
+    "वे आश्रम से दांडी तक पैदल गए। समुद्र किनारे नमक उठाकर उन्होंने नमक कानून तोड़ा।",
+    "एक साधारण चीज़ लोगों के विरोध का प्रतीक बनी। यही नमक सत्याग्रह की ताकत थी।",
+    "याद रखो: नमक रोज़मर्रा की ज़रूरत था। इसलिए उससे जुड़ा विरोध आम लोगों को जोड़ सकता था।"
+  ],
+  "titles": [
+    [
+      "नमक से चुनौती?",
+      "रसोई की चीज़, बड़ा विरोध"
+    ],
+    [
+      "गरीब पर भी कर",
+      "ज़रूरत रोज़ की, बोझ भी"
+    ],
+    [
+      "कानून को चुनौती",
+      "अहिंसक विरोध का रास्ता"
+    ],
+    [
+      "दांडी में नमक उठाया",
+      "कानून तोड़ने का प्रतीक"
+    ],
+    [
+      "साधारण चीज़, साझा विरोध",
+      "नमक सत्याग्रह की ताकत"
+    ],
+    [
+      "नमक ही क्यों?",
+      "आम ज़रूरत से आम लोग जुड़े"
+    ]
+  ],
+  "requested_topic": "दांडी मार्च में नमक क्यों चुना गया?",
+  "dynamic": true,
+  "editorial_revision": 2,
+  "reference_text": "In 1930 Gandhi proposed breaking the Salt Laws to begin a mass civil disobedience movement. Salt tax affected the poorest people. He announced a march from his ashram in Ahmedabad to Dandi on the Arabian Sea. Picking up salt at Dandi was an act of defiance of the Salt Laws and a signal for others to defy the law. This connected an everyday material with non-violent political action. No numerical crowd size, automatic tax repeal, boiling demonstration or immediate independence is asserted.",
+  "sources": [
+    {
+      "url": "https://www.publicationsdivision.nic.in/catalog/view/theme/default/images/new_ngm_final/timeline/pages/page14.html",
+      "publisher": "Publications Division, Government of India"
+    },
+    {
+      "url": "https://www.pib.gov.in/newsite/erelcontent.aspx?lang=2&reg=48&relid=8343",
+      "publisher": "Press Information Bureau, Government of India"
+    }
+  ]
+}

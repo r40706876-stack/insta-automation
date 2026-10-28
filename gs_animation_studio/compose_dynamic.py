@@ -31,11 +31,12 @@ def overlay(im,i):
  occupied=[]
  for obj in sc['objects']:
   if not obj.get('label'):continue
-  x,y=row['pins'][obj['id']];x=max(115,min(550,x));y=max(355,min(950,y-30))
+  ax,ay=row['pins'][obj['id']];x,y=ax,ay;x=max(115,min(550,x));y=max(355,min(950,y-30))
   while any(abs(x-a)<170 and abs(y-b)<55 for a,b in occupied):y+=58
   y=min(1010,y);occupied.append((x,y));label=obj['label'];n=26
   while n>18 and d.textlength(label,font=font(n))>200:n-=1
   w=max(65,d.textlength(label,font=font(n))/2+12)
+  if abs(x-ax)+abs(y-ay)>45:arrow(d,(x,y+23),(ax,ay),COL,2)
   d.rounded_rectangle((x-w,y-23,x+w,y+23),10,fill=(9,35,47),outline=COL,width=2);text(d,(x,y),label,n,(244,248,250))
  # Phrase timing is approximate for Gemini; it is not falsely labelled word-aligned.
  words=sc['speech'].split();groups=[' '.join(words[j:j+5]) for j in range(0,len(words),5)]

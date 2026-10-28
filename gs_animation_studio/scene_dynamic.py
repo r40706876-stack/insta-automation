@@ -33,10 +33,10 @@ def line(name,pts,r,m,parent):
  for a,p in zip(sp.points,pts):a.co=(*p,1)
  o=bpy.data.objects.new(name,c);bpy.context.collection.objects.link(o);o.parent=parent;o.data.materials.append(m);return o
 
-def person(g,m,soldier=False):
+def person(g,m,soldier=False,role='ordinary'):
  joints=[]
  for x in [-.2,.2]:
-  pivot=empty('Hip',g);pivot.location=(x,0,.88);box('Leg',(0,0,-.34),(.23,.27,.7),dark,pivot);box('Foot',(0,-.1,-.78),(.28,.5,.16),dark,pivot);joints.append(pivot)
+  pivot=empty('Hip',g);pivot.location=(x,0,.88);box('Leg',(0,0,-.34),(.23,.27,.7),skin if role=='gandhi' else dark,pivot);box('Foot',(0,-.1,-.78),(.28,.5,.16),dark,pivot);joints.append(pivot)
  box('Torso',(0,0,1.17),(.7,.35,.7),m,g)
  for x in [-.46,.46]:
   pivot=empty('Shoulder',g);pivot.location=(x,0,1.45);box('Arm',(0,0,-.3),(.19,.24,.64),m,pivot);sphere('Hand',(0,0,-.64),.12,skin,pivot);joints.append(pivot)
@@ -44,12 +44,21 @@ def person(g,m,soldier=False):
  for x in [-.11,.11]:sphere('Eye',(x,-.265,1.98),.035,dark,g)
  if soldier:
   cyl('Helmet',(0,0,2.12),.32,.18,m,g);box('Shield',(-.58,-.26,1.02),(.55,.12,.7),gold,g);box('Sword',(.6,0,1.8),(.055,.055,1),white,g)
+ elif role=='gandhi':
+  box('White dhoti',(0,0,.86),(.71,.38,.62),white,g)
+  for x in (-.12,.12):line('Round spectacles',[(x+.105*math.cos(a),-.286,1.98+.105*math.sin(a)) for a in [j*math.tau/24 for j in range(25)]],.014,dark,g)
+  line('Spectacle bridge',[(-.02,-.29,1.98),(.02,-.29,1.98)],.014,dark,g)
+  line('Walking staff',[(-.67,-.05,.03),(-.67,-.05,1.55)],.035,gold,g)
  else:cyl('Cap',(0,0,2.16),.31,.12,white,g)
  return joints
 
 def asset(spec,parent):
  kind=spec['kind'];g=empty(spec['id'],parent);m=mat(spec['id'],tuple(int(spec['color'][i:i+2],16)/255 for i in (1,3,5)));details={}
- if kind in ('person','soldier'):details['joints']=person(g,m,kind=='soldier')
+ if kind in ('person','soldier'):
+  details['joints']=person(g,m,kind=='soldier',spec.get('role','ordinary'))
+  if spec.get('gesture')=='collect':
+   details['pickup']=box('Salt visibly held in hand',(0,-.03,-.73),(.22,.2,.2),white,details['joints'][3])
+   details['pickup'].scale=(0,0,0)
  elif kind in ('building','assembly','fort','factory'):
   box('Main structure',(0,.1,1),(1.8,1.2,2),m,g);box('Steps',(0,-.6,.12),(2.4,1.8,.24),white,g)
   if kind=='fort':
@@ -140,7 +149,7 @@ for frame in range(1,N+1):
   p=Vector(spec['pos']);size=Vector(spec['size']);action=spec['action'];o.rotation_euler=(0,0,0)
   if action in ('move','walk','rise','fall','flow'):
    # Flow cycles discrete parcels; causal actors move once towards the explicit destination.
-   f=(q*2)%1 if action=='flow' else e;p=p.lerp(Vector(spec['to']),f)
+   f=(q*2)%1 if action=='flow' else ease(q/.45) if spec.get('gesture')=='collect' else e;p=p.lerp(Vector(spec['to']),f)
   elif action=='spin':o.rotation_euler.z=q*math.tau
   elif action=='orbit':p.x+=.8*math.cos(q*math.tau);p.y+=.8*math.sin(q*math.tau)
   elif action=='grow':size*=.25+.75*e
@@ -148,6 +157,14 @@ for frame in range(1,N+1):
   o.location=p;o.scale=size;o.keyframe_insert(data_path='location',frame=frame);o.keyframe_insert(data_path='scale',frame=frame);o.keyframe_insert(data_path='rotation_euler',frame=frame)
   for j,joint in enumerate(details.get('joints',[])):
    joint.rotation_euler.x=(.45*math.sin(q*math.tau*4+(j%2)*math.pi)) if action=='walk' else .08*math.sin(q*math.tau+j);joint.keyframe_insert(data_path='rotation_euler',frame=frame)
+  if spec.get('gesture') in ('point','collect') and details.get('joints'):
+   arm=details['joints'][3]
+   if spec['gesture']=='point':
+    arm.rotation_euler.y=-1.05*ease(q/.35);arm.keyframe_insert(data_path='rotation_euler',frame=frame)
+   else:
+    reach=ease((q-.38)/.2);lift=ease((q-.62)/.25)
+    arm.rotation_euler.y=-1.05*reach*(1-lift*.55);arm.rotation_euler.x=-1.25*lift;arm.keyframe_insert(data_path='rotation_euler',frame=frame)
+    held=details['pickup'];held.scale=(1,1,1) if q>=.62 else (0,0,0);held.keyframe_insert(data_path='scale',frame=frame)
   if 'paper' in details:
    paper=details['paper'];paper.location.z=2.1-1.5*e;paper.keyframe_insert(data_path='location',frame=frame)
   if 'beam' in details:
@@ -161,7 +178,7 @@ for frame in range(1,N+1):
  bpy.context.view_layer.update()
  for spec,o,details in sets[k]:
   if spec.get('label'):
-   world=o.matrix_world@Vector((0,0,2.5));v=world_to_camera_view(s,cam,world);pins[spec['id']]=[v.x*720,(1-v.y)*1280]
+   anchor=2.4 if spec['kind'] in ('person','soldier') else .65 if spec['kind'] in ('salt','book') else 1.6;world=o.matrix_world@Vector((0,0,anchor));v=world_to_camera_view(s,cam,world);pins[spec['id']]=[v.x*720,(1-v.y)*1280]
  track.append({'t':t,'scene':k,'pins':pins})
 # Constant camera cuts prevent interpolated travel between distant sets.
 for o in bpy.data.objects:

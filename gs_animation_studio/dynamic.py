@@ -9,7 +9,19 @@ class DynamicRecovery(Recovery):
   self.root.mkdir(parents=True,exist_ok=True)
   if (self.root/'final.mp4').exists():raise StageError('inputs','stale_export')
   shutil.copy(self.known('Mukta.ttf'),self.root/'Mukta.ttf')
-  self.call('plan_new_topic',[sys.executable,str(self.base/'planner.py'),str(self.root),str(self.repo)],timeout=720)
+  reviewed=os.getenv('STUDIO_REVIEWED_RECIPE','')
+  if reviewed:
+   import re
+   from planner import validate,check_quantities
+   if not re.fullmatch(r'[a-z0-9_]+',reviewed):raise StageError('inputs','invalid_reviewed_recipe')
+   src=self.base/'reviewed'/(reviewed+'.json');raw=src.read_bytes()
+   if hashlib.sha256(raw).hexdigest()!=os.getenv('STUDIO_REVIEWED_SHA256'):raise StageError('inputs','reviewed_recipe_hash_mismatch')
+   recipe=json.loads(raw);validate(recipe)
+   check_quantities(recipe,[{'text':recipe['reference_text']}])
+   (self.root/'recipe.json').write_bytes(raw)
+   (self.root/'sources.json').write_text(json.dumps(recipe['sources'],ensure_ascii=False,indent=2))
+   self.note('reviewed_recipe','passed',recipe=reviewed,sha256=hashlib.sha256(raw).hexdigest())
+  else:self.call('plan_new_topic',[sys.executable,str(self.base/'planner.py'),str(self.root),str(self.repo)],timeout=720)
   self.recipe=json.loads((self.root/'recipe.json').read_text());self.plan_digest=hashlib.sha256((self.root/'recipe.json').read_bytes()).hexdigest()
   self.restore_renderer();self.note('inputs','passed',requested_topic=self.recipe['requested_topic'])
  def compatible_snapshot(self):
