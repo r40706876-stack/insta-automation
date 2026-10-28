@@ -1,0 +1,47 @@
+name: Publish authorized easy majority demo once
+on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/majority_demo_publish.yml]
+permissions:
+  contents: write
+concurrency:
+  group: minuteme-majority-demo-20261028
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install publication dependencies
+        run: |
+          pip install --timeout 30 --retries 1 -r requirements.txt imageio-ffmpeg
+          python -c "import imageio_ffmpeg,os; p='/usr/local/bin/ffmpeg'; os.path.exists(p) or os.symlink(imageio_ffmpeg.get_ffmpeg_exe(),p)"
+          python -m py_compile publish_majority_demo.py
+      - name: Set receipt commit identity
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+      - name: Publish the exact reviewed demo once
+        env:
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          PYTHONUNBUFFERED: '1'
+        run: |
+          set -o pipefail
+          python -u publish_majority_demo.py 2>&1 | sed -u -E 's/(access_token=|key=|Bearer )[^&" ]+/\1***/g'
+      - name: Retain publication or uncertain-attempt receipts
+        if: always()
+        run: |
+          git add experiments/majority_share_demo_20261028 2>/dev/null || exit 0
+          git diff --cached --quiet && exit 0
+          git commit -m 'Preserve majority demo publication receipt [skip ci]'
+          for attempt in 1 2 3; do
+            git pull --rebase && git push && exit 0
+            sleep 2
+          done
+          exit 1
