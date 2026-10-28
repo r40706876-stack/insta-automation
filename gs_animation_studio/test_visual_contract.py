@@ -94,4 +94,11 @@ class SharedBuilderTests(unittest.TestCase):
    self.assertEqual(script['renderer_version'],bridge.VERSION);self.assertEqual((root/'reel.mp4').read_bytes(),b'verified fixture video')
    self.assertEqual(json.loads((root/'validated.json').read_text())['sha256'],hashlib.sha256(b'verified fixture video').hexdigest())
 
+ def test_bridge_does_not_rebuild_an_already_published_slot(self):
+  with tempfile.TemporaryDirectory() as tmp:
+   root=Path(tmp);(root/'published.json').write_text(json.dumps({'media_id':'existing'}))
+   (root/'reel.mp4').write_bytes(b'original published video')
+   with self.assertRaisesRegex(RuntimeError,'Already published output'):bridge.build(root,'2026-10-28')
+   self.assertEqual((root/'reel.mp4').read_bytes(),b'original published video')
+
 if __name__=='__main__':unittest.main()

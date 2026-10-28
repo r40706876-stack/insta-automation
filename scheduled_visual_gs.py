@@ -28,9 +28,12 @@ elif subject=='Geography':
  if not used:
   q={'subject':subject,'question':'rainshadow-first-trial: एक पहाड़ की दो तरफ बारिश अलग क्यों?','options':{'a':'नम हवा ऊपर उठकर ठंडी होती है; दूसरी ओर उतरती हवा गर्म और अपेक्षाकृत सूखी होती है।'},'answer':'a','explanation':'नम हवा पहाड़ पर ऊपर उठती और ठंडी होती है। संघनन से बादल और वर्षा बन सकते हैं। दूसरी तरफ नीचे उतरती हवा गर्म होती है और अपेक्षाकृत कम वर्षा होती है। यह सरलीकृत वर्षाछाया का मॉडल है; बारिश पूरी तरह शून्य होना जरूरी नहीं।','sources':['https://cloudatlas.wmo.int/orographic-influences-on-the-windward-side.html','https://www.noaa.gov/jetstream/appendix/weather-glossary-r']}
   os.environ['GS_REFERENCE_JSON']=json.dumps([q],ensure_ascii=False)
-assert subject in ('Geography','History','Traditional GK','Polity','Economics','Current Affairs')
+assert subject in ('Geography','History','Traditional GK','Polity','Economics','Current Affairs','Science')
 os.environ['GS_VISUAL_SUBJECT']=subject
 root=Path(os.environ['GS_VISUAL_OUTPUT']);root.mkdir(parents=True,exist_ok=True)
+if (root/'published.json').exists() and json.loads((root/'published.json').read_text()).get('media_id'):
+ print('Already published slot; keep the original video and receipt',flush=True)
+ raise SystemExit(0)
 (root/'experiment.json').write_text(json.dumps({'slot':key,'subject':subject,'target_utc':target,'format':'everyday visual puzzle; mechanism begins immediately; transfer question','comparison':'24h and 72h; skip, watch time, shares, follows; not proof from one post'},ensure_ascii=False,indent=2))
 
 # All supported subjects now build through gs_animation_bridge and the shared Blender engine.

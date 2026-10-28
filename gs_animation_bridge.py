@@ -28,6 +28,8 @@ def choose_reference(bank,subject,used):
 
 def build(root,day):
  root=Path(root);root.mkdir(parents=True,exist_ok=True)
+ if (root/'published.json').exists() and json.loads((root/'published.json').read_text()).get('media_id'):
+  raise RuntimeError('Already published output: keep the original video and receipt; choose a future slot')
  import auto_poster as e
  bank=json.loads(os.environ['GS_REFERENCE_JSON']) if os.getenv('GS_REFERENCE_JSON') else e.load_bank()
  subject=os.getenv('GS_VISUAL_SUBJECT','')
