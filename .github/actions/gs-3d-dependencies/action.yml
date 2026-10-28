@@ -1,0 +1,41 @@
+name: GS Blender rendering dependencies
+description: Verified Blender, software rendering, audio and text packages
+runs:
+  using: composite
+  steps:
+    - name: Install operating-system rendering libraries
+      shell: bash
+      run: |
+        sudo python - <<'PYFIX'
+        from pathlib import Path
+        files=[p for p in Path('/etc/apt').rglob('*') if p.is_file() and p.suffix in {'.list','.sources','.txt'}]
+        for p in files:
+            if not p.exists():continue
+            s=p.read_text().replace('http://azure.archive.ubuntu.com/ubuntu','https://archive.ubuntu.com/ubuntu').replace('http://archive.ubuntu.com/ubuntu','https://archive.ubuntu.com/ubuntu').replace('http://security.ubuntu.com/ubuntu','https://security.ubuntu.com/ubuntu')
+            p.write_text(s)
+        PYFIX
+        timeout 240 sudo apt-get update -qq -o Acquire::Retries=1 -o Acquire::http::Timeout=30 || timeout 240 sudo apt-get update -qq -o Acquire::Retries=1 -o Acquire::http::Timeout=30
+        timeout 240 sudo env DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends -o Dpkg::Lock::Timeout=60 -o Acquire::Retries=1 -o Acquire::http::Timeout=30 ffmpeg xvfb xauth libegl1 libegl-mesa0 libgl1 libgl1-mesa-dri libxrender1 libxi6 libxkbcommon0
+    - name: Install known working Python voice and text packages
+      shell: bash
+      run: |
+        python -m pip install --timeout 30 --retries 2 Pillow==13.0.0 numpy==2.4.6 requests==2.34.2 edge-tts==7.3.1 || python -m pip install --no-cache-dir --timeout 30 --retries 2 Pillow==13.0.0 numpy==2.4.6 requests==2.34.2 edge-tts==7.3.1
+    - name: Reuse the verified Blender installation
+      id: blender_cache
+      uses: actions/cache@v4
+      with:
+        path: /tmp/blender
+        key: gs-blender-4.2.0-linux-x64-4f4fd7646af01f6f
+    - name: Download verified Blender with a bounded official mirror fallback
+      if: steps.blender_cache.outputs.cache-hit != 'true'
+      shell: bash
+      run: |
+        for host in download.blender.org mirror.blender.org ftp.blender.org; do
+          if curl -fL --retry 1 --connect-timeout 15 --max-time 120 "https://$host/release/Blender4.2/blender-4.2.0-linux-x64.tar.xz" -o /tmp/blender.tar.xz; then
+            if echo '4f4fd7646af01f6fee9d420408318381a6e52571268eb7cf9cd5033bd9e7a359  /tmp/blender.tar.xz' | sha256sum -c -; then break; fi
+          fi
+        done
+        echo '4f4fd7646af01f6fee9d420408318381a6e52571268eb7cf9cd5033bd9e7a359  /tmp/blender.tar.xz' | sha256sum -c -
+        mkdir -p /tmp/blender
+        timeout 120 tar -xf /tmp/blender.tar.xz -C /tmp/blender --strip-components=1
+        /tmp/blender/blender --version

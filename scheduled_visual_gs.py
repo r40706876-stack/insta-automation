@@ -33,20 +33,7 @@ os.environ['GS_VISUAL_SUBJECT']=subject
 root=Path(os.environ['GS_VISUAL_OUTPUT']);root.mkdir(parents=True,exist_ok=True)
 (root/'experiment.json').write_text(json.dumps({'slot':key,'subject':subject,'target_utc':target,'format':'everyday visual puzzle; mechanism begins immediately; transfer question','comparison':'24h and 72h; skip, watch time, shares, follows; not proof from one post'},ensure_ascii=False,indent=2))
 
-# The first geography trial is authored from the cited WMO/NOAA reference.
-# Keep this source-checked script deterministic instead of depending on an LLM retry.
-if subject=='Geography' and os.getenv('GS_REFERENCE_JSON'):
- import gs_scene_stage as motion,hashlib
- reference=json.loads(os.environ['GS_REFERENCE_JSON'])[0]
- lines=[
- ('एक पहाड़। बारिश अलग क्यों?','एक पहाड़ की दो तरफ बारिश अलग क्यों? नम हवा का रास्ता देखो।'),
- ('ऊपर उठी हवा ठंडी हुई','हवा पहाड़ पर ऊपर चढ़ती है। ठंडी होने पर बादल और बारिश बन सकते हैं।'),
- ('दूसरी तरफ क्या हुआ?','दूसरी तरफ हवा नीचे उतरकर गर्म होती है। यहाँ अक्सर कम बारिश होती है।'),
- ('किस तरफ बारिश कम?','अब बताओ, हवा जिस तरफ नीचे उतरे, वहाँ बारिश ज्यादा या कम? अक्सर कम।')]
- phases=['question','explain','demonstrate','recall']
- script={'ok':True,'title':'पहाड़ के दो तरफ बारिश अलग क्यों?','subject':subject,'renderer_version':motion.VERSION,'reference':reference,'question_hash':hashlib.sha256(reference['question'].encode()).hexdigest(),'scenes':[{'label':title,'speech':speech,'animation':{'type':'rainshadow','phase':phase,'labels':['ऊपर: ठंडी हवा','नीचे: गर्म हवा']}} for (title,speech),phase in zip(lines,phases)]}
- (root/'script.json').write_text(json.dumps(script,ensure_ascii=False,indent=2))
-
+# All supported subjects now build through gs_animation_bridge and the shared Blender engine.
 sys.argv=['daily_visual_gs.py'];runpy.run_path('daily_visual_gs.py',run_name='__main__')
 if os.environ.get('POST_MODE')=='publish':
  sys.argv=['daily_visual_gs.py','--publish'];runpy.run_path('daily_visual_gs.py',run_name='__main__')

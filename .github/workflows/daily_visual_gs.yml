@@ -31,6 +31,9 @@ jobs:
         run: |
           pip install --timeout 30 --retries 1 -r requirements.txt imageio-ffmpeg
           python -c "import imageio_ffmpeg,os; os.symlink(imageio_ffmpeg.get_ffmpeg_exe(),'/usr/local/bin/ffmpeg')"
+      - name: Prepare the same 3D engine used by Animation Studio
+        if: inputs.mode != 'publish' && github.event.schedule != '15 12 * * *'
+        uses: ./.github/actions/gs-3d-dependencies
       - name: Build or publish
         env:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
@@ -39,6 +42,7 @@ jobs:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
           IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          BLENDER_BIN: /tmp/blender/blender
           MODE: ${{ inputs.mode }}
           EVENT_SCHEDULE: ${{ github.event.schedule }}
           PYTHONUNBUFFERED: '1'
@@ -61,7 +65,7 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
-          git add experiments/daily_visual_gs || exit 0
+          git add experiments/daily_visual_gs experiments/gs_animation_studio studio_diagnostics || exit 1
           git diff --cached --quiet && exit 0
           git commit -m 'Save daily visual GS result [skip ci]'
           for attempt in 1 2 3; do

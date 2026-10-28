@@ -33,32 +33,21 @@ def line(name,pts,r,m,parent):
  for a,p in zip(sp.points,pts):a.co=(*p,1)
  o=bpy.data.objects.new(name,c);bpy.context.collection.objects.link(o);o.parent=parent;o.data.materials.append(m);return o
 
-def person(g,m,soldier=False,role='ordinary'):
- joints=[]
- for x in [-.2,.2]:
-  pivot=empty('Hip',g);pivot.location=(x,0,.88);box('Leg',(0,0,-.34),(.23,.27,.7),skin if role=='gandhi' else dark,pivot);box('Foot',(0,-.1,-.78),(.28,.5,.16),dark,pivot);joints.append(pivot)
- box('Torso',(0,0,1.17),(.7,.35,.7),m,g)
- for x in [-.46,.46]:
-  pivot=empty('Shoulder',g);pivot.location=(x,0,1.45);box('Arm',(0,0,-.3),(.19,.24,.64),m,pivot);sphere('Hand',(0,0,-.64),.12,skin,pivot);joints.append(pivot)
- sphere('Head',(0,0,1.93),.3,skin,g)
- for x in [-.11,.11]:sphere('Eye',(x,-.265,1.98),.035,dark,g)
- if soldier:
-  cyl('Helmet',(0,0,2.12),.32,.18,m,g);box('Shield',(-.58,-.26,1.02),(.55,.12,.7),gold,g);box('Sword',(.6,0,1.8),(.055,.055,1),white,g)
- elif role=='gandhi':
-  box('White dhoti',(0,0,.86),(.71,.38,.62),white,g)
-  for x in (-.12,.12):line('Round spectacles',[(x+.105*math.cos(a),-.286,1.98+.105*math.sin(a)) for a in [j*math.tau/24 for j in range(25)]],.014,dark,g)
-  line('Spectacle bridge',[(-.02,-.29,1.98),(.02,-.29,1.98)],.014,dark,g)
-  line('Walking staff',[(-.67,-.05,.03),(-.67,-.05,1.55)],.035,gold,g)
- else:cyl('Cap',(0,0,2.16),.31,.12,white,g)
- return joints
+import sys
+sys.path.insert(0,str(R))
+import rich_assets as rich
+rich.configure(globals())
 
 def asset(spec,parent):
  kind=spec['kind'];g=empty(spec['id'],parent);m=mat(spec['id'],tuple(int(spec['color'][i:i+2],16)/255 for i in (1,3,5)));details={}
  if kind in ('person','soldier'):
-  details['joints']=person(g,m,kind=='soldier',spec.get('role','ordinary'))
-  if spec.get('gesture')=='collect':
-   details['pickup']=box('Salt visibly held in hand',(0,-.03,-.73),(.22,.2,.2),white,details['joints'][3])
-   details['pickup'].scale=(0,0,0)
+  details['human']=rich.human(g,gandhi=spec.get('role')=='gandhi',color=m,scale=1.18,role=spec.get('role','soldier' if kind=='soldier' else 'ordinary'))
+  if kind=='soldier':
+   h=details['human'];cyl('Helmet',(0,0,.23),.23,.15,m,h['head']);box('Shield',(-.3,-.2,.25),(.5,.1,.65),gold,h['body'])
+ elif kind=='map':details.update(rich.map_asset(g,spec))
+ elif kind=='ocean':
+  # Ocean is a diorama; its mesh and moving foam are scaled together.
+  details.update(rich.ocean_asset(g))
  elif kind in ('building','assembly','fort','factory'):
   box('Main structure',(0,.1,1),(1.8,1.2,2),m,g);box('Steps',(0,-.6,.12),(2.4,1.8,.24),white,g)
   if kind=='fort':
@@ -72,9 +61,7 @@ def asset(spec,parent):
    roof=cone('Pediment',(0,0,2.2),1.3,.5,m,g);roof.scale.y=.7
  elif kind in ('planet','moon','sun'):
   sphere(kind,(0,0,1.2),1.05,m,g)
-  if kind=='planet':
-   for i in range(8):
-    a=i*2.399;z=-.8+i*.22;r=math.sqrt(max(.01,1.05**2-z*z));patch=sphere('Schematic land',(r*math.cos(a),r*math.sin(a),1.2+z),.28,green,g);patch.scale.z=.6
+  if kind=='planet':rich.world_coasts(g)
   elif kind=='sun':
    for i in range(12):
     a=i*math.tau/12;line('Sun ray',[(1.18*math.cos(a),0,1.2+1.18*math.sin(a)),(1.48*math.cos(a),0,1.2+1.48*math.sin(a))],.045,gold,g)
@@ -139,12 +126,14 @@ stage=empty('Stage');box('Ground',(0,0,-.18),(8.5,5,.25),mat('Stage blue',(.025,
 sets=[]
 for k,sc in enumerate(plan['scenes']):
  group=empty('Set '+str(k));group.location.x=k*30
+ sc['_environment']=rich.environment(sc.get('setting','neutral'),group)
  sets.append([(o,*asset(o,group)) for o in sc['objects']])
 bpy.ops.object.camera_add();cam=bpy.context.object;cam.data.type='ORTHO';cam.data.ortho_scale=13.8;s.camera=cam
 track=[]
 def ease(x):x=max(0,min(1,x));return x*x*(3-2*x)
 for frame in range(1,N+1):
- t=(frame-1)/FPS;k=max(i for i,a in enumerate(starts) if a<=t);q=min(1,(t-starts[k])/ds[k]);e=ease(q);s.frame_set(frame);pins={};stage.location.x=k*30;stage.keyframe_insert(data_path='location',frame=frame)
+ t=(frame-1)/FPS;k=max(i for i,a in enumerate(starts) if a<=t);q=min(1,(t-starts[k])/ds[k]);e=ease(q);s.frame_set(frame);pins={};annotations=[];stage.location.z=-100 if any(sp['kind']=='map' for sp,_,_ in sets[k]) or plan['scenes'][k].get('setting')=='space' else 0;stage.location.x=k*30;stage.keyframe_insert(data_path='location',frame=frame)
+ if plan['scenes'][k].get('_environment'):rich.animate_ocean(plan['scenes'][k]['_environment'],t,frame)
  for spec,o,details in sets[k]:
   p=Vector(spec['pos']);size=Vector(spec['size']);action=spec['action'];o.rotation_euler=(0,0,0)
   if action in ('move','walk','rise','fall','flow'):
@@ -155,16 +144,21 @@ for frame in range(1,N+1):
   elif action=='grow':size*=.25+.75*e
   elif action=='pulse':size*=.87+.13*math.sin(q*math.tau*2)
   o.location=p;o.scale=size;o.keyframe_insert(data_path='location',frame=frame);o.keyframe_insert(data_path='scale',frame=frame);o.keyframe_insert(data_path='rotation_euler',frame=frame)
-  for j,joint in enumerate(details.get('joints',[])):
-   joint.rotation_euler.x=(.45*math.sin(q*math.tau*4+(j%2)*math.pi)) if action=='walk' else .08*math.sin(q*math.tau+j);joint.keyframe_insert(data_path='rotation_euler',frame=frame)
-  if spec.get('gesture') in ('point','collect') and details.get('joints'):
-   arm=details['joints'][3]
-   if spec['gesture']=='point':
-    arm.rotation_euler.y=-1.05*ease(q/.35);arm.keyframe_insert(data_path='rotation_euler',frame=frame)
-   else:
-    reach=ease((q-.38)/.2);lift=ease((q-.62)/.25)
-    arm.rotation_euler.y=-1.05*reach*(1-lift*.55);arm.rotation_euler.x=-1.25*lift;arm.keyframe_insert(data_path='rotation_euler',frame=frame)
-    held=details['pickup'];held.scale=(1,1,1) if q>=.62 else (0,0,0);held.keyframe_insert(data_path='scale',frame=frame)
+  if 'human' in details:
+   h=details['human'];pickup=spec.get('gesture')=='collect';poseq=max(0,min(1,(q-.4)/.6)) if pickup else q;rich.pose(h,poseq,frame,walk=action=='walk' and (not pickup or q<.45),collect=pickup,hold=spec.get('gesture')=='hold')
+   if action=='walk' and 'to' in spec:
+    travel=Vector(spec['to'])-Vector(spec['pos'])
+    if abs(travel.x)+abs(travel.y)>.01:h['root'].rotation_euler.z=math.atan2(travel.x,-travel.y)*(1-ease((q-.3)/.15) if pickup else 1)
+    rich.key(h['root'],'rotation_euler',frame)
+   if spec.get('gesture')=='point':
+    arm=h['arms'][1][0];arm.rotation_euler.y=-1.0*ease(q/.35);rich.key(arm,'rotation_euler',frame)
+   if spec.get('gesture') in ('collect','hold'):
+    target=next((sp for sp,_,_ in sets[k] if sp['id']==spec.get('interact_with')),None)
+    if target and target['kind']!='salt':
+     # This engine has no matching grasp payload for this object; do not show fake salt.
+     h['salt'].scale=(0,0,0);rich.key(h['salt'],'scale',frame)
+  if details.get('route'):rich.animate_map(details,q,frame)
+  if 'wave' in details:rich.animate_ocean(details,t,frame)
   if 'paper' in details:
    paper=details['paper'];paper.location.z=2.1-1.5*e;paper.keyframe_insert(data_path='location',frame=frame)
   if 'beam' in details:
@@ -173,13 +167,15 @@ for frame in range(1,N+1):
    piston=details['piston'];piston.location.z=1+.6*math.sin(q*math.tau*2);piston.keyframe_insert(data_path='location',frame=frame)
   for j,el in enumerate(details.get('electrons',[])):
    a=q*math.tau*2+j*2;el.location=(math.cos(a),math.sin(a),0);el.keyframe_insert(data_path='location',frame=frame)
- cam.data.ortho_scale=8.8 if len(sets[k])<=2 else 10.4 if len(sets[k])==3 else 12.0;cam.data.keyframe_insert(data_path='ortho_scale',frame=frame)
- target=Vector((k*30,0,1.0));cam.location=target+Vector((3.6,-17,9.5));cam.rotation_euler=(target-cam.location).to_track_quat('-Z','Y').to_euler();cam.keyframe_insert(data_path='location',frame=frame);cam.keyframe_insert(data_path='rotation_euler',frame=frame)
+ cam.data.ortho_scale=(11.5 if any(sp['kind']=='map' for sp,_,_ in sets[k]) else 8.8 if len(sets[k])<=2 else 10.4 if len(sets[k])==3 else 12.0)-.12*ease(q);cam.data.keyframe_insert(data_path='ortho_scale',frame=frame)
+ target=Vector((k*30,0,1.0));cam.location=target+(Vector((0,-20,0)) if any(sp['kind']=='map' for sp,_,_ in sets[k]) else Vector((3.6,-17,9.5)));cam.rotation_euler=(target-cam.location).to_track_quat('-Z','Y').to_euler();cam.keyframe_insert(data_path='location',frame=frame);cam.keyframe_insert(data_path='rotation_euler',frame=frame)
  bpy.context.view_layer.update()
  for spec,o,details in sets[k]:
+  for label,point in details.get('map_markers',[]):
+   v=world_to_camera_view(s,cam,o.matrix_world@point);annotations.append({'text':label,'anchor':[v.x*720,(1-v.y)*1280]})
   if spec.get('label'):
    anchor=2.4 if spec['kind'] in ('person','soldier') else .65 if spec['kind'] in ('salt','book') else 1.6;world=o.matrix_world@Vector((0,0,anchor));v=world_to_camera_view(s,cam,world);pins[spec['id']]=[v.x*720,(1-v.y)*1280]
- track.append({'t':t,'scene':k,'pins':pins})
+ track.append({'t':t,'scene':k,'pins':pins,'annotations':annotations,'map_disclaimer':any(sp['kind']=='map' and sp.get('route') for sp,_,_ in sets[k])})
 # Constant camera cuts prevent interpolated travel between distant sets.
 for o in bpy.data.objects:
  if o.animation_data and o.animation_data.action:
@@ -189,6 +185,9 @@ if cam.data.animation_data and cam.data.animation_data.action:
  for fc in cam.data.animation_data.action.fcurves:
   for key in fc.keyframe_points:key.interpolation='CONSTANT'
 s.frame_start=1;s.frame_end=N
-(R/'motion.json').write_text(json.dumps(track));(R/'scene_checks.json').write_text(json.dumps({'frames':N,'fps':FPS,'actual_3d':True,'photo_assets':0,'distinct_sets':6,'data_driven_objects':sum(len(x) for x in sets),'schematic_not_exact_reconstruction':True},indent=2))
-bpy.ops.wm.save_as_mainfile(filepath=str(R/'scene.blend'));s.render.image_settings.file_format='FFMPEG';s.render.ffmpeg.format='MPEG4';s.render.ffmpeg.codec='H264';s.render.ffmpeg.constant_rate_factor='HIGH';s.render.filepath=str(R/'silent_3d.mp4');bpy.ops.render.render(animation=True)
+(R/'motion.json').write_text(json.dumps(track));(R/'scene_checks.json').write_text(json.dumps({'frames':N,'fps':FPS,'actual_3d':True,'quality_version':'rich_3d_v1','articulated_people':True,'source_based_maps':True,'photo_assets':0,'distinct_sets':6,'data_driven_objects':sum(len(x) for x in sets),'schematic_not_exact_reconstruction':True},indent=2))
+bpy.ops.wm.save_as_mainfile(filepath=str(R/'scene.blend'));s.render.image_settings.file_format='FFMPEG';s.render.ffmpeg.format='MPEG4';s.render.ffmpeg.codec='H264';s.render.ffmpeg.constant_rate_factor='HIGH';s.render.filepath=str(R/'silent_3d.mp4');
+if os.getenv('STUDIO_PREVIEW_FRAME'):
+ s.frame_set(int(os.environ['STUDIO_PREVIEW_FRAME']));s.render.image_settings.file_format='JPEG';s.render.filepath=str(R/'preview.jpg');bpy.ops.render.render(write_still=True)
+else:bpy.ops.render.render(animation=True)
 print('DYNAMIC_3D_DONE',N,flush=True)

@@ -24,6 +24,13 @@ def footer(size,font):
 def prepare_video(src,font):
     src=Path(src)
     if src.name.endswith('_notes_safe_v2.mp4'):return str(src)
+    # The shared Studio compositor already includes the safe-area Notes banner.
+    # Only skip the second banner for the exact hash verified by its export gate.
+    check_path=src.parent/'file_checks.json'
+    if check_path.exists():
+        checked=json.loads(check_path.read_text());banner=checked.get('notes_banner') or {}
+        if checked.get('quality_version')=='rich_3d_v1' and banner.get('version')=='studio-notes-v1' and banner.get('phone')==PHONE and checked.get('sha256')==hashlib.sha256(src.read_bytes()).hexdigest():
+            return str(src)
     # Resolve dimensions without requiring a separate ffprobe binary.
     import re
     probe=subprocess.run(['ffmpeg','-hide_banner','-i',str(src)],capture_output=True,text=True)

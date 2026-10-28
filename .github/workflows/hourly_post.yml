@@ -44,6 +44,10 @@ jobs:
           pip install --timeout 30 --retries 1 -r requirements.txt imageio-ffmpeg
           python -c "import imageio_ffmpeg,os; p='/usr/local/bin/ffmpeg'; os.path.exists(p) or os.symlink(imageio_ffmpeg.get_ffmpeg_exe(),p)"
 
+      - name: Prepare shared 3D engine for subject explainers
+        if: inputs.subject != '' || inputs.format == 'current'
+        uses: ./.github/actions/gs-3d-dependencies
+
       - name: Reel banao + Instagram pe daalo
         env:
           IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
@@ -53,6 +57,7 @@ jobs:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           IMGBB_KEY: ${{ secrets.IMGBB_KEY }}
+          BLENDER_BIN: /tmp/blender/blender
           GS_TARGET_UTC: ${{ github.event.inputs.target_utc }}
           GS_SUBJECT: ${{ github.event.inputs.subject }}
           GS_REGULAR_SCHEDULE: '20261026-v2'
@@ -84,6 +89,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add experiments/gs_animation_studio studio_diagnostics 2>/dev/null || true
           git add experiments/scheduled_visual_gs 2>/dev/null || true
           git add experiments/regular_schedule 2>/dev/null || true
           git add progress.json

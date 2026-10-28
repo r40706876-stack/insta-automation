@@ -1,0 +1,44 @@
+name: GS rich animation quality checks
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'gs_animation_studio/**'
+      - 'gs_animation_bridge.py'
+      - 'gs_publication.py'
+      - 'daily_visual_gs.py'
+      - 'scheduled_visual_gs.py'
+      - '.github/actions/gs-3d-dependencies/**'
+      - '.github/workflows/gs_animation_quality.yml'
+      - '.github/workflows/hourly_post.yml'
+      - '.github/workflows/daily_visual_gs.yml'
+permissions:
+  contents: read
+concurrency:
+  group: gs-animation-quality
+  cancel-in-progress: true
+jobs:
+  check:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: ./.github/actions/gs-3d-dependencies
+      - name: Verify quality contract, subject routing and recovery guards
+        run: python -m unittest discover -s gs_animation_studio -p 'test_*.py' -v
+      - name: Render six real 3D sets and check their actual motion
+        env:
+          BLENDER_BIN: /tmp/blender/blender
+        run: python gs_animation_studio/quality_smoke.py --render
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: GS-rich-3D-quality-preview
+          path: |
+            /tmp/gs-quality-preview/contact_sheet.jpg
+            /tmp/gs-quality-preview/quality_smoke.json
+            /tmp/gs-quality-preview/scene_checks.json
+          if-no-files-found: warn

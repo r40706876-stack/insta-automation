@@ -23,3 +23,17 @@ New topics require a working Gemini or Groq text API and a working voice service
 Diagnostics: Actions artifact `GS-Studio-diagnostics-<run>-<attempt>` and `studio_diagnostics/`. Passing reels remain under `experiments/gs_animation_studio/<topic>/<run>/`.
 
 Source lookup first tries fetched links, then live Gemini/Bing search, then a transparently labelled encyclopedia fallback. A pasted reference can be supplied when sites block requests. The source record and AI audits accompany a successful build. Automatic topic selection checks both previous keys and an AI novelty audit; explicit repeated requests are allowed. The engine supplies safe object layouts and keeps the full narration when shortening screen labels.
+
+## Shared rich 3D engine (rich_3d_v1)
+
+All new-topic Studio builds and the daily/regular **subject explainers** now use the same Blender builder (`gs_animation_bridge.py`). The regular 07:00 seven-PYQ and 17:00 mega question formats retain the user's existing layout and times. No additional posts or schedule slots are added. Current-affairs publication hold, MinuteMe_GS account check, collaborator invitation and duplicate/late-slot guards stay active.
+
+- Articulated people with hips, knees, elbows, head and identifiable supported clothing; Gandhi has the reviewed bald head, round spectacles, dhoti, shawl and staff. Walking, pointing and the supported salt pickup are animated. This does not implement every historical likeness or every grasp action.
+- Topic-appropriate settings: coastline with a deforming ocean and traveling foam, institution, village, laboratory, space or neutral teaching set. Unrelated lessons are not forced into a Gandhi/sea/globe scene.
+- Bundled sourced Gujarat outline and Natural Earth physical coastlines for world/India maps and globes. Geographic route points are bounded and audited; the on-screen disclaimer identifies schematic routes. Physical coastlines do not provide arbitrary state/district borders.
+- A visible causal action is mandatory in each scene. Decorative pulsing, zooming or moving captions alone is rejected. Unsupported custom models fail clearly rather than silently substituting irrelevant objects.
+- The existing safe-area Notes/WhatsApp banner and colored Hindi captions are shared. Hash-verified Studio exports skip the publisher's second banner, preventing duplicated text and unnecessary shrinking.
+- Old 2D exports cannot pass the new version gate. The original 3D reviewed demos stay separate; manual `new_topic` uses the new engine automatically.
+- `GS rich animation quality checks` runs the unit/integration suite plus actual Blender rendering of six sets and pixel-motion checks. The check workflow has no Instagram or voice API credentials and never publishes. Its artifact contains a contact sheet and motion report.
+
+These are reusable supported assets and stronger checks, not a promise that every possible topic has a perfect custom simulation. Text/voice API access and factual/visual audits can still fail; render failures retain diagnostics. A human preview and native Instagram metrics remain necessary for judging clarity and engagement.

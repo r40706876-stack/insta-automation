@@ -4,7 +4,7 @@ from recovery import Recovery,StageError
 class DynamicRecovery(Recovery):
  def __init__(self,*args,**kwargs):
   super().__init__('new_topic',*args,**kwargs)
-  self.snapshot={n:(self.base/n).read_bytes() for n in ('scene_dynamic.py','compose_dynamic.py','scene_dandi.py','dandi_map.json','dandi_map.LICENSE')}
+  self.snapshot={n:(self.base/n).read_bytes() for n in ('scene_dynamic.py','compose_dynamic.py','scene_dandi.py','dandi_map.json','dandi_map.LICENSE','rich_assets.py','world_land.json','world_land.LICENSE')}
  def prepare_inputs(self):
   self.root.mkdir(parents=True,exist_ok=True)
   if (self.root/'final.mp4').exists():raise StageError('inputs','stale_export')
@@ -23,14 +23,15 @@ class DynamicRecovery(Recovery):
    self.note('reviewed_recipe','passed',recipe=reviewed,sha256=hashlib.sha256(raw).hexdigest())
   else:self.call('plan_new_topic',[sys.executable,str(self.base/'planner.py'),str(self.root),str(self.repo)],timeout=720)
   self.recipe=json.loads((self.root/'recipe.json').read_text());self.plan_digest=hashlib.sha256((self.root/'recipe.json').read_bytes()).hexdigest()
+  if any(o['kind'] in ('map','planet') for sc in self.recipe['scenes'] for o in sc['objects']):
+   source=self.root/'sources.json';items=json.loads(source.read_text());items.append({'url':'https://www.naturalearthdata.com/downloads/110m-physical-vectors/110m-land/','publisher':'Natural Earth, public-domain physical coastline geometry','note':'Modern Gujarat outline is separately attributed in dandi_map.LICENSE; routes are schematic.'});source.write_text(json.dumps(items,ensure_ascii=False,indent=2))
   self.restore_renderer();self.note('inputs','passed',requested_topic=self.recipe['requested_topic'])
  def compatible_snapshot(self):
   if hashlib.sha256((self.root/'recipe.json').read_bytes()).hexdigest()!=self.plan_digest:raise StageError('snapshot','lesson_mismatch')
  def restore_renderer(self):
   self.compatible_snapshot()
   renderer='scene_dandi.py' if self.recipe.get('renderer')=='dandi_coast_v3' else 'scene_dynamic.py'
-  if renderer=='scene_dandi.py':
-   for name in ('dandi_map.json','dandi_map.LICENSE'):(self.root/name).write_bytes(self.snapshot[name])
+  for name in ('dandi_map.json','dandi_map.LICENSE','rich_assets.py','world_land.json','world_land.LICENSE'):(self.root/name).write_bytes(self.snapshot[name])
   for src,dst in [(renderer,'scene.py'),('compose_dynamic.py','compose.py')]:(self.root/dst).write_bytes(self.snapshot[src])
   self.repair('restore_reviewed_renderer',engine='data-driven-3d',same_recipe=True)
  def restore_voice(self):

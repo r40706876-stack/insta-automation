@@ -4,7 +4,7 @@ from unittest.mock import patch
 from planner import validate,public_url,generate,normalize_layout,check_quantities
 
 def plan():
- return {'title':'नमक पर कानून क्यों?','topic_key':'salt_law','share_reason':'नमक सत्याग्रह का कारण याद रहे','recall':'किस कानून को चुनौती दी?', 'scenes':[{'heading':'नमक पर कानून','explanation':'कानून तोड़ना अहिंसक विरोध था','speech':'नमक रोज की जरूरत था और उस पर अंग्रेजों का नियंत्रण था।','teaches':'नमक कानून का विरोध','objects':[{'id':'person','kind':'person','color':'#ffffff','pos':[-1,0,0],'to':[1,0,0],'size':[.6,.6,.6],'action':'walk','label':'लोग'},{'id':'salt','kind':'salt','color':'#1a80bb','pos':[2,0,0],'size':[.7,.7,.7],'action':'grow','label':'नमक'}]} for _ in range(6)]}
+ return {'title':'नमक पर कानून क्यों?','topic_key':'salt_law','share_reason':'नमक सत्याग्रह का कारण याद रहे','recall':'किस कानून को चुनौती दी?', 'scenes':[{'setting':'neutral','visual_action':'A person walks toward the salt display','heading':'नमक पर कानून','explanation':'कानून तोड़ना अहिंसक विरोध था','speech':'नमक रोज की जरूरत था और उस पर अंग्रेजों का नियंत्रण था।','teaches':'नमक कानून का विरोध','objects':[{'id':'person','kind':'person','color':'#ffffff','pos':[-1,0,0],'to':[1,0,0],'size':[.6,.6,.6],'action':'walk','label':'लोग'},{'id':'salt','kind':'salt','color':'#1a80bb','pos':[2,0,0],'size':[.7,.7,.7],'action':'grow','label':'नमक'}]} for _ in range(6)]}
 class NewTopicTests(unittest.TestCase):
  def test_layout_repair_preserves_facts_and_actions(self):
   p=plan();p['scenes'][0]['objects'][0]['pos']=[-10,0,-1];p['scenes'][0]['objects'][0]['size']=[.1,3,.7]
