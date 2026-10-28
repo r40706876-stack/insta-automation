@@ -10,7 +10,9 @@ STARTED=ROOT/'publish_started.json'
 EXPECTED='314a7b829e2f1a599a8257def7cfa3ca7907720c420fe58088b9be93e530eec0'
 TITLE='3 सबसे ज्यादा, फिर भी बहुमत नहीं?'
 def now():return datetime.datetime.now(datetime.timezone.utc).isoformat()
-def save(path,obj):path.write_text(json.dumps(obj,ensure_ascii=False,indent=2))
+def save(path,obj):
+ path.parent.mkdir(parents=True,exist_ok=True)
+ path.write_text(json.dumps(obj,ensure_ascii=False,indent=2))
 def persist(message):
  subprocess.run(['git','add',str(ROOT)],check=True)
  if subprocess.run(['git','diff','--cached','--quiet']).returncode:

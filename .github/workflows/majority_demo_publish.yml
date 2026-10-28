@@ -1,3 +1,4 @@
+# Revision 2: ensure the receipt directory exists before any upload.
 name: Publish authorized easy majority demo once
 on:
   push:
