@@ -1,0 +1,384 @@
+{
+  "ok": true,
+  "reasons": [],
+  "novel_topic": true,
+  "scene_checks": [
+    {
+      "scene": 1,
+      "mechanism_matches": true
+    },
+    {
+      "scene": 2,
+      "mechanism_matches": true
+    },
+    {
+      "scene": 3,
+      "mechanism_matches": true
+    },
+    {
+      "scene": 4,
+      "mechanism_matches": true
+    },
+    {
+      "scene": 5,
+      "mechanism_matches": true
+    },
+    {
+      "scene": 6,
+      "mechanism_matches": true
+    }
+  ],
+  "title": "गुप्त साम्राज्य का गुजरात विस्तार",
+  "subject": "इतिहास",
+  "topic_key": "gupta_empire_gujarat_expansion",
+  "share_reason": "गुप्त साम्राज्य के गुजरात विस्तार का सही वर्ष याद रहेगा",
+  "recall": "गुप्त साम्राज्य ने 390 ईस्वी में गुजरात तक विस्तार किया।",
+  "share_card": {
+    "kind": "exam_confusion",
+    "recipient": "परीक्षा की तैयारी करने वाले दोस्त",
+    "benefit": "गुप्त साम्राज्य के गुजरात विस्तार का सही वर्ष याद रहेगा",
+    "cta": "चलो साथ में 390 ईस्वी याद रखें"
+  },
+  "scenes": [
+    {
+      "heading": "गुजरात का संकेत",
+      "explanation": "कब तक विस्तार?",
+      "speech": "गुप्त साम्राज्य ने गुजरात को कब जोड़ा? चलिए देखते हैं!",
+      "teaches": "प्रश्न को प्रस्तुत करना और जिज्ञासा जगाना",
+      "setting": "neutral",
+      "visual_action": "भारत के नक्शे पर गुजरात क्षेत्र को चमकते तीर से दिखाया गया है।",
+      "text_color": "#ffffff",
+      "explanation_color": "#ffdd00",
+      "objects": [
+        {
+          "kind": "map",
+          "action": "trace",
+          "map_region": "india",
+          "route": [
+            [
+              78,
+              23
+            ],
+            [
+              72,
+              22
+            ]
+          ],
+          "label": "भारत",
+          "id": "map1",
+          "color": "#59c7c5",
+          "pos": [
+            -0.9,
+            0,
+            0
+          ],
+          "size": [
+            1.1,
+            1.1,
+            1.1
+          ]
+        },
+        {
+          "kind": "arrow",
+          "action": "pulse",
+          "label": "गुजरात",
+          "id": "arrow1",
+          "color": "#59c7c5",
+          "pos": [
+            0.9,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        }
+      ],
+      "quiz_card": {
+        "question": "गुजरात कब जुड़ा?",
+        "answer": "390 ईस्वी",
+        "reveal_after": 2.5,
+        "answer_color": "#73efb2"
+      }
+    },
+    {
+      "heading": "द्वितीय की यात्रा",
+      "explanation": "पश्चिम की ओर बढ़ना",
+      "speech": "चंद्रगुप्त द्वितीय अपनी सेना के साथ गुजरात की दिशा में चल पड़े।",
+      "teaches": "विस्तार की दिशा और नेतृत्व दिखाना",
+      "setting": "neutral",
+      "visual_action": "चंद्रगुप्त द्वितीय और उसकी सेना पश्चिम की ओर चलते दिखाए गए हैं।",
+      "text_color": "#ffffff",
+      "explanation_color": "#ffdd00",
+      "objects": [
+        {
+          "kind": "person",
+          "action": "walk",
+          "label": "चंद्रगुप्त द्वितीय",
+          "id": "person1",
+          "color": "#f4e7bf",
+          "pos": [
+            -1.35,
+            0,
+            0
+          ],
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ],
+          "to": [
+            -0.15,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "soldier",
+          "action": "walk",
+          "label": "सेना",
+          "id": "soldier1",
+          "color": "#a84b3e",
+          "pos": [
+            0.45,
+            0,
+            0
+          ],
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ],
+          "to": [
+            1.65,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "विजय का दृश्य",
+      "explanation": "गुजरात साम्राज्य में शामिल",
+      "speech": "युद्ध के बाद गुजरात क्षेत्र गुप्त साम्राज्य का हिस्सा बन गया।",
+      "teaches": "क्षेत्र के साम्राज्य में शामिल होने की प्रक्रिया",
+      "setting": "neutral",
+      "visual_action": "एक किला गिरता है और नया प्रशासनिक भवन ऊपर उठता है।",
+      "text_color": "#ffffff",
+      "explanation_color": "#ffdd00",
+      "objects": [
+        {
+          "kind": "fort",
+          "action": "fall",
+          "label": "शत्रु किला",
+          "id": "fort1",
+          "color": "#cb9a67",
+          "pos": [
+            -0.9,
+            0,
+            1.2
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            -0.9,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "assembly",
+          "action": "rise",
+          "label": "नया प्रशासन",
+          "id": "assembly1",
+          "color": "#b6b9ad",
+          "pos": [
+            0.9,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            0.9,
+            0,
+            1.2
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "सही वर्ष",
+      "explanation": "विस्तार का समय",
+      "speech": "यह विस्तार 390 ईस्वी में हुआ, जिससे शक्ति बढ़ी और व्यापार में भी लाभ मिला।",
+      "teaches": "विस्तार का सटीक वर्ष बताना",
+      "setting": "neutral",
+      "visual_action": "एक सिक्का घूमता है और गुप्त साम्राज्य का भवन बड़ा होता दिखाया गया है।",
+      "text_color": "#ffffff",
+      "explanation_color": "#ffdd00",
+      "objects": [
+        {
+          "kind": "coin",
+          "action": "spin",
+          "label": "390 ईस्वी",
+          "id": "coin1",
+          "color": "#f5bd3d",
+          "pos": [
+            -0.9,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        {
+          "kind": "building",
+          "action": "grow",
+          "label": "गुप्त साम्राज्य",
+          "id": "building1",
+          "color": "#b1a4d3",
+          "pos": [
+            0.9,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "समुद्री लाभ",
+      "explanation": "पश्चिमी व्यापार का फायदा",
+      "speech": "गुजरात पर नियंत्रण से समुद्री व्यापार बढ़ा, राजस्व में वृद्धि हुई।",
+      "teaches": "विस्तार के आर्थिक लाभों को दर्शाना",
+      "setting": "coast",
+      "visual_action": "एक जहाज समुद्र में चलता है और ऊपर सिक्के उठते दिखाए गए हैं।",
+      "text_color": "#ffffff",
+      "explanation_color": "#ffdd00",
+      "objects": [
+        {
+          "kind": "ship",
+          "action": "move",
+          "label": "व्यापारिक जहाज",
+          "id": "ship1",
+          "color": "#59c7c5",
+          "pos": [
+            -1.35,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            -0.15,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "coin",
+          "action": "rise",
+          "label": "धन",
+          "id": "coin2",
+          "color": "#f5bd3d",
+          "pos": [
+            0.9,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            0.9,
+            0,
+            1.2
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "याद रखें",
+      "explanation": "सही उत्तर 390 ईस्वी",
+      "speech": "चंद्रगुप्त द्वितीय ने 390 ईस्वी में गुजरात तक विस्तार किया।",
+      "teaches": "मुख्य तथ्य को दोहराना और याद दिलाना",
+      "setting": "neutral",
+      "visual_action": "भारत के नक्शे पर गुजरात को तीर से दिखाया गया है और एक खुली किताब दिखाई गई है।",
+      "text_color": "#ffffff",
+      "explanation_color": "#ffdd00",
+      "objects": [
+        {
+          "kind": "map",
+          "action": "trace",
+          "map_region": "india",
+          "route": [
+            [
+              78,
+              23
+            ],
+            [
+              72,
+              22
+            ]
+          ],
+          "label": "भारत",
+          "id": "map2",
+          "color": "#59c7c5",
+          "pos": [
+            -0.9,
+            0,
+            0
+          ],
+          "size": [
+            1.1,
+            1.1,
+            1.1
+          ]
+        },
+        {
+          "kind": "arrow",
+          "action": "pulse",
+          "label": "गुजरात",
+          "id": "arrow2",
+          "color": "#59c7c5",
+          "pos": [
+            0.9,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        }
+      ],
+      "quiz_card": {
+        "question": "विस्तार कब हुआ?",
+        "answer": "390 ईस्वी में",
+        "reveal_after": 2.5,
+        "answer_color": "#73efb2"
+      }
+    }
+  ]
+}

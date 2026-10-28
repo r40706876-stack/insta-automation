@@ -1,0 +1,11 @@
+[
+  {
+    "url": "user-provided",
+    "excerpt": "Verified question-bank reference; do not add claims beyond this reference: {\"subject\": \"History\", \"subject_hi\": \"इतिहास\", \"chapter\": \"गुप्त एवं गुप्तोत्तर साम्राज्य (Gupta and Post-Gupta Empire)\", \"sub\": \"\", \"question\": \"चंद्रगुप्त द्वितीय ने गुप्त साम्राज्य का ............ईस्वी में गुजरात तक विस्तार कर लिया था।\", \"options\": {\"a\": \"930\", \"b\": \"903\", \"c\": \"309\", \"d\": \"390\"}, \"answer\": \"d\", \"exams\": [\"RRB Group-D 03-10-2018 (Shift-II)\"], \"explanation\": \"चन्द्रगुप्त द्वितीय ने गुप्त साम्राज्य का 390 ईस्वी में गुजरात तक विस्तार कर लिया था।\", \"times_asked\": 1, \"years\": [\"2018\"], \"id\": \"15ee512ff7\", \"seq\": 754}"
+  },
+  {
+    "url": "https://www.naturalearthdata.com/downloads/110m-physical-vectors/110m-land/",
+    "publisher": "Natural Earth, public-domain physical coastline geometry",
+    "note": "Modern Gujarat outline is separately attributed in dandi_map.LICENSE; routes are schematic."
+  }
+]
