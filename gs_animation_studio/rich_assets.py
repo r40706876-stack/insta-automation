@@ -184,7 +184,7 @@ def world_coasts(parent):
       lon=math.radians(v.x);lat=math.radians(v.y);ids.append(len(verts));verts.append((1.068*math.cos(lat)*math.sin(lon),-1.068*math.cos(lat)*math.cos(lon),1.2+1.068*math.sin(lat)))
      faces.append(tuple(ids))
     if len(flat)>2:
-     for a,b,c in tessellate_polygon([flat]):triangle(a,b,c)
+     for a,b,c in tessellate_polygon([flat]):triangle(*(flat[v] if isinstance(v,int) else v for v in (a,b,c)))
     if faces:
      mesh=bpy.data.meshes.new('Sourced filled continent');mesh.from_pydata(verts,[],faces);mesh.update();o=bpy.data.objects.new('Real geographic land surface',mesh);bpy.context.collection.objects.link(o);o.parent=parent;mesh.materials.append(land)
      for poly in mesh.polygons:poly.use_smooth=True
