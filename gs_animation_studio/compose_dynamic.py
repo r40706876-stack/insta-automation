@@ -38,6 +38,15 @@ def overlay(im,i):
   w=max(65,d.textlength(label,font=font(n))/2+12)
   if abs(x-ax)+abs(y-ay)>45:arrow(d,(x,y+23),(ax,ay),COL,2)
   d.rounded_rectangle((x-w,y-23,x+w,y+23),10,fill=(9,35,47),outline=COL,width=2);text(d,(x,y),label,n,(244,248,250))
+ # Dedicated scene labels are projected from the actual 3D scene, not guessed object names.
+ for item in row.get('annotations',[]):
+  ax,ay=item['anchor'];x=max(135,min(535,ax));y=max(350,min(997,ay));label=item['text'];n=25
+  while n>18 and d.textlength(label,font=font(n))>370:n-=1
+  w=d.textlength(label,font=font(n))/2+12
+  if abs(x-ax)+abs(y-ay)>50:arrow(d,(x,y+20),(ax,ay),COL,2)
+  d.rounded_rectangle((x-w,y-22,x+w,y+22),10,fill=(9,35,47),outline=COL,width=2);text(d,(x,y),label,n,(244,248,250))
+ if row.get('map_disclaimer'):
+  fit(d,(336,1018),'दिशा सांकेतिक • हर पड़ाव का सटीक मार्ग नहीं',21,(224,237,240),590)
  # Phrase timing is approximate for Gemini; it is not falsely labelled word-aligned.
  words=sc['speech'].split();groups=[' '.join(words[j:j+5]) for j in range(0,len(words),5)]
  phrase=groups[min(len(groups)-1,int(max(0,q)*len(groups)))]

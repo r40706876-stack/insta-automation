@@ -1,1 +1,10 @@
-{"topic":"new_topic","topic_text":"दांडी मार्च में नमक क्यों चुना गया?","subject":"इतिहास","voice":"auto","reviewed_recipe":"dandi_v2","reviewed_recipe_sha256":"5952b2b6196a6f97b398d04925a458bd9b75379b765a69122808e10099c579b3","verify_recovery":false,"request_id":"dandi-reviewed-gesture-rebuild-1793151082249"}
+{
+  "topic": "new_topic",
+  "topic_text": "दांडी मार्च में नमक क्यों चुना गया?",
+  "subject": "इतिहास",
+  "voice": "auto",
+  "reviewed_recipe": "dandi_v3",
+  "reviewed_recipe_sha256": "d79756c6a44ef5bd7eb21a84ba3fa4aa4a987a89d6cb7d04844911f7256debed",
+  "verify_recovery": false,
+  "request_id": "dandi-coast-map-articulated-v3"
+}
