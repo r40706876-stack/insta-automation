@@ -1,0 +1,399 @@
+{
+  "title": "भारत कभी समुद्र में अलग था!",
+  "topic_key": "india_island_drift_himalaya_improved_v2",
+  "subject": "भूगोल",
+  "requested_topic": "भारत कभी एक द्वीप था—एशिया तक कैसे पहुँचा?",
+  "dynamic": true,
+  "renderer": "india_drift_v2",
+  "quality_version": "rich_3d_v1",
+  "share_reason": "भारत की यात्रा और हिमालय के बनने को एक साथ समझने के लिए।",
+  "recall": "भारत उत्तर गया, एशिया से टकराया, चट्टानें दबीं और हिमालय उठा।",
+  "share_card": {
+    "kind": "common_misconception",
+    "recipient": "नक्शे से भूगोल सीखने वाला अपना दोस्त",
+    "benefit": "भारत की यात्रा और हिमालय बनने का आसान संबंध समझना",
+    "cta": "हिमालय कैसे बना? यह दृश्य अपने पढ़ाई वाले दोस्त को भेजो"
+  },
+  "sources": [
+    {
+      "url": "https://pubs.usgs.gov/gip/dynamic/himalaya.html",
+      "publisher": "USGS, This Dynamic Earth: The Himalayas"
+    },
+    {
+      "url": "https://science.nasa.gov/earth/earth-observatory/forging-sulaiman-range-84060/",
+      "publisher": "NASA Earth Observatory, continental collision and crustal folding"
+    },
+    {
+      "url": "https://www.naturalearthdata.com/downloads/110m-physical-vectors/110m-land/",
+      "publisher": "Natural Earth, public-domain physical coastline data"
+    }
+  ],
+  "reference_text": "India once travelled north as an island continent, separated from Asia by the Tethys Sea. The Indian and Eurasian plates converged. Continental collision caused crustal shortening, folding and thickening, raising the Himalayas over millions of years. India is still moving north. All silhouettes, paths, rates and relief in this lesson are schematic, not a dated palaeogeographic reconstruction. No sudden single impact formed the mountains. Geological processes operate over crores of years, करोड़ों साल.",
+  "visual_notes": [
+    "Clipped modern physical coastline silhouettes for recognition, not reconstructed ancient coastlines or political borders. Northern India and southern Asia edges are schematic cuts.",
+    "Drift is greatly accelerated; no dated ancient positions or exact plate boundaries are asserted.",
+    "Folded strata and mountains are qualitative demonstrations over millions of years, not a numerical simulation."
+  ],
+  "scenes": [
+    {
+      "heading": "भारत हमेशा यहाँ नहीं था!",
+      "explanation": "दिशा सांकेतिक • प्राचीन नक्शा नहीं",
+      "speech": "आज एशिया से जुड़ा भारत, कभी समुद्र में अलग था। यहाँ तक कैसे पहुँचा?",
+      "setting": "neutral",
+      "visual_action": "Recognizable sourced physical coast silhouettes move together to demonstrate northward convergence; land outlines and travel are schematic, not an ancient map.",
+      "teaches": "Northward drift, convergence and long-term crustal thickening; schematic teaching model.",
+      "objects": [
+        {
+          "id": "india_land",
+          "kind": "box",
+          "pos": [
+            -0.4,
+            -1.4,
+            0
+          ],
+          "to": [
+            0,
+            -0.4,
+            0
+          ],
+          "size": [
+            0.85,
+            0.85,
+            0.85
+          ],
+          "color": "#f6c54b",
+          "action": "move",
+          "label": "भारत"
+        },
+        {
+          "id": "asia_land",
+          "kind": "box",
+          "pos": [
+            0,
+            1.5,
+            0
+          ],
+          "to": [
+            0,
+            0.65,
+            0
+          ],
+          "size": [
+            1.5,
+            1.5,
+            1.5
+          ],
+          "color": "#62c693",
+          "action": "move",
+          "label": "एशिया"
+        }
+      ],
+      "camera_view": "top"
+    },
+    {
+      "heading": "जमीन भी चलती है",
+      "explanation": "दिशा सांकेतिक • प्राचीन नक्शा नहीं",
+      "speech": "धरती की ऊपरी परत बड़ी प्लेटों में बँटी है। भारत अपनी प्लेट के साथ उत्तर गया।",
+      "setting": "neutral",
+      "visual_action": "Recognizable sourced physical coast silhouettes move together to demonstrate northward convergence; land outlines and travel are schematic, not an ancient map.",
+      "teaches": "Northward drift, convergence and long-term crustal thickening; schematic teaching model.",
+      "objects": [
+        {
+          "id": "india_land",
+          "kind": "box",
+          "pos": [
+            -0.4,
+            -1.4,
+            0
+          ],
+          "to": [
+            0,
+            -0.4,
+            0
+          ],
+          "size": [
+            0.85,
+            0.85,
+            0.85
+          ],
+          "color": "#f6c54b",
+          "action": "move",
+          "label": "भारत"
+        },
+        {
+          "id": "asia_land",
+          "kind": "box",
+          "pos": [
+            0,
+            1.5,
+            0
+          ],
+          "to": [
+            0,
+            0.65,
+            0
+          ],
+          "size": [
+            1.5,
+            1.5,
+            1.5
+          ],
+          "color": "#62c693",
+          "action": "move",
+          "label": "एशिया"
+        }
+      ],
+      "camera_view": "top"
+    },
+    {
+      "heading": "बीच में था समुद्र",
+      "explanation": "दिशा सांकेतिक • प्राचीन नक्शा नहीं",
+      "speech": "भारत और एशिया के बीच समुद्र था। भारत बढ़ता गया, बीच का समुद्र सिकुड़ता गया।",
+      "setting": "neutral",
+      "visual_action": "Recognizable sourced physical coast silhouettes move together to demonstrate northward convergence; land outlines and travel are schematic, not an ancient map.",
+      "teaches": "Northward drift, convergence and long-term crustal thickening; schematic teaching model.",
+      "objects": [
+        {
+          "id": "india_land",
+          "kind": "box",
+          "pos": [
+            0,
+            -1.1,
+            0
+          ],
+          "to": [
+            0,
+            -0.25,
+            0
+          ],
+          "size": [
+            0.85,
+            0.85,
+            0.85
+          ],
+          "color": "#f6c54b",
+          "action": "move",
+          "label": "भारत"
+        },
+        {
+          "id": "asia_land",
+          "kind": "box",
+          "pos": [
+            0,
+            1.5,
+            0
+          ],
+          "to": [
+            0,
+            0.65,
+            0
+          ],
+          "size": [
+            1.5,
+            1.5,
+            1.5
+          ],
+          "color": "#62c693",
+          "action": "move",
+          "label": "एशिया"
+        }
+      ],
+      "camera_view": "top"
+    },
+    {
+      "heading": "फिर टकराईं प्लेटें",
+      "explanation": "दबाव → मुड़ती परतें → उठता पर्वत",
+      "speech": "आखिर भारत और एशिया की प्लेटें टकराईं। दबाव से चट्टानों की परतें मुड़ने और मोटी होने लगीं।",
+      "setting": "neutral",
+      "visual_action": "Continuous stratified rock layers shorten, buckle and rise; connected mountain relief grows after compression begins.",
+      "teaches": "Northward drift, convergence and long-term crustal thickening; schematic teaching model.",
+      "objects": [
+        {
+          "id": "strata",
+          "kind": "rock_layers",
+          "pos": [
+            -1,
+            0,
+            0
+          ],
+          "size": [
+            0.85,
+            0.85,
+            0.85
+          ],
+          "color": "#d9a06d",
+          "action": "compress",
+          "label": "मुड़ती चट्टानें",
+          "animation_window": [
+            0,
+            1
+          ]
+        },
+        {
+          "id": "himalaya_relief",
+          "kind": "mountain",
+          "pos": [
+            1.4,
+            0,
+            0
+          ],
+          "size": [
+            0.8,
+            0.8,
+            0.8
+          ],
+          "color": "#79ba92",
+          "action": "grow",
+          "label": "उठता हिमालय",
+          "animation_window": [
+            0.4,
+            1
+          ]
+        }
+      ],
+      "camera_view": "front"
+    },
+    {
+      "heading": "ऊपर उठा हिमालय",
+      "explanation": "दबाव → मुड़ती परतें → उठता पर्वत",
+      "speech": "इन्हीं दबती और उठती चट्टानों से हिमालय बना। यह एक झटके में नहीं, करोड़ों साल में हुआ।",
+      "setting": "neutral",
+      "visual_action": "Continuous stratified rock layers shorten, buckle and rise; connected mountain relief grows after compression begins.",
+      "teaches": "Northward drift, convergence and long-term crustal thickening; schematic teaching model.",
+      "objects": [
+        {
+          "id": "strata",
+          "kind": "rock_layers",
+          "pos": [
+            -1,
+            0,
+            0
+          ],
+          "size": [
+            0.85,
+            0.85,
+            0.85
+          ],
+          "color": "#d9a06d",
+          "action": "compress",
+          "label": "मुड़ती चट्टानें",
+          "animation_window": [
+            0,
+            1
+          ]
+        },
+        {
+          "id": "himalaya_relief",
+          "kind": "mountain",
+          "pos": [
+            1.4,
+            0,
+            0
+          ],
+          "size": [
+            0.8,
+            0.8,
+            0.8
+          ],
+          "color": "#79ba92",
+          "action": "grow",
+          "label": "उठता हिमालय",
+          "animation_window": [
+            0.4,
+            1
+          ]
+        }
+      ],
+      "camera_view": "front"
+    },
+    {
+      "heading": "भारत चला → हिमालय उठा",
+      "explanation": "दिशा सांकेतिक • प्राचीन नक्शा नहीं",
+      "speech": "याद रखो: भारत की उत्तर की यात्रा और हिमालय का बनना, एक ही कहानी के दो हिस्से हैं।",
+      "setting": "neutral",
+      "visual_action": "Recognizable sourced physical coast silhouettes move together to demonstrate northward convergence; land outlines and travel are schematic, not an ancient map.",
+      "teaches": "Northward drift, convergence and long-term crustal thickening; schematic teaching model.",
+      "objects": [
+        {
+          "id": "india_land",
+          "kind": "box",
+          "pos": [
+            0,
+            -1.1,
+            0
+          ],
+          "to": [
+            0,
+            -0.25,
+            0
+          ],
+          "size": [
+            0.85,
+            0.85,
+            0.85
+          ],
+          "color": "#f6c54b",
+          "action": "move",
+          "label": "भारत"
+        },
+        {
+          "id": "asia_land",
+          "kind": "box",
+          "pos": [
+            0,
+            1.5,
+            0
+          ],
+          "to": [
+            0,
+            0.65,
+            0
+          ],
+          "size": [
+            1.5,
+            1.5,
+            1.5
+          ],
+          "color": "#62c693",
+          "action": "move",
+          "label": "एशिया"
+        }
+      ],
+      "camera_view": "top"
+    }
+  ],
+  "speech": [
+    "आज एशिया से जुड़ा भारत, कभी समुद्र में अलग था। यहाँ तक कैसे पहुँचा?",
+    "धरती की ऊपरी परत बड़ी प्लेटों में बँटी है। भारत अपनी प्लेट के साथ उत्तर गया।",
+    "भारत और एशिया के बीच समुद्र था। भारत बढ़ता गया, बीच का समुद्र सिकुड़ता गया।",
+    "आखिर भारत और एशिया की प्लेटें टकराईं। दबाव से चट्टानों की परतें मुड़ने और मोटी होने लगीं।",
+    "इन्हीं दबती और उठती चट्टानों से हिमालय बना। यह एक झटके में नहीं, करोड़ों साल में हुआ।",
+    "याद रखो: भारत की उत्तर की यात्रा और हिमालय का बनना, एक ही कहानी के दो हिस्से हैं।"
+  ],
+  "titles": [
+    [
+      "भारत हमेशा यहाँ नहीं था!",
+      "दिशा सांकेतिक • प्राचीन नक्शा नहीं"
+    ],
+    [
+      "जमीन भी चलती है",
+      "दिशा सांकेतिक • प्राचीन नक्शा नहीं"
+    ],
+    [
+      "बीच में था समुद्र",
+      "दिशा सांकेतिक • प्राचीन नक्शा नहीं"
+    ],
+    [
+      "फिर टकराईं प्लेटें",
+      "दबाव → मुड़ती परतें → उठता पर्वत"
+    ],
+    [
+      "ऊपर उठा हिमालय",
+      "दबाव → मुड़ती परतें → उठता पर्वत"
+    ],
+    [
+      "भारत चला → हिमालय उठा",
+      "दिशा सांकेतिक • प्राचीन नक्शा नहीं"
+    ]
+  ]
+}

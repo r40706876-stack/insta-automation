@@ -1,0 +1,84 @@
+{
+  "topic": "new_topic",
+  "run_id": "40702208430",
+  "attempt": "1",
+  "status": "passed",
+  "events": [
+    {
+      "stage": "reviewed_recipe",
+      "status": "passed",
+      "recipe": "india_drift_v2",
+      "sha256": "1143be7f5002c21fd1270e00c887562da3fa0511081edf5ef7d9a03f67a89b55"
+    },
+    {
+      "stage": "inputs",
+      "status": "passed",
+      "requested_topic": "भारत कभी एक द्वीप था—एशिया तक कैसे पहुँचा?"
+    },
+    {
+      "stage": "voice_generate",
+      "status": "started",
+      "log": "2_voice_generate.log"
+    },
+    {
+      "stage": "voice_generate",
+      "status": "passed"
+    },
+    {
+      "stage": "voice_decode",
+      "status": "started",
+      "log": "4_voice_decode.log"
+    },
+    {
+      "stage": "voice_decode",
+      "status": "passed"
+    },
+    {
+      "stage": "render",
+      "status": "started",
+      "log": "6_render.log"
+    },
+    {
+      "stage": "render",
+      "status": "passed"
+    },
+    {
+      "stage": "compose",
+      "status": "started",
+      "log": "8_compose.log"
+    },
+    {
+      "stage": "compose",
+      "status": "passed"
+    },
+    {
+      "stage": "validate",
+      "status": "started",
+      "log": "10_validate.log"
+    },
+    {
+      "stage": "validate",
+      "status": "passed"
+    },
+    {
+      "stage": "compress_scene",
+      "status": "started",
+      "log": "12_compress_scene.log"
+    },
+    {
+      "stage": "compress_scene",
+      "status": "passed"
+    }
+  ],
+  "repairs": [
+    {
+      "action": "restore_reviewed_renderer",
+      "engine": "data-driven-3d",
+      "same_recipe": true
+    }
+  ],
+  "injected_failures": [],
+  "instagram_publish": false,
+  "output": "experiments/gs_animation_studio/new_topic/40702208430",
+  "sha256": "00ec9e79814975ca7538954583cd12812aa095b5fa58652979e058c2418035e0"
+}
