@@ -1,0 +1,29 @@
+{
+  "ok": true,
+  "scene_checks": [
+    {
+      "scene": 0,
+      "mechanism_matches": true
+    },
+    {
+      "scene": 1,
+      "mechanism_matches": true
+    },
+    {
+      "scene": 2,
+      "mechanism_matches": true
+    },
+    {
+      "scene": 3,
+      "mechanism_matches": true
+    },
+    {
+      "scene": 4,
+      "mechanism_matches": true
+    },
+    {
+      "scene": 5,
+      "mechanism_matches": true
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "duration_seconds": 43.333333,
+  "dimensions": [
+    720,
+    1280
+  ],
+  "fps": "24/1",
+  "decoded_without_errors": true,
+  "black_intervals": 0,
+  "audio_mean_db": -17.1,
+  "audio_peak_db": -1.3,
+  "sha256": "bbd4d49a09f7bf6b5ed07019697080918c25860655d24a5f7e8c29a06f301f67",
+  "voice": "Edge / Swara female fallback",
+  "published": false,
+  "actual_rendered_motion_checks": {
+    "scene_1_teaching_motion": {
+      "changed_fraction": 0.2508
+    },
+    "scene_2_teaching_motion": {
+      "changed_fraction": 0.22332
+    },
+    "scene_3_teaching_motion": {
+      "changed_fraction": 0.40478
+    },
+    "scene_4_teaching_motion": {
+      "changed_fraction": 0.27838
+    },
+    "scene_5_teaching_motion": {
+      "changed_fraction": 0.31541
+    },
+    "scene_6_teaching_motion": {
+      "changed_fraction": 0.25309
+    }
+  }
+}
