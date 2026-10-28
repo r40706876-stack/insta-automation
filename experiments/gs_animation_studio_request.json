@@ -1,10 +1,10 @@
 {
   "topic": "new_topic",
-  "topic_text": "दांडी मार्च में नमक क्यों चुना गया?",
-  "subject": "इतिहास",
+  "topic_text": "सबसे बड़ा दल और बहुमत में आसान अंतर",
+  "subject": "राजव्यवस्था",
   "voice": "auto",
-  "reviewed_recipe": "dandi_v3",
-  "reviewed_recipe_sha256": "d79756c6a44ef5bd7eb21a84ba3fa4aa4a987a89d6cb7d04844911f7256debed",
+  "reviewed_recipe": "majority_demo_v1",
+  "reviewed_recipe_sha256": "a3d279a06e909ab810c5fbb588504dbf23ab0014596d97e389be3f6ee2226691",
   "verify_recovery": false,
-  "request_id": "dandi-final-safe-map-1793161041549338892"
+  "request_id": "majority-share-demo-1793177744412066411"
 }
