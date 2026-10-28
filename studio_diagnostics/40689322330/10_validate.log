@@ -1,0 +1,46 @@
+{
+  "notes_banner": {
+    "version": "studio-notes-v1",
+    "phone": "+91 89892 79637",
+    "safe_area": [
+      36,
+      64,
+      636,
+      151
+    ]
+  },
+  "quality_version": "rich_3d_v1",
+  "duration_seconds": 38.083333,
+  "dimensions": [
+    720,
+    1280
+  ],
+  "fps": "24/1",
+  "decoded_without_errors": true,
+  "black_intervals": 0,
+  "audio_mean_db": -16.3,
+  "audio_peak_db": -1.4,
+  "sha256": "ec2fad9be1e1f1bc41ef3738baebae4033b8ad23d20c0e794cd466c59a48d5c6",
+  "voice": "Gemini / Charon male",
+  "published": false,
+  "actual_rendered_motion_checks": {
+    "scene_1_teaching_motion": {
+      "changed_fraction": 0.28991
+    },
+    "scene_2_teaching_motion": {
+      "changed_fraction": 0.29076
+    },
+    "scene_3_teaching_motion": {
+      "changed_fraction": 0.27272
+    },
+    "scene_4_teaching_motion": {
+      "changed_fraction": 0.20701
+    },
+    "scene_5_teaching_motion": {
+      "changed_fraction": 0.20838
+    },
+    "scene_6_teaching_motion": {
+      "changed_fraction": 0.2752
+    }
+  }
+}
