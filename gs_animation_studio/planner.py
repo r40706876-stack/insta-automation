@@ -2,6 +2,7 @@
 import hashlib,html,ipaddress,json,math,os,re,socket,time,urllib.parse
 from pathlib import Path
 from visual_contract import validate_visual,VERSION as VISUAL_VERSION
+from share_policy import CONTRACT as SHARE_CONTRACT,validate_share
 KINDS={'person','soldier','building','fort','ship','tree','mountain','planet','sun','moon','ballot','assembly','coin','scale','bottle','cloud','piston','atom','factory','train','magnet','gear','water','salt','book','arrow','box','cylinder','sphere','map','ocean'}
 ACTIONS={'none','move','walk','spin','rise','fall','grow','pulse','orbit','flow','trace','wave'}
 SUBJECTS={'auto','भूगोल','इतिहास','विज्ञान','राजव्यवस्था','अर्थशास्त्र','स्टैटिक जीके','पर्यावरण'}
@@ -141,7 +142,7 @@ CONTRACT += '\n'+RICH_CONTRACT
 CATALOG += '; map=sourced physical coastline or Gujarat outline with moving route; ocean=deforming water mesh'
 
 EASY_MEMORY_CONTRACT="""TOPIC PRIORITY: choose beginner-friendly, useful GS concepts before obscure trivia. One reel = ONE small idea. Prefer a concrete everyday question, a visible cause-and-effect action, and one accurate Hindi recall line of at most 16 words. The viewer should recognize the puzzle in the opening two seconds without prerequisite knowledge. Prefer concepts that connect naturally to exam basics; do not choose a topic merely because animation is available. Avoid obscure dates/names, long lists, multiple concepts, technical jargon and elaborate stories that need extra explanation. An accurate simple explanation is more important than visual spectacle. History: one clear reason or consequence; polity: one basic institution/process; economics: one everyday money/price example; geography/science: one familiar visible mechanism. These are selection principles, not a fixed topic list. Use the existing supported assets honestly. Never replace an explicitly requested user topic; simplify its explanation instead. Automatic selection must also avoid prior concepts, even when easy. """
-CONTRACT += '\n'+EASY_MEMORY_CONTRACT
+CONTRACT += '\n'+EASY_MEMORY_CONTRACT+'\n'+SHARE_CONTRACT
 
 def generate(root,repo,topic_text='',subject='auto',source_text=''):
  root=Path(root);repo=Path(repo);history=[];automatic=not bool(topic_text.strip())
@@ -160,7 +161,7 @@ def generate(root,repo,topic_text='',subject='auto',source_text=''):
    old=json.loads(record);history.append({'title':old.get('title'),'topic_key':old.get('topic_key') or old.get('id')})
   except (ValueError,OSError):pass
  (root/'request.json').write_text(json.dumps({'topic_text':topic_text,'subject':subject,'auto_new':not bool(topic_text)},ensure_ascii=False,indent=2))
- brief='Requested topic: '+(topic_text or 'Select a fresh GS concept, different from all these previous lessons: '+json.dumps(history,ensure_ascii=False))+'. Subject: '+subject+'\n'+EASY_MEMORY_CONTRACT
+ brief='Requested topic: '+(topic_text or 'Select a fresh GS concept, different from all these previous lessons: '+json.dumps(history,ensure_ascii=False))+'. Subject: '+subject+'\n'+EASY_MEMORY_CONTRACT+'\n'+SHARE_CONTRACT
  evidence=[]
  if source_text.strip():evidence=[{'url':'user-provided','text':source_text[:14000]}]
  else:
@@ -196,12 +197,12 @@ def generate(root,repo,topic_text='',subject='auto',source_text=''):
      for sc,txt in zip(p['scenes'],short['texts']):sc['heading']=txt['heading'];sc['explanation']=txt['explanation']
    diag=Path(os.getenv('STUDIO_DIAGNOSTICS',str(root)));diag.mkdir(parents=True,exist_ok=True)
    (diag/f'plan_attempt_{attempt}.json').write_text(json.dumps(p,ensure_ascii=False,indent=2))
-   validate(p);validate_visual(p);check_quantities(p,evidence)
+   validate(p);validate_visual(p);validate_share(p);check_quantities(p,evidence)
    if len(str(p.get('recall','')).split())>16:raise ValueError('Recall must be one simple Hindi line of at most 16 words')
    if not re.fullmatch(r'[a-z0-9_]{3,70}',str(p.get('topic_key',''))):raise ValueError('Stable topic_key required')
    if not source_text and not topic_text:raise ValueError('Missing topic')
    if automatic and any(p['topic_key']==h.get('topic_key') for h in history):raise ValueError('Already generated topic; choose another')
-   audit,auditor=ask('Independently fact-check this proposed Hindi video against EVIDENCE. Verify exact user topic, all dates/numbers, simple language, ONE core concept, a concrete easy opening, a memorable recall line, no answer confusion, and that EACH listed 3D object and action actually demonstrates the narration. Reject decorative unrelated animation, overlapping objects, misleading analogies, floating feet, wrong directions, or simply reading text. Supported engine contract: '+CONTRACT+'\nReturn JSON {ok:boolean,reasons:[string],novel_topic:boolean (false when same underlying concept as history, even with a different title/key),scene_checks:[{scene:integer,mechanism_matches:boolean}]}. Automatic selection:'+str(automatic)+'. User topic:'+topic_text+' Previous topics to avoid in automatic mode:'+json.dumps(history,ensure_ascii=False)+' Evidence:'+json.dumps(evidence,ensure_ascii=False)+' Plan:'+json.dumps(p,ensure_ascii=False))
+   audit,auditor=ask('Independently fact-check this proposed Hindi video against EVIDENCE. Verify exact user topic, all dates/numbers, simple language, ONE core concept, a concrete easy opening, a memorable recall line, a genuine topic-specific benefit for the named recipient demonstrated before its CTA (reject generic share begging), no answer confusion, and that EACH listed 3D object and action actually demonstrates the narration. Reject decorative unrelated animation, overlapping objects, misleading analogies, floating feet, wrong directions, or simply reading text. Supported engine contract: '+CONTRACT+'\nReturn JSON {ok:boolean,reasons:[string],novel_topic:boolean (false when same underlying concept as history, even with a different title/key),scene_checks:[{scene:integer,mechanism_matches:boolean}]}. Automatic selection:'+str(automatic)+'. User topic:'+topic_text+' Previous topics to avoid in automatic mode:'+json.dumps(history,ensure_ascii=False)+' Evidence:'+json.dumps(evidence,ensure_ascii=False)+' Plan:'+json.dumps(p,ensure_ascii=False))
    (root/f'audit_{attempt}.json').write_text(json.dumps(audit,ensure_ascii=False,indent=2))
    (diag/f'audit_{attempt}.json').write_text(json.dumps(audit,ensure_ascii=False,indent=2))
    if automatic and audit.get('novel_topic') is not True:raise ValueError('Automatic topic repeats an earlier concept or novelty audit missing')

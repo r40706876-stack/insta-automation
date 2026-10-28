@@ -82,7 +82,7 @@ def build(root,day):
  shutil.copy(video,root/'reel.mp4');shutil.copy(out/'contact_sheet.jpg',root/'contact_sheet.jpg')
  for name in ('audio.json','sources.json','scene_checks.json','file_checks.json','build_receipt.json'):
   if (out/name).exists():shutil.copy(out/name,root/name)
- script={'ok':True,'title':recipe['title'],'subject':subject,'renderer_version':VERSION,'question_hash':digest,'reference':q,'topic_policy':'easy_single_concept_v1','topic_priority':topic_priority(q),'recall':recipe.get('recall'),'scenes':[{'label':s['heading'],'speech':s['speech'],'animation':{'type':'blender_3d','setting':s['setting'],'visible_action':s['visual_action']}} for s in recipe['scenes']]}
+ script={'ok':True,'title':recipe['title'],'subject':subject,'renderer_version':VERSION,'question_hash':digest,'reference':q,'topic_policy':'easy_single_concept_v1','topic_priority':topic_priority(q),'recall':recipe.get('recall'),'share_card':recipe.get('share_card'),'share_reason':recipe.get('share_reason'),'scenes':[{'label':s['heading'],'speech':s['speech'],'animation':{'type':'blender_3d','setting':s['setting'],'visible_action':s['visual_action']}} for s in recipe['scenes']]}
  (root/'script.json').write_text(json.dumps(script,ensure_ascii=False,indent=2))
  (root/'validated.json').write_text(json.dumps({'renderer_version':VERSION,'date':day,'sha256':digest_video,'duration':checks['duration_seconds'],'voice':checks['voice'],'studio_output':str(out.relative_to(repo)),'built_on_github':bool(os.getenv('GITHUB_ACTIONS'))},ensure_ascii=False,indent=2))
  # Use an actual video frame for the Instagram cover.

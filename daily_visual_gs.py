@@ -23,6 +23,7 @@ if __name__=='__main__':
   account=e.requests.get(e.GRAPH+e.IG_USER_ID,params={'fields':'username','access_token':e.IG_ACCESS_TOKEN},timeout=30).json();assert account.get('username','').lower()=='minuteme_gs'
   save('publish_started.json',{'date':DAY});e._with_series=lambda x:x
   caption=s['title']+'\n\n'+' '.join(x['speech'] for x in s['scenes'])+'\n\nशिक्षण ऐनिमेशन सांकेतिक है। Concept practice.\n#MinuteMeGS #GS #StudyHindi #SSC #RailwayExam'
+  if (s.get('share_card') or {}).get('cta'):caption+='\n\n'+s['share_card']['cta']
   pid=e._upload_once(str(out),caption,0)
   assert pid;save('published.json',{'media_id':pid,'date':DAY})
   obj=e.requests.get(e.GRAPH+pid,params={'fields':'permalink','access_token':e.IG_ACCESS_TOKEN},timeout=30).json();save('published.json',{'media_id':pid,'permalink':obj.get('permalink'),'date':DAY})

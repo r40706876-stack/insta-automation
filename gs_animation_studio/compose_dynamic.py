@@ -47,6 +47,11 @@ def overlay(im,i):
   d.rounded_rectangle((x-w,y-22,x+w,y+22),10,fill=(9,35,47),outline=COL,width=2);text(d,(x,y),label,n,(244,248,250))
  if row.get('map_disclaimer'):
   fit(d,(336,1018),'दिशा सांकेतिक • हर पड़ाव का सटीक मार्ग नहीं',21,(224,237,240),590)
+ # A specific useful share invitation appears only after the explanation, for two seconds.
+ card=plan.get('share_card') or {}
+ if k==len(plan['scenes'])-1 and age>=max(0,meta['seconds'][k]-2) and card.get('cta'):
+  d.rounded_rectangle((36,305,636,365),12,fill=(17,63,65),outline=GOLD,width=2)
+  fit(d,(336,335),card['cta'],26,GOLD,570)
  # Phrase timing is approximate for Gemini; it is not falsely labelled word-aligned.
  words=sc['speech'].split();groups=[' '.join(words[j:j+5]) for j in range(0,len(words),5)]
  phrase=groups[min(len(groups)-1,int(max(0,q)*len(groups)))]
