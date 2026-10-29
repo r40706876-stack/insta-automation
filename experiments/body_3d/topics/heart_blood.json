@@ -1,0 +1,27 @@
+{
+  "topic": "दिल और खून का सफ़र",
+  "brand": "मानव शरीर",
+  "fps": 24,
+  "steps": ["दिल", "धमनी", "शिरा", "फेफड़े"],
+  "scenes": [
+    {"id": "hook", "seconds": 3.5, "title": "ये दिल कभी रुकता क्यों नहीं?", "sub": "एक दिन में लगभग 1 लाख धड़कन", "step": -1,
+     "camera": {"focus": ["heart"], "angle": "three_quarter", "move": "push", "zoom": 0.9},
+     "layers": ["skin", "cardio", "visceral"], "solid": ["heart"], "effects": ["beat"], "labels": ["heart"]},
+    {"id": "where", "seconds": 5, "title": "दिल कहाँ होता है?", "sub": "छाती में, दोनों फेफड़ों के बीच, थोड़ा बाईं ओर", "step": 0,
+     "camera": {"focus": ["lungs", "heart"], "angle": "front", "move": "orbit"},
+     "layers": ["skin", "visceral", "cardio", "skeletal"], "solid": ["heart", "lungs", "ribs"], "effects": ["beat"], "labels": ["heart", "lungs"]},
+    {"id": "arteries", "seconds": 6, "title": "धमनियाँ: दिल से पूरे शरीर तक", "sub": "शुद्ध (ऑक्सीजन वाला) खून बाहर जाता है", "step": 1,
+     "camera": {"focus": ["skin"], "angle": "three_quarter", "move": "push", "zoom": 1.45},
+     "layers": ["skin", "cardio"], "solid": ["heart", "aorta", "arteries"], "hide": ["veins", "vena_cava"], "effects": ["beat", "flow:arteries", "flow:aorta"], "labels": ["heart", "aorta"]},
+    {"id": "veins", "seconds": 6, "title": "शिराएँ: वापस दिल तक", "sub": "अशुद्ध खून लौटकर दिल में आता है", "step": 2,
+     "camera": {"focus": ["skin"], "angle": "three_quarter_left", "move": "pull", "zoom": 1.45},
+     "layers": ["skin", "cardio"], "solid": ["heart", "veins", "vena_cava"], "hide": ["arteries", "aorta"], "effects": ["beat", "flow:veins", "flow:vena_cava"], "labels": ["vena_cava"]},
+    {"id": "lungs", "seconds": 6.5, "title": "फेफड़ों में खून साफ़ होता है", "sub": "फुफ्फुसीय धमनी अशुद्ध खून फेफड़ों तक ले जाती है", "step": 3,
+     "camera": {"focus": ["lungs"], "angle": "front", "move": "push", "zoom": 1.05},
+     "layers": ["skin", "visceral", "cardio"], "solid": ["heart", "lungs", "pulmonary_vessels", "trachea", "bronchi"], "hide": ["arteries", "veins"], "effects": ["beat", "breathe", "flow:pulmonary_vessels"], "labels": ["lungs", "pulmonary_vessels"]},
+    {"id": "quiz", "seconds": 5, "title": "परीक्षा का पक्का सवाल", "sub": "", "step": 3,
+     "camera": {"focus": ["heart"], "angle": "three_quarter", "move": "orbit", "zoom": 0.85},
+     "layers": ["skin", "cardio", "visceral"], "solid": ["heart"], "effects": ["beat"], "labels": [],
+     "quiz": {"q": "कौन-सी धमनी अशुद्ध खून ले जाती है?", "a": "A) महाधमनी", "b": "B) फुफ्फुसीय धमनी", "cta": "जवाब कमेंट में लिखो"}}
+  ]
+}

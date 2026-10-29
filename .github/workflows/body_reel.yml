@@ -1,0 +1,143 @@
+name: Human Body 3D reel (Blender template)
+# Folder: experiments/body_3d/   Workflow: .github/workflows/body_reel.yml
+# Give a topic in Hindi (Gemini plans it) OR the path of a ready topic JSON.
+# Nothing is published or committed: the reel comes back as the artifact "body-reel".
+on:
+  workflow_dispatch:
+    inputs:
+      topic_text:
+        description: 'Topic in Hindi (empty = use topic_file)'
+        default: ''
+      topic_file:
+        description: 'Ready-made topic JSON inside experiments/body_3d/'
+        default: 'topics/heart_blood.json'
+      chunks:
+        description: 'Parallel render machines (1-20)'
+        default: '20'
+      samples:
+        description: 'Cycles samples (12 = reference quality)'
+        default: '12'
+permissions:
+  contents: read
+env:
+  BODY_DIR: experiments/body_3d
+  BLENDER_URL: https://github.com/UPBGE/upbge/releases/download/v0.44/upbge-0.44-linux-x86_64.tar.xz
+  BLENDER_SHA256: cb23e1003dc3ec10847eb7ac4380eba9cd5de6a53b944d6231f46841534afd5f
+
+jobs:
+  plan:
+    runs-on: ubuntu-24.04
+    outputs:
+      matrix: ${{ steps.m.outputs.matrix }}
+      frames: ${{ steps.m.outputs.frames }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.11' }
+      - name: Topic plan (Gemini, validated) or ready JSON
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          TOPIC_TEXT: ${{ github.event.inputs.topic_text }}
+        run: |
+          cd "$BODY_DIR"
+          if [ -n "$TOPIC_TEXT" ]; then pip install -q requests; python planner.py "$TOPIC_TEXT" plan.json
+          else cp "${{ github.event.inputs.topic_file }}" plan.json; fi
+          cat plan.json
+      - id: m
+        run: |
+          cd "$BODY_DIR"
+          n=${{ github.event.inputs.chunks }}; n=$(( n<1 ? 1 : (n>20 ? 20 : n) ))
+          python - "$n" >> "$GITHUB_OUTPUT" <<'PY'
+          import json,sys
+          p=json.load(open('plan.json')); fps=p.get('fps',24)
+          N=sum(round(s['seconds']*fps) for s in p['scenes']); n=int(sys.argv[1])
+          print('frames=%d' % N); print('matrix='+json.dumps({'chunk':list(range(n))}))
+          PY
+      - uses: actions/upload-artifact@v4
+        with: { name: plan, path: '${{ env.BODY_DIR }}/plan.json' }
+
+  assets:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - id: c
+        uses: actions/cache@v4
+        with:
+          path: |
+            /tmp/blender
+            ${{ env.BODY_DIR }}/body_assets.blend
+          key: body-assets-v1-${{ hashFiles('experiments/body_3d/prepare_assets.py', 'experiments/body_3d/organs.json') }}
+      - name: Blender + Z-Anatomy -> body_assets.blend
+        if: steps.c.outputs.cache-hit != 'true'
+        run: |
+          curl -fL --retry 3 "$BLENDER_URL" -o /tmp/b.tar.xz
+          echo "$BLENDER_SHA256  /tmp/b.tar.xz" | sha256sum -c -
+          mkdir -p /tmp/blender && tar -xf /tmp/b.tar.xz -C /tmp/blender --strip-components=1
+          sudo apt-get update -qq && sudo apt-get install -y -qq libxrender1 libxi6 libxkbcommon0 libsm6 libgl1 libegl1
+          bash "$BODY_DIR/fetch_za.sh" /tmp/za
+          cd "$BODY_DIR" && ZA_DIR=/tmp/za/Resources/Models/FBX BODY_ROOT=$PWD /tmp/blender/blender -b -t 0 --python prepare_assets.py | grep -E "organ|ASSETS"
+          git diff --stat -- organ_index.json || true
+
+  render:
+    needs: [plan, assets]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 300
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJson(needs.plan.outputs.matrix) }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/cache/restore@v4
+        with:
+          path: |
+            /tmp/blender
+            ${{ env.BODY_DIR }}/body_assets.blend
+          key: body-assets-v1-${{ hashFiles('experiments/body_3d/prepare_assets.py', 'experiments/body_3d/organs.json') }}
+          fail-on-cache-miss: true
+      - uses: actions/download-artifact@v4
+        with: { name: plan, path: '${{ env.BODY_DIR }}' }
+      - name: Render my frame range
+        env:
+          BLENDER: /tmp/blender/blender
+          DEMO_SAMPLES: ${{ github.event.inputs.samples }}
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq libxrender1 libxi6 libxkbcommon0 libsm6 libgl1 libegl1
+          cd "$BODY_DIR"; export TOPIC=$PWD/plan.json OUT=$PWD/out
+          N=${{ needs.plan.outputs.frames }}; n=${{ strategy.job-total }}; i=${{ matrix.chunk }}
+          a=$(( i*N/n )); b=$(( (i+1)*N/n - 1 )); echo "chunk $i/$n -> $a-$b"; s=$(date +%s)
+          ./render_range.sh $a $b
+          echo "rendered $((b-a+1)) frames in $(( $(date +%s)-s ))s on $(nproc) CPUs"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: frames-${{ matrix.chunk }}
+          path: |
+            ${{ env.BODY_DIR }}/out/frames/*.png
+            ${{ env.BODY_DIR }}/out/pins.json
+          retention-days: 3
+
+  compose:
+    needs: [plan, render]
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.11' }
+      - uses: actions/download-artifact@v4
+        with: { name: plan, path: '${{ env.BODY_DIR }}' }
+      - uses: actions/download-artifact@v4
+        with: { pattern: 'frames-*', merge-multiple: true, path: '${{ env.BODY_DIR }}/out' }
+      - name: Overlays + sound -> MP4
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg libraqm0
+          pip install -q numpy Pillow
+          python -c "from PIL import features; assert features.check('raqm'), 'Hindi shaping missing'"
+          cd "$BODY_DIR"; test "$(ls out/frames/*.png | wc -l)" -eq "${{ needs.plan.outputs.frames }}"
+          TOPIC=$PWD/plan.json OUT=$PWD/out BODY_ROOT=$PWD python compose.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: body-reel
+          path: |
+            ${{ env.BODY_DIR }}/out/reel.mp4
+            ${{ env.BODY_DIR }}/out/contact_sheet.jpg
+            ${{ env.BODY_DIR }}/plan.json
+          retention-days: 30

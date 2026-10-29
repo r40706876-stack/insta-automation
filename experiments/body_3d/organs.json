@@ -1,0 +1,579 @@
+{
+ "_note": "Order matters: first matching rule wins inside each source file. 'class' picks the material colour.",
+ "organs": [
+  {
+   "key": "heart",
+   "hi": "हृदय",
+   "src": "cardio",
+   "class": "heart",
+   "any": [
+    "atrium",
+    "ventricle",
+    "auricle of",
+    "papillary",
+    "septum",
+    "leaflet",
+    "valve",
+    "chordae",
+    "trabecul",
+    "conus arteriosus",
+    "crista",
+    "fossa ovalis",
+    "moderator",
+    "coronary sinus",
+    "great cardiac vein",
+    "of heart"
+   ]
+  },
+  {
+   "key": "aorta",
+   "hi": "महाधमनी",
+   "src": "cardio",
+   "class": "artery",
+   "any": [
+    "aorta",
+    "aortic"
+   ]
+  },
+  {
+   "key": "vena_cava",
+   "hi": "महाशिरा",
+   "src": "cardio",
+   "class": "vein",
+   "any": [
+    "vena cava"
+   ]
+  },
+  {
+   "key": "pulmonary_vessels",
+   "hi": "फुफ्फुसीय धमनी/शिरा",
+   "src": "cardio",
+   "class": "pulmonary",
+   "any": [
+    "pulmonary trunk",
+    "pulmonary artery",
+    "pulmonary vein",
+    "pulmonary trunk",
+    "lobar artery",
+    "lobar vein",
+    "segmental artery of",
+    "segmental vein of"
+   ]
+  },
+  {
+   "key": "veins",
+   "hi": "शिराएँ",
+   "src": "cardio",
+   "class": "vein",
+   "any": [
+    "vein",
+    "sinus",
+    "venous",
+    "plexus"
+   ]
+  },
+  {
+   "key": "arteries",
+   "hi": "धमनियाँ",
+   "src": "cardio",
+   "class": "artery",
+   "any": [
+    ""
+   ]
+  },
+  {
+   "key": "liver",
+   "hi": "यकृत (लिवर)",
+   "src": "visceral",
+   "class": "liver",
+   "any": [
+    "liver",
+    "hepatic",
+    "caudate",
+    "quadrate lobe"
+   ]
+  },
+  {
+   "key": "lungs",
+   "hi": "फेफड़े",
+   "src": "visceral",
+   "class": "lung",
+   "any": [
+    "lobe of",
+    "lung",
+    "lingula"
+   ]
+  },
+  {
+   "key": "trachea",
+   "hi": "श्वासनली",
+   "src": "visceral",
+   "class": "airway",
+   "any": [
+    "trachea",
+    "carina"
+   ]
+  },
+  {
+   "key": "bronchi",
+   "hi": "श्वसनी",
+   "src": "visceral",
+   "class": "airway",
+   "any": [
+    "bronch"
+   ]
+  },
+  {
+   "key": "larynx",
+   "hi": "स्वरयंत्र",
+   "src": "visceral",
+   "class": "airway",
+   "any": [
+    "larynx",
+    "laryngeal",
+    "epiglottis",
+    "vocal",
+    "glottis"
+   ]
+  },
+  {
+   "key": "pharynx",
+   "hi": "ग्रसनी",
+   "src": "visceral",
+   "class": "digestive",
+   "any": [
+    "pharynx",
+    "pharyngeal"
+   ]
+  },
+  {
+   "key": "tongue",
+   "hi": "जीभ",
+   "src": "visceral",
+   "class": "digestive",
+   "any": [
+    "tongue"
+   ]
+  },
+  {
+   "key": "oesophagus",
+   "hi": "ग्रासनली",
+   "src": "visceral",
+   "class": "digestive",
+   "any": [
+    "oesophag"
+   ]
+  },
+  {
+   "key": "stomach",
+   "hi": "आमाशय",
+   "src": "visceral",
+   "class": "digestive",
+   "any": [
+    "stomach",
+    "pylor",
+    "cardia",
+    "fundus of stomach",
+    "gastric"
+   ]
+  },
+  {
+   "key": "gallbladder",
+   "hi": "पित्ताशय",
+   "src": "visceral",
+   "class": "bile",
+   "any": [
+    "gallbladder",
+    "bile duct",
+    "cystic duct"
+   ]
+  },
+  {
+   "key": "pancreas",
+   "hi": "अग्न्याशय",
+   "src": "visceral",
+   "class": "gland",
+   "any": [
+    "pancrea"
+   ]
+  },
+  {
+   "key": "small_intestine",
+   "hi": "छोटी आँत",
+   "src": "visceral",
+   "class": "digestive",
+   "any": [
+    "duoden",
+    "jejun",
+    "ile",
+    "small intestine"
+   ]
+  },
+  {
+   "key": "appendix",
+   "hi": "अपेंडिक्स",
+   "src": "visceral",
+   "class": "digestive2",
+   "any": [
+    "vermiform appendix",
+    "meso-appendix"
+   ]
+  },
+  {
+   "key": "large_intestine",
+   "hi": "बड़ी आँत",
+   "src": "visceral",
+   "class": "digestive2",
+   "any": [
+    "colon",
+    "caec",
+    "rectum",
+    "taenia",
+    "anal canal",
+    "sigmoid",
+    "colic"
+   ]
+  },
+  {
+   "key": "adrenal",
+   "hi": "अधिवृक्क ग्रंथि",
+   "src": "visceral",
+   "class": "gland",
+   "any": [
+    "suprarenal",
+    "adrenal"
+   ]
+  },
+  {
+   "key": "kidneys",
+   "hi": "वृक्क (किडनी)",
+   "src": "visceral",
+   "class": "kidney",
+   "any": [
+    "kidney",
+    "renal"
+   ]
+  },
+  {
+   "key": "ureters",
+   "hi": "मूत्रवाहिनी",
+   "src": "visceral",
+   "class": "urine",
+   "any": [
+    "ureter"
+   ]
+  },
+  {
+   "key": "bladder",
+   "hi": "मूत्राशय",
+   "src": "visceral",
+   "class": "urine",
+   "any": [
+    "urinary bladder",
+    "bladder"
+   ]
+  },
+  {
+   "key": "thyroid",
+   "hi": "थायरॉइड ग्रंथि",
+   "src": "visceral",
+   "class": "gland",
+   "any": [
+    "thyroid gland",
+    "parathyroid"
+   ]
+  },
+  {
+   "key": "viscera_other",
+   "hi": "अन्य अंग",
+   "src": "visceral",
+   "class": "other",
+   "any": [
+    ""
+   ]
+  },
+  {
+   "key": "eyes",
+   "hi": "आँख",
+   "src": "nervous",
+   "class": "eye",
+   "any": [
+    "eyeball",
+    "retina",
+    "cornea",
+    "sclera",
+    "lens",
+    "iris",
+    "vitreous",
+    "zonular",
+    "choroid",
+    "ciliary"
+   ]
+  },
+  {
+   "key": "cerebellum",
+   "hi": "अनुमस्तिष्क",
+   "src": "nervous",
+   "class": "brain2",
+   "any": [
+    "cerebell"
+   ]
+  },
+  {
+   "key": "brain",
+   "hi": "मस्तिष्क",
+   "src": "nervous",
+   "class": "brain",
+   "any": [
+    "telenceph",
+    "cerebr",
+    "dienceph",
+    "midbrain",
+    "mesenceph",
+    "pons",
+    "pontine",
+    "medulla oblongata",
+    "thalam",
+    "hippocamp",
+    "amygdal",
+    "corpus callosum",
+    "fornix",
+    "putamen",
+    "caudate",
+    "globus",
+    "insula",
+    "gyrus",
+    "lobe",
+    "cortex",
+    "hypophysis",
+    "pituitary",
+    "pineal",
+    "brain",
+    "falx",
+    "tentorium",
+    "olive",
+    "nucleus"
+   ]
+  },
+  {
+   "key": "spinal_cord",
+   "hi": "मेरुरज्जु",
+   "src": "nervous",
+   "class": "cord",
+   "any": [
+    "spinal cord",
+    "spinal dura",
+    "horn of spinal",
+    "funiculus",
+    "fasciculus proprius",
+    "tract",
+    "conus medullaris",
+    "filum",
+    "cauda equina"
+   ]
+  },
+  {
+   "key": "nerves",
+   "hi": "तंत्रिकाएँ",
+   "src": "nervous",
+   "class": "nerve",
+   "any": [
+    ""
+   ]
+  },
+  {
+   "key": "skull",
+   "hi": "खोपड़ी",
+   "src": "skeletal",
+   "class": "bone",
+   "any": [
+    "frontal bone",
+    "parietal bone",
+    "occipital bone",
+    "temporal bone",
+    "sphenoid",
+    "ethmoid",
+    "maxilla",
+    "mandible",
+    "zygomatic",
+    "nasal bone",
+    "vomer",
+    "lacrimal",
+    "palatine",
+    "nasal concha",
+    "sinus of"
+   ]
+  },
+  {
+   "key": "teeth",
+   "hi": "दाँत",
+   "src": "skeletal",
+   "class": "tooth",
+   "any": [
+    "tooth",
+    "incisor",
+    "canine",
+    "premolar",
+    "molar"
+   ]
+  },
+  {
+   "key": "ear_bones",
+   "hi": "कान की हड्डियाँ (स्टेपीज़)",
+   "src": "skeletal",
+   "class": "bone",
+   "any": [
+    "stapes",
+    "incus",
+    "malleus"
+   ]
+  },
+  {
+   "key": "spine",
+   "hi": "मेरुदंड (रीढ़)",
+   "src": "skeletal",
+   "class": "bone",
+   "any": [
+    "vertebra",
+    "atlas",
+    "axis",
+    "sacrum",
+    "coccyx"
+   ]
+  },
+  {
+   "key": "ribs",
+   "hi": "पसलियाँ",
+   "src": "skeletal",
+   "class": "bone",
+   "any": [
+    "rib",
+    "sternum",
+    "xiphoid",
+    "costal cartilage"
+   ]
+  },
+  {
+   "key": "pelvis",
+   "hi": "श्रोणि",
+   "src": "skeletal",
+   "class": "bone",
+   "any": [
+    "hip bone"
+   ]
+  },
+  {
+   "key": "femur",
+   "hi": "फीमर (जाँघ की हड्डी)",
+   "src": "skeletal",
+   "class": "bone",
+   "any": [
+    "femur"
+   ]
+  },
+  {
+   "key": "arm_bones",
+   "hi": "बाँह की हड्डियाँ",
+   "src": "skeletal",
+   "class": "bone",
+   "any": [
+    "humerus",
+    "radius",
+    "ulna",
+    "clavicle",
+    "scapula"
+   ]
+  },
+  {
+   "key": "hand_bones",
+   "hi": "हाथ की हड्डियाँ",
+   "src": "skeletal",
+   "class": "bone",
+   "any": [
+    "of hand",
+    "metacarp",
+    "scaphoid",
+    "lunate",
+    "triquetr",
+    "pisiform",
+    "trapez",
+    "capitate",
+    "hamate"
+   ]
+  },
+  {
+   "key": "leg_bones",
+   "hi": "पैर की हड्डियाँ",
+   "src": "skeletal",
+   "class": "bone",
+   "any": [
+    "tibia",
+    "fibula",
+    "patella",
+    "of foot",
+    "metatars",
+    "calcaneus",
+    "talus",
+    "navicular",
+    "cuboid",
+    "cuneiform"
+   ]
+  },
+  {
+   "key": "bones",
+   "hi": "हड्डियाँ",
+   "src": "skeletal",
+   "class": "bone",
+   "any": [
+    ""
+   ]
+  },
+  {
+   "key": "skin",
+   "hi": "त्वचा",
+   "src": "skin",
+   "class": "skin",
+   "any": [
+    ""
+   ]
+  }
+ ],
+ "exclude_any": [
+  "penis",
+  "testis",
+  "testic",
+  "scrot",
+  "prostat",
+  "ductus deferens",
+  "seminal",
+  "epididym",
+  "spermatic",
+  "urethra",
+  "pubic hair",
+  "urogenital",
+  "anal region",
+  "glans",
+  "corpus cavernosum",
+  "corpus spongiosum",
+  "take a picture",
+  "omentum",
+  "mesocolon",
+  "mesentery",
+  "pleura",
+  "fascia",
+  "peritone",
+  "mucosa of nasal",
+  "gingiva",
+  "ligament",
+  "membrane",
+  "cartilage of nose",
+  "alar cartilage",
+  "nasal septal cartilage",
+  "-profile"
+ ],
+ "keep_suffix": [
+  "",
+  "l",
+  "r"
+ ]
+}

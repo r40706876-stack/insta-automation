@@ -1,0 +1,116 @@
+name: Blood Moon 3D demo (Blender Cycles, parallel render)
+# Put this file in .github/workflows/ and the demo folder in experiments/blood_moon_3d/
+# Run it from the Actions tab. It does NOT publish to Instagram and does NOT commit anything:
+# the finished reel + contact sheet come back as a downloadable artifact.
+on:
+  workflow_dispatch:
+    inputs:
+      chunks:
+        description: 'Parallel render machines (1-20). More = faster.'
+        default: '10'
+      samples:
+        description: 'Cycles samples per pixel (12 = same as the demo)'
+        default: '12'
+permissions:
+  contents: read
+env:
+  DEMO_DIR: experiments/blood_moon_3d
+  # Same Blender build used for the reference render (UPBGE 0.44 = Blender 4.4.3, hosted on GitHub)
+  BLENDER_URL: https://github.com/UPBGE/upbge/releases/download/v0.44/upbge-0.44-linux-x86_64.tar.xz
+  BLENDER_SHA256: cb23e1003dc3ec10847eb7ac4380eba9cd5de6a53b944d6231f46841534afd5f
+  TOTAL_FRAMES: 780
+jobs:
+  plan:
+    runs-on: ubuntu-24.04
+    outputs:
+      matrix: ${{ steps.m.outputs.matrix }}
+    steps:
+      - id: m
+        run: |
+          n=${{ github.event.inputs.chunks }}; n=$(( n<1 ? 1 : (n>20 ? 20 : n) ))
+          echo "matrix=$(python3 -c "import json;print(json.dumps({'chunk':list(range($n))}))")" >> "$GITHUB_OUTPUT"
+          echo "CHUNKS=$n"
+
+  render:
+    needs: plan
+    runs-on: ubuntu-24.04
+    timeout-minutes: 300
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJson(needs.plan.outputs.matrix) }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.11' }
+      - name: Cache Blender
+        id: bl
+        uses: actions/cache@v4
+        with:
+          path: /tmp/blender
+          key: upbge-0.44-${{ env.BLENDER_SHA256 }}
+      - name: Install Blender (verified by sha256)
+        if: steps.bl.outputs.cache-hit != 'true'
+        run: |
+          curl -fL --retry 3 "$BLENDER_URL" -o /tmp/b.tar.xz
+          echo "$BLENDER_SHA256  /tmp/b.tar.xz" | sha256sum -c -
+          mkdir -p /tmp/blender && tar -xf /tmp/b.tar.xz -C /tmp/blender --strip-components=1
+      - name: System libraries + Python deps
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq libxrender1 libxi6 libxkbcommon0 libsm6 libgl1 libegl1
+          pip install -q numpy Pillow
+          /tmp/blender/blender -b --version | head -1
+          nproc; free -g | head -2
+      - name: Build Earth texture from repo Natural Earth data
+        run: |
+          cd "$DEMO_DIR" && python make_textures.py && sha256sum earth_color.png earth_water.png
+      - name: Render my frame range
+        env:
+          DEMO_SAMPLES: ${{ github.event.inputs.samples }}
+          BLENDER: /tmp/blender/blender
+        run: |
+          n=${{ strategy.job-total }}; i=${{ matrix.chunk }}
+          a=$(( i*TOTAL_FRAMES/n )); b=$(( (i+1)*TOTAL_FRAMES/n - 1 ))
+          echo "chunk $i/$n -> frames $a-$b"
+          start=$(date +%s)
+          "$DEMO_DIR/render_missing.sh" $a $b
+          echo "rendered $((b-a+1)) frames in $(( $(date +%s)-start ))s"
+          ls "$DEMO_DIR/frames" | wc -l
+      - uses: actions/upload-artifact@v4
+        with:
+          name: frames-${{ matrix.chunk }}
+          path: |
+            ${{ env.DEMO_DIR }}/frames/*.png
+            ${{ env.DEMO_DIR }}/pins.json
+          retention-days: 3
+
+  compose:
+    needs: render
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.11' }
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: frames-*
+          merge-multiple: true
+          path: ${{ env.DEMO_DIR }}
+      - name: Tools
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg libraqm0
+          pip install -q numpy Pillow
+          python -c "from PIL import features; assert features.check('raqm'), 'Hindi shaping (raqm) missing'"
+      - name: Compose Hindi overlays + sound -> MP4
+        run: |
+          test "$(ls $DEMO_DIR/frames/*.png | wc -l)" -eq "$TOTAL_FRAMES"
+          cd "$DEMO_DIR" && DEMO_ROOT=$PWD python compose.py
+          ffprobe -v error -show_entries format=duration:stream=width,height,r_frame_rate -of compact blood_moon_reel.mp4
+      - uses: actions/upload-artifact@v4
+        with:
+          name: blood-moon-reel
+          path: |
+            ${{ env.DEMO_DIR }}/blood_moon_reel.mp4
+            ${{ env.DEMO_DIR }}/contact_sheet.jpg
+            ${{ env.DEMO_DIR }}/file_checks.json
+          retention-days: 30

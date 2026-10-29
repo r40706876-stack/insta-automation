@@ -1,0 +1,15 @@
+{
+  "topic": "चंद्र ग्रहण में चाँद लाल क्यों होता है?",
+  "fps": 24,
+  "scenes": [
+    {"id": "hook",      "seconds": 3.5, "title": "चाँद लाल क्यों हो गया?", "sub": "हर परीक्षा का पसंदीदा सवाल", "step": -1},
+    {"id": "align",     "seconds": 5.5, "title": "सूर्य – पृथ्वी – चाँद", "sub": "तीनों एक सीध में, पृथ्वी बीच में", "step": 0},
+    {"id": "shadow",    "seconds": 6.0, "title": "पृथ्वी की छाया चाँद पर", "sub": "ऐसा सिर्फ पूर्णिमा की रात होता है", "step": 1},
+    {"id": "rays",      "seconds": 7.0, "title": "हवा ने रोशनी छाँट दी", "sub": "नीली बिखर गई, लाल मुड़कर चाँद तक", "step": 2},
+    {"id": "ring",      "seconds": 6.0, "title": "चाँद से पृथ्वी ऐसी दिखती है", "sub": "चारों ओर लाल घेरा = सारे सूर्योदय-सूर्यास्त", "step": 3},
+    {"id": "quiz",      "seconds": 4.5, "title": "इसीलिए कहते हैं Blood Moon", "sub": "", "step": 3,
+     "quiz": {"q": "चंद्र ग्रहण किस दिन होता है?", "a": "A) अमावस्या", "b": "B) पूर्णिमा", "cta": "जवाब कमेंट में लिखो"}}
+  ],
+  "steps": ["एक सीध", "छाया", "लाल रोशनी", "ब्लड मून"],
+  "facts_source": "NCERT Class 6 Geography ch.1 / NASA Science 'Lunar Eclipses' (Rayleigh scattering + refraction through Earth's atmosphere)"
+}
