@@ -111,7 +111,7 @@ def main(plan_path, out):
         with wave.open(str(d / f'seg_{i}.wav'), 'wb') as w:
             w.setnchannels(1); w.setsampwidth(2); w.setframerate(SR); w.writeframes((np.clip(seg, -.98, .98) * 32767).astype('<i2').tobytes())
         L = len(seg) / SR; durs.append(L)
-        need = round(L + .45, 2)                      # 0.25 s lead-in + 0.3 s breath after the line
+        need = round(L + .45 + (1.8 if 'quiz' in s else 0), 2)   # quiz keeps 1.8 s for the end card                      # 0.25 s lead-in + 0.3 s breath after the line
         if s['seconds'] < need: s['seconds'] = need
     plan_path.write_text(json.dumps(plan, ensure_ascii=False, indent=1), encoding='utf-8')
     (d / 'voice.json').write_text(json.dumps({'provider': provider, 'lines': lines, 'seconds': durs}, ensure_ascii=False, indent=1), encoding='utf-8')

@@ -244,6 +244,7 @@ jobs:
           d="downloads/body/$(date -u +%Y-%m-%d)_run${{ github.run_id }}"
           echo "SAVED_DIR=$d" >> "$GITHUB_ENV"
           mkdir -p "$d"; cp "$BODY_DIR/out/reel.mp4" "$BODY_DIR/out/contact_sheet.jpg" "$BODY_DIR/plan.json" "$d/"
+          if ls "$BODY_DIR"/out/carousel/*.jpg >/dev/null 2>&1; then mkdir -p "$d/carousel"; cp "$BODY_DIR"/out/carousel/*.jpg "$d/carousel/"; fi
           git config user.name 'github-actions[bot]'; git config user.email 'github-actions[bot]@users.noreply.github.com'
           git add downloads; git commit -m "Save reel to $d [skip ci]"
           ok=0; for i in 1 2 3 4 5; do git pull --rebase -q origin main && git push -q origin HEAD:main && { ok=1; break; }; sleep $((i*7)); done; [ $ok = 1 ] || { echo "::error title=save to downloads failed::push rejected 5 times"; exit 1; }
@@ -253,6 +254,7 @@ jobs:
           IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
           IG_USER_ID: ${{ secrets.IG_USER_ID }}
           TARGET_UTC: ${{ github.event.inputs.target_utc }}
+          IMGBB_KEY: ${{ secrets.IMGBB_KEY }}
           PYTHONUNBUFFERED: '1'
         run: |
           pip install -q --timeout 30 -r requirements.txt imageio-ffmpeg

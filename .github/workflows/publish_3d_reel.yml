@@ -22,6 +22,7 @@ jobs:
         env:
           IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
           IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          IMGBB_KEY: ${{ secrets.IMGBB_KEY }}
           PYTHONUNBUFFERED: '1'
         run: |
           pip install -q --timeout 30 -r requirements.txt imageio-ffmpeg

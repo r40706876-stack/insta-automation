@@ -297,6 +297,9 @@ TRAP = {
  'largest_organs': ('गलती: बड़ा आंतरिक अंग फेफड़ा', 'सही: सबसे बड़ा आंतरिक अंग यकृत'),
 }
 
+
+ANS = {'pulmonary_artery': 'b', 'double_circulation': 'b', 'trachea_bronchi': 'b', 'gallbladder': 'b', 'kidney': 'b'}   # all other quizzes: 'a'
+
 if __name__ == '__main__':
     import planner
     index = {'पाचन तंत्र में भोजन का सफ़र': 'topics/digestion.json', 'दिल और खून का सफ़र (तैयार demo)': 'topics/heart_blood.json'}
@@ -308,6 +311,7 @@ if __name__ == '__main__':
         trap = json.loads(json.dumps(prev)); trap.update(id='trap', seconds=4.5, title=tw, sub=tr, trap=True, labels=prev['labels'][:1])
         trap['camera'] = dict(prev['camera'], move='orbit')
         scenes.insert(len(scenes) - 1, trap)
+        quiz['quiz']['ans'] = ANS.get(slug, 'a')
         for j, s in enumerate(scenes): s['step'] = -1 if j == 0 else min(j - 1, len(steps) - 1)
         plan = {'topic': name, 'brand': 'मानव शरीर', 'fps': 24, 'steps': steps, 'scenes': scenes}
         err = planner.validate(plan)

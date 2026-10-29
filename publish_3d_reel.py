@@ -71,3 +71,19 @@ r = e.requests.get(e.GRAPH + str(pid), params={'fields': 'permalink', 'access_to
 if r.ok: rec['permalink'] = r.json().get('permalink')
 save(RECEIPT, rec); persist('Save 3D reel Instagram receipt')
 print('PUBLISHED', json.dumps(rec, ensure_ascii=False))
+
+# ---------------------------------------------------------------- save-worthy revision carousel (never blocks the reel)
+cards = sorted((FOLDER / 'carousel').glob('*.jpg'))
+if cards and not rec.get('carousel_id'):
+    cap2 = f"📌 रिवीज़न कार्ड: {plan.get('topic', '')}\nसेव करो — परीक्षा से पहले 30 सेकंड में दोहराओ\n"
+    if trap: cap2 += f"\n✗ {trap['title'].replace('गलती: ', '')}\n✓ {trap['sub'].replace('सही: ', '')}\n"
+    if rec.get('permalink'): cap2 += f"\nपूरा 3D वीडियो: {rec['permalink']}\n"
+    cap2 += '\n' + tags + (('\n\n' + credit) if credit else '')
+    try:
+        cid = e.post_carousel([str(c) for c in cards], cap2)
+    except Exception as ex:
+        cid = None; print('carousel error', type(ex).__name__)
+    if cid:
+        rec['carousel_id'] = str(cid); save(RECEIPT, rec); persist('Save revision carousel receipt'); print('CAROUSEL PUBLISHED', cid)
+    else:
+        print('carousel not posted (reel is fine)')

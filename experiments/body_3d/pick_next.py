@@ -17,6 +17,7 @@ if '--teaser' in sys.argv:
 else:
     todo = [k for k in order if k not in posted] or order          # all done -> start the cycle again
     cur = todo[0]; plan = json.loads((R / idx[cur]).read_text(encoding='utf-8'))
+plan['day'] = len(posted) + (0 if cur in posted else 1)          # series number shown on the badge
 rest = [k for k in order if k not in posted and k != cur] or [k for k in order if k != cur]
 if rest: plan['next'] = hook(rest[0])
 out.write_text(json.dumps(plan, ensure_ascii=False, indent=1), encoding='utf-8')

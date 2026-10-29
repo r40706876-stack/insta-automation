@@ -54,7 +54,11 @@ def overlay(f):
         d.rounded_rectangle((36, 60, 684, 140), radius=16, fill=(10, 34, 48, ba), outline=(70, 140, 160, tb), width=2)
         text(d, (360, 84), 'सभी प्रतियोगी परीक्षाओं के नोट्स उपलब्ध हैं', 24, WHITE + (tb,), stroke=0)
         text(d, (360, 117), 'WhatsApp: +91 89892 79637', 28, GOLD + (tb,), stroke=0)
-    d.text((40, 162), 'MINUTE ME GS  /  ' + TL.get('brand', 'GS'), font=font(19), fill=CYAN, anchor='lm')
+    if f >= 2 * FPS:          # series badge: same look on every 3D reel = recognisable page identity
+        badge = 'MinuteMe 3D  ·  ' + TL.get('brand', 'GS') + (f"  ·  Day {TL['day']}" if TL.get('day') else '')
+        bw = font(21).getlength(badge) + 30
+        d.rounded_rectangle((36, 150, 36 + bw, 182), radius=16, fill=(255, 196, 60, 235))
+        d.text((36 + bw / 2, 166), badge, font=font(21), fill=(20, 24, 30), anchor='mm')
     # title pops in, subtitle slides in 0.25s later
     fast = sc['id'] == 'hook'
     a = ease(t / (.12 if fast else .35)); b = ease((t - (.1 if fast else .25)) / .3)
@@ -100,8 +104,16 @@ def overlay(f):
             yy = y0 + 112 + j * 64
             d.rounded_rectangle((110, yy - 25, 610, yy + 25), radius=14, fill=(22, 46, 64, al), outline=CYAN + (al,), width=2)
             text(d, (360, yy), opt, 30, CYAN + (al,), stroke=0)
-        if t > 1.2: text(d, (360, 1000 + pulse), qz['cta'], 38, GOLD)
-        if TL.get('next') and t > 1.6:
+        end = LEN[k] / FPS - t < 1.8                      # last 1.8 s: follow promise end card
+        if end:
+            e_ = ease((1.8 - (LEN[k] / FPS - t)) / .3)
+            d.rounded_rectangle((50, 640, 670, 1010), radius=26, fill=(8, 18, 30, int(240 * e_)), outline=(255, 196, 60, int(255 * e_)), width=4)
+            text(d, (360, 690), 'कल 13:00 बजे', 34, (255, 196, 60, int(255 * e_)), stroke=0)
+            if TL.get('next'): text(d, (360, 770), TL['next'], fit(TL['next'], 46, 580), (255, 255, 255, int(255 * e_)))
+            text(d, (360, 860), 'फ़ॉलो करो — रोज़ एक 3D सवाल', fit('फ़ॉलो करो — रोज़ एक 3D सवाल', 34, 580), CYAN + (int(255 * e_),), stroke=0)
+            text(d, (360, 940), '@minuteme_gs', 30, (200, 210, 220, int(255 * e_)), stroke=0)
+        elif t > 1.2: text(d, (360, 1000 + pulse), qz['cta'], 38, GOLD)
+        if TL.get('next') and t > 1.6 and not end:
             chip(d, (360, 940), 'अगली रील: ' + TL['next'], CYAN, n=26)
     # step tracker + progress (above Instagram's caption area)
     st = sc['step']
@@ -166,6 +178,62 @@ def make_audio(path):
     with wave.open(str(path), 'wb') as wv:
         wv.setnchannels(1); wv.setsampwidth(2); wv.setframerate(sr); wv.writeframes((mix * 32767).astype(np.int16).tobytes())
 
+
+def carousel():
+    """Save-worthy revision card from the reel's own 3D frames: cover, 3 key scenes, exam trap, quiz + answer."""
+    out = OUT / 'carousel'; out.mkdir(exist_ok=True)
+    for old in out.glob('*.jpg'): old.unlink()
+    CW, CH = 1080, 1350
+    def big(n): return ImageFont.truetype(str(R / 'Mukta.ttf'), n)
+    def fitc(s, n, w=980):
+        while n > 26 and big(n).getlength(s) > w: n -= 2
+        return n
+    def frame_of(i):
+        f = START[i] + int(LEN[i] * .6)
+        im = Image.open(OUT / 'frames' / f'{f:04d}.png').convert('RGB')
+        if im.size != (W, H): im = im.resize((W, H), Image.LANCZOS)
+        return im.crop((0, 200, 720, 1100)).resize((CW, CH), Image.LANCZOS)
+    def card(bg, top, title, sub, col, idx, note=''):
+        im = bg.convert('RGBA'); ov = Image.new('RGBA', im.size, (0, 0, 0, 0)); d = ImageDraw.Draw(ov)
+        for y in range(420): d.line([(0, CH - y), (CW, CH - y)], fill=(4, 10, 18, int(235 * (1 - y / 420) ** .6)))
+        for y in range(220): d.line([(0, y), (CW, y)], fill=(4, 10, 18, int(200 * (1 - y / 220))))
+        d.rounded_rectangle((50, 46, 50 + big(30).getlength(top) + 44, 100), radius=26, fill=(255, 196, 60, 240))
+        d.text((72, 73), top, font=big(30), fill=(20, 24, 30), anchor='lm')
+        d.text((CW - 60, 73), f'{idx}/6', font=big(30), fill=(220, 230, 240), anchor='rm')
+        d.text((CW / 2, CH - 300), title, font=big(fitc(title, 62)), fill=col, anchor='mm', stroke_width=3, stroke_fill=INK)
+        if sub: d.text((CW / 2, CH - 200), sub, font=big(fitc(sub, 40)), fill=WHITE, anchor='mm', stroke_width=2, stroke_fill=INK)
+        d.text((CW / 2, CH - 70), note or '@minuteme_gs  ·  सेव करो, परीक्षा से पहले दोहराओ', font=big(28), fill=(170, 190, 205), anchor='mm')
+        return Image.alpha_composite(im, ov).convert('RGB')
+    sc = TL['scenes']; top = 'MinuteMe 3D' + (f"  ·  Day {TL['day']}" if TL.get('day') else '')
+    body = [i for i, s in enumerate(sc) if s['id'] not in ('hook', 'quiz', 'trap')][:3]
+    pages = [card(frame_of(0), top, sc[0]['title'], TL.get('topic', ''), GOLD, 1, 'स्वाइप करो →')]
+    for n, i in enumerate(body): pages.append(card(frame_of(i), top, sc[i]['title'], sc[i].get('sub', ''), GOLD, n + 2))
+    trap = next((i for i, s in enumerate(sc) if s.get('trap')), None)
+    if trap is not None:
+        bg = Image.new('RGB', (CW, CH), (10, 16, 26)); d = ImageDraw.Draw(bg)
+        d.rounded_rectangle((70, 300, CW - 70, 600), radius=30, fill=(70, 18, 18)); d.rounded_rectangle((70, 680, CW - 70, 980), radius=30, fill=(14, 60, 30))
+        d.text((CW / 2, 360), 'गलत', font=big(40), fill=(255, 150, 140), anchor='mm')
+        w_ = sc[trap]['title'].replace('गलती: ', ''); r_ = sc[trap]['sub'].replace('सही: ', '')
+        d.text((CW / 2, 480), w_, font=big(fitc(w_, 54, 900)), fill=(255, 225, 220), anchor='mm')
+        d.text((CW / 2, 740), 'सही', font=big(40), fill=(150, 240, 170), anchor='mm')
+        d.text((CW / 2, 860), r_, font=big(fitc(r_, 54, 900)), fill=(225, 255, 230), anchor='mm')
+        pages.append(card(bg, top, 'परीक्षा की आम गलती', '', (255, 120, 100), 5))
+    qz = sc[-1].get('quiz')
+    if qz:
+        bg = Image.new('RGB', (CW, CH), (10, 16, 26)); d = ImageDraw.Draw(bg)
+        d.text((CW / 2, 330), qz['q'], font=big(fitc(qz['q'], 50, 960)), fill=WHITE, anchor='mm')
+        for j, key in enumerate(('a', 'b')):
+            y = 470 + j * 150; ok = qz.get('ans') == key
+            d.rounded_rectangle((120, y, CW - 120, y + 110), radius=24, fill=(20, 90, 50) if ok else (28, 40, 56), outline=(120, 240, 150) if ok else (90, 110, 130), width=4)
+            d.text((CW / 2, y + 55), qz[key] + ('  ✔' if False else ''), font=big(fitc(qz[key], 46, 760)), fill=WHITE, anchor='mm')
+        if qz.get('ans'): d.text((CW / 2, 820), 'सही जवाब: ' + qz[qz['ans']], font=big(44), fill=(150, 240, 170), anchor='mm')
+        nxt = ('कल 13:00: ' + TL['next']) if TL.get('next') else 'रोज़ एक 3D सवाल'
+        pages.append(card(bg, top, 'फ़ॉलो करो @minuteme_gs', nxt, CYAN, 6))
+    for n, im in enumerate(pages, 1):
+        d = ImageDraw.Draw(im); d.rectangle((CW - 150, 46, CW - 50, 100), fill=(4, 10, 18)); d.text((CW - 60, 73), f'{n}/{len(pages)}', font=big(30), fill=(220, 230, 240), anchor='rm')
+        im.save(out / f'{n:02d}.jpg', quality=90)
+    print('CAROUSEL', len(pages), 'pages')
+
 if __name__ == '__main__':
     wav = OUT / 'soundtrack.wav'; make_audio(wav)
     out = OUT / 'reel.mp4'
@@ -184,4 +252,5 @@ if __name__ == '__main__':
     for i, im in enumerate(sorted(sheet, key=lambda x: 0)[:8]): cs.paste(im, ((i % 4) * 270, (i // 4) * 480))
     cs.save(OUT / 'contact_sheet.jpg', quality=88)
     info = {'video': out.name, 'frames': N, 'seconds': N / FPS, 'sha256': hashlib.sha256(out.read_bytes()).hexdigest(), 'bytes': out.stat().st_size}
+    carousel()
     (OUT / 'file_checks.json').write_text(json.dumps(info, indent=2, ensure_ascii=False)); print(info)
