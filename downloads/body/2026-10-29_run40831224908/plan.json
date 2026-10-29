@@ -1,0 +1,211 @@
+{
+ "topic": "पाचन तंत्र में भोजन का सफ़र",
+ "brand": "मानव शरीर",
+ "fps": 24,
+ "steps": [
+  "मुख",
+  "आमाशय",
+  "छोटी आँत",
+  "बड़ी आँत"
+ ],
+ "scenes": [
+  {
+   "id": "hook",
+   "seconds": 6.69,
+   "title": "खाना खाते ही क्या होता है?",
+   "sub": "आइए देखें भोजन का शरीर में सफ़र",
+   "step": -1,
+   "camera": {
+    "focus": [
+     "oesophagus",
+     "stomach"
+    ],
+    "angle": "three_quarter",
+    "move": "push",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "oesophagus",
+    "stomach",
+    "small_intestine",
+    "large_intestine"
+   ],
+   "effects": [
+    "travel:tongue,oesophagus,stomach,small_intestine"
+   ],
+   "labels": [
+    "oesophagus",
+    "stomach"
+   ]
+  },
+  {
+   "id": "mouth_start",
+   "seconds": 7.37,
+   "title": "मुँह से ग्रासनली तक",
+   "sub": "दाँत चबाते हैं, लार मिलाती है, फिर निगलते हैं",
+   "step": 0,
+   "camera": {
+    "focus": [
+     "tongue",
+     "oesophagus"
+    ],
+    "angle": "side",
+    "move": "push",
+    "zoom": 1.2
+   },
+   "layers": [
+    "skin",
+    "visceral",
+    "skeletal"
+   ],
+   "solid": [
+    "tongue",
+    "teeth",
+    "pharynx",
+    "oesophagus"
+   ],
+   "effects": [
+    "travel:tongue,pharynx,oesophagus",
+    "flow:oesophagus"
+   ],
+   "labels": [
+    "tongue",
+    "oesophagus"
+   ]
+  },
+  {
+   "id": "stomach_churn",
+   "seconds": 6.96,
+   "title": "आमाशय में भोजन का मंथन",
+   "sub": "अम्ल और एंजाइम भोजन को पचाते हैं",
+   "step": 1,
+   "camera": {
+    "focus": [
+     "stomach"
+    ],
+    "angle": "three_quarter",
+    "move": "orbit",
+    "zoom": 1.3
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "stomach",
+    "pancreas",
+    "liver",
+    "gallbladder"
+   ],
+   "effects": [
+    "pulse:stomach",
+    "travel:stomach"
+   ],
+   "labels": [
+    "stomach",
+    "liver"
+   ]
+  },
+  {
+   "id": "small_intestine_absorb",
+   "seconds": 7.46,
+   "title": "छोटी आँत: पोषक तत्वों का अवशोषण",
+   "sub": "पचा हुआ भोजन खून में मिल जाता है",
+   "step": 2,
+   "camera": {
+    "focus": [
+     "small_intestine"
+    ],
+    "angle": "front",
+    "move": "push",
+    "zoom": 1.4
+   },
+   "layers": [
+    "skin",
+    "visceral",
+    "cardio"
+   ],
+   "solid": [
+    "small_intestine",
+    "pancreas",
+    "liver"
+   ],
+   "effects": [
+    "travel:small_intestine",
+    "particles:small_intestine,liver,nutrient"
+   ],
+   "labels": [
+    "small_intestine",
+    "pancreas"
+   ]
+  },
+  {
+   "id": "large_intestine_water",
+   "seconds": 7.61,
+   "title": "बड़ी आँत: पानी का अवशोषण",
+   "sub": "बचा हुआ अपशिष्ट शरीर से बाहर निकलता है",
+   "step": 3,
+   "camera": {
+    "focus": [
+     "large_intestine"
+    ],
+    "angle": "three_quarter_left",
+    "move": "pull",
+    "zoom": 1.2
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "large_intestine",
+    "appendix"
+   ],
+   "effects": [
+    "travel:large_intestine",
+    "particles:large_intestine,veins,water"
+   ],
+   "labels": [
+    "large_intestine"
+   ]
+  },
+  {
+   "id": "quiz",
+   "seconds": 12.74,
+   "title": "परीक्षा का पक्का सवाल",
+   "sub": "",
+   "step": 3,
+   "camera": {
+    "focus": [
+     "stomach"
+    ],
+    "angle": "front",
+    "move": "orbit",
+    "zoom": 0.9
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "stomach",
+    "small_intestine",
+    "large_intestine"
+   ],
+   "effects": [
+    "travel:oesophagus,stomach,small_intestine,large_intestine"
+   ],
+   "labels": [],
+   "quiz": {
+    "q": "पचे हुए भोजन का अवशोषण मुख्य रूप से कहाँ होता है?",
+    "a": "A) आमाशय",
+    "b": "B) छोटी आँत",
+    "cta": "जवाब कमेंट में लिखो"
+   }
+  }
+ ]
+}
