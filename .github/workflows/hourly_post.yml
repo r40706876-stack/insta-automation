@@ -82,7 +82,18 @@ jobs:
           else
             ENTRY=auto_poster.py
           fi
-          python -u "$ENTRY" 2>&1 | sed -u -E 's/(access_token=|key=|Bearer )[^&" ]+/\1***/g' | tee last_run_log.txt
+          if python -u "$ENTRY" 2>&1 | sed -u -E 's/(access_token=|key=|Bearer )[^&" ]+/\1***/g' | tee last_run_log.txt; then exit 0; fi
+          # Fallback: a failed subject explainer must not leave the slot empty -> post that subject's 7-PYQ list reel.
+          if [ "$ENTRY" = scheduled_visual_gs.py ] && [ "$POST_MODE" = publish ] && [ "$GS_SUBJECT" != "Current Affairs" ] && [ "$REEL_FORMAT" != current ] && [ -n "$GS_TARGET_UTC" ]; then
+            KEY=$(python -c "import datetime,os;t=datetime.datetime.fromisoformat(os.environ['GS_TARGET_UTC'].replace('Z','+00:00'));print(t.astimezone(datetime.timezone(datetime.timedelta(hours=5,minutes=30))).strftime('%Y-%m-%d_%H%M'))")
+            if [ -e "experiments/scheduled_visual_gs/$KEY/publish_started.json" ] || [ -e "experiments/scheduled_visual_gs/$KEY/published.json" ]; then
+              echo "::error::Explainer publish may have started; not posting a fallback (check Instagram)"; exit 1
+            fi
+            echo "::warning title=fallback::3D explainer failed for $GS_SUBJECT; posting the 7-PYQ list reel instead"
+            REEL_FORMAT=list python -u auto_poster.py 2>&1 | sed -u -E 's/(access_token=|key=|Bearer )[^&" ]+/\1***/g' | tee -a last_run_log.txt
+          else
+            exit 1
+          fi
 
       - name: Progress save
         if: always()

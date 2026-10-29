@@ -2,13 +2,13 @@ name: Timer (theek samay par reel)
 
 # GitHub ka apna schedule 45-90 min der se chalta tha. Ye timer khud sota hai, theek samay par
 # hourly_post.yml ko us slot ke format ke saath chalata hai, fir khud ko dobara chala deta hai.
-# Public repo = minute free. Backup: har 6 ghante schedule timer ko jaga deta hai (chain toot jaaye to bhi).
+# Public repo = minute free. Backup: har ghante schedule timer ko jaga deta hai (chain toot jaaye to bhi).
 on:
   push:
     paths: [.github/workflows/timer.yml]
   workflow_dispatch:
   schedule:
-    - cron: '29 */6 * * *'
+    - cron: '29 * * * *'     # har ghante jaagta hai: chain toote to bhi agla slot nahi chhootega
 
 concurrency:
   group: minuteme-timer
