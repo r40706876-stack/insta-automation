@@ -1,0 +1,173 @@
+{
+ "topic": "दिल एक दिन में कितनी बार धड़कता है",
+ "brand": "मानव शरीर",
+ "fps": 24,
+ "steps": [
+  "धड़कन",
+  "पंप",
+  "शरीर",
+  "याद"
+ ],
+ "scenes": [
+  {
+   "id": "hook",
+   "seconds": 4.57,
+   "title": "ये दिल रुकता क्यों नहीं?",
+   "sub": "एक दिन में लगभग 1 लाख धड़कन",
+   "camera": {
+    "focus": [
+     "heart"
+    ],
+    "angle": "three_quarter",
+    "move": "push",
+    "zoom": 1.2
+   },
+   "layers": [
+    "skin",
+    "visceral",
+    "cardio"
+   ],
+   "solid": [
+    "heart"
+   ],
+   "effects": [
+    "beat",
+    "flow:heart"
+   ],
+   "labels": [
+    "heart"
+   ],
+   "step": -1
+  },
+  {
+   "id": "rate",
+   "seconds": 7.08,
+   "title": "1 मिनट में लगभग 72 बार",
+   "sub": "72 × 60 × 24 = करीब 1 लाख धड़कन रोज़",
+   "camera": {
+    "focus": [
+     "heart"
+    ],
+    "angle": "three_quarter",
+    "move": "push",
+    "zoom": 1.1
+   },
+   "layers": [
+    "skin",
+    "cardio"
+   ],
+   "solid": [
+    "heart",
+    "aorta"
+   ],
+   "effects": [
+    "beat",
+    "travel:heart,aorta,arteries"
+   ],
+   "labels": [
+    "heart",
+    "aorta"
+   ],
+   "step": 0
+  },
+  {
+   "id": "pump",
+   "seconds": 5.61,
+   "title": "हर धड़कन = खून का धक्का",
+   "sub": "धमनियों से पूरे शरीर में खून पहुँचता है",
+   "camera": {
+    "focus": [
+     "skin"
+    ],
+    "angle": "three_quarter",
+    "move": "push",
+    "zoom": 1.35
+   },
+   "layers": [
+    "skin",
+    "cardio"
+   ],
+   "solid": [
+    "heart",
+    "aorta",
+    "arteries"
+   ],
+   "effects": [
+    "beat",
+    "travel:heart,aorta,arteries",
+    "flow:arteries"
+   ],
+   "labels": [
+    "heart",
+    "aorta"
+   ],
+   "hide": [
+    "veins",
+    "vena_cava"
+   ],
+   "step": 1
+  },
+  {
+   "id": "size",
+   "seconds": 5.5,
+   "title": "मुट्ठी जितना, चार कक्ष",
+   "sub": "दो अलिंद ऊपर, दो निलय नीचे",
+   "camera": {
+    "focus": [
+     "heart"
+    ],
+    "angle": "front",
+    "move": "orbit",
+    "zoom": 1.25
+   },
+   "layers": [
+    "skin",
+    "cardio"
+   ],
+   "solid": [
+    "heart"
+   ],
+   "effects": [
+    "beat",
+    "pulse:heart"
+   ],
+   "labels": [
+    "heart"
+   ],
+   "step": 2
+  },
+  {
+   "id": "quiz",
+   "seconds": 9.42,
+   "title": "परीक्षा का पक्का सवाल",
+   "sub": "",
+   "camera": {
+    "focus": [
+     "heart"
+    ],
+    "angle": "three_quarter",
+    "move": "orbit",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "cardio"
+   ],
+   "solid": [
+    "heart"
+   ],
+   "effects": [
+    "beat",
+    "travel:heart,aorta,arteries"
+   ],
+   "labels": [],
+   "quiz": {
+    "q": "सामान्य व्यक्ति का दिल 1 मिनट में कितनी बार धड़कता है?",
+    "a": "A) लगभग 72 बार",
+    "b": "B) लगभग 150 बार",
+    "cta": "जवाब कमेंट में लिखो"
+   },
+   "step": 3
+  }
+ ]
+}
