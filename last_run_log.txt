@@ -1,17 +1,32 @@
-Traceback (most recent call last):
-  File "/home/runner/work/insta-automation/insta-automation/scheduled_visual_gs.py", line 40, in <module>
-    sys.argv=['daily_visual_gs.py'];runpy.run_path('daily_visual_gs.py',run_name='__main__')
-                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "<frozen runpy>", line 291, in run_path
-  File "<frozen runpy>", line 98, in _run_module_code
-  File "<frozen runpy>", line 88, in _run_code
-  File "daily_visual_gs.py", line 33, in <module>
-    if os.getenv('GS_FORCE_BUILD')=='1' or not (ROOT/'validated.json').exists() or json.loads((ROOT/'validated.json').read_text()).get('renderer_version')!=bridge.VERSION:build()
-                                                                                                                                                                           ^^^^^^^
-  File "daily_visual_gs.py", line 10, in build
-    def build():return bridge.build(ROOT,DAY)
-                       ^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/insta-automation/insta-automation/gs_animation_bridge.py", line 76, in build
-    if not runner.run():raise RuntimeError('3D build failed; diagnostics: '+str(runner.diag))
-                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-RuntimeError: 3D build failed; diagnostics: /home/runner/work/insta-automation/insta-automation/studio_diagnostics/40716568172
+FORMAT: list
+  Gemini text models: gemini-flash-latest, gemini-3.8-flash, gemini-3.7-flash, gemini-3.6-flash
+  Gemini gemini-flash-latest: HTTP 503 (koshish 1) {   "error": {     "code": 503,     "message": "This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later
+  Gemini gemini-flash-latest: HTTP 503 (koshish 1) {   "error": {     "code": 503,     "message": "This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later
+  Gemini gemini-flash-latest: HTTP 503 (koshish 2) 
+LIST REEL TAIYAR: generated_reels/science_pyq_reel.mp4 (10s)
+
+CAPTION:
+📚 सामान्य ज्ञान के 7 PYQ - RRB, SSC, Police, Patwari, Army, State Exams के लिए (Save करो)
+
+1. इंडियन प्रीमियर लीग (IPL) नीलामी 2022 में सबसे महंगा खिलाड़ी कौन था? → ईशान किशन
+2. अंतर्राष्ट्रीय योग दिवस किस दिन मनाया जाता है? → 21 जून
+3. किस प्रसिद्ध व्यक्तित्व के जन्मदिन पर भारत में राष्ट्रीय गणित दिवस मनाया जाता है? → श्रीनिवास रामानुजन
+4. किस भारतीय राज्य में 1 अप्रैल को उत्कल दिवस मनाया जाता है? → ओडिशा
+5. पृथ्वी दिवस कब मनाया जाता है? → 22 अप्रैल
+6. भारत में राष्ट्रीय नौसेना दिवस कब मनाया जाता है? → 4 दिसम्बर
+7. भारत में राष्ट्रीय युवा दिवस कब मनाया जाता है? → 12 जनवरी
+
+💬 कितने पहले से आते थे? कमेंट करो: 7/7?
+📤 Save करो + उस दोस्त को भेजो जो exam की तैयारी कर रहा है।
+GK GK Questions | RRB NTPC, Group D, SSC GD, State Exam PYQ
+⏱ MinuteMe_GS - एक मिनट, एक PYQ - पक्का!
+📲 Free test / notes: WhatsApp 8989971379
+
+#gkquiz #rrbntpc #sscgd #gkpyq #gk
+SCHEDULE: video ready; target 2026-10-29T01:30:00Z
+Collab invitation requested: @ar_publication
+  IG container: 17911143213568651
+  upload try 1: HTTP 200 {"success":true,"message":"Upload Successful."}
+  IG processing: FINISHED
+REMINDER: reel ready, publication due within 10 minutes: 2026-10-29T01:30:00Z
+INSTAGRAM PE POST HO GAYA: 18100977722434738
