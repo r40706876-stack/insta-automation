@@ -1,0 +1,31 @@
+name: Save a finished reel into downloads/
+# Copies an artifact (video, contact sheet, plan) of an earlier run into the repo folder downloads/.
+on:
+  workflow_dispatch:
+    inputs:
+      run_id: { description: 'Run ID (URL me /runs/<ye number>)', required: true }
+      artifact: { description: 'body-reel ya blood-moon-reel', default: 'body-reel' }
+      folder: { description: 'downloads/ ke andar folder ka naam', default: 'body' }
+permissions:
+  contents: write
+  actions: read
+jobs:
+  save:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: ${{ github.event.inputs.artifact }}
+          run-id: ${{ github.event.inputs.run_id }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path: /tmp/art
+      - name: Commit into downloads/
+        run: |
+          d="downloads/${{ github.event.inputs.folder }}/$(date -u +%Y-%m-%d)_run${{ github.event.inputs.run_id }}"
+          mkdir -p "$d"; find /tmp/art -type f \( -name '*.mp4' -o -name '*.jpg' -o -name '*.json' \) -exec cp {} "$d/" \;
+          ls -la "$d"
+          git config user.name 'github-actions[bot]'; git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git add downloads; git commit -m "Save reel to $d [skip ci]"
+          for i in 1 2 3; do git pull --rebase -q origin main && git push -q origin HEAD:main && break; sleep 5; done

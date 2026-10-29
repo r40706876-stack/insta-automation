@@ -12,7 +12,7 @@ on:
         description: 'Cycles samples per pixel (12 = same as the demo)'
         default: '12'
 permissions:
-  contents: read
+  contents: write
 env:
   DEMO_DIR: experiments/blood_moon_3d
   # Same Blender build used for the reference render (UPBGE 0.44 = Blender 4.4.3, hosted on GitHub)
@@ -115,3 +115,10 @@ jobs:
             ${{ env.DEMO_DIR }}/contact_sheet.jpg
             ${{ env.DEMO_DIR }}/file_checks.json
           retention-days: 30
+      - name: Save into downloads/ folder of the repo
+        run: |
+          d="downloads/blood_moon/$(date -u +%Y-%m-%d)_run${{ github.run_id }}"
+          mkdir -p "$d"; cp "$DEMO_DIR/blood_moon_reel.mp4" "$DEMO_DIR/contact_sheet.jpg" "$DEMO_DIR/file_checks.json" "$d/"
+          git config user.name 'github-actions[bot]'; git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git add downloads; git commit -m "Save reel to $d [skip ci]"
+          for i in 1 2 3; do git pull --rebase -q origin main && git push -q origin HEAD:main && break; sleep 5; done

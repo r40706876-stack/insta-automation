@@ -65,7 +65,7 @@ on:
         description: 'Cycles samples (12 = reference quality)'
         default: '12'
 permissions:
-  contents: read
+  contents: write
 env:
   BODY_DIR: experiments/body_3d
   BLENDER_URL: https://github.com/UPBGE/upbge/releases/download/v0.44/upbge-0.44-linux-x86_64.tar.xz
@@ -208,3 +208,10 @@ jobs:
             ${{ env.BODY_DIR }}/out/contact_sheet.jpg
             ${{ env.BODY_DIR }}/plan.json
           retention-days: 30
+      - name: Save into downloads/ folder of the repo
+        run: |
+          d="downloads/body/$(date -u +%Y-%m-%d)_run${{ github.run_id }}"
+          mkdir -p "$d"; cp "$BODY_DIR/out/reel.mp4" "$BODY_DIR/out/contact_sheet.jpg" "$BODY_DIR/plan.json" "$d/"
+          git config user.name 'github-actions[bot]'; git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git add downloads; git commit -m "Save reel to $d [skip ci]"
+          for i in 1 2 3; do git pull --rebase -q origin main && git push -q origin HEAD:main && break; sleep 5; done
