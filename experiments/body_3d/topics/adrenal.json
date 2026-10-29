@@ -1,0 +1,172 @@
+{
+ "topic": "अधिवृक्क ग्रंथि: आपातकाल का हार्मोन एड्रेनालिन",
+ "brand": "मानव शरीर",
+ "fps": 24,
+ "steps": [
+  "जगह",
+  "एड्रेनालिन",
+  "दिल",
+  "याद"
+ ],
+ "scenes": [
+  {
+   "id": "hook",
+   "seconds": 3.5,
+   "title": "डर लगते ही दिल तेज़ क्यों?",
+   "sub": "ज़िम्मेदार है एक छोटी ग्रंथि",
+   "camera": {
+    "focus": [
+     "adrenal",
+     "kidneys"
+    ],
+    "angle": "back",
+    "move": "push",
+    "zoom": 1.4
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "adrenal",
+    "kidneys"
+   ],
+   "effects": [
+    "pulse:adrenal",
+    "particles:adrenal,heart,blood"
+   ],
+   "labels": [
+    "adrenal"
+   ],
+   "step": -1
+  },
+  {
+   "id": "where",
+   "seconds": 5.5,
+   "title": "हर किडनी के ऊपर एक टोपी",
+   "sub": "इसीलिए नाम अधिवृक्क",
+   "camera": {
+    "focus": [
+     "adrenal",
+     "kidneys"
+    ],
+    "angle": "back",
+    "move": "orbit",
+    "zoom": 1.3
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "adrenal",
+    "kidneys"
+   ],
+   "effects": [
+    "sequence:kidneys,adrenal"
+   ],
+   "labels": [
+    "adrenal",
+    "kidneys"
+   ],
+   "step": 0
+  },
+  {
+   "id": "rush",
+   "seconds": 6,
+   "title": "एड्रेनालिन खून में",
+   "sub": "दिल तेज़ धड़कता है, साँस तेज़ होती है",
+   "camera": {
+    "focus": [
+     "heart",
+     "lungs"
+    ],
+    "angle": "front",
+    "move": "push",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "visceral",
+    "cardio"
+   ],
+   "solid": [
+    "heart",
+    "lungs",
+    "adrenal"
+   ],
+   "effects": [
+    "beat",
+    "breathe",
+    "particles:adrenal,heart,blood"
+   ],
+   "labels": [
+    "heart",
+    "lungs"
+   ],
+   "step": 1
+  },
+  {
+   "id": "fight",
+   "seconds": 5,
+   "title": "लड़ो या भागो हार्मोन",
+   "sub": "आपात स्थिति में शरीर को तैयार करता है",
+   "camera": {
+    "focus": [
+     "adrenal"
+    ],
+    "angle": "back",
+    "move": "push",
+    "zoom": 1.5
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "adrenal",
+    "kidneys"
+   ],
+   "effects": [
+    "pulse:adrenal",
+    "flow:adrenal"
+   ],
+   "labels": [
+    "adrenal"
+   ],
+   "step": 2
+  },
+  {
+   "id": "quiz",
+   "seconds": 5,
+   "title": "परीक्षा का पक्का सवाल",
+   "sub": "",
+   "camera": {
+    "focus": [
+     "adrenal"
+    ],
+    "angle": "back",
+    "move": "orbit",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "adrenal"
+   ],
+   "effects": [
+    "pulse:adrenal"
+   ],
+   "labels": [],
+   "quiz": {
+    "q": "आपातकालीन हार्मोन किसे कहते हैं?",
+    "a": "A) एड्रेनालिन",
+    "b": "B) इंसुलिन",
+    "cta": "जवाब कमेंट में लिखो"
+   },
+   "step": 3
+  }
+ ]
+}

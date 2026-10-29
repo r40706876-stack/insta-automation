@@ -1,0 +1,168 @@
+{
+ "topic": "यकृत: शरीर की सबसे बड़ी ग्रंथि",
+ "brand": "मानव शरीर",
+ "fps": 24,
+ "steps": [
+  "यकृत",
+  "पित्त",
+  "भंडार",
+  "याद"
+ ],
+ "scenes": [
+  {
+   "id": "hook",
+   "seconds": 3.5,
+   "title": "शरीर की सबसे बड़ी ग्रंथि?",
+   "sub": "पेट के दाईं ओर ऊपर",
+   "camera": {
+    "focus": [
+     "liver"
+    ],
+    "angle": "three_quarter",
+    "move": "push",
+    "zoom": 1.2
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "liver"
+   ],
+   "effects": [
+    "pulse:liver",
+    "flow:liver"
+   ],
+   "labels": [
+    "liver"
+   ],
+   "step": -1
+  },
+  {
+   "id": "where",
+   "seconds": 5.5,
+   "title": "यकृत (लिवर) दाईं ओर",
+   "sub": "डायाफ्राम के ठीक नीचे, आमाशय के पास",
+   "camera": {
+    "focus": [
+     "liver",
+     "stomach"
+    ],
+    "angle": "front",
+    "move": "orbit",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "liver",
+    "stomach"
+   ],
+   "effects": [
+    "sequence:liver,stomach"
+   ],
+   "labels": [
+    "liver",
+    "stomach"
+   ],
+   "step": 0
+  },
+  {
+   "id": "bile",
+   "seconds": 6,
+   "title": "पित्त रस बनाता है",
+   "sub": "पित्त वसा के पाचन में मदद करता है",
+   "camera": {
+    "focus": [
+     "liver",
+     "gallbladder"
+    ],
+    "angle": "three_quarter",
+    "move": "push",
+    "zoom": 1.2
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "liver",
+    "gallbladder",
+    "small_intestine"
+   ],
+   "effects": [
+    "travel:liver,gallbladder,small_intestine"
+   ],
+   "labels": [
+    "liver",
+    "gallbladder"
+   ],
+   "step": 1
+  },
+  {
+   "id": "store",
+   "seconds": 5.5,
+   "title": "ग्लाइकोजन का भंडार",
+   "sub": "ज़रूरत पर खून में शुगर छोड़ता है",
+   "camera": {
+    "focus": [
+     "liver"
+    ],
+    "angle": "three_quarter_left",
+    "move": "push",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "liver",
+    "small_intestine"
+   ],
+   "effects": [
+    "particles:small_intestine,liver,nutrient",
+    "pulse:liver"
+   ],
+   "labels": [
+    "liver",
+    "small_intestine"
+   ],
+   "step": 2
+  },
+  {
+   "id": "quiz",
+   "seconds": 5,
+   "title": "परीक्षा का पक्का सवाल",
+   "sub": "",
+   "camera": {
+    "focus": [
+     "liver"
+    ],
+    "angle": "three_quarter",
+    "move": "orbit",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "liver"
+   ],
+   "effects": [
+    "pulse:liver"
+   ],
+   "labels": [],
+   "quiz": {
+    "q": "मानव शरीर की सबसे बड़ी ग्रंथि कौन-सी है?",
+    "a": "A) यकृत",
+    "b": "B) अग्न्याशय",
+    "cta": "जवाब कमेंट में लिखो"
+   },
+   "step": 3
+  }
+ ]
+}

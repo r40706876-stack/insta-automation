@@ -1,0 +1,164 @@
+{
+ "topic": "बड़ी आँत का काम",
+ "brand": "मानव शरीर",
+ "fps": 24,
+ "steps": [
+  "बड़ी आँत",
+  "पानी",
+  "बाहर",
+  "याद"
+ ],
+ "scenes": [
+  {
+   "id": "hook",
+   "seconds": 3.5,
+   "title": "मोटी, पर छोटी — कौन?",
+   "sub": "बड़ी आँत का असली काम",
+   "camera": {
+    "focus": [
+     "large_intestine"
+    ],
+    "angle": "front",
+    "move": "push",
+    "zoom": 1.05
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "large_intestine",
+    "small_intestine"
+   ],
+   "effects": [
+    "travel:small_intestine,large_intestine"
+   ],
+   "labels": [
+    "large_intestine"
+   ],
+   "step": -1
+  },
+  {
+   "id": "frame",
+   "seconds": 5.5,
+   "title": "छोटी आँत को घेरे हुए",
+   "sub": "लगभग 1.5 मीटर लंबी, पर ज़्यादा चौड़ी",
+   "camera": {
+    "focus": [
+     "large_intestine"
+    ],
+    "angle": "front",
+    "move": "orbit",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "large_intestine",
+    "small_intestine"
+   ],
+   "effects": [
+    "travel:large_intestine"
+   ],
+   "labels": [
+    "large_intestine",
+    "small_intestine"
+   ],
+   "step": 0
+  },
+  {
+   "id": "water",
+   "seconds": 6,
+   "title": "पानी और लवण सोखती है",
+   "sub": "बचा अपशिष्ट गाढ़ा हो जाता है",
+   "camera": {
+    "focus": [
+     "large_intestine"
+    ],
+    "angle": "three_quarter_left",
+    "move": "push",
+    "zoom": 1.15
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "large_intestine"
+   ],
+   "effects": [
+    "travel:large_intestine",
+    "particles:large_intestine,veins,water"
+   ],
+   "labels": [
+    "large_intestine"
+   ],
+   "step": 1
+  },
+  {
+   "id": "out",
+   "seconds": 5,
+   "title": "मलाशय से बाहर",
+   "sub": "अपचा भोजन शरीर से बाहर निकलता है",
+   "camera": {
+    "focus": [
+     "large_intestine"
+    ],
+    "angle": "front",
+    "move": "rise",
+    "zoom": 1.15
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "large_intestine",
+    "appendix"
+   ],
+   "effects": [
+    "travel:large_intestine",
+    "pulse:large_intestine"
+   ],
+   "labels": [
+    "large_intestine",
+    "appendix"
+   ],
+   "step": 2
+  },
+  {
+   "id": "quiz",
+   "seconds": 5,
+   "title": "परीक्षा का पक्का सवाल",
+   "sub": "",
+   "camera": {
+    "focus": [
+     "large_intestine"
+    ],
+    "angle": "front",
+    "move": "orbit",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "large_intestine"
+   ],
+   "effects": [
+    "travel:large_intestine"
+   ],
+   "labels": [],
+   "quiz": {
+    "q": "बड़ी आँत मुख्य रूप से क्या सोखती है?",
+    "a": "A) पानी और लवण",
+    "b": "B) प्रोटीन",
+    "cta": "जवाब कमेंट में लिखो"
+   },
+   "step": 3
+  }
+ ]
+}

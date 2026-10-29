@@ -1,0 +1,172 @@
+{
+ "topic": "फेफड़े: शरीर में ऑक्सीजन का दरवाज़ा",
+ "brand": "मानव शरीर",
+ "fps": 24,
+ "steps": [
+  "फेफड़े",
+  "वायुकोष",
+  "खून",
+  "याद"
+ ],
+ "scenes": [
+  {
+   "id": "hook",
+   "seconds": 3.5,
+   "title": "फेफड़े खुद साँस नहीं लेते!",
+   "sub": "तो फिर ये फूलते कैसे हैं?",
+   "camera": {
+    "focus": [
+     "lungs"
+    ],
+    "angle": "front",
+    "move": "push",
+    "zoom": 1.05
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "lungs"
+   ],
+   "effects": [
+    "breathe",
+    "pulse:lungs"
+   ],
+   "labels": [
+    "lungs"
+   ],
+   "step": -1
+  },
+  {
+   "id": "diaphragm",
+   "seconds": 5.5,
+   "title": "डायाफ्राम नीचे खिंचता है",
+   "sub": "छाती में जगह बनती है, हवा अंदर आती है",
+   "camera": {
+    "focus": [
+     "lungs"
+    ],
+    "angle": "front",
+    "move": "push",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "lungs",
+    "trachea",
+    "bronchi"
+   ],
+   "effects": [
+    "breathe",
+    "travel:larynx,trachea,bronchi,lungs"
+   ],
+   "labels": [
+    "lungs",
+    "trachea"
+   ],
+   "step": 0
+  },
+  {
+   "id": "alveoli",
+   "seconds": 6,
+   "title": "करोड़ों छोटे वायुकोष",
+   "sub": "यहाँ ऑक्सीजन खून में घुलती है",
+   "camera": {
+    "focus": [
+     "lungs",
+     "heart"
+    ],
+    "angle": "three_quarter_left",
+    "move": "push",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "visceral",
+    "cardio"
+   ],
+   "solid": [
+    "lungs",
+    "heart"
+   ],
+   "effects": [
+    "breathe",
+    "beat",
+    "particles:lungs,heart,oxygen"
+   ],
+   "labels": [
+    "lungs"
+   ],
+   "step": 1
+  },
+  {
+   "id": "ribs",
+   "seconds": 5,
+   "title": "पसलियाँ फेफड़ों की ढाल",
+   "sub": "दिल और फेफड़ों की रक्षा करती हैं",
+   "camera": {
+    "focus": [
+     "ribs"
+    ],
+    "angle": "front",
+    "move": "orbit",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "visceral",
+    "skeletal"
+   ],
+   "solid": [
+    "ribs",
+    "lungs"
+   ],
+   "effects": [
+    "breathe",
+    "sequence:ribs,lungs"
+   ],
+   "labels": [
+    "ribs",
+    "lungs"
+   ],
+   "step": 2
+  },
+  {
+   "id": "quiz",
+   "seconds": 5,
+   "title": "परीक्षा का पक्का सवाल",
+   "sub": "",
+   "camera": {
+    "focus": [
+     "lungs"
+    ],
+    "angle": "front",
+    "move": "orbit",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "lungs"
+   ],
+   "effects": [
+    "breathe",
+    "travel:larynx,trachea,bronchi,lungs"
+   ],
+   "labels": [],
+   "quiz": {
+    "q": "साँस लेने में मुख्य पेशी कौन-सी है?",
+    "a": "A) डायाफ्राम",
+    "b": "B) हृदय पेशी",
+    "cta": "जवाब कमेंट में लिखो"
+   },
+   "step": 3
+  }
+ ]
+}

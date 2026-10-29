@@ -1,0 +1,177 @@
+{
+ "topic": "साँस लेने की प्रक्रिया: नाक से फेफड़ों तक",
+ "brand": "मानव शरीर",
+ "fps": 24,
+ "steps": [
+  "नाक",
+  "श्वासनली",
+  "फेफड़े",
+  "याद"
+ ],
+ "scenes": [
+  {
+   "id": "hook",
+   "seconds": 3.5,
+   "title": "हवा अंदर जाकर कहाँ जाती है?",
+   "sub": "एक साँस का पूरा सफ़र",
+   "camera": {
+    "focus": [
+     "lungs"
+    ],
+    "angle": "front",
+    "move": "push",
+    "zoom": 1.05
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "lungs",
+    "trachea",
+    "bronchi",
+    "larynx"
+   ],
+   "effects": [
+    "breathe",
+    "travel:larynx,trachea,bronchi,lungs"
+   ],
+   "labels": [
+    "lungs"
+   ],
+   "step": -1
+  },
+  {
+   "id": "nose",
+   "seconds": 5,
+   "title": "नाक → ग्रसनी → स्वरयंत्र",
+   "sub": "नाक के बाल और म्यूकस धूल रोकते हैं",
+   "camera": {
+    "focus": [
+     "larynx",
+     "trachea"
+    ],
+    "angle": "side",
+    "move": "push",
+    "zoom": 1.3
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "pharynx",
+    "larynx",
+    "trachea"
+   ],
+   "effects": [
+    "travel:pharynx,larynx,trachea"
+   ],
+   "labels": [
+    "larynx",
+    "trachea"
+   ],
+   "step": 0
+  },
+  {
+   "id": "tube",
+   "seconds": 5.5,
+   "title": "श्वासनली से दो श्वसनी",
+   "sub": "हवा दाएँ और बाएँ फेफड़े में बँट जाती है",
+   "camera": {
+    "focus": [
+     "trachea",
+     "bronchi"
+    ],
+    "angle": "front",
+    "move": "push",
+    "zoom": 1.15
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "trachea",
+    "bronchi",
+    "lungs"
+   ],
+   "effects": [
+    "breathe",
+    "travel:trachea,bronchi"
+   ],
+   "labels": [
+    "trachea",
+    "bronchi"
+   ],
+   "step": 1
+  },
+  {
+   "id": "exchange",
+   "seconds": 6,
+   "title": "वायुकोष में गैसों की अदला-बदली",
+   "sub": "ऑक्सीजन खून में जाती है, CO₂ बाहर आती है",
+   "camera": {
+    "focus": [
+     "lungs",
+     "heart"
+    ],
+    "angle": "three_quarter_left",
+    "move": "push",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "visceral",
+    "cardio"
+   ],
+   "solid": [
+    "lungs",
+    "heart"
+   ],
+   "effects": [
+    "breathe",
+    "beat",
+    "particles:lungs,heart,oxygen"
+   ],
+   "labels": [
+    "lungs",
+    "heart"
+   ],
+   "step": 2
+  },
+  {
+   "id": "quiz",
+   "seconds": 5,
+   "title": "परीक्षा का पक्का सवाल",
+   "sub": "",
+   "camera": {
+    "focus": [
+     "lungs"
+    ],
+    "angle": "front",
+    "move": "orbit",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "lungs"
+   ],
+   "effects": [
+    "breathe",
+    "travel:larynx,trachea,bronchi,lungs"
+   ],
+   "labels": [],
+   "quiz": {
+    "q": "फेफड़ों में गैसों का आदान-प्रदान कहाँ होता है?",
+    "a": "A) वायुकोष (एल्वियोली)",
+    "b": "B) श्वासनली",
+    "cta": "जवाब कमेंट में लिखो"
+   },
+   "step": 3
+  }
+ ]
+}

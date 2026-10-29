@@ -1,0 +1,169 @@
+{
+ "topic": "श्वासनली और श्वसनी का काम",
+ "brand": "मानव शरीर",
+ "fps": 24,
+ "steps": [
+  "श्वासनली",
+  "छल्ले",
+  "श्वसनी",
+  "याद"
+ ],
+ "scenes": [
+  {
+   "id": "hook",
+   "seconds": 3.5,
+   "title": "ये नली पिचकती क्यों नहीं?",
+   "sub": "राज़ है इसके छल्लों में",
+   "camera": {
+    "focus": [
+     "trachea"
+    ],
+    "angle": "side",
+    "move": "push",
+    "zoom": 1.4
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "trachea",
+    "larynx"
+   ],
+   "effects": [
+    "travel:larynx,trachea"
+   ],
+   "labels": [
+    "trachea"
+   ],
+   "step": -1
+  },
+  {
+   "id": "rings",
+   "seconds": 5.5,
+   "title": "C-आकार के उपास्थि छल्ले",
+   "sub": "ये श्वासनली को हमेशा खुला रखते हैं",
+   "camera": {
+    "focus": [
+     "trachea"
+    ],
+    "angle": "front",
+    "move": "orbit",
+    "zoom": 1.4
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "trachea",
+    "bronchi"
+   ],
+   "effects": [
+    "breathe",
+    "flow:trachea"
+   ],
+   "labels": [
+    "trachea"
+   ],
+   "step": 0
+  },
+  {
+   "id": "split",
+   "seconds": 5.5,
+   "title": "नीचे जाकर दो श्वसनी",
+   "sub": "एक दाएँ फेफड़े में, एक बाएँ फेफड़े में",
+   "camera": {
+    "focus": [
+     "bronchi"
+    ],
+    "angle": "front",
+    "move": "push",
+    "zoom": 1.1
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "trachea",
+    "bronchi",
+    "lungs"
+   ],
+   "effects": [
+    "breathe",
+    "travel:trachea,bronchi,lungs"
+   ],
+   "labels": [
+    "bronchi",
+    "lungs"
+   ],
+   "step": 1
+  },
+  {
+   "id": "lobes",
+   "seconds": 5.5,
+   "title": "दायाँ फेफड़ा 3 पालियाँ, बायाँ 2",
+   "sub": "बाईं ओर दिल के लिए जगह छोड़नी होती है",
+   "camera": {
+    "focus": [
+     "lungs"
+    ],
+    "angle": "front",
+    "move": "orbit",
+    "zoom": 1.05
+   },
+   "layers": [
+    "skin",
+    "visceral",
+    "cardio"
+   ],
+   "solid": [
+    "lungs",
+    "heart"
+   ],
+   "effects": [
+    "breathe",
+    "beat",
+    "sequence:lungs,heart"
+   ],
+   "labels": [
+    "lungs",
+    "heart"
+   ],
+   "step": 2
+  },
+  {
+   "id": "quiz",
+   "seconds": 5,
+   "title": "परीक्षा का पक्का सवाल",
+   "sub": "",
+   "camera": {
+    "focus": [
+     "lungs"
+    ],
+    "angle": "front",
+    "move": "orbit",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "lungs"
+   ],
+   "effects": [
+    "breathe"
+   ],
+   "labels": [],
+   "quiz": {
+    "q": "बाएँ फेफड़े में कितनी पालियाँ होती हैं?",
+    "a": "A) तीन",
+    "b": "B) दो",
+    "cta": "जवाब कमेंट में लिखो"
+   },
+   "step": 3
+  }
+ ]
+}

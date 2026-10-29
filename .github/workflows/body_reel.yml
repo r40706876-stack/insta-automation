@@ -95,13 +95,16 @@ jobs:
           TOPIC_TEXT: ${{ github.event.inputs.topic_text }}
         run: |
           cd "$BODY_DIR"
-          case "$TOPIC_CHOICE" in
-            *"तैयार demo"*) T="" ;;
-            *"अपना topic"*) T="$TOPIC_TEXT"; [ -n "$T" ] || { echo "topic_text khaali hai"; exit 1; } ;;
-            *) T="$TOPIC_CHOICE" ;;
-          esac
-          if [ -n "$T" ]; then pip install -q requests; python planner.py "$T" plan.json > /tmp/plan.log 2>&1 || { echo "::error title=plan failed::$(tail -c 2500 /tmp/plan.log | tr '\n' ' ')"; exit 1; }; cat /tmp/plan.log
-          else cp "${{ github.event.inputs.topic_file }}" plan.json; fi
+          F=$(python -c "import json,sys;print(json.load(open('topics/index.json')).get(sys.argv[1],''))" "$TOPIC_CHOICE")
+          if [ "$TOPIC_CHOICE" = "${{ github.event.inputs.topic_file }}" ] || [[ "$TOPIC_CHOICE" == *"तैयार demo"* && "${{ github.event.inputs.topic_file }}" != "topics/heart_blood.json" ]]; then F="${{ github.event.inputs.topic_file }}"; fi
+          if [[ "$TOPIC_CHOICE" == *"अपना topic"* ]]; then
+            [ -n "$TOPIC_TEXT" ] || { echo "::error::topic_text khaali hai"; exit 1; }
+            pip install -q requests; python planner.py "$TOPIC_TEXT" plan.json > /tmp/plan.log 2>&1 || { echo "::error title=plan failed::$(tail -c 2500 /tmp/plan.log | tr '\n' ' ')"; exit 1; }; cat /tmp/plan.log
+          elif [ -n "$F" ]; then
+            echo "::notice title=plan::taiyaar kahani $F"; cp "$F" plan.json
+          else
+            pip install -q requests; python planner.py "$TOPIC_CHOICE" plan.json > /tmp/plan.log 2>&1 || { echo "::error title=plan failed::$(tail -c 2500 /tmp/plan.log | tr '\n' ' ')"; exit 1; }; cat /tmp/plan.log
+          fi
           cat plan.json
       - name: Hindi voiceover (Gemini male Charon, one voice per video)
         timeout-minutes: 20

@@ -1,0 +1,168 @@
+{
+ "topic": "मस्तिष्क के भाग और उनके काम",
+ "brand": "मानव शरीर",
+ "fps": 24,
+ "steps": [
+  "प्रमस्तिष्क",
+  "अनुमस्तिष्क",
+  "मेडुला",
+  "याद"
+ ],
+ "scenes": [
+  {
+   "id": "hook",
+   "seconds": 3.5,
+   "title": "सोचता कौन, संतुलन कौन रखता है?",
+   "sub": "दिमाग के तीन हिस्से",
+   "camera": {
+    "focus": [
+     "brain"
+    ],
+    "angle": "side",
+    "move": "push",
+    "zoom": 1.1
+   },
+   "layers": [
+    "skin",
+    "nervous"
+   ],
+   "solid": [
+    "brain",
+    "cerebellum"
+   ],
+   "effects": [
+    "pulse:brain",
+    "travel:brain,spinal_cord,nerves"
+   ],
+   "labels": [
+    "brain"
+   ],
+   "step": -1
+  },
+  {
+   "id": "cerebrum",
+   "seconds": 5.5,
+   "title": "प्रमस्तिष्क: सबसे बड़ा भाग",
+   "sub": "सोचना, याद रखना, बोलना, समझना",
+   "camera": {
+    "focus": [
+     "brain"
+    ],
+    "angle": "three_quarter",
+    "move": "orbit",
+    "zoom": 1.2
+   },
+   "layers": [
+    "skin",
+    "nervous"
+   ],
+   "solid": [
+    "brain"
+   ],
+   "effects": [
+    "pulse:brain",
+    "flow:brain"
+   ],
+   "labels": [
+    "brain"
+   ],
+   "step": 0
+  },
+  {
+   "id": "cerebellum",
+   "seconds": 5.5,
+   "title": "अनुमस्तिष्क: संतुलन",
+   "sub": "चलते समय शरीर को गिरने नहीं देता",
+   "camera": {
+    "focus": [
+     "cerebellum"
+    ],
+    "angle": "back",
+    "move": "push",
+    "zoom": 1.3
+   },
+   "layers": [
+    "skin",
+    "nervous"
+   ],
+   "solid": [
+    "cerebellum",
+    "brain"
+   ],
+   "effects": [
+    "pulse:cerebellum",
+    "sequence:brain,cerebellum"
+   ],
+   "labels": [
+    "cerebellum"
+   ],
+   "step": 1
+  },
+  {
+   "id": "medulla",
+   "seconds": 5.5,
+   "title": "मेडुला: अपने आप होने वाले काम",
+   "sub": "दिल की धड़कन, साँस — बिना सोचे",
+   "camera": {
+    "focus": [
+     "brain",
+     "spinal_cord"
+    ],
+    "angle": "side",
+    "move": "down",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "nervous"
+   ],
+   "solid": [
+    "brain",
+    "spinal_cord",
+    "cerebellum"
+   ],
+   "effects": [
+    "travel:brain,spinal_cord",
+    "flow:spinal_cord"
+   ],
+   "labels": [
+    "spinal_cord"
+   ],
+   "step": 2
+  },
+  {
+   "id": "quiz",
+   "seconds": 5,
+   "title": "परीक्षा का पक्का सवाल",
+   "sub": "",
+   "camera": {
+    "focus": [
+     "cerebellum",
+     "brain"
+    ],
+    "angle": "side",
+    "move": "orbit",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "nervous"
+   ],
+   "solid": [
+    "cerebellum",
+    "brain"
+   ],
+   "effects": [
+    "pulse:cerebellum"
+   ],
+   "labels": [],
+   "quiz": {
+    "q": "शरीर का संतुलन कौन बनाए रखता है?",
+    "a": "A) अनुमस्तिष्क",
+    "b": "B) प्रमस्तिष्क",
+    "cta": "जवाब कमेंट में लिखो"
+   },
+   "step": 3
+  }
+ ]
+}

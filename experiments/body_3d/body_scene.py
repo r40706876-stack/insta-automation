@@ -86,10 +86,12 @@ ANG = {'front': 0, 'three_quarter': 35, 'three_quarter_left': -35, 'side': 90, '
 WIDE = {'viscera_other', 'bones', 'nerves', 'arteries', 'veins', 'skin'}   # catch-all groups: too big to frame
 HEAD = {'brain', 'cerebellum', 'eyes', 'tongue', 'teeth', 'skull', 'pharynx', 'larynx', 'ear_bones', 'thyroid'}
 def scene_focus(s, idx):
-    cam = s.get('camera', {}); keys = [k for k in cam.get('focus', []) if k in IDX and k not in WIDE]
+    cam = s.get('camera', {}); keys = [k for k in cam.get('focus', []) if k in IDX and (k not in WIDE or k == 'skin')]
     seq = next((e.split(':', 1)[1].split(',') for e in s.get('effects', []) if e.startswith('sequence:')), [])
     talk = [l if isinstance(l, str) else l['key'] for l in s.get('labels', [])] + seq + s.get('solid', [])
     talk = [k for k in talk if k in IDX and k != 'skin']
+    if keys == ['skin'] and idx > 0: return keys                                          # deliberate full-body shot
+    keys = [k for k in keys if k != 'skin']
     if (idx == 0 or not keys) and talk and not (set(keys) & set(talk[:2])): keys = talk[:2]   # hook / vague focus: frame the organ being talked about          # hook: start close on the organ
     return keys or ['skin']
 def cam_pose(spec, k, keys=None):

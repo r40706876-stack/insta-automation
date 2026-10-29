@@ -1,0 +1,167 @@
+{
+ "topic": "ग्रासनली: भोजन की नली",
+ "brand": "मानव शरीर",
+ "fps": 24,
+ "steps": [
+  "मुँह",
+  "ग्रासनली",
+  "आमाशय",
+  "याद"
+ ],
+ "scenes": [
+  {
+   "id": "hook",
+   "seconds": 3.5,
+   "title": "उल्टा लटककर भी खाना पेट में!",
+   "sub": "ग्रासनली का कमाल",
+   "camera": {
+    "focus": [
+     "oesophagus"
+    ],
+    "angle": "side",
+    "move": "push",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "oesophagus",
+    "stomach",
+    "tongue"
+   ],
+   "effects": [
+    "travel:tongue,pharynx,oesophagus,stomach"
+   ],
+   "labels": [
+    "oesophagus"
+   ],
+   "step": -1
+  },
+  {
+   "id": "tube",
+   "seconds": 5.5,
+   "title": "लगभग 25 सेमी लंबी नली",
+   "sub": "गले से आमाशय तक भोजन ले जाती है",
+   "camera": {
+    "focus": [
+     "oesophagus"
+    ],
+    "angle": "side",
+    "move": "push",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "oesophagus",
+    "pharynx"
+   ],
+   "effects": [
+    "travel:pharynx,oesophagus",
+    "flow:oesophagus"
+   ],
+   "labels": [
+    "oesophagus"
+   ],
+   "step": 0
+  },
+  {
+   "id": "wave",
+   "seconds": 6,
+   "title": "क्रमाकुंचन: लहर जैसी गति",
+   "sub": "पेशियाँ सिकुड़कर भोजन को नीचे धकेलती हैं",
+   "camera": {
+    "focus": [
+     "oesophagus",
+     "stomach"
+    ],
+    "angle": "three_quarter",
+    "move": "rise",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "oesophagus",
+    "stomach"
+   ],
+   "effects": [
+    "travel:oesophagus,stomach",
+    "pulse:oesophagus"
+   ],
+   "labels": [
+    "oesophagus",
+    "stomach"
+   ],
+   "step": 1
+  },
+  {
+   "id": "gate",
+   "seconds": 5,
+   "title": "नीचे एक वाल्व",
+   "sub": "भोजन वापस ऊपर नहीं आता",
+   "camera": {
+    "focus": [
+     "stomach"
+    ],
+    "angle": "front",
+    "move": "push",
+    "zoom": 1.2
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "oesophagus",
+    "stomach"
+   ],
+   "effects": [
+    "travel:oesophagus,stomach",
+    "pulse:stomach"
+   ],
+   "labels": [
+    "stomach"
+   ],
+   "step": 2
+  },
+  {
+   "id": "quiz",
+   "seconds": 5,
+   "title": "परीक्षा का पक्का सवाल",
+   "sub": "",
+   "camera": {
+    "focus": [
+     "oesophagus"
+    ],
+    "angle": "side",
+    "move": "orbit",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "oesophagus"
+   ],
+   "effects": [
+    "travel:oesophagus,stomach"
+   ],
+   "labels": [],
+   "quiz": {
+    "q": "भोजन नली में भोजन किस गति से आगे बढ़ता है?",
+    "a": "A) क्रमाकुंचन",
+    "b": "B) परासरण",
+    "cta": "जवाब कमेंट में लिखो"
+   },
+   "step": 3
+  }
+ ]
+}

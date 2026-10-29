@@ -1,0 +1,166 @@
+{
+ "topic": "किडनी खून को कैसे साफ़ करती है",
+ "brand": "मानव शरीर",
+ "fps": 24,
+ "steps": [
+  "खून",
+  "छानना",
+  "मूत्र",
+  "याद"
+ ],
+ "scenes": [
+  {
+   "id": "hook",
+   "seconds": 3.5,
+   "title": "शरीर का फ़िल्टर कौन?",
+   "sub": "रोज़ खून को बार-बार साफ़ करता है",
+   "camera": {
+    "focus": [
+     "kidneys"
+    ],
+    "angle": "back",
+    "move": "push",
+    "zoom": 1.2
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "kidneys"
+   ],
+   "effects": [
+    "pulse:kidneys",
+    "particles:arteries,kidneys,blood"
+   ],
+   "labels": [
+    "kidneys"
+   ],
+   "step": -1
+  },
+  {
+   "id": "where",
+   "seconds": 5.5,
+   "title": "पीठ की ओर, दो सेम जैसे",
+   "sub": "कमर के ऊपर, रीढ़ के दोनों ओर",
+   "camera": {
+    "focus": [
+     "kidneys"
+    ],
+    "angle": "back",
+    "move": "orbit",
+    "zoom": 1.1
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "kidneys",
+    "adrenal"
+   ],
+   "effects": [
+    "sequence:kidneys,adrenal"
+   ],
+   "labels": [
+    "kidneys",
+    "adrenal"
+   ],
+   "step": 0
+  },
+  {
+   "id": "filter",
+   "seconds": 6,
+   "title": "नेफ्रॉन: छलनी की इकाई",
+   "sub": "खून से यूरिया और ज़्यादा पानी छानते हैं",
+   "camera": {
+    "focus": [
+     "kidneys"
+    ],
+    "angle": "back",
+    "move": "push",
+    "zoom": 1.35
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "kidneys"
+   ],
+   "effects": [
+    "particles:arteries,kidneys,blood",
+    "pulse:kidneys",
+    "flow:kidneys"
+   ],
+   "labels": [
+    "kidneys"
+   ],
+   "step": 1
+  },
+  {
+   "id": "urine",
+   "seconds": 5.5,
+   "title": "बचा = मूत्र",
+   "sub": "मूत्रवाहिनी से मूत्राशय तक जाता है",
+   "camera": {
+    "focus": [
+     "kidneys",
+     "bladder"
+    ],
+    "angle": "front",
+    "move": "push",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "kidneys",
+    "ureters",
+    "bladder"
+   ],
+   "effects": [
+    "travel:kidneys,ureters,bladder"
+   ],
+   "labels": [
+    "ureters",
+    "bladder"
+   ],
+   "step": 2
+  },
+  {
+   "id": "quiz",
+   "seconds": 5,
+   "title": "परीक्षा का पक्का सवाल",
+   "sub": "",
+   "camera": {
+    "focus": [
+     "kidneys"
+    ],
+    "angle": "back",
+    "move": "orbit",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "kidneys"
+   ],
+   "effects": [
+    "pulse:kidneys"
+   ],
+   "labels": [],
+   "quiz": {
+    "q": "वृक्क की कार्यात्मक इकाई क्या है?",
+    "a": "A) न्यूरॉन",
+    "b": "B) नेफ्रॉन",
+    "cta": "जवाब कमेंट में लिखो"
+   },
+   "step": 3
+  }
+ ]
+}

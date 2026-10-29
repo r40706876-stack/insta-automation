@@ -1,0 +1,166 @@
+{
+ "topic": "हाथ और पैर की हड्डियाँ",
+ "brand": "मानव शरीर",
+ "fps": 24,
+ "steps": [
+  "बाँह",
+  "हाथ",
+  "पैर",
+  "याद"
+ ],
+ "scenes": [
+  {
+   "id": "hook",
+   "seconds": 3.5,
+   "title": "एक हाथ में 27 हड्डियाँ!",
+   "sub": "इसीलिए उँगलियाँ इतनी लचीली हैं",
+   "camera": {
+    "focus": [
+     "hand_bones"
+    ],
+    "angle": "front",
+    "move": "push",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "skeletal"
+   ],
+   "solid": [
+    "hand_bones",
+    "arm_bones"
+   ],
+   "effects": [
+    "sequence:arm_bones,hand_bones",
+    "pulse:hand_bones"
+   ],
+   "labels": [
+    "hand_bones"
+   ],
+   "step": -1
+  },
+  {
+   "id": "arm",
+   "seconds": 5.5,
+   "title": "बाँह: ह्यूमरस, रेडियस, अल्ना",
+   "sub": "कंधे से कलाई तक",
+   "camera": {
+    "focus": [
+     "arm_bones"
+    ],
+    "angle": "three_quarter",
+    "move": "down",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "skeletal"
+   ],
+   "solid": [
+    "arm_bones",
+    "hand_bones"
+   ],
+   "effects": [
+    "sequence:arm_bones,hand_bones"
+   ],
+   "labels": [
+    "arm_bones"
+   ],
+   "step": 0
+  },
+  {
+   "id": "hand",
+   "seconds": 5.5,
+   "title": "कलाई, हथेली, उँगलियाँ",
+   "sub": "उँगलियों की हड्डियाँ = फैलेंजेस",
+   "camera": {
+    "focus": [
+     "hand_bones"
+    ],
+    "angle": "front",
+    "move": "push",
+    "zoom": 1.2
+   },
+   "layers": [
+    "skin",
+    "skeletal"
+   ],
+   "solid": [
+    "hand_bones"
+   ],
+   "effects": [
+    "sequence:hand_bones",
+    "pulse:hand_bones"
+   ],
+   "labels": [
+    "hand_bones"
+   ],
+   "step": 1
+  },
+  {
+   "id": "leg",
+   "seconds": 5.5,
+   "title": "पैर: फीमर, टिबिया, फिबुला",
+   "sub": "एक पैर के पंजे में 26 हड्डियाँ",
+   "camera": {
+    "focus": [
+     "femur",
+     "leg_bones"
+    ],
+    "angle": "three_quarter_left",
+    "move": "down",
+    "zoom": 0.9
+   },
+   "layers": [
+    "skin",
+    "skeletal"
+   ],
+   "solid": [
+    "pelvis",
+    "femur",
+    "leg_bones"
+   ],
+   "effects": [
+    "sequence:pelvis,femur,leg_bones"
+   ],
+   "labels": [
+    "femur",
+    "leg_bones"
+   ],
+   "step": 2
+  },
+  {
+   "id": "quiz",
+   "seconds": 5,
+   "title": "परीक्षा का पक्का सवाल",
+   "sub": "",
+   "camera": {
+    "focus": [
+     "leg_bones"
+    ],
+    "angle": "front",
+    "move": "orbit",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "skeletal"
+   ],
+   "solid": [
+    "femur",
+    "leg_bones"
+   ],
+   "effects": [
+    "sequence:femur,leg_bones"
+   ],
+   "labels": [],
+   "quiz": {
+    "q": "घुटने की टोपी (पटेला) किस अंग में है?",
+    "a": "A) पैर",
+    "b": "B) हाथ",
+    "cta": "जवाब कमेंट में लिखो"
+   },
+   "step": 3
+  }
+ ]
+}

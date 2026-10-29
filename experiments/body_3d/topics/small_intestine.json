@@ -1,0 +1,169 @@
+{
+ "topic": "छोटी आँत में पाचन और अवशोषण",
+ "brand": "मानव शरीर",
+ "fps": 24,
+ "steps": [
+  "पाचन",
+  "रस",
+  "अवशोषण",
+  "याद"
+ ],
+ "scenes": [
+  {
+   "id": "hook",
+   "seconds": 3.5,
+   "title": "शरीर की सबसे लंबी नली कौन?",
+   "sub": "पेट में मुड़ी हुई है",
+   "camera": {
+    "focus": [
+     "small_intestine"
+    ],
+    "angle": "front",
+    "move": "push",
+    "zoom": 1.1
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "small_intestine",
+    "stomach"
+   ],
+   "effects": [
+    "travel:stomach,small_intestine"
+   ],
+   "labels": [
+    "small_intestine"
+   ],
+   "step": -1
+  },
+  {
+   "id": "long",
+   "seconds": 5.5,
+   "title": "आहार नाल का सबसे लंबा भाग",
+   "sub": "लगभग 7.5 मीटर, कुंडली जैसी मुड़ी हुई",
+   "camera": {
+    "focus": [
+     "small_intestine"
+    ],
+    "angle": "front",
+    "move": "orbit",
+    "zoom": 1.25
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "small_intestine"
+   ],
+   "effects": [
+    "travel:small_intestine",
+    "pulse:small_intestine"
+   ],
+   "labels": [
+    "small_intestine"
+   ],
+   "step": 0
+  },
+  {
+   "id": "juices",
+   "seconds": 5.5,
+   "title": "पित्त और अग्न्याशय रस",
+   "sub": "पाचन यहीं पूरा होता है",
+   "camera": {
+    "focus": [
+     "small_intestine",
+     "pancreas"
+    ],
+    "angle": "three_quarter",
+    "move": "push",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "small_intestine",
+    "pancreas",
+    "liver",
+    "gallbladder"
+   ],
+   "effects": [
+    "travel:liver,gallbladder,small_intestine",
+    "particles:pancreas,small_intestine,nutrient"
+   ],
+   "labels": [
+    "pancreas",
+    "gallbladder"
+   ],
+   "step": 1
+  },
+  {
+   "id": "villi",
+   "seconds": 6,
+   "title": "दीर्घरोम (विलाई) सोखते हैं",
+   "sub": "पचा हुआ भोजन खून में चला जाता है",
+   "camera": {
+    "focus": [
+     "small_intestine",
+     "liver"
+    ],
+    "angle": "three_quarter_left",
+    "move": "push",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "small_intestine",
+    "liver"
+   ],
+   "effects": [
+    "travel:small_intestine",
+    "particles:small_intestine,liver,nutrient"
+   ],
+   "labels": [
+    "small_intestine",
+    "liver"
+   ],
+   "step": 2
+  },
+  {
+   "id": "quiz",
+   "seconds": 5,
+   "title": "परीक्षा का पक्का सवाल",
+   "sub": "",
+   "camera": {
+    "focus": [
+     "small_intestine"
+    ],
+    "angle": "front",
+    "move": "orbit",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "small_intestine"
+   ],
+   "effects": [
+    "travel:small_intestine"
+   ],
+   "labels": [],
+   "quiz": {
+    "q": "आहार नाल का सबसे लंबा भाग कौन-सा है?",
+    "a": "A) छोटी आँत",
+    "b": "B) बड़ी आँत",
+    "cta": "जवाब कमेंट में लिखो"
+   },
+   "step": 3
+  }
+ ]
+}

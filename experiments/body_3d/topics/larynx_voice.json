@@ -1,0 +1,169 @@
+{
+ "topic": "स्वरयंत्र: आवाज़ कहाँ से बनती है",
+ "brand": "मानव शरीर",
+ "fps": 24,
+ "steps": [
+  "स्वरयंत्र",
+  "स्वर-रज्जु",
+  "ढक्कन",
+  "याद"
+ ],
+ "scenes": [
+  {
+   "id": "hook",
+   "seconds": 3.5,
+   "title": "आपकी आवाज़ कहाँ बनती है?",
+   "sub": "गले के इस छोटे से डिब्बे में",
+   "camera": {
+    "focus": [
+     "larynx"
+    ],
+    "angle": "side",
+    "move": "push",
+    "zoom": 1.5
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "larynx",
+    "trachea"
+   ],
+   "effects": [
+    "travel:larynx,trachea",
+    "pulse:larynx"
+   ],
+   "labels": [
+    "larynx"
+   ],
+   "step": -1
+  },
+  {
+   "id": "box",
+   "seconds": 5.5,
+   "title": "स्वरयंत्र = वॉयस बॉक्स",
+   "sub": "इसमें स्वर-रज्जु (वोकल कॉर्ड) होते हैं",
+   "camera": {
+    "focus": [
+     "larynx"
+    ],
+    "angle": "front",
+    "move": "orbit",
+    "zoom": 1.5
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "larynx",
+    "thyroid"
+   ],
+   "effects": [
+    "pulse:larynx",
+    "flow:larynx"
+   ],
+   "labels": [
+    "larynx",
+    "thyroid"
+   ],
+   "step": 0
+  },
+  {
+   "id": "vibrate",
+   "seconds": 5.5,
+   "title": "हवा से रज्जु काँपते हैं",
+   "sub": "इसी कंपन से आवाज़ पैदा होती है",
+   "camera": {
+    "focus": [
+     "larynx",
+     "trachea"
+    ],
+    "angle": "side",
+    "move": "push",
+    "zoom": 1.4
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "larynx",
+    "trachea"
+   ],
+   "effects": [
+    "travel:trachea,larynx",
+    "pulse:larynx"
+   ],
+   "labels": [
+    "larynx"
+   ],
+   "step": 1
+  },
+  {
+   "id": "lid",
+   "seconds": 5.5,
+   "title": "एपिग्लॉटिस: खाने का ढक्कन",
+   "sub": "निगलते समय भोजन को श्वासनली में जाने से रोकता है",
+   "camera": {
+    "focus": [
+     "pharynx",
+     "larynx"
+    ],
+    "angle": "side",
+    "move": "push",
+    "zoom": 1.4
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "pharynx",
+    "larynx",
+    "oesophagus"
+   ],
+   "effects": [
+    "travel:tongue,pharynx,oesophagus"
+   ],
+   "labels": [
+    "pharynx",
+    "oesophagus"
+   ],
+   "step": 2
+  },
+  {
+   "id": "quiz",
+   "seconds": 5,
+   "title": "परीक्षा का पक्का सवाल",
+   "sub": "",
+   "camera": {
+    "focus": [
+     "larynx"
+    ],
+    "angle": "side",
+    "move": "orbit",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "larynx"
+   ],
+   "effects": [
+    "pulse:larynx"
+   ],
+   "labels": [],
+   "quiz": {
+    "q": "स्वरयंत्र को आम भाषा में क्या कहते हैं?",
+    "a": "A) वॉयस बॉक्स",
+    "b": "B) विंड पाइप",
+    "cta": "जवाब कमेंट में लिखो"
+   },
+   "step": 3
+  }
+ ]
+}

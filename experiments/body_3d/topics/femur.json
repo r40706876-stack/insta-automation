@@ -1,0 +1,167 @@
+{
+ "topic": "सबसे लंबी हड्डी: फीमर",
+ "brand": "मानव शरीर",
+ "fps": 24,
+ "steps": [
+  "जाँघ",
+  "लंबी",
+  "मज़बूत",
+  "याद"
+ ],
+ "scenes": [
+  {
+   "id": "hook",
+   "seconds": 3.5,
+   "title": "शरीर की सबसे लंबी हड्डी?",
+   "sub": "और सबसे मज़बूत भी",
+   "camera": {
+    "focus": [
+     "femur"
+    ],
+    "angle": "front",
+    "move": "push",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "skeletal"
+   ],
+   "solid": [
+    "femur",
+    "pelvis"
+   ],
+   "effects": [
+    "sequence:pelvis,femur",
+    "pulse:femur"
+   ],
+   "labels": [
+    "femur"
+   ],
+   "step": -1
+  },
+  {
+   "id": "thigh",
+   "seconds": 5.5,
+   "title": "फीमर: जाँघ की हड्डी",
+   "sub": "कूल्हे से घुटने तक",
+   "camera": {
+    "focus": [
+     "femur",
+     "pelvis"
+    ],
+    "angle": "three_quarter",
+    "move": "down",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "skeletal"
+   ],
+   "solid": [
+    "femur",
+    "pelvis",
+    "leg_bones"
+   ],
+   "effects": [
+    "sequence:pelvis,femur,leg_bones"
+   ],
+   "labels": [
+    "femur",
+    "pelvis"
+   ],
+   "step": 0
+  },
+  {
+   "id": "strong",
+   "seconds": 5.5,
+   "title": "पूरे शरीर का वज़न उठाती है",
+   "sub": "खड़े होने, चलने, दौड़ने में",
+   "camera": {
+    "focus": [
+     "femur"
+    ],
+    "angle": "side",
+    "move": "orbit",
+    "zoom": 1.1
+   },
+   "layers": [
+    "skin",
+    "skeletal"
+   ],
+   "solid": [
+    "femur"
+   ],
+   "effects": [
+    "pulse:femur",
+    "sequence:femur"
+   ],
+   "labels": [
+    "femur"
+   ],
+   "step": 1
+  },
+  {
+   "id": "joints",
+   "seconds": 5.5,
+   "title": "ऊपर कूल्हा, नीचे घुटना",
+   "sub": "बॉल-सॉकेट जोड़ कूल्हे पर",
+   "camera": {
+    "focus": [
+     "pelvis",
+     "femur"
+    ],
+    "angle": "front",
+    "move": "push",
+    "zoom": 1.2
+   },
+   "layers": [
+    "skin",
+    "skeletal"
+   ],
+   "solid": [
+    "pelvis",
+    "femur"
+   ],
+   "effects": [
+    "sequence:pelvis,femur"
+   ],
+   "labels": [
+    "pelvis",
+    "femur"
+   ],
+   "step": 2
+  },
+  {
+   "id": "quiz",
+   "seconds": 5,
+   "title": "परीक्षा का पक्का सवाल",
+   "sub": "",
+   "camera": {
+    "focus": [
+     "femur"
+    ],
+    "angle": "front",
+    "move": "orbit",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "skeletal"
+   ],
+   "solid": [
+    "femur"
+   ],
+   "effects": [
+    "pulse:femur"
+   ],
+   "labels": [],
+   "quiz": {
+    "q": "मानव शरीर की सबसे लंबी हड्डी कौन-सी है?",
+    "a": "A) फीमर",
+    "b": "B) टिबिया",
+    "cta": "जवाब कमेंट में लिखो"
+   },
+   "step": 3
+  }
+ ]
+}

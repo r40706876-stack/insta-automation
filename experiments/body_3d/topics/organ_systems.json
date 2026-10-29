@@ -1,0 +1,210 @@
+{
+ "topic": "मानव शरीर के प्रमुख अंग तंत्र",
+ "brand": "मानव शरीर",
+ "fps": 24,
+ "steps": [
+  "पाचन",
+  "श्वसन",
+  "परिसंचरण",
+  "तंत्रिका"
+ ],
+ "scenes": [
+  {
+   "id": "hook",
+   "seconds": 3.5,
+   "title": "शरीर की 5 टीमें",
+   "sub": "हर टीम का अपना काम",
+   "camera": {
+    "focus": [
+     "skin"
+    ],
+    "angle": "front",
+    "move": "push",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "visceral",
+    "cardio"
+   ],
+   "solid": [
+    "stomach",
+    "lungs",
+    "heart",
+    "small_intestine",
+    "large_intestine"
+   ],
+   "effects": [
+    "sequence:stomach,lungs,heart,brain"
+   ],
+   "labels": [
+    "heart"
+   ],
+   "step": -1
+  },
+  {
+   "id": "digest",
+   "seconds": 5,
+   "title": "पाचन तंत्र",
+   "sub": "भोजन को ऊर्जा में बदलता है",
+   "camera": {
+    "focus": [
+     "stomach",
+     "small_intestine"
+    ],
+    "angle": "front",
+    "move": "push",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "oesophagus",
+    "stomach",
+    "small_intestine",
+    "large_intestine"
+   ],
+   "effects": [
+    "travel:tongue,oesophagus,stomach,small_intestine,large_intestine"
+   ],
+   "labels": [
+    "stomach",
+    "small_intestine"
+   ],
+   "step": 0
+  },
+  {
+   "id": "breathe",
+   "seconds": 5,
+   "title": "श्वसन तंत्र",
+   "sub": "ऑक्सीजन अंदर, कार्बन डाइऑक्साइड बाहर",
+   "camera": {
+    "focus": [
+     "lungs"
+    ],
+    "angle": "front",
+    "move": "push",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "lungs",
+    "trachea",
+    "bronchi"
+   ],
+   "effects": [
+    "breathe",
+    "travel:larynx,trachea,bronchi,lungs"
+   ],
+   "labels": [
+    "lungs"
+   ],
+   "step": 1
+  },
+  {
+   "id": "blood",
+   "seconds": 5.5,
+   "title": "परिसंचरण तंत्र",
+   "sub": "दिल खून को पूरे शरीर में भेजता है",
+   "camera": {
+    "focus": [
+     "skin"
+    ],
+    "angle": "three_quarter",
+    "move": "push",
+    "zoom": 1.35
+   },
+   "layers": [
+    "skin",
+    "cardio"
+   ],
+   "solid": [
+    "heart",
+    "aorta",
+    "arteries"
+   ],
+   "effects": [
+    "beat",
+    "travel:heart,aorta,arteries",
+    "flow:arteries"
+   ],
+   "labels": [
+    "heart"
+   ],
+   "hide": [
+    "veins",
+    "vena_cava"
+   ],
+   "step": 2
+  },
+  {
+   "id": "nerve",
+   "seconds": 5.5,
+   "title": "तंत्रिका तंत्र",
+   "sub": "दिमाग पूरे शरीर को चलाता है",
+   "camera": {
+    "focus": [
+     "skin"
+    ],
+    "angle": "three_quarter",
+    "move": "pull",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "nervous"
+   ],
+   "solid": [
+    "brain",
+    "spinal_cord",
+    "nerves"
+   ],
+   "effects": [
+    "travel:brain,spinal_cord,nerves",
+    "flow:nerves"
+   ],
+   "labels": [
+    "brain"
+   ],
+   "step": 3
+  },
+  {
+   "id": "quiz",
+   "seconds": 5,
+   "title": "परीक्षा का पक्का सवाल",
+   "sub": "",
+   "camera": {
+    "focus": [
+     "heart"
+    ],
+    "angle": "three_quarter",
+    "move": "orbit",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "visceral",
+    "cardio"
+   ],
+   "solid": [
+    "heart"
+   ],
+   "effects": [
+    "beat"
+   ],
+   "labels": [],
+   "quiz": {
+    "q": "खून को पूरे शरीर में कौन पंप करता है?",
+    "a": "A) हृदय",
+    "b": "B) फेफड़े",
+    "cta": "जवाब कमेंट में लिखो"
+   },
+   "step": 3
+  }
+ ]
+}

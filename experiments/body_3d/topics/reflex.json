@@ -1,0 +1,163 @@
+{
+ "topic": "मेरुरज्जु और प्रतिवर्ती क्रिया",
+ "brand": "मानव शरीर",
+ "fps": 24,
+ "steps": [
+  "मेरुरज्जु",
+  "प्रतिवर्ती",
+  "तेज़",
+  "याद"
+ ],
+ "scenes": [
+  {
+   "id": "hook",
+   "seconds": 3.5,
+   "title": "छूते ही हाथ क्यों हटता है?",
+   "sub": "दिमाग से पहले कौन फैसला करता है?",
+   "camera": {
+    "focus": [
+     "spinal_cord"
+    ],
+    "angle": "back",
+    "move": "push",
+    "zoom": 0.9
+   },
+   "layers": [
+    "skin",
+    "nervous"
+   ],
+   "solid": [
+    "spinal_cord",
+    "nerves"
+   ],
+   "effects": [
+    "travel:nerves,spinal_cord,nerves"
+   ],
+   "labels": [
+    "spinal_cord"
+   ],
+   "step": -1
+  },
+  {
+   "id": "cord",
+   "seconds": 5.5,
+   "title": "मेरुरज्जु: रीढ़ के अंदर",
+   "sub": "दिमाग से नीचे आती तंत्रिकाओं की रस्सी",
+   "camera": {
+    "focus": [
+     "spinal_cord"
+    ],
+    "angle": "back",
+    "move": "down",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "nervous"
+   ],
+   "solid": [
+    "spinal_cord",
+    "brain"
+   ],
+   "effects": [
+    "travel:brain,spinal_cord",
+    "flow:spinal_cord"
+   ],
+   "labels": [
+    "spinal_cord",
+    "brain"
+   ],
+   "step": 0
+  },
+  {
+   "id": "reflex",
+   "seconds": 6,
+   "title": "प्रतिवर्ती क्रिया",
+   "sub": "मेरुरज्जु तुरंत जवाब भेजता है, बिना सोचे",
+   "camera": {
+    "focus": [
+     "skin"
+    ],
+    "angle": "three_quarter",
+    "move": "push",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "nervous"
+   ],
+   "solid": [
+    "spinal_cord",
+    "nerves"
+   ],
+   "effects": [
+    "travel:nerves,spinal_cord,nerves",
+    "flow:nerves"
+   ],
+   "labels": [
+    "spinal_cord"
+   ],
+   "step": 1
+  },
+  {
+   "id": "guard",
+   "seconds": 5,
+   "title": "रीढ़ की हड्डी इसकी ढाल",
+   "sub": "कशेरुक मेरुरज्जु को बचाते हैं",
+   "camera": {
+    "focus": [
+     "spine"
+    ],
+    "angle": "back",
+    "move": "rise",
+    "zoom": 0.9
+   },
+   "layers": [
+    "skin",
+    "skeletal"
+   ],
+   "solid": [
+    "spine"
+   ],
+   "effects": [
+    "sequence:spine"
+   ],
+   "labels": [
+    "spine"
+   ],
+   "step": 2
+  },
+  {
+   "id": "quiz",
+   "seconds": 5,
+   "title": "परीक्षा का पक्का सवाल",
+   "sub": "",
+   "camera": {
+    "focus": [
+     "spinal_cord"
+    ],
+    "angle": "back",
+    "move": "orbit",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "nervous"
+   ],
+   "solid": [
+    "spinal_cord"
+   ],
+   "effects": [
+    "flow:spinal_cord"
+   ],
+   "labels": [],
+   "quiz": {
+    "q": "प्रतिवर्ती क्रिया कौन नियंत्रित करता है?",
+    "a": "A) मेरुरज्जु",
+    "b": "B) प्रमस्तिष्क",
+    "cta": "जवाब कमेंट में लिखो"
+   },
+   "step": 3
+  }
+ ]
+}

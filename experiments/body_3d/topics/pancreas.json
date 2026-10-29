@@ -1,0 +1,166 @@
+{
+ "topic": "अग्न्याशय: इंसुलिन बनाने वाली ग्रंथि",
+ "brand": "मानव शरीर",
+ "fps": 24,
+ "steps": [
+  "अग्न्याशय",
+  "रस",
+  "इंसुलिन",
+  "याद"
+ ],
+ "scenes": [
+  {
+   "id": "hook",
+   "seconds": 3.5,
+   "title": "एक अंग, दो काम!",
+   "sub": "पाचन भी, हार्मोन भी",
+   "camera": {
+    "focus": [
+     "pancreas"
+    ],
+    "angle": "three_quarter",
+    "move": "push",
+    "zoom": 1.4
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "pancreas"
+   ],
+   "effects": [
+    "pulse:pancreas",
+    "flow:pancreas"
+   ],
+   "labels": [
+    "pancreas"
+   ],
+   "step": -1
+  },
+  {
+   "id": "where",
+   "seconds": 5.5,
+   "title": "आमाशय के पीछे",
+   "sub": "पत्ती जैसी लंबी ग्रंथि",
+   "camera": {
+    "focus": [
+     "pancreas",
+     "stomach"
+    ],
+    "angle": "front",
+    "move": "orbit",
+    "zoom": 1.2
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "pancreas",
+    "stomach"
+   ],
+   "effects": [
+    "sequence:stomach,pancreas"
+   ],
+   "labels": [
+    "pancreas",
+    "stomach"
+   ],
+   "step": 0
+  },
+  {
+   "id": "juice",
+   "seconds": 5.5,
+   "title": "अग्न्याशय रस → छोटी आँत",
+   "sub": "प्रोटीन, वसा, कार्बोहाइड्रेट का पाचन",
+   "camera": {
+    "focus": [
+     "pancreas",
+     "small_intestine"
+    ],
+    "angle": "three_quarter",
+    "move": "push",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "pancreas",
+    "small_intestine"
+   ],
+   "effects": [
+    "travel:pancreas,small_intestine",
+    "particles:pancreas,small_intestine,nutrient"
+   ],
+   "labels": [
+    "pancreas",
+    "small_intestine"
+   ],
+   "step": 1
+  },
+  {
+   "id": "insulin",
+   "seconds": 6,
+   "title": "लैंगरहैंस द्वीप: इंसुलिन",
+   "sub": "खून में शुगर घटाता है, कमी से मधुमेह",
+   "camera": {
+    "focus": [
+     "pancreas"
+    ],
+    "angle": "three_quarter_left",
+    "move": "push",
+    "zoom": 1.4
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "pancreas"
+   ],
+   "effects": [
+    "particles:pancreas,veins,nutrient",
+    "pulse:pancreas"
+   ],
+   "labels": [
+    "pancreas"
+   ],
+   "step": 2
+  },
+  {
+   "id": "quiz",
+   "seconds": 5,
+   "title": "परीक्षा का पक्का सवाल",
+   "sub": "",
+   "camera": {
+    "focus": [
+     "pancreas"
+    ],
+    "angle": "three_quarter",
+    "move": "orbit",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "pancreas"
+   ],
+   "effects": [
+    "pulse:pancreas"
+   ],
+   "labels": [],
+   "quiz": {
+    "q": "इंसुलिन की कमी से कौन-सा रोग होता है?",
+    "a": "A) मधुमेह",
+    "b": "B) घेंघा",
+    "cta": "जवाब कमेंट में लिखो"
+   },
+   "step": 3
+  }
+ ]
+}

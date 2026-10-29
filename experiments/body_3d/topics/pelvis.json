@@ -1,0 +1,172 @@
+{
+ "topic": "श्रोणि (पेल्विस) की हड्डी",
+ "brand": "मानव शरीर",
+ "fps": 24,
+ "steps": [
+  "जगह",
+  "जोड़",
+  "रक्षा",
+  "याद"
+ ],
+ "scenes": [
+  {
+   "id": "hook",
+   "seconds": 3.5,
+   "title": "शरीर का कटोरा!",
+   "sub": "जो पेट के निचले अंगों को सँभालता है",
+   "camera": {
+    "focus": [
+     "pelvis"
+    ],
+    "angle": "front",
+    "move": "push",
+    "zoom": 1.1
+   },
+   "layers": [
+    "skin",
+    "skeletal"
+   ],
+   "solid": [
+    "pelvis",
+    "spine"
+   ],
+   "effects": [
+    "sequence:spine,pelvis",
+    "pulse:pelvis"
+   ],
+   "labels": [
+    "pelvis"
+   ],
+   "step": -1
+  },
+  {
+   "id": "bowl",
+   "seconds": 5.5,
+   "title": "श्रोणि मेखला",
+   "sub": "दो कूल्हे की हड्डियाँ, पीछे त्रिकास्थि",
+   "camera": {
+    "focus": [
+     "pelvis",
+     "spine"
+    ],
+    "angle": "three_quarter",
+    "move": "orbit",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "skeletal"
+   ],
+   "solid": [
+    "pelvis",
+    "spine"
+   ],
+   "effects": [
+    "sequence:pelvis,spine"
+   ],
+   "labels": [
+    "pelvis",
+    "spine"
+   ],
+   "step": 0
+  },
+  {
+   "id": "joint",
+   "seconds": 5.5,
+   "title": "फीमर यहीं जुड़ती है",
+   "sub": "कूल्हे का बॉल-सॉकेट जोड़",
+   "camera": {
+    "focus": [
+     "pelvis",
+     "femur"
+    ],
+    "angle": "front",
+    "move": "push",
+    "zoom": 1.15
+   },
+   "layers": [
+    "skin",
+    "skeletal"
+   ],
+   "solid": [
+    "pelvis",
+    "femur"
+   ],
+   "effects": [
+    "sequence:pelvis,femur"
+   ],
+   "labels": [
+    "pelvis",
+    "femur"
+   ],
+   "step": 1
+  },
+  {
+   "id": "protect",
+   "seconds": 5.5,
+   "title": "मूत्राशय की रक्षा",
+   "sub": "और शरीर का वज़न पैरों तक पहुँचाती है",
+   "camera": {
+    "focus": [
+     "pelvis",
+     "bladder"
+    ],
+    "angle": "front",
+    "move": "orbit",
+    "zoom": 1.1
+   },
+   "layers": [
+    "skin",
+    "skeletal",
+    "visceral"
+   ],
+   "solid": [
+    "pelvis",
+    "bladder"
+   ],
+   "effects": [
+    "pulse:bladder",
+    "sequence:pelvis"
+   ],
+   "labels": [
+    "bladder",
+    "pelvis"
+   ],
+   "step": 2
+  },
+  {
+   "id": "quiz",
+   "seconds": 5,
+   "title": "परीक्षा का पक्का सवाल",
+   "sub": "",
+   "camera": {
+    "focus": [
+     "pelvis",
+     "femur"
+    ],
+    "angle": "front",
+    "move": "orbit",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "skeletal"
+   ],
+   "solid": [
+    "pelvis",
+    "femur"
+   ],
+   "effects": [
+    "sequence:pelvis,femur"
+   ],
+   "labels": [],
+   "quiz": {
+    "q": "कूल्हे का जोड़ किस प्रकार का है?",
+    "a": "A) कंदुक-खल्लिका (बॉल-सॉकेट)",
+    "b": "B) कब्ज़ा जोड़",
+    "cta": "जवाब कमेंट में लिखो"
+   },
+   "step": 3
+  }
+ ]
+}

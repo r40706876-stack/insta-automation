@@ -1,0 +1,171 @@
+{
+ "topic": "पित्ताशय और पित्त रस का काम",
+ "brand": "मानव शरीर",
+ "fps": 24,
+ "steps": [
+  "यकृत",
+  "पित्ताशय",
+  "वसा",
+  "याद"
+ ],
+ "scenes": [
+  {
+   "id": "hook",
+   "seconds": 3.5,
+   "title": "हरे रंग की छोटी थैली क्या है?",
+   "sub": "यकृत के नीचे छिपी है",
+   "camera": {
+    "focus": [
+     "gallbladder"
+    ],
+    "angle": "three_quarter",
+    "move": "push",
+    "zoom": 1.5
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "gallbladder",
+    "liver"
+   ],
+   "effects": [
+    "pulse:gallbladder",
+    "travel:liver,gallbladder"
+   ],
+   "labels": [
+    "gallbladder"
+   ],
+   "step": -1
+  },
+  {
+   "id": "make",
+   "seconds": 5.5,
+   "title": "पित्त यकृत में बनता है",
+   "sub": "पित्ताशय उसे जमा करके रखता है",
+   "camera": {
+    "focus": [
+     "liver",
+     "gallbladder"
+    ],
+    "angle": "front",
+    "move": "push",
+    "zoom": 1.15
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "liver",
+    "gallbladder"
+   ],
+   "effects": [
+    "travel:liver,gallbladder"
+   ],
+   "labels": [
+    "liver",
+    "gallbladder"
+   ],
+   "step": 0
+  },
+  {
+   "id": "release",
+   "seconds": 5.5,
+   "title": "भोजन आते ही पित्त छोटी आँत में",
+   "sub": "ग्रहणी (ड्यूओडेनम) में पहुँचता है",
+   "camera": {
+    "focus": [
+     "gallbladder",
+     "small_intestine"
+    ],
+    "angle": "three_quarter",
+    "move": "push",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "gallbladder",
+    "small_intestine",
+    "liver"
+   ],
+   "effects": [
+    "travel:gallbladder,small_intestine",
+    "pulse:gallbladder"
+   ],
+   "labels": [
+    "gallbladder",
+    "small_intestine"
+   ],
+   "step": 1
+  },
+  {
+   "id": "fat",
+   "seconds": 5.5,
+   "title": "वसा को छोटी बूँदों में तोड़ता है",
+   "sub": "पित्त में कोई एंजाइम नहीं होता",
+   "camera": {
+    "focus": [
+     "small_intestine"
+    ],
+    "angle": "front",
+    "move": "orbit",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "small_intestine",
+    "gallbladder"
+   ],
+   "effects": [
+    "travel:small_intestine",
+    "particles:gallbladder,small_intestine,nutrient"
+   ],
+   "labels": [
+    "small_intestine"
+   ],
+   "step": 2
+  },
+  {
+   "id": "quiz",
+   "seconds": 5,
+   "title": "परीक्षा का पक्का सवाल",
+   "sub": "",
+   "camera": {
+    "focus": [
+     "liver",
+     "gallbladder"
+    ],
+    "angle": "three_quarter",
+    "move": "orbit",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "liver",
+    "gallbladder"
+   ],
+   "effects": [
+    "pulse:gallbladder"
+   ],
+   "labels": [],
+   "quiz": {
+    "q": "पित्त रस कहाँ बनता है?",
+    "a": "A) पित्ताशय",
+    "b": "B) यकृत",
+    "cta": "जवाब कमेंट में लिखो"
+   },
+   "step": 3
+  }
+ ]
+}

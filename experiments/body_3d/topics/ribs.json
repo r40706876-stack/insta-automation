@@ -1,0 +1,173 @@
+{
+ "topic": "पसलियाँ: दिल और फेफड़ों की रक्षा",
+ "brand": "मानव शरीर",
+ "fps": 24,
+ "steps": [
+  "पसलियाँ",
+  "जोड़ी",
+  "रक्षा",
+  "याद"
+ ],
+ "scenes": [
+  {
+   "id": "hook",
+   "seconds": 3.5,
+   "title": "छाती का पिंजरा",
+   "sub": "दिल और फेफड़े इसी में बंद हैं",
+   "camera": {
+    "focus": [
+     "ribs"
+    ],
+    "angle": "front",
+    "move": "push",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "skeletal",
+    "visceral",
+    "cardio"
+   ],
+   "solid": [
+    "ribs",
+    "heart",
+    "lungs"
+   ],
+   "effects": [
+    "breathe",
+    "beat",
+    "sequence:ribs"
+   ],
+   "labels": [
+    "ribs"
+   ],
+   "step": -1
+  },
+  {
+   "id": "pairs",
+   "seconds": 5.5,
+   "title": "12 जोड़ी पसलियाँ",
+   "sub": "पीछे रीढ़ से, आगे उरोस्थि से जुड़ी",
+   "camera": {
+    "focus": [
+     "ribs"
+    ],
+    "angle": "three_quarter",
+    "move": "orbit",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "skeletal"
+   ],
+   "solid": [
+    "ribs",
+    "spine"
+   ],
+   "effects": [
+    "sequence:spine,ribs"
+   ],
+   "labels": [
+    "ribs",
+    "spine"
+   ],
+   "step": 0
+  },
+  {
+   "id": "types",
+   "seconds": 5.5,
+   "title": "7 सच्ची, 3 झूठी, 2 तैरती",
+   "sub": "तैरती पसलियाँ आगे से नहीं जुड़तीं",
+   "camera": {
+    "focus": [
+     "ribs"
+    ],
+    "angle": "front",
+    "move": "push",
+    "zoom": 1.1
+   },
+   "layers": [
+    "skin",
+    "skeletal"
+   ],
+   "solid": [
+    "ribs"
+   ],
+   "effects": [
+    "sequence:ribs"
+   ],
+   "labels": [
+    "ribs"
+   ],
+   "step": 1
+  },
+  {
+   "id": "protect",
+   "seconds": 5.5,
+   "title": "साँस में ऊपर-नीचे",
+   "sub": "फेफड़ों को फैलने की जगह देती हैं",
+   "camera": {
+    "focus": [
+     "ribs",
+     "lungs"
+    ],
+    "angle": "three_quarter_left",
+    "move": "push",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "skeletal",
+    "visceral",
+    "cardio"
+   ],
+   "solid": [
+    "ribs",
+    "lungs",
+    "heart"
+   ],
+   "effects": [
+    "breathe",
+    "beat"
+   ],
+   "labels": [
+    "lungs",
+    "heart"
+   ],
+   "step": 2
+  },
+  {
+   "id": "quiz",
+   "seconds": 5,
+   "title": "परीक्षा का पक्का सवाल",
+   "sub": "",
+   "camera": {
+    "focus": [
+     "ribs"
+    ],
+    "angle": "front",
+    "move": "orbit",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "skeletal"
+   ],
+   "solid": [
+    "ribs"
+   ],
+   "effects": [
+    "breathe",
+    "sequence:ribs"
+   ],
+   "labels": [],
+   "quiz": {
+    "q": "मनुष्य में कितनी जोड़ी पसलियाँ होती हैं?",
+    "a": "A) 12 जोड़ी",
+    "b": "B) 10 जोड़ी",
+    "cta": "जवाब कमेंट में लिखो"
+   },
+   "step": 3
+  }
+ ]
+}

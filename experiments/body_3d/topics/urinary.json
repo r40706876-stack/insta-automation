@@ -1,0 +1,169 @@
+{
+ "topic": "मूत्र तंत्र: किडनी से मूत्राशय तक",
+ "brand": "मानव शरीर",
+ "fps": 24,
+ "steps": [
+  "किडनी",
+  "नली",
+  "मूत्राशय",
+  "याद"
+ ],
+ "scenes": [
+  {
+   "id": "hook",
+   "seconds": 3.5,
+   "title": "मूत्र बनता कहाँ है?",
+   "sub": "मूत्र तंत्र का पूरा रास्ता",
+   "camera": {
+    "focus": [
+     "kidneys",
+     "bladder"
+    ],
+    "angle": "front",
+    "move": "push",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "kidneys",
+    "ureters",
+    "bladder"
+   ],
+   "effects": [
+    "travel:kidneys,ureters,bladder"
+   ],
+   "labels": [
+    "kidneys",
+    "bladder"
+   ],
+   "step": -1
+  },
+  {
+   "id": "kidney",
+   "seconds": 5.5,
+   "title": "दो वृक्क खून छानते हैं",
+   "sub": "यूरिया, नमक और ज़्यादा पानी अलग करते हैं",
+   "camera": {
+    "focus": [
+     "kidneys"
+    ],
+    "angle": "back",
+    "move": "push",
+    "zoom": 1.2
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "kidneys"
+   ],
+   "effects": [
+    "pulse:kidneys",
+    "particles:arteries,kidneys,blood"
+   ],
+   "labels": [
+    "kidneys"
+   ],
+   "step": 0
+  },
+  {
+   "id": "ureter",
+   "seconds": 5.5,
+   "title": "मूत्रवाहिनी: नीचे की नलियाँ",
+   "sub": "मूत्र को मूत्राशय तक ले जाती हैं",
+   "camera": {
+    "focus": [
+     "ureters"
+    ],
+    "angle": "front",
+    "move": "down",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "kidneys",
+    "ureters",
+    "bladder"
+   ],
+   "effects": [
+    "travel:kidneys,ureters,bladder",
+    "flow:ureters"
+   ],
+   "labels": [
+    "ureters"
+   ],
+   "step": 1
+  },
+  {
+   "id": "bladder",
+   "seconds": 5.5,
+   "title": "मूत्राशय: थैली",
+   "sub": "भरने पर मूत्रमार्ग से बाहर निकलता है",
+   "camera": {
+    "focus": [
+     "bladder"
+    ],
+    "angle": "front",
+    "move": "push",
+    "zoom": 1.4
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "bladder",
+    "ureters"
+   ],
+   "effects": [
+    "travel:ureters,bladder",
+    "pulse:bladder"
+   ],
+   "labels": [
+    "bladder"
+   ],
+   "step": 2
+  },
+  {
+   "id": "quiz",
+   "seconds": 5,
+   "title": "परीक्षा का पक्का सवाल",
+   "sub": "",
+   "camera": {
+    "focus": [
+     "kidneys",
+     "bladder"
+    ],
+    "angle": "front",
+    "move": "orbit",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "kidneys",
+    "bladder"
+   ],
+   "effects": [
+    "travel:kidneys,ureters,bladder"
+   ],
+   "labels": [],
+   "quiz": {
+    "q": "मूत्र में मुख्य अपशिष्ट क्या होता है?",
+    "a": "A) यूरिया",
+    "b": "B) ग्लूकोज़",
+    "cta": "जवाब कमेंट में लिखो"
+   },
+   "step": 3
+  }
+ ]
+}

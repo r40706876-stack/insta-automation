@@ -1,0 +1,158 @@
+{
+ "topic": "मानव शरीर के सबसे बड़े अंग: त्वचा और यकृत",
+ "brand": "मानव शरीर",
+ "fps": 24,
+ "steps": [
+  "त्वचा",
+  "यकृत",
+  "फ़र्क",
+  "याद"
+ ],
+ "scenes": [
+  {
+   "id": "hook",
+   "seconds": 3.5,
+   "title": "शरीर का सबसे बड़ा अंग?",
+   "sub": "जवाब आपकी आँखों के सामने है",
+   "camera": {
+    "focus": [
+     "skin"
+    ],
+    "angle": "front",
+    "move": "push",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin"
+   ],
+   "solid": [],
+   "effects": [
+    "pulse:skin",
+    "sequence:skin,liver"
+   ],
+   "labels": [
+    "skin"
+   ],
+   "step": -1
+  },
+  {
+   "id": "skin",
+   "seconds": 5.5,
+   "title": "त्वचा: सबसे बड़ा अंग",
+   "sub": "पूरे शरीर को ढकती और बचाती है",
+   "camera": {
+    "focus": [
+     "skin"
+    ],
+    "angle": "three_quarter",
+    "move": "orbit",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin"
+   ],
+   "solid": [],
+   "effects": [
+    "sequence:skin"
+   ],
+   "labels": [
+    "skin"
+   ],
+   "step": 0
+  },
+  {
+   "id": "liver",
+   "seconds": 5.5,
+   "title": "यकृत: सबसे बड़ा आंतरिक अंग",
+   "sub": "और सबसे बड़ी ग्रंथि भी",
+   "camera": {
+    "focus": [
+     "liver"
+    ],
+    "angle": "front",
+    "move": "push",
+    "zoom": 1.2
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "liver",
+    "gallbladder"
+   ],
+   "effects": [
+    "pulse:liver",
+    "travel:liver,gallbladder"
+   ],
+   "labels": [
+    "liver"
+   ],
+   "step": 1
+  },
+  {
+   "id": "duties",
+   "seconds": 5.5,
+   "title": "दोनों के काम",
+   "sub": "त्वचा तापमान सँभालती है, यकृत पित्त बनाता है",
+   "camera": {
+    "focus": [
+     "liver",
+     "skin"
+    ],
+    "angle": "three_quarter_left",
+    "move": "pull",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "liver",
+    "gallbladder",
+    "small_intestine"
+   ],
+   "effects": [
+    "sequence:skin,liver",
+    "travel:liver,gallbladder,small_intestine"
+   ],
+   "labels": [
+    "liver"
+   ],
+   "step": 2
+  },
+  {
+   "id": "quiz",
+   "seconds": 5,
+   "title": "परीक्षा का पक्का सवाल",
+   "sub": "",
+   "camera": {
+    "focus": [
+     "liver"
+    ],
+    "angle": "three_quarter",
+    "move": "orbit",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "liver"
+   ],
+   "effects": [
+    "pulse:liver"
+   ],
+   "labels": [],
+   "quiz": {
+    "q": "शरीर का सबसे बड़ा आंतरिक अंग कौन-सा है?",
+    "a": "A) यकृत",
+    "b": "B) फेफड़ा",
+    "cta": "जवाब कमेंट में लिखो"
+   },
+   "step": 3
+  }
+ ]
+}

@@ -1,0 +1,165 @@
+{
+ "topic": "सबसे छोटी हड्डी: स्टेपीज़ (कान में)",
+ "brand": "मानव शरीर",
+ "fps": 24,
+ "steps": [
+  "कान",
+  "तीन हड्डियाँ",
+  "स्टेपीज़",
+  "याद"
+ ],
+ "scenes": [
+  {
+   "id": "hook",
+   "seconds": 3.5,
+   "title": "चावल के दाने से भी छोटी हड्डी!",
+   "sub": "आपके कान के अंदर",
+   "camera": {
+    "focus": [
+     "ear_bones"
+    ],
+    "angle": "side",
+    "move": "push",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "skeletal"
+   ],
+   "solid": [
+    "ear_bones",
+    "skull"
+   ],
+   "effects": [
+    "pulse:ear_bones"
+   ],
+   "labels": [
+    "ear_bones"
+   ],
+   "step": -1
+  },
+  {
+   "id": "where",
+   "seconds": 5.5,
+   "title": "मध्य कर्ण में",
+   "sub": "खोपड़ी की टेम्पोरल हड्डी के अंदर",
+   "camera": {
+    "focus": [
+     "ear_bones",
+     "skull"
+    ],
+    "angle": "side",
+    "move": "push",
+    "zoom": 0.9
+   },
+   "layers": [
+    "skin",
+    "skeletal"
+   ],
+   "solid": [
+    "ear_bones",
+    "skull"
+   ],
+   "effects": [
+    "sequence:skull,ear_bones"
+   ],
+   "labels": [
+    "ear_bones",
+    "skull"
+   ],
+   "step": 0
+  },
+  {
+   "id": "three",
+   "seconds": 5.5,
+   "title": "मैलियस, इंकस, स्टेपीज़",
+   "sub": "हथौड़ा, निहाई और रकाब",
+   "camera": {
+    "focus": [
+     "ear_bones"
+    ],
+    "angle": "side",
+    "move": "orbit",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "skeletal"
+   ],
+   "solid": [
+    "ear_bones"
+   ],
+   "effects": [
+    "pulse:ear_bones",
+    "sequence:ear_bones"
+   ],
+   "labels": [
+    "ear_bones"
+   ],
+   "step": 1
+  },
+  {
+   "id": "sound",
+   "seconds": 5.5,
+   "title": "ध्वनि की कंपन आगे बढ़ाती हैं",
+   "sub": "कान के पर्दे से भीतरी कान तक",
+   "camera": {
+    "focus": [
+     "ear_bones"
+    ],
+    "angle": "side",
+    "move": "pull",
+    "zoom": 0.9
+   },
+   "layers": [
+    "skin",
+    "skeletal",
+    "nervous"
+   ],
+   "solid": [
+    "ear_bones",
+    "brain"
+   ],
+   "effects": [
+    "pulse:ear_bones",
+    "travel:ear_bones,brain"
+   ],
+   "labels": [
+    "ear_bones"
+   ],
+   "step": 2
+  },
+  {
+   "id": "quiz",
+   "seconds": 5,
+   "title": "परीक्षा का पक्का सवाल",
+   "sub": "",
+   "camera": {
+    "focus": [
+     "ear_bones"
+    ],
+    "angle": "side",
+    "move": "orbit",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "skeletal"
+   ],
+   "solid": [
+    "ear_bones"
+   ],
+   "effects": [
+    "pulse:ear_bones"
+   ],
+   "labels": [],
+   "quiz": {
+    "q": "मानव शरीर की सबसे छोटी हड्डी कौन-सी है?",
+    "a": "A) स्टेपीज़",
+    "b": "B) मैलियस",
+    "cta": "जवाब कमेंट में लिखो"
+   },
+   "step": 3
+  }
+ ]
+}

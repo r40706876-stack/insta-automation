@@ -1,0 +1,165 @@
+{
+ "topic": "मानव आँख की बनावट",
+ "brand": "मानव शरीर",
+ "fps": 24,
+ "steps": [
+  "आँख",
+  "लेंस",
+  "रेटिना",
+  "याद"
+ ],
+ "scenes": [
+  {
+   "id": "hook",
+   "seconds": 3.5,
+   "title": "आँख में तस्वीर उलटी बनती है!",
+   "sub": "फिर भी सब सीधा दिखता है",
+   "camera": {
+    "focus": [
+     "eyes"
+    ],
+    "angle": "front",
+    "move": "push",
+    "zoom": 1.5
+   },
+   "layers": [
+    "skin",
+    "nervous"
+   ],
+   "solid": [
+    "eyes",
+    "brain"
+   ],
+   "effects": [
+    "pulse:eyes",
+    "travel:eyes,brain"
+   ],
+   "labels": [
+    "eyes"
+   ],
+   "step": -1
+  },
+  {
+   "id": "front",
+   "seconds": 5.5,
+   "title": "कॉर्निया और लेंस",
+   "sub": "रोशनी को मोड़कर पीछे फोकस करते हैं",
+   "camera": {
+    "focus": [
+     "eyes"
+    ],
+    "angle": "side",
+    "move": "push",
+    "zoom": 1.6
+   },
+   "layers": [
+    "skin",
+    "nervous"
+   ],
+   "solid": [
+    "eyes"
+   ],
+   "effects": [
+    "pulse:eyes",
+    "flow:eyes"
+   ],
+   "labels": [
+    "eyes"
+   ],
+   "step": 0
+  },
+  {
+   "id": "retina",
+   "seconds": 5.5,
+   "title": "रेटिना पर उलटा, वास्तविक चित्र",
+   "sub": "शलाका और शंकु रोशनी पहचानते हैं",
+   "camera": {
+    "focus": [
+     "eyes"
+    ],
+    "angle": "three_quarter",
+    "move": "orbit",
+    "zoom": 1.7
+   },
+   "layers": [
+    "skin",
+    "nervous"
+   ],
+   "solid": [
+    "eyes"
+   ],
+   "effects": [
+    "flow:eyes",
+    "pulse:eyes"
+   ],
+   "labels": [
+    "eyes"
+   ],
+   "step": 1
+  },
+  {
+   "id": "brain",
+   "seconds": 5.5,
+   "title": "दृक् तंत्रिका → दिमाग",
+   "sub": "दिमाग चित्र को सीधा करके समझता है",
+   "camera": {
+    "focus": [
+     "eyes",
+     "brain"
+    ],
+    "angle": "side",
+    "move": "pull",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "nervous"
+   ],
+   "solid": [
+    "eyes",
+    "brain"
+   ],
+   "effects": [
+    "travel:eyes,brain",
+    "flow:brain"
+   ],
+   "labels": [
+    "brain",
+    "eyes"
+   ],
+   "step": 2
+  },
+  {
+   "id": "quiz",
+   "seconds": 5,
+   "title": "परीक्षा का पक्का सवाल",
+   "sub": "",
+   "camera": {
+    "focus": [
+     "eyes"
+    ],
+    "angle": "front",
+    "move": "orbit",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "nervous"
+   ],
+   "solid": [
+    "eyes"
+   ],
+   "effects": [
+    "pulse:eyes"
+   ],
+   "labels": [],
+   "quiz": {
+    "q": "आँख में चित्र कहाँ बनता है?",
+    "a": "A) रेटिना",
+    "b": "B) कॉर्निया",
+    "cta": "जवाब कमेंट में लिखो"
+   },
+   "step": 3
+  }
+ ]
+}

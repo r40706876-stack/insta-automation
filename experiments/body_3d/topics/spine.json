@@ -1,0 +1,165 @@
+{
+ "topic": "रीढ़ की हड्डी की बनावट",
+ "brand": "मानव शरीर",
+ "fps": 24,
+ "steps": [
+  "कशेरुक",
+  "भाग",
+  "रक्षा",
+  "याद"
+ ],
+ "scenes": [
+  {
+   "id": "hook",
+   "seconds": 3.5,
+   "title": "रीढ़ एक हड्डी नहीं!",
+   "sub": "ये कई छोटी हड्डियों की माला है",
+   "camera": {
+    "focus": [
+     "spine"
+    ],
+    "angle": "back",
+    "move": "push",
+    "zoom": 0.9
+   },
+   "layers": [
+    "skin",
+    "skeletal"
+   ],
+   "solid": [
+    "spine"
+   ],
+   "effects": [
+    "sequence:spine",
+    "travel:brain,spinal_cord"
+   ],
+   "labels": [
+    "spine"
+   ],
+   "step": -1
+  },
+  {
+   "id": "beads",
+   "seconds": 5.5,
+   "title": "33 कशेरुक",
+   "sub": "वयस्क में कुछ जुड़कर 26 रह जाते हैं",
+   "camera": {
+    "focus": [
+     "spine"
+    ],
+    "angle": "side",
+    "move": "down",
+    "zoom": 0.9
+   },
+   "layers": [
+    "skin",
+    "skeletal"
+   ],
+   "solid": [
+    "spine"
+   ],
+   "effects": [
+    "sequence:spine"
+   ],
+   "labels": [
+    "spine"
+   ],
+   "step": 0
+  },
+  {
+   "id": "parts",
+   "seconds": 5.5,
+   "title": "गर्दन, छाती, कमर के भाग",
+   "sub": "नीचे त्रिकास्थि और अनुत्रिक",
+   "camera": {
+    "focus": [
+     "spine",
+     "pelvis"
+    ],
+    "angle": "back",
+    "move": "down",
+    "zoom": 0.9
+   },
+   "layers": [
+    "skin",
+    "skeletal"
+   ],
+   "solid": [
+    "spine",
+    "pelvis"
+   ],
+   "effects": [
+    "sequence:spine,pelvis"
+   ],
+   "labels": [
+    "spine",
+    "pelvis"
+   ],
+   "step": 1
+  },
+  {
+   "id": "guard",
+   "seconds": 5.5,
+   "title": "अंदर मेरुरज्जु सुरक्षित",
+   "sub": "रीढ़ शरीर को सीधा खड़ा रखती है",
+   "camera": {
+    "focus": [
+     "spine",
+     "spinal_cord"
+    ],
+    "angle": "side",
+    "move": "rise",
+    "zoom": 0.9
+   },
+   "layers": [
+    "skin",
+    "skeletal",
+    "nervous"
+   ],
+   "solid": [
+    "spine",
+    "spinal_cord"
+   ],
+   "effects": [
+    "travel:brain,spinal_cord",
+    "flow:spinal_cord"
+   ],
+   "labels": [
+    "spinal_cord"
+   ],
+   "step": 2
+  },
+  {
+   "id": "quiz",
+   "seconds": 5,
+   "title": "परीक्षा का पक्का सवाल",
+   "sub": "",
+   "camera": {
+    "focus": [
+     "spine"
+    ],
+    "angle": "back",
+    "move": "orbit",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "skeletal"
+   ],
+   "solid": [
+    "spine"
+   ],
+   "effects": [
+    "sequence:spine"
+   ],
+   "labels": [],
+   "quiz": {
+    "q": "रीढ़ की हड्डी के अंदर क्या होता है?",
+    "a": "A) मेरुरज्जु",
+    "b": "B) फीमर",
+    "cta": "जवाब कमेंट में लिखो"
+   },
+   "step": 3
+  }
+ ]
+}

@@ -1,0 +1,170 @@
+{
+ "topic": "जीभ और स्वाद",
+ "brand": "मानव शरीर",
+ "fps": 24,
+ "steps": [
+  "जीभ",
+  "स्वाद",
+  "निगलना",
+  "याद"
+ ],
+ "scenes": [
+  {
+   "id": "hook",
+   "seconds": 3.5,
+   "title": "नाक बंद तो स्वाद गायब!",
+   "sub": "जीभ और स्वाद का रिश्ता",
+   "camera": {
+    "focus": [
+     "tongue"
+    ],
+    "angle": "side",
+    "move": "push",
+    "zoom": 1.6
+   },
+   "layers": [
+    "skin",
+    "visceral",
+    "skeletal"
+   ],
+   "solid": [
+    "tongue",
+    "teeth"
+   ],
+   "effects": [
+    "pulse:tongue",
+    "flow:tongue"
+   ],
+   "labels": [
+    "tongue"
+   ],
+   "step": -1
+  },
+  {
+   "id": "buds",
+   "seconds": 5.5,
+   "title": "जीभ पर स्वाद कलिकाएँ",
+   "sub": "मीठा, नमकीन, खट्टा, कड़वा पहचानती हैं",
+   "camera": {
+    "focus": [
+     "tongue"
+    ],
+    "angle": "front",
+    "move": "orbit",
+    "zoom": 1.7
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "tongue"
+   ],
+   "effects": [
+    "pulse:tongue",
+    "flow:tongue"
+   ],
+   "labels": [
+    "tongue"
+   ],
+   "step": 0
+  },
+  {
+   "id": "chew",
+   "seconds": 5.5,
+   "title": "चबाने में मदद",
+   "sub": "जीभ भोजन को दाँतों के बीच घुमाती है",
+   "camera": {
+    "focus": [
+     "tongue",
+     "teeth"
+    ],
+    "angle": "side",
+    "move": "push",
+    "zoom": 1.6
+   },
+   "layers": [
+    "skin",
+    "visceral",
+    "skeletal"
+   ],
+   "solid": [
+    "tongue",
+    "teeth"
+   ],
+   "effects": [
+    "pulse:tongue",
+    "sequence:teeth,tongue"
+   ],
+   "labels": [
+    "tongue",
+    "teeth"
+   ],
+   "step": 1
+  },
+  {
+   "id": "swallow",
+   "seconds": 5.5,
+   "title": "निगलने की शुरुआत",
+   "sub": "भोजन को गले की ओर धकेलती है",
+   "camera": {
+    "focus": [
+     "tongue",
+     "oesophagus"
+    ],
+    "angle": "side",
+    "move": "push",
+    "zoom": 1.3
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "tongue",
+    "pharynx",
+    "oesophagus"
+   ],
+   "effects": [
+    "travel:tongue,pharynx,oesophagus"
+   ],
+   "labels": [
+    "tongue",
+    "pharynx"
+   ],
+   "step": 2
+  },
+  {
+   "id": "quiz",
+   "seconds": 5,
+   "title": "परीक्षा का पक्का सवाल",
+   "sub": "",
+   "camera": {
+    "focus": [
+     "tongue"
+    ],
+    "angle": "side",
+    "move": "orbit",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "tongue"
+   ],
+   "effects": [
+    "pulse:tongue"
+   ],
+   "labels": [],
+   "quiz": {
+    "q": "जीभ पर स्वाद किससे पहचाना जाता है?",
+    "a": "A) स्वाद कलिकाएँ",
+    "b": "B) दीर्घरोम",
+    "cta": "जवाब कमेंट में लिखो"
+   },
+   "step": 3
+  }
+ ]
+}

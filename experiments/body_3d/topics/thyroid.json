@@ -1,0 +1,165 @@
+{
+ "topic": "थायरॉइड ग्रंथि और आयोडीन",
+ "brand": "मानव शरीर",
+ "fps": 24,
+ "steps": [
+  "गला",
+  "थायरॉक्सिन",
+  "आयोडीन",
+  "याद"
+ ],
+ "scenes": [
+  {
+   "id": "hook",
+   "seconds": 3.5,
+   "title": "गले की तितली जैसी ग्रंथि",
+   "sub": "नमक में आयोडीन क्यों मिलाते हैं?",
+   "camera": {
+    "focus": [
+     "thyroid"
+    ],
+    "angle": "front",
+    "move": "push",
+    "zoom": 1.5
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "thyroid",
+    "larynx",
+    "trachea"
+   ],
+   "effects": [
+    "pulse:thyroid",
+    "flow:thyroid"
+   ],
+   "labels": [
+    "thyroid"
+   ],
+   "step": -1
+  },
+  {
+   "id": "where",
+   "seconds": 5.5,
+   "title": "गले में, श्वासनली के आगे",
+   "sub": "स्वरयंत्र के ठीक नीचे",
+   "camera": {
+    "focus": [
+     "thyroid",
+     "trachea"
+    ],
+    "angle": "side",
+    "move": "orbit",
+    "zoom": 1.4
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "thyroid",
+    "larynx",
+    "trachea"
+   ],
+   "effects": [
+    "sequence:larynx,thyroid,trachea"
+   ],
+   "labels": [
+    "thyroid",
+    "trachea"
+   ],
+   "step": 0
+  },
+  {
+   "id": "hormone",
+   "seconds": 5.5,
+   "title": "थायरॉक्सिन हार्मोन",
+   "sub": "शरीर की चयापचय (मेटाबॉलिज़्म) दर तय करता है",
+   "camera": {
+    "focus": [
+     "thyroid"
+    ],
+    "angle": "front",
+    "move": "push",
+    "zoom": 1.6
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "thyroid"
+   ],
+   "effects": [
+    "particles:thyroid,arteries,nutrient",
+    "pulse:thyroid"
+   ],
+   "labels": [
+    "thyroid"
+   ],
+   "step": 1
+  },
+  {
+   "id": "iodine",
+   "seconds": 5.5,
+   "title": "बनाने के लिए आयोडीन ज़रूरी",
+   "sub": "कमी से गला फूलता है = घेंघा",
+   "camera": {
+    "focus": [
+     "thyroid"
+    ],
+    "angle": "three_quarter",
+    "move": "orbit",
+    "zoom": 1.7
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "thyroid"
+   ],
+   "effects": [
+    "pulse:thyroid"
+   ],
+   "labels": [
+    "thyroid"
+   ],
+   "step": 2
+  },
+  {
+   "id": "quiz",
+   "seconds": 5,
+   "title": "परीक्षा का पक्का सवाल",
+   "sub": "",
+   "camera": {
+    "focus": [
+     "thyroid"
+    ],
+    "angle": "front",
+    "move": "orbit",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "thyroid"
+   ],
+   "effects": [
+    "pulse:thyroid"
+   ],
+   "labels": [],
+   "quiz": {
+    "q": "आयोडीन की कमी से कौन-सा रोग होता है?",
+    "a": "A) घेंघा",
+    "b": "B) रिकेट्स",
+    "cta": "जवाब कमेंट में लिखो"
+   },
+   "step": 3
+  }
+ ]
+}

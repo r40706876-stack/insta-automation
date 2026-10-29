@@ -1,0 +1,165 @@
+{
+ "topic": "खोपड़ी: मस्तिष्क का कवच",
+ "brand": "मानव शरीर",
+ "fps": 24,
+ "steps": [
+  "कवच",
+  "हड्डियाँ",
+  "जबड़ा",
+  "याद"
+ ],
+ "scenes": [
+  {
+   "id": "hook",
+   "seconds": 3.5,
+   "title": "सिर की एक ही हड्डी हिलती है!",
+   "sub": "कौन-सी? अंत तक देखो",
+   "camera": {
+    "focus": [
+     "skull"
+    ],
+    "angle": "three_quarter",
+    "move": "push",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "skeletal"
+   ],
+   "solid": [
+    "skull",
+    "teeth"
+   ],
+   "effects": [
+    "sequence:skull,teeth"
+   ],
+   "labels": [
+    "skull"
+   ],
+   "step": -1
+  },
+  {
+   "id": "armor",
+   "seconds": 5.5,
+   "title": "मस्तिष्क का कवच",
+   "sub": "कपाल की हड्डियाँ दिमाग को चारों ओर से ढकती हैं",
+   "camera": {
+    "focus": [
+     "skull"
+    ],
+    "angle": "side",
+    "move": "orbit",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "skeletal"
+   ],
+   "solid": [
+    "skull"
+   ],
+   "effects": [
+    "sequence:skull",
+    "pulse:brain"
+   ],
+   "labels": [
+    "skull"
+   ],
+   "step": 0
+  },
+  {
+   "id": "bones",
+   "seconds": 5.5,
+   "title": "खोपड़ी में 22 हड्डियाँ",
+   "sub": "ज़्यादातर आपस में मज़बूती से जुड़ी",
+   "camera": {
+    "focus": [
+     "skull"
+    ],
+    "angle": "front",
+    "move": "push",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "skeletal"
+   ],
+   "solid": [
+    "skull",
+    "teeth"
+   ],
+   "effects": [
+    "sequence:skull,teeth"
+   ],
+   "labels": [
+    "skull",
+    "teeth"
+   ],
+   "step": 1
+  },
+  {
+   "id": "jaw",
+   "seconds": 5.5,
+   "title": "निचला जबड़ा: अकेली हिलने वाली",
+   "sub": "बोलने और चबाने के लिए",
+   "camera": {
+    "focus": [
+     "skull",
+     "teeth"
+    ],
+    "angle": "side",
+    "move": "push",
+    "zoom": 1.1
+   },
+   "layers": [
+    "skin",
+    "skeletal"
+   ],
+   "solid": [
+    "skull",
+    "teeth"
+   ],
+   "effects": [
+    "sequence:teeth",
+    "pulse:teeth"
+   ],
+   "labels": [
+    "teeth"
+   ],
+   "step": 2
+  },
+  {
+   "id": "quiz",
+   "seconds": 5,
+   "title": "परीक्षा का पक्का सवाल",
+   "sub": "",
+   "camera": {
+    "focus": [
+     "skull"
+    ],
+    "angle": "side",
+    "move": "orbit",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "skeletal"
+   ],
+   "solid": [
+    "skull",
+    "teeth"
+   ],
+   "effects": [
+    "sequence:skull,teeth"
+   ],
+   "labels": [],
+   "quiz": {
+    "q": "खोपड़ी की कौन-सी हड्डी हिल सकती है?",
+    "a": "A) निचला जबड़ा",
+    "b": "B) ललाट हड्डी",
+    "cta": "जवाब कमेंट में लिखो"
+   },
+   "step": 3
+  }
+ ]
+}

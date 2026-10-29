@@ -1,0 +1,169 @@
+{
+ "topic": "मानव शरीर की प्रमुख अंतःस्रावी ग्रंथियाँ",
+ "brand": "मानव शरीर",
+ "fps": 24,
+ "steps": [
+  "मस्तिष्क",
+  "गला",
+  "पेट",
+  "याद"
+ ],
+ "scenes": [
+  {
+   "id": "hook",
+   "seconds": 3.5,
+   "title": "बिना नली वाली ग्रंथियाँ",
+   "sub": "हार्मोन सीधे खून में छोड़ती हैं",
+   "camera": {
+    "focus": [
+     "thyroid",
+     "pancreas"
+    ],
+    "angle": "front",
+    "move": "push",
+    "zoom": 0.9
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "thyroid",
+    "pancreas",
+    "adrenal"
+   ],
+   "effects": [
+    "sequence:brain,thyroid,adrenal,pancreas"
+   ],
+   "labels": [
+    "thyroid",
+    "pancreas"
+   ],
+   "step": -1
+  },
+  {
+   "id": "pituitary",
+   "seconds": 5.5,
+   "title": "पीयूष ग्रंथि: मास्टर ग्रंथि",
+   "sub": "मस्तिष्क के नीचे, बाकी ग्रंथियों को चलाती है",
+   "camera": {
+    "focus": [
+     "brain"
+    ],
+    "angle": "side",
+    "move": "push",
+    "zoom": 1.2
+   },
+   "layers": [
+    "skin",
+    "nervous"
+   ],
+   "solid": [
+    "brain"
+   ],
+   "effects": [
+    "pulse:brain",
+    "flow:brain"
+   ],
+   "labels": [
+    "brain"
+   ],
+   "step": 0
+  },
+  {
+   "id": "thyroid",
+   "seconds": 5,
+   "title": "थायरॉइड: गले में",
+   "sub": "थायरॉक्सिन, आयोडीन ज़रूरी",
+   "camera": {
+    "focus": [
+     "thyroid"
+    ],
+    "angle": "front",
+    "move": "push",
+    "zoom": 1.5
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "thyroid",
+    "larynx"
+   ],
+   "effects": [
+    "pulse:thyroid",
+    "particles:thyroid,arteries,nutrient"
+   ],
+   "labels": [
+    "thyroid"
+   ],
+   "step": 1
+  },
+  {
+   "id": "belly",
+   "seconds": 6,
+   "title": "अधिवृक्क और अग्न्याशय",
+   "sub": "एड्रेनालिन और इंसुलिन",
+   "camera": {
+    "focus": [
+     "adrenal",
+     "pancreas"
+    ],
+    "angle": "three_quarter",
+    "move": "push",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "adrenal",
+    "pancreas",
+    "kidneys"
+   ],
+   "effects": [
+    "sequence:adrenal,pancreas",
+    "particles:pancreas,veins,nutrient"
+   ],
+   "labels": [
+    "adrenal",
+    "pancreas"
+   ],
+   "step": 2
+  },
+  {
+   "id": "quiz",
+   "seconds": 5,
+   "title": "परीक्षा का पक्का सवाल",
+   "sub": "",
+   "camera": {
+    "focus": [
+     "brain"
+    ],
+    "angle": "side",
+    "move": "orbit",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "nervous"
+   ],
+   "solid": [
+    "brain"
+   ],
+   "effects": [
+    "pulse:brain"
+   ],
+   "labels": [],
+   "quiz": {
+    "q": "मास्टर ग्रंथि किसे कहते हैं?",
+    "a": "A) पीयूष ग्रंथि",
+    "b": "B) थायरॉइड",
+    "cta": "जवाब कमेंट में लिखो"
+   },
+   "step": 3
+  }
+ ]
+}

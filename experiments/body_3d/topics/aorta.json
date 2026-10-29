@@ -1,0 +1,182 @@
+{
+ "topic": "महाधमनी: शरीर की सबसे बड़ी धमनी",
+ "brand": "मानव शरीर",
+ "fps": 24,
+ "steps": [
+  "दिल",
+  "महाधमनी",
+  "शाखाएँ",
+  "याद"
+ ],
+ "scenes": [
+  {
+   "id": "hook",
+   "seconds": 3.5,
+   "title": "शरीर की सबसे बड़ी धमनी?",
+   "sub": "दिल से निकलती है ये मोटी नली",
+   "camera": {
+    "focus": [
+     "heart",
+     "aorta"
+    ],
+    "angle": "three_quarter",
+    "move": "push",
+    "zoom": 1.1
+   },
+   "layers": [
+    "skin",
+    "cardio"
+   ],
+   "solid": [
+    "heart",
+    "aorta"
+   ],
+   "effects": [
+    "beat",
+    "travel:heart,aorta"
+   ],
+   "labels": [
+    "aorta"
+   ],
+   "step": -1
+  },
+  {
+   "id": "start",
+   "seconds": 5.5,
+   "title": "बायाँ निलय → महाधमनी",
+   "sub": "सबसे ताकतवर धक्का बायाँ निलय देता है",
+   "camera": {
+    "focus": [
+     "heart"
+    ],
+    "angle": "front",
+    "move": "orbit",
+    "zoom": 1.25
+   },
+   "layers": [
+    "skin",
+    "cardio"
+   ],
+   "solid": [
+    "heart",
+    "aorta"
+   ],
+   "effects": [
+    "beat",
+    "flow:aorta"
+   ],
+   "labels": [
+    "heart",
+    "aorta"
+   ],
+   "step": 0
+  },
+  {
+   "id": "branch",
+   "seconds": 6,
+   "title": "महाधमनी से सारी शाखाएँ",
+   "sub": "सिर, हाथ, पेट, पैर — हर जगह शुद्ध खून",
+   "camera": {
+    "focus": [
+     "skin"
+    ],
+    "angle": "three_quarter",
+    "move": "push",
+    "zoom": 1.35
+   },
+   "layers": [
+    "skin",
+    "cardio"
+   ],
+   "solid": [
+    "heart",
+    "aorta",
+    "arteries"
+   ],
+   "effects": [
+    "beat",
+    "travel:heart,aorta,arteries",
+    "flow:arteries"
+   ],
+   "labels": [
+    "aorta"
+   ],
+   "hide": [
+    "veins",
+    "vena_cava"
+   ],
+   "step": 1
+  },
+  {
+   "id": "vein",
+   "seconds": 5,
+   "title": "सबसे बड़ी शिरा: महाशिरा",
+   "sub": "पूरे शरीर का खून इसी से दिल में लौटता है",
+   "camera": {
+    "focus": [
+     "heart",
+     "vena_cava"
+    ],
+    "angle": "three_quarter_left",
+    "move": "pull",
+    "zoom": 1.1
+   },
+   "layers": [
+    "skin",
+    "cardio"
+   ],
+   "solid": [
+    "heart",
+    "vena_cava",
+    "veins"
+   ],
+   "effects": [
+    "beat",
+    "travel:veins,vena_cava,heart"
+   ],
+   "labels": [
+    "vena_cava"
+   ],
+   "hide": [
+    "arteries",
+    "aorta"
+   ],
+   "step": 2
+  },
+  {
+   "id": "quiz",
+   "seconds": 5,
+   "title": "परीक्षा का पक्का सवाल",
+   "sub": "",
+   "camera": {
+    "focus": [
+     "heart",
+     "aorta"
+    ],
+    "angle": "three_quarter",
+    "move": "orbit",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "cardio"
+   ],
+   "solid": [
+    "heart",
+    "aorta"
+   ],
+   "effects": [
+    "beat",
+    "flow:aorta"
+   ],
+   "labels": [],
+   "quiz": {
+    "q": "शरीर की सबसे बड़ी धमनी कौन-सी है?",
+    "a": "A) महाधमनी",
+    "b": "B) फुफ्फुसीय धमनी",
+    "cta": "जवाब कमेंट में लिखो"
+   },
+   "step": 3
+  }
+ ]
+}

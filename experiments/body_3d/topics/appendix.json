@@ -1,0 +1,165 @@
+{
+ "topic": "अपेंडिक्स: एक अवशेषी अंग",
+ "brand": "मानव शरीर",
+ "fps": 24,
+ "steps": [
+  "कहाँ",
+  "अवशेषी",
+  "सूजन",
+  "याद"
+ ],
+ "scenes": [
+  {
+   "id": "hook",
+   "seconds": 3.5,
+   "title": "ये छोटा अंग किसी काम का नहीं?",
+   "sub": "मिलिए अपेंडिक्स से",
+   "camera": {
+    "focus": [
+     "appendix"
+    ],
+    "angle": "front",
+    "move": "push",
+    "zoom": 1.5
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "appendix",
+    "large_intestine"
+   ],
+   "effects": [
+    "travel:small_intestine,large_intestine,appendix",
+    "pulse:appendix"
+   ],
+   "labels": [
+    "appendix"
+   ],
+   "step": -1
+  },
+  {
+   "id": "where",
+   "seconds": 5.5,
+   "title": "पेट के दाईं ओर नीचे",
+   "sub": "बड़ी आँत की शुरुआत (सीकम) से जुड़ा",
+   "camera": {
+    "focus": [
+     "appendix",
+     "large_intestine"
+    ],
+    "angle": "front",
+    "move": "push",
+    "zoom": 1.25
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "appendix",
+    "large_intestine",
+    "small_intestine"
+   ],
+   "effects": [
+    "travel:large_intestine,appendix"
+   ],
+   "labels": [
+    "appendix",
+    "large_intestine"
+   ],
+   "step": 0
+  },
+  {
+   "id": "vestigial",
+   "seconds": 5.5,
+   "title": "अवशेषी अंग",
+   "sub": "मनुष्य में इसका पाचन में खास काम नहीं",
+   "camera": {
+    "focus": [
+     "appendix"
+    ],
+    "angle": "three_quarter",
+    "move": "orbit",
+    "zoom": 1.6
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "appendix",
+    "large_intestine"
+   ],
+   "effects": [
+    "pulse:appendix",
+    "flow:appendix"
+   ],
+   "labels": [
+    "appendix"
+   ],
+   "step": 1
+  },
+  {
+   "id": "swell",
+   "seconds": 5.5,
+   "title": "सूजन = अपेंडिसाइटिस",
+   "sub": "तब ऑपरेशन से इसे निकालना पड़ता है",
+   "camera": {
+    "focus": [
+     "appendix"
+    ],
+    "angle": "front",
+    "move": "push",
+    "zoom": 1.7
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "appendix"
+   ],
+   "effects": [
+    "pulse:appendix"
+   ],
+   "labels": [
+    "appendix"
+   ],
+   "step": 2
+  },
+  {
+   "id": "quiz",
+   "seconds": 5,
+   "title": "परीक्षा का पक्का सवाल",
+   "sub": "",
+   "camera": {
+    "focus": [
+     "appendix"
+    ],
+    "angle": "front",
+    "move": "orbit",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "appendix"
+   ],
+   "effects": [
+    "pulse:appendix"
+   ],
+   "labels": [],
+   "quiz": {
+    "q": "मनुष्य में अवशेषी अंग कौन-सा है?",
+    "a": "A) अपेंडिक्स",
+    "b": "B) अग्न्याशय",
+    "cta": "जवाब कमेंट में लिखो"
+   },
+   "step": 3
+  }
+ ]
+}

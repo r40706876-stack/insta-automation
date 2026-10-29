@@ -1,0 +1,192 @@
+{
+ "topic": "मानव कंकाल: वयस्क में 206 हड्डियाँ",
+ "brand": "मानव शरीर",
+ "fps": 24,
+ "steps": [
+  "खोपड़ी",
+  "धड़",
+  "हाथ-पैर",
+  "याद"
+ ],
+ "scenes": [
+  {
+   "id": "hook",
+   "seconds": 3.5,
+   "title": "बच्चे में ज़्यादा हड्डियाँ!",
+   "sub": "फिर बड़े होकर 206 कैसे?",
+   "camera": {
+    "focus": [
+     "skin"
+    ],
+    "angle": "front",
+    "move": "push",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "skeletal"
+   ],
+   "solid": [
+    "skull",
+    "spine",
+    "ribs",
+    "pelvis",
+    "femur",
+    "arm_bones",
+    "leg_bones",
+    "hand_bones",
+    "bones"
+   ],
+   "effects": [
+    "sequence:skull,spine,ribs,pelvis,femur"
+   ],
+   "labels": [
+    "skull"
+   ],
+   "step": -1
+  },
+  {
+   "id": "count",
+   "seconds": 5.5,
+   "title": "जन्म पर लगभग 300 हड्डियाँ",
+   "sub": "कई हड्डियाँ आपस में जुड़कर 206 बनती हैं",
+   "camera": {
+    "focus": [
+     "skull",
+     "spine"
+    ],
+    "angle": "three_quarter",
+    "move": "orbit",
+    "zoom": 0.9
+   },
+   "layers": [
+    "skin",
+    "skeletal"
+   ],
+   "solid": [
+    "skull",
+    "spine",
+    "pelvis",
+    "ribs"
+   ],
+   "effects": [
+    "sequence:skull,spine,pelvis"
+   ],
+   "labels": [
+    "skull",
+    "spine",
+    "pelvis"
+   ],
+   "step": 0
+  },
+  {
+   "id": "axial",
+   "seconds": 5.5,
+   "title": "खोपड़ी, रीढ़, पसलियाँ",
+   "sub": "मस्तिष्क, दिल और फेफड़ों की रक्षा",
+   "camera": {
+    "focus": [
+     "skull",
+     "ribs"
+    ],
+    "angle": "front",
+    "move": "down",
+    "zoom": 0.9
+   },
+   "layers": [
+    "skin",
+    "skeletal"
+   ],
+   "solid": [
+    "skull",
+    "spine",
+    "ribs"
+   ],
+   "effects": [
+    "sequence:skull,spine,ribs"
+   ],
+   "labels": [
+    "skull",
+    "ribs"
+   ],
+   "step": 1
+  },
+  {
+   "id": "limbs",
+   "seconds": 5.5,
+   "title": "हाथ-पैर से चलना-फिरना",
+   "sub": "हड्डियाँ, जोड़ और पेशियाँ मिलकर काम करती हैं",
+   "camera": {
+    "focus": [
+     "skin"
+    ],
+    "angle": "three_quarter_left",
+    "move": "pull",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "skeletal"
+   ],
+   "solid": [
+    "arm_bones",
+    "hand_bones",
+    "femur",
+    "leg_bones",
+    "pelvis",
+    "spine",
+    "ribs",
+    "skull",
+    "bones"
+   ],
+   "effects": [
+    "sequence:arm_bones,hand_bones,femur,leg_bones"
+   ],
+   "labels": [
+    "femur",
+    "arm_bones"
+   ],
+   "step": 2
+  },
+  {
+   "id": "quiz",
+   "seconds": 5,
+   "title": "परीक्षा का पक्का सवाल",
+   "sub": "",
+   "camera": {
+    "focus": [
+     "skin"
+    ],
+    "angle": "front",
+    "move": "orbit",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "skeletal"
+   ],
+   "solid": [
+    "skull",
+    "spine",
+    "ribs",
+    "pelvis",
+    "femur",
+    "arm_bones",
+    "leg_bones",
+    "hand_bones",
+    "bones"
+   ],
+   "effects": [
+    "sequence:skull,spine,femur"
+   ],
+   "labels": [],
+   "quiz": {
+    "q": "वयस्क मनुष्य में कितनी हड्डियाँ होती हैं?",
+    "a": "A) 206",
+    "b": "B) 300",
+    "cta": "जवाब कमेंट में लिखो"
+   },
+   "step": 3
+  }
+ ]
+}

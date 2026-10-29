@@ -1,0 +1,170 @@
+{
+ "topic": "तंत्रिका तंत्र: संदेश कैसे जाता है",
+ "brand": "मानव शरीर",
+ "fps": 24,
+ "steps": [
+  "आँख-कान",
+  "तंत्रिका",
+  "दिमाग",
+  "याद"
+ ],
+ "scenes": [
+  {
+   "id": "hook",
+   "seconds": 3.5,
+   "title": "शरीर का इंटरनेट!",
+   "sub": "संदेश पलक झपकते पहुँचता है",
+   "camera": {
+    "focus": [
+     "skin"
+    ],
+    "angle": "front",
+    "move": "push",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "nervous"
+   ],
+   "solid": [
+    "brain",
+    "spinal_cord",
+    "nerves"
+   ],
+   "effects": [
+    "travel:brain,spinal_cord,nerves",
+    "flow:nerves"
+   ],
+   "labels": [
+    "brain"
+   ],
+   "step": -1
+  },
+  {
+   "id": "net",
+   "seconds": 5.5,
+   "title": "पूरे शरीर में तंत्रिकाएँ",
+   "sub": "हर अंग दिमाग से जुड़ा है",
+   "camera": {
+    "focus": [
+     "skin"
+    ],
+    "angle": "three_quarter",
+    "move": "orbit",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "nervous"
+   ],
+   "solid": [
+    "brain",
+    "spinal_cord",
+    "nerves"
+   ],
+   "effects": [
+    "flow:nerves",
+    "travel:spinal_cord,nerves"
+   ],
+   "labels": [
+    "nerves",
+    "spinal_cord"
+   ],
+   "step": 0
+  },
+  {
+   "id": "up",
+   "seconds": 5.5,
+   "title": "संवेदी तंत्रिका: अंग → दिमाग",
+   "sub": "छूना, देखना, सुनना ऊपर पहुँचता है",
+   "camera": {
+    "focus": [
+     "brain",
+     "spinal_cord"
+    ],
+    "angle": "side",
+    "move": "rise",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "nervous"
+   ],
+   "solid": [
+    "brain",
+    "spinal_cord",
+    "nerves"
+   ],
+   "effects": [
+    "travel:nerves,spinal_cord,brain"
+   ],
+   "labels": [
+    "brain"
+   ],
+   "step": 1
+  },
+  {
+   "id": "down",
+   "seconds": 5.5,
+   "title": "प्रेरक तंत्रिका: दिमाग → पेशी",
+   "sub": "हुक्म नीचे आता है, हाथ-पैर चलते हैं",
+   "camera": {
+    "focus": [
+     "skin"
+    ],
+    "angle": "front",
+    "move": "down",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "nervous"
+   ],
+   "solid": [
+    "brain",
+    "spinal_cord",
+    "nerves"
+   ],
+   "effects": [
+    "travel:brain,spinal_cord,nerves",
+    "flow:nerves"
+   ],
+   "labels": [
+    "spinal_cord"
+   ],
+   "step": 2
+  },
+  {
+   "id": "quiz",
+   "seconds": 5,
+   "title": "परीक्षा का पक्का सवाल",
+   "sub": "",
+   "camera": {
+    "focus": [
+     "brain"
+    ],
+    "angle": "side",
+    "move": "orbit",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "nervous"
+   ],
+   "solid": [
+    "brain"
+   ],
+   "effects": [
+    "travel:brain,spinal_cord,nerves"
+   ],
+   "labels": [],
+   "quiz": {
+    "q": "तंत्रिका तंत्र की इकाई क्या है?",
+    "a": "A) न्यूरॉन",
+    "b": "B) नेफ्रॉन",
+    "cta": "जवाब कमेंट में लिखो"
+   },
+   "step": 3
+  }
+ ]
+}

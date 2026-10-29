@@ -1,0 +1,166 @@
+{
+ "topic": "दाँतों के प्रकार और काम",
+ "brand": "मानव शरीर",
+ "fps": 24,
+ "steps": [
+  "काटना",
+  "फाड़ना",
+  "पीसना",
+  "याद"
+ ],
+ "scenes": [
+  {
+   "id": "hook",
+   "seconds": 3.5,
+   "title": "शरीर का सबसे कठोर पदार्थ?",
+   "sub": "आपके दाँतों के ऊपर है",
+   "camera": {
+    "focus": [
+     "teeth"
+    ],
+    "angle": "front",
+    "move": "push",
+    "zoom": 1.5
+   },
+   "layers": [
+    "skin",
+    "skeletal"
+   ],
+   "solid": [
+    "teeth",
+    "skull"
+   ],
+   "effects": [
+    "pulse:teeth",
+    "sequence:teeth"
+   ],
+   "labels": [
+    "teeth"
+   ],
+   "step": -1
+  },
+  {
+   "id": "cut",
+   "seconds": 5.5,
+   "title": "कृंतक: काटने वाले",
+   "sub": "सामने के 8 दाँत",
+   "camera": {
+    "focus": [
+     "teeth"
+    ],
+    "angle": "front",
+    "move": "push",
+    "zoom": 1.7
+   },
+   "layers": [
+    "skin",
+    "skeletal"
+   ],
+   "solid": [
+    "teeth"
+   ],
+   "effects": [
+    "sequence:teeth",
+    "pulse:teeth"
+   ],
+   "labels": [
+    "teeth"
+   ],
+   "step": 0
+  },
+  {
+   "id": "tear",
+   "seconds": 5.5,
+   "title": "रदनक फाड़ते, दाढ़ पीसती हैं",
+   "sub": "हर दाँत का अलग काम",
+   "camera": {
+    "focus": [
+     "teeth",
+     "tongue"
+    ],
+    "angle": "side",
+    "move": "orbit",
+    "zoom": 1.6
+   },
+   "layers": [
+    "skin",
+    "skeletal",
+    "visceral"
+   ],
+   "solid": [
+    "teeth",
+    "tongue"
+   ],
+   "effects": [
+    "sequence:teeth,tongue",
+    "pulse:tongue"
+   ],
+   "labels": [
+    "teeth",
+    "tongue"
+   ],
+   "step": 1
+  },
+  {
+   "id": "count",
+   "seconds": 5.5,
+   "title": "दूध के 20, स्थायी 32 दाँत",
+   "sub": "इनेमल शरीर का सबसे कठोर पदार्थ",
+   "camera": {
+    "focus": [
+     "teeth"
+    ],
+    "angle": "three_quarter",
+    "move": "pull",
+    "zoom": 1.4
+   },
+   "layers": [
+    "skin",
+    "skeletal"
+   ],
+   "solid": [
+    "teeth",
+    "skull"
+   ],
+   "effects": [
+    "pulse:teeth"
+   ],
+   "labels": [
+    "teeth"
+   ],
+   "step": 2
+  },
+  {
+   "id": "quiz",
+   "seconds": 5,
+   "title": "परीक्षा का पक्का सवाल",
+   "sub": "",
+   "camera": {
+    "focus": [
+     "teeth"
+    ],
+    "angle": "front",
+    "move": "orbit",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "skeletal"
+   ],
+   "solid": [
+    "teeth"
+   ],
+   "effects": [
+    "pulse:teeth"
+   ],
+   "labels": [],
+   "quiz": {
+    "q": "शरीर का सबसे कठोर पदार्थ कौन-सा है?",
+    "a": "A) इनेमल",
+    "b": "B) हड्डी",
+    "cta": "जवाब कमेंट में लिखो"
+   },
+   "step": 3
+  }
+ ]
+}
