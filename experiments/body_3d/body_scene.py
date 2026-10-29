@@ -158,7 +158,7 @@ for i, s in enumerate(TOP['scenes']):
 def glow_material():
     m = bpy.data.materials.new('Glow'); m.use_nodes = True; nt = m.node_tree; nt.nodes.clear()
     o = nt.nodes.new('ShaderNodeOutputMaterial'); info = nt.nodes.new('ShaderNodeObjectInfo'); em = nt.nodes.new('ShaderNodeEmission')
-    em.inputs['Strength'].default_value = 7; nt.links.new(info.outputs['Color'], em.inputs['Color']); nt.links.new(em.outputs[0], o.inputs[0])
+    em.inputs['Strength'].default_value = 12; nt.links.new(info.outputs['Color'], em.inputs['Color']); nt.links.new(em.outputs[0], o.inputs[0])
     m.cycles.emission_sampling = 'NONE'; return m
 GLOW = glow_material()
 def glow_sphere(name, r):
@@ -166,8 +166,8 @@ def glow_sphere(name, r):
     o.data.materials.append(GLOW); o.visible_shadow = False; o.hide_render = True
     for pl in o.data.polygons: pl.use_smooth = True
     return o
-BALL = glow_sphere('Bolus', .013); TRAIL = [glow_sphere(f'Trail{j}', .011 - j * .0014) for j in range(6)]
-DOTS = [glow_sphere(f'Dot{j}', .0045) for j in range(28)]
+BALL = glow_sphere('Bolus', .021); TRAIL = [glow_sphere(f'Trail{j}', .017 - j * .0022) for j in range(6)]
+DOTS = [glow_sphere(f'Dot{j}', .0065) for j in range(28)]
 COLORS = {'food': (1, .62, .12, 1), 'air': (.45, .85, 1, 1), 'blood': (1, .12, .08, 1), 'signal': (1, .92, .3, 1),
           'urine': (1, .85, .2, 1), 'water': (.25, .6, 1, 1), 'nutrient': (1, .8, .2, 1), 'oxygen': (.4, .9, 1, 1)}
 KIND = {'digestive': 'food', 'digestive2': 'food', 'liver': 'food', 'bile': 'food', 'gland': 'food', 'airway': 'air', 'lung': 'air',
