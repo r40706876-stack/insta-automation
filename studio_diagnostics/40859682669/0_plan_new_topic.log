@@ -1,0 +1,10 @@
+Plan repair 1 Map requires a bundled sourced region
+Traceback (most recent call last):
+  File "/home/runner/work/insta-automation/insta-automation/gs_animation_studio/planner.py", line 225, in <module>
+    generate(sys.argv[1],sys.argv[2],os.getenv('STUDIO_TOPIC_TEXT','').strip(),os.getenv('STUDIO_SUBJECT','auto'),os.getenv('STUDIO_REFERENCE_TEXT',''))
+  File "/home/runner/work/insta-automation/insta-automation/gs_animation_studio/planner.py", line 198, in generate
+    p,provider=ask(prompt)
+               ^^^^^^^^^^^
+  File "/home/runner/work/insta-automation/insta-automation/gs_animation_studio/planner.py", line 31, in ask
+    raise RuntimeError('Topic planner unavailable: '+('; '.join(errors) or 'GROQ_API_KEY or GEMINI_API_KEY required'))
+RuntimeError: Topic planner unavailable: Groq HTTP 404; Groq HTTP 429; Gemini HTTP 503; Gemini HTTP 404

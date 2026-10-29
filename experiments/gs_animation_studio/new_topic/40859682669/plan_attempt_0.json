@@ -1,0 +1,421 @@
+{
+  "title": "सूरत से होकर बहने वाली नदी",
+  "subject": "भूगोल",
+  "topic_key": "surat_se_ho_kar_bahne_wali_nadi",
+  "share_reason": "सूरत की नदी का सही उत्तर याद रखें, परीक्षा में जल्दी से उत्तर दे सकें",
+  "recall": "सूरत से होकर बहने वाली नदी ताप्ती है",
+  "share_card": {
+    "kind": "exam_confusion",
+    "recipient": "परीक्षा की तैयारी करने वाले मित्र",
+    "benefit": "सूरत की नदी का सही उत्तर याद रहेगा",
+    "cta": "चलो साथ में ताप्ती याद करें"
+  },
+  "scenes": [
+    {
+      "heading": "प्रश्न: सूरत की नदी",
+      "explanation": "कौन सी नदी?",
+      "speech": "सूरत से होकर बहने वाली नदी कौन सी है, चलिए देखते हैं।",
+      "teaches": "प्रश्न पहचान",
+      "setting": "neutral",
+      "visual_action": "नदी का मार्ग मानचित्र पर दिखाएँ",
+      "text_color": "#FFFFFF",
+      "explanation_color": "#FFFF00",
+      "objects": [
+        {
+          "kind": "map",
+          "action": "trace",
+          "label": "ताप्ती मार्ग",
+          "id": "object_0",
+          "color": "#59c7c5",
+          "pos": [
+            -0.9,
+            0,
+            0
+          ],
+          "size": [
+            1.1,
+            1.1,
+            1.1
+          ]
+        },
+        {
+          "kind": "arrow",
+          "action": "move",
+          "label": "मार्ग",
+          "id": "object_1",
+          "color": "#59c7c5",
+          "pos": [
+            0.45,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            1.65,
+            0,
+            0
+          ]
+        }
+      ],
+      "quiz_card": {
+        "question": "सूरत से होकर बहने वाली नदी कौन सी है?",
+        "answer": "ताप्ती",
+        "reveal_after": 2.5,
+        "answer_color": "#73efb2"
+      }
+    },
+    {
+      "heading": "मूल स्रोत",
+      "explanation": "मुल्ताई से शुरू",
+      "speech": "ताप्ती नदी मध्य प्रदेश के मुल्ताई से उत्पन्न होती है।",
+      "teaches": "स्रोत पहचान",
+      "setting": "neutral",
+      "visual_action": "स्रोत से पानी बहता दिखाएँ",
+      "text_color": "#FFFFFF",
+      "explanation_color": "#FFFF00",
+      "objects": [
+        {
+          "kind": "map",
+          "action": "trace",
+          "label": "मुल्ताई",
+          "id": "object_0",
+          "color": "#59c7c5",
+          "pos": [
+            -0.9,
+            0,
+            0
+          ],
+          "size": [
+            1.1,
+            1.1,
+            1.1
+          ]
+        },
+        {
+          "kind": "water",
+          "action": "flow",
+          "label": "नदी",
+          "id": "object_1",
+          "color": "#18a9dd",
+          "pos": [
+            0.9,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            2.1,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "सतपुड़ा पार",
+      "explanation": "पहाड़ों से नीचे",
+      "speech": "नदी सतपुड़ा पर्वत के मध्य से पश्चिम की ओर बहती है।",
+      "teaches": "भौगोलिक मार्ग",
+      "setting": "neutral",
+      "visual_action": "पर्वत के ऊपर से पानी नीचे बहता दिखाएँ",
+      "text_color": "#FFFFFF",
+      "explanation_color": "#FFFF00",
+      "objects": [
+        {
+          "kind": "mountain",
+          "action": "none",
+          "label": "सतपुड़ा",
+          "id": "object_0",
+          "color": "#59c7c5",
+          "pos": [
+            -1.8,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        {
+          "kind": "water",
+          "action": "flow",
+          "label": "नदी",
+          "id": "object_1",
+          "color": "#18a9dd",
+          "pos": [
+            0.0,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            1.2,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "arrow",
+          "action": "move",
+          "label": "दिशा",
+          "id": "object_2",
+          "color": "#59c7c5",
+          "pos": [
+            1.35,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            2.55,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "सूरत मैदान",
+      "explanation": "गुज़रती हुई",
+      "speech": "नदी सूरत के मैदान को पार करती है, शहर के किनारे बहती है।",
+      "teaches": "स्थानीय प्रभाव",
+      "setting": "neutral",
+      "visual_action": "नदी सूरत के मैदान में बहती दिखाएँ",
+      "text_color": "#FFFFFF",
+      "explanation_color": "#FFFF00",
+      "objects": [
+        {
+          "kind": "map",
+          "action": "trace",
+          "label": "सूरत",
+          "id": "object_0",
+          "color": "#59c7c5",
+          "pos": [
+            -1.8,
+            0,
+            0
+          ],
+          "size": [
+            1.1,
+            1.1,
+            1.1
+          ]
+        },
+        {
+          "kind": "water",
+          "action": "flow",
+          "label": "नदी",
+          "id": "object_1",
+          "color": "#18a9dd",
+          "pos": [
+            0.0,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            1.2,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "person",
+          "action": "walk",
+          "label": "नदी किनारा",
+          "id": "object_2",
+          "color": "#f4e7bf",
+          "pos": [
+            1.35,
+            0,
+            0
+          ],
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ],
+          "to": [
+            2.55,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "अरब सागर में",
+      "explanation": "समुद्र में मिलती",
+      "speech": "ताप्ती अंत में अरब सागर में गिरती है।",
+      "teaches": "नदी का अंत",
+      "setting": "coast",
+      "visual_action": "नदी समुद्र में मिलती दिखाएँ",
+      "text_color": "#FFFFFF",
+      "explanation_color": "#FFFF00",
+      "objects": [
+        {
+          "kind": "ocean",
+          "action": "wave",
+          "label": "अरब सागर",
+          "id": "object_0",
+          "color": "#59c7c5",
+          "pos": [
+            -1.8,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        {
+          "kind": "water",
+          "action": "flow",
+          "label": "नदी",
+          "id": "object_1",
+          "color": "#18a9dd",
+          "pos": [
+            0.0,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            1.2,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "arrow",
+          "action": "move",
+          "label": "दिशा",
+          "id": "object_2",
+          "color": "#59c7c5",
+          "pos": [
+            1.35,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            2.55,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "सारांश",
+      "explanation": "सही उत्तर",
+      "speech": "सूरत से होकर बहने वाली नदी ताप्ती है।",
+      "teaches": "स्मरण",
+      "setting": "neutral",
+      "visual_action": "नदी का नाम और प्रवाह दिखाएँ",
+      "text_color": "#FFFFFF",
+      "explanation_color": "#FFFF00",
+      "objects": [
+        {
+          "kind": "map",
+          "action": "none",
+          "label": "ताप्ती",
+          "id": "object_0",
+          "color": "#59c7c5",
+          "pos": [
+            -1.8,
+            0,
+            0
+          ],
+          "size": [
+            1.1,
+            1.1,
+            1.1
+          ]
+        },
+        {
+          "kind": "water",
+          "action": "flow",
+          "label": "नदी",
+          "id": "object_1",
+          "color": "#18a9dd",
+          "pos": [
+            0.0,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            1.2,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "arrow",
+          "action": "move",
+          "label": "नाम",
+          "id": "object_2",
+          "color": "#59c7c5",
+          "pos": [
+            1.35,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            2.55,
+            0,
+            0
+          ]
+        }
+      ],
+      "quiz_card": {
+        "question": "सूरत से होकर बहने वाली नदी कौन सी है?",
+        "answer": "ताप्ती",
+        "reveal_after": 2.5,
+        "answer_color": "#73efb2"
+      }
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "topic": "new_topic",
+  "run_id": "40859682669",
+  "attempt": "1",
+  "status": "failed",
+  "events": [
+    {
+      "stage": "plan_new_topic",
+      "status": "started",
+      "log": "0_plan_new_topic.log"
+    },
+    {
+      "stage": "plan_new_topic",
+      "status": "failed",
+      "code": "process_failed",
+      "detail": "Plan repair 1 Map requires a bundled sourced region\nTraceback (most recent call last):\n  File \"/home/runner/work/insta-automation/insta-automation/gs_animation_studio/planner.py\", line 225, in <module>\n    generate(sys.argv[1],sys.argv[2],os.getenv('STUDIO_TOPIC_TEXT','').strip(),os.getenv('STUDIO_SUBJECT','auto'),os.getenv('STUDIO_REFERENCE_TEXT',''))\n  File \"/home/runner/work/insta-automation/insta-automation/gs_animation_studio/planner.py\", line 198, in generate\n    p,provider=ask(prompt)\n               ^^^^^^^^^^^\n  File \"/home/runner/work/insta-automation/insta-automation/gs_animation_studio/planner.py\", line 31, in ask\n    raise RuntimeError('Topic planner unavailable: '+('; '.join(errors) or 'GROQ_API_KEY or GEMINI_API_KEY required'))\nRuntimeError: Topic planner unavailable: Groq HTTP 404; Groq HTTP 429; Gemini HTTP 503; Gemini HTTP 404\n"
+    }
+  ],
+  "repairs": [],
+  "injected_failures": [],
+  "instagram_publish": false,
+  "failure": {
+    "type": "StageError",
+    "message": "plan_new_topic: process_failed"
+  }
+}
