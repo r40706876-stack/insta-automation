@@ -96,12 +96,21 @@ def main(plan_path, out):
         except Exception as e: print('edge failed', type(e).__name__); segs = None
     if not segs:
         print('NO VOICE: video will have music only'); (d / 'voice.json').write_text(json.dumps({'provider': None})); return
+    tempo = float(os.getenv('VOICE_TEMPO', '1.15'))          # reels feel slow at normal speed; atempo keeps the pitch
+    if abs(tempo - 1) > .01:
+        fast = []
+        for seg in segs:
+            raw = (np.clip(seg, -1, 1) * 32767).astype('<i2').tobytes()
+            out_ = subprocess.run(['ffmpeg', '-v', 'error', '-f', 's16le', '-ar', str(SR), '-ac', '1', '-i', '-', '-filter:a', f'atempo={tempo}',
+                                   '-f', 'f32le', '-ar', str(SR), '-ac', '1', '-'], input=raw, capture_output=True, check=True).stdout
+            fast.append(np.frombuffer(out_, np.float32).copy())
+        segs = fast
     durs = []
     for i, (s, seg) in enumerate(zip(plan['scenes'], segs)):
         with wave.open(str(d / f'seg_{i}.wav'), 'wb') as w:
             w.setnchannels(1); w.setsampwidth(2); w.setframerate(SR); w.writeframes((np.clip(seg, -.98, .98) * 32767).astype('<i2').tobytes())
         L = len(seg) / SR; durs.append(L)
-        need = round(L + .55, 2)                      # 0.25 s lead-in + 0.3 s breath after the line
+        need = round(L + .45, 2)                      # 0.25 s lead-in + 0.3 s breath after the line
         if s['seconds'] < need: s['seconds'] = need
     plan_path.write_text(json.dumps(plan, ensure_ascii=False, indent=1), encoding='utf-8')
     (d / 'voice.json').write_text(json.dumps({'provider': provider, 'lines': lines, 'seconds': durs}, ensure_ascii=False, indent=1), encoding='utf-8')
