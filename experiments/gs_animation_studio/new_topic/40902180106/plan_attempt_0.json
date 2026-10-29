@@ -1,0 +1,466 @@
+{
+  "title": "भारत सरकार का मुख्य बैंकर कौन?",
+  "subject": "अर्थशास्त्र",
+  "topic_key": "bharat_sarkar_ka_mukhya_banker",
+  "share_reason": "रिजर्व बैंक का सही उत्तर याद रखें, परीक्षा में अक्सर पूछे जाता है",
+  "recall": "रिजर्व बैंक ऑफ इंडिया भारत सरकार का मुख्य बैंकर है।",
+  "scenes": [
+    {
+      "heading": "मुख्य बैंकर?",
+      "explanation": "कौन है सरकार का बैंकर",
+      "speech": "इनमें से कौन भारत सरकार का मुख्य बैंकर है? चलिए देखते हैं!",
+      "teaches": "मुख्य बैंकर की पहचान करना",
+      "objects": [
+        {
+          "kind": "person",
+          "action": "walk",
+          "label": "विचारक",
+          "id": "object_0",
+          "color": "#f4e7bf",
+          "pos": [
+            -2.25,
+            0,
+            0
+          ],
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ],
+          "to": [
+            -1.05,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "building",
+          "action": "none",
+          "label": "रिजर्व बैंक",
+          "id": "object_1",
+          "color": "#b1a4d3",
+          "pos": [
+            0.0,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        {
+          "kind": "arrow",
+          "action": "move",
+          "label": "दिशा",
+          "id": "object_2",
+          "color": "#59c7c5",
+          "pos": [
+            1.35,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            2.55,
+            0,
+            0
+          ]
+        }
+      ],
+      "setting": "institution",
+      "visual_action": "व्यक्ति RBI भवन की ओर चलता है और तीर दिशा दिखाता है",
+      "text_color": "#FFFFFF",
+      "explanation_color": "#FFD700",
+      "quiz_card": {
+        "question": "भारत सरकार का मुख्य बैंकर कौन है?",
+        "answer": "रिजर्व बैंक ऑफ इंडिया",
+        "reveal_after": 2.5,
+        "answer_color": "#73efb2"
+      }
+    },
+    {
+      "heading": "रिजर्व बैंक",
+      "explanation": "सरकार का बैंकर यहाँ",
+      "speech": "रिजर्व बैंक सरकार के पैसे संभालता है, नीतियों को लागू करता है।",
+      "teaches": "RBI के कोष संभालने की भूमिका",
+      "objects": [
+        {
+          "kind": "building",
+          "action": "none",
+          "label": "रिजर्व बैंक",
+          "id": "object_0",
+          "color": "#b1a4d3",
+          "pos": [
+            -1.8,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        {
+          "kind": "coin",
+          "action": "flow",
+          "label": "धन",
+          "id": "object_1",
+          "color": "#f5bd3d",
+          "pos": [
+            0.0,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            1.2,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "scale",
+          "action": "rise",
+          "label": "बैलेंस",
+          "id": "object_2",
+          "color": "#59c7c5",
+          "pos": [
+            1.8,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            1.8,
+            0,
+            1.2
+          ]
+        }
+      ],
+      "setting": "institution",
+      "visual_action": "कोइन्स RBI के वॉल्ट से बहते हैं और स्केल ऊपर उठता है",
+      "text_color": "#FFFFFF",
+      "explanation_color": "#00FF00"
+    },
+    {
+      "heading": "नीति नियंत्रण",
+      "explanation": "ब्याज दरें, मुद्रा आपूर्ति",
+      "speech": "रिजर्व बैंक ब्याज दरें तय करता है और मुद्रा आपूर्ति नियंत्रित करता है।",
+      "teaches": "मौद्रिक नीति के उपकरण",
+      "objects": [
+        {
+          "kind": "person",
+          "action": "none",
+          "label": "रिजर्व बैंकर",
+          "id": "object_0",
+          "color": "#f4e7bf",
+          "pos": [
+            -1.8,
+            0,
+            0
+          ],
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ]
+        },
+        {
+          "kind": "gear",
+          "action": "spin",
+          "label": "नीति गियर",
+          "id": "object_1",
+          "color": "#59c7c5",
+          "pos": [
+            0.0,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        {
+          "kind": "arrow",
+          "action": "spin",
+          "label": "दिशा संकेत",
+          "id": "object_2",
+          "color": "#59c7c5",
+          "pos": [
+            1.8,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        }
+      ],
+      "setting": "institution",
+      "visual_action": "गियर घूमता है, तीर भी घुमाकर नीति लागू होती है",
+      "text_color": "#FFFFFF",
+      "explanation_color": "#00FFFF"
+    },
+    {
+      "heading": "नोट जारी",
+      "explanation": "नोट बनाता, जारी करता",
+      "speech": "रिजर्व बैंक नई नोटों को छापता और जारी करता है।",
+      "teaches": "नोट निर्माण और वितरण प्रक्रिया",
+      "objects": [
+        {
+          "kind": "building",
+          "action": "none",
+          "label": "रिजर्व बैंक",
+          "id": "object_0",
+          "color": "#b1a4d3",
+          "pos": [
+            -1.8,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        {
+          "kind": "box",
+          "action": "move",
+          "label": "प्रिंटिंग प्रेस",
+          "id": "object_1",
+          "color": "#59c7c5",
+          "pos": [
+            -0.45,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            0.75,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "coin",
+          "action": "flow",
+          "label": "नोट",
+          "id": "object_2",
+          "color": "#f5bd3d",
+          "pos": [
+            1.8,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            3.0,
+            0,
+            0
+          ]
+        }
+      ],
+      "setting": "institution",
+      "visual_action": "प्रिंटिंग बॉक्स से नोट निकलते हैं और कोइन्स की तरह बहते हैं",
+      "text_color": "#FFFFFF",
+      "explanation_color": "#FFAA00"
+    },
+    {
+      "heading": "बैंकों को निधि",
+      "explanation": "वित्तीय स्थिरता, ऋण",
+      "speech": "रिजर्व बैंक वाणिज्यिक बैंकों को आवश्यक निधि देता है।",
+      "teaches": "लेंडर ऑफ लास्ट रिसॉर्ट की भूमिका",
+      "objects": [
+        {
+          "kind": "building",
+          "action": "none",
+          "label": "रिजर्व बैंक",
+          "id": "object_0",
+          "color": "#b1a4d3",
+          "pos": [
+            -2.3478,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        {
+          "kind": "building",
+          "action": "none",
+          "label": "वाणिज्यिक बैंक",
+          "id": "object_1",
+          "color": "#b1a4d3",
+          "pos": [
+            -0.7826,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        {
+          "kind": "arrow",
+          "action": "move",
+          "label": "धन प्रवाह",
+          "id": "object_2",
+          "color": "#59c7c5",
+          "pos": [
+            0.3913,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            1.4348,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "person",
+          "action": "walk",
+          "label": "",
+          "id": "object_3",
+          "color": "#f4e7bf",
+          "pos": [
+            1.9565,
+            0,
+            0
+          ],
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ],
+          "to": [
+            3.0,
+            0,
+            0
+          ]
+        }
+      ],
+      "setting": "institution",
+      "visual_action": "तीर RBI से वाणिज्यिक बैंक तक जाता है, अधिकारी चलता है",
+      "text_color": "#FFFFFF",
+      "explanation_color": "#FF00FF"
+    },
+    {
+      "heading": "स्मरण",
+      "explanation": "मुख्य बैंकर याद रखें",
+      "speech": "रिजर्व बैंक ऑफ इंडिया ही भारत सरकार का मुख्य बैंकर है।",
+      "teaches": "उत्तर की पुनरावृत्ति",
+      "objects": [
+        {
+          "kind": "building",
+          "action": "none",
+          "label": "रिजर्व बैंक",
+          "id": "object_0",
+          "color": "#b1a4d3",
+          "pos": [
+            -1.8,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        {
+          "kind": "person",
+          "action": "walk",
+          "label": "स्मरणकर्ता",
+          "id": "object_1",
+          "color": "#f4e7bf",
+          "pos": [
+            -0.45,
+            0,
+            0
+          ],
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ],
+          "to": [
+            0.75,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "arrow",
+          "action": "move",
+          "label": "इशारा",
+          "id": "object_2",
+          "color": "#59c7c5",
+          "pos": [
+            1.35,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            2.55,
+            0,
+            0
+          ]
+        }
+      ],
+      "setting": "institution",
+      "visual_action": "व्यक्ति RBI की ओर इशारा करता है और चलता है",
+      "text_color": "#FFFFFF",
+      "explanation_color": "#00FF00",
+      "quiz_card": {
+        "question": "भारत सरकार का मुख्य बैंकर कौन है?",
+        "answer": "रिजर्व बैंक ऑफ इंडिया",
+        "reveal_after": 2.5,
+        "answer_color": "#73efb2"
+      }
+    }
+  ]
+}
