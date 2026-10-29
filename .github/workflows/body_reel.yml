@@ -142,7 +142,8 @@ jobs:
           path: |
             /tmp/blender
             ${{ env.BODY_DIR }}/body_assets.blend
-          key: body-assets-v1-${{ hashFiles('experiments/body_3d/prepare_assets.py', 'experiments/body_3d/organs.json') }}
+            ${{ env.BODY_DIR }}/organ_index.json
+          key: body-assets-v2-${{ hashFiles('experiments/body_3d/prepare_assets.py', 'experiments/body_3d/organs.json') }}
       - name: Blender + Z-Anatomy -> body_assets.blend
         if: steps.c.outputs.cache-hit != 'true'
         shell: bash
@@ -175,7 +176,8 @@ jobs:
           path: |
             /tmp/blender
             ${{ env.BODY_DIR }}/body_assets.blend
-          key: body-assets-v1-${{ hashFiles('experiments/body_3d/prepare_assets.py', 'experiments/body_3d/organs.json') }}
+            ${{ env.BODY_DIR }}/organ_index.json
+          key: body-assets-v2-${{ hashFiles('experiments/body_3d/prepare_assets.py', 'experiments/body_3d/organs.json') }}
           fail-on-cache-miss: true
       - uses: actions/download-artifact@v4
         with: { name: plan, path: '${{ env.BODY_DIR }}' }
