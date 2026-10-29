@@ -153,7 +153,7 @@ jobs:
           mkdir -p "$d"; cp "$DEMO_DIR/blood_moon_reel.mp4" "$DEMO_DIR/contact_sheet.jpg" "$DEMO_DIR/file_checks.json" "$d/"
           git config user.name 'github-actions[bot]'; git config user.email 'github-actions[bot]@users.noreply.github.com'
           git add downloads; git commit -m "Save reel to $d [skip ci]"
-          for i in 1 2 3; do git pull --rebase -q origin main && git push -q origin HEAD:main && break; sleep 5; done
+          ok=0; for i in 1 2 3 4 5; do git pull --rebase -q origin main && git push -q origin HEAD:main && { ok=1; break; }; sleep $((i*7)); done; [ $ok = 1 ] || { echo "::error title=save to downloads failed::push rejected 5 times"; exit 1; }
       - name: Publish to Instagram (MinuteMe_GS)
         if: ${{ github.event.inputs.publish != 'no' }}
         env:
