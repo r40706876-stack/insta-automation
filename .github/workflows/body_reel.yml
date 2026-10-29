@@ -5,6 +5,11 @@ name: Human Body 3D reel (Blender template)
 on:
   workflow_dispatch:
     inputs:
+      publish:
+        description: 'Video banne ke baad Instagram pe post karein?'
+        type: choice
+        default: 'yes'
+        options: ['yes', 'no']
       topic:
         description: 'Topic chuno (sabse upar wala = taiyaar demo)'
         type: choice
@@ -226,7 +231,20 @@ jobs:
       - name: Save into downloads/ folder of the repo
         run: |
           d="downloads/body/$(date -u +%Y-%m-%d)_run${{ github.run_id }}"
+          echo "SAVED_DIR=$d" >> "$GITHUB_ENV"
           mkdir -p "$d"; cp "$BODY_DIR/out/reel.mp4" "$BODY_DIR/out/contact_sheet.jpg" "$BODY_DIR/plan.json" "$d/"
           git config user.name 'github-actions[bot]'; git config user.email 'github-actions[bot]@users.noreply.github.com'
           git add downloads; git commit -m "Save reel to $d [skip ci]"
           for i in 1 2 3; do git pull --rebase -q origin main && git push -q origin HEAD:main && break; sleep 5; done
+      - name: Publish to Instagram (MinuteMe_GS)
+        if: ${{ github.event.inputs.publish != 'no' }}
+        env:
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          PYTHONUNBUFFERED: '1'
+        run: |
+          pip install -q --timeout 30 -r requirements.txt imageio-ffmpeg
+          python -c "import imageio_ffmpeg,os; p='/usr/local/bin/ffmpeg'; os.path.exists(p) or os.symlink(imageio_ffmpeg.get_ffmpeg_exe(),p)"
+          python -u publish_3d_reel.py "$SAVED_DIR" body 2>&1 | sed -u -E 's/(access_token=|key=|Bearer |OAuth )[^&" ]+/\1***/g' | tee /tmp/pub.log
+          grep -qE "PUBLISHED|ALREADY PUBLISHED" /tmp/pub.log || { echo "::error title=publish failed::$(tail -c 1500 /tmp/pub.log | tr '\n' ' ')"; exit 1; }
+          echo "::notice title=instagram::$(grep -E 'PUBLISHED' /tmp/pub.log | tail -1)"

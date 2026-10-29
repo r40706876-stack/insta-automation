@@ -1,0 +1,32 @@
+name: Publish a 3D reel to Instagram
+# Publishes a reel already saved in downloads/ (exactly once, duplicate-safe).
+on:
+  workflow_dispatch:
+    inputs:
+      folder: { description: 'downloads/ wala folder, jaise downloads/body/2026-10-29_run123', required: true }
+      kind: { description: 'body ya blood_moon', default: 'body' }
+permissions:
+  contents: write
+concurrency:
+  group: minuteme-3d-publish
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.11' }
+      - name: Publish once
+        env:
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          PYTHONUNBUFFERED: '1'
+        run: |
+          pip install -q --timeout 30 -r requirements.txt imageio-ffmpeg
+          python -c "import imageio_ffmpeg,os; p='/usr/local/bin/ffmpeg'; os.path.exists(p) or os.symlink(imageio_ffmpeg.get_ffmpeg_exe(),p)"
+          git config user.name 'github-actions[bot]'; git config user.email 'github-actions[bot]@users.noreply.github.com'
+          python -u publish_3d_reel.py "${{ github.event.inputs.folder }}" "${{ github.event.inputs.kind }}" 2>&1 | sed -u -E 's/(access_token=|key=|Bearer |OAuth )[^&" ]+/\1***/g' | tee /tmp/pub.log
+          grep -qE "PUBLISHED|ALREADY PUBLISHED" /tmp/pub.log || { echo "::error title=publish failed::$(tail -c 1500 /tmp/pub.log | tr '\n' ' ')"; exit 1; }
+          echo "::notice title=instagram::$(grep -E 'PUBLISHED' /tmp/pub.log | tail -1)"
