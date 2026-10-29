@@ -45,7 +45,7 @@ def gemini(text, key):
             if r.status_code not in (429, 500, 502, 503, 504): break
     raise RuntimeError('Gemini TTS unavailable')
 
-def split_at_pauses(a, n):
+def split_at_pauses(a, n, lines=None):
     """Cut one long take into n parts at the n-1 longest silences (keeps the order)."""
     win = int(.02 * SR); rms = np.sqrt(np.convolve(a ** 2, np.ones(win) / win, 'same'))
     quiet = rms < max(.008, .06 * np.percentile(rms, 95))
@@ -64,8 +64,14 @@ def split_at_pauses(a, n):
     for p in parts:
         idx = np.where(np.abs(p) > .01)[0]
         trim.append(p[max(0, idx[0] - 800): idx[-1] + 2000] if len(idx) else p)
-    # sanity: every scene must get a real chunk of speech
-    return trim if all(len(t) > .4 * SR for t in trim) else None
+    if not all(len(t) > .4 * SR for t in trim): return None
+    # each part must be about as long as its text (else the cut fell inside a sentence)
+    if lines:
+        chars = np.array([max(1, len(l)) for l in lines], float); total = sum(len(t) for t in trim)
+        for t, c in zip(trim, chars):
+            ratio = len(t) / (total * c / chars.sum())
+            if not .6 <= ratio <= 1.6: print('split rejected, ratio', round(ratio, 2)); return None
+    return trim
 
 def edge(lines, d):
     import edge_tts
@@ -80,7 +86,7 @@ def main(plan_path, out):
     if key:
         try:
             take = gemini(STYLE + '\n\n'.join(lines), key)
-            segs = split_at_pauses(take, len(lines)); provider = 'Gemini Charon (one take)' if segs else None
+            segs = split_at_pauses(take, len(lines), lines); provider = 'Gemini Charon (one take)' if segs else None
         except Exception as e: print('one-take failed', type(e).__name__)
         if not segs:
             try: segs = [gemini(STYLE + l, key) for l in lines]; provider = 'Gemini Charon (per scene, same voice)'
