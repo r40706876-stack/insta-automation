@@ -95,7 +95,7 @@ jobs:
             *"अपना topic"*) T="$TOPIC_TEXT"; [ -n "$T" ] || { echo "topic_text khaali hai"; exit 1; } ;;
             *) T="$TOPIC_CHOICE" ;;
           esac
-          if [ -n "$T" ]; then pip install -q requests; python planner.py "$T" plan.json
+          if [ -n "$T" ]; then pip install -q requests; python planner.py "$T" plan.json > /tmp/plan.log 2>&1 || { echo "::error title=plan failed::$(tail -c 2500 /tmp/plan.log | tr '\n' ' ')"; exit 1; }; cat /tmp/plan.log
           else cp "${{ github.event.inputs.topic_file }}" plan.json; fi
           cat plan.json
       - id: m
@@ -125,14 +125,21 @@ jobs:
           key: body-assets-v1-${{ hashFiles('experiments/body_3d/prepare_assets.py', 'experiments/body_3d/organs.json') }}
       - name: Blender + Z-Anatomy -> body_assets.blend
         if: steps.c.outputs.cache-hit != 'true'
+        shell: bash
         run: |
-          curl -fL --retry 3 "$BLENDER_URL" -o /tmp/b.tar.xz
-          echo "$BLENDER_SHA256  /tmp/b.tar.xz" | sha256sum -c -
-          mkdir -p /tmp/blender && tar -xf /tmp/b.tar.xz -C /tmp/blender --strip-components=1
-          sudo apt-get update -qq && sudo apt-get install -y -qq libxrender1 libxi6 libxkbcommon0 libsm6 libgl1 libegl1
-          bash "$BODY_DIR/fetch_za.sh" /tmp/za
-          cd "$BODY_DIR" && ZA_DIR=/tmp/za/Resources/Models/FBX BODY_ROOT=$PWD /tmp/blender/blender -b -t 0 --python prepare_assets.py | grep -E "organ|ASSETS"
-          git diff --stat -- organ_index.json || true
+          set -o pipefail
+          LOG=/tmp/assets.log
+          fail() { echo "::error title=assets failed at: $1::$(tail -c 2500 $LOG | tr '\n' ' ' | tr -s ' ')"; exit 1; }
+          { curl -fL --retry 3 -sS "$BLENDER_URL" -o /tmp/b.tar.xz && ls -la /tmp/b.tar.xz; } >>$LOG 2>&1 || fail download
+          echo "$BLENDER_SHA256  /tmp/b.tar.xz" | sha256sum -c - >>$LOG 2>&1 || fail sha256
+          { mkdir -p /tmp/blender && tar -xf /tmp/b.tar.xz -C /tmp/blender --strip-components=1; } >>$LOG 2>&1 || fail untar
+          { sudo apt-get update -qq && sudo apt-get install -y -qq libxrender1 libxi6 libxkbcommon0 libsm6 libgl1 libegl1 libxxf86vm1 libxfixes3 libx11-6; } >>$LOG 2>&1 || fail apt
+          /tmp/blender/blender -b --version >>$LOG 2>&1 || fail blender-start
+          bash "$BODY_DIR/fetch_za.sh" /tmp/za >>$LOG 2>&1 || fail fetch-models
+          ( cd "$BODY_DIR" && ZA_DIR=/tmp/za/Resources/Models/FBX BODY_ROOT=$PWD /tmp/blender/blender -b -t 0 --python-exit-code 3 --python prepare_assets.py ) >>$LOG 2>&1 || fail prepare
+          grep -q "ASSETS OK" $LOG || fail prepare-no-ok
+          grep -E "ASSETS|organ " $LOG | tail -50
+          echo "::notice title=assets ok::$(grep ASSETS $LOG)"
 
   render:
     needs: [plan, assets]
@@ -161,7 +168,9 @@ jobs:
           cd "$BODY_DIR"; export TOPIC=$PWD/plan.json OUT=$PWD/out
           N=${{ needs.plan.outputs.frames }}; n=${{ strategy.job-total }}; i=${{ matrix.chunk }}
           a=$(( i*N/n )); b=$(( (i+1)*N/n - 1 )); echo "chunk $i/$n -> $a-$b"; s=$(date +%s)
-          ./render_range.sh $a $b
+          ./render_range.sh $a $b 2>&1 | tee /tmp/render.log
+          n_ok=$(ls out/frames/*.png 2>/dev/null | wc -l)
+          if [ "$n_ok" -lt $((b-a+1)) ]; then echo "::error title=render chunk $i made $n_ok/$((b-a+1)) frames::$(tail -c 2500 /tmp/render.log | tr '\n' ' ')"; exit 1; fi
           echo "rendered $((b-a+1)) frames in $(( $(date +%s)-s ))s on $(nproc) CPUs"
       - uses: actions/upload-artifact@v4
         with:
@@ -189,7 +198,8 @@ jobs:
           pip install -q numpy Pillow
           python -c "from PIL import features; assert features.check('raqm'), 'Hindi shaping missing'"
           cd "$BODY_DIR"; test "$(ls out/frames/*.png | wc -l)" -eq "${{ needs.plan.outputs.frames }}"
-          TOPIC=$PWD/plan.json OUT=$PWD/out BODY_ROOT=$PWD python compose.py
+          TOPIC=$PWD/plan.json OUT=$PWD/out BODY_ROOT=$PWD python compose.py > /tmp/compose.log 2>&1 || { echo "::error title=compose failed::$(tail -c 2500 /tmp/compose.log | tr '\n' ' ')"; exit 1; }
+          cat /tmp/compose.log
       - uses: actions/upload-artifact@v4
         with:
           name: body-reel
