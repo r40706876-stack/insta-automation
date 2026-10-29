@@ -71,7 +71,7 @@ def split_at_pauses(a, n, lines=None):
         chars = np.array([max(1, len(l)) for l in lines], float); total = sum(len(t) for t in trim)
         for t, c in zip(trim, chars):
             ratio = len(t) / (total * c / chars.sum())
-            if not .6 <= ratio <= 1.6: print('split rejected, ratio', round(ratio, 2)); return None
+            if not .75 <= ratio <= 1.35: print('split rejected, ratio', round(ratio, 2)); return None
     return trim
 
 def edge(lines, d):

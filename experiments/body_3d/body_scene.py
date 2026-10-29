@@ -276,7 +276,11 @@ for f in range(N):
     if i == 0 and FOCUS[i] != (cs.get('focus') or ['skin']): cs['zoom'] = max(cs.get('zoom', 1), 1.15)
     pos, tgt, lens = cam_pose(cs, ease(k), FOCUS[i])
     pos = tgt + (pos - tgt) * (1 + .22 * (1 - min(1, age / .7)) ** 3)      # quick push-in at each cut
-    if BALLPOS[-1] is not None and (BALLPOS[-1][0] - pos).length < .35:   # bolus right in front of the lens = blurry blob: hide it
+    def _bad(pt):                                      # too close to the lens or outside the frame = blurry blob
+        pc = q.inverted() @ (pt - pos); z = -pc.z
+        if z < .55: return True
+        vh = 12 / lens; return abs(pc.x / z) > vh * 720 / 1280 * 1.05 or abs(pc.y / z) > vh * 1.05
+    if BALLPOS[-1] is not None and _bad(BALLPOS[-1][0]):
         for o in [BALL] + TRAIL: setk(o, 'hide_render', True, f)
         BALLPOS[-1] = None
     q = look(pos, tgt)

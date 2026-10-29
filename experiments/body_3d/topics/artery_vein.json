@@ -52,7 +52,7 @@
     ],
     "angle": "three_quarter",
     "move": "push",
-    "zoom": 1.35
+    "zoom": 1.6
    },
    "layers": [
     "skin",
@@ -88,7 +88,7 @@
     ],
     "angle": "three_quarter_left",
     "move": "pull",
-    "zoom": 1.35
+    "zoom": 1.6
    },
    "layers": [
     "skin",

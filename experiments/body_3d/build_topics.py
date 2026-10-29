@@ -21,13 +21,13 @@ T = {}
 T['दिल एक दिन में कितनी बार धड़कता है'] = ('heart_beats', ['धड़कन', 'पंप', 'शरीर', 'याद'], [
     S('hook', 3.5, 'ये दिल रुकता क्यों नहीं?', 'एक दिन में लगभग 1 लाख धड़कन', ['heart'], ['beat', 'flow:heart'], ['heart'], layers=CV, zoom=1.2),
     S('rate', 5.5, '1 मिनट में लगभग 72 बार', '72 × 60 × 24 = करीब 1 लाख धड़कन रोज़', ['heart'], ['beat', BLOOD_OUT], ['heart', 'aorta'], ['heart', 'aorta'], C, zoom=1.1),
-    S('pump', 5.5, 'हर धड़कन = खून का धक्का', 'धमनियों से पूरे शरीर में खून पहुँचता है', ['skin'], ['beat', BLOOD_OUT, 'flow:arteries'], ['heart', 'aorta'], ['heart', 'aorta', 'arteries'], C, hide=['veins', 'vena_cava'], zoom=1.35),
+    S('pump', 5.5, 'हर धड़कन = खून का धक्का', 'धमनियों से पूरे शरीर में खून पहुँचता है', ['skin'], ['beat', BLOOD_OUT, 'flow:arteries'], ['heart', 'aorta'], ['heart', 'aorta', 'arteries'], C, hide=['veins', 'vena_cava'], zoom=1.6),
     S('size', 5.5, 'मुट्ठी जितना, चार कक्ष', 'दो अलिंद ऊपर, दो निलय नीचे', ['heart'], ['beat', 'pulse:heart'], ['heart'], ['heart'], C, 'front', 'orbit', 1.25),
     Q('परीक्षा का पक्का सवाल', 'सामान्य व्यक्ति का दिल 1 मिनट में कितनी बार धड़कता है?', 'A) लगभग 72 बार', 'B) लगभग 150 बार', ['heart'], ['beat', BLOOD_OUT], C)])
 T['धमनी और शिरा में अंतर'] = ('artery_vein', ['धमनी', 'शिरा', 'दीवार', 'याद'], [
     S('hook', 3.5, 'लाल नली या नीली नली?', 'धमनी और शिरा का असली फ़र्क', ['heart', 'aorta'], [BLOOD_OUT], ['heart'], ['heart', 'aorta', 'arteries', 'veins'], C, zoom=1.1),
-    S('artery', 6, 'धमनी: दिल से बाहर', 'ऑक्सीजन वाला शुद्ध खून शरीर तक ले जाती है', ['skin'], ['beat', BLOOD_OUT, 'flow:arteries'], ['aorta'], ['heart', 'aorta', 'arteries'], C, hide=['veins', 'vena_cava'], zoom=1.35),
-    S('vein', 6, 'शिरा: वापस दिल तक', 'अशुद्ध खून लौटाती है, इसमें वाल्व होते हैं', ['skin'], ['beat', BLOOD_IN, 'flow:veins'], ['vena_cava'], ['heart', 'veins', 'vena_cava'], C, 'three_quarter_left', 'pull', 1.35, hide=['arteries', 'aorta']),
+    S('artery', 6, 'धमनी: दिल से बाहर', 'ऑक्सीजन वाला शुद्ध खून शरीर तक ले जाती है', ['skin'], ['beat', BLOOD_OUT, 'flow:arteries'], ['aorta'], ['heart', 'aorta', 'arteries'], C, hide=['veins', 'vena_cava'], zoom=1.6),
+    S('vein', 6, 'शिरा: वापस दिल तक', 'अशुद्ध खून लौटाती है, इसमें वाल्व होते हैं', ['skin'], ['beat', BLOOD_IN, 'flow:veins'], ['vena_cava'], ['heart', 'veins', 'vena_cava'], C, 'three_quarter_left', 'pull', 1.6, hide=['arteries', 'aorta']),
     S('wall', 5, 'धमनी की दीवार मोटी', 'तेज़ दबाव झेलती है, शिरा की दीवार पतली', ['heart', 'aorta'], ['beat', 'flow:aorta'], ['aorta', 'vena_cava'], ['heart', 'aorta', 'vena_cava'], C, 'front', 'orbit', 1.2),
     Q('परीक्षा का पक्का सवाल', 'किस नली में वाल्व होते हैं?', 'A) शिरा', 'B) धमनी', ['heart'], ['beat', BLOOD_IN], C)])
 T['फुफ्फुसीय धमनी अशुद्ध खून क्यों ले जाती है'] = ('pulmonary_artery', ['दिल', 'फेफड़े', 'शुद्ध', 'याद'], [
@@ -39,13 +39,13 @@ T['फुफ्फुसीय धमनी अशुद्ध खून क्�
 T['दोहरा परिसंचरण: दिल से फेफड़े और पूरा शरीर'] = ('double_circulation', ['फेफड़े', 'शरीर', 'दोहरा', 'याद'], [
     S('hook', 3.5, 'खून दो बार दिल से क्यों?', 'इसे कहते हैं दोहरा परिसंचरण', ['heart'], ['beat', 'pulse:heart'], ['heart'], ['heart'], CV, zoom=1.2),
     S('small', 6, 'पहला चक्कर: फेफड़ों तक', 'दिल → फेफड़े → दिल, खून में ऑक्सीजन भरती है', ['lungs', 'heart'], ['beat', 'breathe', 'travel:heart,pulmonary_vessels,lungs', 'particles:lungs,heart,oxygen'], ['lungs', 'heart'], ['lungs', 'heart', 'pulmonary_vessels'], CV, 'front'),
-    S('big', 6, 'दूसरा चक्कर: पूरे शरीर तक', 'दिल → धमनियाँ → अंग → शिराएँ → दिल', ['skin'], ['beat', BLOOD_OUT, 'flow:arteries'], ['heart', 'aorta'], ['heart', 'aorta', 'arteries'], C, hide=['veins', 'vena_cava'], zoom=1.35),
-    S('return', 5.5, 'शिराएँ खून वापस लाती हैं', 'एक पूरे चक्कर में खून दिल से 2 बार गुज़रता है', ['skin'], ['beat', BLOOD_IN, 'flow:veins'], ['vena_cava'], ['heart', 'veins', 'vena_cava'], C, 'three_quarter_left', 'pull', 1.35, hide=['arteries', 'aorta']),
+    S('big', 6, 'दूसरा चक्कर: पूरे शरीर तक', 'दिल → धमनियाँ → अंग → शिराएँ → दिल', ['skin'], ['beat', BLOOD_OUT, 'flow:arteries'], ['heart', 'aorta'], ['heart', 'aorta', 'arteries'], C, hide=['veins', 'vena_cava'], zoom=1.6),
+    S('return', 5.5, 'शिराएँ खून वापस लाती हैं', 'एक पूरे चक्कर में खून दिल से 2 बार गुज़रता है', ['skin'], ['beat', BLOOD_IN, 'flow:veins'], ['vena_cava'], ['heart', 'veins', 'vena_cava'], C, 'three_quarter_left', 'pull', 1.6, hide=['arteries', 'aorta']),
     Q('परीक्षा का पक्का सवाल', 'मनुष्य के हृदय में कितने कक्ष होते हैं?', 'A) तीन', 'B) चार', ['heart'], ['beat'], CV)])
 T['महाधमनी: शरीर की सबसे बड़ी धमनी'] = ('aorta', ['दिल', 'महाधमनी', 'शाखाएँ', 'याद'], [
     S('hook', 3.5, 'शरीर की सबसे बड़ी धमनी?', 'दिल से निकलती है ये मोटी नली', ['heart', 'aorta'], ['beat', 'travel:heart,aorta'], ['aorta'], ['heart', 'aorta'], C, zoom=1.1),
     S('start', 5.5, 'बायाँ निलय → महाधमनी', 'सबसे ताकतवर धक्का बायाँ निलय देता है', ['heart'], ['beat', 'flow:aorta'], ['heart', 'aorta'], ['heart', 'aorta'], C, 'front', 'orbit', 1.25),
-    S('branch', 6, 'महाधमनी से सारी शाखाएँ', 'सिर, हाथ, पेट, पैर — हर जगह शुद्ध खून', ['skin'], ['beat', BLOOD_OUT, 'flow:arteries'], ['aorta'], ['heart', 'aorta', 'arteries'], C, hide=['veins', 'vena_cava'], zoom=1.35),
+    S('branch', 6, 'महाधमनी से सारी शाखाएँ', 'सिर, हाथ, पेट, पैर — हर जगह शुद्ध खून', ['skin'], ['beat', BLOOD_OUT, 'flow:arteries'], ['aorta'], ['heart', 'aorta', 'arteries'], C, hide=['veins', 'vena_cava'], zoom=1.6),
     S('vein', 5, 'सबसे बड़ी शिरा: महाशिरा', 'पूरे शरीर का खून इसी से दिल में लौटता है', ['heart', 'vena_cava'], ['beat', BLOOD_IN], ['vena_cava'], ['heart', 'vena_cava', 'veins'], C, 'three_quarter_left', 'pull', 1.1, hide=['arteries', 'aorta']),
     Q('परीक्षा का पक्का सवाल', 'शरीर की सबसे बड़ी धमनी कौन-सी है?', 'A) महाधमनी', 'B) फुफ्फुसीय धमनी', ['heart', 'aorta'], ['beat', 'flow:aorta'], C)])
 T['साँस लेने की प्रक्रिया: नाक से फेफड़ों तक'] = ('breathing', ['नाक', 'श्वासनली', 'फेफड़े', 'याद'], [
@@ -244,7 +244,7 @@ T['मानव शरीर के प्रमुख अंग तंत्र
     S('hook', 3.5, 'शरीर की 5 टीमें', 'हर टीम का अपना काम', ['skin'], ['sequence:stomach,lungs,heart,brain'], ['heart'], ['stomach', 'lungs', 'heart', 'small_intestine', 'large_intestine'], CV, 'front', zoom=1.0),
     S('digest', 5, 'पाचन तंत्र', 'भोजन को ऊर्जा में बदलता है', ['stomach', 'small_intestine'], [FOOD], ['stomach', 'small_intestine'], ['oesophagus', 'stomach', 'small_intestine', 'large_intestine'], V, 'front', 'push'),
     S('breathe', 5, 'श्वसन तंत्र', 'ऑक्सीजन अंदर, कार्बन डाइऑक्साइड बाहर', ['lungs'], ['breathe', AIR], ['lungs'], ['lungs', 'trachea', 'bronchi'], V, 'front', 'push'),
-    S('blood', 5.5, 'परिसंचरण तंत्र', 'दिल खून को पूरे शरीर में भेजता है', ['skin'], ['beat', BLOOD_OUT, 'flow:arteries'], ['heart'], ['heart', 'aorta', 'arteries'], C, hide=['veins', 'vena_cava'], zoom=1.35),
+    S('blood', 5.5, 'परिसंचरण तंत्र', 'दिल खून को पूरे शरीर में भेजता है', ['skin'], ['beat', BLOOD_OUT, 'flow:arteries'], ['heart'], ['heart', 'aorta', 'arteries'], C, hide=['veins', 'vena_cava'], zoom=1.6),
     S('nerve', 5.5, 'तंत्रिका तंत्र', 'दिमाग पूरे शरीर को चलाता है', ['skin'], [SIGNAL, 'flow:nerves'], ['brain'], ['brain', 'spinal_cord', 'nerves'], N_, 'three_quarter', 'pull', 1.0),
     Q('परीक्षा का पक्का सवाल', 'खून को पूरे शरीर में कौन पंप करता है?', 'A) हृदय', 'B) फेफड़े', ['heart'], ['beat'], CV)])
 T['मानव शरीर के सबसे बड़े अंग: त्वचा और यकृत'] = ('largest_organs', ['त्वचा', 'यकृत', 'फ़र्क', 'याद'], [
