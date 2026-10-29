@@ -20,7 +20,7 @@ COL = {'heart': (.6, .045, .04), 'artery': (.8, .035, .03), 'vein': (.08, .16, .
        'lung': (.85, .38, .44), 'airway': (.85, .72, .6), 'digestive': (.86, .4, .32), 'digestive2': (.74, .36, .25),
        'liver': (.42, .08, .06), 'bile': (.22, .55, .18), 'gland': (.92, .62, .18), 'kidney': (.52, .12, .09),
        'urine': (.88, .76, .28), 'brain': (.86, .6, .6), 'brain2': (.78, .48, .55), 'cord': (.92, .86, .7),
-       'nerve': (.98, .8, .22), 'eye': (.93, .93, .96), 'bone': (.87, .83, .73), 'tooth': (.96, .96, .92), 'other': (.8, .6, .5)}
+       'nerve': (.98, .8, .22), 'eye': (.93, .93, .96), 'bone': (.87, .83, .73), 'tooth': (.78, .76, .7), 'other': (.8, .6, .5)}
 FLOW = {'artery': 1, 'heart': 1, 'pulmonary': 1, 'vein': -1, 'nerve': 1, 'cord': 1, 'brain': 1}   # +1 outward, -1 inward
 
 def clock_group():
@@ -124,7 +124,8 @@ for src, fn in SRC.items():
         if org['class'] == 'skin': j.visible_shadow = False
         bb = [j.matrix_world @ Vector(c) for c in j.bound_box]
         info[key] = {'src': src, 'class': org['class'], 'hi': org['hi'], 'verts': len(j.data.vertices),
-                     'min': [round(min(v[i] for v in bb), 4) for i in range(3)], 'max': [round(max(v[i] for v in bb), 4) for i in range(3)]}
+                     'min': [round(min(v[i] for v in bb), 4) for i in range(3)], 'max': [round(max(v[i] for v in bb), 4) for i in range(3)],
+                     'pts': [[round(c, 4) for c in (j.matrix_world @ j.data.vertices[q].co)] for q in range(0, len(j.data.vertices), max(1, len(j.data.vertices) // 400))][:400]}
         print('organ', key, info[key]['verts'])
 for o in list(bpy.data.objects):
     if o.type != 'MESH': bpy.data.objects.remove(o, do_unlink=True)

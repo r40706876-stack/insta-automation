@@ -17,11 +17,12 @@
    "step": -1,
    "camera": {
     "focus": [
-     "viscera_other"
+     "oesophagus",
+     "stomach"
     ],
-    "angle": "front",
-    "move": "orbit",
-    "zoom": 0.8
+    "angle": "three_quarter",
+    "move": "push",
+    "zoom": 1.0
    },
    "layers": [
     "skin",
@@ -34,7 +35,7 @@
     "large_intestine"
    ],
    "effects": [
-    "sequence:tongue,oesophagus,stomach"
+    "travel:tongue,oesophagus,stomach,small_intestine"
    ],
    "labels": [
     "oesophagus",
@@ -68,6 +69,7 @@
     "oesophagus"
    ],
    "effects": [
+    "travel:tongue,pharynx,oesophagus",
     "flow:oesophagus"
    ],
    "labels": [
@@ -100,7 +102,8 @@
     "gallbladder"
    ],
    "effects": [
-    "flow:stomach"
+    "pulse:stomach",
+    "travel:stomach"
    ],
    "labels": [
     "stomach",
@@ -132,8 +135,8 @@
     "liver"
    ],
    "effects": [
-    "flow:small_intestine",
-    "flow:arteries"
+    "travel:small_intestine",
+    "particles:small_intestine,liver,nutrient"
    ],
    "labels": [
     "small_intestine",
@@ -163,7 +166,8 @@
     "appendix"
    ],
    "effects": [
-    "flow:large_intestine"
+    "travel:large_intestine",
+    "particles:large_intestine,veins,water"
    ],
    "labels": [
     "large_intestine"
@@ -193,7 +197,7 @@
     "large_intestine"
    ],
    "effects": [
-    "sequence:stomach,small_intestine,large_intestine"
+    "travel:oesophagus,stomach,small_intestine,large_intestine"
    ],
    "labels": [],
    "quiz": {

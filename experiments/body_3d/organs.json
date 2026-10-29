@@ -569,7 +569,11 @@
   "cartilage of nose",
   "alar cartilage",
   "nasal septal cartilage",
-  "-profile"
+  "-profile",
+  "segment of liver",
+  "lobe of liver",
+  "bronchopulmonary segment",
+  "segment of lung"
  ],
  "keep_suffix": [
   "",

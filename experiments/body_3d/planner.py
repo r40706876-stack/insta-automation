@@ -27,7 +27,7 @@ PROMPT = """तुम MinuteMe GS (SSC, Railway, State परीक्षाए�
 4. हर scene में कहानी एक कदम आगे बढ़े (कारण → असर)। एक जैसी बात दोहराना मना।
 5. camera.focus में वही खास अंग लिखो जिसकी बात हो रही है (viscera_other/bones/nerves नहीं)। camera.focus, solid, labels, hide, flow: में सिर्फ़ नीचे की keys। labels अधिकतम 3, और वे keys जिनकी layer "layers" में हो।
 6. camera.angle ∈ {angles}; camera.move ∈ {moves}; camera.zoom 0.7-1.6।
-7. layers ∈ {layers}। effects ∈ "beat" (दिल धड़कना), "breathe" (फेफड़े), "flow:<key>" (उस अंग में बहाव की चमक: खून/नस/भोजन/हवा), "sequence:<key1>,<key2>,..." (अंग क्रम से चमकें, जैसे भोजन का रास्ता)।
+7. layers ∈ {layers}। effects ∈ "beat" (दिल धड़कना), "breathe" (फेफड़े), "flow:<key>" (उस अंग में बहाव की चमक: खून/नस/भोजन/हवा), "sequence:<key1>,<key2>,..." (अंग क्रम से चमकें, जैसे भोजन का रास्ता)। सबसे ज़रूरी: "travel:<key1>,<key2>,..." = चमकता गोला उन अंगों से होकर चलता है (भोजन/हवा/खून/संदेश का सफ़र) — जहाँ भी कुछ एक जगह से दूसरी जगह जाता है, यही लगाओ; "pulse:<key>" = अंग सिकुड़ता-फैलता है (आमाशय का मंथन, आँत की गति); "particles:<from>,<to>" = छोटे कण एक अंग से दूसरे तक जाते हैं (पोषक तत्व आँत से यकृत, पानी आँत से शिरा, ऑक्सीजन फेफड़े से हृदय)। हर scene में कम से कम एक चलता हुआ effect हो — ठहरी हुई तस्वीर मना है।
 8. steps: 3-4 छोटे शब्द (≤ 10 अक्षर), हर scene का "step" उसका index (hook = -1)।
 9. किताब या नोट्स का नाम कभी मत लिखो।
 
@@ -70,7 +70,12 @@ def validate(p):
             if e in ('beat', 'breathe'): continue
             if e.startswith('flow:') and e[5:] in IDX: continue
             if e.startswith('sequence:') and all(k in IDX for k in e[9:].split(',')): continue
+            if e.startswith('travel:') and all(k in IDX for k in e[7:].split(',')): continue
+            if e.startswith('pulse:') and e[6:] in IDX: continue
+            if e.startswith('particles:') and all(k in IDX for k in e[10:].split(',')[:2]): continue
             E.append(f'{tag}: bad effect {e}')
+        moving = [e for e in s.get('effects', []) if e.split(':')[0] in ('travel', 'pulse', 'particles', 'flow', 'beat', 'breathe', 'sequence')]
+        if not moving: E.append(f'{tag}: needs at least one moving effect (travel/pulse/particles/flow/beat/breathe)')
         if 'quiz' in s:
             q = s['quiz']
             if not all(q.get(x) for x in ('q', 'a', 'b', 'cta')): E.append(f'{tag}: quiz needs q,a,b,cta')

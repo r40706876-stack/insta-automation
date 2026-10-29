@@ -70,6 +70,11 @@ def overlay(f):
         placed.append(cy)
         c = (GOLD, CYAN, WHITE)[j % 3]
         chip(d, (cx, cy), txt, c, n=27, anchor_pt=(x, y))
+    if '__ball' in p and p['__ball'][2] > 0 and p.get('__ballt'):
+        bx, by, _ = p['__ball']
+        if 20 < bx < 700 and 300 < by < 1030:
+            side = -1 if bx > 360 else 1
+            chip(d, (min(max(bx + side * 120, 90), 630), max(by - 70, 330)), p['__ballt'], (255, 170, 60), n=26, anchor_pt=(bx, by))
     if sid == 'hook' and sc.get('hook_line', 'अंत तक देखो, कभी नहीं भूलोगे'):
         q = 1 + .06 * math.sin(t * 7)
         text(d, (360, 980), sc.get('hook_line', 'अंत तक देखो, कभी नहीं भूलोगे'), int(30 * q), CYAN)

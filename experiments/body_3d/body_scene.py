@@ -154,6 +154,66 @@ for i, s in enumerate(TOP['scenes']):
             b = IDX[key]
             if hits(Vector(b['min']), Vector(b['max']), pos, tgt): occ.add(key)
     OCCL.append(occ)
+# ------------------------------------------------------------- story objects: travelling bolus + particles
+def glow_material():
+    m = bpy.data.materials.new('Glow'); m.use_nodes = True; nt = m.node_tree; nt.nodes.clear()
+    o = nt.nodes.new('ShaderNodeOutputMaterial'); info = nt.nodes.new('ShaderNodeObjectInfo'); em = nt.nodes.new('ShaderNodeEmission')
+    em.inputs['Strength'].default_value = 7; nt.links.new(info.outputs['Color'], em.inputs['Color']); nt.links.new(em.outputs[0], o.inputs[0])
+    m.cycles.emission_sampling = 'NONE'; return m
+GLOW = glow_material()
+def glow_sphere(name, r):
+    bpy.ops.mesh.primitive_uv_sphere_add(segments=20, ring_count=10, radius=r); o = bpy.context.object; o.name = name
+    o.data.materials.append(GLOW); o.visible_shadow = False; o.hide_render = True
+    for pl in o.data.polygons: pl.use_smooth = True
+    return o
+BALL = glow_sphere('Bolus', .013); TRAIL = [glow_sphere(f'Trail{j}', .011 - j * .0014) for j in range(6)]
+DOTS = [glow_sphere(f'Dot{j}', .0045) for j in range(28)]
+COLORS = {'food': (1, .62, .12, 1), 'air': (.45, .85, 1, 1), 'blood': (1, .12, .08, 1), 'signal': (1, .92, .3, 1),
+          'urine': (1, .85, .2, 1), 'water': (.25, .6, 1, 1), 'nutrient': (1, .8, .2, 1), 'oxygen': (.4, .9, 1, 1)}
+KIND = {'digestive': 'food', 'digestive2': 'food', 'liver': 'food', 'bile': 'food', 'gland': 'food', 'airway': 'air', 'lung': 'air',
+        'artery': 'blood', 'vein': 'blood', 'heart': 'blood', 'pulmonary': 'blood', 'nerve': 'signal', 'cord': 'signal', 'brain': 'signal',
+        'brain2': 'signal', 'kidney': 'urine', 'urine': 'urine'}
+BALL_TEXT = {'food': 'भोजन', 'air': 'हवा', 'blood': 'खून', 'signal': 'संदेश', 'urine': 'मूत्र'}
+def organ_path(keys):
+    path, prev = [], None
+    for key in keys:
+        pts = [Vector(p) for p in IDX.get(key, {}).get('pts', [])]
+        if not pts: continue
+        start = min(pts, key=lambda p: (p - prev).length) if prev is not None else max(pts, key=lambda p: p.z)
+        rest = [p for p in pts if p is not start]; walk = [start]
+        while rest:
+            nxt = min(rest, key=lambda p: (p - walk[-1]).length); rest.remove(nxt); walk.append(nxt)
+        path += walk; prev = walk[-1]
+    if len(path) < 3: return []
+    w = 9; sm = []
+    for i in range(len(path)):
+        seg = path[max(0, i - w):i + w + 1]; sm.append(sum(seg, Vector()) / len(seg))
+    acc = [0.]
+    for a_, b_ in zip(sm, sm[1:]): acc.append(acc[-1] + (b_ - a_).length)
+    return list(zip(acc, sm))
+def along(path, u):
+    L = path[-1][0] * min(1, max(0, u))
+    for (la, pa), (lb, pb) in zip(path, path[1:]):
+        if lb >= L: return pa.lerp(pb, 0 if lb == la else (L - la) / (lb - la))
+    return path[-1][1]
+TRAVEL, PARTS, PULSE, BALLKIND = [], [], [], []
+for s in TOP['scenes']:
+    ef = s.get('effects', [])
+    tk = next((e.split(':', 1)[1].split(',') for e in ef if e.startswith('travel:')), [])
+    tk = [k for k in tk if k in IDX]
+    TRAVEL.append(organ_path(tk) if tk else [])
+    BALLKIND.append(s.get('ball', KIND.get(IDX[tk[0]]['class'], 'food') if tk else 'food'))
+    pp = next((e.split(':', 1)[1].split(',') for e in ef if e.startswith('particles:')), [])
+    if len(pp) >= 2 and pp[0] in IDX and pp[1] in IDX:
+        A = [Vector(p) for p in IDX[pp[0]]['pts']]; B = [Vector(p) for p in IDX[pp[1]]['pts']]
+        pairs = []
+        for j in range(len(DOTS)):
+            a_ = A[(j * 37) % len(A)]; pairs.append((a_, min(B, key=lambda b: (b - a_).length + .02 * ((j * 13) % 7))))
+        col = pp[2] if len(pp) > 2 else {'artery': 'blood', 'vein': 'water', 'liver': 'nutrient', 'heart': 'oxygen'}.get(IDX[pp[1]]['class'], 'nutrient')
+        PARTS.append((pairs, COLORS.get(col, COLORS['nutrient'])))
+    else: PARTS.append(None)
+    PULSE.append({e.split(':', 1)[1] for e in ef if e.startswith('pulse:')})
+BALLPOS = []
 for f in range(N):
     i, k = scene_at(f); s = TOP['scenes'][i]; t = f / FPS; age = (f - START[i]) / FPS
     layers = set(s.get('layers', ['skin', 'visceral', 'cardio']))
@@ -175,6 +235,7 @@ for f in range(N):
         if key in seq:
             j = seq.index(key); win = 1 / len(seq); on = ease((k - j * win) / (win * .5))
             hl = max(hl, on * (1.3 if k < (j + 1) * win else .5)); g = 0.
+        if TRAVEL[i] and key in next((e.split(':', 1)[1].split(',') for e in effects if e.startswith('travel:')), []): g = max(g, .45)
         if g >= .9: vis = False                       # fully faded organs are skipped, not rendered transparent
         setk(o, 'hide_render', not vis, f)
         fl = 1. if (key in flows or IDX.get(key, {}).get('class') in flows) else 0.
@@ -186,9 +247,33 @@ for f in range(N):
     if 'lungs' in OBJ:
         br = .5 - .5 * math.cos(2 * math.pi * t / 3.6) if 'breathe' in effects else 0
         setk(OBJ['lungs'], 'scale', (round(1 + .05 * br, 4), round(1 + .04 * br, 4), round(1 + .06 * br, 4)), f)
+    for key in PULSE[i]:                               # churning / squeezing organ
+        if key in OBJ and key not in ('heart', 'lungs'):
+            w_ = 2 * math.pi * 1.3 * t
+            setk(OBJ[key], 'scale', (round(1 + .05 * math.sin(w_), 4), round(1 + .05 * math.sin(w_ + 2), 4), round(1 - .035 * math.sin(w_ + 1), 4)), f)
+    for key in set().union(*PULSE) - PULSE[i]:
+        if key in OBJ and key not in ('heart', 'lungs'): setk(OBJ[key], 'scale', (1.0, 1.0, 1.0), f)
+    path = TRAVEL[i]
+    if path:
+        u = ease((k - .04) / .86); col = COLORS[BALLKIND[i]]
+        p0 = along(path, u); BALLPOS.append((p0, BALL_TEXT.get(BALLKIND[i], '')))
+        for j, o in enumerate([BALL] + TRAIL):
+            setk(o, 'hide_render', False, f); setk(o, 'color', col, f)
+            setk(o, 'location', tuple(round(c, 4) for c in along(path, u - j * .018)), f)
+    else:
+        BALLPOS.append(None)
+        for o in [BALL] + TRAIL: setk(o, 'hide_render', True, f)
+    pr = PARTS[i]
+    for j, o in enumerate(DOTS):
+        if not pr: setk(o, 'hide_render', True, f); continue
+        (a_, b_), col = pr[0][j], pr[1]; ph = (age * .5 + j / len(DOTS)) % 1
+        pos_ = a_.lerp(b_, ease(ph)) + Vector((0, -.015 * math.sin(math.pi * ph), .01 * math.sin(math.pi * ph)))
+        setk(o, 'hide_render', False, f); setk(o, 'color', col, f)
+        setk(o, 'location', tuple(round(c, 4) for c in pos_), f); sz = round(max(.05, math.sin(math.pi * ph)), 3); setk(o, 'scale', (sz, sz, sz), f)
     cs = dict(s.get('camera', {}))
     if i == 0 and FOCUS[i] != (cs.get('focus') or ['skin']): cs['zoom'] = max(cs.get('zoom', 1), 1.15)
     pos, tgt, lens = cam_pose(cs, ease(k), FOCUS[i])
+    pos = tgt + (pos - tgt) * (1 + .22 * (1 - min(1, age / .7)) ** 3)      # quick push-in at each cut
     q = look(pos, tgt)
     if prevq is not None and q.dot(prevq) < 0: q.negate()
     CAM_ROWS.append((pos.copy(), q.copy(), lens))
@@ -201,7 +286,16 @@ def fix(idb):
     fcs = ad.action.fcurves if hasattr(ad.action, 'fcurves') else [fc for l in ad.action.layers for st in l.strips for cb in st.channelbags for fc in cb.fcurves]
     for fc in fcs:
         for kp in fc.keyframe_points: kp.interpolation = 'CONSTANT' if int(kp.co.x) in ENDS else 'LINEAR'
-for x in list(OBJ.values()) + [cam, cd, bpy.data.node_groups['Clock']]: fix(x)
+for x in list(OBJ.values()) + [cam, cd, bpy.data.node_groups['Clock'], BALL] + TRAIL + DOTS: fix(x)
+
+sc.use_nodes = True; ct = sc.node_tree; ct.nodes.clear()
+rl = ct.nodes.new('CompositorNodeRLayers'); comp = ct.nodes.new('CompositorNodeComposite'); gl = ct.nodes.new('CompositorNodeGlare')
+gl.glare_type = 'FOG_GLOW'; gl.quality = 'HIGH'
+try: gl.threshold = 1.2; gl.size = 7; gl.mix = -.55
+except AttributeError:
+    for k_, v_ in (('Threshold', 1.2), ('Strength', .5), ('Size', .55)):
+        if k_ in gl.inputs: gl.inputs[k_].default_value = v_
+ct.links.new(rl.outputs['Image'], gl.inputs['Image']); ct.links.new(gl.outputs['Image'], comp.inputs['Image'])
 
 # ------------------------------------------------------------- 2D pins for overlay labels
 label_keys = sorted({(l if isinstance(l, str) else l['key']) for s in TOP['scenes'] for l in s.get('labels', [])})
@@ -214,6 +308,12 @@ for f in range(N):
         if pc.z >= 0: row[key] = [0, 0, -1]; continue
         x = pc.x / -pc.z / hh; y = (pc.y / -pc.z - cd.shift_y * 2 * vh) / vh
         row[key] = [round(360 + x * 360, 1), round(640 - y * 640, 1), round(-pc.z, 3)]
+    bp = BALLPOS[f]
+    if bp:
+        pc = inv @ (bp[0] - pos)
+        if pc.z < 0:
+            x = pc.x / -pc.z / hh; y = (pc.y / -pc.z - cd.shift_y * 2 * vh) / vh
+            row['__ball'] = [round(360 + x * 360, 1), round(640 - y * 640, 1), round(-pc.z, 3)]; row['__ballt'] = bp[1]
     pins.append(row)
 (OUT / 'pins.json').write_text(json.dumps(pins))
 
