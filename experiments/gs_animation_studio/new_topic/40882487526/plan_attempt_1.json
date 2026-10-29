@@ -1,0 +1,425 @@
+{
+  "title": "कर्नाटक संगीत की त्रिमूर्ति",
+  "subject": "स्टैटिक जीके",
+  "topic_key": "karnataka_sangeet_trimurti",
+  "share_reason": "परीक्षा में कर्नाटक संगीत की त्रिमूर्ति से जुड़ा सवाल हल करने में मदद मिलेगी।",
+  "recall": "त्यागराज कर्नाटक संगीत की त्रिमूर्ति में से एक हैं।",
+  "share_card": {
+    "kind": "exam_confusion",
+    "recipient": "स्टैटिक जीके पढ़ने वाले दोस्त",
+    "benefit": "कर्नाटक संगीत की त्रिमूर्ति के सदस्यों को आसानी से याद रखें।",
+    "cta": "क्या तुम जानते हो त्रिमूर्ति में कौन है?"
+  },
+  "scenes": [
+    {
+      "heading": "कर्नाटक संगीत त्रिमूर्ति",
+      "explanation": "कौन हैं ये महान?",
+      "speech": "कर्नाटक संगीत की त्रिमूर्ति में कौन शामिल है?",
+      "teaches": "प्रश्न को पहचानना",
+      "setting": "institution",
+      "visual_action": "एक व्यक्ति प्रश्न पुस्तक की ओर चलता है।",
+      "text_color": "#FFFFFF",
+      "explanation_color": "#FFFF00",
+      "objects": [
+        {
+          "kind": "person",
+          "action": "walk",
+          "label": "प्रश्नकर्ता",
+          "role": "ordinary",
+          "color": "#f4e7bf",
+          "pos": [
+            -1.5,
+            0,
+            0
+          ],
+          "to": [
+            -0.5,
+            0,
+            0
+          ],
+          "id": "object_0",
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ]
+        },
+        {
+          "kind": "book",
+          "action": "move",
+          "label": "प्रश्न",
+          "color": "#59c7c5",
+          "pos": [
+            0.5,
+            0,
+            0
+          ],
+          "to": [
+            1.5,
+            0,
+            0
+          ],
+          "id": "object_1",
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        }
+      ],
+      "quiz_card": {
+        "question": "त्रिमूर्ति में कौन है?",
+        "answer": "त्यागराज",
+        "reveal_after": 2.5,
+        "answer_color": "#73efb2"
+      }
+    },
+    {
+      "heading": "त्रिमूर्ति के सदस्य",
+      "explanation": "तीन महान संगीतकार",
+      "speech": "त्यागराज, मुथुस्वामी दीक्षिता और श्यामा शास्त्री हैं त्रिमूर्ति।",
+      "teaches": "तीनों सदस्यों को जानना",
+      "setting": "institution",
+      "visual_action": "तीन व्यक्ति मंच पर आते हैं।",
+      "text_color": "#FFFFFF",
+      "explanation_color": "#FFFF00",
+      "objects": [
+        {
+          "kind": "person",
+          "action": "walk",
+          "label": "त्यागराज",
+          "role": "ordinary",
+          "color": "#f4e7bf",
+          "pos": [
+            -2.5,
+            0,
+            0
+          ],
+          "to": [
+            -1.5,
+            0,
+            0
+          ],
+          "id": "object_0",
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ]
+        },
+        {
+          "kind": "person",
+          "action": "walk",
+          "label": "मुथुस्वामी दीक्षिता",
+          "role": "ordinary",
+          "color": "#f4e7bf",
+          "pos": [
+            -0.5,
+            0,
+            0
+          ],
+          "to": [
+            0.5,
+            0,
+            0
+          ],
+          "id": "object_1",
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ]
+        },
+        {
+          "kind": "person",
+          "action": "walk",
+          "label": "श्यामा शास्त्री",
+          "role": "ordinary",
+          "color": "#f4e7bf",
+          "pos": [
+            1.5,
+            0,
+            0
+          ],
+          "to": [
+            2.5,
+            0,
+            0
+          ],
+          "id": "object_2",
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "त्यागराज का योगदान",
+      "explanation": "भक्तिगीत रचनाएँ",
+      "speech": "त्यागराज ने कई भक्तिगीत और कृतियाँ रचीं, जैसे 'भज गोविंद'।",
+      "teaches": "त्यागराज के महत्व को समझना",
+      "setting": "institution",
+      "visual_action": "त्यागराज मंच पर चलते हैं और उनकी रचनाओं की पुस्तक ऊपर उठती है।",
+      "text_color": "#FFFFFF",
+      "explanation_color": "#FFFF00",
+      "objects": [
+        {
+          "kind": "person",
+          "action": "walk",
+          "label": "त्यागराज",
+          "role": "ordinary",
+          "color": "#f4e7bf",
+          "pos": [
+            -1.5,
+            0,
+            0
+          ],
+          "to": [
+            -0.5,
+            0,
+            0
+          ],
+          "id": "object_0",
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ]
+        },
+        {
+          "kind": "book",
+          "action": "rise",
+          "label": "रचनाएँ",
+          "color": "#59c7c5",
+          "pos": [
+            0.5,
+            0,
+            0
+          ],
+          "to": [
+            0.5,
+            1.0,
+            0
+          ],
+          "id": "object_1",
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "अन्य विकल्प क्यों नहीं?",
+      "explanation": "ये त्रिमूर्ति में नहीं",
+      "speech": "मीराबाई, अन्नमय्य और कालिदास कर्नाटक संगीत की त्रिमूर्ति में नहीं हैं।",
+      "teaches": "गलत विकल्पों को पहचानना",
+      "setting": "institution",
+      "visual_action": "तीन व्यक्ति मंच से हटते हैं, एक तीर उन्हें गलत विकल्प के रूप में इंगित करता है।",
+      "text_color": "#FFFFFF",
+      "explanation_color": "#FFFF00",
+      "objects": [
+        {
+          "kind": "person",
+          "action": "move",
+          "label": "मीराबाई",
+          "role": "ordinary",
+          "color": "#f4e7bf",
+          "pos": [
+            -2.0,
+            0,
+            0
+          ],
+          "to": [
+            -3.0,
+            0,
+            0
+          ],
+          "id": "object_0",
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ]
+        },
+        {
+          "kind": "person",
+          "action": "move",
+          "label": "अन्नमय्य",
+          "role": "ordinary",
+          "color": "#f4e7bf",
+          "pos": [
+            0.0,
+            0,
+            0
+          ],
+          "to": [
+            0.0,
+            0,
+            0
+          ],
+          "id": "object_1",
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ]
+        },
+        {
+          "kind": "person",
+          "action": "move",
+          "label": "कालिदास",
+          "role": "ordinary",
+          "color": "#f4e7bf",
+          "pos": [
+            2.0,
+            0,
+            0
+          ],
+          "to": [
+            3.0,
+            0,
+            0
+          ],
+          "id": "object_2",
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ]
+        },
+        {
+          "kind": "arrow",
+          "action": "move",
+          "label": "",
+          "color": "#ff0000",
+          "pos": [
+            0.0,
+            0.5,
+            0
+          ],
+          "to": [
+            0.0,
+            0.5,
+            0.5
+          ],
+          "id": "object_3",
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "सही उत्तर चुनें",
+      "explanation": "त्यागराज है सही नाम",
+      "speech": "परीक्षा में त्यागराज को सही उत्तर के रूप में चुनें।",
+      "teaches": "सही उत्तर को याद रखना",
+      "setting": "institution",
+      "visual_action": "एक छात्र मतपेटी की ओर इशारा करता है।",
+      "text_color": "#FFFFFF",
+      "explanation_color": "#FFFF00",
+      "objects": [
+        {
+          "kind": "person",
+          "action": "point",
+          "label": "छात्र",
+          "role": "ordinary",
+          "color": "#f4e7bf",
+          "pos": [
+            -1.0,
+            0,
+            0
+          ],
+          "interact_with": "ballot_box_id",
+          "id": "object_0",
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ]
+        },
+        {
+          "kind": "ballot",
+          "action": "pulse",
+          "label": "मतपेटी",
+          "id": "ballot_box_id",
+          "color": "#59c7c5",
+          "pos": [
+            1.0,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "याद रखें",
+      "explanation": "मुख्य बात का स्मरण",
+      "speech": "त्यागराज कर्नाटक संगीत की त्रिमूर्ति में से एक हैं।",
+      "teaches": "स्मरण शक्ति",
+      "setting": "institution",
+      "visual_action": "त्यागराज ऊपर उठते हैं और ज्ञान की पुस्तक घूमती है।",
+      "text_color": "#FFFFFF",
+      "explanation_color": "#FFFF00",
+      "objects": [
+        {
+          "kind": "person",
+          "action": "rise",
+          "label": "त्यागराज",
+          "role": "ordinary",
+          "color": "#f4e7bf",
+          "pos": [
+            -1.0,
+            0,
+            0
+          ],
+          "to": [
+            -1.0,
+            1.0,
+            0
+          ],
+          "id": "object_0",
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ]
+        },
+        {
+          "kind": "book",
+          "action": "spin",
+          "label": "ज्ञान",
+          "color": "#59c7c5",
+          "pos": [
+            1.0,
+            0,
+            0
+          ],
+          "id": "object_1",
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        }
+      ],
+      "quiz_card": {
+        "question": "त्रिमूर्ति में कौन है?",
+        "answer": "त्यागराज",
+        "reveal_after": 2.5,
+        "answer_color": "#73efb2"
+      }
+    }
+  ]
+}

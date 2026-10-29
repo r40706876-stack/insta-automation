@@ -1,0 +1,362 @@
+{
+  "title": "कर्नाटक संगीत की त्रिमूर्ति",
+  "subject": "स्टैटिक जीके",
+  "topic_key": "karnataka_sangeet_trimurti",
+  "share_reason": "परीक्षा में कर्नाटक संगीत की त्रिमूर्ति से जुड़ा सवाल हल करने में मदद मिलेगी।",
+  "recall": "त्यागराज कर्नाटक संगीत की त्रिमूर्ति में से एक हैं।",
+  "share_card": {
+    "kind": "exam_confusion",
+    "recipient": "स्टैटिक जीके पढ़ने वाले दोस्त",
+    "benefit": "कर्नाटक संगीत की त्रिमूर्ति को आसानी से याद रखें",
+    "cta": "चलो मिलकर त्रिमूर्ति याद करें"
+  },
+  "scenes": [
+    {
+      "heading": "त्रिमूर्ति प्रश्न",
+      "explanation": "कौन हैं ये महान?",
+      "speech": "क्या आप जानते हैं कि कर्नाटक संगीत की त्रिमूर्ति में कौन शामिल है?",
+      "teaches": "प्रश्न को पहचानना",
+      "setting": "institution",
+      "visual_action": "एक व्यक्ति प्रश्न की ओर चलता है और तीर संकेत दिखाता है।",
+      "text_color": "#FFFFFF",
+      "explanation_color": "#FFFF00",
+      "objects": [
+        {
+          "kind": "person",
+          "action": "walk",
+          "label": "प्रश्नकर्ता",
+          "id": "object_0",
+          "color": "#f4e7bf",
+          "pos": [
+            -2.25,
+            0,
+            0
+          ],
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ],
+          "to": [
+            -1.05,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "arrow",
+          "action": "move",
+          "label": "तीर",
+          "id": "object_1",
+          "color": "#59c7c5",
+          "pos": [
+            -0.45,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            0.75,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "book",
+          "action": "none",
+          "label": "प्रश्न",
+          "id": "object_2",
+          "color": "#59c7c5",
+          "pos": [
+            1.8,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        }
+      ],
+      "quiz_card": {
+        "question": "त्रिमूर्ति में कौन है?",
+        "answer": "त्यागराज",
+        "reveal_after": 2.5,
+        "answer_color": "#73efb2"
+      }
+    },
+    {
+      "heading": "त्रिमूर्ति सदस्य",
+      "explanation": "तीन महान संगीतकार",
+      "speech": "त्रिमूर्ति के तीन महान संगीतकार हैं: त्यागराज, मुथुस्वामी दीक्षिता और श्यामा शास्त्री।",
+      "teaches": "तीनों सदस्यों को जानना",
+      "setting": "institution",
+      "visual_action": "तीन संगीतकार मंच की ओर चलते हुए त्रिमूर्ति बनाते हैं।",
+      "text_color": "#FFFFFF",
+      "explanation_color": "#FFFF00",
+      "objects": [
+        {
+          "kind": "person",
+          "action": "walk",
+          "label": "त्यागराज",
+          "id": "object_0",
+          "color": "#f4e7bf",
+          "pos": [
+            -2.25,
+            0,
+            0
+          ],
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ],
+          "to": [
+            -1.05,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "person",
+          "action": "walk",
+          "label": "मुथुस्वामी",
+          "id": "object_1",
+          "color": "#f4e7bf",
+          "pos": [
+            -0.45,
+            0,
+            0
+          ],
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ],
+          "to": [
+            0.75,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "person",
+          "action": "walk",
+          "label": "श्यामा",
+          "id": "object_2",
+          "color": "#f4e7bf",
+          "pos": [
+            1.35,
+            0,
+            0
+          ],
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ],
+          "to": [
+            2.55,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "त्यागराज योगदान",
+      "explanation": "भक्तिगीत रचनाएँ",
+      "speech": "त्यागराज ने कई भजन और रचनाएँ लिखी, जैसे 'भज गोविंद' और अन्य संगीत रचनाएँ।",
+      "teaches": "त्यागराज के महत्व को समझना",
+      "setting": "institution",
+      "visual_action": "त्यागराज मंच पर चलता है और उसकी रचनाओं की पुस्तक ऊपर उठती है।",
+      "text_color": "#FFFFFF",
+      "explanation_color": "#FFFF00",
+      "objects": [
+        {
+          "kind": "person",
+          "action": "walk",
+          "label": "त्यागराज",
+          "id": "object_0",
+          "color": "#f4e7bf",
+          "pos": [
+            -1.35,
+            0,
+            0
+          ],
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ],
+          "to": [
+            -0.15,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "book",
+          "action": "rise",
+          "label": "रचनाएँ",
+          "id": "object_1",
+          "color": "#59c7c5",
+          "pos": [
+            0.9,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            0.9,
+            0,
+            1.2
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "गलत विकल्प",
+      "explanation": "त्रिमूर्ति में नहीं",
+      "speech": "मीराबाई, अन्नमय्य और कालिदास कर्नाटक संगीत की त्रिमूर्ति में नहीं आते, वे अन्य शैलियों के कवि हैं।",
+      "teaches": "गलत विकल्पों को पहचानना",
+      "setting": "institution",
+      "visual_action": "गलत विकल्प वाले व्यक्ति मंच से चलते हैं और तीर उन्हें बाहर इंगित करता है।",
+      "text_color": "#FFFFFF",
+      "explanation_color": "#FFFF00",
+      "objects": [
+        {
+          "kind": "person",
+          "action": "move",
+          "label": "मीराबाई",
+          "id": "object_0",
+          "color": "#f4e7bf",
+          "pos": [
+            -2.7391,
+            0,
+            0
+          ],
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ],
+          "to": [
+            -1.6957,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "person",
+          "action": "move",
+          "label": "अन्नमय्य",
+          "id": "object_1",
+          "color": "#f4e7bf",
+          "pos": [
+            -1.1739,
+            0,
+            0
+          ],
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ],
+          "to": [
+            -0.1304,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "person",
+          "action": "move",
+          "label": "कालिदास",
+          "id": "object_2",
+          "color": "#f4e7bf",
+          "pos": [
+            0.3913,
+            0,
+            0
+          ],
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ],
+          "to": [
+            1.4348,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "arrow",
+          "action": "move",
+          "label": "",
+          "id": "object_3",
+          "color": "#59c7c5",
+          "pos": [
+            1.9565,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            3.0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "परीक्षा चयन",
+      "explanation": "सही उत्तर चुनें",
+      "speech": "परीक्षा में सही उत्तर चुनें: त्यागराज को विकल्प के रूप में चिह्नित करें और अन्य को छोड़ें।",
+      "teaches": "सही उत्तर को याद रखना",
+      "setting": "institution",
+      "visual_action": "छात्र उत्तर की ओर चलता है और सिक्का मतपेटी में जाता है।",
+      "text_color": "#FFFFFF",
+      "explanation_color": "#FFFF00",
+      "objects": [
+        {
+          "kind": "person",
+          "action": "walk",
+          "label": "छात्र",
+          "id": "object_0",
+          "color": "#f4e7bf",
+          "pos": [
+            -0.45,
+            0,
+            0
+          ],
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ],
+          "to": [
+            0.75,
+            0,
+            0
+          ]
+        }
+      ]
+    }
+  ]
+}
