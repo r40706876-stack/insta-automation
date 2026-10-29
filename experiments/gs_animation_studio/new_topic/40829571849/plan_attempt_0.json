@@ -1,0 +1,331 @@
+{
+  "title": "इत्सिंग का ताम्रलिप्ति में संस्कृत अध्ययन",
+  "subject": "इतिहास",
+  "topic_key": "chiini_yatri_itsing_tamralipti_sanskrit",
+  "share_reason": "इत्सिंग ने ताम्रलिप्ति में संस्कृत सीखी, विकल्प भ्रम दूर",
+  "recall": "इत्सिंग ने ताम्रलिप्ति में तीन साल संस्कृत सीखी।",
+  "share_card": {
+    "kind": "exam_confusion",
+    "recipient": "परीक्षा की तैयारी करने वाले दोस्त",
+    "benefit": "इत्सिंग ने ताम्रलिप्ति में संस्कृत सीखी, विकल्प भ्रम दूर",
+    "cta": "दोस्त को यह तथ्य बताओ"
+  },
+  "scenes": [
+    {
+      "heading": "समुद्र यात्रा",
+      "explanation": "इत्सिंग आया भारत",
+      "speech": "इत्सिंग समुद्र से भारत आया, जहाज़ से ताम्रलिप्ति पहुँचा।",
+      "teaches": "इत्सिंग के भारत आगमन का मार्ग दिखाना",
+      "objects": [
+        {
+          "kind": "ship",
+          "action": "move",
+          "label": "इत्सिंग का जहाज़",
+          "id": "object_0",
+          "color": "#59c7c5",
+          "pos": [
+            -1.35,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            -0.15,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "person",
+          "action": "walk",
+          "label": "इत्सिंग",
+          "id": "object_1",
+          "color": "#f4e7bf",
+          "pos": [
+            0.45,
+            0,
+            0
+          ],
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ],
+          "to": [
+            1.65,
+            0,
+            0
+          ]
+        }
+      ],
+      "setting": "coast",
+      "visual_action": "जहाज़ समुद्र में चलता है और व्यक्ति तट पर चलता है",
+      "text_color": "#FFFFFF",
+      "explanation_color": "#FFFF00"
+    },
+    {
+      "heading": "मार्ग दर्शना",
+      "explanation": "समुद्री मार्ग दिखाएँ",
+      "speech": "समुद्री मार्ग से सुमात्रा, लंका होकर ताम्रलिप्ति तक।",
+      "teaches": "इत्सिंग के यात्रा मार्ग को समझना",
+      "objects": [
+        {
+          "kind": "map",
+          "action": "trace",
+          "label": "मार्ग",
+          "id": "object_0",
+          "color": "#59c7c5",
+          "pos": [
+            -0.9,
+            0,
+            0
+          ],
+          "size": [
+            1.1,
+            1.1,
+            1.1
+          ]
+        },
+        {
+          "kind": "person",
+          "action": "walk",
+          "label": "इत्सिंग",
+          "id": "object_1",
+          "color": "#f4e7bf",
+          "pos": [
+            0.45,
+            0,
+            0
+          ],
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ],
+          "to": [
+            1.65,
+            0,
+            0
+          ]
+        }
+      ],
+      "setting": "neutral",
+      "visual_action": "नक्शे पर समुद्री मार्ग को रेखा बनाते हैं",
+      "text_color": "#FFFFFF",
+      "explanation_color": "#00FF00"
+    },
+    {
+      "heading": "शिक्षा स्थल",
+      "explanation": "ताम्रलिप्ति में अध्ययन",
+      "speech": "ताम्रलिप्ति में वह एक बौद्ध विहार में संस्कृत पढ़ता रहा।",
+      "teaches": "वहाँ के शिक्षा केंद्र को दिखाना",
+      "objects": [
+        {
+          "kind": "building",
+          "action": "none",
+          "label": "विहार",
+          "id": "object_0",
+          "color": "#b1a4d3",
+          "pos": [
+            -1.8,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        {
+          "kind": "person",
+          "action": "walk",
+          "label": "इत्सिंग",
+          "id": "object_1",
+          "color": "#f4e7bf",
+          "pos": [
+            -0.45,
+            0,
+            0
+          ],
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ],
+          "to": [
+            0.75,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "book",
+          "action": "rise",
+          "label": "संस्कृत ग्रन्थ",
+          "id": "object_2",
+          "color": "#59c7c5",
+          "pos": [
+            1.8,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            1.8,
+            0,
+            1.2
+          ]
+        }
+      ],
+      "setting": "institution",
+      "visual_action": "व्यक्ति भवन में प्रवेश करता है और पुस्तक ऊपर उठती है",
+      "text_color": "#FFFFFF",
+      "explanation_color": "#FFAA00"
+    },
+    {
+      "heading": "पाठ्यक्रम",
+      "explanation": "संस्कृत सीखना",
+      "speech": "वह रोज़ पुस्तक पढ़ता, शब्दों को दोहराता, भाषा में निपुण हुआ।",
+      "teaches": "संस्कृत अध्ययन की प्रक्रिया",
+      "objects": [
+        {
+          "kind": "person",
+          "action": "move",
+          "label": "इत्सिंग",
+          "id": "object_0",
+          "color": "#f4e7bf",
+          "pos": [
+            -2.25,
+            0,
+            0
+          ],
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ],
+          "to": [
+            -1.05,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "gear",
+          "action": "spin",
+          "label": "समय",
+          "id": "object_1",
+          "color": "#59c7c5",
+          "pos": [
+            0.0,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        {
+          "kind": "book",
+          "action": "none",
+          "label": "पुस्तक",
+          "id": "object_2",
+          "color": "#59c7c5",
+          "pos": [
+            1.8,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        }
+      ],
+      "setting": "institution",
+      "visual_action": "गियर घूमता है जिससे समय का प्रवाह दिखे",
+      "text_color": "#FFFFFF",
+      "explanation_color": "#00FFFF"
+    },
+    {
+      "heading": "तीन वर्ष",
+      "explanation": "समय का बीतना",
+      "speech": "तीन साल बीते, वह अब संस्कृत में निपुण हो गया।",
+      "teaches": "समय अवधि का संकेत",
+      "objects": [
+        {
+          "kind": "sun",
+          "action": "rise",
+          "label": "सूर्य",
+          "id": "object_0",
+          "color": "#59c7c5",
+          "pos": [
+            -1.8,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            -1.8,
+            0,
+            1.2
+          ]
+        },
+        {
+          "kind": "gear",
+          "action": "spin",
+          "label": "समय चक्र",
+          "id": "object_1",
+          "color": "#59c7c5",
+          "pos": [
+            0.0,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        {
+          "kind": "person",
+          "action": "none",
+          "label": "इत्सिंग",
+          "id": "object_2",
+          "color": "#f4e7bf",
+          "pos": [
+            1.8,
+            0,
+            0
+          ],
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ]
+        }
+      ],
+      "setting": "neutral",
+      "visual_action": "सूर्य उगता है और गियर घूमता है, समय दिखाते हुए",
+      "text_color": "#FFFFFF",
+      "explanation_color": "#FF00FF"
+    }
+  ]
+}

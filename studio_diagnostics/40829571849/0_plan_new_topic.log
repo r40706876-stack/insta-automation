@@ -1,0 +1,9 @@
+Plan repair 1 Exactly six scenes required
+Plan repair 2 Each scene needs 8-25 conversational Hindi words
+Plan repair 3 Each scene needs 8-25 conversational Hindi words
+Traceback (most recent call last):
+  File "/home/runner/work/insta-automation/insta-automation/gs_animation_studio/planner.py", line 225, in <module>
+    generate(sys.argv[1],sys.argv[2],os.getenv('STUDIO_TOPIC_TEXT','').strip(),os.getenv('STUDIO_SUBJECT','auto'),os.getenv('STUDIO_REFERENCE_TEXT',''))
+  File "/home/runner/work/insta-automation/insta-automation/gs_animation_studio/planner.py", line 221, in generate
+    raise RuntimeError('New-topic plan failed validation after three attempts: '+str(errors))
+RuntimeError: New-topic plan failed validation after three attempts: ['Exactly six scenes required', 'Each scene needs 8-25 conversational Hindi words', 'Each scene needs 8-25 conversational Hindi words']

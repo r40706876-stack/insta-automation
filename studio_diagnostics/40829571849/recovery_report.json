@@ -1,0 +1,26 @@
+{
+  "topic": "new_topic",
+  "run_id": "40829571849",
+  "attempt": "1",
+  "status": "failed",
+  "events": [
+    {
+      "stage": "plan_new_topic",
+      "status": "started",
+      "log": "0_plan_new_topic.log"
+    },
+    {
+      "stage": "plan_new_topic",
+      "status": "failed",
+      "code": "process_failed",
+      "detail": "Plan repair 1 Exactly six scenes required\nPlan repair 2 Each scene needs 8-25 conversational Hindi words\nPlan repair 3 Each scene needs 8-25 conversational Hindi words\nTraceback (most recent call last):\n  File \"/home/runner/work/insta-automation/insta-automation/gs_animation_studio/planner.py\", line 225, in <module>\n    generate(sys.argv[1],sys.argv[2],os.getenv('STUDIO_TOPIC_TEXT','').strip(),os.getenv('STUDIO_SUBJECT','auto'),os.getenv('STUDIO_REFERENCE_TEXT',''))\n  File \"/home/runner/work/insta-automation/insta-automation/gs_animation_studio/planner.py\", line 221, in generate\n    raise RuntimeError('New-topic plan failed validation after three attempts: '+str(errors))\nRuntimeError: New-topic plan failed validation after three attempts: ['Exactly six scenes required', 'Each scene needs 8-25 conversational Hindi words', 'Each scene needs 8-25 conversational Hindi words']\n"
+    }
+  ],
+  "repairs": [],
+  "injected_failures": [],
+  "instagram_publish": false,
+  "failure": {
+    "type": "StageError",
+    "message": "plan_new_topic: process_failed"
+  }
+}
