@@ -17,7 +17,8 @@ def scene_lines(plan):
         if s.get('speak'): out.append(s['speak']); continue
         if 'quiz' in s:
             q = s['quiz']
-            out.append(f"{s.get('title', '')}। {q['q']} {q['a']}, या {q['b']}? {q['cta']}।"); continue
+            nxt = f" अगली रील में: {plan['next']}" if plan.get('next') else ''
+            out.append(f"{s.get('title', '')}। {q['q']} {q['a']}, या {q['b']}? {q['cta']}।{nxt}"); continue
         out.append(' '.join(x if x.endswith(('?', '।', '!')) else x + '।' for x in (s.get('title', ''), s.get('sub', '')) if x))
     return [l.replace('(', ', ').replace(')', ', ').replace(':', ',') for l in out]
 

@@ -11,7 +11,7 @@
  "scenes": [
   {
    "id": "hook",
-   "seconds": 3.5,
+   "seconds": 3.0,
    "title": "शरीर की सबसे बड़ी ग्रंथि?",
    "sub": "पेट के दाईं ओर ऊपर",
    "camera": {
@@ -40,7 +40,7 @@
   },
   {
    "id": "where",
-   "seconds": 5.5,
+   "seconds": 4.5,
    "title": "यकृत (लिवर) दाईं ओर",
    "sub": "डायाफ्राम के ठीक नीचे, आमाशय के पास",
    "camera": {
@@ -71,7 +71,7 @@
   },
   {
    "id": "bile",
-   "seconds": 6,
+   "seconds": 4.5,
    "title": "पित्त रस बनाता है",
    "sub": "पित्त वसा के पाचन में मदद करता है",
    "camera": {
@@ -103,7 +103,7 @@
   },
   {
    "id": "store",
-   "seconds": 5.5,
+   "seconds": 4.5,
    "title": "ग्लाइकोजन का भंडार",
    "sub": "ज़रूरत पर खून में शुगर छोड़ता है",
    "camera": {
@@ -133,8 +133,39 @@
    "step": 2
   },
   {
+   "id": "trap",
+   "seconds": 4.5,
+   "title": "गलती: सबसे बड़ा अंग = यकृत",
+   "sub": "सही: सबसे बड़ा अंग त्वचा, बड़ी ग्रंथि यकृत",
+   "camera": {
+    "focus": [
+     "liver"
+    ],
+    "angle": "three_quarter_left",
+    "move": "orbit",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "liver",
+    "small_intestine"
+   ],
+   "effects": [
+    "particles:small_intestine,liver,nutrient",
+    "pulse:liver"
+   ],
+   "labels": [
+    "liver"
+   ],
+   "trap": true,
+   "step": 3
+  },
+  {
    "id": "quiz",
-   "seconds": 5,
+   "seconds": 4.5,
    "title": "परीक्षा का पक्का सवाल",
    "sub": "",
    "camera": {

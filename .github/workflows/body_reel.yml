@@ -13,8 +13,9 @@ on:
       topic:
         description: 'Topic chuno (sabse upar wala = taiyaar demo)'
         type: choice
-        default: 'दिल और खून का सफ़र (तैयार demo)'
+        default: 'auto (agla topic)'
         options:
+          - 'auto (agla topic)'
           - 'दिल और खून का सफ़र (तैयार demo)'
           - 'अपना topic लिखूँगा (नीचे topic_text में)'
           - 'दिल एक दिन में कितनी बार धड़कता है'
@@ -64,8 +65,11 @@ on:
         description: 'Taiyaar demo JSON (badalne ki zarurat nahi)'
         default: 'topics/heart_blood.json'
       chunks:
-        description: 'Parallel render machines (1-20)'
-        default: '20'
+        description: 'Parallel render machines (1-20); 12 leaves room for the regular posts'
+        default: '12'
+      target_utc:
+        description: 'Post at this exact UTC time (empty = right after build)'
+        default: ''
       samples:
         description: 'Cycles samples (12 = reference quality)'
         default: '12'
@@ -100,8 +104,10 @@ jobs:
           if [[ "$TOPIC_CHOICE" == *"अपना topic"* ]]; then
             [ -n "$TOPIC_TEXT" ] || { echo "::error::topic_text khaali hai"; exit 1; }
             pip install -q requests; python planner.py "$TOPIC_TEXT" plan.json > /tmp/plan.log 2>&1 || { echo "::error title=plan failed::$(tail -c 2500 /tmp/plan.log | tr '\n' ' ')"; exit 1; }; cat /tmp/plan.log
+          elif [[ "$TOPIC_CHOICE" == auto* ]]; then
+            python pick_next.py plan.json | tee /tmp/pick.log; echo "::notice title=plan::$(cat /tmp/pick.log)"
           elif [ -n "$F" ]; then
-            echo "::notice title=plan::taiyaar kahani $F"; cp "$F" plan.json
+            echo "::notice title=plan::taiyaar kahani $F"; cp "$F" plan.json; python pick_next.py plan.json --teaser
           else
             pip install -q requests; python planner.py "$TOPIC_CHOICE" plan.json > /tmp/plan.log 2>&1 || { echo "::error title=plan failed::$(tail -c 2500 /tmp/plan.log | tr '\n' ' ')"; exit 1; }; cat /tmp/plan.log
           fi
@@ -208,7 +214,7 @@ jobs:
   compose:
     needs: [plan, render]
     runs-on: ubuntu-24.04
-    timeout-minutes: 120
+    timeout-minutes: 330
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -246,6 +252,7 @@ jobs:
         env:
           IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
           IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          TARGET_UTC: ${{ github.event.inputs.target_utc }}
           PYTHONUNBUFFERED: '1'
         run: |
           pip install -q --timeout 30 -r requirements.txt imageio-ffmpeg

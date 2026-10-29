@@ -11,7 +11,7 @@
  "scenes": [
   {
    "id": "hook",
-   "seconds": 3.5,
+   "seconds": 3.0,
    "title": "रीढ़ एक हड्डी नहीं!",
    "sub": "ये कई छोटी हड्डियों की माला है",
    "camera": {
@@ -40,7 +40,7 @@
   },
   {
    "id": "beads",
-   "seconds": 5.5,
+   "seconds": 4.5,
    "title": "33 कशेरुक",
    "sub": "वयस्क में कुछ जुड़कर 26 रह जाते हैं",
    "camera": {
@@ -68,7 +68,7 @@
   },
   {
    "id": "parts",
-   "seconds": 5.5,
+   "seconds": 4.5,
    "title": "गर्दन, छाती, कमर के भाग",
    "sub": "नीचे त्रिकास्थि और अनुत्रिक",
    "camera": {
@@ -99,7 +99,7 @@
   },
   {
    "id": "guard",
-   "seconds": 5.5,
+   "seconds": 4.5,
    "title": "अंदर मेरुरज्जु सुरक्षित",
    "sub": "रीढ़ शरीर को सीधा खड़ा रखती है",
    "camera": {
@@ -130,8 +130,41 @@
    "step": 2
   },
   {
+   "id": "trap",
+   "seconds": 4.5,
+   "title": "गलती: रीढ़ एक लंबी हड्डी है",
+   "sub": "सही: 33 कशेरुकों की माला",
+   "camera": {
+    "focus": [
+     "spine",
+     "spinal_cord"
+    ],
+    "angle": "side",
+    "move": "orbit",
+    "zoom": 0.9
+   },
+   "layers": [
+    "skin",
+    "skeletal",
+    "nervous"
+   ],
+   "solid": [
+    "spine",
+    "spinal_cord"
+   ],
+   "effects": [
+    "travel:brain,spinal_cord",
+    "flow:spinal_cord"
+   ],
+   "labels": [
+    "spinal_cord"
+   ],
+   "trap": true,
+   "step": 3
+  },
+  {
    "id": "quiz",
-   "seconds": 5,
+   "seconds": 4.5,
    "title": "परीक्षा का पक्का सवाल",
    "sub": "",
    "camera": {

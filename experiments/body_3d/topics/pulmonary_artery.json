@@ -11,7 +11,7 @@
  "scenes": [
   {
    "id": "hook",
-   "seconds": 3.5,
+   "seconds": 3.0,
    "title": "धमनी में अशुद्ध खून?",
    "sub": "ये परीक्षा का सबसे बड़ा ट्रिक सवाल है",
    "camera": {
@@ -43,7 +43,7 @@
   },
   {
    "id": "rule",
-   "seconds": 5.5,
+   "seconds": 4.5,
    "title": "धमनी का नियम: दिल से बाहर",
    "sub": "खून शुद्ध हो या अशुद्ध, दिल से बाहर = धमनी",
    "camera": {
@@ -75,7 +75,7 @@
   },
   {
    "id": "to_lungs",
-   "seconds": 6,
+   "seconds": 4.5,
    "title": "फुफ्फुसीय धमनी → फेफड़े",
    "sub": "दायाँ निलय अशुद्ध खून फेफड़ों में भेजता है",
    "camera": {
@@ -109,7 +109,7 @@
   },
   {
    "id": "back",
-   "seconds": 6,
+   "seconds": 4.5,
    "title": "फुफ्फुसीय शिरा: शुद्ध खून",
    "sub": "फेफड़ों से ऑक्सीजन लेकर खून दिल में लौटता है",
    "camera": {
@@ -142,8 +142,42 @@
    "step": 2
   },
   {
+   "id": "trap",
+   "seconds": 4.5,
+   "title": "गलती: फुफ्फुसीय शिरा अशुद्ध",
+   "sub": "सही: फुफ्फुसीय शिरा में शुद्ध खून",
+   "camera": {
+    "focus": [
+     "lungs",
+     "heart"
+    ],
+    "angle": "three_quarter_left",
+    "move": "orbit",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "visceral",
+    "cardio"
+   ],
+   "solid": [
+    "lungs",
+    "heart",
+    "pulmonary_vessels"
+   ],
+   "effects": [
+    "breathe",
+    "particles:lungs,heart,oxygen"
+   ],
+   "labels": [
+    "heart"
+   ],
+   "trap": true,
+   "step": 3
+  },
+  {
    "id": "quiz",
-   "seconds": 5,
+   "seconds": 4.5,
    "title": "परीक्षा का पक्का सवाल",
    "sub": "",
    "camera": {

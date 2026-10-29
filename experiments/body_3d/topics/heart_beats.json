@@ -11,7 +11,7 @@
  "scenes": [
   {
    "id": "hook",
-   "seconds": 3.5,
+   "seconds": 3.0,
    "title": "ये दिल रुकता क्यों नहीं?",
    "sub": "एक दिन में लगभग 1 लाख धड़कन",
    "camera": {
@@ -41,7 +41,7 @@
   },
   {
    "id": "rate",
-   "seconds": 5.5,
+   "seconds": 4.5,
    "title": "1 मिनट में लगभग 72 बार",
    "sub": "72 × 60 × 24 = करीब 1 लाख धड़कन रोज़",
    "camera": {
@@ -72,7 +72,7 @@
   },
   {
    "id": "pump",
-   "seconds": 5.5,
+   "seconds": 4.5,
    "title": "हर धड़कन = खून का धक्का",
    "sub": "धमनियों से पूरे शरीर में खून पहुँचता है",
    "camera": {
@@ -109,7 +109,7 @@
   },
   {
    "id": "size",
-   "seconds": 5.5,
+   "seconds": 4.5,
    "title": "मुट्ठी जितना, चार कक्ष",
    "sub": "दो अलिंद ऊपर, दो निलय नीचे",
    "camera": {
@@ -137,8 +137,38 @@
    "step": 2
   },
   {
+   "id": "trap",
+   "seconds": 4.5,
+   "title": "गलती: दिल पूरा बाईं ओर होता है",
+   "sub": "सही: छाती के बीच में, थोड़ा बाईं ओर झुका",
+   "camera": {
+    "focus": [
+     "heart"
+    ],
+    "angle": "front",
+    "move": "orbit",
+    "zoom": 1.25
+   },
+   "layers": [
+    "skin",
+    "cardio"
+   ],
+   "solid": [
+    "heart"
+   ],
+   "effects": [
+    "beat",
+    "pulse:heart"
+   ],
+   "labels": [
+    "heart"
+   ],
+   "trap": true,
+   "step": 3
+  },
+  {
    "id": "quiz",
-   "seconds": 5,
+   "seconds": 4.5,
    "title": "परीक्षा का पक्का सवाल",
    "sub": "",
    "camera": {

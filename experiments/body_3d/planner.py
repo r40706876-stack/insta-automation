@@ -22,7 +22,7 @@ PROMPT = """तुम MinuteMe GS (SSC, Railway, State परीक्षाए�
 
 नियम:
 1. 5 से 7 scenes। पहला id "hook" (3-4 sec, जिज्ञासा जगाने वाला सवाल), आख़िरी scene में "quiz" (q, a, b, cta) — एक विकल्प सही हो।
-2. हर scene 3.5 से 7 sec, कुल 25-40 sec। title ≤ 30 अक्षर, sub ≤ 48 अक्षर, आसान बोलचाल की हिंदी।
+2. हर scene 3 से 7 sec, कुल 25-40 sec। title ≤ 30 अक्षर, sub ≤ 48 अक्षर, आसान बोलचाल की हिंदी।
 3. तथ्य सिर्फ़ NCERT स्तर के पक्के तथ्य। कोई संख्या तभी जब पाठ्यपुस्तक में मानक हो। शक हो तो संख्या मत लिखो।
 4. हर scene में कहानी एक कदम आगे बढ़े (कारण → असर)। एक जैसी बात दोहराना मना।
 5. camera.focus में वही खास अंग लिखो जिसकी बात हो रही है (viscera_other/bones/nerves नहीं)। camera.focus, solid, labels, hide, flow: में सिर्फ़ नीचे की keys। labels अधिकतम 3, और वे keys जिनकी layer "layers" में हो।
@@ -47,7 +47,7 @@ def validate(p):
     if not 3 <= len(steps) <= 4 or any(len(x) > 12 for x in steps): E.append('steps: 3-4 items, each <= 10 chars')
     for i, s in enumerate(sc):
         tag = f'scene {i}'
-        if not 3.5 <= s.get('seconds', 0) <= 7: E.append(f'{tag}: seconds 3.5-7')
+        if not 3 <= s.get('seconds', 0) <= 7: E.append(f'{tag}: seconds 3-7')
         if len(s.get('title', '')) > 32: E.append(f'{tag}: title too long')
         if len(s.get('sub', '')) > 50: E.append(f'{tag}: sub too long')
         lay = set(s.get('layers', []))

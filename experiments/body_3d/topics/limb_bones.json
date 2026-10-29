@@ -11,7 +11,7 @@
  "scenes": [
   {
    "id": "hook",
-   "seconds": 3.5,
+   "seconds": 3.0,
    "title": "एक हाथ में 27 हड्डियाँ!",
    "sub": "इसीलिए उँगलियाँ इतनी लचीली हैं",
    "camera": {
@@ -41,7 +41,7 @@
   },
   {
    "id": "arm",
-   "seconds": 5.5,
+   "seconds": 4.5,
    "title": "बाँह: ह्यूमरस, रेडियस, अल्ना",
    "sub": "कंधे से कलाई तक",
    "camera": {
@@ -70,7 +70,7 @@
   },
   {
    "id": "hand",
-   "seconds": 5.5,
+   "seconds": 4.5,
    "title": "कलाई, हथेली, उँगलियाँ",
    "sub": "उँगलियों की हड्डियाँ = फैलेंजेस",
    "camera": {
@@ -99,7 +99,7 @@
   },
   {
    "id": "leg",
-   "seconds": 5.5,
+   "seconds": 4.5,
    "title": "पैर: फीमर, टिबिया, फिबुला",
    "sub": "एक पैर के पंजे में 26 हड्डियाँ",
    "camera": {
@@ -130,8 +130,40 @@
    "step": 2
   },
   {
+   "id": "trap",
+   "seconds": 4.5,
+   "title": "गलती: बाँह की हड्डी फीमर",
+   "sub": "सही: बाँह में ह्यूमरस, फीमर जाँघ में",
+   "camera": {
+    "focus": [
+     "femur",
+     "leg_bones"
+    ],
+    "angle": "three_quarter_left",
+    "move": "orbit",
+    "zoom": 0.9
+   },
+   "layers": [
+    "skin",
+    "skeletal"
+   ],
+   "solid": [
+    "pelvis",
+    "femur",
+    "leg_bones"
+   ],
+   "effects": [
+    "sequence:pelvis,femur,leg_bones"
+   ],
+   "labels": [
+    "femur"
+   ],
+   "trap": true,
+   "step": 3
+  },
+  {
    "id": "quiz",
-   "seconds": 5,
+   "seconds": 4.5,
    "title": "परीक्षा का पक्का सवाल",
    "sub": "",
    "camera": {

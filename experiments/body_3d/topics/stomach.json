@@ -11,7 +11,7 @@
  "scenes": [
   {
    "id": "hook",
-   "seconds": 3.5,
+   "seconds": 3.0,
    "title": "पेट में तेज़ाब, फिर भी सुरक्षित!",
    "sub": "आमाशय का अनोखा राज़",
    "camera": {
@@ -41,7 +41,7 @@
   },
   {
    "id": "churn",
-   "seconds": 5.5,
+   "seconds": 4.5,
    "title": "आमाशय भोजन को मथता है",
    "sub": "पेशियाँ भोजन को घोल जैसा बना देती हैं",
    "camera": {
@@ -70,7 +70,7 @@
   },
   {
    "id": "acid",
-   "seconds": 5.5,
+   "seconds": 4.5,
    "title": "हाइड्रोक्लोरिक अम्ल (HCl)",
    "sub": "कीटाणु मारता है, पेप्सिन को सक्रिय करता है",
    "camera": {
@@ -101,7 +101,7 @@
   },
   {
    "id": "protein",
-   "seconds": 5.5,
+   "seconds": 4.5,
    "title": "प्रोटीन का पाचन यहीं शुरू",
    "sub": "श्लेष्मा (म्यूकस) पेट की दीवार को बचाता है",
    "camera": {
@@ -131,8 +131,39 @@
    "step": 2
   },
   {
+   "id": "trap",
+   "seconds": 4.5,
+   "title": "गलती: पाचन आमाशय से शुरू होता है",
+   "sub": "सही: पाचन मुँह में लार से शुरू होता है",
+   "camera": {
+    "focus": [
+     "stomach",
+     "small_intestine"
+    ],
+    "angle": "three_quarter_left",
+    "move": "orbit",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "stomach",
+    "small_intestine"
+   ],
+   "effects": [
+    "travel:stomach,small_intestine"
+   ],
+   "labels": [
+    "stomach"
+   ],
+   "trap": true,
+   "step": 3
+  },
+  {
    "id": "quiz",
-   "seconds": 5,
+   "seconds": 4.5,
    "title": "परीक्षा का पक्का सवाल",
    "sub": "",
    "camera": {

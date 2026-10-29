@@ -11,7 +11,7 @@
  "scenes": [
   {
    "id": "hook",
-   "seconds": 3.5,
+   "seconds": 3.0,
    "title": "शरीर का इंटरनेट!",
    "sub": "संदेश पलक झपकते पहुँचता है",
    "camera": {
@@ -42,7 +42,7 @@
   },
   {
    "id": "net",
-   "seconds": 5.5,
+   "seconds": 4.5,
    "title": "पूरे शरीर में तंत्रिकाएँ",
    "sub": "हर अंग दिमाग से जुड़ा है",
    "camera": {
@@ -74,7 +74,7 @@
   },
   {
    "id": "up",
-   "seconds": 5.5,
+   "seconds": 4.5,
    "title": "संवेदी तंत्रिका: अंग → दिमाग",
    "sub": "छूना, देखना, सुनना ऊपर पहुँचता है",
    "camera": {
@@ -105,7 +105,7 @@
   },
   {
    "id": "down",
-   "seconds": 5.5,
+   "seconds": 4.5,
    "title": "प्रेरक तंत्रिका: दिमाग → पेशी",
    "sub": "हुक्म नीचे आता है, हाथ-पैर चलते हैं",
    "camera": {
@@ -135,8 +135,40 @@
    "step": 2
   },
   {
+   "id": "trap",
+   "seconds": 4.5,
+   "title": "गलती: तंत्रिका की इकाई नेफ्रॉन",
+   "sub": "सही: न्यूरॉन; नेफ्रॉन वृक्क की इकाई",
+   "camera": {
+    "focus": [
+     "skin"
+    ],
+    "angle": "front",
+    "move": "orbit",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "nervous"
+   ],
+   "solid": [
+    "brain",
+    "spinal_cord",
+    "nerves"
+   ],
+   "effects": [
+    "travel:brain,spinal_cord,nerves",
+    "flow:nerves"
+   ],
+   "labels": [
+    "spinal_cord"
+   ],
+   "trap": true,
+   "step": 3
+  },
+  {
    "id": "quiz",
-   "seconds": 5,
+   "seconds": 4.5,
    "title": "परीक्षा का पक्का सवाल",
    "sub": "",
    "camera": {

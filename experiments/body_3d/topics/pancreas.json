@@ -11,7 +11,7 @@
  "scenes": [
   {
    "id": "hook",
-   "seconds": 3.5,
+   "seconds": 3.0,
    "title": "एक अंग, दो काम!",
    "sub": "पाचन भी, हार्मोन भी",
    "camera": {
@@ -40,7 +40,7 @@
   },
   {
    "id": "where",
-   "seconds": 5.5,
+   "seconds": 4.5,
    "title": "आमाशय के पीछे",
    "sub": "पत्ती जैसी लंबी ग्रंथि",
    "camera": {
@@ -71,7 +71,7 @@
   },
   {
    "id": "juice",
-   "seconds": 5.5,
+   "seconds": 4.5,
    "title": "अग्न्याशय रस → छोटी आँत",
    "sub": "प्रोटीन, वसा, कार्बोहाइड्रेट का पाचन",
    "camera": {
@@ -103,7 +103,7 @@
   },
   {
    "id": "insulin",
-   "seconds": 6,
+   "seconds": 4.5,
    "title": "लैंगरहैंस द्वीप: इंसुलिन",
    "sub": "खून में शुगर घटाता है, कमी से मधुमेह",
    "camera": {
@@ -131,8 +131,38 @@
    "step": 2
   },
   {
+   "id": "trap",
+   "seconds": 4.5,
+   "title": "गलती: इंसुलिन यकृत बनाता है",
+   "sub": "सही: अग्न्याशय के लैंगरहैंस द्वीप",
+   "camera": {
+    "focus": [
+     "pancreas"
+    ],
+    "angle": "three_quarter_left",
+    "move": "orbit",
+    "zoom": 1.4
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "pancreas"
+   ],
+   "effects": [
+    "particles:pancreas,veins,nutrient",
+    "pulse:pancreas"
+   ],
+   "labels": [
+    "pancreas"
+   ],
+   "trap": true,
+   "step": 3
+  },
+  {
    "id": "quiz",
-   "seconds": 5,
+   "seconds": 4.5,
    "title": "परीक्षा का पक्का सवाल",
    "sub": "",
    "camera": {

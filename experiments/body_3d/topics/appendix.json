@@ -11,7 +11,7 @@
  "scenes": [
   {
    "id": "hook",
-   "seconds": 3.5,
+   "seconds": 3.0,
    "title": "ये छोटा अंग किसी काम का नहीं?",
    "sub": "मिलिए अपेंडिक्स से",
    "camera": {
@@ -41,7 +41,7 @@
   },
   {
    "id": "where",
-   "seconds": 5.5,
+   "seconds": 4.5,
    "title": "पेट के दाईं ओर नीचे",
    "sub": "बड़ी आँत की शुरुआत (सीकम) से जुड़ा",
    "camera": {
@@ -73,7 +73,7 @@
   },
   {
    "id": "vestigial",
-   "seconds": 5.5,
+   "seconds": 4.5,
    "title": "अवशेषी अंग",
    "sub": "मनुष्य में इसका पाचन में खास काम नहीं",
    "camera": {
@@ -103,7 +103,7 @@
   },
   {
    "id": "swell",
-   "seconds": 5.5,
+   "seconds": 4.5,
    "title": "सूजन = अपेंडिसाइटिस",
    "sub": "तब ऑपरेशन से इसे निकालना पड़ता है",
    "camera": {
@@ -130,8 +130,37 @@
    "step": 2
   },
   {
+   "id": "trap",
+   "seconds": 4.5,
+   "title": "गलती: अपेंडिक्स बाईं ओर होता है",
+   "sub": "सही: पेट के दाईं ओर नीचे",
+   "camera": {
+    "focus": [
+     "appendix"
+    ],
+    "angle": "front",
+    "move": "orbit",
+    "zoom": 1.7
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "appendix"
+   ],
+   "effects": [
+    "pulse:appendix"
+   ],
+   "labels": [
+    "appendix"
+   ],
+   "trap": true,
+   "step": 3
+  },
+  {
    "id": "quiz",
-   "seconds": 5,
+   "seconds": 4.5,
    "title": "परीक्षा का पक्का सवाल",
    "sub": "",
    "camera": {

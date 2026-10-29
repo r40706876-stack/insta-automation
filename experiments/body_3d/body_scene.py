@@ -276,6 +276,9 @@ for f in range(N):
     if i == 0 and FOCUS[i] != (cs.get('focus') or ['skin']): cs['zoom'] = max(cs.get('zoom', 1), 1.15)
     pos, tgt, lens = cam_pose(cs, ease(k), FOCUS[i])
     pos = tgt + (pos - tgt) * (1 + .22 * (1 - min(1, age / .7)) ** 3)      # quick push-in at each cut
+    if BALLPOS[-1] is not None and (BALLPOS[-1][0] - pos).length < .35:   # bolus right in front of the lens = blurry blob: hide it
+        for o in [BALL] + TRAIL: setk(o, 'hide_render', True, f)
+        BALLPOS[-1] = None
     q = look(pos, tgt)
     if prevq is not None and q.dot(prevq) < 0: q.negate()
     CAM_ROWS.append((pos.copy(), q.copy(), lens))

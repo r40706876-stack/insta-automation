@@ -11,7 +11,7 @@
  "scenes": [
   {
    "id": "hook",
-   "seconds": 3.5,
+   "seconds": 3.0,
    "title": "शरीर की सबसे लंबी हड्डी?",
    "sub": "और सबसे मज़बूत भी",
    "camera": {
@@ -41,7 +41,7 @@
   },
   {
    "id": "thigh",
-   "seconds": 5.5,
+   "seconds": 4.5,
    "title": "फीमर: जाँघ की हड्डी",
    "sub": "कूल्हे से घुटने तक",
    "camera": {
@@ -73,7 +73,7 @@
   },
   {
    "id": "strong",
-   "seconds": 5.5,
+   "seconds": 4.5,
    "title": "पूरे शरीर का वज़न उठाती है",
    "sub": "खड़े होने, चलने, दौड़ने में",
    "camera": {
@@ -102,7 +102,7 @@
   },
   {
    "id": "joints",
-   "seconds": 5.5,
+   "seconds": 4.5,
    "title": "ऊपर कूल्हा, नीचे घुटना",
    "sub": "बॉल-सॉकेट जोड़ कूल्हे पर",
    "camera": {
@@ -132,8 +132,39 @@
    "step": 2
   },
   {
+   "id": "trap",
+   "seconds": 4.5,
+   "title": "गलती: सबसे लंबी हड्डी टिबिया",
+   "sub": "सही: फीमर सबसे लंबी, टिबिया दूसरी",
+   "camera": {
+    "focus": [
+     "pelvis",
+     "femur"
+    ],
+    "angle": "front",
+    "move": "orbit",
+    "zoom": 1.2
+   },
+   "layers": [
+    "skin",
+    "skeletal"
+   ],
+   "solid": [
+    "pelvis",
+    "femur"
+   ],
+   "effects": [
+    "sequence:pelvis,femur"
+   ],
+   "labels": [
+    "pelvis"
+   ],
+   "trap": true,
+   "step": 3
+  },
+  {
    "id": "quiz",
-   "seconds": 5,
+   "seconds": 4.5,
    "title": "परीक्षा का पक्का सवाल",
    "sub": "",
    "camera": {

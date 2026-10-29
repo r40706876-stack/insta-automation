@@ -11,7 +11,7 @@
  "scenes": [
   {
    "id": "hook",
-   "seconds": 3.5,
+   "seconds": 3.0,
    "title": "बच्चे में ज़्यादा हड्डियाँ!",
    "sub": "फिर बड़े होकर 206 कैसे?",
    "camera": {
@@ -47,7 +47,7 @@
   },
   {
    "id": "count",
-   "seconds": 5.5,
+   "seconds": 4.5,
    "title": "जन्म पर लगभग 300 हड्डियाँ",
    "sub": "कई हड्डियाँ आपस में जुड़कर 206 बनती हैं",
    "camera": {
@@ -81,7 +81,7 @@
   },
   {
    "id": "axial",
-   "seconds": 5.5,
+   "seconds": 4.5,
    "title": "खोपड़ी, रीढ़, पसलियाँ",
    "sub": "मस्तिष्क, दिल और फेफड़ों की रक्षा",
    "camera": {
@@ -113,7 +113,7 @@
   },
   {
    "id": "limbs",
-   "seconds": 5.5,
+   "seconds": 4.5,
    "title": "हाथ-पैर से चलना-फिरना",
    "sub": "हड्डियाँ, जोड़ और पेशियाँ मिलकर काम करती हैं",
    "camera": {
@@ -149,8 +149,45 @@
    "step": 2
   },
   {
+   "id": "trap",
+   "seconds": 4.5,
+   "title": "गलती: बच्चे में 206 हड्डियाँ",
+   "sub": "सही: वयस्क में 206, जन्म पर लगभग 300",
+   "camera": {
+    "focus": [
+     "skin"
+    ],
+    "angle": "three_quarter_left",
+    "move": "orbit",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "skeletal"
+   ],
+   "solid": [
+    "arm_bones",
+    "hand_bones",
+    "femur",
+    "leg_bones",
+    "pelvis",
+    "spine",
+    "ribs",
+    "skull",
+    "bones"
+   ],
+   "effects": [
+    "sequence:arm_bones,hand_bones,femur,leg_bones"
+   ],
+   "labels": [
+    "femur"
+   ],
+   "trap": true,
+   "step": 3
+  },
+  {
    "id": "quiz",
-   "seconds": 5,
+   "seconds": 4.5,
    "title": "परीक्षा का पक्का सवाल",
    "sub": "",
    "camera": {

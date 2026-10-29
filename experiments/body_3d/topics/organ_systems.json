@@ -11,7 +11,7 @@
  "scenes": [
   {
    "id": "hook",
-   "seconds": 3.5,
+   "seconds": 3.0,
    "title": "शरीर की 5 टीमें",
    "sub": "हर टीम का अपना काम",
    "camera": {
@@ -44,7 +44,7 @@
   },
   {
    "id": "digest",
-   "seconds": 5,
+   "seconds": 4.5,
    "title": "पाचन तंत्र",
    "sub": "भोजन को ऊर्जा में बदलता है",
    "camera": {
@@ -77,7 +77,7 @@
   },
   {
    "id": "breathe",
-   "seconds": 5,
+   "seconds": 4.5,
    "title": "श्वसन तंत्र",
    "sub": "ऑक्सीजन अंदर, कार्बन डाइऑक्साइड बाहर",
    "camera": {
@@ -108,7 +108,7 @@
   },
   {
    "id": "blood",
-   "seconds": 5.5,
+   "seconds": 4.5,
    "title": "परिसंचरण तंत्र",
    "sub": "दिल खून को पूरे शरीर में भेजता है",
    "camera": {
@@ -144,7 +144,7 @@
   },
   {
    "id": "nerve",
-   "seconds": 5.5,
+   "seconds": 4.5,
    "title": "तंत्रिका तंत्र",
    "sub": "दिमाग पूरे शरीर को चलाता है",
    "camera": {
@@ -174,8 +174,40 @@
    "step": 3
   },
   {
+   "id": "trap",
+   "seconds": 4.5,
+   "title": "गलती: खून फेफड़े पंप करते हैं",
+   "sub": "सही: खून हृदय पंप करता है",
+   "camera": {
+    "focus": [
+     "skin"
+    ],
+    "angle": "three_quarter",
+    "move": "orbit",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "nervous"
+   ],
+   "solid": [
+    "brain",
+    "spinal_cord",
+    "nerves"
+   ],
+   "effects": [
+    "travel:brain,spinal_cord,nerves",
+    "flow:nerves"
+   ],
+   "labels": [
+    "brain"
+   ],
+   "trap": true,
+   "step": 3
+  },
+  {
    "id": "quiz",
-   "seconds": 5,
+   "seconds": 4.5,
    "title": "परीक्षा का पक्का सवाल",
    "sub": "",
    "camera": {

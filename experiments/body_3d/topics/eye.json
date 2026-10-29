@@ -11,7 +11,7 @@
  "scenes": [
   {
    "id": "hook",
-   "seconds": 3.5,
+   "seconds": 3.0,
    "title": "आँख में तस्वीर उलटी बनती है!",
    "sub": "फिर भी सब सीधा दिखता है",
    "camera": {
@@ -41,7 +41,7 @@
   },
   {
    "id": "front",
-   "seconds": 5.5,
+   "seconds": 4.5,
    "title": "कॉर्निया और लेंस",
    "sub": "रोशनी को मोड़कर पीछे फोकस करते हैं",
    "camera": {
@@ -70,7 +70,7 @@
   },
   {
    "id": "retina",
-   "seconds": 5.5,
+   "seconds": 4.5,
    "title": "रेटिना पर उलटा, वास्तविक चित्र",
    "sub": "शलाका और शंकु रोशनी पहचानते हैं",
    "camera": {
@@ -99,7 +99,7 @@
   },
   {
    "id": "brain",
-   "seconds": 5.5,
+   "seconds": 4.5,
    "title": "दृक् तंत्रिका → दिमाग",
    "sub": "दिमाग चित्र को सीधा करके समझता है",
    "camera": {
@@ -130,8 +130,40 @@
    "step": 2
   },
   {
+   "id": "trap",
+   "seconds": 4.5,
+   "title": "गलती: चित्र लेंस पर बनता है",
+   "sub": "सही: रेटिना पर, उलटा और वास्तविक",
+   "camera": {
+    "focus": [
+     "eyes",
+     "brain"
+    ],
+    "angle": "side",
+    "move": "orbit",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "nervous"
+   ],
+   "solid": [
+    "eyes",
+    "brain"
+   ],
+   "effects": [
+    "travel:eyes,brain",
+    "flow:brain"
+   ],
+   "labels": [
+    "brain"
+   ],
+   "trap": true,
+   "step": 3
+  },
+  {
    "id": "quiz",
-   "seconds": 5,
+   "seconds": 4.5,
    "title": "परीक्षा का पक्का सवाल",
    "sub": "",
    "camera": {

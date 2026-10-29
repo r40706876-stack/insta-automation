@@ -11,7 +11,7 @@
  "scenes": [
   {
    "id": "hook",
-   "seconds": 3.5,
+   "seconds": 3.0,
    "title": "सिर की एक ही हड्डी हिलती है!",
    "sub": "कौन-सी? अंत तक देखो",
    "camera": {
@@ -40,7 +40,7 @@
   },
   {
    "id": "armor",
-   "seconds": 5.5,
+   "seconds": 4.5,
    "title": "मस्तिष्क का कवच",
    "sub": "कपाल की हड्डियाँ दिमाग को चारों ओर से ढकती हैं",
    "camera": {
@@ -69,7 +69,7 @@
   },
   {
    "id": "bones",
-   "seconds": 5.5,
+   "seconds": 4.5,
    "title": "खोपड़ी में 22 हड्डियाँ",
    "sub": "ज़्यादातर आपस में मज़बूती से जुड़ी",
    "camera": {
@@ -99,7 +99,7 @@
   },
   {
    "id": "jaw",
-   "seconds": 5.5,
+   "seconds": 4.5,
    "title": "निचला जबड़ा: अकेली हिलने वाली",
    "sub": "बोलने और चबाने के लिए",
    "camera": {
@@ -129,8 +129,40 @@
    "step": 2
   },
   {
+   "id": "trap",
+   "seconds": 4.5,
+   "title": "गलती: खोपड़ी की सब हड्डी हिलती",
+   "sub": "सही: सिर्फ़ निचला जबड़ा हिलता है",
+   "camera": {
+    "focus": [
+     "skull",
+     "teeth"
+    ],
+    "angle": "side",
+    "move": "orbit",
+    "zoom": 1.1
+   },
+   "layers": [
+    "skin",
+    "skeletal"
+   ],
+   "solid": [
+    "skull",
+    "teeth"
+   ],
+   "effects": [
+    "sequence:teeth",
+    "pulse:teeth"
+   ],
+   "labels": [
+    "teeth"
+   ],
+   "trap": true,
+   "step": 3
+  },
+  {
    "id": "quiz",
-   "seconds": 5,
+   "seconds": 4.5,
    "title": "परीक्षा का पक्का सवाल",
    "sub": "",
    "camera": {

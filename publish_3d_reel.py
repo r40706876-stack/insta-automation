@@ -31,9 +31,11 @@ sc = plan['scenes']
 TITLE = f"{sc[0]['title']} | {plan.get('topic', '')}".strip(' |')
 body = [f"• {s['title']} — {s['sub']}" for s in sc[1:] if s.get('sub') and 'quiz' not in s]
 quiz = next((s['quiz'] for s in sc if 'quiz' in s), None)
+trap = next((s for s in sc if s.get('trap')), None)
 caption = TITLE + '\n\n' + '\n'.join(body)
+if trap: caption += f"\n\n⚠️ परीक्षा की आम गलती\n✗ {trap['title'].replace('गलती: ', '')}\n✓ {trap['sub'].replace('सही: ', '')}"
 if quiz: caption += f"\n\n❓ {quiz['q']}\n{quiz['a']}\n{quiz['b']}\nजवाब कमेंट में लिखो 👇"
-caption += '\n\nरोज़ ऐसे 3D सवाल के लिए फ़ॉलो करो @minuteme_gs\n\n' + tags + (('\n\n' + credit) if credit else '')
+caption += (f"\n\nअगली रील: {plan['next']} — फ़ॉलो करो ताकि छूटे नहीं @minuteme_gs\n\n" if plan.get('next') else '\n\nरोज़ ऐसे 3D सवाल के लिए फ़ॉलो करो @minuteme_gs\n\n') + tags + (('\n\n' + credit) if credit else '')
 
 # ---------------------------------------------------------------- checks
 acc = e.requests.get(e.GRAPH + e.IG_USER_ID, params={'fields': 'username', 'access_token': e.IG_ACCESS_TOKEN}, timeout=30)
@@ -54,7 +56,15 @@ save(STARTED, {'started_utc': now(), 'video': VIDEO.name}); persist('Record 3D r
 os.environ.pop('GS_TARGET_UTC', None)
 publication.prepare_video = lambda src, font: str(src)
 e._with_series = lambda v: v
-pid = e._upload_once(str(VIDEO), caption, 1500)
+tgt = os.getenv('TARGET_UTC', '').strip()
+if tgt:                                   # scheduled slot: wait for the exact time (never post early)
+    import time
+    when = datetime.datetime.fromisoformat(tgt.replace('Z', '+00:00'))
+    left = (when - datetime.datetime.now(datetime.timezone.utc)).total_seconds()
+    if left > 0: print('waiting', int(left), 's for slot', tgt, flush=True); time.sleep(left)
+    late = (datetime.datetime.now(datetime.timezone.utc) - when).total_seconds()
+    if late > 2700: raise SystemExit('Slot over 45 minutes late; not posting to avoid bunching')
+pid = e._upload_once(str(VIDEO), caption, 1200)
 assert pid, 'Instagram publication not confirmed'
 rec = {'media_id': str(pid), 'published_utc': now(), 'title': TITLE}
 r = e.requests.get(e.GRAPH + str(pid), params={'fields': 'permalink', 'access_token': e.IG_ACCESS_TOKEN}, timeout=30)

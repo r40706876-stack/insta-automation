@@ -11,7 +11,7 @@
  "scenes": [
   {
    "id": "hook",
-   "seconds": 3.5,
+   "seconds": 3.0,
    "title": "शरीर का सबसे बड़ा अंग?",
    "sub": "जवाब आपकी आँखों के सामने है",
    "camera": {
@@ -37,7 +37,7 @@
   },
   {
    "id": "skin",
-   "seconds": 5.5,
+   "seconds": 4.5,
    "title": "त्वचा: सबसे बड़ा अंग",
    "sub": "पूरे शरीर को ढकती और बचाती है",
    "camera": {
@@ -62,7 +62,7 @@
   },
   {
    "id": "liver",
-   "seconds": 5.5,
+   "seconds": 4.5,
    "title": "यकृत: सबसे बड़ा आंतरिक अंग",
    "sub": "और सबसे बड़ी ग्रंथि भी",
    "camera": {
@@ -92,7 +92,7 @@
   },
   {
    "id": "duties",
-   "seconds": 5.5,
+   "seconds": 4.5,
    "title": "दोनों के काम",
    "sub": "त्वचा तापमान सँभालती है, यकृत पित्त बनाता है",
    "camera": {
@@ -123,8 +123,41 @@
    "step": 2
   },
   {
+   "id": "trap",
+   "seconds": 4.5,
+   "title": "गलती: बड़ा आंतरिक अंग फेफड़ा",
+   "sub": "सही: सबसे बड़ा आंतरिक अंग यकृत",
+   "camera": {
+    "focus": [
+     "liver",
+     "skin"
+    ],
+    "angle": "three_quarter_left",
+    "move": "orbit",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "liver",
+    "gallbladder",
+    "small_intestine"
+   ],
+   "effects": [
+    "sequence:skin,liver",
+    "travel:liver,gallbladder,small_intestine"
+   ],
+   "labels": [
+    "liver"
+   ],
+   "trap": true,
+   "step": 3
+  },
+  {
    "id": "quiz",
-   "seconds": 5,
+   "seconds": 4.5,
    "title": "परीक्षा का पक्का सवाल",
    "sub": "",
    "camera": {

@@ -11,7 +11,7 @@
  "scenes": [
   {
    "id": "hook",
-   "seconds": 3.5,
+   "seconds": 3.0,
    "title": "आपकी आवाज़ कहाँ बनती है?",
    "sub": "गले के इस छोटे से डिब्बे में",
    "camera": {
@@ -41,7 +41,7 @@
   },
   {
    "id": "box",
-   "seconds": 5.5,
+   "seconds": 4.5,
    "title": "स्वरयंत्र = वॉयस बॉक्स",
    "sub": "इसमें स्वर-रज्जु (वोकल कॉर्ड) होते हैं",
    "camera": {
@@ -72,7 +72,7 @@
   },
   {
    "id": "vibrate",
-   "seconds": 5.5,
+   "seconds": 4.5,
    "title": "हवा से रज्जु काँपते हैं",
    "sub": "इसी कंपन से आवाज़ पैदा होती है",
    "camera": {
@@ -103,7 +103,7 @@
   },
   {
    "id": "lid",
-   "seconds": 5.5,
+   "seconds": 4.5,
    "title": "एपिग्लॉटिस: खाने का ढक्कन",
    "sub": "निगलते समय भोजन को श्वासनली में जाने से रोकता है",
    "camera": {
@@ -134,8 +134,40 @@
    "step": 2
   },
   {
+   "id": "trap",
+   "seconds": 4.5,
+   "title": "गलती: आवाज़ श्वासनली से बनती है",
+   "sub": "सही: स्वरयंत्र के स्वर-रज्जु से",
+   "camera": {
+    "focus": [
+     "pharynx",
+     "larynx"
+    ],
+    "angle": "side",
+    "move": "orbit",
+    "zoom": 1.4
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "pharynx",
+    "larynx",
+    "oesophagus"
+   ],
+   "effects": [
+    "travel:tongue,pharynx,oesophagus"
+   ],
+   "labels": [
+    "pharynx"
+   ],
+   "trap": true,
+   "step": 3
+  },
+  {
    "id": "quiz",
-   "seconds": 5,
+   "seconds": 4.5,
    "title": "परीक्षा का पक्का सवाल",
    "sub": "",
    "camera": {

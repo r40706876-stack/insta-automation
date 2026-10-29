@@ -11,7 +11,7 @@
  "scenes": [
   {
    "id": "hook",
-   "seconds": 3.5,
+   "seconds": 3.0,
    "title": "मोटी, पर छोटी — कौन?",
    "sub": "बड़ी आँत का असली काम",
    "camera": {
@@ -40,7 +40,7 @@
   },
   {
    "id": "frame",
-   "seconds": 5.5,
+   "seconds": 4.5,
    "title": "छोटी आँत को घेरे हुए",
    "sub": "लगभग 1.5 मीटर लंबी, पर ज़्यादा चौड़ी",
    "camera": {
@@ -70,7 +70,7 @@
   },
   {
    "id": "water",
-   "seconds": 6,
+   "seconds": 4.5,
    "title": "पानी और लवण सोखती है",
    "sub": "बचा अपशिष्ट गाढ़ा हो जाता है",
    "camera": {
@@ -99,7 +99,7 @@
   },
   {
    "id": "out",
-   "seconds": 5,
+   "seconds": 4.5,
    "title": "मलाशय से बाहर",
    "sub": "अपचा भोजन शरीर से बाहर निकलता है",
    "camera": {
@@ -129,8 +129,39 @@
    "step": 2
   },
   {
+   "id": "trap",
+   "seconds": 4.5,
+   "title": "गलती: बड़ी आँत ज़्यादा लंबी है",
+   "sub": "सही: छोटी आँत लंबी, बड़ी आँत चौड़ी",
+   "camera": {
+    "focus": [
+     "large_intestine"
+    ],
+    "angle": "front",
+    "move": "orbit",
+    "zoom": 1.15
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "large_intestine",
+    "appendix"
+   ],
+   "effects": [
+    "travel:large_intestine",
+    "pulse:large_intestine"
+   ],
+   "labels": [
+    "large_intestine"
+   ],
+   "trap": true,
+   "step": 3
+  },
+  {
    "id": "quiz",
-   "seconds": 5,
+   "seconds": 4.5,
    "title": "परीक्षा का पक्का सवाल",
    "sub": "",
    "camera": {

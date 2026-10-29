@@ -11,7 +11,7 @@
  "scenes": [
   {
    "id": "hook",
-   "seconds": 3.5,
+   "seconds": 3.0,
    "title": "उल्टा लटककर भी खाना पेट में!",
    "sub": "ग्रासनली का कमाल",
    "camera": {
@@ -41,7 +41,7 @@
   },
   {
    "id": "tube",
-   "seconds": 5.5,
+   "seconds": 4.5,
    "title": "लगभग 25 सेमी लंबी नली",
    "sub": "गले से आमाशय तक भोजन ले जाती है",
    "camera": {
@@ -71,7 +71,7 @@
   },
   {
    "id": "wave",
-   "seconds": 6,
+   "seconds": 4.5,
    "title": "क्रमाकुंचन: लहर जैसी गति",
    "sub": "पेशियाँ सिकुड़कर भोजन को नीचे धकेलती हैं",
    "camera": {
@@ -103,7 +103,7 @@
   },
   {
    "id": "gate",
-   "seconds": 5,
+   "seconds": 4.5,
    "title": "नीचे एक वाल्व",
    "sub": "भोजन वापस ऊपर नहीं आता",
    "camera": {
@@ -132,8 +132,39 @@
    "step": 2
   },
   {
+   "id": "trap",
+   "seconds": 4.5,
+   "title": "गलती: ग्रासनली में भोजन पचता है",
+   "sub": "सही: यहाँ पाचन नहीं, भोजन सिर्फ़ आगे बढ़ता है",
+   "camera": {
+    "focus": [
+     "stomach"
+    ],
+    "angle": "front",
+    "move": "orbit",
+    "zoom": 1.2
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "oesophagus",
+    "stomach"
+   ],
+   "effects": [
+    "travel:oesophagus,stomach",
+    "pulse:stomach"
+   ],
+   "labels": [
+    "stomach"
+   ],
+   "trap": true,
+   "step": 3
+  },
+  {
    "id": "quiz",
-   "seconds": 5,
+   "seconds": 4.5,
    "title": "परीक्षा का पक्का सवाल",
    "sub": "",
    "camera": {

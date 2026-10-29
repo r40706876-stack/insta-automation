@@ -11,7 +11,7 @@
  "scenes": [
   {
    "id": "hook",
-   "seconds": 3.5,
+   "seconds": 3.0,
    "title": "लाल नली या नीली नली?",
    "sub": "धमनी और शिरा का असली फ़र्क",
    "camera": {
@@ -43,7 +43,7 @@
   },
   {
    "id": "artery",
-   "seconds": 6,
+   "seconds": 4.5,
    "title": "धमनी: दिल से बाहर",
    "sub": "ऑक्सीजन वाला शुद्ध खून शरीर तक ले जाती है",
    "camera": {
@@ -79,7 +79,7 @@
   },
   {
    "id": "vein",
-   "seconds": 6,
+   "seconds": 4.5,
    "title": "शिरा: वापस दिल तक",
    "sub": "अशुद्ध खून लौटाती है, इसमें वाल्व होते हैं",
    "camera": {
@@ -115,7 +115,7 @@
   },
   {
    "id": "wall",
-   "seconds": 5,
+   "seconds": 4.5,
    "title": "धमनी की दीवार मोटी",
    "sub": "तेज़ दबाव झेलती है, शिरा की दीवार पतली",
    "camera": {
@@ -147,8 +147,41 @@
    "step": 2
   },
   {
+   "id": "trap",
+   "seconds": 4.5,
+   "title": "गलती: हर धमनी में शुद्ध खून",
+   "sub": "सही: फुफ्फुसीय धमनी में अशुद्ध खून",
+   "camera": {
+    "focus": [
+     "heart",
+     "aorta"
+    ],
+    "angle": "front",
+    "move": "orbit",
+    "zoom": 1.2
+   },
+   "layers": [
+    "skin",
+    "cardio"
+   ],
+   "solid": [
+    "heart",
+    "aorta",
+    "vena_cava"
+   ],
+   "effects": [
+    "beat",
+    "flow:aorta"
+   ],
+   "labels": [
+    "aorta"
+   ],
+   "trap": true,
+   "step": 3
+  },
+  {
    "id": "quiz",
-   "seconds": 5,
+   "seconds": 4.5,
    "title": "परीक्षा का पक्का सवाल",
    "sub": "",
    "camera": {

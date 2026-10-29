@@ -25,6 +25,9 @@ def scene_of(f):
         if f >= START[i]: return i, f - START[i]
 def ease(t): t = max(0., min(1., t)); return 1 - (1 - t) ** 3
 
+def fit(s, n, maxw=660):            # shrink long Hindi lines so they never leave the frame
+    while n > 18 and font(n).getlength(s) > maxw: n -= 1
+    return n
 def text(d, xy, s, n, c, anchor='mm', stroke=3):
     d.text(xy, s, font=font(n), fill=c, anchor=anchor, stroke_width=stroke, stroke_fill=INK)
 
@@ -46,16 +49,25 @@ def overlay(f):
     for i in range(260):
         d.line([(0, H - i), (W, H - i)], fill=(0, 0, 0, int(170 * (1 - i / 260) ** 1.4)))
     # repo-standard notes banner (kept clear of Instagram's top bar)
-    d.rounded_rectangle((36, 60, 684, 140), radius=16, fill=(10, 34, 48, 225), outline=(70, 140, 160), width=2)
-    text(d, (360, 84), 'सभी प्रतियोगी परीक्षाओं के नोट्स उपलब्ध हैं', 24, WHITE, stroke=0)
-    text(d, (360, 117), 'WhatsApp: +91 89892 79637', 28, GOLD, stroke=0)
+    if f >= 2 * FPS:          # first 2 s: only the question + visual (hook), banner fades in after
+        ba = int(225 * min(1, (f - 2 * FPS) / 8)); tb = int(255 * min(1, (f - 2 * FPS) / 8))
+        d.rounded_rectangle((36, 60, 684, 140), radius=16, fill=(10, 34, 48, ba), outline=(70, 140, 160, tb), width=2)
+        text(d, (360, 84), 'सभी प्रतियोगी परीक्षाओं के नोट्स उपलब्ध हैं', 24, WHITE + (tb,), stroke=0)
+        text(d, (360, 117), 'WhatsApp: +91 89892 79637', 28, GOLD + (tb,), stroke=0)
     d.text((40, 162), 'MINUTE ME GS  /  ' + TL.get('brand', 'GS'), font=font(19), fill=CYAN, anchor='lm')
     # title pops in, subtitle slides in 0.25s later
-    a = ease(t / .35); b = ease((t - .25) / .35)
+    fast = sc['id'] == 'hook'
+    a = ease(t / (.12 if fast else .35)); b = ease((t - (.1 if fast else .25)) / .3)
+    trap = sc.get('trap')
+    if trap:
+        k_ = ease(t / .25); d.rounded_rectangle((210, 258, 510, 294), radius=18, fill=(150, 20, 20, int(235 * k_)))
+        text(d, (360, 276), 'परीक्षा की आम गलती', 24, (255, 235, 230) + (int(255 * k_),), stroke=0)
     if sc['title']:
-        size = int(48 + 8 * (1 - a)); text(d, (360, 222 - int(18 * (1 - a))), sc['title'], size, GOLD + (int(255 * a),), stroke=4)
+        tcol = (255, 105, 90) if trap else GOLD
+        size = int(48 + 8 * (1 - a)) if not fast else int(54 + 10 * (1 - a))
+        text(d, (360, 222 - int(18 * (1 - a))), sc['title'], fit(sc['title'], size), tcol + (int(255 * a),), stroke=4)
     if sc['sub']:
-        text(d, (360 - int(40 * (1 - b)), 276), sc['sub'], 30, WHITE + (int(255 * b),))
+        text(d, (360 - int(40 * (1 - b)), 276 + (56 if trap else 0)), sc['sub'], fit(sc['sub'], 32 if trap else 30), ((120, 235, 140) if trap else WHITE) + (int(255 * b),))
     sid = sc['id']
     # labels pinned to organs (positions exported by Blender), stacked so they never overlap
     placed = []
@@ -82,13 +94,15 @@ def overlay(f):
         qz = sc['quiz']; c = ease((t - .2) / .4)
         y0 = 330 + int(30 * (1 - c)); al = int(235 * c)
         d.rounded_rectangle((60, y0, 660, y0 + 250), radius=22, fill=(10, 24, 38, al), outline=GOLD + (al,), width=3)
-        text(d, (360, y0 + 48), qz['q'], 33, WHITE + (al,), stroke=0)
+        text(d, (360, y0 + 48), qz['q'], fit(qz['q'], 33, 560), WHITE + (al,), stroke=0)
         pulse = int(6 * math.sin(t * 6))
         for j, opt in enumerate((qz['a'], qz['b'])):
             yy = y0 + 112 + j * 64
             d.rounded_rectangle((110, yy - 25, 610, yy + 25), radius=14, fill=(22, 46, 64, al), outline=CYAN + (al,), width=2)
             text(d, (360, yy), opt, 30, CYAN + (al,), stroke=0)
         if t > 1.2: text(d, (360, 1000 + pulse), qz['cta'], 38, GOLD)
+        if TL.get('next') and t > 1.6:
+            chip(d, (360, 940), 'अगली रील: ' + TL['next'], CYAN, n=26)
     # step tracker + progress (above Instagram's caption area)
     st = sc['step']
     if st >= 0:

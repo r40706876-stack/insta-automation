@@ -11,7 +11,7 @@
  "scenes": [
   {
    "id": "hook",
-   "seconds": 3.5,
+   "seconds": 3.0,
    "title": "शरीर का कटोरा!",
    "sub": "जो पेट के निचले अंगों को सँभालता है",
    "camera": {
@@ -41,7 +41,7 @@
   },
   {
    "id": "bowl",
-   "seconds": 5.5,
+   "seconds": 4.5,
    "title": "श्रोणि मेखला",
    "sub": "दो कूल्हे की हड्डियाँ, पीछे त्रिकास्थि",
    "camera": {
@@ -72,7 +72,7 @@
   },
   {
    "id": "joint",
-   "seconds": 5.5,
+   "seconds": 4.5,
    "title": "फीमर यहीं जुड़ती है",
    "sub": "कूल्हे का बॉल-सॉकेट जोड़",
    "camera": {
@@ -103,7 +103,7 @@
   },
   {
    "id": "protect",
-   "seconds": 5.5,
+   "seconds": 4.5,
    "title": "मूत्राशय की रक्षा",
    "sub": "और शरीर का वज़न पैरों तक पहुँचाती है",
    "camera": {
@@ -135,8 +135,41 @@
    "step": 2
   },
   {
+   "id": "trap",
+   "seconds": 4.5,
+   "title": "गलती: कूल्हे का जोड़ कब्ज़ा जोड़",
+   "sub": "सही: कूल्हा बॉल-सॉकेट, घुटना कब्ज़ा",
+   "camera": {
+    "focus": [
+     "pelvis",
+     "bladder"
+    ],
+    "angle": "front",
+    "move": "orbit",
+    "zoom": 1.1
+   },
+   "layers": [
+    "skin",
+    "skeletal",
+    "visceral"
+   ],
+   "solid": [
+    "pelvis",
+    "bladder"
+   ],
+   "effects": [
+    "pulse:bladder",
+    "sequence:pelvis"
+   ],
+   "labels": [
+    "bladder"
+   ],
+   "trap": true,
+   "step": 3
+  },
+  {
    "id": "quiz",
-   "seconds": 5,
+   "seconds": 4.5,
    "title": "परीक्षा का पक्का सवाल",
    "sub": "",
    "camera": {

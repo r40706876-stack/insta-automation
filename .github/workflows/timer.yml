@@ -29,7 +29,8 @@ jobs:
           REPO: ${{ github.repository }}
         run: |
           # IST samay = format (pehle wale schedule jaise, ab theek samay par)
-          SLOTS="05:00=current 07:00=list 10:00=list_Geography 13:00=list_History 17:00=mega 20:00=list_Static 22:00=list_Alternate"
+          SLOTS="05:00=current 07:00=list 10:00=list_Geography 13:00=body3d 17:00=mega 20:00=list_Static 22:00=list_Alternate"
+          # body3d = Human Body 3D template reel; render takes ~1-1.5 h, so it starts 2.5 h before the slot
           NOW=$(date +%s)
           BEST=""; BESTT=0
           for d in today tomorrow; do
@@ -42,7 +43,8 @@ jobs:
               if [ $TS -gt $((NOW+60)) ] && { [ -z "$BEST" ] || [ $TS -lt $BESTT ]; }; then BEST=$J; BESTT=$TS; BESTS=$T; fi
             done
           done
-          W=$((BESTT-NOW-3600))
+          LEAD=3600; [ "$BEST" = body3d ] && LEAD=9000
+          W=$((BESTT-NOW-LEAD))
           if [ "$W" -lt 0 ]; then W=0; fi
           echo "Agla: $BEST, $(TZ=Asia/Kolkata date -d @$BESTT '+%d %b %H:%M IST') ($W sec baad)"
           if [ $W -le 16200 ]; then
@@ -57,7 +59,11 @@ jobs:
                 DAYS=$((BESTT / 86400))
                 if [ $((DAYS % 2)) -eq 0 ]; then SUBJECT=Polity; else SUBJECT=Economics; fi ;;
             esac
+            if [ "$BEST" = body3d ]; then
+              gh workflow run body_reel.yml -R "$REPO" --ref main -f topic='auto (agla topic)' -f publish=yes -f chunks=12 -f target_utc="$(date -u -d @$BESTT +%Y-%m-%dT%H:%M:%SZ)" && echo "3D body reel chalayi"
+            else
             gh workflow run hourly_post.yml -R "$REPO" --ref main -f format="$BEST" -f subject="$SUBJECT" -f regular_slot="$BESTS" -f target_utc="$(date -u -d @$BESTT +%Y-%m-%dT%H:%M:%SZ)" -f post_mode=publish && echo "reel ($BEST / $SUBJECT) chalayi"
+            fi
             REST=$((BESTT-$(date +%s)+90))
             if [ "$REST" -gt 0 ]; then sleep "$REST"; fi
           else

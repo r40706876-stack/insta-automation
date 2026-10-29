@@ -11,7 +11,7 @@
  "scenes": [
   {
    "id": "hook",
-   "seconds": 3.5,
+   "seconds": 3.0,
    "title": "मूत्र बनता कहाँ है?",
    "sub": "मूत्र तंत्र का पूरा रास्ता",
    "camera": {
@@ -43,7 +43,7 @@
   },
   {
    "id": "kidney",
-   "seconds": 5.5,
+   "seconds": 4.5,
    "title": "दो वृक्क खून छानते हैं",
    "sub": "यूरिया, नमक और ज़्यादा पानी अलग करते हैं",
    "camera": {
@@ -72,7 +72,7 @@
   },
   {
    "id": "ureter",
-   "seconds": 5.5,
+   "seconds": 4.5,
    "title": "मूत्रवाहिनी: नीचे की नलियाँ",
    "sub": "मूत्र को मूत्राशय तक ले जाती हैं",
    "camera": {
@@ -103,7 +103,7 @@
   },
   {
    "id": "bladder",
-   "seconds": 5.5,
+   "seconds": 4.5,
    "title": "मूत्राशय: थैली",
    "sub": "भरने पर मूत्रमार्ग से बाहर निकलता है",
    "camera": {
@@ -132,8 +132,39 @@
    "step": 2
   },
   {
+   "id": "trap",
+   "seconds": 4.5,
+   "title": "गलती: मूत्र मूत्राशय में बनता है",
+   "sub": "सही: वृक्क बनाता है, मूत्राशय जमा करता है",
+   "camera": {
+    "focus": [
+     "bladder"
+    ],
+    "angle": "front",
+    "move": "orbit",
+    "zoom": 1.4
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "bladder",
+    "ureters"
+   ],
+   "effects": [
+    "travel:ureters,bladder",
+    "pulse:bladder"
+   ],
+   "labels": [
+    "bladder"
+   ],
+   "trap": true,
+   "step": 3
+  },
+  {
    "id": "quiz",
-   "seconds": 5,
+   "seconds": 4.5,
    "title": "परीक्षा का पक्का सवाल",
    "sub": "",
    "camera": {

@@ -11,7 +11,7 @@
  "scenes": [
   {
    "id": "hook",
-   "seconds": 3.5,
+   "seconds": 3.0,
    "title": "हवा अंदर जाकर कहाँ जाती है?",
    "sub": "एक साँस का पूरा सफ़र",
    "camera": {
@@ -43,7 +43,7 @@
   },
   {
    "id": "nose",
-   "seconds": 5,
+   "seconds": 4.5,
    "title": "नाक → ग्रसनी → स्वरयंत्र",
    "sub": "नाक के बाल और म्यूकस धूल रोकते हैं",
    "camera": {
@@ -75,7 +75,7 @@
   },
   {
    "id": "tube",
-   "seconds": 5.5,
+   "seconds": 4.5,
    "title": "श्वासनली से दो श्वसनी",
    "sub": "हवा दाएँ और बाएँ फेफड़े में बँट जाती है",
    "camera": {
@@ -108,7 +108,7 @@
   },
   {
    "id": "exchange",
-   "seconds": 6,
+   "seconds": 4.5,
    "title": "वायुकोष में गैसों की अदला-बदली",
    "sub": "ऑक्सीजन खून में जाती है, CO₂ बाहर आती है",
    "camera": {
@@ -141,8 +141,42 @@
    "step": 2
   },
   {
+   "id": "trap",
+   "seconds": 4.5,
+   "title": "गलती: साँस लेना = श्वसन",
+   "sub": "सही: श्वसन = भोजन से ऊर्जा निकलना",
+   "camera": {
+    "focus": [
+     "lungs",
+     "heart"
+    ],
+    "angle": "three_quarter_left",
+    "move": "orbit",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "visceral",
+    "cardio"
+   ],
+   "solid": [
+    "lungs",
+    "heart"
+   ],
+   "effects": [
+    "breathe",
+    "beat",
+    "particles:lungs,heart,oxygen"
+   ],
+   "labels": [
+    "lungs"
+   ],
+   "trap": true,
+   "step": 3
+  },
+  {
    "id": "quiz",
-   "seconds": 5,
+   "seconds": 4.5,
    "title": "परीक्षा का पक्का सवाल",
    "sub": "",
    "camera": {

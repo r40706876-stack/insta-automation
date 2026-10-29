@@ -11,7 +11,7 @@
  "scenes": [
   {
    "id": "hook",
-   "seconds": 3.5,
+   "seconds": 3.0,
    "title": "ये नली पिचकती क्यों नहीं?",
    "sub": "राज़ है इसके छल्लों में",
    "camera": {
@@ -40,7 +40,7 @@
   },
   {
    "id": "rings",
-   "seconds": 5.5,
+   "seconds": 4.5,
    "title": "C-आकार के उपास्थि छल्ले",
    "sub": "ये श्वासनली को हमेशा खुला रखते हैं",
    "camera": {
@@ -70,7 +70,7 @@
   },
   {
    "id": "split",
-   "seconds": 5.5,
+   "seconds": 4.5,
    "title": "नीचे जाकर दो श्वसनी",
    "sub": "एक दाएँ फेफड़े में, एक बाएँ फेफड़े में",
    "camera": {
@@ -102,7 +102,7 @@
   },
   {
    "id": "lobes",
-   "seconds": 5.5,
+   "seconds": 4.5,
    "title": "दायाँ फेफड़ा 3 पालियाँ, बायाँ 2",
    "sub": "बाईं ओर दिल के लिए जगह छोड़नी होती है",
    "camera": {
@@ -134,8 +134,41 @@
    "step": 2
   },
   {
+   "id": "trap",
+   "seconds": 4.5,
+   "title": "गलती: दोनों में 3-3 पालियाँ",
+   "sub": "सही: दाएँ में 3, बाएँ में 2",
+   "camera": {
+    "focus": [
+     "lungs"
+    ],
+    "angle": "front",
+    "move": "orbit",
+    "zoom": 1.05
+   },
+   "layers": [
+    "skin",
+    "visceral",
+    "cardio"
+   ],
+   "solid": [
+    "lungs",
+    "heart"
+   ],
+   "effects": [
+    "breathe",
+    "beat",
+    "sequence:lungs,heart"
+   ],
+   "labels": [
+    "lungs"
+   ],
+   "trap": true,
+   "step": 3
+  },
+  {
    "id": "quiz",
-   "seconds": 5,
+   "seconds": 4.5,
    "title": "परीक्षा का पक्का सवाल",
    "sub": "",
    "camera": {

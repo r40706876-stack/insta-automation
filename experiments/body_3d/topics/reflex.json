@@ -11,7 +11,7 @@
  "scenes": [
   {
    "id": "hook",
-   "seconds": 3.5,
+   "seconds": 3.0,
    "title": "छूते ही हाथ क्यों हटता है?",
    "sub": "दिमाग से पहले कौन फैसला करता है?",
    "camera": {
@@ -40,7 +40,7 @@
   },
   {
    "id": "cord",
-   "seconds": 5.5,
+   "seconds": 4.5,
    "title": "मेरुरज्जु: रीढ़ के अंदर",
    "sub": "दिमाग से नीचे आती तंत्रिकाओं की रस्सी",
    "camera": {
@@ -71,7 +71,7 @@
   },
   {
    "id": "reflex",
-   "seconds": 6,
+   "seconds": 4.5,
    "title": "प्रतिवर्ती क्रिया",
    "sub": "मेरुरज्जु तुरंत जवाब भेजता है, बिना सोचे",
    "camera": {
@@ -101,7 +101,7 @@
   },
   {
    "id": "guard",
-   "seconds": 5,
+   "seconds": 4.5,
    "title": "रीढ़ की हड्डी इसकी ढाल",
    "sub": "कशेरुक मेरुरज्जु को बचाते हैं",
    "camera": {
@@ -128,8 +128,37 @@
    "step": 2
   },
   {
+   "id": "trap",
+   "seconds": 4.5,
+   "title": "गलती: रिफ्लेक्स दिमाग चलाता है",
+   "sub": "सही: प्रतिवर्ती क्रिया मेरुरज्जु चलाता है",
+   "camera": {
+    "focus": [
+     "spine"
+    ],
+    "angle": "back",
+    "move": "orbit",
+    "zoom": 0.9
+   },
+   "layers": [
+    "skin",
+    "skeletal"
+   ],
+   "solid": [
+    "spine"
+   ],
+   "effects": [
+    "sequence:spine"
+   ],
+   "labels": [
+    "spine"
+   ],
+   "trap": true,
+   "step": 3
+  },
+  {
    "id": "quiz",
-   "seconds": 5,
+   "seconds": 4.5,
    "title": "परीक्षा का पक्का सवाल",
    "sub": "",
    "camera": {

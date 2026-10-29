@@ -11,7 +11,7 @@
  "scenes": [
   {
    "id": "hook",
-   "seconds": 3.5,
+   "seconds": 3.0,
    "title": "गले की तितली जैसी ग्रंथि",
    "sub": "नमक में आयोडीन क्यों मिलाते हैं?",
    "camera": {
@@ -42,7 +42,7 @@
   },
   {
    "id": "where",
-   "seconds": 5.5,
+   "seconds": 4.5,
    "title": "गले में, श्वासनली के आगे",
    "sub": "स्वरयंत्र के ठीक नीचे",
    "camera": {
@@ -74,7 +74,7 @@
   },
   {
    "id": "hormone",
-   "seconds": 5.5,
+   "seconds": 4.5,
    "title": "थायरॉक्सिन हार्मोन",
    "sub": "शरीर की चयापचय (मेटाबॉलिज़्म) दर तय करता है",
    "camera": {
@@ -103,7 +103,7 @@
   },
   {
    "id": "iodine",
-   "seconds": 5.5,
+   "seconds": 4.5,
    "title": "बनाने के लिए आयोडीन ज़रूरी",
    "sub": "कमी से गला फूलता है = घेंघा",
    "camera": {
@@ -130,8 +130,37 @@
    "step": 2
   },
   {
+   "id": "trap",
+   "seconds": 4.5,
+   "title": "गलती: घेंघा विटामिन की कमी से",
+   "sub": "सही: घेंघा आयोडीन की कमी से",
+   "camera": {
+    "focus": [
+     "thyroid"
+    ],
+    "angle": "three_quarter",
+    "move": "orbit",
+    "zoom": 1.7
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "thyroid"
+   ],
+   "effects": [
+    "pulse:thyroid"
+   ],
+   "labels": [
+    "thyroid"
+   ],
+   "trap": true,
+   "step": 3
+  },
+  {
    "id": "quiz",
-   "seconds": 5,
+   "seconds": 4.5,
    "title": "परीक्षा का पक्का सवाल",
    "sub": "",
    "camera": {

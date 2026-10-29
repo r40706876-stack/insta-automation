@@ -11,7 +11,7 @@
  "scenes": [
   {
    "id": "hook",
-   "seconds": 3.5,
+   "seconds": 3.0,
    "title": "फेफड़े खुद साँस नहीं लेते!",
    "sub": "तो फिर ये फूलते कैसे हैं?",
    "camera": {
@@ -40,7 +40,7 @@
   },
   {
    "id": "diaphragm",
-   "seconds": 5.5,
+   "seconds": 4.5,
    "title": "डायाफ्राम नीचे खिंचता है",
    "sub": "छाती में जगह बनती है, हवा अंदर आती है",
    "camera": {
@@ -72,7 +72,7 @@
   },
   {
    "id": "alveoli",
-   "seconds": 6,
+   "seconds": 4.5,
    "title": "करोड़ों छोटे वायुकोष",
    "sub": "यहाँ ऑक्सीजन खून में घुलती है",
    "camera": {
@@ -105,7 +105,7 @@
   },
   {
    "id": "ribs",
-   "seconds": 5,
+   "seconds": 4.5,
    "title": "पसलियाँ फेफड़ों की ढाल",
    "sub": "दिल और फेफड़ों की रक्षा करती हैं",
    "camera": {
@@ -136,8 +136,40 @@
    "step": 2
   },
   {
+   "id": "trap",
+   "seconds": 4.5,
+   "title": "गलती: गैस बदले श्वासनली में",
+   "sub": "सही: गैस विनिमय वायुकोष में",
+   "camera": {
+    "focus": [
+     "ribs"
+    ],
+    "angle": "front",
+    "move": "orbit",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "visceral",
+    "skeletal"
+   ],
+   "solid": [
+    "ribs",
+    "lungs"
+   ],
+   "effects": [
+    "breathe",
+    "sequence:ribs,lungs"
+   ],
+   "labels": [
+    "ribs"
+   ],
+   "trap": true,
+   "step": 3
+  },
+  {
    "id": "quiz",
-   "seconds": 5,
+   "seconds": 4.5,
    "title": "परीक्षा का पक्का सवाल",
    "sub": "",
    "camera": {

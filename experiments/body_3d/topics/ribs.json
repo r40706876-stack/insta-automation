@@ -11,7 +11,7 @@
  "scenes": [
   {
    "id": "hook",
-   "seconds": 3.5,
+   "seconds": 3.0,
    "title": "छाती का पिंजरा",
    "sub": "दिल और फेफड़े इसी में बंद हैं",
    "camera": {
@@ -45,7 +45,7 @@
   },
   {
    "id": "pairs",
-   "seconds": 5.5,
+   "seconds": 4.5,
    "title": "12 जोड़ी पसलियाँ",
    "sub": "पीछे रीढ़ से, आगे उरोस्थि से जुड़ी",
    "camera": {
@@ -75,7 +75,7 @@
   },
   {
    "id": "types",
-   "seconds": 5.5,
+   "seconds": 4.5,
    "title": "7 सच्ची, 3 झूठी, 2 तैरती",
    "sub": "तैरती पसलियाँ आगे से नहीं जुड़तीं",
    "camera": {
@@ -103,7 +103,7 @@
   },
   {
    "id": "protect",
-   "seconds": 5.5,
+   "seconds": 4.5,
    "title": "साँस में ऊपर-नीचे",
    "sub": "फेफड़ों को फैलने की जगह देती हैं",
    "camera": {
@@ -137,8 +137,43 @@
    "step": 2
   },
   {
+   "id": "trap",
+   "seconds": 4.5,
+   "title": "गलती: कुल 12 पसलियाँ",
+   "sub": "सही: 12 जोड़ी, यानी 24 पसलियाँ",
+   "camera": {
+    "focus": [
+     "ribs",
+     "lungs"
+    ],
+    "angle": "three_quarter_left",
+    "move": "orbit",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "skeletal",
+    "visceral",
+    "cardio"
+   ],
+   "solid": [
+    "ribs",
+    "lungs",
+    "heart"
+   ],
+   "effects": [
+    "breathe",
+    "beat"
+   ],
+   "labels": [
+    "lungs"
+   ],
+   "trap": true,
+   "step": 3
+  },
+  {
    "id": "quiz",
-   "seconds": 5,
+   "seconds": 4.5,
    "title": "परीक्षा का पक्का सवाल",
    "sub": "",
    "camera": {

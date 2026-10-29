@@ -11,7 +11,7 @@
  "scenes": [
   {
    "id": "hook",
-   "seconds": 3.5,
+   "seconds": 3.0,
    "title": "डर लगते ही दिल तेज़ क्यों?",
    "sub": "ज़िम्मेदार है एक छोटी ग्रंथि",
    "camera": {
@@ -42,7 +42,7 @@
   },
   {
    "id": "where",
-   "seconds": 5.5,
+   "seconds": 4.5,
    "title": "हर किडनी के ऊपर एक टोपी",
    "sub": "इसीलिए नाम अधिवृक्क",
    "camera": {
@@ -73,7 +73,7 @@
   },
   {
    "id": "rush",
-   "seconds": 6,
+   "seconds": 4.5,
    "title": "एड्रेनालिन खून में",
    "sub": "दिल तेज़ धड़कता है, साँस तेज़ होती है",
    "camera": {
@@ -108,7 +108,7 @@
   },
   {
    "id": "fight",
-   "seconds": 5,
+   "seconds": 4.5,
    "title": "लड़ो या भागो हार्मोन",
    "sub": "आपात स्थिति में शरीर को तैयार करता है",
    "camera": {
@@ -137,8 +137,39 @@
    "step": 2
   },
   {
+   "id": "trap",
+   "seconds": 4.5,
+   "title": "गलती: एड्रेनालिन अग्न्याशय से",
+   "sub": "सही: एड्रेनालिन अधिवृक्क ग्रंथि से",
+   "camera": {
+    "focus": [
+     "adrenal"
+    ],
+    "angle": "back",
+    "move": "orbit",
+    "zoom": 1.5
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "adrenal",
+    "kidneys"
+   ],
+   "effects": [
+    "pulse:adrenal",
+    "flow:adrenal"
+   ],
+   "labels": [
+    "adrenal"
+   ],
+   "trap": true,
+   "step": 3
+  },
+  {
    "id": "quiz",
-   "seconds": 5,
+   "seconds": 4.5,
    "title": "परीक्षा का पक्का सवाल",
    "sub": "",
    "camera": {

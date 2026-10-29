@@ -11,7 +11,7 @@
  "scenes": [
   {
    "id": "hook",
-   "seconds": 3.5,
+   "seconds": 3.0,
    "title": "शरीर की सबसे लंबी नली कौन?",
    "sub": "पेट में मुड़ी हुई है",
    "camera": {
@@ -40,7 +40,7 @@
   },
   {
    "id": "long",
-   "seconds": 5.5,
+   "seconds": 4.5,
    "title": "आहार नाल का सबसे लंबा भाग",
    "sub": "लगभग 7.5 मीटर, कुंडली जैसी मुड़ी हुई",
    "camera": {
@@ -69,7 +69,7 @@
   },
   {
    "id": "juices",
-   "seconds": 5.5,
+   "seconds": 4.5,
    "title": "पित्त और अग्न्याशय रस",
    "sub": "पाचन यहीं पूरा होता है",
    "camera": {
@@ -103,7 +103,7 @@
   },
   {
    "id": "villi",
-   "seconds": 6,
+   "seconds": 4.5,
    "title": "दीर्घरोम (विलाई) सोखते हैं",
    "sub": "पचा हुआ भोजन खून में चला जाता है",
    "camera": {
@@ -134,8 +134,40 @@
    "step": 2
   },
   {
+   "id": "trap",
+   "seconds": 4.5,
+   "title": "गलती: अवशोषण बड़ी आँत में",
+   "sub": "सही: पचे भोजन का अवशोषण छोटी आँत में",
+   "camera": {
+    "focus": [
+     "small_intestine",
+     "liver"
+    ],
+    "angle": "three_quarter_left",
+    "move": "orbit",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "small_intestine",
+    "liver"
+   ],
+   "effects": [
+    "travel:small_intestine",
+    "particles:small_intestine,liver,nutrient"
+   ],
+   "labels": [
+    "small_intestine"
+   ],
+   "trap": true,
+   "step": 3
+  },
+  {
    "id": "quiz",
-   "seconds": 5,
+   "seconds": 4.5,
    "title": "परीक्षा का पक्का सवाल",
    "sub": "",
    "camera": {

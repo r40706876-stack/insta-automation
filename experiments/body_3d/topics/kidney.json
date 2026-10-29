@@ -11,7 +11,7 @@
  "scenes": [
   {
    "id": "hook",
-   "seconds": 3.5,
+   "seconds": 3.0,
    "title": "शरीर का फ़िल्टर कौन?",
    "sub": "रोज़ खून को बार-बार साफ़ करता है",
    "camera": {
@@ -40,7 +40,7 @@
   },
   {
    "id": "where",
-   "seconds": 5.5,
+   "seconds": 4.5,
    "title": "पीठ की ओर, दो सेम जैसे",
    "sub": "कमर के ऊपर, रीढ़ के दोनों ओर",
    "camera": {
@@ -70,7 +70,7 @@
   },
   {
    "id": "filter",
-   "seconds": 6,
+   "seconds": 4.5,
    "title": "नेफ्रॉन: छलनी की इकाई",
    "sub": "खून से यूरिया और ज़्यादा पानी छानते हैं",
    "camera": {
@@ -100,7 +100,7 @@
   },
   {
    "id": "urine",
-   "seconds": 5.5,
+   "seconds": 4.5,
    "title": "बचा = मूत्र",
    "sub": "मूत्रवाहिनी से मूत्राशय तक जाता है",
    "camera": {
@@ -131,8 +131,40 @@
    "step": 2
   },
   {
+   "id": "trap",
+   "seconds": 4.5,
+   "title": "गलती: वृक्क की इकाई न्यूरॉन",
+   "sub": "सही: वृक्क की इकाई नेफ्रॉन",
+   "camera": {
+    "focus": [
+     "kidneys",
+     "bladder"
+    ],
+    "angle": "front",
+    "move": "orbit",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "visceral"
+   ],
+   "solid": [
+    "kidneys",
+    "ureters",
+    "bladder"
+   ],
+   "effects": [
+    "travel:kidneys,ureters,bladder"
+   ],
+   "labels": [
+    "ureters"
+   ],
+   "trap": true,
+   "step": 3
+  },
+  {
    "id": "quiz",
-   "seconds": 5,
+   "seconds": 4.5,
    "title": "परीक्षा का पक्का सवाल",
    "sub": "",
    "camera": {

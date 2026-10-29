@@ -11,7 +11,7 @@
  "scenes": [
   {
    "id": "hook",
-   "seconds": 3.5,
+   "seconds": 3.0,
    "title": "चावल के दाने से भी छोटी हड्डी!",
    "sub": "आपके कान के अंदर",
    "camera": {
@@ -40,7 +40,7 @@
   },
   {
    "id": "where",
-   "seconds": 5.5,
+   "seconds": 4.5,
    "title": "मध्य कर्ण में",
    "sub": "खोपड़ी की टेम्पोरल हड्डी के अंदर",
    "camera": {
@@ -71,7 +71,7 @@
   },
   {
    "id": "three",
-   "seconds": 5.5,
+   "seconds": 4.5,
    "title": "मैलियस, इंकस, स्टेपीज़",
    "sub": "हथौड़ा, निहाई और रकाब",
    "camera": {
@@ -100,7 +100,7 @@
   },
   {
    "id": "sound",
-   "seconds": 5.5,
+   "seconds": 4.5,
    "title": "ध्वनि की कंपन आगे बढ़ाती हैं",
    "sub": "कान के पर्दे से भीतरी कान तक",
    "camera": {
@@ -130,8 +130,40 @@
    "step": 2
   },
   {
+   "id": "trap",
+   "seconds": 4.5,
+   "title": "गलती: सबसे छोटी हड्डी उँगली में",
+   "sub": "सही: कान के अंदर स्टेपीज़",
+   "camera": {
+    "focus": [
+     "ear_bones"
+    ],
+    "angle": "side",
+    "move": "orbit",
+    "zoom": 0.9
+   },
+   "layers": [
+    "skin",
+    "skeletal",
+    "nervous"
+   ],
+   "solid": [
+    "ear_bones",
+    "brain"
+   ],
+   "effects": [
+    "pulse:ear_bones",
+    "travel:ear_bones,brain"
+   ],
+   "labels": [
+    "ear_bones"
+   ],
+   "trap": true,
+   "step": 3
+  },
+  {
    "id": "quiz",
-   "seconds": 5,
+   "seconds": 4.5,
    "title": "परीक्षा का पक्का सवाल",
    "sub": "",
    "camera": {

@@ -11,7 +11,7 @@
  "scenes": [
   {
    "id": "hook",
-   "seconds": 3.5,
+   "seconds": 3.0,
    "title": "सोचता कौन, संतुलन कौन रखता है?",
    "sub": "दिमाग के तीन हिस्से",
    "camera": {
@@ -41,7 +41,7 @@
   },
   {
    "id": "cerebrum",
-   "seconds": 5.5,
+   "seconds": 4.5,
    "title": "प्रमस्तिष्क: सबसे बड़ा भाग",
    "sub": "सोचना, याद रखना, बोलना, समझना",
    "camera": {
@@ -70,7 +70,7 @@
   },
   {
    "id": "cerebellum",
-   "seconds": 5.5,
+   "seconds": 4.5,
    "title": "अनुमस्तिष्क: संतुलन",
    "sub": "चलते समय शरीर को गिरने नहीं देता",
    "camera": {
@@ -100,7 +100,7 @@
   },
   {
    "id": "medulla",
-   "seconds": 5.5,
+   "seconds": 4.5,
    "title": "मेडुला: अपने आप होने वाले काम",
    "sub": "दिल की धड़कन, साँस — बिना सोचे",
    "camera": {
@@ -131,8 +131,41 @@
    "step": 2
   },
   {
+   "id": "trap",
+   "seconds": 4.5,
+   "title": "गलती: संतुलन प्रमस्तिष्क रखता है",
+   "sub": "सही: संतुलन अनुमस्तिष्क रखता है",
+   "camera": {
+    "focus": [
+     "brain",
+     "spinal_cord"
+    ],
+    "angle": "side",
+    "move": "orbit",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "nervous"
+   ],
+   "solid": [
+    "brain",
+    "spinal_cord",
+    "cerebellum"
+   ],
+   "effects": [
+    "travel:brain,spinal_cord",
+    "flow:spinal_cord"
+   ],
+   "labels": [
+    "spinal_cord"
+   ],
+   "trap": true,
+   "step": 3
+  },
+  {
    "id": "quiz",
-   "seconds": 5,
+   "seconds": 4.5,
    "title": "परीक्षा का पक्का सवाल",
    "sub": "",
    "camera": {
