@@ -1,0 +1,423 @@
+{
+  "ok": true,
+  "reasons": [],
+  "novel_topic": false,
+  "scene_checks": [
+    {
+      "scene": 1,
+      "mechanism_matches": true
+    },
+    {
+      "scene": 2,
+      "mechanism_matches": true
+    },
+    {
+      "scene": 3,
+      "mechanism_matches": true
+    },
+    {
+      "scene": 4,
+      "mechanism_matches": true
+    },
+    {
+      "scene": 5,
+      "mechanism_matches": true
+    },
+    {
+      "scene": 6,
+      "mechanism_matches": true
+    }
+  ],
+  "title": "वित्त मंत्रालय और राजकोषीय नीति",
+  "subject": "राजव्यवस्था",
+  "topic_key": "finance_ministry_fiscal_policy",
+  "share_reason": "वित्त मंत्रालय राजकोषीय नीति बनाता, विकल्प में भ्रम दूर",
+  "recall": "राजकोषीय नीति वित्त मंत्रालय बनाता है",
+  "share_card": {
+    "kind": "exam_confusion",
+    "recipient": "परीक्षा की तैयारी करने वाले दोस्त",
+    "benefit": "वित्त मंत्रालय राजकोषीय नीति बनाता, विकल्प में भ्रम दूर",
+    "cta": "दोस्त को यह तथ्य बताओ"
+  },
+  "scenes": [
+    {
+      "heading": "वित्त मंत्रालय?",
+      "explanation": "राजकोषीय नीति कौन बनाता?",
+      "speech": "क्या आप जानते हैं कि भारत में राजकोषीय नीति किस विभाग से आती है?",
+      "teaches": "Identify the ministry responsible for fiscal policy",
+      "objects": [
+        {
+          "kind": "person",
+          "action": "walk",
+          "label": "अधिकारी",
+          "id": "object_0",
+          "color": "#f4e7bf",
+          "pos": [
+            -2.25,
+            0,
+            0
+          ],
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ],
+          "to": [
+            -1.05,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "building",
+          "action": "none",
+          "label": "वित्त मंत्रालय",
+          "id": "object_1",
+          "color": "#b1a4d3",
+          "pos": [
+            0.0,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        {
+          "kind": "coin",
+          "action": "move",
+          "label": "धन",
+          "id": "object_2",
+          "color": "#f5bd3d",
+          "pos": [
+            1.35,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            2.55,
+            0,
+            0
+          ]
+        }
+      ],
+      "setting": "institution",
+      "visual_action": "व्यक्ति वित्त मंत्रालय के दरवाजे की ओर चलता है",
+      "text_color": "#FFFFFF",
+      "explanation_color": "#FFFF00",
+      "quiz_card": {
+        "question": "भारत में राजकोषीय नीति कौन बनाता है?",
+        "answer": "वित्त मंत्रालय",
+        "reveal_after": 2.5,
+        "answer_color": "#73efb2"
+      }
+    },
+    {
+      "heading": "नीति दस्तावेज़",
+      "explanation": "वित्त मंत्रालय तैयार करता है",
+      "speech": "वित्त मंत्रालय बजट और राजकोषीय नीति का मसौदा तैयार करता है।",
+      "teaches": "Explain that finance ministry drafts the fiscal policy document",
+      "objects": [
+        {
+          "kind": "person",
+          "action": "walk",
+          "label": "अधिकारी",
+          "id": "object_0",
+          "color": "#f4e7bf",
+          "pos": [
+            -1.35,
+            0,
+            0
+          ],
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ],
+          "to": [
+            -0.15,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "box",
+          "action": "move",
+          "label": "दस्तावेज़",
+          "id": "object_1",
+          "color": "#59c7c5",
+          "pos": [
+            0.45,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            1.65,
+            0,
+            0
+          ]
+        }
+      ],
+      "setting": "institution",
+      "visual_action": "व्यक्ति दस्तावेज़ को पढ़ता और उठाता है",
+      "text_color": "#FFFFFF",
+      "explanation_color": "#FFFF00"
+    },
+    {
+      "heading": "नीति के घटक",
+      "explanation": "राजकोषीय नीति के भाग",
+      "speech": "राजकोषीय नीति में राजस्व, व्यय और ऋण जैसे घटक शामिल होते हैं।",
+      "teaches": "Show components of fiscal policy via gears",
+      "objects": [
+        {
+          "kind": "gear",
+          "action": "spin",
+          "label": "राजस्व",
+          "id": "object_0",
+          "color": "#59c7c5",
+          "pos": [
+            -0.9,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        {
+          "kind": "gear",
+          "action": "spin",
+          "label": "व्यय",
+          "id": "object_1",
+          "color": "#59c7c5",
+          "pos": [
+            0.9,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        }
+      ],
+      "setting": "neutral",
+      "visual_action": "गियर घूमते हैं, नीति के भाग दिखाते",
+      "text_color": "#FFFFFF",
+      "explanation_color": "#FFFF00"
+    },
+    {
+      "heading": "धन का प्रवाह",
+      "explanation": "राजकोषीय नीति से धन चलता",
+      "speech": "नीति के अनुसार धन सरकार के खर्च और आय में बंटता है।",
+      "teaches": "Demonstrate money flow using coins and scale",
+      "objects": [
+        {
+          "kind": "coin",
+          "action": "fall",
+          "label": "आय",
+          "id": "object_0",
+          "color": "#f5bd3d",
+          "pos": [
+            -0.9,
+            0,
+            1.2
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            -0.9,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "coin",
+          "action": "fall",
+          "label": "व्यय",
+          "id": "object_1",
+          "color": "#f5bd3d",
+          "pos": [
+            0.9,
+            0,
+            1.2
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            0.9,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "scale",
+          "action": "pulse",
+          "label": "संतुलन",
+          "id": "object_2",
+          "color": "#d3d3d3",
+          "pos": [
+            0,
+            0,
+            0
+          ],
+          "size": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        }
+      ],
+      "setting": "neutral",
+      "visual_action": "सिक्के स्केल पर गिरते हैं, आय-व्यय दिखाते",
+      "text_color": "#FFFFFF",
+      "explanation_color": "#FFFF00"
+    },
+    {
+      "heading": "आर्थिक प्रभाव",
+      "explanation": "नीति से GDP बढ़ता",
+      "speech": "सही राजकोषीय नीति आर्थिक विकास और रोजगार को बढ़ावा देती है।",
+      "teaches": "Show GDP growth via cylinder growing",
+      "objects": [
+        {
+          "kind": "cylinder",
+          "action": "grow",
+          "label": "GDP",
+          "id": "object_0",
+          "color": "#59c7c5",
+          "pos": [
+            -0.9,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        {
+          "kind": "arrow",
+          "action": "spin",
+          "label": "वृद्धि",
+          "id": "object_1",
+          "color": "#59c7c5",
+          "pos": [
+            0.9,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        }
+      ],
+      "setting": "neutral",
+      "visual_action": "सिलेंडर बढ़ता है, अर्थव्यवस्था का विस्तार दिखाता",
+      "text_color": "#FFFFFF",
+      "explanation_color": "#FFFF00"
+    },
+    {
+      "heading": "सारांश",
+      "explanation": "मुख्य बात याद रखें",
+      "speech": "राजकोषीय नीति वित्त मंत्रालय बनाता है, इसे याद रखें।",
+      "teaches": "Recall the ministry responsible for fiscal policy",
+      "objects": [
+        {
+          "kind": "person",
+          "action": "walk",
+          "label": "अधिकारी",
+          "id": "object_0",
+          "color": "#f4e7bf",
+          "pos": [
+            -2.25,
+            0,
+            0
+          ],
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ],
+          "to": [
+            -1.05,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "building",
+          "action": "none",
+          "label": "वित्त मंत्रालय",
+          "id": "object_1",
+          "color": "#b1a4d3",
+          "pos": [
+            0.0,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        {
+          "kind": "book",
+          "action": "rise",
+          "label": "नीति",
+          "id": "object_2",
+          "color": "#59c7c5",
+          "pos": [
+            0.0,
+            0.5,
+            0
+          ],
+          "size": [
+            0.5,
+            0.5,
+            0.5
+          ],
+          "to": [
+            0.0,
+            1.5,
+            0
+          ]
+        }
+      ],
+      "setting": "institution",
+      "visual_action": "व्यक्ति वित्त मंत्रालय की ओर चलता है, नीति पुस्तक ऊपर उठती है",
+      "text_color": "#FFFFFF",
+      "explanation_color": "#FFFF00",
+      "quiz_card": {
+        "question": "भारत में राजकोषीय नीति कौन बनाता है?",
+        "answer": "वित्त मंत्रालय",
+        "reveal_after": 2.5,
+        "answer_color": "#73efb2"
+      }
+    }
+  ]
+}

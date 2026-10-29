@@ -1,0 +1,12 @@
+[
+  {
+    "scene": 2,
+    "object": "object_0",
+    "repair": "fit_to"
+  },
+  {
+    "scene": 6,
+    "object": "object_0",
+    "repair": "fit_to"
+  }
+]
