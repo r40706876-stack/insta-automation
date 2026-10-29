@@ -83,8 +83,17 @@ for f, v in ((0, 0.), (N, N / FPS)):
 cd = bpy.data.cameras.new('Cam'); cam = bpy.data.objects.new('Cam', cd); sc.collection.objects.link(cam); sc.camera = cam
 cam.rotation_mode = 'QUATERNION'; cd.sensor_fit = 'VERTICAL'; cd.sensor_height = 24; cd.clip_start = .01; cd.shift_y = .045
 ANG = {'front': 0, 'three_quarter': 35, 'three_quarter_left': -35, 'side': 90, 'side_left': -90, 'back': 180}
-def cam_pose(spec, k):
-    keys = spec.get('focus') or ['skin']
+WIDE = {'viscera_other', 'bones', 'nerves', 'arteries', 'veins', 'skin'}   # catch-all groups: too big to frame
+HEAD = {'brain', 'cerebellum', 'eyes', 'tongue', 'teeth', 'skull', 'pharynx', 'larynx', 'ear_bones', 'thyroid'}
+def scene_focus(s, idx):
+    cam = s.get('camera', {}); keys = [k for k in cam.get('focus', []) if k in IDX and k not in WIDE]
+    seq = next((e.split(':', 1)[1].split(',') for e in s.get('effects', []) if e.startswith('sequence:')), [])
+    talk = [l if isinstance(l, str) else l['key'] for l in s.get('labels', [])] + seq + s.get('solid', [])
+    talk = [k for k in talk if k in IDX and k != 'skin']
+    if (idx == 0 or not keys) and talk and not (set(keys) & set(talk[:2])): keys = talk[:2]   # hook / vague focus: frame the organ being talked about          # hook: start close on the organ
+    return keys or ['skin']
+def cam_pose(spec, k, keys=None):
+    keys = keys or spec.get('focus') or ['skin']
     lo, hi = bbox(keys); ctr = (lo + hi) / 2; size = hi - lo
     lens = spec.get('lens', 50); vf = 2 * math.atan(12 / lens); hf = 2 * math.atan(math.tan(vf / 2) * 720 / 1280)
     ang = math.radians(ANG.get(spec.get('angle', 'front'), 0)); mv = spec.get('move', 'push')
@@ -123,6 +132,28 @@ def _apply(idb, path, v):
     if path.startswith('["'): idb[path[2:-2]] = v
     else: setattr(idb, path, v)
 CAM_ROWS = []
+FOCUS = [scene_focus(s, i) for i, s in enumerate(TOP['scenes'])]
+def hits(lo, hi, p0, p1):                       # segment p0->p1 vs axis-aligned box (slab test)
+    t0, t1 = 0., .92
+    for ax in range(3):
+        d = p1[ax] - p0[ax]
+        if abs(d) < 1e-9:
+            if not lo[ax] <= p0[ax] <= hi[ax]: return False
+            continue
+        a_, b_ = (lo[ax] - p0[ax]) / d, (hi[ax] - p0[ax]) / d
+        t0, t1 = max(t0, min(a_, b_)), min(t1, max(a_, b_))
+        if t0 > t1: return False
+    return True
+OCCL = []
+for i, s in enumerate(TOP['scenes']):
+    pos, tgt, _ = cam_pose(s.get('camera', {}), .5, FOCUS[i]); keep = set(FOCUS[i]) | set(s.get('solid', [])) | {l if isinstance(l, str) else l['key'] for l in s.get('labels', [])}
+    occ = set()
+    if FOCUS[i] != ['skin']:
+        for key in OBJ:
+            if key in keep or key == 'skin' or key not in IDX: continue
+            b = IDX[key]
+            if hits(Vector(b['min']), Vector(b['max']), pos, tgt): occ.add(key)
+    OCCL.append(occ)
 for f in range(N):
     i, k = scene_at(f); s = TOP['scenes'][i]; t = f / FPS; age = (f - START[i]) / FPS
     layers = set(s.get('layers', ['skin', 'visceral', 'cardio']))
@@ -134,7 +165,8 @@ for f in range(N):
     for key, o in OBJ.items():
         lay = LAYER_OF.get(key, 'skin'); vis = lay in layers and key not in hidden
 
-        if key == 'skin': g = .0 if not solid else .35
+        if key == 'skin': g = (.0 if not solid else .35) if not (set(FOCUS[i]) & HEAD) else .62
+        elif key in OCCL[i] and key not in seq: g = .93
         elif solid and key not in solid and key not in seq:
             g = .95 if IDX.get(key, {}).get('class') in ('artery', 'vein', 'nerve', 'pulmonary', 'bone') else .85
         else: g = 0.
@@ -154,7 +186,9 @@ for f in range(N):
     if 'lungs' in OBJ:
         br = .5 - .5 * math.cos(2 * math.pi * t / 3.6) if 'breathe' in effects else 0
         setk(OBJ['lungs'], 'scale', (round(1 + .05 * br, 4), round(1 + .04 * br, 4), round(1 + .06 * br, 4)), f)
-    pos, tgt, lens = cam_pose(s.get('camera', {}), ease(k))
+    cs = dict(s.get('camera', {}))
+    if i == 0 and FOCUS[i] != (cs.get('focus') or ['skin']): cs['zoom'] = max(cs.get('zoom', 1), 1.15)
+    pos, tgt, lens = cam_pose(cs, ease(k), FOCUS[i])
     q = look(pos, tgt)
     if prevq is not None and q.dot(prevq) < 0: q.negate()
     CAM_ROWS.append((pos.copy(), q.copy(), lens))

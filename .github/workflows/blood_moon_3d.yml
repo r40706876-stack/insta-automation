@@ -18,18 +18,40 @@ env:
   # Same Blender build used for the reference render (UPBGE 0.44 = Blender 4.4.3, hosted on GitHub)
   BLENDER_URL: https://github.com/UPBGE/upbge/releases/download/v0.44/upbge-0.44-linux-x86_64.tar.xz
   BLENDER_SHA256: cb23e1003dc3ec10847eb7ac4380eba9cd5de6a53b944d6231f46841534afd5f
-  TOTAL_FRAMES: 780
 jobs:
   plan:
     runs-on: ubuntu-24.04
+    timeout-minutes: 45
     outputs:
       matrix: ${{ steps.m.outputs.matrix }}
+      frames: ${{ steps.m.outputs.frames }}
     steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.11' }
+      - name: Hindi voiceover (Gemini male Charon, one voice per video)
+        timeout-minutes: 20
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
+          pip install -q requests numpy edge-tts
+          cd "$DEMO_DIR"
+          python voice.py timeline.json out > /tmp/voice.log 2>&1 || { echo "::error title=voice failed::$(tail -c 1500 /tmp/voice.log | tr '\n' ' ')"; exit 1; }
+          cat /tmp/voice.log
+          echo "::notice title=voice::$(grep -E 'VOICE|NO VOICE' /tmp/voice.log | tr '\n' ' ')"
       - id: m
         run: |
+          cd "$DEMO_DIR"
           n=${{ github.event.inputs.chunks }}; n=$(( n<1 ? 1 : (n>20 ? 20 : n) ))
           echo "matrix=$(python3 -c "import json;print(json.dumps({'chunk':list(range($n))}))")" >> "$GITHUB_OUTPUT"
-          echo "CHUNKS=$n"
+          echo "frames=$(python3 -c "import json;t=json.load(open('timeline.json'));print(sum(round(s['seconds']*t['fps']) for s in t['scenes']))")" >> "$GITHUB_OUTPUT"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: timing
+          path: |
+            ${{ env.DEMO_DIR }}/timeline.json
+            ${{ env.DEMO_DIR }}/out/voice/*
 
   render:
     needs: plan
@@ -61,6 +83,8 @@ jobs:
           pip install -q numpy Pillow
           /tmp/blender/blender -b --version | head -1
           nproc; free -g | head -2
+      - uses: actions/download-artifact@v4
+        with: { name: timing, path: '${{ env.DEMO_DIR }}' }
       - name: Build Earth texture from repo Natural Earth data
         run: |
           cd "$DEMO_DIR" && python make_textures.py && sha256sum earth_color.png earth_water.png
@@ -70,7 +94,7 @@ jobs:
           BLENDER: /tmp/blender/blender
         run: |
           n=${{ strategy.job-total }}; i=${{ matrix.chunk }}
-          a=$(( i*TOTAL_FRAMES/n )); b=$(( (i+1)*TOTAL_FRAMES/n - 1 ))
+          T=${{ needs.plan.outputs.frames }}; a=$(( i*T/n )); b=$(( (i+1)*T/n - 1 ))
           echo "chunk $i/$n -> frames $a-$b"
           start=$(date +%s)
           "$DEMO_DIR/render_missing.sh" $a $b
@@ -85,13 +109,15 @@ jobs:
           retention-days: 3
 
   compose:
-    needs: render
+    needs: [plan, render]
     runs-on: ubuntu-24.04
     timeout-minutes: 120
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with: { python-version: '3.11' }
+      - uses: actions/download-artifact@v4
+        with: { name: timing, path: '${{ env.DEMO_DIR }}' }
       - uses: actions/download-artifact@v4
         with:
           pattern: frames-*
@@ -104,7 +130,7 @@ jobs:
           python -c "from PIL import features; assert features.check('raqm'), 'Hindi shaping (raqm) missing'"
       - name: Compose Hindi overlays + sound -> MP4
         run: |
-          test "$(ls $DEMO_DIR/frames/*.png | wc -l)" -eq "$TOTAL_FRAMES"
+          test "$(ls $DEMO_DIR/frames/*.png | wc -l)" -eq "${{ needs.plan.outputs.frames }}"
           cd "$DEMO_DIR" && DEMO_ROOT=$PWD python compose.py
           ffprobe -v error -show_entries format=duration:stream=width,height,r_frame_rate -of compact blood_moon_reel.mp4
       - uses: actions/upload-artifact@v4

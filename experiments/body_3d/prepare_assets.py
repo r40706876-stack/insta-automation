@@ -17,7 +17,7 @@ sc = bpy.context.scene
 
 # ------------------------------------------------------------- shared materials
 COL = {'heart': (.6, .045, .04), 'artery': (.8, .035, .03), 'vein': (.08, .16, .7), 'pulmonary': (.45, .2, .75),
-       'lung': (.88, .46, .5), 'airway': (.88, .82, .72), 'digestive': (.9, .55, .45), 'digestive2': (.78, .48, .36),
+       'lung': (.85, .38, .44), 'airway': (.85, .72, .6), 'digestive': (.86, .4, .32), 'digestive2': (.74, .36, .25),
        'liver': (.42, .08, .06), 'bile': (.22, .55, .18), 'gland': (.92, .62, .18), 'kidney': (.52, .12, .09),
        'urine': (.88, .76, .28), 'brain': (.86, .6, .6), 'brain2': (.78, .48, .55), 'cord': (.92, .86, .7),
        'nerve': (.98, .8, .22), 'eye': (.93, .93, .96), 'bone': (.87, .83, .73), 'tooth': (.96, .96, .92), 'other': (.8, .6, .5)}
@@ -49,7 +49,7 @@ def organ_material(cls):
     b.inputs['Coat Weight'].default_value = .3; b.inputs['Coat Roughness'].default_value = .25
     # highlight: rim glow driven by object property "hl"
     fr = N.new('ShaderNodeLayerWeight'); fr.inputs['Blend'].default_value = .35
-    rim = math('ADD', math('MULTIPLY', fr.outputs['Facing'], 1.6), .12)
+    rim = math('ADD', math('MULTIPLY', fr.outputs['Facing'], .9), .05)
     glow = math('MULTIPLY', rim, attr('hl'))
     # flow: travelling pulse = distance from origin (object prop flow_x/y/z) minus time
     geo = N.new('ShaderNodeNewGeometry'); comb = N.new('ShaderNodeCombineXYZ')
@@ -58,9 +58,9 @@ def organ_material(cls):
     clk = N.new('ShaderNodeGroup'); clk.node_tree = CLOCK
     phase = math('SUBTRACT', math('MULTIPLY', dist.outputs['Value'], 14.0), math('MULTIPLY', clk.outputs[0], 9.0 * FLOW.get(cls, 1)))
     wave = math('POWER', math('MULTIPLY', math('ADD', math('SINE', phase, 0), 1), .5), 10)
-    flow = math('MULTIPLY', wave, math('MULTIPLY', attr('flow'), 4.0))
+    flow = math('MULTIPLY', wave, math('MULTIPLY', attr('flow'), 1.3))
     em = math('ADD', glow, flow)
-    glowcol = tuple(min(1, x * 1.35) for x in c)
+    glowcol = tuple((x / max(c)) ** 2.2 for x in c)          # saturated glow: organ keeps its own colour, never turns white
     b.inputs['Emission Color'].default_value = (*glowcol, 1); L.new(em, b.inputs['Emission Strength'])
     # ghost: 0 = solid, 1 = invisible
     tr = N.new('ShaderNodeBsdfTransparent'); mx = N.new('ShaderNodeMixShader')

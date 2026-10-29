@@ -100,35 +100,52 @@ def overlay(f):
 
 # ---------------------------------------------------------------- sound design (no external audio)
 def make_audio(path):
-    sr = 44100; n = int(N / FPS * sr); tt = np.arange(n) / sr; rng = np.random.default_rng(3)
-    a = np.zeros(n)
-    for fr, amp in ((55, .25), (82.4, .18), (110, .12), (164.8, .06), (220, .04)):   # A-minor space pad
-        a += amp * np.sin(2 * np.pi * fr * tt + rng.random() * 6) * (1 + .3 * np.sin(2 * np.pi * .13 * tt + fr))
-    a *= np.clip(tt / 1.5, 0, 1) * np.clip((N / FPS - tt) / 1.5, 0, 1)
+    """Phone-audible mix: male voiceover on top, soft music ducked under it, heartbeat/whoosh/chime effects."""
+    sr = 44100; total = N / FPS; n = int(total * sr); tt = np.arange(n) / sr; rng = np.random.default_rng(3)
+    music = np.zeros(n)
+    for fr, amp in ((220, .10), (261.6, .08), (329.6, .07), (440, .035)):            # warm A-minor pad, mid range
+        music += amp * np.sin(2 * np.pi * fr * tt + rng.random() * 6) * (.75 + .25 * np.sin(2 * np.pi * .2 * tt + fr))
+    notes = (440, 523.3, 659.3, 880, 659.3, 523.3)                                    # gentle pluck arpeggio
+    for k, t0 in enumerate(np.arange(.4, total - .4, .5)):
+        i0 = int(t0 * sr); m = min(int(.45 * sr), n - i0); x = np.arange(m) / sr; fr = notes[k % len(notes)]
+        music[i0:i0 + m] += .09 * (np.sin(2 * np.pi * fr * x) + .3 * np.sin(4 * np.pi * fr * x)) * np.exp(-x * 7)
+    music *= np.clip(tt / 1.0, 0, 1) * np.clip((total - tt) / 1.2, 0, 1)
+    fx = np.zeros(n)
     def burst(t0, dur, lo, hi, amp):
-        i0 = int(t0 * sr); m = int(dur * sr); w = rng.standard_normal(m)
-        spec = np.fft.rfft(w); fq = np.fft.rfftfreq(m, 1 / sr); spec[(fq < lo) | (fq > hi)] = 0
-        s = np.fft.irfft(spec, m); env = np.sin(np.pi * np.linspace(0, 1, m)) ** 2
-        a[i0:i0 + m] += amp * s / (np.abs(s).max() + 1e-9) * env[:len(a[i0:i0 + m])]
-    for s0 in START[1:]: burst(s0 / FPS - .35, .7, 300, 4000, .35)                   # whoosh at every cut
+        i0 = max(0, int(t0 * sr)); m = min(int(dur * sr), n - i0)
+        if m <= 0: return
+        w = rng.standard_normal(m); spec = np.fft.rfft(w); fq = np.fft.rfftfreq(m, 1 / sr); spec[(fq < lo) | (fq > hi)] = 0
+        x = np.fft.irfft(spec, m); fx[i0:i0 + m] += amp * x / (np.abs(x).max() + 1e-9) * np.sin(np.pi * np.linspace(0, 1, m)) ** 2
+    for s0 in START[1:]: burst(s0 / FPS - .3, .6, 500, 6000, .22)                      # whoosh at every cut
     for i, scn in enumerate(TL['scenes']):
         t0 = START[i] / FPS; dur = LEN[i] / FPS
         if 'quiz' in scn:
-            for k, fr in ((t0 + .3, 880), (t0 + .5, 1318.5)):
-                i0 = int(k * sr); m = int(1.5 * sr); e = np.exp(-np.linspace(0, 6, m))
-                a[i0:i0 + m] += .22 * np.sin(2 * np.pi * fr * np.arange(m) / sr)[:len(a[i0:i0 + m])] * e[:len(a[i0:i0 + m])]
-        if 'beat' in scn.get('effects', []):          # lub-dub synced with the 3D heartbeat (72 bpm)
+            for k, fr in ((t0 + .2, 880), (t0 + .38, 1318.5)):
+                i0 = int(k * sr); m = min(int(1.2 * sr), n - i0); x = np.arange(m) / sr
+                fx[i0:i0 + m] += .25 * np.sin(2 * np.pi * fr * x) * np.exp(-x * 5)
+        if 'beat' in scn.get('effects', []):                                          # lub-dub, audible on phone speakers
             beat = 0
             while (bt := beat / 1.2) < t0 + dur:
-                for off, amp in ((.1 / 1.2, .5), (.32 / 1.2, .3)):
-                    tt0 = bt + off
-                    if t0 <= tt0 < t0 + dur:
-                        i0 = int(tt0 * sr); m = int(.16 * sr); x = np.arange(m) / sr
-                        a[i0:i0 + m] += amp * np.sin(2 * np.pi * 55 * x)[:len(a[i0:i0 + m])] * np.exp(-x * 30)[:len(a[i0:i0 + m])]
+                for off, amp in ((.1 / 1.2, .55), (.32 / 1.2, .35)):
+                    t1 = bt + off
+                    if t0 <= t1 < t0 + dur:
+                        i0 = int(t1 * sr); m = min(int(.14 * sr), n - i0); x = np.arange(m) / sr
+                        fx[i0:i0 + m] += amp * (np.sin(2 * np.pi * 75 * x) + .6 * np.sin(2 * np.pi * 150 * x) + .35 * np.sin(2 * np.pi * 300 * x)) * np.exp(-x * 28)
                 beat += 1
-    a = a / np.abs(a).max() * .7
+    voice = np.zeros(n); vj = OUT / 'voice' / 'voice.json'
+    if vj.exists() and json.loads(vj.read_text()).get('provider'):
+        for i in range(len(TL['scenes'])):
+            p = OUT / 'voice' / f'seg_{i}.wav'
+            if not p.exists(): continue
+            with wave.open(str(p)) as w: v = np.frombuffer(w.readframes(w.getnframes()), '<i2').astype(np.float32) / 32768
+            i0 = int((START[i] / FPS + .25) * sr); m = min(len(v), n - i0)
+            if m > 0: voice[i0:i0 + m] += v[:m]
+        if np.abs(voice).max() > 0: voice *= .9 / np.abs(voice).max()
+    env = np.convolve(np.abs(voice), np.ones(int(.12 * sr)) / int(.12 * sr), 'same'); env = np.clip(env / (env.max() + 1e-9) * 3, 0, 1)
+    mix = voice + (music * (1 - .7 * env)) * 1.0 + fx * (1 - .5 * env)
+    mix *= .95 / (np.abs(mix).max() + 1e-9)
     with wave.open(str(path), 'wb') as wv:
-        wv.setnchannels(1); wv.setsampwidth(2); wv.setframerate(sr); wv.writeframes((a * 32767).astype(np.int16).tobytes())
+        wv.setnchannels(1); wv.setsampwidth(2); wv.setframerate(sr); wv.writeframes((mix * 32767).astype(np.int16).tobytes())
 
 if __name__ == '__main__':
     wav = OUT / 'soundtrack.wav'; make_audio(wav)

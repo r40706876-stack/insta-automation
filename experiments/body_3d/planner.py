@@ -25,7 +25,7 @@ PROMPT = """तुम MinuteMe GS (SSC, Railway, State परीक्षाए�
 2. हर scene 3.5 से 7 sec, कुल 25-40 sec। title ≤ 30 अक्षर, sub ≤ 48 अक्षर, आसान बोलचाल की हिंदी।
 3. तथ्य सिर्फ़ NCERT स्तर के पक्के तथ्य। कोई संख्या तभी जब पाठ्यपुस्तक में मानक हो। शक हो तो संख्या मत लिखो।
 4. हर scene में कहानी एक कदम आगे बढ़े (कारण → असर)। एक जैसी बात दोहराना मना।
-5. camera.focus, solid, labels, hide, flow: में सिर्फ़ नीचे की keys। labels अधिकतम 3, और वे keys जिनकी layer "layers" में हो।
+5. camera.focus में वही खास अंग लिखो जिसकी बात हो रही है (viscera_other/bones/nerves नहीं)। camera.focus, solid, labels, hide, flow: में सिर्फ़ नीचे की keys। labels अधिकतम 3, और वे keys जिनकी layer "layers" में हो।
 6. camera.angle ∈ {angles}; camera.move ∈ {moves}; camera.zoom 0.7-1.6।
 7. layers ∈ {layers}। effects ∈ "beat" (दिल धड़कना), "breathe" (फेफड़े), "flow:<key>" (उस अंग में बहाव की चमक: खून/नस/भोजन/हवा), "sequence:<key1>,<key2>,..." (अंग क्रम से चमकें, जैसे भोजन का रास्ता)।
 8. steps: 3-4 छोटे शब्द (≤ 10 अक्षर), हर scene का "step" उसका index (hook = -1)।
@@ -56,6 +56,8 @@ def validate(p):
         if cam.get('angle', 'front') not in ANGLES: E.append(f'{tag}: bad angle')
         if cam.get('move', 'push') not in MOVES: E.append(f'{tag}: bad move')
         if not .7 <= cam.get('zoom', 1) <= 1.6: E.append(f'{tag}: zoom 0.7-1.6')
+        if any(k in ('viscera_other', 'bones', 'nerves', 'skin') for k in cam.get('focus', [])) and i > 0:
+            E.append(f'{tag}: camera.focus must name the specific organ, not a catch-all group')
         for k in cam.get('focus', []) + s.get('solid', []) + s.get('hide', []):
             if k not in IDX: E.append(f'{tag}: unknown key {k}')
         labs = s.get('labels', [])
