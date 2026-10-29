@@ -1,0 +1,219 @@
+{
+ "topic": "धमनी और शिरा में अंतर",
+ "brand": "मानव शरीर",
+ "fps": 24,
+ "steps": [
+  "धमनी",
+  "शिरा",
+  "दीवार",
+  "याद"
+ ],
+ "scenes": [
+  {
+   "id": "hook",
+   "seconds": 3.21,
+   "title": "लाल नली या नीली नली?",
+   "sub": "धमनी और शिरा का असली फ़र्क",
+   "camera": {
+    "focus": [
+     "heart",
+     "aorta"
+    ],
+    "angle": "three_quarter",
+    "move": "push",
+    "zoom": 1.1
+   },
+   "layers": [
+    "skin",
+    "cardio"
+   ],
+   "solid": [
+    "heart",
+    "aorta",
+    "arteries",
+    "veins"
+   ],
+   "effects": [
+    "travel:heart,aorta,arteries"
+   ],
+   "labels": [
+    "heart"
+   ],
+   "step": -1
+  },
+  {
+   "id": "artery",
+   "seconds": 4.99,
+   "title": "धमनी: दिल से बाहर",
+   "sub": "ऑक्सीजन वाला शुद्ध खून शरीर तक ले जाती है",
+   "camera": {
+    "focus": [
+     "skin"
+    ],
+    "angle": "three_quarter",
+    "move": "push",
+    "zoom": 1.35
+   },
+   "layers": [
+    "skin",
+    "cardio"
+   ],
+   "solid": [
+    "heart",
+    "aorta",
+    "arteries"
+   ],
+   "effects": [
+    "beat",
+    "travel:heart,aorta,arteries",
+    "flow:arteries"
+   ],
+   "labels": [
+    "aorta"
+   ],
+   "hide": [
+    "veins",
+    "vena_cava"
+   ],
+   "step": 0
+  },
+  {
+   "id": "vein",
+   "seconds": 4.5,
+   "title": "शिरा: वापस दिल तक",
+   "sub": "अशुद्ध खून लौटाती है, इसमें वाल्व होते हैं",
+   "camera": {
+    "focus": [
+     "skin"
+    ],
+    "angle": "three_quarter_left",
+    "move": "pull",
+    "zoom": 1.35
+   },
+   "layers": [
+    "skin",
+    "cardio"
+   ],
+   "solid": [
+    "heart",
+    "veins",
+    "vena_cava"
+   ],
+   "effects": [
+    "beat",
+    "travel:veins,vena_cava,heart",
+    "flow:veins"
+   ],
+   "labels": [
+    "vena_cava"
+   ],
+   "hide": [
+    "arteries",
+    "aorta"
+   ],
+   "step": 1
+  },
+  {
+   "id": "wall",
+   "seconds": 4.5,
+   "title": "धमनी की दीवार मोटी",
+   "sub": "तेज़ दबाव झेलती है, शिरा की दीवार पतली",
+   "camera": {
+    "focus": [
+     "heart",
+     "aorta"
+    ],
+    "angle": "front",
+    "move": "orbit",
+    "zoom": 1.2
+   },
+   "layers": [
+    "skin",
+    "cardio"
+   ],
+   "solid": [
+    "heart",
+    "aorta",
+    "vena_cava"
+   ],
+   "effects": [
+    "beat",
+    "flow:aorta"
+   ],
+   "labels": [
+    "aorta",
+    "vena_cava"
+   ],
+   "step": 2
+  },
+  {
+   "id": "trap",
+   "seconds": 4.5,
+   "title": "गलती: हर धमनी में शुद्ध खून",
+   "sub": "सही: फुफ्फुसीय धमनी में अशुद्ध खून",
+   "camera": {
+    "focus": [
+     "heart",
+     "aorta"
+    ],
+    "angle": "front",
+    "move": "orbit",
+    "zoom": 1.2
+   },
+   "layers": [
+    "skin",
+    "cardio"
+   ],
+   "solid": [
+    "heart",
+    "aorta",
+    "vena_cava"
+   ],
+   "effects": [
+    "beat",
+    "flow:aorta"
+   ],
+   "labels": [
+    "aorta"
+   ],
+   "trap": true,
+   "step": 3
+  },
+  {
+   "id": "quiz",
+   "seconds": 8.43,
+   "title": "परीक्षा का पक्का सवाल",
+   "sub": "",
+   "camera": {
+    "focus": [
+     "heart"
+    ],
+    "angle": "three_quarter",
+    "move": "orbit",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "cardio"
+   ],
+   "solid": [
+    "heart"
+   ],
+   "effects": [
+    "beat",
+    "travel:veins,vena_cava,heart"
+   ],
+   "labels": [],
+   "quiz": {
+    "q": "किस नली में वाल्व होते हैं?",
+    "a": "A) शिरा",
+    "b": "B) धमनी",
+    "cta": "जवाब कमेंट में लिखो",
+    "ans": "a"
+   },
+   "step": 3
+  }
+ ],
+ "day": 3,
+ "next": "धमनी में अशुद्ध खून?"
+}
