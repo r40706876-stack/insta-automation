@@ -1,0 +1,9 @@
+Plan repair 1 Every scene needs at least two animated objects, not a static poster
+Plan repair 2 Meaningful movement needs a visible path
+Plan repair 3 Map requires a bundled sourced region
+Traceback (most recent call last):
+  File "/home/runner/work/insta-automation/insta-automation/gs_animation_studio/planner.py", line 225, in <module>
+    generate(sys.argv[1],sys.argv[2],os.getenv('STUDIO_TOPIC_TEXT','').strip(),os.getenv('STUDIO_SUBJECT','auto'),os.getenv('STUDIO_REFERENCE_TEXT',''))
+  File "/home/runner/work/insta-automation/insta-automation/gs_animation_studio/planner.py", line 221, in generate
+    raise RuntimeError('New-topic plan failed validation after three attempts: '+str(errors))
+RuntimeError: New-topic plan failed validation after three attempts: ['Every scene needs at least two animated objects, not a static poster', 'Meaningful movement needs a visible path', 'Map requires a bundled sourced region']

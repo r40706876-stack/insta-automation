@@ -1,0 +1,387 @@
+{
+  "title": "इत्सिंग की ताम्रलिप्ति यात्रा",
+  "subject": "इतिहास",
+  "topic_key": "chiini_yatri_itsing_tamralipti_sanskrit",
+  "share_reason": "साथी को अक्सर इस प्रश्न का उत्तर नहीं पता, यह रील मदद करेगी",
+  "recall": "इत्सिंग ने ताम्रलिप्ति में संस्कृत सीखी।",
+  "share_card": {
+    "kind": "exam_confusion",
+    "recipient": "परीक्षा की तैयारी करने वाले मित्र",
+    "benefit": "इत्सिंग ने कहाँ संस्कृत सीखी, विकल्पों में भ्रम दूर",
+    "cta": "चलो साथ मिलकर इस प्रश्न को याद रखें!"
+  },
+  "scenes": [
+    {
+      "heading": "इत्सिंग कहाँ गया?",
+      "explanation": "प्रश्न का परिचय",
+      "speech": "चीनी यात्री इत्सिंग भारत आया, वह कहाँ संस्कृत सीखा?",
+      "teaches": "प्रश्न पहचानना",
+      "setting": "institution",
+      "visual_action": "एक मानचित्र पर मार्ग ट्रेस होता है, जहाज़ चलता है",
+      "objects": [
+        {
+          "kind": "map",
+          "action": "trace",
+          "label": "मार्ग",
+          "id": "object_0",
+          "color": "#59c7c5",
+          "pos": [
+            -0.9,
+            0,
+            0
+          ],
+          "size": [
+            1.1,
+            1.1,
+            1.1
+          ]
+        },
+        {
+          "kind": "ship",
+          "action": "move",
+          "label": "इत्सिंग का जहाज़",
+          "id": "object_1",
+          "color": "#59c7c5",
+          "pos": [
+            0.45,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            1.65,
+            0,
+            0
+          ]
+        }
+      ],
+      "text_color": "#FFFFFF",
+      "explanation_color": "#FFFF00",
+      "quiz_card": {
+        "question": "इत्सिंग ने संस्कृत कहाँ सीखी?",
+        "answer": "ताम्रलिप्ति",
+        "reveal_after": 2.5,
+        "answer_color": "#73efb2"
+      }
+    },
+    {
+      "heading": "समुद्री मार्ग",
+      "explanation": "समुद्र से यात्रा",
+      "speech": "इत्सिंग दक्षिण के समुद्री मार्ग से सुमात्रा, लंका होते हुए भारत पहुँचा।",
+      "teaches": "मार्ग समझना",
+      "setting": "coast",
+      "visual_action": "समुद्र में जहाज़ चलता है, लहरें बहती हैं",
+      "objects": [
+        {
+          "kind": "ship",
+          "action": "move",
+          "label": "जहाज़",
+          "id": "object_0",
+          "color": "#59c7c5",
+          "pos": [
+            -1.35,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            -0.15,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "ocean",
+          "action": "wave",
+          "label": "समुद्र",
+          "id": "object_1",
+          "color": "#59c7c5",
+          "pos": [
+            0.9,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        }
+      ],
+      "text_color": "#FFFFFF",
+      "explanation_color": "#FFFF00"
+    },
+    {
+      "heading": "ताम्रलिप्ति आगमन",
+      "explanation": "बंदरगाह पर पहुँचना",
+      "speech": "वह ताम्रलिप्ति के बंदरगाह पर पहुँचा और किनारे पर उतरा।",
+      "teaches": "गंतव्य पहचानना",
+      "setting": "coast",
+      "visual_action": "जहाज़ बंदरगाह में रुकता है, व्यक्ति चलता है",
+      "objects": [
+        {
+          "kind": "ship",
+          "action": "move",
+          "label": "जहाज़",
+          "id": "object_0",
+          "color": "#59c7c5",
+          "pos": [
+            -1.35,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            -0.15,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "person",
+          "action": "walk",
+          "label": "इत्सिंग",
+          "id": "object_1",
+          "color": "#f4e7bf",
+          "pos": [
+            0.45,
+            0,
+            0
+          ],
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ],
+          "to": [
+            1.65,
+            0,
+            0
+          ]
+        }
+      ],
+      "text_color": "#FFFFFF",
+      "explanation_color": "#FFFF00"
+    },
+    {
+      "heading": "संस्कृत अध्ययन",
+      "explanation": "पढ़ाई शुरू करना",
+      "speech": "ताम्रलिप्ति में वह एक विद्यालय में जाकर संस्कृत का अध्ययन शुरू किया।",
+      "teaches": "अध्ययन प्रक्रिया",
+      "setting": "institution",
+      "visual_action": "व्यक्ति पुस्तक की ओर इशारा करता है, पुस्तक उठती है",
+      "objects": [
+        {
+          "kind": "person",
+          "action": "walk",
+          "label": "इत्सिंग",
+          "id": "object_0",
+          "color": "#f4e7bf",
+          "pos": [
+            -1.35,
+            0,
+            0
+          ],
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ],
+          "to": [
+            -0.15,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "book",
+          "action": "rise",
+          "label": "संस्कृत ग्रंथ",
+          "id": "object_1",
+          "color": "#59c7c5",
+          "pos": [
+            0.9,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            0.9,
+            0,
+            1.2
+          ]
+        }
+      ],
+      "text_color": "#FFFFFF",
+      "explanation_color": "#FFFF00"
+    },
+    {
+      "heading": "तीन वर्ष अभ्यास",
+      "explanation": "लगातार पढ़ाई",
+      "speech": "तीन साल तक वह लगातार संस्कृत के ग्रंथ पढ़ता और अभ्यास करता रहा।",
+      "teaches": "अवधि और निरंतरता",
+      "setting": "institution",
+      "visual_action": "पुस्तकों का ढेर बढ़ता है, व्यक्ति चलता है",
+      "objects": [
+        {
+          "kind": "book",
+          "action": "grow",
+          "label": "ज्ञान पुस्तक",
+          "id": "object_0",
+          "color": "#59c7c5",
+          "pos": [
+            -1.8,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        {
+          "kind": "book",
+          "action": "grow",
+          "label": "दूसरी पुस्तक",
+          "id": "object_1",
+          "color": "#59c7c5",
+          "pos": [
+            0.0,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        {
+          "kind": "person",
+          "action": "walk",
+          "label": "इत्सिंग",
+          "id": "object_2",
+          "color": "#f4e7bf",
+          "pos": [
+            1.35,
+            0,
+            0
+          ],
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ],
+          "to": [
+            2.55,
+            0,
+            0
+          ]
+        }
+      ],
+      "text_color": "#FFFFFF",
+      "explanation_color": "#FFFF00"
+    },
+    {
+      "heading": "सही उत्तर",
+      "explanation": "ताम्रलिप्ति याद रखें",
+      "speech": "इत्सिंग ने ताम्रलिप्ति में तीन वर्ष ठहरकर संस्कृत सीखी, यही उत्तर है।",
+      "teaches": "मुख्य तथ्य स्मरण",
+      "setting": "institution",
+      "visual_action": "एक पुस्तक खुलती है, उत्तर ताम्रलिप्ति पर तीर इशारा करता है",
+      "objects": [
+        {
+          "kind": "book",
+          "action": "rise",
+          "label": "उत्तर पुस्तक",
+          "id": "object_0",
+          "color": "#59c7c5",
+          "pos": [
+            -1.8,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            -1.8,
+            0,
+            1.2
+          ]
+        },
+        {
+          "kind": "arrow",
+          "action": "move",
+          "label": "संकेत तीर",
+          "id": "object_1",
+          "color": "#59c7c5",
+          "pos": [
+            -0.45,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            0.75,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "person",
+          "action": "walk",
+          "label": "पाठक",
+          "id": "object_2",
+          "color": "#f4e7bf",
+          "pos": [
+            1.35,
+            0,
+            0
+          ],
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ],
+          "to": [
+            2.55,
+            0,
+            0
+          ]
+        }
+      ],
+      "text_color": "#FFFFFF",
+      "explanation_color": "#FFFF00",
+      "quiz_card": {
+        "question": "इत्सिंग ने संस्कृत कहाँ सीखी?",
+        "answer": "ताम्रलिप्ति",
+        "reveal_after": 2.5,
+        "answer_color": "#73efb2"
+      }
+    }
+  ]
+}
