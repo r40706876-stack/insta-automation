@@ -5,11 +5,58 @@ name: Human Body 3D reel (Blender template)
 on:
   workflow_dispatch:
     inputs:
+      topic:
+        description: 'Topic chuno (sabse upar wala = taiyaar demo)'
+        type: choice
+        default: 'दिल और खून का सफ़र (तैयार demo)'
+        options:
+          - 'दिल और खून का सफ़र (तैयार demo)'
+          - 'अपना topic लिखूँगा (नीचे topic_text में)'
+          - 'दिल एक दिन में कितनी बार धड़कता है'
+          - 'धमनी और शिरा में अंतर'
+          - 'फुफ्फुसीय धमनी अशुद्ध खून क्यों ले जाती है'
+          - 'दोहरा परिसंचरण: दिल से फेफड़े और पूरा शरीर'
+          - 'महाधमनी: शरीर की सबसे बड़ी धमनी'
+          - 'साँस लेने की प्रक्रिया: नाक से फेफड़ों तक'
+          - 'श्वासनली और श्वसनी का काम'
+          - 'स्वरयंत्र: आवाज़ कहाँ से बनती है'
+          - 'फेफड़े: शरीर में ऑक्सीजन का दरवाज़ा'
+          - 'पाचन तंत्र में भोजन का सफ़र'
+          - 'ग्रासनली: भोजन की नली'
+          - 'आमाशय में भोजन का पाचन'
+          - 'छोटी आँत में पाचन और अवशोषण'
+          - 'बड़ी आँत का काम'
+          - 'अपेंडिक्स: एक अवशेषी अंग'
+          - 'जीभ और स्वाद'
+          - 'यकृत: शरीर की सबसे बड़ी ग्रंथि'
+          - 'पित्ताशय और पित्त रस का काम'
+          - 'अग्न्याशय: इंसुलिन बनाने वाली ग्रंथि'
+          - 'किडनी खून को कैसे साफ़ करती है'
+          - 'मूत्र तंत्र: किडनी से मूत्राशय तक'
+          - 'थायरॉइड ग्रंथि और आयोडीन'
+          - 'अधिवृक्क ग्रंथि: आपातकाल का हार्मोन एड्रेनालिन'
+          - 'मानव शरीर की प्रमुख अंतःस्रावी ग्रंथियाँ'
+          - 'मस्तिष्क के भाग और उनके काम'
+          - 'अनुमस्तिष्क: शरीर का संतुलन'
+          - 'मेरुरज्जु और प्रतिवर्ती क्रिया'
+          - 'तंत्रिका तंत्र: संदेश कैसे जाता है'
+          - 'मानव आँख की बनावट'
+          - 'मानव कंकाल: वयस्क में 206 हड्डियाँ'
+          - 'सबसे लंबी हड्डी: फीमर'
+          - 'सबसे छोटी हड्डी: स्टेपीज़ (कान में)'
+          - 'खोपड़ी: मस्तिष्क का कवच'
+          - 'रीढ़ की हड्डी की बनावट'
+          - 'पसलियाँ: दिल और फेफड़ों की रक्षा'
+          - 'दाँतों के प्रकार और काम'
+          - 'हाथ और पैर की हड्डियाँ'
+          - 'श्रोणि (पेल्विस) की हड्डी'
+          - 'मानव शरीर के प्रमुख अंग तंत्र'
+          - 'मानव शरीर के सबसे बड़े अंग: त्वचा और यकृत'
       topic_text:
-        description: 'Topic in Hindi (empty = use topic_file)'
+        description: 'Sirf tab bharo jab upar "अपना topic लिखूँगा" chuna ho'
         default: ''
       topic_file:
-        description: 'Ready-made topic JSON inside experiments/body_3d/'
+        description: 'Taiyaar demo JSON (badalne ki zarurat nahi)'
         default: 'topics/heart_blood.json'
       chunks:
         description: 'Parallel render machines (1-20)'
@@ -27,6 +74,7 @@ env:
 jobs:
   plan:
     runs-on: ubuntu-24.04
+    timeout-minutes: 45
     outputs:
       matrix: ${{ steps.m.outputs.matrix }}
       frames: ${{ steps.m.outputs.frames }}
@@ -35,12 +83,19 @@ jobs:
       - uses: actions/setup-python@v5
         with: { python-version: '3.11' }
       - name: Topic plan (Gemini, validated) or ready JSON
+        timeout-minutes: 30
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          TOPIC_CHOICE: ${{ github.event.inputs.topic }}
           TOPIC_TEXT: ${{ github.event.inputs.topic_text }}
         run: |
           cd "$BODY_DIR"
-          if [ -n "$TOPIC_TEXT" ]; then pip install -q requests; python planner.py "$TOPIC_TEXT" plan.json
+          case "$TOPIC_CHOICE" in
+            *"तैयार demo"*) T="" ;;
+            *"अपना topic"*) T="$TOPIC_TEXT"; [ -n "$T" ] || { echo "topic_text khaali hai"; exit 1; } ;;
+            *) T="$TOPIC_CHOICE" ;;
+          esac
+          if [ -n "$T" ]; then pip install -q requests; python planner.py "$T" plan.json
           else cp "${{ github.event.inputs.topic_file }}" plan.json; fi
           cat plan.json
       - id: m
@@ -58,6 +113,7 @@ jobs:
 
   assets:
     runs-on: ubuntu-24.04
+    timeout-minutes: 120
     steps:
       - uses: actions/checkout@v4
       - id: c
@@ -81,7 +137,7 @@ jobs:
   render:
     needs: [plan, assets]
     runs-on: ubuntu-24.04
-    timeout-minutes: 300
+    timeout-minutes: 355
     strategy:
       fail-fast: false
       matrix: ${{ fromJson(needs.plan.outputs.matrix) }}
@@ -118,6 +174,7 @@ jobs:
   compose:
     needs: [plan, render]
     runs-on: ubuntu-24.04
+    timeout-minutes: 120
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5

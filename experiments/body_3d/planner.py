@@ -75,22 +75,33 @@ def validate(p):
     return E
 
 def ask(prompt):
+    import time
+    last = ''
     for model in ('gemini-2.5-flash', 'gemini-2.5-flash-lite'):
-        r = requests.post(f'https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent',
-                          headers={'x-goog-api-key': os.environ['GEMINI_API_KEY']}, timeout=120,
-                          json={'contents': [{'parts': [{'text': prompt}]}],
-                                'generationConfig': {'temperature': .35, 'responseMimeType': 'application/json'}})
-        if r.ok:
-            txt = r.json()['candidates'][0]['content']['parts'][0]['text']
-            return json.loads(re.sub(r'^```(json)?|```$', '', txt.strip()))
-        print('model failed', model, r.status_code, r.text[:200])
-    raise RuntimeError('Gemini unavailable')
+        for wait in (0, 20, 60, 120):              # busy / rate-limit: wait and try again
+            time.sleep(wait)
+            try:
+                r = requests.post(f'https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent',
+                                  headers={'x-goog-api-key': os.environ['GEMINI_API_KEY']}, timeout=300,
+                                  json={'contents': [{'parts': [{'text': prompt}]}],
+                                        'generationConfig': {'temperature': .35, 'responseMimeType': 'application/json'}})
+            except requests.RequestException as e:
+                last = str(e); print('network', model, last[:120]); continue
+            if r.ok:
+                try:
+                    txt = r.json()['candidates'][0]['content']['parts'][0]['text']
+                    return json.loads(re.sub(r'^```(json)?|```$', '', txt.strip()))
+                except (KeyError, IndexError, ValueError) as e:
+                    last = 'bad answer: ' + str(e); print(last); continue
+            last = f'{r.status_code} {r.text[:160]}'; print('model failed', model, last)
+            if r.status_code not in (429, 500, 502, 503, 504): break
+    raise RuntimeError('Gemini unavailable: ' + last)
 
 if __name__ == '__main__':
     topic, out = sys.argv[1], Path(sys.argv[2])
     base = PROMPT.format(topic=topic, example=EXAMPLE, catalog=catalog(), angles=sorted(ANGLES), moves=sorted(MOVES), layers=sorted(LAYERS))
     prompt, errors = base, []
-    for attempt in range(3):
+    for attempt in range(5):
         plan = ask(prompt); errors = validate(plan)
         if not errors:
             plan.setdefault('fps', 24); plan.setdefault('brand', 'मानव शरीर')

@@ -34,7 +34,7 @@ jobs:
   render:
     needs: plan
     runs-on: ubuntu-24.04
-    timeout-minutes: 300
+    timeout-minutes: 355
     strategy:
       fail-fast: false
       matrix: ${{ fromJson(needs.plan.outputs.matrix) }}
@@ -87,6 +87,7 @@ jobs:
   compose:
     needs: render
     runs-on: ubuntu-24.04
+    timeout-minutes: 120
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
