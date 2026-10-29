@@ -12,7 +12,7 @@ on:
 
 concurrency:
   group: minuteme-timer
-  cancel-in-progress: true
+  cancel-in-progress: false   # naya timer purane ko kabhi nahi kaatta (dohri post nahi); chain tooti ho to turant chalta hai
 
 permissions:
   actions: write
