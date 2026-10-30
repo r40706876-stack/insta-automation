@@ -214,7 +214,8 @@ jobs:
           else
             echo "::warning title=self-heal::latest renderer failed the smoke test, rolling back: $(grep -E 'Error|Traceback' /tmp/smoke.log | tail -3 | tr '\n' ' ')"
             git fetch -q --tags origin
-            git checkout body3d-good -- body_scene.py compose.py
+            REF=body3d-good; git rev-parse -q --verify refs/tags/body3d-good >/dev/null || REF=e1c348d3c0edc6f4ba068d637b3786eb8b8abbb3   # first good real video
+            git checkout "$REF" -- body_scene.py compose.py
             smoke || { echo "::error title=smoke failed even after rollback::$(tail -c 1500 /tmp/smoke.log | tr '\n' ' ')"; exit 1; }
             echo "rolled_back=true" >> "$GITHUB_OUTPUT"; echo "::notice title=self-heal::rolled back to body3d-good and it works"
           fi
