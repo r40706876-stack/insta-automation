@@ -1,0 +1,511 @@
+{
+  "ok": true,
+  "reasons": [],
+  "novel_topic": true,
+  "scene_checks": [
+    {
+      "scene": 1,
+      "mechanism_matches": true
+    },
+    {
+      "scene": 2,
+      "mechanism_matches": true
+    },
+    {
+      "scene": 3,
+      "mechanism_matches": true
+    },
+    {
+      "scene": 4,
+      "mechanism_matches": true
+    },
+    {
+      "scene": 5,
+      "mechanism_matches": true
+    },
+    {
+      "scene": 6,
+      "mechanism_matches": true
+    }
+  ],
+  "title": "कर्नाटक संगीत त्रिमूर्ति",
+  "subject": "स्टैटिक जीके",
+  "topic_key": "karnataka_sangeet_trimurti",
+  "share_reason": "कर्नाटक संगीत की त्रिमूर्ति को याद रखना आसान बनाता है",
+  "recall": "त्यागराज, मुथुस्वामी दीक्षिता और श्यामा शास्त्री कर्नाटक संगीत की त्रिमूर्ति हैं।",
+  "share_card": {
+    "kind": "exam_confusion",
+    "recipient": "परीक्षा की तैयारी करने वाले मित्र",
+    "benefit": "त्रिमूर्ति के तीन नाम जल्दी याद रखें",
+    "cta": "क्या आप त्रिमूर्ति के नाम बता सकते हैं?"
+  },
+  "scenes": [
+    {
+      "heading": "त्रिमूर्ति प्रश्न",
+      "explanation": "कौन हैं ये संगीतकार",
+      "speech": "कर्नाटक संगीत की त्रिमूर्ति में कौन-कौन शामिल हैं, आप जानते हैं?",
+      "teaches": "प्रश्न पहचान और जिज्ञासा उत्पन्न करना",
+      "setting": "institution",
+      "visual_action": "एक व्यक्ति मंच पर चलता है और तीन सिलेंडर उठते दिखते हैं",
+      "text_color": "#FFFFFF",
+      "explanation_color": "#FFD700",
+      "objects": [
+        {
+          "kind": "person",
+          "action": "walk",
+          "label": "प्रश्नकर्ता",
+          "color": "#f4e7bf",
+          "id": "obj1",
+          "pos": [
+            -3.0,
+            0,
+            0
+          ],
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ],
+          "to": [
+            -1.8571,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "cylinder",
+          "action": "rise",
+          "label": "सिलेंडर1",
+          "color": "#a0a0a0",
+          "id": "obj2",
+          "pos": [
+            -0.8571,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            -0.8571,
+            0,
+            1.2
+          ]
+        },
+        {
+          "kind": "cylinder",
+          "action": "rise",
+          "label": "सिलेंडर2",
+          "color": "#a0a0a0",
+          "id": "obj3",
+          "pos": [
+            0.8571,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            0.8571,
+            0,
+            1.2
+          ]
+        },
+        {
+          "kind": "cylinder",
+          "action": "rise",
+          "label": "",
+          "color": "#a0a0a0",
+          "id": "obj4",
+          "pos": [
+            2.5714,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            2.5714,
+            0,
+            1.2
+          ]
+        }
+      ],
+      "quiz_card": {
+        "question": "कर्नाटक संगीत की त्रिमूर्ति में कौन है?",
+        "answer": "त्यागराज",
+        "reveal_after": 2.5,
+        "answer_color": "#73efb2"
+      }
+    },
+    {
+      "heading": "त्रिमूर्ति सदस्य",
+      "explanation": "तीन महान कलाकार",
+      "speech": "यह हैं त्यागराज, मुथुस्वामी दीक्षिता और श्यामा शास्त्री, कर्नाटक संगीत के महान कलाकार।",
+      "teaches": "त्रिमूर्ति के तीन सदस्यों का परिचय",
+      "setting": "institution",
+      "visual_action": "तीन संगीतकार मंच पर चलते हुए आते हैं",
+      "text_color": "#FFFFFF",
+      "explanation_color": "#FFD700",
+      "objects": [
+        {
+          "kind": "person",
+          "action": "walk",
+          "label": "त्यागराज",
+          "color": "#f4e7bf",
+          "id": "obj5",
+          "pos": [
+            -2.25,
+            0,
+            0
+          ],
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ],
+          "to": [
+            -1.05,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "person",
+          "action": "walk",
+          "label": "दीक्षिता",
+          "color": "#f4e7bf",
+          "id": "obj6",
+          "pos": [
+            -0.45,
+            0,
+            0
+          ],
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ],
+          "to": [
+            0.75,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "person",
+          "action": "walk",
+          "label": "श्यामा शास्त्री",
+          "color": "#f4e7bf",
+          "id": "obj7",
+          "pos": [
+            1.35,
+            0,
+            0
+          ],
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ],
+          "to": [
+            2.55,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "त्यागराज का योगदान",
+      "explanation": "कीर्तन और रचना",
+      "speech": "त्यागराज ने कई कीर्तन और रचनाएँ लिखी, जो आज भी गाई जाती हैं।",
+      "teaches": "त्यागराज के महत्व को समझाना",
+      "setting": "institution",
+      "visual_action": "त्यागराज सामने आते हैं, दो संगीत नोट गोलाकार घूमते हैं",
+      "text_color": "#FFFFFF",
+      "explanation_color": "#FFD700",
+      "objects": [
+        {
+          "kind": "person",
+          "action": "walk",
+          "label": "त्यागराज",
+          "color": "#f4e7bf",
+          "id": "obj8",
+          "pos": [
+            -2.25,
+            0,
+            0
+          ],
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ],
+          "to": [
+            -1.05,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "sphere",
+          "action": "orbit",
+          "label": "नोट1",
+          "color": "#ffd700",
+          "id": "obj9",
+          "pos": [
+            0.0,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        {
+          "kind": "sphere",
+          "action": "orbit",
+          "label": "नोट2",
+          "color": "#ffd700",
+          "id": "obj10",
+          "pos": [
+            1.8,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "दीक्षिता की शैली",
+      "explanation": "जटिल शास्त्रीय रचना",
+      "speech": "मुथुस्वामी दीक्षिता की रचनाएँ जटिल और शास्त्रीय होती हैं, संगीत प्रेमियों को आकर्षित करती हैं।",
+      "teaches": "दीक्षिता के योगदान को उजागर करना",
+      "setting": "institution",
+      "visual_action": "दीक्षिता चलते हैं, एक पुस्तक ऊपर उठती है",
+      "text_color": "#FFFFFF",
+      "explanation_color": "#FFD700",
+      "objects": [
+        {
+          "kind": "person",
+          "action": "walk",
+          "label": "दीक्षिता",
+          "color": "#f4e7bf",
+          "id": "obj11",
+          "pos": [
+            -1.35,
+            0,
+            0
+          ],
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ],
+          "to": [
+            -0.15,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "book",
+          "action": "rise",
+          "label": "पुस्तक",
+          "color": "#59c7c5",
+          "id": "obj12",
+          "pos": [
+            0.9,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            0.9,
+            0,
+            1.2
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "श्यामा शास्त्री की ताल",
+      "explanation": "ताल में महारत",
+      "speech": "श्यामा शास्त्री की रचनाएँ ताल‑प्रधान हैं, उनका संगीत दिल को छूता है।",
+      "teaches": "श्यामा शास्त्री के संगीत शैली को समझाना",
+      "setting": "institution",
+      "visual_action": "श्यामा शास्त्री चलते हैं, गियर घूमता है और गोला धड़कता है",
+      "text_color": "#FFFFFF",
+      "explanation_color": "#FFD700",
+      "objects": [
+        {
+          "kind": "person",
+          "action": "walk",
+          "label": "श्यामा शास्त्री",
+          "color": "#f4e7bf",
+          "id": "obj13",
+          "pos": [
+            -2.25,
+            0,
+            0
+          ],
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ],
+          "to": [
+            -1.05,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "gear",
+          "action": "spin",
+          "label": "गियर",
+          "color": "#c0c0c0",
+          "id": "obj14",
+          "pos": [
+            0.0,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        {
+          "kind": "sphere",
+          "action": "pulse",
+          "label": "धड़कन",
+          "color": "#ffd700",
+          "id": "obj15",
+          "pos": [
+            1.8,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "त्रिमूर्ति याद रखें",
+      "explanation": "परीक्षा के लिए आवश्यक",
+      "speech": "त्यागराज, मुथुस्वामी दीक्षिता और श्यामा शास्त्री - यही हैं कर्नाटक संगीत की त्रिमूर्ति।",
+      "teaches": "मुख्य जानकारी का पुनरावलोकन",
+      "setting": "institution",
+      "visual_action": "तीनों संगीतकार खड़े होते हैं, एक पुस्तक उठती है",
+      "text_color": "#FFFFFF",
+      "explanation_color": "#FFD700",
+      "objects": [
+        {
+          "kind": "person",
+          "action": "none",
+          "label": "त्यागराज",
+          "color": "#f4e7bf",
+          "id": "obj16",
+          "pos": [
+            -2.4828,
+            0,
+            0
+          ],
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ]
+        },
+        {
+          "kind": "person",
+          "action": "none",
+          "label": "दीक्षिता",
+          "color": "#f4e7bf",
+          "id": "obj17",
+          "pos": [
+            -1.2414,
+            0,
+            0
+          ],
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ]
+        },
+        {
+          "kind": "person",
+          "action": "none",
+          "label": "श्यामा शास्त्री",
+          "color": "#f4e7bf",
+          "id": "obj18",
+          "pos": [
+            0.0,
+            0,
+            0
+          ],
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ]
+        },
+        {
+          "kind": "book",
+          "action": "rise",
+          "label": "",
+          "color": "#59c7c5",
+          "id": "obj19",
+          "pos": [
+            1.2414,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            1.2414,
+            0,
+            1.2
+          ]
+        }
+      ],
+      "quiz_card": {
+        "question": "त्रिमूर्ति में कौन-कौन हैं?",
+        "answer": "त्यागराज, मुथुस्वामी दीक्षिता, श्यामा शास्त्री",
+        "reveal_after": 2.5,
+        "answer_color": "#73efb2"
+      }
+    }
+  ]
+}

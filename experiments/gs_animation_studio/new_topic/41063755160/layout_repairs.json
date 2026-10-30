@@ -1,0 +1,92 @@
+[
+  {
+    "scene": 1,
+    "object": "obj1",
+    "repair": "fit_pos"
+  },
+  {
+    "scene": 1,
+    "object": "obj1",
+    "repair": "fit_to"
+  },
+  {
+    "scene": 1,
+    "object": "obj2",
+    "repair": "fit_pos"
+  },
+  {
+    "scene": 1,
+    "object": "obj2",
+    "repair": "fit_to"
+  },
+  {
+    "scene": 1,
+    "object": "obj3",
+    "repair": "fit_pos"
+  },
+  {
+    "scene": 1,
+    "object": "obj3",
+    "repair": "fit_to"
+  },
+  {
+    "scene": 1,
+    "object": "obj4",
+    "repair": "fit_pos"
+  },
+  {
+    "scene": 1,
+    "object": "obj4",
+    "repair": "fit_to"
+  },
+  {
+    "scene": 1,
+    "object": "obj4",
+    "repair": "remove_excess_label"
+  },
+  {
+    "scene": 4,
+    "object": "obj11",
+    "repair": "fit_to"
+  },
+  {
+    "scene": 6,
+    "object": "obj16",
+    "repair": "fit_pos"
+  },
+  {
+    "scene": 6,
+    "object": "obj17",
+    "repair": "fit_pos"
+  },
+  {
+    "scene": 6,
+    "object": "obj19",
+    "repair": "fit_pos"
+  },
+  {
+    "scene": 6,
+    "object": "obj19",
+    "repair": "fit_to"
+  },
+  {
+    "scene": 6,
+    "object": "obj19",
+    "repair": "remove_excess_label"
+  },
+  {
+    "scene": 6,
+    "object": "obj20",
+    "repair": "fit_pos"
+  },
+  {
+    "scene": 6,
+    "object": "obj20",
+    "repair": "fit_to"
+  },
+  {
+    "scene": 6,
+    "object": "obj20",
+    "repair": "remove_excess_label"
+  }
+]
