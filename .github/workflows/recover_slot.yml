@@ -1,0 +1,65 @@
+name: Recover failed slot (bani hui reel dobara post)
+
+# Jab kisi slot ki reel ban gayi par Instagram upload fail hua (container kabhi publish nahi hua),
+# to wahi reel bina dobara banaye post karta hai. Sirf haath se chalta hai.
+on:
+  workflow_dispatch:
+    inputs:
+      slot:
+        description: "Slot folder, jaise 2026-10-30_2000 (experiments/scheduled_visual_gs/ me)"
+        required: true
+
+permissions:
+  contents: write
+
+concurrency:
+  group: science-pyq-reel
+  cancel-in-progress: false
+
+jobs:
+  recover:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Dependencies
+        run: |
+          pip install --timeout 30 --retries 1 -r requirements.txt imageio-ffmpeg
+          python -c "import imageio_ffmpeg,os; p='/usr/local/bin/ffmpeg'; os.path.exists(p) or os.symlink(imageio_ffmpeg.get_ffmpeg_exe(),p)"
+      - name: Bani hui reel post karo
+        env:
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          SLOT: ${{ inputs.slot }}
+        run: |
+          set -o pipefail
+          D="experiments/scheduled_visual_gs/$SLOT"
+          test -f "$D/reel.mp4" && test -f "$D/validated.json" || { echo "::error::$D me validated reel nahi"; exit 1; }
+          if [ -f "$D/published.json" ] && grep -q media_id "$D/published.json"; then echo "Pehle se post ho chuki"; exit 0; fi
+          if ! python - <<'PY'
+          import json, os, pathlib, sys
+          sys.path.insert(0, '.')
+          import auto_poster as e
+          d = pathlib.Path('experiments/scheduled_visual_gs') / os.environ['SLOT']
+          s = json.loads((d / 'script.json').read_text())
+          # account ki aakhri 10 reels me same caption title ho to dobara mat daalo
+          r = e.requests.get(e.GRAPH + e.IG_USER_ID + '/media', params={'fields': 'caption', 'limit': 10,
+                             'access_token': e.IG_ACCESS_TOKEN}, timeout=30).json()
+          if any(s['title'] in (m.get('caption') or '') for m in r.get('data', [])):
+              print('Ye reel account par pehle se hai -> skip'); sys.exit(3)
+          PY
+          then exit 0; fi
+          rm -f "$D/publish_started.json"
+          GS_VISUAL_OUTPUT="$D" python -u daily_visual_gs.py --publish 2>&1 | sed -u -E 's/(access_token=|key=|Bearer )[^&" ]+/\1***/g' | tee last_run_log.txt
+      - name: Receipt save
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add experiments/scheduled_visual_gs last_run_log.txt 2>/dev/null || true
+          git diff --cached --quiet || git commit -m "Recover slot ${{ inputs.slot }} [skip ci]"
+          git pull --rebase -X theirs --autostash || true
+          git push || true
