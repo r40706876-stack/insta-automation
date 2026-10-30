@@ -1,19 +1,5 @@
-SCHEDULE: video ready; target 2026-10-30T14:30:00Z
 Collab invitation requested: @ar_publication
-  IG container: 17911444356568651
-  upload try 1: HTTP 400 {"debug_info":{"retriable":false,"type":"ProcessingFailedError","message":"Request processing failed"}}
-  upload try 2: HTTP 400 {"debug_info":{"retriable":false,"type":"ProcessingFailedError","message":"{\"success\":false,\"error\":{\"message\":\"The ig container is not in the 
-  upload try 3: HTTP 400 {"debug_info":{"retriable":false,"type":"ProcessingFailedError","message":"{\"success\":false,\"error\":{\"message\":\"The ig container is not in the 
-Traceback (most recent call last):
-  File "/home/runner/work/insta-automation/insta-automation/scheduled_visual_gs.py", line 42, in <module>
-    sys.argv=['daily_visual_gs.py','--publish'];runpy.run_path('daily_visual_gs.py',run_name='__main__')
-                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "<frozen runpy>", line 291, in run_path
-  File "<frozen runpy>", line 98, in _run_module_code
-  File "<frozen runpy>", line 88, in _run_code
-  File "daily_visual_gs.py", line 27, in <module>
-    pid=e._upload_once(str(out),caption,0)
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/insta-automation/insta-automation/auto_poster.py", line 3102, in _upload_once
-    raise RuntimeError(f"IG upload fail: {up.status_code} {up.text[:200]}")
-RuntimeError: IG upload fail: 400 {"debug_info":{"retriable":false,"type":"ProcessingFailedError","message":"{\"success\":false,\"error\":{\"message\":\"The ig container is not in the status to upload a video\"}}"}}
+  IG container: 17911458561568651
+  upload try 1.1: HTTP 200 {"success":true,"message":"Upload Successful."}
+  IG processing: FINISHED
+  LIVE: https://www.instagram.com/reel/DfH4NxJCP4b/
