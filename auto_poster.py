@@ -4121,7 +4121,13 @@ def pick_list_items(bank, st):
     if not pending:
         return None, []
     today = []                                  # 'aaj ke din' wala title band: hamesha ek subject ("जीव विज्ञान के 7 PYQ")
-    subject = next((q["subject"] for q in pending if list_ok(q)), pending[0]["subject"])
+    # subject with too few short questions left (e.g. 3) would drop the 7-PYQ list to an 8 s loop reel -> skip it
+    ok_count = {}
+    for q in pending:
+        if list_ok(q): ok_count[q["subject"]] = ok_count.get(q["subject"], 0) + 1
+    subject = next((q["subject"] for q in pending if list_ok(q) and ok_count.get(q["subject"], 0) >= LIST_N),
+                   next((q["subject"] for q in pending if list_ok(q) and ok_count.get(q["subject"], 0) >= 4),
+                        next((q["subject"] for q in pending if list_ok(q)), pending[0]["subject"])))
     items = []
     # zyada baar poochhe gaye + chhote sawal pehle: student ko "arre, ye to aana chahiye!" lage
     pool = sorted((q for q in pending if q["subject"] == subject),
