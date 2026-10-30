@@ -1,0 +1,47 @@
+[
+  {
+    "scene": 1,
+    "object": "object_0",
+    "repair": "fit_to"
+  },
+  {
+    "scene": 2,
+    "object": "object_0",
+    "repair": "fit_pos"
+  },
+  {
+    "scene": 2,
+    "object": "object_1",
+    "repair": "fit_pos"
+  },
+  {
+    "scene": 2,
+    "object": "object_3",
+    "repair": "fit_pos"
+  },
+  {
+    "scene": 2,
+    "object": "object_3",
+    "repair": "fit_to"
+  },
+  {
+    "scene": 2,
+    "object": "object_3",
+    "repair": "remove_excess_label"
+  },
+  {
+    "scene": 2,
+    "object": "object_4",
+    "repair": "fit_pos"
+  },
+  {
+    "scene": 2,
+    "object": "object_4",
+    "repair": "fit_to"
+  },
+  {
+    "scene": 2,
+    "object": "object_4",
+    "repair": "remove_excess_label"
+  }
+]
