@@ -172,8 +172,58 @@ jobs:
           grep -E "ASSETS|organ " $LOG | tail -50
           echo "::notice title=assets ok::$(grep ASSETS $LOG)"
 
-  render:
+  smoke:
+    # Self-healing: render 2 tiny frames + the overlay BEFORE the real render. If the latest code is broken,
+    # roll the renderer back to the last version that produced a real video (tag body3d-good) and use that.
     needs: [plan, assets]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    outputs:
+      rolled_back: ${{ steps.s.outputs.rolled_back }}
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.11' }
+      - uses: actions/cache/restore@v4
+        with:
+          path: |
+            /tmp/blender
+            ${{ env.BODY_DIR }}/body_assets.blend
+            ${{ env.BODY_DIR }}/organ_index.json
+          key: body-assets-v2-${{ hashFiles('experiments/body_3d/prepare_assets.py', 'experiments/body_3d/organs.json') }}
+          fail-on-cache-miss: true
+      - uses: actions/download-artifact@v4
+        with: { name: plan, path: '${{ env.BODY_DIR }}' }
+      - id: s
+        name: Smoke test (auto rollback to last good code)
+        run: |
+          for i in 1 2 3; do sudo apt-get update -qq && sudo apt-get install -y -qq libxrender1 libxi6 libxkbcommon0 libsm6 libgl1 libegl1 libpulse0 libsndfile1 libvulkan1 libice6 libx11-xcb1 libxext6 libxau6 libxdmcp6 libdbus-1-3 && break; sleep 15; done
+          pip install -q numpy Pillow
+          cd "$BODY_DIR"; N=${{ needs.plan.outputs.frames }}
+          smoke() {
+            rm -rf /tmp/smoke; mkdir -p /tmp/smoke
+            TOPIC=$PWD/plan.json OUT=/tmp/smoke BODY_ROOT=$PWD DEMO_SAMPLES=1 BODY_RES_PCT=20 DEMO_FRAMES="3,$((N/2)),$((N-5))" \
+              /tmp/blender/blender -b -t 0 --python-exit-code 3 --python body_scene.py > /tmp/smoke.log 2>&1 || return 1
+            [ "$(ls /tmp/smoke/frames/*.png 2>/dev/null | wc -l)" -eq 3 ] || return 1
+            TOPIC=$PWD/plan.json OUT=/tmp/smoke BODY_ROOT=$PWD python -c "import compose; [compose.overlay(f) for f in (3, $((N/2)), $((N-5)))]" >> /tmp/smoke.log 2>&1 || return 1
+          }
+          mkdir -p /tmp/code
+          if smoke; then
+            echo "rolled_back=false" >> "$GITHUB_OUTPUT"; echo "::notice title=smoke::latest code OK"
+          else
+            echo "::warning title=self-heal::latest renderer failed the smoke test, rolling back: $(grep -E 'Error|Traceback' /tmp/smoke.log | tail -3 | tr '\n' ' ')"
+            git fetch -q --tags origin
+            git checkout body3d-good -- body_scene.py compose.py
+            smoke || { echo "::error title=smoke failed even after rollback::$(tail -c 1500 /tmp/smoke.log | tr '\n' ' ')"; exit 1; }
+            echo "rolled_back=true" >> "$GITHUB_OUTPUT"; echo "::notice title=self-heal::rolled back to body3d-good and it works"
+          fi
+          cp body_scene.py compose.py /tmp/code/
+      - uses: actions/upload-artifact@v4
+        with: { name: code, path: /tmp/code/ }
+
+  render:
+    needs: [plan, assets, smoke]
     runs-on: ubuntu-24.04
     timeout-minutes: 355
     strategy:
@@ -191,16 +241,19 @@ jobs:
           fail-on-cache-miss: true
       - uses: actions/download-artifact@v4
         with: { name: plan, path: '${{ env.BODY_DIR }}' }
+      - uses: actions/download-artifact@v4
+        with: { name: code, path: '${{ env.BODY_DIR }}' }
       - name: Render my frame range
         env:
           BLENDER: /tmp/blender/blender
           DEMO_SAMPLES: ${{ github.event.inputs.samples }}
         run: |
-          sudo apt-get update -qq && sudo apt-get install -y -qq libxrender1 libxi6 libxkbcommon0 libsm6 libgl1 libegl1 libpulse0 libsndfile1 libvulkan1 libice6 libx11-xcb1 libxext6 libxau6 libxdmcp6 libdbus-1-3
+          for i in 1 2 3; do sudo apt-get update -qq && sudo apt-get install -y -qq libxrender1 libxi6 libxkbcommon0 libsm6 libgl1 libegl1 libpulse0 libsndfile1 libvulkan1 libice6 libx11-xcb1 libxext6 libxau6 libxdmcp6 libdbus-1-3 && break; sleep 15; done
           cd "$BODY_DIR"; export TOPIC=$PWD/plan.json OUT=$PWD/out
           N=${{ needs.plan.outputs.frames }}; n=${{ strategy.job-total }}; i=${{ matrix.chunk }}
           a=$(( i*N/n )); b=$(( (i+1)*N/n - 1 )); echo "chunk $i/$n -> $a-$b"; s=$(date +%s)
           ./render_range.sh $a $b 2>&1 | tee /tmp/render.log
+          if [ "$(ls out/frames/*.png 2>/dev/null | wc -l)" -lt $((b-a+1)) ]; then echo "::warning::chunk $i retry (missing frames)"; ./render_range.sh $a $b 2>&1 | tee -a /tmp/render.log; fi
           n_ok=$(ls out/frames/*.png 2>/dev/null | wc -l)
           if [ "$n_ok" -lt $((b-a+1)) ]; then echo "::error title=render chunk $i made $n_ok/$((b-a+1)) frames::$(tail -c 2500 /tmp/render.log | tr '\n' ' ')"; exit 1; fi
           echo "rendered $((b-a+1)) frames in $(( $(date +%s)-s ))s on $(nproc) CPUs"
@@ -213,7 +266,7 @@ jobs:
           retention-days: 3
 
   compose:
-    needs: [plan, render]
+    needs: [plan, smoke, render]
     runs-on: ubuntu-24.04
     timeout-minutes: 330
     steps:
@@ -224,6 +277,8 @@ jobs:
         with: { name: plan, path: '${{ env.BODY_DIR }}' }
       - uses: actions/download-artifact@v4
         with: { pattern: 'frames-*', merge-multiple: true, path: '${{ env.BODY_DIR }}/out' }
+      - uses: actions/download-artifact@v4
+        with: { name: code, path: '${{ env.BODY_DIR }}' }
       - name: Overlays + sound -> MP4
         run: |
           sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg libraqm0
@@ -249,6 +304,10 @@ jobs:
           git config user.name 'github-actions[bot]'; git config user.email 'github-actions[bot]@users.noreply.github.com'
           git add downloads; git commit -m "Save reel to $d [skip ci]"
           ok=0; for i in 1 2 3 4 5; do git pull --rebase -q origin main && git push -q origin HEAD:main && { ok=1; break; }; sleep $((i*7)); done; [ $ok = 1 ] || { echo "::error title=save to downloads failed::push rejected 5 times"; exit 1; }
+      - name: Mark this code as last good (self-heal rollback point)
+        if: ${{ needs.smoke.outputs.rolled_back != 'true' }}
+        run: |
+          git tag -f body3d-good "$GITHUB_SHA" && git push -f -q origin refs/tags/body3d-good && echo "body3d-good -> $GITHUB_SHA" || true
       - name: Publish to Instagram (MinuteMe_GS)
         if: ${{ github.event.inputs.publish != 'no' }}
         env:
@@ -266,7 +325,7 @@ jobs:
 
   fallback:
     # 3D reel failed for a scheduled slot -> the slot must not stay empty: post the 7-PYQ list reel instead.
-    needs: [plan, assets, render, compose]
+    needs: [plan, assets, smoke, render, compose]
     if: ${{ failure() && github.event.inputs.target_utc != '' && github.event.inputs.publish != 'no' }}
     runs-on: ubuntu-24.04
     timeout-minutes: 10
