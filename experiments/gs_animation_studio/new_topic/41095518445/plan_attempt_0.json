@@ -1,0 +1,452 @@
+{
+  "title": "कर्नाटक संगीत का राग कौन सा?",
+  "subject": "स्टैटिक जीके",
+  "topic_key": "karnataka_raga_identification",
+  "share_reason": "सही राग याद रखने से परीक्षा में विकल्प भ्रम नहीं होगा",
+  "recall": "सिंधु भैरवी ही कर्नाटक संगीत का राग है।",
+  "share_card": {
+    "kind": "exam_confusion",
+    "recipient": "परीक्षा की तैयारी करने वाले मित्र",
+    "benefit": "रागों को कर्नाटक‑हिंदुस्तानी में अलग‑अलग पहचानना",
+    "cta": "चलो साथ में राग पहचानें!"
+  },
+  "scenes": [
+    {
+      "heading": "राग विकल्प",
+      "explanation": "प्रश्न और चार विकल्प दिखाएँ",
+      "speech": "निम्नलिखित में से कौन सा कर्नाटक संगीत का राग है? विकल्प देखें।",
+      "teaches": "विकल्प पहचानना",
+      "objects": [
+        {
+          "kind": "box",
+          "action": "move",
+          "label": "ठुमरी",
+          "id": "object_0",
+          "color": "#59c7c5",
+          "pos": [
+            -2.7391,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            -1.6957,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "box",
+          "action": "move",
+          "label": "सिंधु भैरवी",
+          "id": "object_1",
+          "color": "#59c7c5",
+          "pos": [
+            -1.1739,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            -0.1304,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "box",
+          "action": "move",
+          "label": "खयाल",
+          "id": "object_2",
+          "color": "#59c7c5",
+          "pos": [
+            0.3913,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            1.4348,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "box",
+          "action": "move",
+          "label": "",
+          "id": "object_3",
+          "color": "#59c7c5",
+          "pos": [
+            1.9565,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            3.0,
+            0,
+            0
+          ]
+        }
+      ],
+      "setting": "neutral",
+      "visual_action": "विकल्प बॉक्स बाएँ‑दाएँ चलते हैं, प्रश्न दिखाई देता है",
+      "text_color": "#FFFFFF",
+      "explanation_color": "#FFFF00",
+      "quiz_card": {
+        "question": "कर्नाटक संगीत का राग कौन सा है?",
+        "answer": "सिंधु भैरवी",
+        "reveal_after": 2.5,
+        "answer_color": "#73efb2"
+      }
+    },
+    {
+      "heading": "कर्नाटक स्कूल",
+      "explanation": "सिंधु भैरवी कर्नाटक में जाता है",
+      "speech": "गायक पुस्तक लेकर कर्नाटक स्कूल की ओर चलता है, सूरज उगता है।",
+      "teaches": "सही राग का स्थान बताना",
+      "objects": [
+        {
+          "kind": "person",
+          "action": "walk",
+          "label": "गायक",
+          "id": "object_0",
+          "color": "#f4e7bf",
+          "pos": [
+            -3.0,
+            0,
+            0
+          ],
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ],
+          "to": [
+            -1.8571,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "book",
+          "action": "move",
+          "label": "सिंधु भैरवी",
+          "id": "object_1",
+          "color": "#59c7c5",
+          "pos": [
+            -1.2857,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            -0.1429,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "building",
+          "action": "none",
+          "label": "कर्नाटक स्कूल",
+          "id": "object_2",
+          "color": "#b1a4d3",
+          "pos": [
+            0.8571,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        {
+          "kind": "sun",
+          "action": "rise",
+          "label": "",
+          "id": "object_3",
+          "color": "#59c7c5",
+          "pos": [
+            2.5714,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            2.5714,
+            0,
+            1.2
+          ]
+        }
+      ],
+      "setting": "institution",
+      "visual_action": "गायक पुस्तक लेकर कर्नाटक स्कूल की ओर चलता है, सूरज उगता है",
+      "text_color": "#FFFFFF",
+      "explanation_color": "#FFFF00"
+    },
+    {
+      "heading": "हिंदुस्तानी स्कूल",
+      "explanation": "अन्य राग हिंदुस्तानी में जाते हैं",
+      "speech": "गायक पुस्तक लेकर हिंदुस्तानी स्कूल की ओर चलता है, चाँद चमकता है।",
+      "teaches": "गलत विकल्प का वर्गीकरण",
+      "objects": [
+        {
+          "kind": "person",
+          "action": "walk",
+          "label": "गायक",
+          "id": "object_0",
+          "color": "#f4e7bf",
+          "pos": [
+            -3.0,
+            0,
+            0
+          ],
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ],
+          "to": [
+            -1.8571,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "book",
+          "action": "move",
+          "label": "ठुमरी",
+          "id": "object_1",
+          "color": "#59c7c5",
+          "pos": [
+            -1.2857,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            -0.1429,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "building",
+          "action": "none",
+          "label": "हिंदुस्तानी स्कूल",
+          "id": "object_2",
+          "color": "#b1a4d3",
+          "pos": [
+            0.8571,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        {
+          "kind": "moon",
+          "action": "rise",
+          "label": "",
+          "id": "object_3",
+          "color": "#59c7c5",
+          "pos": [
+            2.5714,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            2.5714,
+            0,
+            1.2
+          ]
+        }
+      ],
+      "setting": "institution",
+      "visual_action": "गायक पुस्तक लेकर हिंदुस्तानी स्कूल की ओर चलता है, चाँद चमकता है",
+      "text_color": "#FFFFFF",
+      "explanation_color": "#FFFF00"
+    },
+    {
+      "heading": "सही उत्तर",
+      "explanation": "सिंधु भैरवी कर्नाटक राग है",
+      "speech": "सिंधु भैरवी कर्नाटक संगीत का राग है, यह सुबह गाया जाता है।",
+      "teaches": "सही राग की पुष्टि",
+      "objects": [
+        {
+          "kind": "person",
+          "action": "none",
+          "label": "गाइड",
+          "id": "object_0",
+          "color": "#f4e7bf",
+          "pos": [
+            -1.8,
+            0,
+            0
+          ],
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ]
+        },
+        {
+          "kind": "book",
+          "action": "none",
+          "label": "सिंधु भैरवी",
+          "id": "object_1",
+          "color": "#59c7c5",
+          "pos": [
+            0.0,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        {
+          "kind": "arrow",
+          "action": "spin",
+          "label": "सही",
+          "id": "object_2",
+          "color": "#59c7c5",
+          "pos": [
+            1.8,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        }
+      ],
+      "setting": "neutral",
+      "visual_action": "गाइड पुस्तक दिखाता है, तीर सही विकल्प की ओर घूमता है",
+      "text_color": "#FFFFFF",
+      "explanation_color": "#FFFF00"
+    },
+    {
+      "heading": "भ्रम हटाएँ",
+      "explanation": "गलत उत्तर को दिखाएँ फिर सुधारें",
+      "speech": "कई लोग ठुमरी को कर्नाटक मानते हैं, लेकिन यह हिंदुस्तानी है।",
+      "teaches": "सामान्य भ्रम दूर करना",
+      "objects": [
+        {
+          "kind": "person",
+          "action": "walk",
+          "label": "विद्यार्थी",
+          "id": "object_0",
+          "color": "#f4e7bf",
+          "pos": [
+            -2.25,
+            0,
+            0
+          ],
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ],
+          "to": [
+            -1.05,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "arrow",
+          "action": "move",
+          "label": "गलत उत्तर",
+          "id": "object_1",
+          "color": "#59c7c5",
+          "pos": [
+            -0.45,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            0.75,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "box",
+          "action": "move",
+          "label": "ठुमरी",
+          "id": "object_2",
+          "color": "#59c7c5",
+          "pos": [
+            1.35,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            2.55,
+            0,
+            0
+          ]
+        }
+      ],
+      "setting": "neutral",
+      "visual_action": "विद्यार्थी गलत विकल्प की ओर जाता है, फिर गाइड सही दिखाता है",
+      "text_color": "#FFFFFF",
+      "explanation_color": "#FFFF00"
+    }
+  ]
+}

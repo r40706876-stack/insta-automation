@@ -1,0 +1,611 @@
+{
+  "title": "कर्नाटक संगीत का राग कौन सा?",
+  "subject": "स्टैटिक जीके",
+  "topic_key": "karnataka_raga_identification",
+  "share_reason": "सही राग याद रखने से परीक्षा में विकल्प भ्रम नहीं होगा",
+  "recall": "सिंधु भैरवी ही कर्नाटक संगीत का राग है।",
+  "share_card": {
+    "kind": "exam_confusion",
+    "recipient": "परीक्षा की तैयारी करने वाले मित्र",
+    "benefit": "रागों को कर्नाटक और हिंदुस्तानी संगीत में सही पहचानना",
+    "cta": "चलो, रागों का अंतर समझें!"
+  },
+  "scenes": [
+    {
+      "heading": "राग पहचानें",
+      "explanation": "कर्नाटक संगीत का राग कौन सा?",
+      "speech": "निम्नलिखित में से कौन सा कर्नाटक संगीत का एक राग है? ध्यान से देखें।",
+      "teaches": "प्रश्न और विकल्पों को प्रस्तुत करना",
+      "objects": [
+        {
+          "kind": "book",
+          "action": "move",
+          "label": "ठुमरी",
+          "id": "thumri_book",
+          "color": "#FFD700",
+          "to": [
+            -1.9048,
+            0.5,
+            0
+          ],
+          "pos": [
+            -3.0,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        {
+          "kind": "book",
+          "action": "pulse",
+          "label": "सिंधु भैरवी",
+          "id": "sindhu_bhairavi_book",
+          "color": "#73efb2",
+          "pos": [
+            -0.8571,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        {
+          "kind": "book",
+          "action": "move",
+          "label": "खयाल",
+          "id": "khayal_book",
+          "color": "#FFD700",
+          "to": [
+            1.9048,
+            0.5,
+            0
+          ],
+          "pos": [
+            0.4286,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        {
+          "kind": "book",
+          "action": "move",
+          "label": "",
+          "id": "tappa_book",
+          "color": "#FFD700",
+          "to": [
+            0.0,
+            -0.5,
+            0
+          ],
+          "pos": [
+            2.1429,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        }
+      ],
+      "setting": "neutral",
+      "visual_action": "चार रागों की पुस्तकें दिखाई देती हैं, सही राग की पुस्तक चमकती है",
+      "text_color": "#FFFFFF",
+      "explanation_color": "#FFFF00",
+      "quiz_card": {
+        "question": "कर्नाटक संगीत का राग कौन सा है?",
+        "answer": "सिंधु भैरवी",
+        "reveal_after": 2.5,
+        "answer_color": "#73efb2"
+      }
+    },
+    {
+      "heading": "कर्नाटक संगीत",
+      "explanation": "दक्षिण भारत की शास्त्रीय शैली",
+      "speech": "कर्नाटक संगीत मुख्य रूप से दक्षिण भारत में प्रचलित है। सिंधु भैरवी इसी शैली का राग है।",
+      "teaches": "कर्नाटक संगीत का भौगोलिक संदर्भ और राग का जुड़ाव",
+      "objects": [
+        {
+          "kind": "map",
+          "action": "trace",
+          "map_region": "india",
+          "route": [
+            [
+              74.0,
+              10.0
+            ],
+            [
+              78.0,
+              12.0
+            ],
+            [
+              80.0,
+              14.0
+            ],
+            [
+              79.0,
+              18.0
+            ]
+          ],
+          "markers": [
+            {
+              "at": [
+                77.0,
+                12.0
+              ],
+              "label": "दक्षिण भारत"
+            }
+          ],
+          "label": "भारत का नक्शा",
+          "id": "india_map",
+          "color": "#8B4513",
+          "pos": [
+            -1.8,
+            0,
+            0
+          ],
+          "size": [
+            1.1,
+            1.1,
+            1.1
+          ]
+        },
+        {
+          "kind": "person",
+          "action": "walk",
+          "label": "गायक",
+          "id": "carnatic_musician",
+          "color": "#f4e7bf",
+          "to": [
+            0.5,
+            0,
+            0
+          ],
+          "pos": [
+            -0.45,
+            0,
+            0
+          ],
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ]
+        },
+        {
+          "kind": "book",
+          "action": "move",
+          "label": "सिंधु भैरवी",
+          "id": "sindhu_bhairavi_book_s2",
+          "color": "#73efb2",
+          "to": [
+            1.5,
+            0.5,
+            0
+          ],
+          "pos": [
+            1.35,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        }
+      ],
+      "setting": "neutral",
+      "visual_action": "भारत के नक्शे पर दक्षिण भारत का क्षेत्र ट्रेस होता है, गायक सिंधु भैरवी पुस्तक के साथ चलता है",
+      "text_color": "#FFFFFF",
+      "explanation_color": "#FFFF00"
+    },
+    {
+      "heading": "हिंदुस्तानी संगीत",
+      "explanation": "उत्तर भारत की शास्त्रीय शैली",
+      "speech": "ठुमरी, खयाल और टप्पा हिंदुस्तानी संगीत के राग हैं, जो उत्तर भारत में लोकप्रिय हैं।",
+      "teaches": "हिंदुस्तानी संगीत का भौगोलिक संदर्भ और अन्य रागों का जुड़ाव",
+      "objects": [
+        {
+          "kind": "map",
+          "action": "trace",
+          "map_region": "india",
+          "route": [
+            [
+              75.0,
+              28.0
+            ],
+            [
+              80.0,
+              25.0
+            ],
+            [
+              85.0,
+              22.0
+            ],
+            [
+              82.0,
+              30.0
+            ]
+          ],
+          "markers": [
+            {
+              "at": [
+                78.0,
+                26.0
+              ],
+              "label": "उत्तर भारत"
+            }
+          ],
+          "label": "भारत का नक्शा",
+          "id": "india_map_s3",
+          "color": "#8B4513",
+          "pos": [
+            -2.7,
+            0,
+            0
+          ],
+          "size": [
+            1.1,
+            1.1,
+            1.1
+          ]
+        },
+        {
+          "kind": "person",
+          "action": "walk",
+          "label": "गायक",
+          "id": "hindustani_musician",
+          "color": "#f4e7bf",
+          "to": [
+            -0.5,
+            0,
+            0
+          ],
+          "pos": [
+            -1.35,
+            0,
+            0
+          ],
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ]
+        },
+        {
+          "kind": "book",
+          "action": "move",
+          "label": "ठुमरी",
+          "id": "thumri_book_s3",
+          "color": "#FFD700",
+          "to": [
+            -1.5,
+            0.5,
+            0
+          ],
+          "pos": [
+            0.45,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        {
+          "kind": "book",
+          "action": "move",
+          "label": "",
+          "id": "khayal_book_s3",
+          "color": "#FFD700",
+          "to": [
+            -2.0,
+            0.0,
+            0
+          ],
+          "pos": [
+            2.25,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        }
+      ],
+      "setting": "neutral",
+      "visual_action": "भारत के नक्शे पर उत्तर भारत का क्षेत्र ट्रेस होता है, गायक ठुमरी और खयाल पुस्तक के साथ चलता है",
+      "text_color": "#FFFFFF",
+      "explanation_color": "#FFFF00"
+    },
+    {
+      "heading": "शैली विभाजन",
+      "explanation": "दोनों शैलियों को अलग करें",
+      "speech": "भारतीय शास्त्रीय संगीत की दो प्रमुख शैलियाँ हैं: कर्नाटक और हिंदुस्तानी।",
+      "teaches": "दोनों संगीत शैलियों का स्पष्ट विभाजन",
+      "objects": [
+        {
+          "kind": "building",
+          "action": "none",
+          "label": "कर्नाटक संगीत",
+          "id": "carnatic_building",
+          "color": "#ADD8E6",
+          "pos": [
+            -2.7,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        {
+          "kind": "building",
+          "action": "none",
+          "label": "हिंदुस्तानी संगीत",
+          "id": "hindustani_building",
+          "color": "#F0E68C",
+          "pos": [
+            -0.9,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        {
+          "kind": "book",
+          "action": "move",
+          "label": "सिंधु भैरवी",
+          "id": "sindhu_bhairavi_book_s4",
+          "color": "#73efb2",
+          "to": [
+            -1.5,
+            0.5,
+            0
+          ],
+          "pos": [
+            0.45,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        {
+          "kind": "book",
+          "action": "move",
+          "label": "",
+          "id": "thumri_book_s4",
+          "color": "#FFD700",
+          "to": [
+            1.5,
+            0.5,
+            0
+          ],
+          "pos": [
+            2.25,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        }
+      ],
+      "setting": "institution",
+      "visual_action": "दो इमारतें अलग-अलग शैलियों को दर्शाती हैं, रागों की पुस्तकें अपनी-अपनी इमारत की ओर बढ़ती हैं",
+      "text_color": "#FFFFFF",
+      "explanation_color": "#FFFF00"
+    },
+    {
+      "heading": "सामान्य भ्रम",
+      "explanation": "गलत धारणा को सुधारें",
+      "speech": "अक्सर लोग ठुमरी को कर्नाटक संगीत का राग मान लेते हैं, पर यह हिंदुस्तानी शैली का है।",
+      "teaches": "एक सामान्य गलतफहमी को दूर करना",
+      "objects": [
+        {
+          "kind": "person",
+          "action": "walk",
+          "label": "विद्यार्थी",
+          "id": "student_person",
+          "color": "#f4e7bf",
+          "to": [
+            -0.9524,
+            0,
+            0
+          ],
+          "pos": [
+            -3.0,
+            0,
+            0
+          ],
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ]
+        },
+        {
+          "kind": "book",
+          "action": "move",
+          "label": "ठुमरी",
+          "id": "thumri_book_s5",
+          "color": "#FFD700",
+          "to": [
+            0.4762,
+            0.5,
+            0
+          ],
+          "pos": [
+            -1.2857,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        {
+          "kind": "arrow",
+          "action": "spin",
+          "label": "गलत",
+          "id": "wrong_arrow",
+          "color": "#FF0000",
+          "pos": [
+            0.8571,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        {
+          "kind": "book",
+          "action": "move",
+          "label": "",
+          "id": "sindhu_bhairavi_book_s5",
+          "color": "#73efb2",
+          "to": [
+            1.9048,
+            0.5,
+            0
+          ],
+          "pos": [
+            2.1429,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        }
+      ],
+      "setting": "neutral",
+      "visual_action": "विद्यार्थी ठुमरी पुस्तक की ओर चलता है, एक तीर उसे गलत बताता है, फिर सही राग की पुस्तक दिखाई देती है",
+      "text_color": "#FFFFFF",
+      "explanation_color": "#FFFF00"
+    },
+    {
+      "heading": "याद रखें",
+      "explanation": "सही उत्तर की पुष्टि",
+      "speech": "याद रखें, सिंधु भैरवी कर्नाटक संगीत का राग है। यह परीक्षा के लिए महत्वपूर्ण है।",
+      "teaches": "मुख्य जानकारी को दोहराना और याद दिलाना",
+      "objects": [
+        {
+          "kind": "person",
+          "action": "none",
+          "label": "शिक्षक",
+          "id": "teacher_person",
+          "color": "#f4e7bf",
+          "pos": [
+            -2.7,
+            0,
+            0
+          ],
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ]
+        },
+        {
+          "kind": "book",
+          "action": "pulse",
+          "label": "सिंधु भैरवी",
+          "id": "sindhu_bhairavi_book_s6",
+          "color": "#73efb2",
+          "pos": [
+            -0.9,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        {
+          "kind": "book",
+          "action": "none",
+          "label": "ठुमरी",
+          "id": "thumri_book_s6",
+          "color": "#FFD700",
+          "pos": [
+            0.9,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        {
+          "kind": "book",
+          "action": "none",
+          "label": "",
+          "id": "khayal_book_s6",
+          "color": "#FFD700",
+          "pos": [
+            2.7,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        }
+      ],
+      "setting": "institution",
+      "visual_action": "शिक्षक सिंधु भैरवी पुस्तक की ओर इशारा करता है, पुस्तक चमकती है, अन्य राग स्थिर रहते हैं",
+      "text_color": "#FFFFFF",
+      "explanation_color": "#FFFF00",
+      "quiz_card": {
+        "question": "कर्नाटक संगीत का सही राग कौन सा है?",
+        "answer": "सिंधु भैरवी",
+        "reveal_after": 2.5,
+        "answer_color": "#73efb2"
+      }
+    }
+  ]
+}
