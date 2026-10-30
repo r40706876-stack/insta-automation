@@ -1,6 +1,6 @@
 {
- "next_seq": 110,
- "episode": 152,
+ "next_seq": 185,
+ "episode": 153,
  "posted": [
   "684d76bcbc",
   "6bb20b4a07",
@@ -409,7 +409,8 @@
   "be8e5d0174",
   "4aa555f0be",
   "960851e7c5",
-  "31127dea5a"
+  "31127dea5a",
+  "aa3fa33d14"
  ],
  "skipped": {
   "bdd1ce5a8b": "उत्तर कुंजी वर्तमान स्थिति के अनुसार गलत है।",
@@ -428,10 +429,9 @@
   "1eeddeb136": "वर्तमान में नाबार्ड में भारत सरकार का हिस्सा 100% है तथा विकल्प में 'ज्ञ्' प्रतीक (%) की जगह त्रुटिपूर्ण है।"
  },
  "last": {
-  "seq": 1596,
-  "id": "31127dea5a",
-  "time": "2026-10-29 16:30",
-  "format": "list"
+  "seq": 184,
+  "id": "aa3fa33d14",
+  "time": "2026-10-30 01:30"
  },
  "carousel_queue": [
   {
@@ -465,16 +465,42 @@
    ],
    "times_asked": 1,
    "topic": "भारतीय नौसेना"
+  },
+  {
+   "episode": 153,
+   "subject": "Physics",
+   "question": "सार्वत्रिक गुरुत्वाकर्षण नियतांक 'G' की खोज ____ ने की थी।",
+   "options": [
+    [
+     "A",
+     "एंटोनी-वॉन लेवोजियर"
+    ],
+    [
+     "B",
+     "आइज़ेक न्यूटन"
+    ],
+    [
+     "C",
+     "हेनरी कैवेंडिश"
+    ],
+    [
+     "D",
+     "जॉन डाल्टन"
+    ]
+   ],
+   "correct": "C",
+   "correct_text": "हेनरी कैवेंडिश",
+   "why": "हेनरी कैवेंडिश ने 1798 में प्रयोग द्वारा 'G' का मान ज्ञात किया था।",
+   "tip": "न्यूटन ने नियम दिया, कैवेंडिश ने G नापा।",
+   "exams": [
+    "RRB Group D 2018"
+   ],
+   "times_asked": 2,
+   "topic": "गुरुत्वाकर्षण"
   }
  ],
  "carousel_count": 24,
  "recent": [
-  {
-   "id": "deba7d61ef",
-   "seq": 188,
-   "q": "आंध्र प्रदेश का राज्य पशु कौन सा है?",
-   "a": "काला हिरन"
-  },
   {
    "id": "c1d3d5936d",
    "seq": 251,
@@ -594,17 +620,23 @@
    "seq": 767,
    "q": "ऊर्जा के पारंपरिक स्रोत के एक उदाहरण की पहचान करें-",
    "a": "प्राकृतिक गैस"
+  },
+  {
+   "id": "aa3fa33d14",
+   "seq": 184,
+   "q": "सार्वत्रिक गुरुत्वाकर्षण नियतांक 'G' की खोज ____ ने की थी।",
+   "a": "हेनरी कैवेंडिश"
   }
  ],
  "last_loop": {
-  "media": "17959187004216326",
-  "correct": "A"
+  "media": "18003222410808345",
+  "correct": "C"
  },
  "comment_log": {
-  "media": "17995643790102261",
+  "media": "18003222410808345",
   "ok": false,
-  "error": "{'message': '(#10) Application does not have permission for this action', 'type': 'OAuthException', 'code': 10, 'fbtrace_id': 'A3Kzg5z3SVTa8wg7lbTEyiF'}",
-  "time": "2026-10-20 06:09"
+  "error": "{'message': '(#10) Application does not have permission for this action', 'type': 'OAuthException', 'code': 10, 'fbtrace_id': 'AyY3ohwwamD3_Dt5WVeKzgX'}",
+  "time": "2026-10-30 01:30"
  },
  "mega_used": [
   "684d76bcbc",
