@@ -151,6 +151,16 @@ CONTRACT+='\n'+STORY_QUALITY_CONTRACT
 ENGAGING_LESSON_FORMAT="""DEFAULT PRESENTATION FOR NEW EXPLAINERS: use an opening question which the viewer can answer, a concrete causal demonstration, an easy explanation of the necessary term, one useful exam/learning takeaway and a final recall question before the specific sharing invitation. Every scene must have text_color and explanation_color as readable bright #RRGGBB on dark background. Keep object identity colors consistent across scenes; do not change a plate/person identity color for decoration. Scene 1 and scene 6 include quiz_card:{question:short Hindi question,answer:short accurate reveal, reveal_after:2.5,answer_color:'#73efb2'}. The opening reveal may invite inspection instead of prematurely giving away the mechanism. The final reveal answers the recall question using the demonstrated reason. NEVER invent a false binary choice when the topic has more alternatives. Use animation_window to show cause before effect. Named object label_color may match its actual visible material. Visuals must match the supported catalog: the reviewed fold demo has a dedicated volcano model; generic new-topic renderer does NOT support a volcano yet, so do not promise one. Apply this storytelling format to each subject with its own matching assets, not Himalayan props everywhere. """
 CONTRACT+='\\n'+ENGAGING_LESSON_FORMAT
 
+# 30 Oct analytics (37 reels): best = 'बहुमत' (72.6% 3-sec hold), 'नर्मदा Map Test' (13 saves, 4 shares),
+# 'चंद्र ग्रहण' (56% hold). Weak = plain textbook topics (पाचन तंत्र, धमनी-शिरा, दिल की धड़कन: 17-34% hold, ~0 saves).
+PERFORMANCE_CONTRACT="""AUDIENCE DATA PRIORITY (automatic selection): prefer a topic whose obvious first-guess answer is WRONG
+(like 'तीन सबसे बड़ी पार्टी, फिर भी बहुमत नहीं?') or a visible sky/earth/map puzzle (like 'चंद्र ग्रहण में चाँद लाल क्यों?',
+'नर्मदा पश्चिम क्यों बहती है?'). Avoid plain textbook chapter-recaps (digestion system, artery vs vein, heartbeat).
+Scene 1 must SHOW the puzzle question and its visual in the first second, before any explanation.
+Scene 6 must end with ONE exam trap: the common wrong answer vs the right answer, worth saving for revision.
+The share reason must be a concrete fact a friend would want before an exam, not a generic request."""
+
+
 def generate(root,repo,topic_text='',subject='auto',source_text=''):
  root=Path(root);repo=Path(repo);history=[];automatic=not bool(topic_text.strip())
  records=[]
@@ -168,7 +178,7 @@ def generate(root,repo,topic_text='',subject='auto',source_text=''):
    old=json.loads(record);history.append({'title':old.get('title'),'topic_key':old.get('topic_key') or old.get('id')})
   except (ValueError,OSError):pass
  (root/'request.json').write_text(json.dumps({'topic_text':topic_text,'subject':subject,'auto_new':not bool(topic_text)},ensure_ascii=False,indent=2))
- brief='Requested topic: '+(topic_text or 'Select a fresh GS concept, different from all these previous lessons: '+json.dumps(history,ensure_ascii=False))+'. Subject: '+subject+'\n'+EASY_MEMORY_CONTRACT+'\n'+SHARE_CONTRACT
+ brief='Requested topic: '+(topic_text or 'Select a fresh GS concept, different from all these previous lessons: '+json.dumps(history,ensure_ascii=False))+'. Subject: '+subject+'\n'+EASY_MEMORY_CONTRACT+'\n'+SHARE_CONTRACT+'\n'+PERFORMANCE_CONTRACT
  evidence=[]
  if source_text.strip():evidence=[{'url':'user-provided','text':source_text[:14000]}]
  else:

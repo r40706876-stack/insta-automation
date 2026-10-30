@@ -3079,25 +3079,32 @@ def _upload_once(video_file, caption, thumb_ms=0, cover_url=None):
     print("Collab invitation requested: @" + publication.HANDLE)
     if cover_url:                                # alag se bana sundar cover photo
         body["cover_url"] = cover_url
-    r = requests.post(f"{GRAPH}{IG_USER_ID}/media", data=body, timeout=60).json()
-    cid = r.get("id")
-    if not cid:
-        raise RuntimeError(f"IG container nahi bana: {r}")
-    print("  IG container:", cid)
-    time.sleep(10)                                  # turant upload = ProcessingFailedError (container taiyar nahi)
-    up_url = r.get("uri") or f"https://rupload.facebook.com/ig-api-upload/{GRAPH_VER}/{cid}"
-    size = os.path.getsize(video_file)
-    with open(video_file, "rb") as vf:
-        data = vf.read()
-    up = None
-    for k in range(3):                              # rupload kabhi-kabhi pehli baar mana karta hai
-        up = requests.post(up_url, headers={"Authorization": f"OAuth {IG_ACCESS_TOKEN}", "offset": "0",
-                                            "file_size": str(size), "Content-Type": "application/octet-stream"},
-                           data=data, timeout=600)
-        print(f"  upload try {k + 1}: HTTP {up.status_code} {up.text[:150]}")
+    cid, up = None, None
+    for rnd in range(2):                            # rupload fail -> NAYA container + saral encoding (purana container dobara nahi chalta)
+        if rnd == 1:
+            print("  Upload fail -> naya container, Instagram-safe encoding ke saath")
+            video_file = _ig_safe_copy(video_file) or video_file
+            body.pop("cover_url", None)
+        r = requests.post(f"{GRAPH}{IG_USER_ID}/media", data=body, timeout=60).json()
+        cid = r.get("id")
+        if not cid:
+            raise RuntimeError(f"IG container nahi bana: {r}")
+        print("  IG container:", cid)
+        time.sleep(10)                              # turant upload = ProcessingFailedError (container taiyar nahi)
+        up_url = r.get("uri") or f"https://rupload.facebook.com/ig-api-upload/{GRAPH_VER}/{cid}"
+        size = os.path.getsize(video_file)
+        with open(video_file, "rb") as vf:
+            data = vf.read()
+        for k in range(2):
+            up = requests.post(up_url, headers={"Authorization": f"OAuth {IG_ACCESS_TOKEN}", "offset": "0",
+                                                "file_size": str(size), "Content-Type": "application/octet-stream"},
+                               data=data, timeout=600)
+            print(f"  upload try {rnd + 1}.{k + 1}: HTTP {up.status_code} {up.text[:150]}")
+            if up.status_code < 300 or "ProcessingFailed" in up.text:
+                break
+            time.sleep(15 * (k + 1))
         if up.status_code < 300:
             break
-        time.sleep(15 * (k + 1))
     if up.status_code >= 300:
         raise RuntimeError(f"IG upload fail: {up.status_code} {up.text[:200]}")
     status = ""
@@ -3124,6 +3131,12 @@ def _upload_once(video_file, caption, thumb_ms=0, cover_url=None):
         time.sleep(20)
     if not pub.get("id"):
         raise RuntimeError(f"IG publish fail: {pub}")
+    try:                                            # publish ki pakki jaanch (permalink mila = sach me live)
+        chk = requests.get(f"{GRAPH}{pub['id']}", params={"fields": "permalink", "access_token": IG_ACCESS_TOKEN},
+                           timeout=30).json()
+        print("  LIVE:", chk.get("permalink") or chk)
+    except Exception as exc:
+        print("  permalink jaanch nahi hui:", str(exc)[:100])
     slot.complete(pub["id"])
     return pub["id"]
 
