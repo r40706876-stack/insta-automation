@@ -1,0 +1,218 @@
+{
+ "topic": "फुफ्फुसीय धमनी अशुद्ध खून क्यों ले जाती है",
+ "brand": "मानव शरीर",
+ "fps": 24,
+ "steps": [
+  "दिल",
+  "फेफड़े",
+  "शुद्ध",
+  "याद"
+ ],
+ "scenes": [
+  {
+   "id": "hook",
+   "seconds": 4.58,
+   "title": "धमनी में अशुद्ध खून?",
+   "sub": "ये परीक्षा का सबसे बड़ा ट्रिक सवाल है",
+   "camera": {
+    "focus": [
+     "heart",
+     "lungs"
+    ],
+    "angle": "three_quarter",
+    "move": "push",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "visceral",
+    "cardio"
+   ],
+   "solid": [
+    "heart",
+    "pulmonary_vessels"
+   ],
+   "effects": [
+    "beat",
+    "travel:heart,pulmonary_vessels,lungs"
+   ],
+   "labels": [
+    "pulmonary_vessels"
+   ],
+   "step": -1
+  },
+  {
+   "id": "rule",
+   "seconds": 5.55,
+   "title": "धमनी का नियम: दिल से बाहर",
+   "sub": "खून शुद्ध हो या अशुद्ध, दिल से बाहर = धमनी",
+   "camera": {
+    "focus": [
+     "heart"
+    ],
+    "angle": "front",
+    "move": "orbit",
+    "zoom": 1.2
+   },
+   "layers": [
+    "skin",
+    "visceral",
+    "cardio"
+   ],
+   "solid": [
+    "heart",
+    "pulmonary_vessels"
+   ],
+   "effects": [
+    "beat",
+    "flow:pulmonary_vessels"
+   ],
+   "labels": [
+    "heart",
+    "pulmonary_vessels"
+   ],
+   "step": 0
+  },
+  {
+   "id": "to_lungs",
+   "seconds": 5.44,
+   "title": "फुफ्फुसीय धमनी → फेफड़े",
+   "sub": "दायाँ निलय अशुद्ध खून फेफड़ों में भेजता है",
+   "camera": {
+    "focus": [
+     "lungs"
+    ],
+    "angle": "front",
+    "move": "push",
+    "zoom": 1.05
+   },
+   "layers": [
+    "skin",
+    "visceral",
+    "cardio"
+   ],
+   "solid": [
+    "lungs",
+    "heart",
+    "pulmonary_vessels"
+   ],
+   "effects": [
+    "beat",
+    "breathe",
+    "travel:heart,pulmonary_vessels,lungs"
+   ],
+   "labels": [
+    "lungs",
+    "pulmonary_vessels"
+   ],
+   "step": 1
+  },
+  {
+   "id": "back",
+   "seconds": 5.47,
+   "title": "फुफ्फुसीय शिरा: शुद्ध खून",
+   "sub": "फेफड़ों से ऑक्सीजन लेकर खून दिल में लौटता है",
+   "camera": {
+    "focus": [
+     "lungs",
+     "heart"
+    ],
+    "angle": "three_quarter_left",
+    "move": "pull",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "visceral",
+    "cardio"
+   ],
+   "solid": [
+    "lungs",
+    "heart",
+    "pulmonary_vessels"
+   ],
+   "effects": [
+    "breathe",
+    "particles:lungs,heart,oxygen"
+   ],
+   "labels": [
+    "heart",
+    "lungs"
+   ],
+   "step": 2
+  },
+  {
+   "id": "trap",
+   "seconds": 5.09,
+   "title": "गलती: फुफ्फुसीय शिरा अशुद्ध",
+   "sub": "सही: फुफ्फुसीय शिरा में शुद्ध खून",
+   "camera": {
+    "focus": [
+     "lungs",
+     "heart"
+    ],
+    "angle": "three_quarter_left",
+    "move": "orbit",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "visceral",
+    "cardio"
+   ],
+   "solid": [
+    "lungs",
+    "heart",
+    "pulmonary_vessels"
+   ],
+   "effects": [
+    "breathe",
+    "particles:lungs,heart,oxygen"
+   ],
+   "labels": [
+    "heart"
+   ],
+   "trap": true,
+   "step": 3
+  },
+  {
+   "id": "quiz",
+   "seconds": 11.21,
+   "title": "परीक्षा का पक्का सवाल",
+   "sub": "",
+   "camera": {
+    "focus": [
+     "heart",
+     "lungs"
+    ],
+    "angle": "three_quarter",
+    "move": "orbit",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "visceral",
+    "cardio"
+   ],
+   "solid": [
+    "heart",
+    "lungs"
+   ],
+   "effects": [
+    "beat",
+    "breathe"
+   ],
+   "labels": [],
+   "quiz": {
+    "q": "कौन-सी शिरा शुद्ध खून ले जाती है?",
+    "a": "A) महाशिरा",
+    "b": "B) फुफ्फुसीय शिरा",
+    "cta": "जवाब कमेंट में लिखो",
+    "ans": "b"
+   },
+   "step": 3
+  }
+ ],
+ "day": 4,
+ "next": "खून दो बार दिल से क्यों?"
+}
