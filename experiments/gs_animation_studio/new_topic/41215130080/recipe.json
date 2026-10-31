@@ -1,0 +1,530 @@
+{
+  "title": "भारत सरकार का मुख्य बैंकर कौन?",
+  "subject": "अर्थशास्त्र",
+  "topic_key": "main_banker_of_india",
+  "share_reason": "रिज़र्व बैंक का सही उत्तर याद रहेगा",
+  "recall": "रिज़र्व बैंक ऑफ़ इंडिया भारत सरकार का मुख्य बैंकर है।",
+  "share_card": {
+    "kind": "exam_confusion",
+    "recipient": "परीक्षा की तैयारी करने वाला दोस्त",
+    "benefit": "मुख्य बैंकर का सही उत्तर याद रहेगा",
+    "cta": "दोस्त को यह याद दिलाएँ"
+  },
+  "scenes": [
+    {
+      "heading": "मुख्य बैंकर कौन?",
+      "explanation": "सरकारी बैंक चुनें",
+      "speech": "भारत सरकार का मुख्य बैंकर कौन है? विकल्प देखें।",
+      "teaches": "प्रश्न पहचान",
+      "setting": "institution",
+      "visual_action": "एक व्यक्ति और सिक्के RBI की ओर चलते हैं।",
+      "text_color": "#FFEE00",
+      "explanation_color": "#00FFAA",
+      "objects": [
+        {
+          "kind": "building",
+          "action": "none",
+          "label": "RBI",
+          "id": "b1",
+          "color": "#b1a4d3",
+          "pos": [
+            -1.8,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        {
+          "kind": "person",
+          "action": "walk",
+          "label": "",
+          "id": "p1",
+          "color": "#f4e7bf",
+          "pos": [
+            -0.45,
+            0,
+            0
+          ],
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ],
+          "to": [
+            0.75,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "coin",
+          "action": "move",
+          "label": "",
+          "id": "c1",
+          "color": "#f5bd3d",
+          "pos": [
+            1.35,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            2.55,
+            0,
+            0
+          ]
+        }
+      ],
+      "quiz_card": {
+        "question": "भारत सरकार का मुख्य बैंकर कौन है?",
+        "answer": "रिज़र्व बैंक ऑफ़ इंडिया",
+        "reveal_after": 2.5,
+        "answer_color": "#73efb2"
+      }
+    },
+    {
+      "heading": "सरकारी खाता",
+      "explanation": "वित्तीय लेनदेन",
+      "speech": "RBI सरकार के सभी वित्तीय लेनदेन संभालता है।",
+      "teaches": "बैंकर की भूमिका",
+      "setting": "institution",
+      "visual_action": "सरकार से धन RBI की ओर प्रवाहित होता है।",
+      "text_color": "#FFEE00",
+      "explanation_color": "#00FFAA",
+      "objects": [
+        {
+          "kind": "building",
+          "action": "none",
+          "label": "RBI",
+          "id": "b2",
+          "color": "#b1a4d3",
+          "pos": [
+            -2.7,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        {
+          "kind": "assembly",
+          "action": "none",
+          "label": "सरकार",
+          "id": "a1",
+          "color": "#b6b9ad",
+          "pos": [
+            -0.9,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        {
+          "kind": "coin",
+          "action": "flow",
+          "label": "",
+          "id": "c2",
+          "color": "#f5bd3d",
+          "pos": [
+            0.9,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            2.1,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "arrow",
+          "action": "pulse",
+          "label": "",
+          "id": "ar1",
+          "color": "#59c7c5",
+          "pos": [
+            2.7,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "ऋण प्रबंधन",
+      "explanation": "सरकार का ऋण",
+      "speech": "RBI सरकार के ऋण का प्रबंधन भी करता है।",
+      "teaches": "ऋण प्रबंधन",
+      "setting": "institution",
+      "visual_action": "निवेशक RBI की ओर चलकर ऋण के सिक्के देता है।",
+      "text_color": "#FFEE00",
+      "explanation_color": "#00FFAA",
+      "objects": [
+        {
+          "kind": "building",
+          "action": "none",
+          "label": "RBI",
+          "id": "b3",
+          "color": "#b1a4d3",
+          "pos": [
+            -2.7,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        {
+          "kind": "person",
+          "action": "walk",
+          "label": "निवेशक",
+          "id": "p2",
+          "color": "#f4e7bf",
+          "pos": [
+            -1.35,
+            0,
+            0
+          ],
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ],
+          "to": [
+            -0.15,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "coin",
+          "action": "move",
+          "label": "",
+          "id": "c3",
+          "color": "#f5bd3d",
+          "pos": [
+            0.45,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            1.65,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "assembly",
+          "action": "none",
+          "label": "",
+          "id": "a2",
+          "color": "#b6b9ad",
+          "pos": [
+            2.7,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "मौद्रिक नीति",
+      "explanation": "धन आपूर्ति नियंत्रण",
+      "speech": "RBI देश की मौद्रिक नीति बनाता और लागू करता है।",
+      "teaches": "नीति महत्व",
+      "setting": "institution",
+      "visual_action": "RBI से धन बहता है, गियर घूमता है।",
+      "text_color": "#FFEE00",
+      "explanation_color": "#00FFAA",
+      "objects": [
+        {
+          "kind": "building",
+          "action": "none",
+          "label": "RBI",
+          "id": "b4",
+          "color": "#b1a4d3",
+          "pos": [
+            -1.8,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        {
+          "kind": "gear",
+          "action": "spin",
+          "label": "",
+          "id": "g1",
+          "color": "#59c7c5",
+          "pos": [
+            0.0,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        {
+          "kind": "water",
+          "action": "flow",
+          "label": "",
+          "id": "w1",
+          "color": "#18a9dd",
+          "pos": [
+            1.8,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            3.0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "नोट जारीकर्ता",
+      "explanation": "नोट और सिक्का अधिकार",
+      "speech": "RBI नोट और सिक्के जारी करने का एकमात्र अधिकार रखता है।",
+      "teaches": "मुद्रा अधिकार",
+      "setting": "institution",
+      "visual_action": "RBI से नए सिक्के ऊपर उठते हैं।",
+      "text_color": "#FFEE00",
+      "explanation_color": "#00FFAA",
+      "objects": [
+        {
+          "kind": "building",
+          "action": "none",
+          "label": "RBI",
+          "id": "b5",
+          "color": "#b1a4d3",
+          "pos": [
+            -1.8,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        {
+          "kind": "coin",
+          "action": "rise",
+          "label": "",
+          "id": "c4",
+          "color": "#f5bd3d",
+          "pos": [
+            0.0,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            0.0,
+            0,
+            1.2
+          ]
+        },
+        {
+          "kind": "coin",
+          "action": "rise",
+          "label": "",
+          "id": "c5",
+          "color": "#f5bd3d",
+          "pos": [
+            1.8,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            1.8,
+            0,
+            1.2
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "सही उत्तर",
+      "explanation": "RBI ही मुख्य बैंकर",
+      "speech": "तो, भारत सरकार का मुख्य बैंकर रिज़र्व बैंक ऑफ़ इंडिया है।",
+      "teaches": "उत्तर याददाश्त",
+      "setting": "institution",
+      "visual_action": "व्यक्ति RBI की ओर इशारा करता है, तीर चलती है।",
+      "text_color": "#FFEE00",
+      "explanation_color": "#00FFAA",
+      "objects": [
+        {
+          "kind": "building",
+          "action": "pulse",
+          "label": "RBI",
+          "id": "b6",
+          "color": "#b1a4d3",
+          "pos": [
+            -1.8,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        {
+          "kind": "person",
+          "action": "walk",
+          "label": "",
+          "id": "p3",
+          "color": "#f4e7bf",
+          "pos": [
+            -0.45,
+            0,
+            0
+          ],
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ],
+          "to": [
+            0.75,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "arrow",
+          "action": "move",
+          "label": "",
+          "id": "ar2",
+          "color": "#59c7c5",
+          "pos": [
+            1.35,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            2.55,
+            0,
+            0
+          ]
+        }
+      ],
+      "quiz_card": {
+        "question": "भारत सरकार का मुख्य बैंकर कौन है?",
+        "answer": "रिज़र्व बैंक ऑफ़ इंडिया",
+        "reveal_after": 2.5,
+        "answer_color": "#73efb2"
+      }
+    }
+  ],
+  "speech": [
+    "भारत सरकार का मुख्य बैंकर कौन है? विकल्प देखें।",
+    "RBI सरकार के सभी वित्तीय लेनदेन संभालता है।",
+    "RBI सरकार के ऋण का प्रबंधन भी करता है।",
+    "RBI देश की मौद्रिक नीति बनाता और लागू करता है।",
+    "RBI नोट और सिक्के जारी करने का एकमात्र अधिकार रखता है।",
+    "तो, भारत सरकार का मुख्य बैंकर रिज़र्व बैंक ऑफ़ इंडिया है।"
+  ],
+  "titles": [
+    [
+      "मुख्य बैंकर कौन?",
+      "सरकारी बैंक चुनें"
+    ],
+    [
+      "सरकारी खाता",
+      "वित्तीय लेनदेन"
+    ],
+    [
+      "ऋण प्रबंधन",
+      "सरकार का ऋण"
+    ],
+    [
+      "मौद्रिक नीति",
+      "धन आपूर्ति नियंत्रण"
+    ],
+    [
+      "नोट जारीकर्ता",
+      "नोट और सिक्का अधिकार"
+    ],
+    [
+      "सही उत्तर",
+      "RBI ही मुख्य बैंकर"
+    ]
+  ],
+  "requested_topic": "इनमें से कौन भारत सरकार का मुख्य बैंकर है?",
+  "automatic_selection": false,
+  "planner": "Groq / openai/gpt-oss-120b",
+  "auditor": "Gemini / gemini-2.5-flash",
+  "dynamic": true,
+  "topic_policy": "easy_single_concept_v1",
+  "quality_version": "rich_3d_v1"
+}

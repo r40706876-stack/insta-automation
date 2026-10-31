@@ -1,0 +1,14 @@
+{
+  "frames": 580,
+  "fps": 24,
+  "actual_3d": true,
+  "quality_version": "rich_3d_v1",
+  "articulated_people": true,
+  "source_based_maps": false,
+  "continuous_rock_layers": false,
+  "terrain_relief": false,
+  "photo_assets": 0,
+  "distinct_sets": 6,
+  "data_driven_objects": 20,
+  "schematic_not_exact_reconstruction": true
+}

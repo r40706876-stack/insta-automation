@@ -1,0 +1,97 @@
+{
+  "ok": true,
+  "title": "भारत सरकार का मुख्य बैंकर कौन?",
+  "subject": "Economics",
+  "renderer_version": "rich_3d_v1",
+  "question_hash": "f0001f296f8197af41a5b081cc184f349dd064cdfc954db7d21eb0cdf2efab35",
+  "reference": {
+    "subject": "Economics",
+    "subject_hi": "अर्थशास्त्र",
+    "chapter": "मुद्रा एवं बैंकिंग (Money and Banking)",
+    "sub": "",
+    "question": "इनमें से कौन भारत सरकार का मुख्य बैंकर है?",
+    "options": {
+      "a": "पंजाब नेशनल बैंक",
+      "b": "स्टेट बैंक ऑफ इंडिया",
+      "c": "बैंक ऑफ इंडिया",
+      "d": "रिजर्व बैंक ऑफ इंडिया"
+    },
+    "answer": "d",
+    "exams": [
+      "RRB Group-D 19-09-2018 (Shift-II)"
+    ],
+    "explanation": "रिजर्व बैंक ऑफ इंडिया भारत सरकार का मुख्य बैंकर है।",
+    "times_asked": 1,
+    "years": [
+      "2018"
+    ],
+    "id": "4f96206edf",
+    "seq": 982
+  },
+  "topic_policy": "easy_single_concept_v1",
+  "topic_priority": 12,
+  "recall": "रिज़र्व बैंक ऑफ़ इंडिया भारत सरकार का मुख्य बैंकर है।",
+  "share_card": {
+    "kind": "exam_confusion",
+    "recipient": "परीक्षा की तैयारी करने वाला दोस्त",
+    "benefit": "मुख्य बैंकर का सही उत्तर याद रहेगा",
+    "cta": "दोस्त को यह याद दिलाएँ"
+  },
+  "share_reason": "रिज़र्व बैंक का सही उत्तर याद रहेगा",
+  "scenes": [
+    {
+      "label": "मुख्य बैंकर कौन?",
+      "speech": "भारत सरकार का मुख्य बैंकर कौन है? विकल्प देखें।",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "institution",
+        "visible_action": "एक व्यक्ति और सिक्के RBI की ओर चलते हैं।"
+      }
+    },
+    {
+      "label": "सरकारी खाता",
+      "speech": "RBI सरकार के सभी वित्तीय लेनदेन संभालता है।",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "institution",
+        "visible_action": "सरकार से धन RBI की ओर प्रवाहित होता है।"
+      }
+    },
+    {
+      "label": "ऋण प्रबंधन",
+      "speech": "RBI सरकार के ऋण का प्रबंधन भी करता है।",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "institution",
+        "visible_action": "निवेशक RBI की ओर चलकर ऋण के सिक्के देता है।"
+      }
+    },
+    {
+      "label": "मौद्रिक नीति",
+      "speech": "RBI देश की मौद्रिक नीति बनाता और लागू करता है।",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "institution",
+        "visible_action": "RBI से धन बहता है, गियर घूमता है।"
+      }
+    },
+    {
+      "label": "नोट जारीकर्ता",
+      "speech": "RBI नोट और सिक्के जारी करने का एकमात्र अधिकार रखता है।",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "institution",
+        "visible_action": "RBI से नए सिक्के ऊपर उठते हैं।"
+      }
+    },
+    {
+      "label": "सही उत्तर",
+      "speech": "तो, भारत सरकार का मुख्य बैंकर रिज़र्व बैंक ऑफ़ इंडिया है।",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "institution",
+        "visible_action": "व्यक्ति RBI की ओर इशारा करता है, तीर चलती है।"
+      }
+    }
+  ]
+}
