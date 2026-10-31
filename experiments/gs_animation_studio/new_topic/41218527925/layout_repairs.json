@@ -1,0 +1,172 @@
+[
+  {
+    "scene": 1,
+    "object": "person_0",
+    "repair": "fit_pos"
+  },
+  {
+    "scene": 1,
+    "object": "person_0",
+    "repair": "fit_to"
+  },
+  {
+    "scene": 1,
+    "object": "rbi_building",
+    "repair": "fit_pos"
+  },
+  {
+    "scene": 1,
+    "object": "sbi_building",
+    "repair": "fit_pos"
+  },
+  {
+    "scene": 1,
+    "object": "sbi_building",
+    "repair": "remove_excess_label"
+  },
+  {
+    "scene": 1,
+    "object": "coin_0",
+    "repair": "fit_pos"
+  },
+  {
+    "scene": 1,
+    "object": "coin_0",
+    "repair": "fit_to"
+  },
+  {
+    "scene": 1,
+    "object": "coin_0",
+    "repair": "remove_excess_label"
+  },
+  {
+    "scene": 3,
+    "object": "rbi_building_s3",
+    "repair": "fit_pos"
+  },
+  {
+    "scene": 3,
+    "object": "book_1",
+    "repair": "fit_pos"
+  },
+  {
+    "scene": 3,
+    "object": "book_1",
+    "repair": "fit_to"
+  },
+  {
+    "scene": 3,
+    "object": "person_1",
+    "repair": "fit_pos"
+  },
+  {
+    "scene": 3,
+    "object": "person_1",
+    "repair": "fit_to"
+  },
+  {
+    "scene": 3,
+    "object": "coin_1",
+    "repair": "fit_pos"
+  },
+  {
+    "scene": 3,
+    "object": "coin_1",
+    "repair": "fit_to"
+  },
+  {
+    "scene": 3,
+    "object": "coin_1",
+    "repair": "remove_excess_label"
+  },
+  {
+    "scene": 3,
+    "object": "govt_building_s3",
+    "repair": "fit_pos"
+  },
+  {
+    "scene": 3,
+    "object": "govt_building_s3",
+    "repair": "remove_excess_label"
+  },
+  {
+    "scene": 4,
+    "object": "rbi_building_s4",
+    "repair": "fit_pos"
+  },
+  {
+    "scene": 4,
+    "object": "person_2",
+    "repair": "fit_pos"
+  },
+  {
+    "scene": 4,
+    "object": "person_2",
+    "repair": "fit_to"
+  },
+  {
+    "scene": 4,
+    "object": "govt_building_s4",
+    "repair": "fit_pos"
+  },
+  {
+    "scene": 4,
+    "object": "arrow_0",
+    "repair": "fit_pos"
+  },
+  {
+    "scene": 4,
+    "object": "arrow_0",
+    "repair": "fit_to"
+  },
+  {
+    "scene": 4,
+    "object": "arrow_0",
+    "repair": "remove_excess_label"
+  },
+  {
+    "scene": 5,
+    "object": "commercial_bank_s5",
+    "repair": "fit_pos"
+  },
+  {
+    "scene": 5,
+    "object": "person_3",
+    "repair": "fit_pos"
+  },
+  {
+    "scene": 5,
+    "object": "person_3",
+    "repair": "fit_to"
+  },
+  {
+    "scene": 5,
+    "object": "coin_2",
+    "repair": "fit_pos"
+  },
+  {
+    "scene": 5,
+    "object": "coin_2",
+    "repair": "fit_to"
+  },
+  {
+    "scene": 5,
+    "object": "rbi_building_s5",
+    "repair": "fit_pos"
+  },
+  {
+    "scene": 5,
+    "object": "rbi_building_s5",
+    "repair": "remove_excess_label"
+  },
+  {
+    "scene": 5,
+    "object": "govt_building_s5",
+    "repair": "fit_pos"
+  },
+  {
+    "scene": 5,
+    "object": "govt_building_s5",
+    "repair": "remove_excess_label"
+  }
+]

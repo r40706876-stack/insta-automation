@@ -1,0 +1,637 @@
+{
+  "ok": true,
+  "reasons": [],
+  "novel_topic": true,
+  "scene_checks": [
+    {
+      "scene": 1,
+      "mechanism_matches": true
+    },
+    {
+      "scene": 2,
+      "mechanism_matches": true
+    },
+    {
+      "scene": 3,
+      "mechanism_matches": true
+    },
+    {
+      "scene": 4,
+      "mechanism_matches": true
+    },
+    {
+      "scene": 5,
+      "mechanism_matches": true
+    },
+    {
+      "scene": 6,
+      "mechanism_matches": true
+    }
+  ],
+  "title": "भारत सरकार का मुख्य बैंकर कौन?",
+  "subject": "अर्थशास्त्र",
+  "topic_key": "bharat_sarkar_ka_mukhya_banker_koun",
+  "share_reason": "दोस्त को RBI को सही उत्तर याद रखने में मदद",
+  "recall": "रिज़र्व बैंक ऑफ़ इंडिया भारत सरकार का मुख्य बैंकर है।",
+  "share_card": {
+    "kind": "exam_confusion",
+    "recipient": "परीक्षा की तैयारी करने वाला मित्र",
+    "benefit": "RBI को भारत सरकार का मुख्य बैंकर क्यों कहते हैं, यह समझना।",
+    "cta": "चलो, RBI के इस महत्वपूर्ण काम को समझें!"
+  },
+  "scenes": [
+    {
+      "heading": "सरकार का बैंकर कौन?",
+      "explanation": "सही बैंक पहचानें।",
+      "speech": "इनमें से कौन भारत सरकार का मुख्य बैंकर है? क्या आप जानते हैं?",
+      "teaches": "प्रश्न प्रस्तुत करना और जिज्ञासा जगाना।",
+      "setting": "institution",
+      "visual_action": "A person walks towards bank buildings, then points at the RBI building as a coin moves towards it.",
+      "text_color": "#FFFFFF",
+      "explanation_color": "#FFD700",
+      "objects": [
+        {
+          "kind": "person",
+          "action": "walk",
+          "label": "विद्यार्थी",
+          "id": "person_0",
+          "color": "#f4e7bf",
+          "animation_window": [
+            0,
+            0.5
+          ],
+          "pos": [
+            -2.7931,
+            0,
+            0
+          ],
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ],
+          "to": [
+            -1.9655,
+            0,
+            0
+          ],
+          "gesture": "point",
+          "interact_with": "rbi_building"
+        },
+        {
+          "kind": "building",
+          "action": "pulse",
+          "label": "रिज़र्व बैंक ऑफ़ इंडिया",
+          "id": "rbi_building",
+          "color": "#b1a4d3",
+          "animation_window": [
+            0.5,
+            1
+          ],
+          "pos": [
+            -1.2414,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        {
+          "kind": "building",
+          "action": "none",
+          "label": "पंजाब नेशनल बैंक",
+          "id": "pnb_building",
+          "color": "#d3b1a4",
+          "pos": [
+            0.0,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        {
+          "kind": "building",
+          "action": "none",
+          "label": "स्टेट बैंक ऑफ इंडिया",
+          "id": "sbi_building",
+          "color": "#d3b1a4",
+          "pos": [
+            1.2414,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        {
+          "kind": "coin",
+          "action": "move",
+          "label": "धन",
+          "id": "coin_0",
+          "color": "#f5bd3d",
+          "animation_window": [
+            0.5,
+            1
+          ],
+          "pos": [
+            2.0,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            -1.0,
+            0,
+            0
+          ]
+        }
+      ],
+      "quiz_card": {
+        "question": "इनमें से कौन सरकार का मुख्य बैंकर है?",
+        "answer": "रिज़र्व बैंक ऑफ़ इंडिया",
+        "reveal_after": 2.5,
+        "answer_color": "#73efb2"
+      }
+    },
+    {
+      "heading": "सरकार के खाते",
+      "explanation": "RBI सरकार के पैसे रखता है।",
+      "speech": "RBI भारत सरकार के सभी खाते रखता है और उनके लिए लेनदेन करता है।",
+      "teaches": "RBI का सरकार के लिए बैंक के रूप में कार्य।",
+      "setting": "institution",
+      "visual_action": "Water (representing money) flows into the RBI building, and a book (ledger) moves.",
+      "text_color": "#FFFFFF",
+      "explanation_color": "#00FF00",
+      "objects": [
+        {
+          "kind": "building",
+          "action": "none",
+          "label": "RBI",
+          "id": "rbi_building_s2",
+          "color": "#b1a4d3",
+          "pos": [
+            -1.8,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        {
+          "kind": "water",
+          "action": "flow",
+          "label": "सरकारी धन",
+          "id": "water_0",
+          "color": "#18a9dd",
+          "pos": [
+            -0.5,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            -1.5,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "book",
+          "action": "move",
+          "label": "खाता बही",
+          "id": "book_0",
+          "color": "#8b4513",
+          "pos": [
+            1.0,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            -1.0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "ऋण प्रबंधन",
+      "explanation": "सरकार के लिए ऋण संभालना।",
+      "speech": "यह सरकार के लिए ऋण का प्रबंधन भी करता है, जैसे बॉन्ड जारी करना।",
+      "teaches": "RBI का सरकार के ऋण प्रबंधन में भूमिका।",
+      "setting": "institution",
+      "visual_action": "Books (bonds) move from the RBI building to a person, and coins flow from the person to the government building.",
+      "text_color": "#FFFFFF",
+      "explanation_color": "#FFAA00",
+      "objects": [
+        {
+          "kind": "building",
+          "action": "none",
+          "label": "RBI",
+          "id": "rbi_building_s3",
+          "color": "#b1a4d3",
+          "pos": [
+            -3.0,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        {
+          "kind": "book",
+          "action": "move",
+          "label": "बॉन्ड",
+          "id": "book_1",
+          "color": "#8b4513",
+          "animation_window": [
+            0,
+            0.5
+          ],
+          "pos": [
+            -1.875,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            -0.875,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "person",
+          "action": "walk",
+          "label": "निवेशक",
+          "id": "person_1",
+          "color": "#f4e7bf",
+          "pos": [
+            -0.375,
+            0,
+            0
+          ],
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ],
+          "to": [
+            0.625,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "coin",
+          "action": "flow",
+          "label": "धन",
+          "id": "coin_1",
+          "color": "#f5bd3d",
+          "animation_window": [
+            0.5,
+            1
+          ],
+          "pos": [
+            1.5,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            2.5,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "building",
+          "action": "none",
+          "label": "सरकार",
+          "id": "govt_building_s3",
+          "color": "#a4d3b1",
+          "pos": [
+            3.0,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "वित्तीय सलाहकार",
+      "explanation": "सरकार को सलाह देना।",
+      "speech": "RBI सरकार को वित्तीय मामलों पर महत्वपूर्ण सलाह देता है।",
+      "teaches": "RBI का सरकार के वित्तीय सलाहकार के रूप में कार्य।",
+      "setting": "institution",
+      "visual_action": "A person walks from the RBI building towards the government building and points, while an arrow moves from RBI to the government.",
+      "text_color": "#FFFFFF",
+      "explanation_color": "#FF8C00",
+      "objects": [
+        {
+          "kind": "building",
+          "action": "none",
+          "label": "RBI",
+          "id": "rbi_building_s4",
+          "color": "#b1a4d3",
+          "pos": [
+            -2.3478,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        {
+          "kind": "person",
+          "action": "walk",
+          "label": "RBI अधिकारी",
+          "id": "person_2",
+          "color": "#f4e7bf",
+          "pos": [
+            -1.1739,
+            0,
+            0
+          ],
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ],
+          "to": [
+            -0.1304,
+            0,
+            0
+          ],
+          "gesture": "point",
+          "interact_with": "govt_building_s4"
+        },
+        {
+          "kind": "building",
+          "action": "none",
+          "label": "सरकार",
+          "id": "govt_building_s4",
+          "color": "#a4d3b1",
+          "pos": [
+            0.7826,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        {
+          "kind": "arrow",
+          "action": "move",
+          "label": "सलाह",
+          "id": "arrow_0",
+          "color": "#ff0000",
+          "pos": [
+            -1.5,
+            0.5,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            0.5,
+            0.5,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "वाणिज्यिक बैंक नहीं",
+      "explanation": "आम जनता से अलग।",
+      "speech": "वाणिज्यिक बैंक आम जनता के लिए होते हैं, पर RBI सरकार का बैंक है।",
+      "teaches": "RBI और वाणिज्यिक बैंकों के बीच अंतर।",
+      "setting": "institution",
+      "visual_action": "A person walks with coins towards a commercial bank, while the RBI and government buildings stand separately.",
+      "text_color": "#FFFFFF",
+      "explanation_color": "#FFFF00",
+      "objects": [
+        {
+          "kind": "building",
+          "action": "none",
+          "label": "वाणिज्यिक बैंक",
+          "id": "commercial_bank_s5",
+          "color": "#d3b1a4",
+          "pos": [
+            -3.0,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        {
+          "kind": "person",
+          "action": "walk",
+          "label": "नागरिक",
+          "id": "person_3",
+          "color": "#f4e7bf",
+          "pos": [
+            -1.875,
+            0,
+            0
+          ],
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ],
+          "to": [
+            -0.875,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "coin",
+          "action": "move",
+          "label": "धन",
+          "id": "coin_2",
+          "color": "#f5bd3d",
+          "pos": [
+            -0.5,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            -2.0,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "building",
+          "action": "none",
+          "label": "RBI",
+          "id": "rbi_building_s5",
+          "color": "#b1a4d3",
+          "pos": [
+            1.5,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        {
+          "kind": "building",
+          "action": "none",
+          "label": "सरकार",
+          "id": "govt_building_s5",
+          "color": "#a4d3b1",
+          "pos": [
+            3.0,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "मुख्य बैंकर: RBI",
+      "explanation": "RBI सरकार का बैंकर है।",
+      "speech": "तो, भारत सरकार का मुख्य बैंकर रिज़र्व बैंक ऑफ़ इंडिया है।",
+      "teaches": "मुख्य अवधारणा को दोहराना और याद दिलाना।",
+      "setting": "institution",
+      "visual_action": "Coins move between the RBI building and the government building, and the RBI building pulses.",
+      "text_color": "#FFFFFF",
+      "explanation_color": "#73efb2",
+      "objects": [
+        {
+          "kind": "building",
+          "action": "pulse",
+          "label": "रिज़र्व बैंक ऑफ़ इंडिया",
+          "id": "rbi_building_s6",
+          "color": "#b1a4d3",
+          "pos": [
+            -1.8,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        {
+          "kind": "building",
+          "action": "none",
+          "label": "भारत सरकार",
+          "id": "govt_building_s6",
+          "color": "#a4d3b1",
+          "pos": [
+            0.0,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        {
+          "kind": "coin",
+          "action": "move",
+          "label": "धन",
+          "id": "coin_3",
+          "color": "#f5bd3d",
+          "pos": [
+            -1.5,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            -0.5,
+            0,
+            0
+          ]
+        }
+      ],
+      "quiz_card": {
+        "question": "भारत सरकार का मुख्य बैंकर कौन है?",
+        "answer": "रिज़र्व बैंक ऑफ़ इंडिया",
+        "reveal_after": 2.5,
+        "answer_color": "#73efb2"
+      }
+    }
+  ]
+}
