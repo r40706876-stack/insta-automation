@@ -1,0 +1,9 @@
+Plan repair 1 Exactly six scenes required
+Plan repair 2 Meaningful movement needs a visible path
+Plan repair 3 Exactly six scenes required
+Traceback (most recent call last):
+  File "/home/runner/work/insta-automation/insta-automation/gs_animation_studio/planner.py", line 235, in <module>
+    generate(sys.argv[1],sys.argv[2],os.getenv('STUDIO_TOPIC_TEXT','').strip(),os.getenv('STUDIO_SUBJECT','auto'),os.getenv('STUDIO_REFERENCE_TEXT',''))
+  File "/home/runner/work/insta-automation/insta-automation/gs_animation_studio/planner.py", line 231, in generate
+    raise RuntimeError('New-topic plan failed validation after three attempts: '+str(errors))
+RuntimeError: New-topic plan failed validation after three attempts: ['Exactly six scenes required', 'Meaningful movement needs a visible path', 'Exactly six scenes required']

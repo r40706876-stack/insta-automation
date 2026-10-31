@@ -1,0 +1,231 @@
+{
+  "title": "सूरत से होकर बहने वाली नदी कौन सी?",
+  "subject": "भूगोल",
+  "topic_key": "surat_se_hokar_bahne_wali_nadi",
+  "share_reason": "दोस्त को परीक्षा में ताप्ती नदी को सूरत से जोड़ने में मदद",
+  "recall": "ताप्ती नदी सूरत से होकर बहती है।",
+  "share_card": {
+    "kind": "exam_confusion",
+    "recipient": "परीक्षा की तैयारी कर रहे दोस्त",
+    "benefit": "सूरत से बहने वाली नदी का सही उत्तर ताप्ती याद रहेगा",
+    "cta": "चलो साथ में ताप्ती याद करें"
+  },
+  "scenes": [
+    {
+      "heading": "सूरत में कौन सी नदी?",
+      "explanation": "गुजरात के सूरत शहर को पहचानें।",
+      "speech": "क्या आप जानते हैं सूरत शहर से कौन सी नदी बहती है?",
+      "teaches": "प्रश्न प्रस्तुत करना और सूरत को मानचित्र पर दिखाना।",
+      "setting": "neutral",
+      "visual_action": "एक व्यक्ति भारत के नक्शे पर सूरत की ओर इशारा करता है, और एक तीर सूरत को इंगित करता है।",
+      "text_color": "#FFFFFF",
+      "explanation_color": "#FFFF00",
+      "objects": [
+        {
+          "kind": "map",
+          "action": "none",
+          "label": "भारत का नक्शा",
+          "map_region": "india",
+          "id": "object_0",
+          "color": "#59c7c5",
+          "pos": [
+            -1.8,
+            0,
+            0
+          ],
+          "size": [
+            1.1,
+            1.1,
+            1.1
+          ]
+        },
+        {
+          "kind": "person",
+          "action": "walk",
+          "label": "विवेचक",
+          "id": "object_1",
+          "color": "#f4e7bf",
+          "pos": [
+            -0.45,
+            0,
+            0
+          ],
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ],
+          "to": [
+            0.75,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "arrow",
+          "action": "pulse",
+          "label": "सूरत",
+          "id": "object_2",
+          "color": "#59c7c5",
+          "pos": [
+            1.8,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        }
+      ],
+      "quiz_card": {
+        "question": "सूरत से होकर बहने वाली नदी कौन सी है?",
+        "answer": "ताप्ती",
+        "reveal_after": 2.5,
+        "answer_color": "#73efb2"
+      }
+    },
+    {
+      "heading": "ताप्ती का उद्गम",
+      "explanation": "ताप्ती मुल्ताई से बहती",
+      "speech": "ताप्ती नदी मध्य प्रदेश के मुल्ताई से निकलती है और सतपुड़ा पर्वत के मध्य से पश्चिम की ओर बहती है।",
+      "teaches": "ताप्ती नदी का उद्गम स्थल और बहाव की दिशा।",
+      "setting": "neutral",
+      "visual_action": "पानी पहाड़ों से निकलकर पश्चिम दिशा में बहता हुआ दिखाया गया है।",
+      "text_color": "#FFFFFF",
+      "explanation_color": "#FFFF00",
+      "objects": [
+        {
+          "kind": "mountain",
+          "action": "none",
+          "label": "सतपुड़ा पर्वत",
+          "id": "object_0",
+          "color": "#59c7c5",
+          "pos": [
+            -1.8,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        {
+          "kind": "water",
+          "action": "flow",
+          "label": "ताप्ती नदी",
+          "id": "object_1",
+          "color": "#18a9dd",
+          "pos": [
+            0.0,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            1.2,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "arrow",
+          "action": "trace",
+          "label": "पश्चिम दिशा",
+          "id": "object_2",
+          "color": "#59c7c5",
+          "pos": [
+            1.8,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "सूरत से गुजरती ताप्ती",
+      "explanation": "ताप्ती सूरत मैदान पार",
+      "speech": "यह महाराष्ट्र के जलगाँव पठार और फिर सूरत के मैदान को पार करती है।",
+      "teaches": "ताप्ती का सूरत से गुजरना।",
+      "setting": "village",
+      "visual_action": "नदी एक शहर के पास से बहती है, और एक व्यक्ति नदी के किनारे चलता है।",
+      "text_color": "#FFFFFF",
+      "explanation_color": "#FFFF00",
+      "objects": [
+        {
+          "kind": "water",
+          "action": "flow",
+          "label": "ताप्ती नदी",
+          "id": "object_0",
+          "color": "#18a9dd",
+          "pos": [
+            -1.8,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            -0.6,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "building",
+          "action": "none",
+          "label": "सूरत शहर",
+          "id": "object_1",
+          "color": "#b1a4d3",
+          "pos": [
+            0.0,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        {
+          "kind": "person",
+          "action": "walk",
+          "label": "शहरवासी",
+          "id": "object_2",
+          "color": "#f4e7bf",
+          "pos": [
+            1.35,
+            0,
+            0
+          ],
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ],
+          "to": [
+            2.55,
+            0,
+            0
+          ]
+        }
+      ]
+    }
+  ]
+}

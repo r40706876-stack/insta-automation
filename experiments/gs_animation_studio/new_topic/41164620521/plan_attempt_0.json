@@ -1,0 +1,291 @@
+{
+  "title": "सूरत से होकर बहने वाली नदी कौन सी?",
+  "subject": "भूगोल",
+  "topic_key": "surat_se_ho_kar_bahne_wali_nadi",
+  "share_reason": "दोस्त को परीक्षा में ताप्ती नदी को सूरत से जोड़ने में मदद",
+  "recall": "ताप्ती नदी सूरत से होकर बहती है।",
+  "share_card": {
+    "kind": "exam_confusion",
+    "recipient": "परीक्षा की तैयारी कर रहे दोस्त",
+    "benefit": "सूरत से बहने वाली नदी का सही उत्तर ताप्ती याद रहेगा",
+    "cta": "चलो साथ में ताप्ती याद करें"
+  },
+  "scenes": [
+    {
+      "heading": "सूरत में कौन सी नदी?",
+      "explanation": "चार विकल्प, एक सही उत्तर",
+      "speech": "सूरत शहर के पास कौन सी नदी बहती है? विकल्प: किम, रुपेन, महानदी, ताप्ती।",
+      "teaches": "सही नदी की पहचान करना",
+      "objects": [
+        {
+          "kind": "map",
+          "action": "none",
+          "label": "गुजरात",
+          "id": "object_0",
+          "color": "#59c7c5",
+          "pos": [
+            -1.8,
+            0,
+            0
+          ],
+          "size": [
+            1.1,
+            1.1,
+            1.1
+          ]
+        },
+        {
+          "kind": "person",
+          "action": "walk",
+          "label": "विवेचक",
+          "id": "object_1",
+          "color": "#f4e7bf",
+          "pos": [
+            -0.45,
+            0,
+            0
+          ],
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ],
+          "to": [
+            0.75,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "arrow",
+          "action": "trace",
+          "label": "नदियों के मार्ग",
+          "id": "object_2",
+          "color": "#59c7c5",
+          "pos": [
+            1.8,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        }
+      ],
+      "setting": "map",
+      "visual_action": "नक्शे पर सूरत दिखता है, व्यक्ति सूरत की ओर चलता है, तीर नदियों के मार्ग दिखाते हैं",
+      "text_color": "#FFFFFF",
+      "explanation_color": "#FFFF00",
+      "quiz_card": {
+        "question": "सूरत से होकर बहने वाली नदी कौन सी है?",
+        "answer": "ताप्ती",
+        "reveal_after": 2.5,
+        "answer_color": "#73efb2"
+      }
+    },
+    {
+      "heading": "ताप्ती का मार्ग",
+      "explanation": "मुल्ताई से सूरत तक",
+      "speech": "ताप्ती नदी मुल्ताई से निकलती है, सतपुड़ा के मध्य से पश्चिम की ओर बहती है, सूरत के मैदान को पार करती है।",
+      "teaches": "स्रोत और दिशा दिखाना",
+      "objects": [
+        {
+          "kind": "water",
+          "action": "flow",
+          "label": "ताप्ती",
+          "id": "object_0",
+          "color": "#18a9dd",
+          "pos": [
+            -0.9,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            0.3,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "person",
+          "action": "walk",
+          "label": "नदी किनारा",
+          "id": "object_1",
+          "color": "#f4e7bf",
+          "pos": [
+            0.45,
+            0,
+            0
+          ],
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ],
+          "to": [
+            1.65,
+            0,
+            0
+          ]
+        }
+      ],
+      "setting": "neutral",
+      "visual_action": "नदी स्रोत से बहती हुई पश्चिम की ओर चलती है",
+      "text_color": "#FFFFFF",
+      "explanation_color": "#FFFF00"
+    },
+    {
+      "heading": "अरब सागर में मिलना",
+      "explanation": "सूरत के बाद समुद्र में",
+      "speech": "सूरत के बाद ताप्ती नदी अरब सागर में गिरती है, यहाँ जहाज़ चलते दिखते हैं।",
+      "teaches": "नदी के मुहाने को दिखाना",
+      "objects": [
+        {
+          "kind": "water",
+          "action": "flow",
+          "label": "ताप्ती",
+          "id": "object_0",
+          "color": "#18a9dd",
+          "pos": [
+            -1.8,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            -0.6,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "ship",
+          "action": "move",
+          "label": "जाहाज़ा",
+          "id": "object_1",
+          "color": "#59c7c5",
+          "pos": [
+            -0.45,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            0.75,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "person",
+          "action": "walk",
+          "label": "नज़र",
+          "id": "object_2",
+          "color": "#f4e7bf",
+          "pos": [
+            1.35,
+            0,
+            0
+          ],
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ],
+          "to": [
+            2.55,
+            0,
+            0
+          ]
+        }
+      ],
+      "setting": "coast",
+      "visual_action": "नदी समुद्र में मिलती है, जहाज़ आगे बढ़ते हैं",
+      "text_color": "#FFFFFF",
+      "explanation_color": "#FFFF00"
+    },
+    {
+      "heading": "अन्य नदियों का मार्ग",
+      "explanation": "किम, रुपेन, महानदी सूरत से नहीं",
+      "speech": "किम, रुपेन, महानदी अलग दिशा में बहती हैं, सूरत से नहीं गुजरतीं।",
+      "teaches": "गलत विकल्पों को अलग करना",
+      "objects": [
+        {
+          "kind": "map",
+          "action": "none",
+          "label": "गुजरात",
+          "id": "object_0",
+          "color": "#59c7c5",
+          "pos": [
+            -1.8,
+            0,
+            0
+          ],
+          "size": [
+            1.1,
+            1.1,
+            1.1
+          ]
+        },
+        {
+          "kind": "arrow",
+          "action": "trace",
+          "label": "गलत मार्ग",
+          "id": "object_1",
+          "color": "#59c7c5",
+          "pos": [
+            0.0,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        {
+          "kind": "person",
+          "action": "walk",
+          "label": "विवेचक",
+          "id": "object_2",
+          "color": "#f4e7bf",
+          "pos": [
+            1.35,
+            0,
+            0
+          ],
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ],
+          "to": [
+            2.55,
+            0,
+            0
+          ]
+        }
+      ],
+      "setting": "neutral",
+      "visual_action": "अन्य नदियों को सूरत से दूर दिखाया",
+      "text_color": "#FFFFFF",
+      "explanation_color": "#FFFF00"
+    }
+  ]
+}
