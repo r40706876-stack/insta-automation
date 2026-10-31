@@ -1,0 +1,225 @@
+{
+ "topic": "दोहरा परिसंचरण: दिल से फेफड़े और पूरा शरीर",
+ "brand": "मानव शरीर",
+ "fps": 24,
+ "steps": [
+  "फेफड़े",
+  "शरीर",
+  "दोहरा",
+  "याद"
+ ],
+ "scenes": [
+  {
+   "id": "hook",
+   "seconds": 5.09,
+   "title": "खून दो बार दिल से क्यों?",
+   "sub": "इसे कहते हैं दोहरा परिसंचरण",
+   "camera": {
+    "focus": [
+     "heart"
+    ],
+    "angle": "three_quarter",
+    "move": "push",
+    "zoom": 1.2
+   },
+   "layers": [
+    "skin",
+    "visceral",
+    "cardio"
+   ],
+   "solid": [
+    "heart"
+   ],
+   "effects": [
+    "beat",
+    "pulse:heart"
+   ],
+   "labels": [
+    "heart"
+   ],
+   "step": -1
+  },
+  {
+   "id": "small",
+   "seconds": 6.07,
+   "title": "पहला चक्कर: फेफड़ों तक",
+   "sub": "दिल → फेफड़े → दिल, खून में ऑक्सीजन भरती है",
+   "camera": {
+    "focus": [
+     "lungs",
+     "heart"
+    ],
+    "angle": "front",
+    "move": "push",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "visceral",
+    "cardio"
+   ],
+   "solid": [
+    "lungs",
+    "heart",
+    "pulmonary_vessels"
+   ],
+   "effects": [
+    "beat",
+    "breathe",
+    "travel:heart,pulmonary_vessels,lungs",
+    "particles:lungs,heart,oxygen"
+   ],
+   "labels": [
+    "lungs",
+    "heart"
+   ],
+   "step": 0
+  },
+  {
+   "id": "big",
+   "seconds": 5.15,
+   "title": "दूसरा चक्कर: पूरे शरीर तक",
+   "sub": "दिल → धमनियाँ → अंग → शिराएँ → दिल",
+   "camera": {
+    "focus": [
+     "skin"
+    ],
+    "angle": "three_quarter",
+    "move": "push",
+    "zoom": 1.6
+   },
+   "layers": [
+    "skin",
+    "cardio"
+   ],
+   "solid": [
+    "heart",
+    "aorta",
+    "arteries"
+   ],
+   "effects": [
+    "beat",
+    "travel:heart,aorta,arteries",
+    "flow:arteries"
+   ],
+   "labels": [
+    "heart",
+    "aorta"
+   ],
+   "hide": [
+    "veins",
+    "vena_cava"
+   ],
+   "step": 1
+  },
+  {
+   "id": "return",
+   "seconds": 7.07,
+   "title": "शिराएँ खून वापस लाती हैं",
+   "sub": "एक पूरे चक्कर में खून दिल से 2 बार गुज़रता है",
+   "camera": {
+    "focus": [
+     "skin"
+    ],
+    "angle": "three_quarter_left",
+    "move": "pull",
+    "zoom": 1.6
+   },
+   "layers": [
+    "skin",
+    "cardio"
+   ],
+   "solid": [
+    "heart",
+    "veins",
+    "vena_cava"
+   ],
+   "effects": [
+    "beat",
+    "travel:veins,vena_cava,heart",
+    "flow:veins"
+   ],
+   "labels": [
+    "vena_cava"
+   ],
+   "hide": [
+    "arteries",
+    "aorta"
+   ],
+   "step": 2
+  },
+  {
+   "id": "trap",
+   "seconds": 6.25,
+   "title": "गलती: मछली में भी दोहरा परिसंचरण",
+   "sub": "सही: मछली में एकल, दिल में 2 कक्ष",
+   "camera": {
+    "focus": [
+     "skin"
+    ],
+    "angle": "three_quarter_left",
+    "move": "orbit",
+    "zoom": 1.6
+   },
+   "layers": [
+    "skin",
+    "cardio"
+   ],
+   "solid": [
+    "heart",
+    "veins",
+    "vena_cava"
+   ],
+   "effects": [
+    "beat",
+    "travel:veins,vena_cava,heart",
+    "flow:veins"
+   ],
+   "labels": [
+    "vena_cava"
+   ],
+   "hide": [
+    "arteries",
+    "aorta"
+   ],
+   "trap": true,
+   "step": 3
+  },
+  {
+   "id": "quiz",
+   "seconds": 14.29,
+   "title": "परीक्षा का पक्का सवाल",
+   "sub": "",
+   "camera": {
+    "focus": [
+     "heart"
+    ],
+    "angle": "three_quarter",
+    "move": "orbit",
+    "zoom": 1.0
+   },
+   "layers": [
+    "skin",
+    "visceral",
+    "cardio"
+   ],
+   "solid": [
+    "heart"
+   ],
+   "effects": [
+    "beat"
+   ],
+   "labels": [],
+   "quiz": {
+    "q": "मनुष्य के हृदय में कितने कक्ष होते हैं?",
+    "a": "A) तीन",
+    "b": "B) चार",
+    "cta": "जवाब कमेंट में लिखो",
+    "ans": "b"
+   },
+   "step": 3
+  }
+ ],
+ "day": 5,
+ "next": "शरीर की सबसे बड़ी धमनी?"
+}
