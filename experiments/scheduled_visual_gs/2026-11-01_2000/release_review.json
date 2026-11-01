@@ -1,0 +1,43 @@
+{
+  "answer_correct": true,
+  "visual_relevance": true,
+  "hindi_readable": true,
+  "pronunciation_correct": true,
+  "audio_visual_match": true,
+  "answer_reveal_timing": true,
+  "revision_card_readable": true,
+  "reasons": [
+    "All video elements strictly adhere to the grounded reference, demonstrating accurate QA flow and high educational utility."
+  ],
+  "observed_answer": "हिप-हॉप",
+  "scene_evidence": [
+    {
+      "scene": 1,
+      "observation": "A 3D character walks across the screen, presenting the exam warning and question to identify the odd one out."
+    },
+    {
+      "scene": 2,
+      "observation": "Two 3D characters present options 'ओडिसी' and 'हिप-हॉप' while audio prompts viewers to choose."
+    },
+    {
+      "scene": 3,
+      "observation": "The correct answer 'हिप-हॉप' is clearly highlighted above the character."
+    },
+    {
+      "scene": 4,
+      "observation": "The character performs dance motions illustrating the context of Hip-Hop dance styles."
+    },
+    {
+      "scene": 5,
+      "observation": "The character walks forward to emphasize the 1970 United States historical origin fact."
+    },
+    {
+      "scene": 6,
+      "observation": "A clean final revision book card appears displaying the takeaway message clearly."
+    }
+  ],
+  "sha256": "90abee0f8491308516d55336737d9541263876089205311f02d638876b049fac",
+  "reviewer": "gemini-3.5-flash-lite / actual rendered video and audio",
+  "reviewed_at": "2026-11-01T13:41:30.775765+00:00",
+  "review_type": "automated_multimodal"
+}

@@ -1,0 +1,35 @@
+{
+  "ok": true,
+  "reasons": [
+    "All six scenes correctly depict the question and answer from evidence.",
+    "No additional claims beyond the provided reference.",
+    "Visual actions match the teaching content for each scene."
+  ],
+  "novel_topic": true,
+  "scene_checks": [
+    {
+      "scene": 1,
+      "mechanism_matches": true
+    },
+    {
+      "scene": 2,
+      "mechanism_matches": true
+    },
+    {
+      "scene": 3,
+      "mechanism_matches": true
+    },
+    {
+      "scene": 4,
+      "mechanism_matches": true
+    },
+    {
+      "scene": 5,
+      "mechanism_matches": true
+    },
+    {
+      "scene": 6,
+      "mechanism_matches": true
+    }
+  ]
+}

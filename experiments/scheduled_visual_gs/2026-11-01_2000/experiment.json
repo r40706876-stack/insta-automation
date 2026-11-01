@@ -1,0 +1,15 @@
+{
+  "slot": "2026-11-01_2000",
+  "subject": "Traditional GK",
+  "target_utc": "2026-11-01T14:30:00Z",
+  "format": "exam_trap",
+  "primary_objective": "format-specific: share/save/planned series",
+  "controlled_variables": [
+    "existing slot",
+    "subject",
+    "primary objective"
+  ],
+  "experiment_start": "2026-11-01",
+  "experiment_days": 7,
+  "comparison": "24h and 72h; skip, watch time, shares, follows; not proof from one post"
+}

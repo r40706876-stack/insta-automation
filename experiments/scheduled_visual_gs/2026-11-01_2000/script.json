@@ -1,0 +1,129 @@
+{
+  "ok": true,
+  "title": "असमान या भिन्न नृत्य पहचान",
+  "subject": "Traditional GK",
+  "renderer_version": "rich_3d_v1",
+  "question_hash": "687b39b56f5bc9c86f658a56635ea75ce4dd78612171976db00b198995d5ca0f",
+  "reference": {
+    "subject": "Traditional GK",
+    "subject_hi": "सामान्य ज्ञान",
+    "chapter": "कला एवं संस्कृति (Art and Culture)",
+    "sub": "",
+    "question": "असमान या भिन्न को पहचानें।",
+    "options": {
+      "a": "ओडिसी",
+      "b": "कथकली",
+      "c": "हिप-हॉप",
+      "d": "भरतनाट्यम"
+    },
+    "answer": "c",
+    "exams": [
+      "RRB Group-D 04-12-2018 (Shift-II)",
+      "RRB Group-D 20-09-2018 (Shift-III)"
+    ],
+    "explanation": "हिप-हॉप नृत्य मुख्यतः हिप-हॉप संगीत पर किए जाने वाले सामाजिक नृत्य या कोरियोग्राफ की गयी नृत्य शैली है। जो 1970 में युनाइटेड स्टेट्स में युवा अश्वेत लोगों के बीच शुरू हुआ था। इसमें रैप संगीत और भित्तिचित्र कला शामिल है जबकि ओडिसी (ओडिशा), कथकली (केरल) तथा भरतनाट्यम (तमिलनाडु) भारतीय शास्त्रीय नृत्य है।",
+    "times_asked": 2,
+    "years": [
+      "2018"
+    ],
+    "id": "2738bb51c0",
+    "seq": 9
+  },
+  "experiment_format": "exam_trap",
+  "primary_objective": "share",
+  "series_next_topic": "सरहुल निम्न में से किस राज्य की जनजातीय आबादी का मुख्य पर्व है?",
+  "series_next_hash": "163868e6834591b134f18ff8795c1ffe42df4966e3836ed9953a93523cf34323",
+  "topic_policy": "evidence_cohort_v2",
+  "topic_priority": 1.0,
+  "recall": "याद रखें: हिप-हॉप।",
+  "share_card": {
+    "kind": "exam_confusion",
+    "recipient": "परीक्षा की तैयारी करने वाले मित्र",
+    "benefit": "हिप-हॉप विकल्प को सही पहचानें",
+    "cta": "अब साथ में अभ्यास करें"
+  },
+  "share_reason": "दोस्त को परीक्षा में विकल्प भ्रम से बचाने के लिए",
+  "scenes": [
+    {
+      "label": "परीक्षा का जाल",
+      "quiz_options": null,
+      "speech": "गलत विकल्प में मत फँसिए। असमान या भिन्न को पहचानें।",
+      "role": "hook",
+      "revision_card": false,
+      "teaches": "प्रश्न को पहचानना और विकल्पों को देखना",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "नर्तक स्क्रीन पर चलता है और प्रश्न दिखाता है"
+      }
+    },
+    {
+      "label": "अपना जवाब चुनिए",
+      "quiz_options": [
+        "ओडिसी",
+        "हिप-हॉप"
+      ],
+      "speech": "दोनों विकल्प देखिए। सही जवाब मन में तय कीजिए।",
+      "role": "challenge",
+      "revision_card": false,
+      "teaches": "दो विकल्पों में अंतर समझना",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "दो नर्तक अलग-अलग दिशा में चलते हैं"
+      }
+    },
+    {
+      "label": "सही उत्तर",
+      "quiz_options": null,
+      "speech": "सही उत्तर है: हिप-हॉप।",
+      "role": "reveal",
+      "revision_card": false,
+      "teaches": "सही विकल्प की पहचान करना",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "हिप-हॉप नर्तक घूमते हुए उजागर होता है"
+      }
+    },
+    {
+      "label": "तथ्य समझिए",
+      "quiz_options": null,
+      "speech": "हिप-हॉप नृत्य मुख्यतः हिप-हॉप संगीत पर किए जाने वाले सामाजिक नृत्य या कोरियोग्राफ की गयी नृत्य शैली है।",
+      "role": "explain",
+      "revision_card": false,
+      "teaches": "हिप-हॉप की उत्पत्ति और विशेषता समझना",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "नर्तक संगीत की धुन पर चलना शुरू करता है"
+      }
+    },
+    {
+      "label": "खुद को जाँचिए",
+      "quiz_options": null,
+      "speech": "जो 1970 में युनाइटेड स्टेट्स में युवा अश्वेत लोगों के बीच शुरू हुआ था।",
+      "role": "transfer",
+      "revision_card": false,
+      "teaches": "इतिहासिक संदर्भ को अन्य प्रश्नों में लागू करना",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "नर्तक समयरेखा पर चलकर 1970 दिखाता है"
+      }
+    },
+    {
+      "label": "रिवीजन कार्ड",
+      "quiz_options": null,
+      "speech": "याद रखें: हिप-हॉप।",
+      "role": "revision",
+      "revision_card": true,
+      "teaches": "मुख्य उत्तर को दोहराना",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "स्थिर कार्ड पर टेक्स्ट दिखता है"
+      }
+    }
+  ]
+}

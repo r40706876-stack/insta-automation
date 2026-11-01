@@ -1,0 +1,13 @@
+{
+  "version": "growth_qa_v1",
+  "safe_to_publish": true,
+  "blocking_reasons": [],
+  "warnings": [],
+  "first_hook": "गलत विकल्प में मत फँसिए। असमान या भिन्न को पहचानें।",
+  "question": "असमान या भिन्न को पहचानें।",
+  "revision_value": true,
+  "share_value": true,
+  "follow_value": true,
+  "manual_visual_review_required": false,
+  "note": "This checks script metadata, not real viewer retention or visual accuracy."
+}
