@@ -234,6 +234,8 @@ def generate(root,repo,topic_text='',subject='auto',source_text=''):
    if audit.get('ok') is not True or len(audit.get('scene_checks',[]))!=6 or any(x.get('mechanism_matches') is not True for x in audit['scene_checks']):raise ValueError('Audit: '+str(audit.get('reasons')))
    (root/'layout_repairs.json').write_text(json.dumps(layout_repairs,indent=2))
    p.update(speech=[s['speech'] for s in p['scenes']],titles=[[s['heading'],s['explanation']] for s in p['scenes']],requested_topic=topic_text or p['title'],automatic_selection=automatic,planner=provider,auditor=auditor,dynamic=True,topic_policy='easy_single_concept_v1',quality_version=VISUAL_VERSION)
+   if os.getenv('GS_EXPERIMENT_FORMAT'):
+    p.update(primary_objective=os.getenv('GS_PRIMARY_OBJECTIVE','save'),series_next_topic=os.getenv('GS_SERIES_NEXT',''))
    (root/'recipe.json').write_text(json.dumps(p,ensure_ascii=False,indent=2));return p
   except (ValueError,TypeError,KeyError) as exc:errors.append(str(exc));print('Plan repair',attempt+1,str(exc)[:300],flush=True)
  raise RuntimeError('New-topic plan failed validation after three attempts: '+str(errors))

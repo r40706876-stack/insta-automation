@@ -26,11 +26,12 @@ def normalize(row):
         value=row.get(key)
         if value is not None and (isinstance(value,bool) or not isinstance(value,(float,int)) or not math.isfinite(value) or value<0):
             raise ValueError('Invalid metric '+key)
-        if key in ('three_second_rate','retention') and value is not None and value>100: raise ValueError('Use percent 0..100')
+        if key=='three_second_rate' and value is not None and value>100: raise ValueError('Use percent 0..100')
         result[key]=value
     for metric in ('shares','saves'):
         result[metric+'_per_1000']=1000*result[metric]/result['views'] if result['views'] and result[metric] is not None else None
     result['net_followers']=result['followers_gained']-result['followers_lost'] if result['followers_gained'] is not None and result['followers_lost'] is not None else None
+    result['source_freshness']=row.get('source_freshness','not supplied')
     result['missing']=[k for k in METRICS if result[k] is None]
     return result
 
@@ -48,7 +49,8 @@ def cohort(rows,window='72h'):
     for row in rows:
         if row.get('window')!=window: continue
         key=row['media_id']
-        if key not in selected or abs(row['age_hours']-target)<abs(selected[key]['age_hours']-target): selected[key]=row
+        def rank(r):return (sum(r.get(k) is not None for k in METRICS),-abs(r['age_hours']-target))
+        if key not in selected or rank(row)>rank(selected[key]):selected[key]=row
     return list(selected.values())
 
 def evidence_score(question,path='experiments/learning/snapshots.json'):

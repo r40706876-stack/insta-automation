@@ -4238,7 +4238,7 @@ def render_list_frame(subject, items):
     sw = stopwatch_sprite(70, 0.0)
     cv.paste(sw, (150, 1597), sw)
     d.text((235, 1618), BRAND_HANDLE, font=get_font(36), fill=INK, anchor="lm")
-    d.text((235, 1660), f"कितने पहले से आते थे?  कमेंट करो __/{len(items)}   •   दोस्तों को भेजो",
+    d.text((235, 1660), "रिवीजन के लिए यह कार्ड सेव करें",
            font=get_font(30), fill=PEN_RED, anchor="lm")
     return cv
 
@@ -4267,16 +4267,9 @@ def build_list_reel(subject, items, out):
 
 
 def list_caption(subject, items):
-    lines = [f"📚 {list_title(subject)} - RRB, SSC, Police, Patwari, Army, State Exams के लिए (Save करो)", ""]
-    lines += [f"{k + 1}. {it['q']} → {it['a']}" for k, it in enumerate(items)]
-    lines += ["", "💬 कितने पहले से आते थे? कमेंट करो: 7/7?",
-              "📤 Save करो + उस दोस्त को भेजो जो exam की तैयारी कर रहा है।",
-              f"{'GK' if subject in ('TODAY', 'WEEK') else subj_word(subject)} GK Questions | RRB NTPC, Group D, SSC GD, State Exam PYQ",
-              f"⏱ {BRAND} - {BRAND_TAGLINE}"]
-    if WHATSAPP_NUMBER:
-        lines.append(f"📲 Free test / notes: WhatsApp {WHATSAPP_NUMBER}")
-    lines += ["", f"#gkquiz #rrbntpc #sscgd #gkpyq {SUBJ_TAGS.get(subject, '#gk')}"]
-    return "\n".join(lines)
+    return (f"📚 {list_title(subject)}\n\nसवाल पढ़ें, अपना जवाब सोचें, फिर सही उत्तर मिलाएँ। "
+            "आखिर में पूरा रिवीजन कार्ड है—दोहराने के लिए सेव करें।\n\n"
+            f"#MinuteMeGS #GS #StudyHindi #PYQ {SUBJ_TAGS.get(subject, '#gk')}")
 
 
 def run_list(bank, st, ep, args):

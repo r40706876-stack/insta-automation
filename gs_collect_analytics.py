@@ -11,10 +11,14 @@ def collect():
     if not token or not account: raise RuntimeError('Instagram analytics credentials unavailable')
     # Use the same API version as the publisher; do not silently change account integrations.
     base='https://graph.facebook.com/'+os.getenv('IG_GRAPH_VERSION','v19.0')+'/'
+    diagnostics=[]
     def get(path,**params):
         response=requests.get(base+path,params=dict(params,access_token=token),timeout=40)
         data=response.json()
-        if response.status_code>=400 or 'error' in data:return None
+        if response.status_code>=400 or 'error' in data:
+            err=data.get('error',{})
+            diagnostics.append({'endpoint':path,'http_status':response.status_code,'code':err.get('code'),'type':err.get('type')})
+            return None
         return data
     now=dt.datetime.now(dt.timezone.utc);metadata={}
     for parent in ('experiments/scheduled_visual_gs','experiments/daily_visual_gs'):
@@ -47,6 +51,7 @@ def collect():
         after=media.get('paging',{}).get('cursors',{}).get('after')
         if stop or not media.get('paging',{}).get('next') or not after:break
     ingest(rows)
+    if errors:print('::warning::Some Instagram insights are unavailable; use the connected Metricool snapshot bridge. Missing values were not changed to zero.')
     path=Path('reports/gs_collection.json');path.parent.mkdir(parents=True,exist_ok=True)
-    path.write_text(json.dumps({'observed_at':now.isoformat(),'reels':len(rows),'unavailable':errors,'note':'Watch time, 3-sec rate, retention and per-reel follows require verified export with explicit units. Total followers is an account snapshot, not reel attribution.'},indent=2))
+    path.write_text(json.dumps({'observed_at':now.isoformat(),'reels':len(rows),'status':'partial' if errors else 'ok','unavailable':errors,'diagnostics':diagnostics,'note':'Watch time, 3-sec rate, retention and per-reel follows require verified export with explicit units. Total followers is an account snapshot, not reel attribution.'},indent=2))
 if __name__=='__main__':collect()

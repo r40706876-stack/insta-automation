@@ -60,6 +60,9 @@ def overlay(im,i):
   fit(d,(336,1018),'दिशा सांकेतिक • हर पड़ाव का सटीक मार्ग नहीं',21,(224,237,240),590)
  # A specific useful share invitation appears only after the explanation, for two seconds.
  card=plan.get('share_card') or {}
+ objective=plan.get('primary_objective','share')
+ if objective=='save':card={'cta':'रिवीजन के लिए सेव करें'}
+ elif objective=='follow':card={'cta':'अगला सवाल: '+str(plan.get('series_next_topic') or '')}
  if k==len(plan['scenes'])-1 and age>=max(0,meta['seconds'][k]-2) and card.get('cta'):
   d.rounded_rectangle((36,305,636,365),12,fill=(17,63,65),outline=GOLD,width=2)
   fit(d,(336,335),card['cta'],26,GOLD,570)
