@@ -1,0 +1,133 @@
+{
+  "generated_at": "2026-11-01T03:56:39.202137+00:00",
+  "windows": {
+    "24h": [
+      {
+        "subject": null,
+        "format": "legacy_unclassified",
+        "reels": 2,
+        "metrics": {
+          "shares_per_1000": {
+            "mean": null,
+            "n": 0
+          },
+          "saves_per_1000": {
+            "mean": null,
+            "n": 0
+          },
+          "average_watch_time": {
+            "mean": null,
+            "n": 0
+          },
+          "three_second_rate": {
+            "mean": null,
+            "n": 0
+          },
+          "retention": {
+            "mean": null,
+            "n": 0
+          },
+          "net_followers": {
+            "mean": null,
+            "n": 0
+          }
+        },
+        "decision": "collect_more",
+        "automatic_scale": false
+      }
+    ],
+    "72h": [
+      {
+        "subject": null,
+        "format": "legacy_unclassified",
+        "reels": 4,
+        "metrics": {
+          "shares_per_1000": {
+            "mean": null,
+            "n": 0
+          },
+          "saves_per_1000": {
+            "mean": null,
+            "n": 0
+          },
+          "average_watch_time": {
+            "mean": null,
+            "n": 0
+          },
+          "three_second_rate": {
+            "mean": null,
+            "n": 0
+          },
+          "retention": {
+            "mean": null,
+            "n": 0
+          },
+          "net_followers": {
+            "mean": null,
+            "n": 0
+          }
+        },
+        "decision": "review_matched_cohort",
+        "automatic_scale": false
+      }
+    ],
+    "7d": [
+      {
+        "subject": null,
+        "format": "legacy_unclassified",
+        "reels": 7,
+        "metrics": {
+          "shares_per_1000": {
+            "mean": null,
+            "n": 0
+          },
+          "saves_per_1000": {
+            "mean": null,
+            "n": 0
+          },
+          "average_watch_time": {
+            "mean": null,
+            "n": 0
+          },
+          "three_second_rate": {
+            "mean": null,
+            "n": 0
+          },
+          "retention": {
+            "mean": null,
+            "n": 0
+          },
+          "net_followers": {
+            "mean": null,
+            "n": 0
+          }
+        },
+        "decision": "review_matched_cohort",
+        "automatic_scale": false
+      }
+    ]
+  },
+  "note": "3-sec rate is not retention. Targets are experiments, not guarantees.",
+  "weekly": {
+    "current": {
+      "reels": 2,
+      "best": null,
+      "weakest": null,
+      "basis": "24h share/save rate; hypotheses only",
+      "mean_shares_per_1000": null,
+      "mean_saves_per_1000": null
+    },
+    "previous": {
+      "reels": 0,
+      "best": null,
+      "weakest": null,
+      "basis": "24h share/save rate; hypotheses only",
+      "mean_shares_per_1000": null,
+      "mean_saves_per_1000": null
+    }
+  },
+  "weekly_change": {
+    "mean_shares_per_1000": null,
+    "mean_saves_per_1000": null
+  }
+}
