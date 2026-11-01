@@ -64,4 +64,4 @@ def caption_addendum(script, report):
     next_topic = str(script.get('series_next_topic') or '').strip()
     if next_topic:
         parts.append('📅 अगला सवाल: '+next_topic+' — मिस न करने के लिए Follow करें।')
-    return '\\n\\n'+'\\n'.join(parts) if parts else ''
+    return '\n\n'+'\n'.join(parts) if parts else ''
