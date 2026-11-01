@@ -46,3 +46,4 @@ jobs:
           if-no-files-found: warn
 
 # Consistent bounded static revision policy, with all teaching scenes still requiring actual motion.
+# Require schema-constrained six-scene output before semantic checks.

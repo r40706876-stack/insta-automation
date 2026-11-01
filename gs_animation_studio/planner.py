@@ -12,13 +12,13 @@ def parse(text):
  try:return json.loads(text)
  except ValueError:
   a=text.find('{');b=text.rfind('}');return json.loads(text[a:b+1])
-def ask(prompt):
+def ask(prompt,schema=None):
  import requests
  errors=[]
  if os.getenv('GROQ_API_KEY'):
   for model in os.getenv('GS_GROQ_MODELS','openai/gpt-oss-120b,openai/gpt-oss-20b,llama-3.3-70b-versatile').split(','):
    try:
-    r=requests.post('https://api.groq.com/openai/v1/chat/completions',headers={'Authorization':'Bearer '+os.environ['GROQ_API_KEY']},json={'model':model,'temperature':.25,'response_format':{'type':'json_object'},'messages':[{'role':'user','content':prompt}]},timeout=(15,90))
+    r=requests.post('https://api.groq.com/openai/v1/chat/completions',headers={'Authorization':'Bearer '+os.environ['GROQ_API_KEY']},json={'model':model,'temperature':.25,'max_completion_tokens':8192,'response_format':({'type':'json_schema','json_schema':{'name':'gs_six_scene_plan','strict':False,'schema':schema}} if schema else {'type':'json_object'}),'messages':[{'role':'user','content':prompt}]},timeout=(15,90))
     if r.status_code==200:return parse(r.json()['choices'][0]['message']['content']), 'Groq / '+model
     errors.append('Groq HTTP '+str(r.status_code))
    except (requests.RequestException,ValueError,KeyError):errors.append('Groq response/network error')
@@ -28,7 +28,7 @@ def ask(prompt):
   from gs_model_config import gemini_models
   for model in gemini_models():
    try:
-    r=requests.post('https://generativelanguage.googleapis.com/v1beta/models/'+model+':generateContent',headers={'x-goog-api-key':os.environ['GEMINI_API_KEY']},json={'contents':[{'parts':[{'text':prompt}]}],'generationConfig':{'temperature':.25,'responseMimeType':'application/json'}},timeout=(15,90))
+    r=requests.post('https://generativelanguage.googleapis.com/v1beta/models/'+model+':generateContent',headers={'x-goog-api-key':os.environ['GEMINI_API_KEY']},json={'contents':[{'parts':[{'text':prompt}]}],'generationConfig':dict(temperature=.25,responseMimeType='application/json',maxOutputTokens=12288,**({'responseJsonSchema':schema} if schema else {}))},timeout=(15,90))
     if r.status_code==200:return parse(' '.join(p.get('text','') for p in r.json()['candidates'][0]['content']['parts'])), 'Gemini / '+model
     errors.append('Gemini HTTP '+str(r.status_code))
    except (requests.RequestException,ValueError,KeyError):errors.append('Gemini response/network error')
@@ -215,7 +215,10 @@ def generate(root,repo,topic_text='',subject='auto',source_text=''):
    sys.path.insert(0,str(Path(__file__).resolve().parent.parent))
    from gs_experiment_contract import PROMPT
    prompt+=PROMPT+' Selected format: '+os.environ['GS_EXPERIMENT_FORMAT']
-  p,provider=ask(prompt)
+  if os.getenv('GS_EXPERIMENT_FORMAT'):
+   from gs_plan_schema import plan_schema
+   p,provider=ask(prompt,schema=plan_schema(KINDS,ACTIONS))
+  else:p,provider=ask(prompt)
   try:
    p,layout_repairs=normalize_layout(p);previous=p
    for index,scene in enumerate(p.get('scenes',[])):
