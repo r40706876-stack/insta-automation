@@ -1,0 +1,43 @@
+{
+  "answer_correct": true,
+  "visual_relevance": false,
+  "hindi_readable": true,
+  "pronunciation_correct": true,
+  "audio_visual_match": true,
+  "answer_reveal_timing": true,
+  "revision_card_readable": true,
+  "reasons": [
+    "The 3D graphics consist of generic walking avatars and numbered blocks, failing to visually explain the specific constitutional provisions (Articles 343, 351, 347) narrated in the audio."
+  ],
+  "observed_answer": "अनुच्छेद 343",
+  "scene_evidence": [
+    {
+      "scene": 1,
+      "observation": "A 3D character walks forward while the question about official language and script is displayed in text banners."
+    },
+    {
+      "scene": 2,
+      "observation": "Two blocks representing Article 351 and Article 343 are shown on screen for selection."
+    },
+    {
+      "scene": 3,
+      "observation": "An arrow turns toward the green platform revealing Article 343 as the correct answer."
+    },
+    {
+      "scene": 4,
+      "observation": "The character stands beside a book labeled 'संविधान' while text explains Article 351."
+    },
+    {
+      "scene": 5,
+      "observation": "Three numbered blocks (351, 347, 343) stand under a structure while audio and text explain Article 347."
+    },
+    {
+      "scene": 6,
+      "observation": "A final revision card frame shows a book labeled 'स्मरण' with clear text prompt to remember Article 343."
+    }
+  ],
+  "sha256": "db0fe89c23093ed6a9e426d81351617c9efebb087046aa250d15e852e1e30a6a",
+  "reviewer": "gemini-3.6-flash / actual rendered video and audio",
+  "reviewed_at": "2026-11-01T15:37:49.266461+00:00",
+  "review_type": "automated_multimodal"
+}

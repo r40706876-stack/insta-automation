@@ -1,0 +1,129 @@
+{
+  "ok": true,
+  "title": "भारतीय संविधान में राजभाषा का अनुच्छेद",
+  "subject": "Polity",
+  "renderer_version": "rich_3d_v1",
+  "question_hash": "421b3679254bad0c716836674510ddcd01fa8d6e5ef4a3ecbbf14944e13cdfae",
+  "reference": {
+    "subject": "Polity",
+    "subject_hi": "राजव्यवस्था",
+    "chapter": "अनुच्छेद एवं अनुसूचियाँ (Articles and Schedules)",
+    "sub": "",
+    "question": "भारतीय संविधान के किस अनुच्छेद के तहत भारत की राजभाषा हिंदी एवं लिपि देवनागरी है?",
+    "options": {
+      "a": "अनुच्छेद 351",
+      "b": "अनुच्छेद 336",
+      "c": "अनुच्छेद 347",
+      "d": "अनुच्छेद 343"
+    },
+    "answer": "d",
+    "exams": [
+      "RRB Group D 26/09/2022 (Shift-III)",
+      "RRB Group D 30/09/2022 (Shift-III)"
+    ],
+    "explanation": "अनुच्छेद 343 – संघ की राजभाषा हिन्दी और लिपि देवनागरी होगी, संघ के शासकीय प्रयोजनों के लिए प्रयोग होने वाले अंकों का रूप भारतीय अंकों का अन्तर्राष्ट्रीय रूप होगा। अनु. 351 – केन्द्र सरकार को हिंदी भाषा के विकास के लिए निदेश जारी करने की शक्ति देता है। अनु. 347 – किसी राज्य की जनसंख्या के किसी भाग द्वारा बोली जाने वाली भाषा के संबंध में विशेष उपबंध।",
+    "times_asked": 2,
+    "years": [
+      "2022"
+    ],
+    "id": "5654c6921b",
+    "seq": 35
+  },
+  "experiment_format": "exam_trap",
+  "primary_objective": "share",
+  "series_next_topic": "भारतीय संविधान के भाग IV A में शामिल मौलिक कर्तव्यों की कुल संख्या कितनी है?",
+  "series_next_hash": "0c2cdd31374255e92c3a6b4757b8bb48331bf7747141745d1bc6af9380bdbba0",
+  "topic_policy": "evidence_cohort_v2",
+  "topic_priority": 1.0,
+  "recall": "याद रखें: अनुच्छेद 343।",
+  "share_card": {
+    "kind": "exam_confusion",
+    "recipient": "परीक्षा की तैयारी करने वाले मित्र",
+    "benefit": "अनुच्छेद 343 को आसानी से याद रखेंगे",
+    "cta": "चलो साथ मिलकर याद रखें"
+  },
+  "share_reason": "परीक्षा में अक्सर अनुच्छेद 351 और 343 में भ्रम होता है",
+  "scenes": [
+    {
+      "label": "परीक्षा का जाल",
+      "quiz_options": null,
+      "speech": "गलत विकल्प में मत फँसिए। भारतीय संविधान के किस अनुच्छेद के तहत भारत की राजभाषा हिंदी एवं लिपि देवनागरी है?",
+      "role": "hook",
+      "revision_card": false,
+      "teaches": "प्रश्न की पहचान और विकल्पों की भ्रमितता",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "व्यक्ति प्रश्न बोर्ड की ओर चलता है"
+      }
+    },
+    {
+      "label": "अपना जवाब चुनिए",
+      "quiz_options": [
+        "अनुच्छेद 351",
+        "अनुच्छेद 343"
+      ],
+      "speech": "दोनों विकल्प देखिए। सही जवाब मन में तय कीजिए।",
+      "role": "challenge",
+      "revision_card": false,
+      "teaches": "विकल्पों की तुलना करके सोचने की प्रक्रिया",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "दो विकल्प कार्ड स्क्रीन पर स्लाइड होते हैं"
+      }
+    },
+    {
+      "label": "सही उत्तर",
+      "quiz_options": null,
+      "speech": "सही उत्तर है: अनुच्छेद 343।",
+      "role": "reveal",
+      "revision_card": false,
+      "teaches": "सही अनुच्छेद की पहचान",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "तीर घुमते हुए सही उत्तर को उजागर करता है"
+      }
+    },
+    {
+      "label": "तथ्य समझिए",
+      "quiz_options": null,
+      "speech": "351 – केन्द्र सरकार को हिंदी भाषा के विकास के लिए निदेश जारी करने की शक्ति देता है।",
+      "role": "explain",
+      "revision_card": false,
+      "teaches": "अनुच्छेद 343 की सामग्री समझना",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "institution",
+        "visible_action": "व्यक्ति पुस्तक उठाता है और पढ़ता है"
+      }
+    },
+    {
+      "label": "खुद को जाँचिए",
+      "quiz_options": null,
+      "speech": "347 – किसी राज्य की जनसंख्या के किसी भाग द्वारा बोली जाने वाली भाषा के संबंध में विशेष उपबंध।",
+      "role": "transfer",
+      "revision_card": false,
+      "teaches": "अन्य अनुच्छेदों के अंतर को समझना",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "institution",
+        "visible_action": "तीन बॉक्स क्रम में स्क्रीन पर आते हैं"
+      }
+    },
+    {
+      "label": "रिवीजन कार्ड",
+      "quiz_options": null,
+      "speech": "याद रखें: अनुच्छेद 343।",
+      "role": "revision",
+      "revision_card": true,
+      "teaches": "तेज़ याददाश्त के लिए पुनरावृत्ति",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "स्मरण कार्ड स्क्रीन पर दिखता है"
+      }
+    }
+  ]
+}

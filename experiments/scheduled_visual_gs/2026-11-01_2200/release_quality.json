@@ -1,0 +1,8 @@
+{
+  "safe_to_publish": false,
+  "blocking_reasons": [
+    "unverified visual_relevance"
+  ],
+  "sha256": "db0fe89c23093ed6a9e426d81351617c9efebb087046aa250d15e852e1e30a6a",
+  "version": "rendered_release_v1"
+}
