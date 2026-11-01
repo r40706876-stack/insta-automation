@@ -74,3 +74,18 @@ class ProviderModelTests(unittest.TestCase):
   with patch.dict('os.environ',{'GEMINI_API_KEY':'test-only'}),patch('gs_model_config.requests.get',return_value=response):
    self.assertEqual(gemini_models(),['gemini-3.8-flash'])
   gemini_models.cache_clear()
+
+class RevisionBoundaryTests(ReleaseTests):
+ def six(self,root):
+  s=self.fixture(root);s['scenes']=[{'speech':'test','role':role,'label':'पुनरावृत्ति','teaches':'revision' if role=='revision' else 'causal fact','revision_card':role=='revision'} for role in ('hook','challenge','reveal','explain','transfer','revision')]
+  checks=json.loads((root/'file_checks.json').read_text());checks['actual_rendered_motion_checks']={'scene_'+str(i)+'_teaching_motion':{'changed_fraction':.03} for i in range(1,6)};checks['static_revision_checks']={'scene_6':{'bounded_revision_card':True,'seconds':4}}
+  (root/'file_checks.json').write_text(json.dumps(checks));(root/'audio.json').write_text(json.dumps({'speech':['test']*6,'seconds':[3]*5+[4]}));return s
+ def test_short_final_revision_can_be_still(self):
+  with tempfile.TemporaryDirectory() as t:
+   root=Path(t);s=self.six(root);self.assertTrue(evaluate_release(root,s)['safe_to_publish'])
+ def test_long_revision_is_blocked(self):
+  with tempfile.TemporaryDirectory() as t:
+   root=Path(t);s=self.six(root);audio=json.loads((root/'audio.json').read_text());audio['seconds'][-1]=8;(root/'audio.json').write_text(json.dumps(audio));self.assertFalse(evaluate_release(root,s)['safe_to_publish'])
+ def test_teaching_scene_cannot_claim_revision_exception(self):
+  with tempfile.TemporaryDirectory() as t:
+   root=Path(t);s=self.six(root);s['scenes'][0]['revision_card']=True;s['scenes'][0]['role']='revision';checks=json.loads((root/'file_checks.json').read_text());checks['actual_rendered_motion_checks'].pop('scene_1_teaching_motion');(root/'file_checks.json').write_text(json.dumps(checks));self.assertFalse(evaluate_release(root,s)['safe_to_publish'])

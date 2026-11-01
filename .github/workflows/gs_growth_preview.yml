@@ -44,3 +44,5 @@ jobs:
             studio_diagnostics/${{ github.run_id }}
             experiments/gs_animation_studio/new_topic/${{ github.run_id }}
           if-no-files-found: warn
+
+# Consistent bounded static revision policy, with all teaching scenes still requiring actual motion.

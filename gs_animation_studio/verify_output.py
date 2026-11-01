@@ -3,6 +3,8 @@ import json,subprocess,re,hashlib,sys
 from pathlib import Path
 from PIL import Image,ImageDraw
 import numpy as np
+sys.path.insert(0,str(Path(__file__).resolve().parent.parent))
+from gs_scene_policy import is_revision_card,validate_revision_duration
 r=Path(sys.argv[1]);p=r/'final.mp4';meta=json.loads((r/'audio.json').read_text())
 v=json.loads(subprocess.check_output(['ffprobe','-v','error','-show_streams','-show_format','-of','json',str(p)]));video=next(s for s in v['streams'] if s['codec_type']=='video');assert any(s['codec_type']=='audio' for s in v['streams']);dur=float(v['format']['duration']);assert abs(dur-sum(meta['seconds']))<.2;assert (video['width'],video['height'])==(720,1280)
 run=subprocess.run(['ffmpeg','-hide_banner','-i',str(p),'-vf','blackdetect=d=0.15:pix_th=0.08','-af','volumedetect','-f','null','-'],text=True,capture_output=True);assert run.returncode==0;assert 'black_start:' not in run.stderr
@@ -16,9 +18,14 @@ def region(t,roi):
  raw=subprocess.check_output(['ffmpeg','-v','error','-ss',str(t),'-i',str(p),'-frames:v','1','-f','rawvideo','-pix_fmt','rgb24','-'])
  im=np.array(Image.frombytes('RGB',(720,1280),raw),dtype=np.float32)
  x1,y1,x2,y2=roi;return im[y1:y2,x1:x2]
-starts=np.cumsum([0]+meta['seconds'][:-1]);motion_checks={}
+starts=np.cumsum([0]+meta['seconds'][:-1]);motion_checks={};revision_checks={}
 if (r/'recipe.json').exists() and json.loads((r/'recipe.json').read_text()).get('dynamic'):
- samples=[('scene_'+str(k+1)+'_teaching_motion',starts[k]+meta['seconds'][k]*.2,starts[k]+meta['seconds'][k]*.7,(75,420,620,1000)) for k in range(6)]
+ recipe=json.loads((r/'recipe.json').read_text());samples=[]
+ for k,scene in enumerate(recipe['scenes']):
+  if is_revision_card(scene,k,len(recipe['scenes'])):
+   validate_revision_duration(meta['seconds'][k])
+   revision_checks['scene_'+str(k+1)]={'seconds':meta['seconds'][k],'bounded_revision_card':True}
+  else:samples.append(('scene_'+str(k+1)+'_teaching_motion',starts[k]+meta['seconds'][k]*.2,starts[k]+meta['seconds'][k]*.7,(75,420,620,1000)))
 elif (r/'recipe.json').exists():
  opened=starts[1]+max(.5,meta['seconds'][1]*.55)
  samples=[('caps_move',opened-.4,opened+.05,(230,440,380,700)),('water_flows',starts[2]+.4,starts[2]+.9,(350,500,630,940)),('dam_base_widens',starts[4]+.45,starts[4]+2.8,(250,600,560,950))]
@@ -38,6 +45,6 @@ if (r/'recipe.json').exists():
   if any(o['kind'] in ('map','planet') for o in objects):assert scene_checks.get('source_based_maps')
   if any(o['kind']=='rock_layers' for o in objects):assert scene_checks.get('continuous_rock_layers')
   if any(o['kind']=='mountain' for o in objects):assert scene_checks.get('terrain_relief')
-checks={'notes_banner':{'version':'studio-notes-v1','phone':'+91 89892 79637','safe_area':[36,64,636,151]} if quality_version=='rich_3d_v1' else None,'quality_version':quality_version,'duration_seconds':dur,'dimensions':[720,1280],'fps':video['r_frame_rate'],'decoded_without_errors':True,'black_intervals':0,'audio_mean_db':mean,'audio_peak_db':peak,'sha256':hashlib.sha256(p.read_bytes()).hexdigest(),'voice':meta.get('voice'),'published':False,'actual_rendered_motion_checks':motion_checks}
+checks={'notes_banner':{'version':'studio-notes-v1','phone':'+91 89892 79637','safe_area':[36,64,636,151]} if quality_version=='rich_3d_v1' else None,'quality_version':quality_version,'duration_seconds':dur,'dimensions':[720,1280],'fps':video['r_frame_rate'],'decoded_without_errors':True,'black_intervals':0,'audio_mean_db':mean,'audio_peak_db':peak,'sha256':hashlib.sha256(p.read_bytes()).hexdigest(),'voice':meta.get('voice'),'published':False,'actual_rendered_motion_checks':motion_checks,'static_revision_checks':revision_checks}
 (r/'file_checks.json').write_text(json.dumps(checks,indent=2));print(json.dumps(checks,indent=2),flush=True)
 
