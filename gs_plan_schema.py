@@ -19,3 +19,11 @@ def plan_schema(kinds,actions):
         'pyq_challenge':{'type':'boolean'},'share_card':{'type':'object','properties':{k:string for k in ('kind','recipient','benefit','cta')},'required':['kind','recipient','benefit','cta']},
         'scenes':{'type':'array','items':scene,'minItems':6,'maxItems':6}},
         'required':['title','subject','topic_key','share_reason','recall','share_card','scenes']}
+
+
+def audit_schema():
+    return {'type':'object','properties':{
+        'ok':{'type':'boolean'},'reasons':{'type':'array','items':{'type':'string'}},
+        'novel_topic':{'type':'boolean'},'scene_checks':{'type':'array','minItems':6,'maxItems':6,'items':{
+            'type':'object','properties':{'scene':{'type':'integer'},'mechanism_matches':{'type':'boolean'}},'required':['scene','mechanism_matches']}}},
+        'required':['ok','reasons','novel_topic','scene_checks']}

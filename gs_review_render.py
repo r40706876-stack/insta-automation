@@ -32,10 +32,10 @@ A final revision frame must be readable. Do not infer passes from script fields 
 Provide six distinct scene observations. No promises about skip rate, follower growth or retention.
 SCRIPT AND GROUNDED REFERENCE:\n'''+json.dumps(script,ensure_ascii=False)
     errors=[]
-    from gs_model_config import gemini_models
+    from gs_model_config import gemini_models,gemini_json_config
     for model in gemini_models():
         try:
-            response=requests.post('https://generativelanguage.googleapis.com/v1beta/models/'+model+':generateContent',headers={'x-goog-api-key':os.environ['GEMINI_API_KEY']},json={'contents':[{'parts':[{'inlineData':{'mimeType':'video/mp4','data':base64.b64encode(raw).decode()}},{'text':prompt}]}],'generationConfig':{'temperature':0,'responseMimeType':'application/json'}},timeout=(15,180))
+            response=requests.post('https://generativelanguage.googleapis.com/v1beta/models/'+model+':generateContent',headers={'x-goog-api-key':os.environ['GEMINI_API_KEY']},json={'contents':[{'parts':[{'inlineData':{'mimeType':'video/mp4','data':base64.b64encode(raw).decode()}},{'text':prompt}]}],'generationConfig':gemini_json_config(model,temperature=0)},timeout=(15,180))
             if response.status_code!=200:
                 errors.append('HTTP '+str(response.status_code));continue
             parts=response.json()['candidates'][0]['content']['parts']

@@ -86,7 +86,9 @@ def build(root,day):
  values={'STUDIO_TOPIC_TEXT':q['question'],'STUDIO_SUBJECT':SUBJECTS.get(subject,'auto'),'STUDIO_REFERENCE_TEXT':source,'STUDIO_REVIEWED_RECIPE':'','STUDIO_REVIEWED_SHA256':'','STUDIO_VOICE':'auto','STUDIO_VERIFY_RECOVERY':'0','GS_EXPERIMENT_FORMAT':format_name,'GS_PRIMARY_OBJECTIVE':objective,'GS_SERIES_NEXT':following[1]['question'] if following else ''}
  with environment(values):
   runner=DynamicRecovery(repo=repo)
-  if not runner.run():raise RuntimeError('3D build failed; diagnostics: '+str(runner.diag))
+  if not runner.run():
+   detail=(runner.report.get('events') or [{}])[-1].get('detail','')
+   raise RuntimeError('3D build failed: '+detail[-2500:]+'; diagnostics: '+str(runner.diag))
  out=runner.root
  recipe=json.loads((out/'recipe.json').read_text());checks=json.loads((out/'file_checks.json').read_text())
  if recipe.get('quality_version')!=VERSION:raise RuntimeError('Old visual quality version refused')

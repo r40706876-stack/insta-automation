@@ -20,17 +20,17 @@ def ask(prompt,schema=None):
    try:
     r=requests.post('https://api.groq.com/openai/v1/chat/completions',headers={'Authorization':'Bearer '+os.environ['GROQ_API_KEY']},json={'model':model,'temperature':.25,'max_completion_tokens':8192,'response_format':({'type':'json_schema','json_schema':{'name':'gs_six_scene_plan','strict':False,'schema':schema}} if schema else {'type':'json_object'}),'messages':[{'role':'user','content':prompt}]},timeout=(15,90))
     if r.status_code==200:return parse(r.json()['choices'][0]['message']['content']), 'Groq / '+model
-    errors.append('Groq HTTP '+str(r.status_code))
+    errors.append('Groq HTTP '+str(r.status_code)+' '+str(r.json().get('error',{}).get('message',''))[:160].replace(os.environ['GROQ_API_KEY'],'***'))
    except (requests.RequestException,ValueError,KeyError):errors.append('Groq response/network error')
  if os.getenv('GEMINI_API_KEY'):
   import sys
   sys.path.insert(0,str(Path(__file__).resolve().parent.parent))
-  from gs_model_config import gemini_models
+  from gs_model_config import gemini_models,gemini_json_config
   for model in gemini_models():
    try:
-    r=requests.post('https://generativelanguage.googleapis.com/v1beta/models/'+model+':generateContent',headers={'x-goog-api-key':os.environ['GEMINI_API_KEY']},json={'contents':[{'parts':[{'text':prompt}]}],'generationConfig':dict(temperature=.25,responseMimeType='application/json',maxOutputTokens=12288,**({'responseJsonSchema':schema} if schema else {}))},timeout=(15,90))
+    r=requests.post('https://generativelanguage.googleapis.com/v1beta/models/'+model+':generateContent',headers={'x-goog-api-key':os.environ['GEMINI_API_KEY']},json={'contents':[{'parts':[{'text':prompt}]}],'generationConfig':gemini_json_config(model,schema)},timeout=(15,90))
     if r.status_code==200:return parse(' '.join(p.get('text','') for p in r.json()['candidates'][0]['content']['parts'])), 'Gemini / '+model
-    errors.append('Gemini HTTP '+str(r.status_code))
+    errors.append('Gemini HTTP '+str(r.status_code)+' '+str(r.json().get('error',{}).get('message',''))[:160].replace(os.environ['GEMINI_API_KEY'],'***'))
    except (requests.RequestException,ValueError,KeyError):errors.append('Gemini response/network error')
  raise RuntimeError('Topic planner unavailable: '+('; '.join(errors) or 'GROQ_API_KEY or GEMINI_API_KEY required'))
 def public_url(url):
@@ -237,7 +237,11 @@ def generate(root,repo,topic_text='',subject='auto',source_text=''):
    if not re.fullmatch(r'[a-z0-9_]{3,70}',str(p.get('topic_key',''))):raise ValueError('Stable topic_key required')
    if not source_text and not topic_text:raise ValueError('Missing topic')
    if automatic and any(p['topic_key']==h.get('topic_key') for h in history):raise ValueError('Already generated topic; choose another')
-   audit,auditor=ask('Independently fact-check this proposed Hindi video against EVIDENCE. Verify exact user topic, all dates/numbers, simple language, ONE core concept, a concrete easy opening, a memorable recall line, a genuine topic-specific benefit for the named recipient demonstrated before its CTA (reject generic share begging), no answer confusion, first-time viewer comprehension without prerequisite knowledge, clear cause BEFORE effect, no generic shapes masquerading as named real objects, and that EACH listed 3D object and action actually demonstrates the narration. Reject decorative unrelated animation, overlapping objects, misleading analogies, floating feet, wrong directions, or simply reading text. Supported engine contract: '+CONTRACT+'\nReturn JSON {ok:boolean,reasons:[string],novel_topic:boolean (false when same underlying concept as history, even with a different title/key),scene_checks:[{scene:integer,mechanism_matches:boolean}]}. Automatic selection:'+str(automatic)+'. User topic:'+topic_text+' Previous topics to avoid in automatic mode:'+json.dumps(history,ensure_ascii=False)+' Evidence:'+json.dumps(evidence,ensure_ascii=False)+' Plan:'+json.dumps(p,ensure_ascii=False))
+   audit_prompt='Independently fact-check this proposed Hindi video against EVIDENCE. Verify exact user topic, all dates/numbers, simple language, ONE core concept, a concrete easy opening, a memorable recall line, a genuine topic-specific benefit for the named recipient demonstrated before its CTA (reject generic share begging), no answer confusion, first-time viewer comprehension without prerequisite knowledge, clear cause BEFORE effect, no generic shapes masquerading as named real objects, and that EACH listed 3D object and action actually demonstrates the narration. Reject decorative unrelated animation, overlapping objects, misleading analogies, floating feet, wrong directions, or simply reading text. Supported engine contract: '+CONTRACT+'\nReturn JSON {ok:boolean,reasons:[string],novel_topic:boolean (false when same underlying concept as history, even with a different title/key),scene_checks:[{scene:integer,mechanism_matches:boolean}]}. Automatic selection:'+str(automatic)+'. User topic:'+topic_text+' Previous topics to avoid in automatic mode:'+json.dumps(history,ensure_ascii=False)+' Evidence:'+json.dumps(evidence,ensure_ascii=False)+' Plan:'+json.dumps(p,ensure_ascii=False)
+   if os.getenv('GS_EXPERIMENT_FORMAT'):
+    from gs_plan_schema import audit_schema
+    audit,auditor=ask(audit_prompt,schema=audit_schema())
+   else:audit,auditor=ask(audit_prompt)
    (root/f'audit_{attempt}.json').write_text(json.dumps(audit,ensure_ascii=False,indent=2))
    (diag/f'audit_{attempt}.json').write_text(json.dumps(audit,ensure_ascii=False,indent=2))
    if automatic and audit.get('novel_topic') is not True:raise ValueError('Automatic topic repeats an earlier concept or novelty audit missing')

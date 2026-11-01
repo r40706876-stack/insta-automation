@@ -13,3 +13,14 @@ def gemini_models():
             return [name for name in preferred if name in active]
     except (requests.RequestException,KeyError,ValueError):pass
     return preferred
+
+def gemini_json_config(model,schema=None,temperature=.25):
+    config={'temperature':temperature,'maxOutputTokens':12288}
+    if model.startswith(('gemini-3.','gemini-4')):
+        text={'mimeType':'APPLICATION_JSON'}
+        if schema is not None:text['schema']=schema
+        config['responseFormat']={'text':text}
+    else:
+        config['responseMimeType']='application/json'
+        if schema is not None:config['responseJsonSchema']=schema
+    return config
