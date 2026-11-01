@@ -2,6 +2,7 @@
 import os,json,datetime,hashlib
 from pathlib import Path
 import auto_poster as e
+from gs_growth_quality import evaluate, caption_addendum
 import gs_animation_bridge as bridge
 DAY=os.getenv('GS_TARGET_DATE') or datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=5,minutes=30))).date().isoformat()
 ROOT=Path(os.getenv('GS_VISUAL_OUTPUT','experiments/daily_visual_gs/'+DAY))
@@ -19,11 +20,15 @@ if __name__=='__main__':
   assert json.loads((ROOT/'validated.json').read_text()).get('renderer_version')==bridge.VERSION,'Old renderer blocked: build with rich_3d_v1 first'
   assert not (ROOT/'publish_started.json').exists(),'Uncertain prior attempt: inspect account before retry'
   s=json.loads((ROOT/'script.json').read_text());out=ROOT/'reel.mp4'
+  quality=evaluate(s)
+  save('growth_quality.json',quality)
+  if not quality['safe_to_publish']:
+   raise RuntimeError('Growth quality gate failed: '+', '.join(quality['blocking_reasons']))
   assert hashlib.sha256(out.read_bytes()).hexdigest()==json.loads((ROOT/'validated.json').read_text())['sha256']
   account=e.requests.get(e.GRAPH+e.IG_USER_ID,params={'fields':'username','access_token':e.IG_ACCESS_TOKEN},timeout=30).json();assert account.get('username','').lower()=='minuteme_gs'
   save('publish_started.json',{'date':DAY});e._with_series=lambda x:x
   caption=s['title']+'\n\n'+' '.join(x['speech'] for x in s['scenes'])+'\n\nशिक्षण ऐनिमेशन सांकेतिक है। Concept practice.\n#MinuteMeGS #GS #StudyHindi #SSC #RailwayExam'
-  if (s.get('share_card') or {}).get('cta'):caption+='\n\n'+s['share_card']['cta']
+  caption+=caption_addendum(s,quality)
   pid=e._upload_once(str(out),caption,0)
   assert pid;save('published.json',{'media_id':pid,'date':DAY})
   obj=e.requests.get(e.GRAPH+pid,params={'fields':'permalink','access_token':e.IG_ACCESS_TOKEN},timeout=30).json();save('published.json',{'media_id':pid,'permalink':obj.get('permalink'),'date':DAY})
