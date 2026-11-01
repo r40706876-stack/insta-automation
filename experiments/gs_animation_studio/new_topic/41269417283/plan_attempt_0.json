@@ -1,0 +1,450 @@
+{
+  "title": "सूरत से होकर बहने वाली नदी कौन सी?",
+  "subject": "भूगोल",
+  "topic_key": "surat_se_ho_kar_bahne_wali_nadi",
+  "share_reason": "ताप्ती नदी का सही उत्तर याद रखने के लिए दोस्त को क्विज़ भेजें",
+  "recall": "सूरत से होकर बहने वाली नदी ताप्ती है।",
+  "share_card": {
+    "kind": "exam_confusion",
+    "recipient": "परीक्षा की तैयारी करने वाले मित्र",
+    "benefit": "ताप्ती नदी का सही उत्तर जल्दी याद रहेगा",
+    "cta": "दोस्त को ताप्ती का क्विज़ भेजो"
+  },
+  "scenes": [
+    {
+      "heading": "नक्शा और प्रश्न",
+      "explanation": "सूरत में कौन सी नदी",
+      "speech": "सूरत शहर के पास कौन सी प्रमुख नदी बहती है, यह देखें।",
+      "teaches": "सूरत से होकर बहने वाली नदी की पहचान",
+      "setting": "institution",
+      "visual_action": "नक्शे पर नदी का प्रवाह दिखाएँ",
+      "text_color": "#FFFFFF",
+      "explanation_color": "#FFFF00",
+      "objects": [
+        {
+          "kind": "map",
+          "action": "trace",
+          "label": "सूरत-ताप्ती",
+          "id": "object_0",
+          "color": "#59c7c5",
+          "pos": [
+            -1.8,
+            0,
+            0
+          ],
+          "size": [
+            1.1,
+            1.1,
+            1.1
+          ]
+        },
+        {
+          "kind": "water",
+          "action": "flow",
+          "label": "नदी",
+          "id": "object_1",
+          "color": "#18a9dd",
+          "pos": [
+            0.0,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            1.2,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "arrow",
+          "action": "spin",
+          "label": "दिशा",
+          "id": "object_2",
+          "color": "#59c7c5",
+          "pos": [
+            1.8,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        }
+      ],
+      "quiz_card": {
+        "question": "सूरत से होकर कौन सी नदी बहती है?",
+        "answer": "ताप्ती",
+        "reveal_after": 2.5,
+        "answer_color": "#73efb2"
+      }
+    },
+    {
+      "heading": "मुल्ताई से स्रोत",
+      "explanation": "ताप्ती का उद्गम स्थल",
+      "speech": "ताप्ती नदी का स्रोत मुल्ताई पहाड़ से शुरू होता है, पानी नीचे बहता है।",
+      "teaches": "ताप्ती नदी का स्रोत समझना",
+      "setting": "neutral",
+      "visual_action": "पहाड़ी से पानी उठकर नीचे बहता दिखाएँ",
+      "text_color": "#FFFFFF",
+      "explanation_color": "#FFFF00",
+      "objects": [
+        {
+          "kind": "mountain",
+          "action": "none",
+          "label": "मुल्ताई",
+          "id": "object_0",
+          "color": "#59c7c5",
+          "pos": [
+            -1.8,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        {
+          "kind": "water",
+          "action": "flow",
+          "label": "स्रोत",
+          "id": "object_1",
+          "color": "#18a9dd",
+          "pos": [
+            0.0,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            1.2,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "arrow",
+          "action": "spin",
+          "label": "प्रवाह",
+          "id": "object_2",
+          "color": "#59c7c5",
+          "pos": [
+            1.8,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "सूरत में प्रवाह",
+      "explanation": "नदी शहर से गुजरती",
+      "speech": "ताप्ती नदी सूरत के मैदान से गुजरती है, शहर के किनारे बहती है।",
+      "teaches": "सूरत में ताप्ती का मार्ग दिखाना",
+      "setting": "neutral",
+      "visual_action": "नदी सूरत के पास बहती दिखाएँ",
+      "text_color": "#FFFFFF",
+      "explanation_color": "#FFFF00",
+      "objects": [
+        {
+          "kind": "building",
+          "action": "none",
+          "label": "सूरत",
+          "id": "object_0",
+          "color": "#b1a4d3",
+          "pos": [
+            -1.8,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        {
+          "kind": "water",
+          "action": "flow",
+          "label": "ताप्ती",
+          "id": "object_1",
+          "color": "#18a9dd",
+          "pos": [
+            0.0,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            1.2,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "ship",
+          "action": "move",
+          "label": "नौका",
+          "id": "object_2",
+          "color": "#59c7c5",
+          "pos": [
+            1.35,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            2.55,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "समुद्र में मिलन",
+      "explanation": "अरब सागर में प्रवेश",
+      "speech": "ताप्ती नदी पश्चिम की ओर बहकर अरब सागर में मिलती है।",
+      "teaches": "नदी का समुद्र में मिलना दिखाना",
+      "setting": "coast",
+      "visual_action": "नदी समुद्र में मिलती दिखाएँ",
+      "text_color": "#FFFFFF",
+      "explanation_color": "#FFFF00",
+      "objects": [
+        {
+          "kind": "water",
+          "action": "flow",
+          "label": "नदी",
+          "id": "object_0",
+          "color": "#18a9dd",
+          "pos": [
+            -1.8,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            -0.6,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "ocean",
+          "action": "wave",
+          "label": "समुद्र",
+          "id": "object_1",
+          "color": "#59c7c5",
+          "pos": [
+            0.0,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        {
+          "kind": "ship",
+          "action": "move",
+          "label": "बंदरगाह",
+          "id": "object_2",
+          "color": "#59c7c5",
+          "pos": [
+            1.35,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            2.55,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "उपयोग और महत्व",
+      "explanation": "सिंचाई और व्यापार",
+      "speech": "ताप्ती के पानी से खेतों की सिंचाई और बंदरगाह में व्यापार होता है।",
+      "teaches": "ताप्ती के आर्थिक महत्व को बताना",
+      "setting": "village",
+      "visual_action": "पानी से खेतों को सिंचाई और व्यापार दिखाएँ",
+      "text_color": "#FFFFFF",
+      "explanation_color": "#FFFF00",
+      "objects": [
+        {
+          "kind": "water",
+          "action": "flow",
+          "label": "सिंचाई",
+          "id": "object_0",
+          "color": "#18a9dd",
+          "pos": [
+            -1.8,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            -0.6,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "tree",
+          "action": "grow",
+          "label": "फसल",
+          "id": "object_1",
+          "color": "#59c7c5",
+          "pos": [
+            0.0,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        {
+          "kind": "ship",
+          "action": "move",
+          "label": "व्यापार",
+          "id": "object_2",
+          "color": "#59c7c5",
+          "pos": [
+            1.35,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            2.55,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "अंतिम प्रश्न",
+      "explanation": "सही उत्तर याद रखें",
+      "speech": "सूरत से होकर बहने वाली नदी ताप्ती है, इसे याद रखें।",
+      "teaches": "सही उत्तर को याद दिलाना",
+      "setting": "neutral",
+      "visual_action": "सही उत्तर को उजागर करें",
+      "text_color": "#FFFFFF",
+      "explanation_color": "#FFFF00",
+      "objects": [
+        {
+          "kind": "map",
+          "action": "none",
+          "label": "सूरत-ताप्ती",
+          "id": "object_0",
+          "color": "#59c7c5",
+          "pos": [
+            -1.8,
+            0,
+            0
+          ],
+          "size": [
+            1.1,
+            1.1,
+            1.1
+          ]
+        },
+        {
+          "kind": "arrow",
+          "action": "spin",
+          "label": "सही उत्तर",
+          "id": "object_1",
+          "color": "#59c7c5",
+          "pos": [
+            0.0,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        {
+          "kind": "water",
+          "action": "flow",
+          "label": "ताप्ती",
+          "id": "object_2",
+          "color": "#18a9dd",
+          "pos": [
+            1.8,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            3.0,
+            0,
+            0
+          ]
+        }
+      ],
+      "quiz_card": {
+        "question": "सूरत से होकर कौन सी नदी बहती है?",
+        "answer": "ताप्ती",
+        "reveal_after": 2.5,
+        "answer_color": "#73efb2"
+      }
+    }
+  ]
+}
