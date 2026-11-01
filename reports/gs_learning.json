@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-01T04:13:20.642900+00:00",
+  "generated_at": "2026-11-01T04:18:48.045338+00:00",
   "windows": {
     "24h": [
       {
@@ -240,11 +240,17 @@
     ]
   },
   "note": "3-sec rate is not retention. Targets are experiments, not guarantees.",
+  "experimental_targets": {
+    "three_second_rate_percent": 60,
+    "shares_per_1000": 3,
+    "saves_per_1000": 8,
+    "note": "Experimental goals; not benchmarks or guarantees"
+  },
   "weekly": {
     "current": {
       "reels": 2,
-      "best": "18136094323708858",
-      "weakest": "18136094323708858",
+      "best": null,
+      "weakest": null,
       "basis": "24h share/save rate; hypotheses only",
       "mean_shares_per_1000": 0.0,
       "mean_saves_per_1000": 0.0
