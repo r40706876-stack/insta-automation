@@ -93,6 +93,7 @@ def normalize_layout(p):
   id_map={};seen=set()
   for j,o in enumerate(objects):
    old=o.get('id');new=old
+   if old in seen and any(x.get('interact_with')==old for x in objects):raise ValueError('Ambiguous duplicate interaction target')
    if not re.fullmatch(r'[a-z][a-z0-9_]{0,24}',str(old or '')) or old in seen:new='object_'+str(j)
    while new in seen:new+='x'
    if old!=new:
@@ -100,7 +101,7 @@ def normalize_layout(p):
     id_map[old]=new;o['id']=new;repairs.append({'scene':k+1,'repair':'normalize_object_id'})
    seen.add(new)
   for o in objects:
-   if o.get('interact_with') in id_map:o['interact_with']=id_map[o['interact_with']]
+   if o.get('interact_with') is not None and o.get('interact_with') in id_map:o['interact_with']=id_map[o['interact_with']]
   labels=0
   for o in objects:
    if not isinstance(o,dict):continue
