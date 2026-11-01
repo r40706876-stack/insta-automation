@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-01T04:18:48.045338+00:00",
+  "generated_at": "2026-11-01T04:54:02.362194+00:00",
   "windows": {
     "24h": [
       {
@@ -22,6 +22,39 @@
           "three_second_rate": {
             "mean": 32.6499985,
             "n": 2
+          },
+          "retention": {
+            "mean": null,
+            "n": 0
+          },
+          "net_followers": {
+            "mean": null,
+            "n": 0
+          }
+        },
+        "decision": "collect_more",
+        "automatic_scale": false
+      },
+      {
+        "subject": null,
+        "format": "legacy_unclassified",
+        "reels": 1,
+        "metrics": {
+          "shares_per_1000": {
+            "mean": null,
+            "n": 0
+          },
+          "saves_per_1000": {
+            "mean": null,
+            "n": 0
+          },
+          "average_watch_time": {
+            "mean": null,
+            "n": 0
+          },
+          "three_second_rate": {
+            "mean": null,
+            "n": 0
           },
           "retention": {
             "mean": null,
@@ -248,7 +281,7 @@
   },
   "weekly": {
     "current": {
-      "reels": 2,
+      "reels": 3,
       "best": null,
       "weakest": null,
       "basis": "24h share/save rate; hypotheses only",
