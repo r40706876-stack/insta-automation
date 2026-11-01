@@ -28,6 +28,8 @@ jobs:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           BLENDER_BIN: /tmp/blender/blender
           GS_VISUAL_SUBJECT: Geography
+          GS_REFERENCE_JSON: >-
+            [{"subject":"Geography","question":"नर्मदा पूर्व बहती है या पश्चिम?","options":{"a":"पश्चिम, अरब सागर की ओर","b":"पूर्व, बंगाल की खाड़ी की ओर"},"answer":"a","explanation":"नर्मदा का उद्गम अमरकंटक है। इसका मुख्य प्रवाह पश्चिम की ओर है और यह अरब सागर में गिरती है। विंध्य इसके उत्तर और सतपुड़ा दक्षिण में हैं। परीक्षा में बहने की दिशा और गिरने वाला समुद्र अलग करके याद करें। केवल इन तथ्यों का उपयोग करें; नक्शे पर पूरा नदी मार्ग दिखाने का दावा न करें।","sources":["https://sathee.iitk.ac.in/ncert-books/class-11/geography/india-physical-environment/chapter-03-drainage-system/"]}]
           GS_VISUAL_OUTPUT: experiments/growth_preview
           GS_FORCE_BUILD: '1'
           POST_MODE: manual
@@ -40,4 +42,5 @@ jobs:
           path: |
             experiments/growth_preview
             studio_diagnostics
+            experiments/gs_animation_studio/new_topic
           if-no-files-found: warn

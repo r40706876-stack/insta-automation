@@ -48,3 +48,17 @@ class ReleaseTests(unittest.TestCase):
  def test_audio_mismatch_blocks(self):
   with tempfile.TemporaryDirectory() as t:
    root=Path(t);s=self.fixture(root);s['scenes'][0]['speech']='other';self.assertFalse(evaluate_release(root,s)['safe_to_publish'])
+
+class EvidenceSelectionTests(unittest.TestCase):
+ def test_incomplete_source_does_not_hide_available_insights(self):
+  base=dict(media_id='1',topic='river',format='legacy',source='graph',published_at='2026-10-01T00:00:00Z',observed_at='2026-10-02T00:00:00Z')
+  incomplete=normalize(base)
+  complete=normalize(dict(base,source='metricool',observed_at='2026-10-02T00:10:00Z',views=1000,shares=3,saves=8))
+  self.assertEqual(cohort([incomplete,complete])[0:] , [])
+  self.assertEqual(cohort([incomplete,complete],'24h')[0]['shares_per_1000'],3)
+ def test_measured_cohort_changes_priority(self):
+  with tempfile.TemporaryDirectory() as t:
+   p=Path(t)/'data.json'
+   rows=[dict(media_id=str(i),topic='river',subject='Geography',format='exam_trap',source='test',published_at='2026-10-01T00:00:00Z',observed_at='2026-10-04T00:00:00Z',views=1000,shares=5,saves=10) for i in range(3)]
+   ingest(rows[:2],p);self.assertEqual(evidence_score({'subject':'Geography','topic_key':'river'},p),0)
+   ingest(rows,p);self.assertGreater(evidence_score({'subject':'Geography','topic_key':'river'},p),0)

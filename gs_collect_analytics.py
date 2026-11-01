@@ -42,7 +42,9 @@ def collect():
             row=dict(media_id=str(item['id']),published_at=item['timestamp'],observed_at=now.isoformat(),source='instagram_graph',topic=script.get('reference',{}).get('topic_key') or script.get('reference',{}).get('question') or 'unmapped:'+str(item['id']),subject=script.get('subject'),format=script.get('experiment_format','legacy_unclassified'),likes=item.get('like_count'),comments=item.get('comments_count'),total_followers=account_data.get('followers_count'))
             # Same metric names as the repository's weekly report; query independently so
             # a deprecated metric cannot discard all the other observations.
-            for target,metric in (('views','views'),('reach','reach'),('saves','saved'),('shares','shares')):
+            in_window=any(abs(age-h)<=tol for h,tol in ((24,3),(72,6),(168,12)))
+            metrics=(('views','views'),('reach','reach'),('saves','saved'),('shares','shares')) if in_window else ()
+            for target,metric in metrics:
                 result=get(str(item['id'])+'/insights',metric=metric)
                 if result and result.get('data'):
                     row[target]=(result['data'][0].get('values') or [{}])[0].get('value')
@@ -55,3 +57,4 @@ def collect():
     path=Path('reports/gs_collection.json');path.parent.mkdir(parents=True,exist_ok=True)
     path.write_text(json.dumps({'observed_at':now.isoformat(),'reels':len(rows),'status':'partial' if errors else 'ok','unavailable':errors,'diagnostics':diagnostics,'note':'Watch time, 3-sec rate, retention and per-reel follows require verified export with explicit units. Total followers is an account snapshot, not reel attribution.'},indent=2))
 if __name__=='__main__':collect()
+

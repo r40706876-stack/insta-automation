@@ -13,7 +13,7 @@
 
 ## Analytics and learning
 
-Hourly Actions collect real Instagram media timestamps and available views, reach, likes, comments, saves, shares and account follower count using existing Instagram secrets. Unavailable API metrics remain null. A collection failure fails the workflow; it is not reported as a successful empty observation. Existing weekly reporting remains enabled.
+Hourly Actions collect real Instagram media timestamps and available views, reach, likes, comments, saves, shares and account follower count using existing Instagram secrets. Unavailable API metrics remain null. A collection failure fails the workflow; it is not reported as a successful empty observation. Existing weekly reporting remains enabled. Direct-API insights were unavailable in the first live test, so 58 matched Metricool observations were imported with cache-freshness limitations preserved. A separate seven-day connected-Metricool bridge updates eligible observations every three hours; it writes analytics data only. No missing analytics permission was silently treated as zero. Direct-API insight calls are limited to eligible age windows to reduce request load.
 
 Additional Metricool observations can be imported as `experiments/learning/import.json`, a JSON array. Required fields: media_id, published_at, observed_at (both ISO timestamps with timezone), source, topic and format. Optional fields include subject, duration, views, reach, likes, comments, shares, saves, average_watch_time (seconds), three_second_rate (percent), retention (percent), followers_gained, followers_lost and total_followers. Export units must be verified before importing. Do not convert 3-sec rate to retention.
 
