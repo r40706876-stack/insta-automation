@@ -1,0 +1,6 @@
+[
+  {
+    "url": "user-provided",
+    "excerpt": "Verified question-bank reference; do not add claims beyond this reference: {\"subject\": \"Geography\", \"subject_hi\": \"भूगोल\", \"chapter\": \"सौरमण्डल (Solar system)\", \"sub\": \"\", \"question\": \"पृथ्वी का द्रव्यमान लगभग है–\", \"options\": {\"a\": \"6 × 1022 kg\", \"b\": \"6 × 1024 kg\", \"c\": \"6 × 1025 kg\", \"d\": \"6 × 1023 kg\"}, \"answer\": \"b\", \"exams\": [\"RRB Group-D 17-09-2018 (Shift-I)\", \"RRB Group-D 20-09-2018 (Shift-III)\", \"RRB Group-D 28-09-2018 (Shift-II)\", \"RRB Group-D 30-10-2018 (Shift-III)\"], \"explanation\": \"किसी वस्तु का भार उस पर पड़ने वाले गुरुत्वीय बल से निर्धारित होता है और अलग–अलग स्थानों पर एक ही वस्तु का अलग–अलग भार होता है। अतः पृथ्वी का भार नहीं होता बल्कि द्रव्यमान होता है। पृथ्वी का द्रव्यमान वैज्ञानिक सिद्धान्त के आधार पर लगभग 6 × 1024 kg होता है।\", \"times_asked\": 4, \"years\": [\"2018\"], \"id\": \"654ddf6d79\", \"seq\": 6}"
+  }
+]

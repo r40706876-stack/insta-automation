@@ -1,0 +1,249 @@
+{
+  "title": "पृथ्वी का द्रव्यमान",
+  "subject": "भूगोल",
+  "topic_key": "prithvi_ka_dravyman",
+  "share_reason": "सही विकल्प याद रखने में मदद",
+  "recall": "याद रखें: 6 × 1024 kg।",
+  "share_card": {
+    "kind": "exam_confusion",
+    "recipient": "भूगोल परीक्षा देने वाले दोस्त",
+    "benefit": "पृथ्वी के द्रव्यमान का सही मान याद रहेगा",
+    "cta": "सही उत्तर याद रखें"
+  },
+  "pyq_challenge": true,
+  "scenes": [
+    {
+      "role": "hook",
+      "heading": "नक्शा टेस्ट",
+      "explanation": "पृथ्वी का द्रव्यमान लगभग है–",
+      "speech": "पृथ्वी का द्रव्यमान लगभग है–",
+      "teaches": "प्रश्न पहचान",
+      "setting": "space",
+      "visual_action": "पृथ्वी को घुमाते हुए द्रव्यमान पूछें",
+      "objects": [
+        {
+          "kind": "planet",
+          "action": "spin",
+          "id": "obj0",
+          "label": "पृथ्वी",
+          "color": "#59c7c5",
+          "pos": [
+            0.0,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        }
+      ]
+    },
+    {
+      "role": "challenge",
+      "heading": "अपना जवाब चुनिए",
+      "explanation": "दोनों विकल्प देखिए। सही जवाब मन",
+      "speech": "दोनों विकल्प देखिए। सही जवाब मन में तय कीजिए।",
+      "teaches": "विकल्प तुलना",
+      "setting": "neutral",
+      "visual_action": "दो तीर विकल्पों की ओर चलाएँ",
+      "objects": [
+        {
+          "kind": "arrow",
+          "action": "move",
+          "id": "obj1",
+          "label": "विकल्प 1",
+          "to": [
+            -0.5,
+            0,
+            0
+          ],
+          "color": "#59c7c5",
+          "pos": [
+            -1.35,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        {
+          "kind": "arrow",
+          "action": "move",
+          "id": "obj2",
+          "label": "विकल्प 2",
+          "to": [
+            0.5,
+            0,
+            0
+          ],
+          "color": "#59c7c5",
+          "pos": [
+            0.45,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        }
+      ],
+      "quiz_options": [
+        "6 × 1024 kg",
+        "6 × 1022 kg"
+      ]
+    },
+    {
+      "role": "reveal",
+      "heading": "सही उत्तर",
+      "explanation": "सही उत्तर है: 6 × 1024",
+      "speech": "सही उत्तर है: 6 × 1024 kg।",
+      "teaches": "सही उत्तर दिखाना",
+      "setting": "neutral",
+      "visual_action": "सही उत्तर को ऊपर उठाएँ",
+      "objects": [
+        {
+          "kind": "coin",
+          "action": "rise",
+          "id": "obj3",
+          "label": "6 × 10^24 kg",
+          "to": [
+            0,
+            0,
+            1
+          ],
+          "color": "#f5bd3d",
+          "pos": [
+            0.0,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        }
+      ]
+    },
+    {
+      "role": "explain",
+      "heading": "तथ्य समझिए",
+      "explanation": "अतः पृथ्वी का भार नहीं होता",
+      "speech": "अतः पृथ्वी का भार नहीं होता बल्कि द्रव्यमान होता है।",
+      "teaches": "धारणा स्पष्ट करना",
+      "setting": "institution",
+      "visual_action": "व्यक्ति स्केल तक चलता है",
+      "objects": [
+        {
+          "kind": "person",
+          "action": "walk",
+          "id": "obj4",
+          "label": "शिक्षक",
+          "to": [
+            0.5,
+            0,
+            0
+          ],
+          "color": "#f4e7bf",
+          "pos": [
+            -1.35,
+            0,
+            0
+          ],
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ]
+        },
+        {
+          "kind": "scale",
+          "action": "none",
+          "id": "obj5",
+          "label": "स्केल",
+          "color": "#59c7c5",
+          "pos": [
+            0.9,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        }
+      ]
+    },
+    {
+      "role": "transfer",
+      "heading": "खुद को जाँचिए",
+      "explanation": "पृथ्वी का द्रव्यमान वैज्ञानिक सिद्धान्त के",
+      "speech": "पृथ्वी का द्रव्यमान वैज्ञानिक सिद्धान्त के आधार पर लगभग 6 × 1024 kg होता है।",
+      "teaches": "विज्ञान सिद्धान्त का अनुप्रयोग",
+      "setting": "laboratory",
+      "visual_action": "पानी के प्रवाह से द्रव्यमान दिखाएँ",
+      "objects": [
+        {
+          "kind": "water",
+          "action": "flow",
+          "id": "obj6",
+          "label": "प्रवाह",
+          "to": [
+            1,
+            0,
+            0
+          ],
+          "color": "#18a9dd",
+          "pos": [
+            0.0,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        }
+      ]
+    },
+    {
+      "role": "revision",
+      "heading": "रिवीजन कार्ड",
+      "explanation": "याद रखें: 6 × 1024 kg।",
+      "speech": "याद रखें: 6 × 1024 kg।",
+      "teaches": "स्मृति सुदृढ़ीकरण",
+      "setting": "neutral",
+      "visual_action": "स्थिर कार्ड दिखाएँ",
+      "revision_card": true,
+      "objects": [
+        {
+          "kind": "map",
+          "action": "none",
+          "id": "obj7",
+          "map_region": "world",
+          "label": "पृथ्वी",
+          "color": "#59c7c5",
+          "pos": [
+            0.0,
+            0,
+            0
+          ],
+          "size": [
+            1.1,
+            1.1,
+            1.1
+          ]
+        }
+      ]
+    }
+  ]
+}
