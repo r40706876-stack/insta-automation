@@ -78,14 +78,16 @@ def report(rows):
             for metric in ('shares_per_1000','saves_per_1000','average_watch_time','three_second_rate','retention','net_followers'):
                 vals=[r[metric] for r in group if r.get(metric) is not None]
                 metrics[metric]={'mean':sum(vals)/len(vals) if vals else None,'n':len(vals)}
-            output['windows'][window].append({'subject':subject,'format':fmt,'reels':len(group),'metrics':metrics,'decision':'collect_more' if len(group)<3 else 'review_matched_cohort','automatic_scale':False})
+            output['windows'][window].append({'subject':subject,'format':fmt,'reels':len(group),'metrics':metrics,'decision':'collect_more' if sum(bool(r.get('views',0) and r['views']>=100 and r.get('shares_per_1000') is not None and r.get('saves_per_1000') is not None) for r in group)<3 else 'review_matched_cohort','automatic_scale':False})
     now=dt.datetime.now(UTC)
     weekly={}
     for label,low,high in (('current',0,7),('previous',7,14)):
         recent=[r for r in cohort(rows,'24h') if low<=(now-timestamp(r['published_at'])).total_seconds()/86400<high]
         usable=[r for r in recent if r.get('views',0) and r['views']>=100 and r.get('shares_per_1000') is not None and r.get('saves_per_1000') is not None]
         score=lambda r:r['shares_per_1000']/3+r['saves_per_1000']/8
-        weekly[label]={'reels':len(recent),'best':max(usable,key=score)['media_id'] if usable else None,'weakest':min(usable,key=score)['media_id'] if usable else None,'basis':'24h share/save rate; hypotheses only','mean_shares_per_1000':sum(r['shares_per_1000'] for r in usable)/len(usable) if usable else None,'mean_saves_per_1000':sum(r['saves_per_1000'] for r in usable)/len(usable) if usable else None}
+        comparable=len(usable)>=3 and max(map(score,usable))>min(map(score,usable))
+        weekly[label]={'reels':len(recent),'best':max(usable,key=score)['media_id'] if comparable else None,'weakest':min(usable,key=score)['media_id'] if comparable else None,'basis':'24h share/save rate; hypotheses only','mean_shares_per_1000':sum(r['shares_per_1000'] for r in usable)/len(usable) if usable else None,'mean_saves_per_1000':sum(r['saves_per_1000'] for r in usable)/len(usable) if usable else None}
+    output['experimental_targets']={'three_second_rate_percent':60,'shares_per_1000':3,'saves_per_1000':8,'note':'Experimental goals; not benchmarks or guarantees'}
     output['weekly']=weekly
     output['weekly_change']={key:weekly['current'][key]-weekly['previous'][key] if weekly['current'][key] is not None and weekly['previous'][key] is not None else None for key in ('mean_shares_per_1000','mean_saves_per_1000')}
     return output

@@ -62,3 +62,15 @@ class EvidenceSelectionTests(unittest.TestCase):
    rows=[dict(media_id=str(i),topic='river',subject='Geography',format='exam_trap',source='test',published_at='2026-10-01T00:00:00Z',observed_at='2026-10-04T00:00:00Z',views=1000,shares=5,saves=10) for i in range(3)]
    ingest(rows[:2],p);self.assertEqual(evidence_score({'subject':'Geography','topic_key':'river'},p),0)
    ingest(rows,p);self.assertGreater(evidence_score({'subject':'Geography','topic_key':'river'},p),0)
+
+
+class ProviderModelTests(unittest.TestCase):
+ def test_retired_models_are_filtered(self):
+  from unittest.mock import patch,Mock
+  from gs_model_config import gemini_models
+  gemini_models.cache_clear()
+  response=Mock(status_code=200)
+  response.json.return_value={'models':[{'name':'models/gemini-3.8-flash','supportedGenerationMethods':['generateContent']}]}
+  with patch.dict('os.environ',{'GEMINI_API_KEY':'test-only'}),patch('gs_model_config.requests.get',return_value=response):
+   self.assertEqual(gemini_models(),['gemini-3.8-flash'])
+  gemini_models.cache_clear()

@@ -32,3 +32,7 @@ Still required in production: successful live API collection with actual permiss
 ## Model availability
 
 The complete preview exposed provider 404/429/503 errors in the old planner configuration. Gemini model availability is now discovered from the provider's models endpoint and limited to a configurable Flash shortlist; retired unavailable model IDs are filtered. `GS_GEMINI_MODELS` and `GS_GROQ_MODELS` allow explicit deployment overrides. Quota/service failures still block an unreviewed publication. Reference: https://ai.google.dev/gemini-api/docs/models and https://ai.google.dev/gemini-api/docs/video-understanding . A static sourced map plus one causal traced route is allowed; decorative extra moving props are no longer required merely to meet a count.
+
+## Rollout status
+
+Analytics, paced PYQ and duplicate-request safety can be rolled out independently. Full subject-experiment integration must remain in PR #1 until its end-to-end preview passes. Three attempted previews correctly failed before publication: inconsistent planner output, unavailable provider models/quota, and a static revision scene rejected by the current motion contract. The last failure is unresolved; do not relabel it as a passing render or bypass the gate. Existing production subject routing should remain active until this integration passes. The 3-hour Metricool data bridge and the separate rollout-completion task must not modify unrelated projects.
