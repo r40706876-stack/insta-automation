@@ -1,0 +1,68 @@
+name: GS growth end-to-end preview - no publication
+on:
+  workflow_dispatch:
+  push:
+    paths: ['.github/workflows/gs_growth_preview.yml']
+permissions:
+  contents: read
+concurrency:
+  group: gs-growth-preview
+  cancel-in-progress: false
+jobs:
+  preview:
+    if: github.event_name == 'workflow_dispatch' || github.ref != 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 70
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: ./.github/actions/gs-3d-dependencies
+      - run: pip install --timeout 30 --retries 1 -r requirements.txt
+      - name: Render and review a complete experiment
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          BLENDER_BIN: /tmp/blender/blender
+          GS_VISUAL_SUBJECT: Geography
+          GS_REFERENCE_JSON: >-
+            [{"subject":"Geography","question":"नर्मदा पूर्व बहती है या पश्चिम?","options":{"a":"पश्चिम, अरब सागर की ओर","b":"पूर्व, बंगाल की खाड़ी की ओर"},"answer":"a","explanation":"नर्मदा का उद्गम अमरकंटक है। इसका मुख्य प्रवाह पश्चिम की ओर है और यह अरब सागर में गिरती है। विंध्य इसके उत्तर और सतपुड़ा दक्षिण में हैं। परीक्षा में बहने की दिशा और गिरने वाला समुद्र अलग करके याद करें। केवल इन तथ्यों का उपयोग करें; नक्शे पर पूरा नदी मार्ग दिखाने का दावा न करें।","sources":["https://sathee.iitk.ac.in/ncert-books/class-11/geography/india-physical-environment/chapter-03-drainage-system/"]}]
+          GS_VISUAL_OUTPUT: experiments/growth_preview
+          GS_FORCE_BUILD: '1'
+          POST_MODE: manual
+          PYTHONUNBUFFERED: '1'
+        run: |
+          python - <<'PY'
+          import json,os,runpy
+          from pathlib import Path
+          refs=json.loads(os.environ['GS_REFERENCE_JSON'])
+          data=json.loads(Path('narmada_map.json').read_text())
+          points=data['river']
+          refs[0]['map_geometry']={'purpose':'river_flow_direction','origin_label':'अमरकंटक','destination_label':'अरब सागर','region':'india','route':[points[round(i*(len(points)-1)/7)] for i in range(8)],'sources':data['sources'],'note':'Simplified sampled geographic polyline; not every river bend. Coordinates are visual data, never narration.'}
+          os.environ['GS_REFERENCE_JSON']=json.dumps(refs,ensure_ascii=False)
+          runpy.run_path('daily_visual_gs.py',run_name='__main__')
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: GS-growth-complete-preview
+          path: |
+            experiments/growth_preview
+            studio_diagnostics/${{ github.run_id }}
+            experiments/gs_animation_studio/new_topic/${{ github.run_id }}
+          if-no-files-found: warn
+
+# Consistent bounded static revision policy, with all teaching scenes still requiring actual motion.
+# Require schema-constrained six-scene output before semantic checks.
+# Use documented current Gemini REST responseFormat and a separate structured factual audit.
+# Compact structural schema avoids provider state limits; normalize technical asset IDs before validation.
+
+# Supply sampled existing geographic data instead of asking the planner to invent a river route.
+# Lock narration to grounded question-bank facts, align cardinal arrows, and preflight audio timing.
+# Preflight reports all validator categories together and applies only the selected primary objective.
+
+# Source-driven river-flow scenes keep real geography throughout, with a short visible-options challenge.
+# Independent factual audit uses the same concise narration and bounded revision policy as local validation.

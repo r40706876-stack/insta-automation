@@ -80,6 +80,12 @@ class Recovery:
  def validate_voice(self):
   m=json.loads((self.root/'audio.json').read_text())
   if self.recipe and m['speech']!=self.recipe['speech']:raise StageError('voice','script_mismatch')
+  if self.recipe:
+   import sys
+   sys.path.insert(0,str(self.repo))
+   from gs_scene_policy import is_revision_card,validate_revision_duration
+   for index,scene in enumerate(self.recipe.get('scenes',[])):
+    if is_revision_card(scene,index,len(self.recipe.get('scenes',[]))):validate_revision_duration(m['seconds'][index])
   if len(m['seconds'])!=6 or any(not .5<float(x)<40 for x in m['seconds']):raise StageError('voice','bad_scene_timing')
   self.call('voice_decode',['ffmpeg','-y','-v','error','-i',str(self.root/'voice.flac'),'-ar','44100','-ac','1',str(self.root/'voice.wav')],timeout=60)
   import wave

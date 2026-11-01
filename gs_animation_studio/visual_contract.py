@@ -1,5 +1,8 @@
 """Reject unsupported scene promises before voice/render/publishing."""
-import math
+import math,sys
+from pathlib import Path
+sys.path.insert(0,str(Path(__file__).resolve().parent.parent))
+from gs_scene_policy import is_revision_card
 VERSION='rich_3d_v1'
 SETTINGS={'neutral','coast','space','institution','laboratory','village'}
 ROLES={'ordinary','marcher','soldier','gandhi'}
@@ -35,11 +38,12 @@ def validate_visual(plan):
     if route and (action!='trace' or not all(coordinate(p,bounds) for p in route)):raise ValueError('Map coordinates outside sourced region')
     markers=o.get('markers',[])
     if len(markers)>3 or any(not coordinate(m.get('at'),bounds) or not isinstance(m.get('label'),str) or not 1<=len(m['label'])<=24 for m in markers):raise ValueError('Invalid map markers')
+   if o.get('route') and kind!='map':raise ValueError('Geographic routes require an actual map asset')
    if action=='trace' and kind!='map':raise ValueError('Trace is only implemented for geographic maps')
    if action=='wave' and kind!='ocean':raise ValueError('Wave is only implemented for ocean meshes')
    if kind=='ocean' and action!='wave':raise ValueError('Ocean must deform, not be a still background')
    # Decorative pulsing/growing alone cannot meet the teaching-motion requirement.
    if action in ('walk','move','flow','rise','fall','spin','orbit','trace','wave','compress') or o.get('gesture') in ('point','collect','hold'):meaningful+=1
-  if meaningful<1:raise ValueError(f'Scene {i+1}: no causal movement beyond decorative pulse/zoom')
+  if meaningful<1 and not is_revision_card(s,i,len(plan['scenes'])):raise ValueError(f'Scene {i+1}: no causal movement beyond decorative pulse/zoom')
  return plan
 

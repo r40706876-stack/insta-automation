@@ -74,3 +74,41 @@ class ProviderModelTests(unittest.TestCase):
   with patch.dict('os.environ',{'GEMINI_API_KEY':'test-only'}),patch('gs_model_config.requests.get',return_value=response):
    self.assertEqual(gemini_models(),['gemini-3.8-flash'])
   gemini_models.cache_clear()
+
+class RevisionBoundaryTests(ReleaseTests):
+ def six(self,root):
+  s=self.fixture(root);s['scenes']=[{'speech':'test','role':role,'label':'पुनरावृत्ति','teaches':'revision' if role=='revision' else 'causal fact','revision_card':role=='revision'} for role in ('hook','challenge','reveal','explain','transfer','revision')]
+  checks=json.loads((root/'file_checks.json').read_text());checks['actual_rendered_motion_checks']={'scene_'+str(i)+'_teaching_motion':{'changed_fraction':.03} for i in range(1,6)};checks['static_revision_checks']={'scene_6':{'bounded_revision_card':True,'seconds':4}}
+  (root/'file_checks.json').write_text(json.dumps(checks));(root/'audio.json').write_text(json.dumps({'speech':['test']*6,'seconds':[3]*5+[4]}));return s
+ def test_short_final_revision_can_be_still(self):
+  with tempfile.TemporaryDirectory() as t:
+   root=Path(t);s=self.six(root);self.assertTrue(evaluate_release(root,s)['safe_to_publish'])
+ def test_long_revision_is_blocked(self):
+  with tempfile.TemporaryDirectory() as t:
+   root=Path(t);s=self.six(root);audio=json.loads((root/'audio.json').read_text());audio['seconds'][-1]=8;(root/'audio.json').write_text(json.dumps(audio));self.assertFalse(evaluate_release(root,s)['safe_to_publish'])
+ def test_teaching_scene_cannot_claim_revision_exception(self):
+  with tempfile.TemporaryDirectory() as t:
+   root=Path(t);s=self.six(root);s['scenes'][0]['revision_card']=True;s['scenes'][0]['role']='revision';checks=json.loads((root/'file_checks.json').read_text());checks['actual_rendered_motion_checks'].pop('scene_1_teaching_motion');(root/'file_checks.json').write_text(json.dumps(checks));self.assertFalse(evaluate_release(root,s)['safe_to_publish'])
+
+
+class GroundedNarrationTests(unittest.TestCase):
+ def test_visual_planner_receives_source_only_narration(self):
+  from gs_storyboard import grounded_storyboard
+  q={'question':'नर्मदा किस दिशा में बहती है?','options':{'a':'पश्चिम','b':'पूर्व'},'answer':'a','explanation':'नर्मदा का उद्गम अमरकंटक है। इसका प्रवाह पश्चिम की ओर है।'}
+  lines=grounded_storyboard(q)
+  self.assertEqual(lines[3]['speech'],'नर्मदा का उद्गम अमरकंटक है।')
+  self.assertEqual(lines[4]['speech'],'इसका प्रवाह पश्चिम की ओर है।')
+  self.assertLessEqual(len(lines[-1]['speech'].split()),6)
+ def test_internal_topic_tag_is_not_narrated(self):
+  from gs_storyboard import grounded_storyboard
+  q={'question':'rainshadow-first-trial: बारिश अलग क्यों?','options':{'a':'नम हवा'},'answer':'a','explanation':'नम हवा ऊपर उठकर ठंडी होती है।'}
+  self.assertNotIn('first-trial',grounded_storyboard(q)[0]['speech'])
+
+class FormatFramingTests(unittest.TestCase):
+ def test_formats_change_the_hook_without_changing_the_answer(self):
+  from gs_storyboard import grounded_storyboard
+  q={'question':'नर्मदा किस दिशा में बहती है?','options':{'a':'पश्चिम','b':'पूर्व'},'answer':'a','explanation':'नर्मदा का उद्गम अमरकंटक है। इसका प्रवाह पश्चिम की ओर है।'}
+  plans=[grounded_storyboard(q,f) for f in ('exam_trap','visual_mystery','map_pyq_challenge')]
+  self.assertEqual(len({p[0]['speech'] for p in plans}),3)
+  self.assertEqual(len({p[2]['speech'] for p in plans}),1)
+  self.assertTrue(all(len(p[1]['speech'].split())<=12 for p in plans))

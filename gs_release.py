@@ -2,6 +2,7 @@
 import hashlib
 import json
 from pathlib import Path
+from gs_scene_policy import is_revision_card,validate_revision_duration
 REVIEW_CHECKS=('answer_correct','visual_relevance','hindi_readable','pronunciation_correct','audio_visual_match','answer_reveal_timing','revision_card_readable')
 
 def evaluate_release(root,script):
@@ -16,9 +17,21 @@ def evaluate_release(root,script):
     if checks.get('decoded_without_errors') is not True or checks.get('black_intervals')!=0:errors.append('decode/black-frame QA missing or failed')
     if checks.get('dimensions') not in ([720,1280],[1080,1920]):errors.append('unsupported portrait dimensions')
     motion=checks.get('actual_rendered_motion_checks') or {}
-    if len(motion)<len(script.get('scenes',[])) or any(v.get('changed_fraction',0)<=.001 for v in motion.values()):errors.append('rendered scene motion evidence incomplete')
     seconds=audio.get('seconds') or []
-    if len(seconds)!=len(script.get('scenes',[])) or any(s<2 for s in seconds):errors.append('scene reading/listening time missing or below 2 seconds')
+    scenes=script.get('scenes',[])
+    revision=checks.get('static_revision_checks') or {}
+    if len(seconds)!=len(scenes) or any(not isinstance(s,(int,float)) or s<2 for s in seconds):errors.append('scene reading/listening time missing or below 2 seconds')
+    for index,scene in enumerate(scenes):
+        key='scene_'+str(index+1)
+        if is_revision_card(scene,index,len(scenes)):
+            try:
+                validate_revision_duration(seconds[index])
+                receipt=revision.get(key,{})
+                if receipt.get('bounded_revision_card') is not True or receipt.get('seconds')!=seconds[index]:errors.append('revision duration receipt missing')
+            except (ValueError,IndexError):errors.append('revision card exceeds measured duration limit')
+        elif motion.get(key+'_teaching_motion',{}).get('changed_fraction',0)<=.001:
+            # Historic single-scene test fixtures also use the same indexed prefix.
+            if motion.get(key,{}).get('changed_fraction',0)<=.001:errors.append('rendered scene motion evidence incomplete: '+key)
     if not isinstance(checks.get('audio_mean_db'),(float,int)) or checks['audio_mean_db']<=-35:errors.append('audio missing or too quiet')
     if audio.get('speech')!=[s.get('speech') for s in script.get('scenes',[])]:errors.append('rendered narration differs from script')
     if script.get('experiment_format') and tuple(s.get('role') for s in script.get('scenes',[]))!=('hook','challenge','reveal','explain','transfer','revision'):errors.append('experiment scene roles invalid')
