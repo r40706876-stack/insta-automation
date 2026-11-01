@@ -3069,6 +3069,12 @@ def _upload_once(video_file, caption, thumb_ms=0, cover_url=None):
     from gs_schedule import Slot
     slot = Slot(video_file)
     if slot.cached: return slot.cached
+    from pathlib import Path
+    prior=Path(video_file).with_suffix('.upload.json')
+    if prior.exists():
+        receipt=json.loads(prior.read_text())
+        if receipt.get('media_id'):return receipt['media_id']
+        raise RuntimeError('Uncertain publication journal exists; inspect container before recovery')
     import gs_publication as publication
     resolve_font()
     video_file = publication.prepare_video(video_file, get_font)
@@ -3121,16 +3127,18 @@ def _upload_once(video_file, caption, thumb_ms=0, cover_url=None):
     if status != "FINISHED":
         raise RuntimeError("IG processing time-out")
     slot.before_publish()
-    pub = {}
-    for k in range(3):
-        pub = requests.post(f"{GRAPH}{IG_USER_ID}/media_publish",
-                            data={"creation_id": cid, "access_token": IG_ACCESS_TOKEN}, timeout=60).json()
-        if pub.get("id"):
-            break
-        print("  publish dobara:", pub)
-        time.sleep(20)
-    if not pub.get("id"):
-        raise RuntimeError(f"IG publish fail: {pub}")
+    # Persist container identity before the irreversible request. Never blindly repeat
+    # media_publish after a timeout or an ambiguous API reply.
+    import datetime as upload_dt
+    from pathlib import Path
+    journal=prior
+    journal.write_text(json.dumps({'container_id':cid,'stage':'publish_requested','requested_at':upload_dt.datetime.now(upload_dt.timezone.utc).isoformat()}))
+    pub=requests.post(f"{GRAPH}{IG_USER_ID}/media_publish",
+                      data={"creation_id":cid,"access_token":IG_ACCESS_TOKEN},timeout=60).json()
+    if not pub.get('id'):
+        raise RuntimeError('IG publication uncertain; inspect persisted container status before recovery')
+    journal.write_text(json.dumps({'container_id':cid,'stage':'published','media_id':pub['id']}))
+    slot.complete(pub['id'])
     try:                                            # publish ki pakki jaanch (permalink mila = sach me live)
         chk = requests.get(f"{GRAPH}{pub['id']}", params={"fields": "permalink", "access_token": IG_ACCESS_TOKEN},
                            timeout=30).json()
@@ -4230,32 +4238,38 @@ def render_list_frame(subject, items):
     sw = stopwatch_sprite(70, 0.0)
     cv.paste(sw, (150, 1597), sw)
     d.text((235, 1618), BRAND_HANDLE, font=get_font(36), fill=INK, anchor="lm")
-    d.text((235, 1660), f"कितने पहले से आते थे?  कमेंट करो __/{len(items)}   •   दोस्तों को भेजो",
+    d.text((235, 1660), "रिवीजन के लिए यह कार्ड सेव करें",
            font=get_font(30), fill=PEN_RED, anchor="lm")
     return cv
 
 
 def build_list_reel(subject, items, out):
     resolve_font()
-    frame = render_list_frame(subject, items)
-    music = beat_music(LIST_DUR, seed=len(items))
-    encode_frames(lambda fi: frame, int(LIST_DUR * FPS), music, out, key=lambda fi: 0)
-    frame.save(os.path.join(os.path.dirname(out) or ".", "thumbnail.jpg"), quality=92)
-    print(f"LIST REEL TAIYAR: {out} ({LIST_DUR:.0f}s)")
-    return LIST_DUR
+    # Read one question, then reveal its answer. Full card is retained for revision.
+    import bisect
+    pages=[];ends=[];elapsed=0.0
+    for index,item in enumerate(items):
+        think=max(2.5,len(item['q'].split())/3)
+        answer_time=max(2.0,len(item['a'].split())/3+1)
+        for revealed,seconds in ((False,think),(True,answer_time)):
+            visible=[{'q':it['q'] if j<=index else 'अगला सवाल…',
+                      'a':it['a'] if j<index or (j==index and revealed) else 'सोचिए…'}
+                     for j,it in enumerate(items)]
+            pages.append(render_list_frame(subject,visible));elapsed+=seconds;ends.append(elapsed)
+    frame=render_list_frame(subject,items)
+    pages.append(frame);elapsed+=4;ends.append(elapsed)
+    def page(fi):return min(len(pages)-1,bisect.bisect_right(ends,fi/FPS))
+    music=beat_music(elapsed,seed=len(items))
+    encode_frames(lambda fi:pages[page(fi)],int(elapsed*FPS),music,out,key=page)
+    frame.save(os.path.join(os.path.dirname(out) or '.', 'thumbnail.jpg'),quality=92)
+    print(f'LIST REEL TAIYAR: {out} ({elapsed:.1f}s; sequential question/reveal)')
+    return elapsed
 
 
 def list_caption(subject, items):
-    lines = [f"📚 {list_title(subject)} - RRB, SSC, Police, Patwari, Army, State Exams के लिए (Save करो)", ""]
-    lines += [f"{k + 1}. {it['q']} → {it['a']}" for k, it in enumerate(items)]
-    lines += ["", "💬 कितने पहले से आते थे? कमेंट करो: 7/7?",
-              "📤 Save करो + उस दोस्त को भेजो जो exam की तैयारी कर रहा है।",
-              f"{'GK' if subject in ('TODAY', 'WEEK') else subj_word(subject)} GK Questions | RRB NTPC, Group D, SSC GD, State Exam PYQ",
-              f"⏱ {BRAND} - {BRAND_TAGLINE}"]
-    if WHATSAPP_NUMBER:
-        lines.append(f"📲 Free test / notes: WhatsApp {WHATSAPP_NUMBER}")
-    lines += ["", f"#gkquiz #rrbntpc #sscgd #gkpyq {SUBJ_TAGS.get(subject, '#gk')}"]
-    return "\n".join(lines)
+    return (f"📚 {list_title(subject)}\n\nसवाल पढ़ें, अपना जवाब सोचें, फिर सही उत्तर मिलाएँ। "
+            "आखिर में पूरा रिवीजन कार्ड है—दोहराने के लिए सेव करें।\n\n"
+            f"#MinuteMeGS #GS #StudyHindi #PYQ {SUBJ_TAGS.get(subject, '#gk')}")
 
 
 def run_list(bank, st, ep, args):
