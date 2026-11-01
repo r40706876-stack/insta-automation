@@ -32,6 +32,14 @@ def ask(prompt,schema=None):
     if r.status_code==200:return parse(' '.join(p.get('text','') for p in r.json()['candidates'][0]['content']['parts'])), 'Gemini / '+model
     errors.append('Gemini HTTP '+str(r.status_code)+' '+str(r.json().get('error',{}).get('message',''))[:160].replace(os.environ['GEMINI_API_KEY'],'***'))
    except (requests.RequestException,ValueError,KeyError):errors.append('Gemini response/network error')
+ if os.getenv('CLOUDFLARE_ACCOUNT_ID') and os.getenv('CLOUDFLARE_API_TOKEN'):
+  model=os.getenv('GS_CLOUDFLARE_TEXT_MODEL','@cf/meta/llama-3.3-70b-instruct-fp8-fast')
+  try:
+   body={'model':model,'temperature':.2,'max_tokens':8192,'response_format':{'type':'json_object'},'messages':[{'role':'user','content':prompt+('\nOutput JSON matching this schema: '+json.dumps(schema) if schema else '')}]}
+   r=requests.post('https://api.cloudflare.com/client/v4/accounts/'+os.environ['CLOUDFLARE_ACCOUNT_ID']+'/ai/v1/chat/completions',headers={'Authorization':'Bearer '+os.environ['CLOUDFLARE_API_TOKEN']},json=body,timeout=(15,90))
+   if r.status_code==200:return parse(r.json()['choices'][0]['message']['content']),'Cloudflare / '+model
+   errors.append('Cloudflare HTTP '+str(r.status_code))
+  except (requests.RequestException,ValueError,KeyError):errors.append('Cloudflare response/network error')
  raise RuntimeError('Topic planner unavailable: '+('; '.join(errors) or 'GROQ_API_KEY or GEMINI_API_KEY required'))
 def public_url(url):
  u=urllib.parse.urlparse(url)
@@ -82,6 +90,17 @@ def normalize_layout(p):
     o['to']=pos
   coords=[o[key] for o in objects if isinstance(o,dict) for key in ('pos','to') if vec(o.get(key),-100,100)]
   fx=min(1,3.0/max([abs(v[0]) for v in coords]+[3.0]));fy=min(1,1.6/max([abs(v[1]) for v in coords]+[1.6]))
+  id_map={};seen=set()
+  for j,o in enumerate(objects):
+   old=o.get('id');new=old
+   if not re.fullmatch(r'[a-z][a-z0-9_]{0,24}',str(old or '')) or old in seen:new='object_'+str(j)
+   while new in seen:new+='x'
+   if old!=new:
+    if old in id_map and any(x.get('interact_with')==old for x in objects):raise ValueError('Ambiguous duplicate interaction target')
+    id_map[old]=new;o['id']=new;repairs.append({'scene':k+1,'repair':'normalize_object_id'})
+   seen.add(new)
+  for o in objects:
+   if o.get('interact_with') in id_map:o['interact_with']=id_map[o['interact_with']]
   labels=0
   for o in objects:
    if not isinstance(o,dict):continue

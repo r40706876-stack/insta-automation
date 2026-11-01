@@ -48,3 +48,4 @@ jobs:
 # Consistent bounded static revision policy, with all teaching scenes still requiring actual motion.
 # Require schema-constrained six-scene output before semantic checks.
 # Use documented current Gemini REST responseFormat and a separate structured factual audit.
+# Compact structural schema avoids provider state limits; normalize technical asset IDs before validation.
