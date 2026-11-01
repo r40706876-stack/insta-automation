@@ -39,10 +39,14 @@ def overlay(im,i):
   message=card_spec.get('answer','') if reveal else card_spec.get('question','')
   d.rounded_rectangle((46,310,626,376),12,fill=(12,39,52),outline=color,width=2)
   fit(d,(336,342),message,29,color,550)
+ options=sc.get('quiz_options') or []
+ if options:
+  d.rounded_rectangle((46,304,626,402),12,fill=(12,39,52),outline=COL,width=2)
+  for option_index,option in enumerate(options[:2]):fit(d,(336,330+option_index*44),str(option),29,(244,248,250),550)
  occupied=[]
  for obj in sc['objects']:
   if not obj.get('label'):continue
-  ax,ay=row['pins'][obj['id']];x,y=ax,ay;x=max(115,min(550,x));y=max(355,min(950,y-30))
+  ax,ay=row['pins'][obj['id']];x,y=ax,ay;x=max(115,min(550,x));y=max(430 if options else 355,min(950,y-30))
   while any(abs(x-a)<170 and abs(y-b)<55 for a,b in occupied):y+=58
   y=min(1010,y);occupied.append((x,y));label=obj['label'];n=26
   while n>18 and d.textlength(label,font=font(n))>200:n-=1
@@ -53,6 +57,8 @@ def overlay(im,i):
  for item in row.get('annotations',[]):
   ax,ay=item['anchor'];x=max(135,min(535,ax));y=max(350,min(997,ay));label=item['text'];n=25
   while n>18 and d.textlength(label,font=font(n))>370:n-=1
+  while any(abs(x-a)<210 and abs(y-b)<54 for a,b in occupied):y+=58
+  y=min(997,y);occupied.append((x,y))
   w=d.textlength(label,font=font(n))/2+12
   if abs(x-ax)+abs(y-ay)>50:arrow(d,(x,y+20),(ax,ay),COL,2)
   d.rounded_rectangle((x-w,y-22,x+w,y+22),10,fill=(9,35,47),outline=COL,width=2);text(d,(x,y),label,n,(244,248,250))

@@ -103,3 +103,12 @@ class GroundedNarrationTests(unittest.TestCase):
   from gs_storyboard import grounded_storyboard
   q={'question':'rainshadow-first-trial: बारिश अलग क्यों?','options':{'a':'नम हवा'},'answer':'a','explanation':'नम हवा ऊपर उठकर ठंडी होती है।'}
   self.assertNotIn('first-trial',grounded_storyboard(q)[0]['speech'])
+
+class FormatFramingTests(unittest.TestCase):
+ def test_formats_change_the_hook_without_changing_the_answer(self):
+  from gs_storyboard import grounded_storyboard
+  q={'question':'नर्मदा किस दिशा में बहती है?','options':{'a':'पश्चिम','b':'पूर्व'},'answer':'a','explanation':'नर्मदा का उद्गम अमरकंटक है। इसका प्रवाह पश्चिम की ओर है।'}
+  plans=[grounded_storyboard(q,f) for f in ('exam_trap','visual_mystery','map_pyq_challenge')]
+  self.assertEqual(len({p[0]['speech'] for p in plans}),3)
+  self.assertEqual(len({p[2]['speech'] for p in plans}),1)
+  self.assertTrue(all(len(p[1]['speech'].split())<=12 for p in plans))

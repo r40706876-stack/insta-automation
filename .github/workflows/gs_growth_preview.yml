@@ -41,7 +41,7 @@ jobs:
           refs=json.loads(os.environ['GS_REFERENCE_JSON'])
           data=json.loads(Path('narmada_map.json').read_text())
           points=data['river']
-          refs[0]['map_geometry']={'region':'india','route':[points[round(i*(len(points)-1)/7)] for i in range(8)],'sources':data['sources'],'note':'Simplified sampled geographic polyline; not every river bend. Coordinates are visual data, never narration.'}
+          refs[0]['map_geometry']={'purpose':'river_flow_direction','origin_label':'अमरकंटक','destination_label':'अरब सागर','region':'india','route':[points[round(i*(len(points)-1)/7)] for i in range(8)],'sources':data['sources'],'note':'Simplified sampled geographic polyline; not every river bend. Coordinates are visual data, never narration.'}
           os.environ['GS_REFERENCE_JSON']=json.dumps(refs,ensure_ascii=False)
           runpy.run_path('daily_visual_gs.py',run_name='__main__')
           PY
@@ -63,3 +63,5 @@ jobs:
 # Supply sampled existing geographic data instead of asking the planner to invent a river route.
 # Lock narration to grounded question-bank facts, align cardinal arrows, and preflight audio timing.
 # Preflight reports all validator categories together and applies only the selected primary objective.
+
+# Source-driven river-flow scenes keep real geography throughout, with a short visible-options challenge.

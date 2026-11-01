@@ -241,7 +241,10 @@ def generate(root,repo,topic_text='',subject='auto',source_text=''):
    from gs_experiment_contract import PROMPT
    prompt+=PROMPT+' Selected format: '+os.environ['GS_EXPERIMENT_FORMAT']
    if os.getenv('GS_LOCKED_STORYBOARD'):prompt+='\nLOCKED STORYBOARD: copy all six speech/heading/explanation/role fields verbatim; design only the matching visual actions and assets. Do not add spoken claims: '+os.environ['GS_LOCKED_STORYBOARD']
-  if os.getenv('GS_EXPERIMENT_FORMAT'):
+  source_map_plan=json.loads(os.getenv('GS_SOURCE_MAP_PLAN','null'))
+  if source_map_plan:
+   p=source_map_plan;provider='source-grounded geographic scene template'
+  elif os.getenv('GS_EXPERIMENT_FORMAT'):
    from gs_plan_schema import plan_schema
    p,provider=ask(prompt,schema=plan_schema(KINDS,ACTIONS))
   else:p,provider=ask(prompt)

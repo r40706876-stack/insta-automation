@@ -38,6 +38,7 @@ def validate_visual(plan):
     if route and (action!='trace' or not all(coordinate(p,bounds) for p in route)):raise ValueError('Map coordinates outside sourced region')
     markers=o.get('markers',[])
     if len(markers)>3 or any(not coordinate(m.get('at'),bounds) or not isinstance(m.get('label'),str) or not 1<=len(m['label'])<=24 for m in markers):raise ValueError('Invalid map markers')
+   if o.get('route') and kind!='map':raise ValueError('Geographic routes require an actual map asset')
    if action=='trace' and kind!='map':raise ValueError('Trace is only implemented for geographic maps')
    if action=='wave' and kind!='ocean':raise ValueError('Wave is only implemented for ocean meshes')
    if kind=='ocean' and action!='wave':raise ValueError('Ocean must deform, not be a still background')

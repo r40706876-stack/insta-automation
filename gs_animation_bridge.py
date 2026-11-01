@@ -83,9 +83,11 @@ def build(root,day):
  format_name=experiment(day,subject)
  objective={'exam_trap':'share','visual_mystery':'save','map_pyq_challenge':'follow' if following else 'save'}[format_name]
  from gs_storyboard import grounded_storyboard
- locked=grounded_storyboard(q)
+ locked=grounded_storyboard(q,format_name)
+ from gs_geography_plan import grounded_map_plan
+ source_map_plan=grounded_map_plan(q,locked)
  source='Verified question-bank reference; do not add claims beyond this reference: '+json.dumps(q,ensure_ascii=False)
- values={'STUDIO_TOPIC_TEXT':q['question'],'STUDIO_SUBJECT':SUBJECTS.get(subject,'auto'),'STUDIO_REFERENCE_TEXT':source,'STUDIO_REVIEWED_RECIPE':'','STUDIO_REVIEWED_SHA256':'','STUDIO_VOICE':'auto','STUDIO_VERIFY_RECOVERY':'0','GS_LOCKED_STORYBOARD':json.dumps(locked,ensure_ascii=False),'GS_EXPERIMENT_FORMAT':format_name,'GS_PRIMARY_OBJECTIVE':objective,'GS_SERIES_NEXT':following[1]['question'] if following else ''}
+ values={'STUDIO_TOPIC_TEXT':q['question'],'STUDIO_SUBJECT':SUBJECTS.get(subject,'auto'),'STUDIO_REFERENCE_TEXT':source,'STUDIO_REVIEWED_RECIPE':'','STUDIO_REVIEWED_SHA256':'','STUDIO_VOICE':'auto','STUDIO_VERIFY_RECOVERY':'0','GS_SOURCE_MAP_PLAN':json.dumps(source_map_plan,ensure_ascii=False),'GS_LOCKED_STORYBOARD':json.dumps(locked,ensure_ascii=False),'GS_EXPERIMENT_FORMAT':format_name,'GS_PRIMARY_OBJECTIVE':objective,'GS_SERIES_NEXT':following[1]['question'] if following else ''}
  with environment(values):
   runner=DynamicRecovery(repo=repo)
   if not runner.run():
@@ -99,7 +101,7 @@ def build(root,day):
  shutil.copy(video,root/'reel.mp4');shutil.copy(out/'contact_sheet.jpg',root/'contact_sheet.jpg')
  for name in ('recipe.json','audio.json','sources.json','scene_checks.json','file_checks.json','build_receipt.json'):
   if (out/name).exists():shutil.copy(out/name,root/name)
- script={'ok':True,'title':recipe['title'],'subject':subject,'renderer_version':VERSION,'question_hash':digest,'reference':q,'experiment_format':format_name,'primary_objective':objective,'series_next_topic':following[1]['question'] if following else None,'series_next_hash':following[0] if following else None,'topic_policy':'evidence_cohort_v2','topic_priority':topic_priority(q),'recall':recipe.get('recall'),'share_card':recipe.get('share_card'),'share_reason':recipe.get('share_reason'),'scenes':[{'label':s['heading'],'speech':s['speech'],'role':s.get('role'),'revision_card':s.get('revision_card',False),'teaches':s.get('teaches'),'animation':{'type':'blender_3d','setting':s['setting'],'visible_action':s['visual_action']}} for s in recipe['scenes']]}
+ script={'ok':True,'title':recipe['title'],'subject':subject,'renderer_version':VERSION,'question_hash':digest,'reference':q,'experiment_format':format_name,'primary_objective':objective,'series_next_topic':following[1]['question'] if following else None,'series_next_hash':following[0] if following else None,'topic_policy':'evidence_cohort_v2','topic_priority':topic_priority(q),'recall':recipe.get('recall'),'share_card':recipe.get('share_card'),'share_reason':recipe.get('share_reason'),'scenes':[{'label':s['heading'],'quiz_options':s.get('quiz_options'),'speech':s['speech'],'role':s.get('role'),'revision_card':s.get('revision_card',False),'teaches':s.get('teaches'),'animation':{'type':'blender_3d','setting':s['setting'],'visible_action':s['visual_action']}} for s in recipe['scenes']]}
  (root/'script.json').write_text(json.dumps(script,ensure_ascii=False,indent=2))
  (root/'validated.json').write_text(json.dumps({'renderer_version':VERSION,'date':day,'sha256':digest_video,'duration':checks['duration_seconds'],'voice':checks['voice'],'studio_output':str(out.relative_to(repo)),'built_on_github':bool(os.getenv('GITHUB_ACTIONS'))},ensure_ascii=False,indent=2))
  # Use an actual video frame for the Instagram cover.
