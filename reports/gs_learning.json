@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-01T08:35:03.286253+00:00",
+  "generated_at": "2026-11-01T10:05:52.772971+00:00",
   "windows": {
     "24h": [
       {
@@ -41,20 +41,20 @@
         "reels": 2,
         "metrics": {
           "shares_per_1000": {
-            "mean": null,
-            "n": 0
+            "mean": 4.8076923076923075,
+            "n": 2
           },
           "saves_per_1000": {
-            "mean": null,
-            "n": 0
+            "mean": 7.525083612040134,
+            "n": 2
           },
           "average_watch_time": {
-            "mean": null,
-            "n": 0
+            "mean": 4.5795,
+            "n": 2
           },
           "three_second_rate": {
-            "mean": null,
-            "n": 0
+            "mean": 32.8999985,
+            "n": 2
           },
           "retention": {
             "mean": null,
@@ -72,24 +72,24 @@
     "72h": [
       {
         "subject": null,
-        "format": "legacy_other",
-        "reels": 3,
+        "format": "legacy_unclassified",
+        "reels": 6,
         "metrics": {
           "shares_per_1000": {
-            "mean": 0.0,
-            "n": 3
+            "mean": 1.2345679012345678,
+            "n": 6
           },
           "saves_per_1000": {
-            "mean": 0.0,
-            "n": 3
+            "mean": 2.05456936226167,
+            "n": 6
           },
           "average_watch_time": {
-            "mean": 7.618666666666667,
-            "n": 3
+            "mean": 4.569833333333333,
+            "n": 6
           },
           "three_second_rate": {
-            "mean": 40.5,
-            "n": 3
+            "mean": 24.766666333333333,
+            "n": 6
           },
           "retention": {
             "mean": null,
@@ -101,6 +101,39 @@
           }
         },
         "decision": "review_matched_cohort",
+        "automatic_scale": false
+      },
+      {
+        "subject": null,
+        "format": "legacy_other",
+        "reels": 2,
+        "metrics": {
+          "shares_per_1000": {
+            "mean": 0.0,
+            "n": 2
+          },
+          "saves_per_1000": {
+            "mean": 0.0,
+            "n": 2
+          },
+          "average_watch_time": {
+            "mean": 7.5235,
+            "n": 2
+          },
+          "three_second_rate": {
+            "mean": 44.0,
+            "n": 2
+          },
+          "retention": {
+            "mean": null,
+            "n": 0
+          },
+          "net_followers": {
+            "mean": null,
+            "n": 0
+          }
+        },
+        "decision": "collect_more",
         "automatic_scale": false
       },
       {
@@ -135,95 +168,29 @@
         },
         "decision": "collect_more",
         "automatic_scale": false
-      },
-      {
-        "subject": null,
-        "format": "legacy_unclassified",
-        "reels": 4,
-        "metrics": {
-          "shares_per_1000": {
-            "mean": null,
-            "n": 0
-          },
-          "saves_per_1000": {
-            "mean": null,
-            "n": 0
-          },
-          "average_watch_time": {
-            "mean": null,
-            "n": 0
-          },
-          "three_second_rate": {
-            "mean": null,
-            "n": 0
-          },
-          "retention": {
-            "mean": null,
-            "n": 0
-          },
-          "net_followers": {
-            "mean": null,
-            "n": 0
-          }
-        },
-        "decision": "collect_more",
-        "automatic_scale": false
       }
     ],
     "7d": [
       {
         "subject": null,
-        "format": "legacy_mega",
-        "reels": 1,
+        "format": "legacy_unclassified",
+        "reels": 7,
         "metrics": {
           "shares_per_1000": {
-            "mean": 11.627906976744185,
-            "n": 1
+            "mean": 1.937984496124031,
+            "n": 6
           },
           "saves_per_1000": {
-            "mean": 11.627906976744185,
-            "n": 1
+            "mean": 10.611577957067547,
+            "n": 6
           },
           "average_watch_time": {
-            "mean": 6.201,
-            "n": 1
+            "mean": 4.903333333333333,
+            "n": 6
           },
           "three_second_rate": {
-            "mean": 32.0,
-            "n": 1
-          },
-          "retention": {
-            "mean": null,
-            "n": 0
-          },
-          "net_followers": {
-            "mean": null,
-            "n": 0
-          }
-        },
-        "decision": "collect_more",
-        "automatic_scale": false
-      },
-      {
-        "subject": null,
-        "format": "legacy_other",
-        "reels": 4,
-        "metrics": {
-          "shares_per_1000": {
-            "mean": 1.3157894736842106,
-            "n": 4
-          },
-          "saves_per_1000": {
-            "mean": 11.770683782535933,
-            "n": 4
-          },
-          "average_watch_time": {
-            "mean": 4.27975,
-            "n": 4
-          },
-          "three_second_rate": {
-            "mean": 19.175001,
-            "n": 4
+            "mean": 24.7333345,
+            "n": 6
           },
           "retention": {
             "mean": null,
@@ -235,6 +202,39 @@
           }
         },
         "decision": "review_matched_cohort",
+        "automatic_scale": false
+      },
+      {
+        "subject": null,
+        "format": "legacy_other",
+        "reels": 1,
+        "metrics": {
+          "shares_per_1000": {
+            "mean": 5.2631578947368425,
+            "n": 1
+          },
+          "saves_per_1000": {
+            "mean": 15.789473684210526,
+            "n": 1
+          },
+          "average_watch_time": {
+            "mean": 4.269,
+            "n": 1
+          },
+          "three_second_rate": {
+            "mean": 18.0,
+            "n": 1
+          },
+          "retention": {
+            "mean": null,
+            "n": 0
+          },
+          "net_followers": {
+            "mean": null,
+            "n": 0
+          }
+        },
+        "decision": "collect_more",
         "automatic_scale": false
       },
       {
@@ -269,39 +269,6 @@
         },
         "decision": "collect_more",
         "automatic_scale": false
-      },
-      {
-        "subject": null,
-        "format": "legacy_unclassified",
-        "reels": 3,
-        "metrics": {
-          "shares_per_1000": {
-            "mean": null,
-            "n": 0
-          },
-          "saves_per_1000": {
-            "mean": null,
-            "n": 0
-          },
-          "average_watch_time": {
-            "mean": null,
-            "n": 0
-          },
-          "three_second_rate": {
-            "mean": null,
-            "n": 0
-          },
-          "retention": {
-            "mean": null,
-            "n": 0
-          },
-          "net_followers": {
-            "mean": null,
-            "n": 0
-          }
-        },
-        "decision": "collect_more",
-        "automatic_scale": false
       }
     ]
   },
@@ -315,11 +282,11 @@
   "weekly": {
     "current": {
       "reels": 4,
-      "best": null,
-      "weakest": null,
+      "best": "18174696019395674",
+      "weakest": "18136094323708858",
       "basis": "24h share/save rate; hypotheses only",
-      "mean_shares_per_1000": 0.0,
-      "mean_saves_per_1000": 0.0
+      "mean_shares_per_1000": 2.4038461538461537,
+      "mean_saves_per_1000": 3.762541806020067
     },
     "previous": {
       "reels": 0,
