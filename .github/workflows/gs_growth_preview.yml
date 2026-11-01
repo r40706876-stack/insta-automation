@@ -34,7 +34,17 @@ jobs:
           GS_FORCE_BUILD: '1'
           POST_MODE: manual
           PYTHONUNBUFFERED: '1'
-        run: python daily_visual_gs.py
+        run: |
+          python - <<'PY'
+          import json,os,runpy
+          from pathlib import Path
+          refs=json.loads(os.environ['GS_REFERENCE_JSON'])
+          data=json.loads(Path('narmada_map.json').read_text())
+          points=data['river']
+          refs[0]['map_geometry']={'region':'india','route':[points[round(i*(len(points)-1)/7)] for i in range(8)],'sources':data['sources'],'note':'Simplified sampled geographic polyline; not every river bend. Coordinates are visual data, never narration.'}
+          os.environ['GS_REFERENCE_JSON']=json.dumps(refs,ensure_ascii=False)
+          runpy.run_path('daily_visual_gs.py',run_name='__main__')
+          PY
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -49,3 +59,5 @@ jobs:
 # Require schema-constrained six-scene output before semantic checks.
 # Use documented current Gemini REST responseFormat and a separate structured factual audit.
 # Compact structural schema avoids provider state limits; normalize technical asset IDs before validation.
+
+# Supply sampled existing geographic data instead of asking the planner to invent a river route.
