@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-01T21:23:25.285904+00:00",
+  "generated_at": "2026-11-01T22:06:37.687916+00:00",
   "windows": {
     "24h": [
       {
@@ -142,20 +142,20 @@
         "reels": 9,
         "metrics": {
           "shares_per_1000": {
-            "mean": 1.0582010582010581,
-            "n": 7
+            "mean": 0.823045267489712,
+            "n": 9
           },
           "saves_per_1000": {
-            "mean": 2.4133751741760174,
-            "n": 7
+            "mean": 2.4712466446799803,
+            "n": 9
           },
           "average_watch_time": {
-            "mean": 4.662999999999999,
-            "n": 7
+            "mean": 5.062222222222221,
+            "n": 9
           },
           "three_second_rate": {
-            "mean": 25.142857142857142,
-            "n": 7
+            "mean": 23.666666666666668,
+            "n": 9
           },
           "retention": {
             "mean": null,
@@ -240,7 +240,7 @@
       {
         "subject": null,
         "format": "legacy_unclassified",
-        "reels": 13,
+        "reels": 12,
         "metrics": {
           "shares_per_1000": {
             "mean": 1.3836113772681413,
@@ -322,6 +322,72 @@
           },
           "three_second_rate": {
             "mean": 25.0,
+            "n": 1
+          },
+          "retention": {
+            "mean": null,
+            "n": 0
+          },
+          "net_followers": {
+            "mean": null,
+            "n": 0
+          }
+        },
+        "decision": "collect_more",
+        "automatic_scale": false
+      },
+      {
+        "subject": "इतिहास",
+        "format": "legacy_unclassified",
+        "reels": 1,
+        "metrics": {
+          "shares_per_1000": {
+            "mean": 1.8050541516245486,
+            "n": 1
+          },
+          "saves_per_1000": {
+            "mean": 1.8050541516245486,
+            "n": 1
+          },
+          "average_watch_time": {
+            "mean": 8.571,
+            "n": 1
+          },
+          "three_second_rate": {
+            "mean": 49.4,
+            "n": 1
+          },
+          "retention": {
+            "mean": null,
+            "n": 0
+          },
+          "net_followers": {
+            "mean": null,
+            "n": 0
+          }
+        },
+        "decision": "collect_more",
+        "automatic_scale": false
+      },
+      {
+        "subject": "अर्थशास्त्र",
+        "format": "legacy_unclassified",
+        "reels": 1,
+        "metrics": {
+          "shares_per_1000": {
+            "mean": 0.0,
+            "n": 1
+          },
+          "saves_per_1000": {
+            "mean": 7.575757575757576,
+            "n": 1
+          },
+          "average_watch_time": {
+            "mean": 4.664,
+            "n": 1
+          },
+          "three_second_rate": {
+            "mean": 27.199997,
             "n": 1
           },
           "retention": {
