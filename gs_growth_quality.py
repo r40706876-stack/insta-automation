@@ -21,6 +21,11 @@ def evaluate(script):
         if any(word in action for word in GENERIC_PROPS):
             visual_warnings.append('Scene %d: check if moving shapes teach the actual topic' % i)
     blocking = []
+    reference=script.get('reference') or {}
+    if reference.get('answer') not in (reference.get('options') or {}):
+        blocking.append('reference answer is not a valid option')
+    if not reference.get('explanation'):
+        blocking.append('missing grounded answer explanation')
     if not script.get('title'):
         blocking.append('missing title')
     if not speech or any(not x for x in speech):
@@ -55,13 +60,14 @@ def caption_addendum(script, report):
     challenge = str(card.get('cta') or '').strip()
     recall = str(script.get('recall') or '').strip()
     parts = []
-    if challenge:
+    objective=script.get('primary_objective','share')
+    if challenge and objective=='share':
         parts.append('💬 '+challenge)
-    if recall:
+    if recall and objective=='save':
         parts.append('📌 रिवीजन: '+recall)
-    if report['share_value']:
+    if script.get('primary_objective','share')=='share' and report['share_value']:
         parts.append('📤 अपने स्टडी पार्टनर से यही सवाल पूछो।')
     next_topic = str(script.get('series_next_topic') or '').strip()
-    if next_topic:
+    if next_topic and objective=='follow':
         parts.append('📅 अगला सवाल: '+next_topic+' — मिस न करने के लिए Follow करें।')
     return '\n\n'+'\n'.join(parts) if parts else ''

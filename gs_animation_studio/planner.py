@@ -205,6 +205,11 @@ def generate(root,repo,topic_text='',subject='auto',source_text=''):
  errors=[];previous=None
  for attempt in range(3):
   prompt=CONTRACT+'\nKINDS='+','.join(sorted(KINDS))+'\nACTIONS='+','.join(sorted(ACTIONS))+'\n'+brief+'\nSelected topic:'+topic_text+'\nEVIDENCE:'+json.dumps(evidence,ensure_ascii=False)+'\nPrevious rejection reasons:'+json.dumps(errors)+'\nRepair this previous plan if present, preserve correct parts:'+json.dumps(previous,ensure_ascii=False)
+  if os.getenv('GS_EXPERIMENT_FORMAT'):
+   import sys
+   sys.path.insert(0,str(Path(__file__).resolve().parent.parent))
+   from gs_experiment_contract import PROMPT
+   prompt+=PROMPT+' Selected format: '+os.environ['GS_EXPERIMENT_FORMAT']
   p,provider=ask(prompt)
   try:
    p,layout_repairs=normalize_layout(p);previous=p
@@ -215,6 +220,9 @@ def generate(root,repo,topic_text='',subject='auto',source_text=''):
    diag=Path(os.getenv('STUDIO_DIAGNOSTICS',str(root)));diag.mkdir(parents=True,exist_ok=True)
    (diag/f'plan_attempt_{attempt}.json').write_text(json.dumps(p,ensure_ascii=False,indent=2))
    validate(p);validate_visual(p);validate_share(p);check_quantities(p,evidence)
+   if os.getenv('GS_EXPERIMENT_FORMAT'):
+    from gs_experiment_contract import validate as validate_experiment
+    validate_experiment(p,os.environ['GS_EXPERIMENT_FORMAT'])
    if len(str(p.get('recall','')).split())>16:raise ValueError('Recall must be one simple Hindi line of at most 16 words')
    if not re.fullmatch(r'[a-z0-9_]{3,70}',str(p.get('topic_key',''))):raise ValueError('Stable topic_key required')
    if not source_text and not topic_text:raise ValueError('Missing topic')

@@ -34,7 +34,7 @@ root=Path(os.environ['GS_VISUAL_OUTPUT']);root.mkdir(parents=True,exist_ok=True)
 if (root/'published.json').exists() and json.loads((root/'published.json').read_text()).get('media_id'):
  print('Already published slot; keep the original video and receipt',flush=True)
  raise SystemExit(0)
-(root/'experiment.json').write_text(json.dumps({'slot':key,'subject':subject,'target_utc':target,'format':'everyday visual puzzle; mechanism begins immediately; transfer question','comparison':'24h and 72h; skip, watch time, shares, follows; not proof from one post'},ensure_ascii=False,indent=2))
+(root/'experiment.json').write_text(json.dumps({'slot':key,'subject':subject,'target_utc':target,'format':__import__('gs_learning').experiment(dt.date().isoformat(),subject),'primary_objective':'save','controlled_variables':['existing slot','subject','primary objective'],'experiment_start':'2026-11-01','experiment_days':7,'comparison':'24h and 72h; skip, watch time, shares, follows; not proof from one post'},ensure_ascii=False,indent=2))
 
 # All supported subjects now build through gs_animation_bridge and the shared Blender engine.
 sys.argv=['daily_visual_gs.py'];runpy.run_path('daily_visual_gs.py',run_name='__main__')
