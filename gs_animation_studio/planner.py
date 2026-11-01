@@ -88,6 +88,11 @@ def normalize_layout(p):
     elif o['action']=='fall':o['pos'][2]+=1.2
     else:pos[0]+=1.2
     o['to']=pos
+  for o in objects:
+   direction=str(o.get('direction') or o.get('label','')).strip().lower()
+   if o.get('kind')=='arrow' and o.get('action')=='move' and direction in ('पूर्व','पश्चिम','east','west'):
+    pos=list(o['pos']);o['to']=[pos[0]+(1.2 if direction in ('पूर्व','east') else -1.2),pos[1],pos[2]]
+    repairs.append({'scene':k+1,'repair':'align_cardinal_arrow','direction':direction})
   coords=[o[key] for o in objects if isinstance(o,dict) for key in ('pos','to') if vec(o.get(key),-100,100)]
   fx=min(1,3.0/max([abs(v[0]) for v in coords]+[3.0]));fy=min(1,1.6/max([abs(v[1]) for v in coords]+[1.6]))
   id_map={};seen=set()
@@ -134,7 +139,7 @@ def validate(p):
  if len(scenes)!=6:raise ValueError('Exactly six scenes required')
  for scene_index,s in enumerate(scenes):
   if not isinstance(s,dict):raise ValueError('Scene must be object')
-  if not isinstance(s.get('speech'),str) or not 8<=len(s['speech'].split())<=25:raise ValueError('Each scene needs 8-25 conversational Hindi words')
+  if not isinstance(s.get('speech'),str) or not 2<=len(s['speech'].split())<=25:raise ValueError('Each scene needs 2-25 source-grounded Hindi words')
   if len(s.get('heading',''))>52 or len(s.get('explanation',''))>80:raise ValueError('Screen text too long')
   if not s.get('heading') or not s.get('explanation') or not s.get('teaches'):raise ValueError('Missing teaching purpose')
   objects=s.get('objects',[])
@@ -152,7 +157,7 @@ def validate(p):
    if o['action'] in {'move','walk','rise','fall','flow'}:
     if not vec(o.get('to'),-3.5,4.5) or o['to'][2]<0 or math.dist(o['pos'],o['to'])<.7:raise ValueError('Meaningful movement needs a visible path')
    if o['action']!='none':moving+=1
-  if is_revision_card(s,scene_index,len(scenes)) and len(s['speech'].split())>12:raise ValueError('Final revision narration must be 8-12 words')
+  if is_revision_card(s,scene_index,len(scenes)) and len(s['speech'].split())>12:raise ValueError('Final revision narration must be at most 12 words')
   if moving<1 and not is_revision_card(s,scene_index,len(scenes)):raise ValueError('Every scene needs a causal animated object, not a static poster')
   if sum(bool(o.get('label')) for o in objects)>3:raise ValueError('Too many labels')
  if not p.get('share_reason') or not p.get('recall'):raise ValueError('Missing useful takeaway / recall')
@@ -235,11 +240,16 @@ def generate(root,repo,topic_text='',subject='auto',source_text=''):
    sys.path.insert(0,str(Path(__file__).resolve().parent.parent))
    from gs_experiment_contract import PROMPT
    prompt+=PROMPT+' Selected format: '+os.environ['GS_EXPERIMENT_FORMAT']
+   if os.getenv('GS_LOCKED_STORYBOARD'):prompt+='\nLOCKED STORYBOARD: copy all six speech/heading/explanation/role fields verbatim; design only the matching visual actions and assets. Do not add spoken claims: '+os.environ['GS_LOCKED_STORYBOARD']
   if os.getenv('GS_EXPERIMENT_FORMAT'):
    from gs_plan_schema import plan_schema
    p,provider=ask(prompt,schema=plan_schema(KINDS,ACTIONS))
   else:p,provider=ask(prompt)
   try:
+   locked=json.loads(os.getenv('GS_LOCKED_STORYBOARD','null'))
+   if locked and len(p.get('scenes',[]))==6:
+    for scene,truth in zip(p['scenes'],locked):scene.update(truth)
+    p['recall']=locked[-1]['speech']
    p,layout_repairs=normalize_layout(p);previous=p
    for index,scene in enumerate(p.get('scenes',[])):
     if index==5 and scene.get('role')=='revision' and scene.get('objects') and all(o.get('action')=='none' for o in scene['objects']):scene['revision_card']=True

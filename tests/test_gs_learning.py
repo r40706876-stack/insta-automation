@@ -89,3 +89,17 @@ class RevisionBoundaryTests(ReleaseTests):
  def test_teaching_scene_cannot_claim_revision_exception(self):
   with tempfile.TemporaryDirectory() as t:
    root=Path(t);s=self.six(root);s['scenes'][0]['revision_card']=True;s['scenes'][0]['role']='revision';checks=json.loads((root/'file_checks.json').read_text());checks['actual_rendered_motion_checks'].pop('scene_1_teaching_motion');(root/'file_checks.json').write_text(json.dumps(checks));self.assertFalse(evaluate_release(root,s)['safe_to_publish'])
+
+
+class GroundedNarrationTests(unittest.TestCase):
+ def test_visual_planner_receives_source_only_narration(self):
+  from gs_storyboard import grounded_storyboard
+  q={'question':'नर्मदा किस दिशा में बहती है?','options':{'a':'पश्चिम','b':'पूर्व'},'answer':'a','explanation':'नर्मदा का उद्गम अमरकंटक है। इसका प्रवाह पश्चिम की ओर है।'}
+  lines=grounded_storyboard(q)
+  self.assertEqual(lines[3]['speech'],'नर्मदा का उद्गम अमरकंटक है।')
+  self.assertEqual(lines[4]['speech'],'इसका प्रवाह पश्चिम की ओर है।')
+  self.assertLessEqual(len(lines[-1]['speech'].split()),6)
+ def test_internal_topic_tag_is_not_narrated(self):
+  from gs_storyboard import grounded_storyboard
+  q={'question':'rainshadow-first-trial: बारिश अलग क्यों?','options':{'a':'नम हवा'},'answer':'a','explanation':'नम हवा ऊपर उठकर ठंडी होती है।'}
+  self.assertNotIn('first-trial',grounded_storyboard(q)[0]['speech'])

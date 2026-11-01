@@ -61,3 +61,4 @@ jobs:
 # Compact structural schema avoids provider state limits; normalize technical asset IDs before validation.
 
 # Supply sampled existing geographic data instead of asking the planner to invent a river route.
+# Lock narration to grounded question-bank facts, align cardinal arrows, and preflight audio timing.

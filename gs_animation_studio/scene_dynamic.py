@@ -145,6 +145,9 @@ for frame in range(1,N+1):
   elif action=='orbit':p.x+=.8*math.cos(q*math.tau);p.y+=.8*math.sin(q*math.tau)
   elif action=='grow':size*=.25+.75*e
   elif action=='pulse':size*=.87+.13*math.sin(q*math.tau*2)
+  if spec['kind']=='arrow' and action=='move':
+   travel=Vector(spec['to'])-Vector(spec['pos'])
+   if travel.length>.01:o.rotation_euler=Vector((1,0,0)).rotation_difference(travel.normalized()).to_euler()
   o.location=p;o.scale=size;o.keyframe_insert(data_path='location',frame=frame);o.keyframe_insert(data_path='scale',frame=frame);o.keyframe_insert(data_path='rotation_euler',frame=frame)
   if 'fold_keys' in details:rich.animate_folds(details,q,frame)
   if 'human' in details:

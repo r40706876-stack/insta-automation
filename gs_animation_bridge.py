@@ -82,8 +82,10 @@ def build(root,day):
  from gs_learning import experiment
  format_name=experiment(day,subject)
  objective={'exam_trap':'share','visual_mystery':'save','map_pyq_challenge':'follow' if following else 'save'}[format_name]
+ from gs_storyboard import grounded_storyboard
+ locked=grounded_storyboard(q)
  source='Verified question-bank reference; do not add claims beyond this reference: '+json.dumps(q,ensure_ascii=False)
- values={'STUDIO_TOPIC_TEXT':q['question'],'STUDIO_SUBJECT':SUBJECTS.get(subject,'auto'),'STUDIO_REFERENCE_TEXT':source,'STUDIO_REVIEWED_RECIPE':'','STUDIO_REVIEWED_SHA256':'','STUDIO_VOICE':'auto','STUDIO_VERIFY_RECOVERY':'0','GS_EXPERIMENT_FORMAT':format_name,'GS_PRIMARY_OBJECTIVE':objective,'GS_SERIES_NEXT':following[1]['question'] if following else ''}
+ values={'STUDIO_TOPIC_TEXT':q['question'],'STUDIO_SUBJECT':SUBJECTS.get(subject,'auto'),'STUDIO_REFERENCE_TEXT':source,'STUDIO_REVIEWED_RECIPE':'','STUDIO_REVIEWED_SHA256':'','STUDIO_VOICE':'auto','STUDIO_VERIFY_RECOVERY':'0','GS_LOCKED_STORYBOARD':json.dumps(locked,ensure_ascii=False),'GS_EXPERIMENT_FORMAT':format_name,'GS_PRIMARY_OBJECTIVE':objective,'GS_SERIES_NEXT':following[1]['question'] if following else ''}
  with environment(values):
   runner=DynamicRecovery(repo=repo)
   if not runner.run():

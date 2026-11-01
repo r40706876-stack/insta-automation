@@ -30,7 +30,7 @@ def prepare(root,recipe):
   asyncio.run(create());files=[root/f'speech_{i}.mp3' for i in range(len(lines))];provider='Edge / Swara female fallback'
  chunks=[]
  for p in files:chunks.append(np.frombuffer(subprocess.check_output(['ffmpeg','-v','error','-i',str(p),'-f','f32le','-ar','44100','-ac','1','-']),np.float32).copy())
- ds=[len(c)/44100+.25 for c in chunks];out=np.zeros(math.ceil(sum(ds)*44100),np.float32)
+ ds=[max(2.0,len(c)/44100+.25) for c in chunks];out=np.zeros(math.ceil(sum(ds)*44100),np.float32)
  for c,t in zip(chunks,np.cumsum([0]+ds[:-1])):k=round((t+.08)*44100);out[k:k+len(c)]=c
  with wave.open(str(root/'voice.wav'),'wb') as w:w.setnchannels(1);w.setsampwidth(2);w.setframerate(44100);w.writeframes((np.clip(out,-.97,.97)*32767).astype('<i2').tobytes())
  subprocess.run(['ffmpeg','-y','-v','error','-i',str(root/'voice.wav'),str(root/'voice.flac')],check=True)
