@@ -259,10 +259,17 @@ def generate(root,repo,topic_text='',subject='auto',source_text=''):
      for sc,txt in zip(p['scenes'],short['texts']):sc['heading']=txt['heading'];sc['explanation']=txt['explanation']
    diag=Path(os.getenv('STUDIO_DIAGNOSTICS',str(root)));diag.mkdir(parents=True,exist_ok=True)
    (diag/f'plan_attempt_{attempt}.json').write_text(json.dumps(p,ensure_ascii=False,indent=2))
-   validate(p);validate_visual(p);validate_share(p);check_quantities(p,evidence)
+   validators=[('script',lambda:validate(p)),('visual',lambda:validate_visual(p)),('facts',lambda:check_quantities(p,evidence))]
+   # A save/follow experiment must not be blocked by a share CTA it does not use.
+   if not os.getenv('GS_EXPERIMENT_FORMAT') or os.getenv('GS_PRIMARY_OBJECTIVE','share')=='share':validators.append(('share',lambda:validate_share(p)))
    if os.getenv('GS_EXPERIMENT_FORMAT'):
     from gs_experiment_contract import validate as validate_experiment
-    validate_experiment(p,os.environ['GS_EXPERIMENT_FORMAT'])
+    validators.append(('experiment',lambda:validate_experiment(p,os.environ['GS_EXPERIMENT_FORMAT'])))
+   all_errors=[]
+   for name,validator in validators:
+    try:validator()
+    except (ValueError,TypeError,KeyError) as exc:all_errors.append(name+': '+str(exc))
+   if all_errors:raise ValueError('; '.join(all_errors))
    if len(str(p.get('recall','')).split())>16:raise ValueError('Recall must be one simple Hindi line of at most 16 words')
    if not re.fullmatch(r'[a-z0-9_]{3,70}',str(p.get('topic_key',''))):raise ValueError('Stable topic_key required')
    if not source_text and not topic_text:raise ValueError('Missing topic')

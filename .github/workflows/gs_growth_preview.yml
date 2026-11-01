@@ -62,3 +62,4 @@ jobs:
 
 # Supply sampled existing geographic data instead of asking the planner to invent a river route.
 # Lock narration to grounded question-bank facts, align cardinal arrows, and preflight audio timing.
+# Preflight reports all validator categories together and applies only the selected primary objective.

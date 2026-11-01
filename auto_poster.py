@@ -3056,10 +3056,8 @@ def series_line():
 
 
 def _with_series(caption):
-    share = "📤 ये reel उस दोस्त को भेजो जो Group D / NTPC / SSC / Police की तैयारी कर रहा है!"
-    if caption.startswith("📅"):
-        return caption
-    return f"{series_line()}\n{share}\n\n{caption}"
+    # Each format owns its primary objective; do not prepend generic follow/share promises.
+    return caption.strip()
 
 
 # ============================== INSTAGRAM ==============================

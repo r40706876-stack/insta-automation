@@ -65,7 +65,7 @@ def caption_addendum(script, report):
         parts.append('💬 '+challenge)
     if recall and objective=='save':
         parts.append('📌 रिवीजन: '+recall)
-    if script.get('primary_objective','share')=='share' and report['share_value']:
+    if script.get('primary_objective','share')=='share' and report['share_value'] and not challenge:
         parts.append('📤 अपने स्टडी पार्टनर से यही सवाल पूछो।')
     next_topic = str(script.get('series_next_topic') or '').strip()
     if next_topic and objective=='follow':
