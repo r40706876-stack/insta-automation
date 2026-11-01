@@ -1,0 +1,52 @@
+name: Publish reviewed Narmada preview once
+on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/publish_reviewed_narmada.yml]
+permissions:
+  contents: write
+  actions: read
+concurrency:
+  group: publish-reviewed-narmada-41277782081
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/download-artifact@v4
+        with:
+          name: GS-growth-complete-preview
+          run-id: 41277782081
+          github-token: ${{ github.token }}
+          path: /tmp/reviewed-narmada
+      - name: Restore exact reviewed output
+        run: |
+          mkdir -p experiments/reviewed_narmada_41277782081
+          cp -n /tmp/reviewed-narmada/experiments/growth_preview/* experiments/reviewed_narmada_41277782081/
+          echo '9a624940161115b0d17e81149b7a7d70b865f0a4877acfd4569cd9ba24ed493e  experiments/reviewed_narmada_41277782081/reel.mp4' | sha256sum -c
+          pip install --timeout 30 --retries 1 -r requirements.txt imageio-ffmpeg
+          python -c "import imageio_ffmpeg,os; p='/usr/local/bin/ffmpeg'; os.path.exists(p) or os.symlink(imageio_ffmpeg.get_ffmpeg_exe(),p)"
+      - name: Publish reviewed video to verified account
+        env:
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          GS_VISUAL_OUTPUT: experiments/reviewed_narmada_41277782081
+          PYTHONUNBUFFERED: '1'
+        run: python daily_visual_gs.py --publish
+      - name: Preserve reviewed video and publication journals
+        if: always()
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git add experiments/reviewed_narmada_41277782081
+          git diff --cached --quiet && exit 0
+          git commit -m 'Save reviewed Narmada publication evidence [skip ci]'
+          git pull --rebase
+          git push
