@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-01T19:08:18.223328+00:00",
+  "generated_at": "2026-11-01T21:23:25.285904+00:00",
   "windows": {
     "24h": [
       {
@@ -139,7 +139,7 @@
       {
         "subject": null,
         "format": "legacy_unclassified",
-        "reels": 7,
+        "reels": 9,
         "metrics": {
           "shares_per_1000": {
             "mean": 1.0582010582010581,
@@ -240,7 +240,7 @@
       {
         "subject": null,
         "format": "legacy_unclassified",
-        "reels": 12,
+        "reels": 13,
         "metrics": {
           "shares_per_1000": {
             "mean": 1.3836113772681413,
