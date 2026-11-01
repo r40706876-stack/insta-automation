@@ -1,0 +1,11 @@
+[
+  {
+    "url": "user-provided",
+    "excerpt": "Verified question-bank reference; do not add claims beyond this reference: {\"subject\": \"Geography\", \"question\": \"नर्मदा पूर्व बहती है या पश्चिम?\", \"options\": {\"a\": \"पश्चिम, अरब सागर की ओर\", \"b\": \"पूर्व, बंगाल की खाड़ी की ओर\"}, \"answer\": \"a\", \"explanation\": \"नर्मदा का उद्गम अमरकंटक है। इसका मुख्य प्रवाह पश्चिम की ओर है और यह अरब सागर में गिरती है। विंध्य इसके उत्तर और सतपुड़ा दक्षिण में हैं। परीक्षा में बहने की दिशा और गिरने वाला समुद्र अलग करके याद करें। केवल इन तथ्यों का उपयोग करें; नक्शे पर पूरा नदी मार्ग दिखाने का दावा न करें।\", \"sources\": [\"https://sathee.iitk.ac.in/ncert-books/class-11/geography/india-physical-environment/chapter-03-drainage-system/\"], \"map_geometry\": {\"purpose\": \"river_flow_direction\", \"origin_label\": \"अमरकंटक\", \"destination_label\": \"अरब सागर\", \"region\": \"india\", \"route\": [[81.75, 22.67], [80.513927, 22.878119], [79.909679, 23.007636], [78.644949, 23.021267], [77.6"
+  },
+  {
+    "url": "https://www.naturalearthdata.com/downloads/110m-physical-vectors/110m-land/",
+    "publisher": "Natural Earth, public-domain physical coastline geometry",
+    "note": "Modern Gujarat outline is separately attributed in dandi_map.LICENSE; routes are schematic."
+  }
+]

@@ -1,0 +1,41 @@
+{
+  "answer_correct": true,
+  "visual_relevance": true,
+  "hindi_readable": true,
+  "pronunciation_correct": true,
+  "audio_visual_match": true,
+  "answer_reveal_timing": true,
+  "revision_card_readable": true,
+  "reasons": [],
+  "observed_answer": "पश्चिम, अरब सागर की ओर",
+  "scene_evidence": [
+    {
+      "scene": 1,
+      "observation": "Map of India displayed with neutral choice indicators for East ('पूर्व') and West ('पश्चिम') while the question is posed."
+    },
+    {
+      "scene": 2,
+      "observation": "An options overlay displays choices towards Bay of Bengal and Arabian Sea, prompting the viewer to think."
+    },
+    {
+      "scene": 3,
+      "observation": "Answer is revealed showing 'पश्चिम, अरब सागर' with map marker indicating flow direction."
+    },
+    {
+      "scene": 4,
+      "observation": "Map highlights origin at Amarkantak ('अमरकंटक') corresponding to narration about origin."
+    },
+    {
+      "scene": 5,
+      "observation": "Animation traces westward flow from Amarkantak to Arabian Sea ('अरब सागर')."
+    },
+    {
+      "scene": 6,
+      "observation": "A clear, legible revision card summarizes the key fact: West, towards Arabian Sea."
+    }
+  ],
+  "sha256": "9a624940161115b0d17e81149b7a7d70b865f0a4877acfd4569cd9ba24ed493e",
+  "reviewer": "gemini-3.6-flash / actual rendered video and audio",
+  "reviewed_at": "2026-11-01T05:46:57.574825+00:00",
+  "review_type": "automated_multimodal"
+}

@@ -1,0 +1,530 @@
+{
+  "title": "नर्मदा पूर्व बहती है या पश्चिम?",
+  "subject": "Geography",
+  "topic_key": "river_flow_62f05d5ad899",
+  "share_reason": "नदी की दिशा और मुहाने का भ्रम स्पष्ट करना",
+  "recall": "याद रखें: पश्चिम, अरब सागर की ओर।",
+  "share_card": {
+    "kind": "friend_quiz",
+    "recipient": "भूगोल की तैयारी वाला दोस्त",
+    "benefit": "नदी की दिशा और समुद्र का सही संबंध याद रखना",
+    "cta": "दोस्त से यही नदी वाला सवाल पूछिए"
+  },
+  "scenes": [
+    {
+      "role": "hook",
+      "heading": "नक्शा टेस्ट",
+      "speech": "नर्मदा पूर्व बहती है या पश्चिम?",
+      "explanation": "नर्मदा पूर्व बहती है या पश्चिम?",
+      "setting": "neutral",
+      "camera_view": "front",
+      "visual_action": "Two equally weighted east and west choices move over the sourced regional map; neither is marked correct",
+      "teaches": "Identify the two possible directions without revealing the answer",
+      "objects": [
+        {
+          "id": "geographic_map",
+          "kind": "map",
+          "action": "none",
+          "map_region": "india",
+          "label": "",
+          "pos": [
+            0,
+            0,
+            0
+          ],
+          "size": [
+            1.45,
+            1.45,
+            1.45
+          ],
+          "color": "#268f89",
+          "markers": []
+        },
+        {
+          "id": "east_choice",
+          "kind": "arrow",
+          "action": "move",
+          "label": "पूर्व",
+          "pos": [
+            -0.3,
+            -0.35,
+            0.9
+          ],
+          "to": [
+            0.9,
+            -0.35,
+            0.9
+          ],
+          "size": [
+            0.5,
+            0.5,
+            0.5
+          ],
+          "color": "#56bbdf"
+        },
+        {
+          "id": "west_choice",
+          "kind": "arrow",
+          "action": "move",
+          "label": "पश्चिम",
+          "pos": [
+            0.3,
+            -0.35,
+            0.9
+          ],
+          "to": [
+            -0.9,
+            -0.35,
+            0.9
+          ],
+          "size": [
+            0.5,
+            0.5,
+            0.5
+          ],
+          "color": "#56bbdf"
+        }
+      ]
+    },
+    {
+      "role": "challenge",
+      "heading": "अपना जवाब चुनिए",
+      "speech": "दोनों विकल्प देखिए। सही जवाब मन में तय कीजिए।",
+      "explanation": "दोनों विकल्प देखिए। सही जवाब मन",
+      "quiz_options": [
+        "पूर्व, बंगाल की खाड़ी की ओर",
+        "पश्चिम, अरब सागर की ओर"
+      ],
+      "setting": "neutral",
+      "camera_view": "front",
+      "visual_action": "Two equally weighted east and west choices move over the sourced regional map; neither is marked correct",
+      "teaches": "Identify the two possible directions without revealing the answer",
+      "objects": [
+        {
+          "id": "geographic_map",
+          "kind": "map",
+          "action": "none",
+          "map_region": "india",
+          "label": "",
+          "pos": [
+            0,
+            0,
+            0
+          ],
+          "size": [
+            1.45,
+            1.45,
+            1.45
+          ],
+          "color": "#268f89",
+          "markers": []
+        },
+        {
+          "id": "east_choice",
+          "kind": "arrow",
+          "action": "move",
+          "label": "पूर्व",
+          "pos": [
+            -0.3,
+            -0.35,
+            0.9
+          ],
+          "to": [
+            0.9,
+            -0.35,
+            0.9
+          ],
+          "size": [
+            0.5,
+            0.5,
+            0.5
+          ],
+          "color": "#56bbdf"
+        },
+        {
+          "id": "west_choice",
+          "kind": "arrow",
+          "action": "move",
+          "label": "पश्चिम",
+          "pos": [
+            0.3,
+            -0.35,
+            0.9
+          ],
+          "to": [
+            -0.9,
+            -0.35,
+            0.9
+          ],
+          "size": [
+            0.5,
+            0.5,
+            0.5
+          ],
+          "color": "#56bbdf"
+        }
+      ]
+    },
+    {
+      "role": "reveal",
+      "heading": "सही उत्तर",
+      "speech": "सही उत्तर है: पश्चिम, अरब सागर की ओर।",
+      "explanation": "सही उत्तर है: पश्चिम, अरब सागर",
+      "setting": "neutral",
+      "camera_view": "front",
+      "visual_action": "The sourced river polyline traces from its origin toward its actual destination",
+      "teaches": "Read the correct flow direction on real geographic context",
+      "objects": [
+        {
+          "id": "geographic_map",
+          "kind": "map",
+          "action": "trace",
+          "map_region": "india",
+          "label": "",
+          "pos": [
+            0,
+            0,
+            0
+          ],
+          "size": [
+            1.45,
+            1.45,
+            1.45
+          ],
+          "color": "#268f89",
+          "markers": [
+            {
+              "at": [
+                81.75,
+                22.67
+              ],
+              "label": "अमरकंटक"
+            },
+            {
+              "at": [
+                72.5,
+                21.6
+              ],
+              "label": "अरब सागर"
+            }
+          ],
+          "route": [
+            [
+              81.75,
+              22.67
+            ],
+            [
+              80.513927,
+              22.878119
+            ],
+            [
+              79.909679,
+              23.007636
+            ],
+            [
+              78.644949,
+              23.021267
+            ],
+            [
+              77.622976,
+              22.720974
+            ],
+            [
+              76.075613,
+              22.229844
+            ],
+            [
+              74.128835,
+              21.951768
+            ],
+            [
+              72.5,
+              21.6
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "role": "explain",
+      "heading": "तथ्य समझिए",
+      "speech": "नर्मदा का उद्गम अमरकंटक है।",
+      "explanation": "नर्मदा का उद्गम अमरकंटक है।",
+      "setting": "neutral",
+      "camera_view": "front",
+      "visual_action": "A labelled origin remains anchored to its geographic position while the river path begins there",
+      "teaches": "Locate the named origin on the sourced route",
+      "objects": [
+        {
+          "id": "geographic_map",
+          "kind": "map",
+          "action": "trace",
+          "map_region": "india",
+          "label": "",
+          "pos": [
+            0,
+            0,
+            0
+          ],
+          "size": [
+            1.45,
+            1.45,
+            1.45
+          ],
+          "color": "#268f89",
+          "markers": [
+            {
+              "at": [
+                81.75,
+                22.67
+              ],
+              "label": "अमरकंटक"
+            }
+          ],
+          "route": [
+            [
+              81.75,
+              22.67
+            ],
+            [
+              80.513927,
+              22.878119
+            ],
+            [
+              79.909679,
+              23.007636
+            ],
+            [
+              78.644949,
+              23.021267
+            ],
+            [
+              77.622976,
+              22.720974
+            ],
+            [
+              76.075613,
+              22.229844
+            ],
+            [
+              74.128835,
+              21.951768
+            ],
+            [
+              72.5,
+              21.6
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "role": "transfer",
+      "heading": "खुद को जाँचिए",
+      "speech": "इसका मुख्य प्रवाह पश्चिम की ओर है और यह अरब सागर में गिरती है।",
+      "explanation": "इसका मुख्य प्रवाह पश्चिम की ओर",
+      "setting": "neutral",
+      "camera_view": "front",
+      "visual_action": "The river route reaches the labelled destination on the regional map",
+      "teaches": "Link the correct flow direction with the named destination",
+      "objects": [
+        {
+          "id": "geographic_map",
+          "kind": "map",
+          "action": "trace",
+          "map_region": "india",
+          "label": "",
+          "pos": [
+            0,
+            0,
+            0
+          ],
+          "size": [
+            1.45,
+            1.45,
+            1.45
+          ],
+          "color": "#268f89",
+          "markers": [
+            {
+              "at": [
+                72.5,
+                21.6
+              ],
+              "label": "अरब सागर"
+            }
+          ],
+          "route": [
+            [
+              81.75,
+              22.67
+            ],
+            [
+              80.513927,
+              22.878119
+            ],
+            [
+              79.909679,
+              23.007636
+            ],
+            [
+              78.644949,
+              23.021267
+            ],
+            [
+              77.622976,
+              22.720974
+            ],
+            [
+              76.075613,
+              22.229844
+            ],
+            [
+              74.128835,
+              21.951768
+            ],
+            [
+              72.5,
+              21.6
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "role": "revision",
+      "heading": "रिवीजन कार्ड",
+      "speech": "याद रखें: पश्चिम, अरब सागर की ओर।",
+      "explanation": "याद रखें: पश्चिम, अरब सागर की",
+      "setting": "neutral",
+      "camera_view": "front",
+      "visual_action": "A short still revision map retains the two geographic location markers",
+      "teaches": "Recall direction and destination in one readable revision card",
+      "revision_card": true,
+      "objects": [
+        {
+          "id": "geographic_map",
+          "kind": "map",
+          "action": "none",
+          "map_region": "india",
+          "label": "",
+          "pos": [
+            0,
+            0,
+            0
+          ],
+          "size": [
+            1.45,
+            1.45,
+            1.45
+          ],
+          "color": "#268f89",
+          "markers": [
+            {
+              "at": [
+                81.75,
+                22.67
+              ],
+              "label": "अमरकंटक"
+            },
+            {
+              "at": [
+                72.5,
+                21.6
+              ],
+              "label": "अरब सागर"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "source_geometry": {
+    "purpose": "river_flow_direction",
+    "origin_label": "अमरकंटक",
+    "destination_label": "अरब सागर",
+    "region": "india",
+    "route": [
+      [
+        81.75,
+        22.67
+      ],
+      [
+        80.513927,
+        22.878119
+      ],
+      [
+        79.909679,
+        23.007636
+      ],
+      [
+        78.644949,
+        23.021267
+      ],
+      [
+        77.622976,
+        22.720974
+      ],
+      [
+        76.075613,
+        22.229844
+      ],
+      [
+        74.128835,
+        21.951768
+      ],
+      [
+        72.5,
+        21.6
+      ]
+    ],
+    "sources": [
+      "https://github.com/nvkelso/natural-earth-vector/blob/master/geojson/ne_10m_rivers_lake_centerlines.geojson",
+      "https://github.com/geohacker/india/blob/master/state/india_state.geojson"
+    ],
+    "note": "Simplified sampled geographic polyline; not every river bend. Coordinates are visual data, never narration."
+  },
+  "speech": [
+    "नर्मदा पूर्व बहती है या पश्चिम?",
+    "दोनों विकल्प देखिए। सही जवाब मन में तय कीजिए।",
+    "सही उत्तर है: पश्चिम, अरब सागर की ओर।",
+    "नर्मदा का उद्गम अमरकंटक है।",
+    "इसका मुख्य प्रवाह पश्चिम की ओर है और यह अरब सागर में गिरती है।",
+    "याद रखें: पश्चिम, अरब सागर की ओर।"
+  ],
+  "titles": [
+    [
+      "नक्शा टेस्ट",
+      "नर्मदा पूर्व बहती है या पश्चिम?"
+    ],
+    [
+      "अपना जवाब चुनिए",
+      "दोनों विकल्प देखिए। सही जवाब मन"
+    ],
+    [
+      "सही उत्तर",
+      "सही उत्तर है: पश्चिम, अरब सागर"
+    ],
+    [
+      "तथ्य समझिए",
+      "नर्मदा का उद्गम अमरकंटक है।"
+    ],
+    [
+      "खुद को जाँचिए",
+      "इसका मुख्य प्रवाह पश्चिम की ओर"
+    ],
+    [
+      "रिवीजन कार्ड",
+      "याद रखें: पश्चिम, अरब सागर की"
+    ]
+  ],
+  "requested_topic": "नर्मदा पूर्व बहती है या पश्चिम?",
+  "automatic_selection": false,
+  "planner": "source-grounded geographic scene template",
+  "auditor": "Groq / openai/gpt-oss-120b",
+  "dynamic": true,
+  "topic_policy": "easy_single_concept_v1",
+  "quality_version": "rich_3d_v1",
+  "primary_objective": "save",
+  "series_next_topic": ""
+}
