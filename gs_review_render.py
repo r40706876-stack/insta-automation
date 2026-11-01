@@ -32,7 +32,8 @@ A final revision frame must be readable. Do not infer passes from script fields 
 Provide six distinct scene observations. No promises about skip rate, follower growth or retention.
 SCRIPT AND GROUNDED REFERENCE:\n'''+json.dumps(script,ensure_ascii=False)
     errors=[]
-    for model in ('gemini-2.5-flash','gemini-2.5-flash-lite'):
+    from gs_model_config import gemini_models
+    for model in gemini_models():
         try:
             response=requests.post('https://generativelanguage.googleapis.com/v1beta/models/'+model+':generateContent',headers={'x-goog-api-key':os.environ['GEMINI_API_KEY']},json={'contents':[{'parts':[{'inlineData':{'mimeType':'video/mp4','data':base64.b64encode(raw).decode()}},{'text':prompt}]}],'generationConfig':{'temperature':0,'responseMimeType':'application/json'}},timeout=(15,180))
             if response.status_code!=200:

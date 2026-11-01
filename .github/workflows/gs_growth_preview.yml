@@ -41,6 +41,6 @@ jobs:
           name: GS-growth-complete-preview
           path: |
             experiments/growth_preview
-            studio_diagnostics
-            experiments/gs_animation_studio/new_topic
+            studio_diagnostics/${{ github.run_id }}
+            experiments/gs_animation_studio/new_topic/${{ github.run_id }}
           if-no-files-found: warn
