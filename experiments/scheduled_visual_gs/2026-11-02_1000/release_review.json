@@ -1,0 +1,45 @@
+{
+  "answer_correct": false,
+  "visual_relevance": true,
+  "hindi_readable": false,
+  "pronunciation_correct": false,
+  "audio_visual_match": true,
+  "answer_reveal_timing": true,
+  "revision_card_readable": false,
+  "observed_answer": "6 × 1024 kg (intended as 6 × 10²⁴ kg)",
+  "reasons": [
+    "Scientific notation error: 10²⁴ is written as 1024 (missing superscript) on screen and spoken as '1024' ('एक हज़ार चौबीस') in Hindi narration.",
+    "Subtitle text at the bottom is clipped/truncated as '1024 kgl'.",
+    "Revision card displays mathematically incorrect text ('6 × 1024 kg' instead of '6 × 10²⁴ kg')."
+  ],
+  "scene_evidence": [
+    {
+      "scene": 1,
+      "observation": "A 3D character walking on a platform under the heading 'परीक्षा का जाल'."
+    },
+    {
+      "scene": 2,
+      "observation": "Two 3D blocks appear labeled 'विकल्प 1' and 'विकल्प 2' displaying options '6 × 1024 kg' and '6 × 1022 kg'."
+    },
+    {
+      "scene": 3,
+      "observation": "A 3D book opens to reveal the correct answer written as '6 × 1024 kg'."
+    },
+    {
+      "scene": 4,
+      "observation": "A balance scale visualization with 'सिक्का' and 'स्केल' explaining mass vs weight."
+    },
+    {
+      "scene": 5,
+      "observation": "A 3D model of Earth rotating in space with text explaining Earth's mass."
+    },
+    {
+      "scene": 6,
+      "observation": "A revision block with text 'याद रखें: 6 × 1024 kg'."
+    }
+  ],
+  "sha256": "e7bec1ef56d4436b035a5dad23447dda415e363f0b564a0456517014e13b877d",
+  "reviewer": "gemini-3.6-flash / actual rendered video and audio",
+  "reviewed_at": "2026-11-02T03:40:51.450506+00:00",
+  "review_type": "automated_multimodal"
+}

@@ -1,0 +1,37 @@
+{
+  "ok": false,
+  "reasons": [
+    "Incorrect answer options: uses 6 × 1024 kg instead of 6 × 10^24 kg",
+    "Correct answer stated as 6 × 1024 kg, contradicting evidence",
+    "Options omit 6 × 10^22, 10^25, 10^23 kg",
+    "Scene 2 and 3 contain misinformation",
+    "Scene 6 lacks causal teaching movement"
+  ],
+  "novel_topic": true,
+  "scene_checks": [
+    {
+      "scene": 1,
+      "mechanism_matches": true
+    },
+    {
+      "scene": 2,
+      "mechanism_matches": true
+    },
+    {
+      "scene": 3,
+      "mechanism_matches": true
+    },
+    {
+      "scene": 4,
+      "mechanism_matches": true
+    },
+    {
+      "scene": 5,
+      "mechanism_matches": true
+    },
+    {
+      "scene": 6,
+      "mechanism_matches": false
+    }
+  ]
+}

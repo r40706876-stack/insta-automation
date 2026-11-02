@@ -1,0 +1,37 @@
+{
+  "ok": true,
+  "reasons": [
+    "Factual claims match evidence",
+    "All six scenes present appropriate causal visual mechanisms",
+    "No unsupported or invented facts",
+    "Scene mechanisms align with teaching objectives",
+    "Topic is standard, not novel"
+  ],
+  "novel_topic": false,
+  "scene_checks": [
+    {
+      "scene": 1,
+      "mechanism_matches": true
+    },
+    {
+      "scene": 2,
+      "mechanism_matches": true
+    },
+    {
+      "scene": 3,
+      "mechanism_matches": true
+    },
+    {
+      "scene": 4,
+      "mechanism_matches": true
+    },
+    {
+      "scene": 5,
+      "mechanism_matches": true
+    },
+    {
+      "scene": 6,
+      "mechanism_matches": true
+    }
+  ]
+}

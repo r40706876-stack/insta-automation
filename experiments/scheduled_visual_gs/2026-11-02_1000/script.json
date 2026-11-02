@@ -1,0 +1,131 @@
+{
+  "ok": true,
+  "title": "पृथ्वी का द्रव्यमान",
+  "subject": "Geography",
+  "renderer_version": "rich_3d_v1",
+  "question_hash": "f736da232962f44cea3a75caa5d58e1e733f41e8e2c817c7e3b8ad85b3bcf26e",
+  "reference": {
+    "subject": "Geography",
+    "subject_hi": "भूगोल",
+    "chapter": "सौरमण्डल (Solar system)",
+    "sub": "",
+    "question": "पृथ्वी का द्रव्यमान लगभग है–",
+    "options": {
+      "a": "6 × 1022 kg",
+      "b": "6 × 1024 kg",
+      "c": "6 × 1025 kg",
+      "d": "6 × 1023 kg"
+    },
+    "answer": "b",
+    "exams": [
+      "RRB Group-D 17-09-2018 (Shift-I)",
+      "RRB Group-D 20-09-2018 (Shift-III)",
+      "RRB Group-D 28-09-2018 (Shift-II)",
+      "RRB Group-D 30-10-2018 (Shift-III)"
+    ],
+    "explanation": "किसी वस्तु का भार उस पर पड़ने वाले गुरुत्वीय बल से निर्धारित होता है और अलग–अलग स्थानों पर एक ही वस्तु का अलग–अलग भार होता है। अतः पृथ्वी का भार नहीं होता बल्कि द्रव्यमान होता है। पृथ्वी का द्रव्यमान वैज्ञानिक सिद्धान्त के आधार पर लगभग 6 × 1024 kg होता है।",
+    "times_asked": 4,
+    "years": [
+      "2018"
+    ],
+    "id": "654ddf6d79",
+    "seq": 6
+  },
+  "experiment_format": "exam_trap",
+  "primary_objective": "share",
+  "series_next_topic": "निम्नलिखित में से कौन सी नदी का उद्गम भारत में नहीं है?",
+  "series_next_hash": "a8c610b63332e6c669d40af0dd75834a7888d66ce3286c9b12bfe3dbd722b8f5",
+  "topic_policy": "evidence_cohort_v2",
+  "topic_priority": 1.0,
+  "recall": "याद रखें: 6 × 1024 kg।",
+  "share_card": {
+    "kind": "exam_confusion",
+    "recipient": "परीक्षा की तैयारी करने वाले मित्र",
+    "benefit": "पृथ्वी के द्रव्यमान का सही मान याद रहेगा",
+    "cta": "आइए साथ में याद रखें!"
+  },
+  "share_reason": "सही विकल्प याद रखने में मदद",
+  "scenes": [
+    {
+      "label": "परीक्षा का जाल",
+      "quiz_options": null,
+      "speech": "गलत विकल्प में मत फँसिए। पृथ्वी का द्रव्यमान लगभग है–",
+      "role": "hook",
+      "revision_card": false,
+      "teaches": "सवाल पहचानना",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "व्यक्ति प्रश्न की ओर चलता है"
+      }
+    },
+    {
+      "label": "अपना जवाब चुनिए",
+      "quiz_options": [
+        "6 × 1024 kg",
+        "6 × 1022 kg"
+      ],
+      "speech": "दोनों विकल्प देखिए। सही जवाब मन में तय कीजिए।",
+      "role": "challenge",
+      "revision_card": false,
+      "teaches": "विकल्प तुलना",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "दो बॉक्स बाएँ‑दाएँ सरकते हैं"
+      }
+    },
+    {
+      "label": "सही उत्तर",
+      "quiz_options": null,
+      "speech": "सही उत्तर है: 6 × 1024 kg।",
+      "role": "reveal",
+      "revision_card": false,
+      "teaches": "सही उत्तर दिखाना",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "पुस्तक ऊपर उठकर उत्तर दिखाता है"
+      }
+    },
+    {
+      "label": "तथ्य समझिए",
+      "quiz_options": null,
+      "speech": "अतः पृथ्वी का भार नहीं होता बल्कि द्रव्यमान होता है।",
+      "role": "explain",
+      "revision_card": false,
+      "teaches": "द्रव्यमान अवधारणा",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "laboratory",
+        "visible_action": "सिक्का गिरकर स्केल पर भार दिखाता है"
+      }
+    },
+    {
+      "label": "खुद को जाँचिए",
+      "quiz_options": null,
+      "speech": "पृथ्वी का द्रव्यमान वैज्ञानिक सिद्धान्त के आधार पर लगभग 6 × 1024 kg होता है।",
+      "role": "transfer",
+      "revision_card": false,
+      "teaches": "विचार लागू करना",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "space",
+        "visible_action": "पृथ्वी ग्रह घूमते हुए द्रव्यमान दर्शाता है"
+      }
+    },
+    {
+      "label": "रिवीजन कार्ड",
+      "quiz_options": null,
+      "speech": "याद रखें: 6 × 1024 kg।",
+      "role": "revision",
+      "revision_card": true,
+      "teaches": "स्मरण शक्ति",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "स्थिर कार्ड स्क्रीन पर दिखता है"
+      }
+    }
+  ]
+}

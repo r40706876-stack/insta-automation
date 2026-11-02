@@ -1,0 +1,11 @@
+{
+  "safe_to_publish": false,
+  "blocking_reasons": [
+    "unverified answer_correct",
+    "unverified hindi_readable",
+    "unverified pronunciation_correct",
+    "unverified revision_card_readable"
+  ],
+  "sha256": "e7bec1ef56d4436b035a5dad23447dda415e363f0b564a0456517014e13b877d",
+  "version": "rendered_release_v1"
+}

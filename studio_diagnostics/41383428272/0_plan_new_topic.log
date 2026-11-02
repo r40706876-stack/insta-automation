@@ -1,0 +1,2 @@
+Plan repair 1 Audit: ['Incorrect answer options: uses 6 × 1024 kg instead of 6 × 10^24 kg', 'Correct answer stated as 6 × 1024 kg, contradicting evidence', 'Options omit 6 × 10^22, 10^25, 10^23 kg', 'Scene 2 and 3 contain misinformation', 'Scene 6 lacks causal teaching movement']
+Plan repair 2 script: Invalid title; visual: 'scenes'; facts: 'scenes'; share: Concrete share_card required; experiment: Use hook/challenge/reveal/explain/transfer/revision scene roles
