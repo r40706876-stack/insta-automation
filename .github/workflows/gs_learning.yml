@@ -1,7 +1,7 @@
 name: GS age-matched learning and regression checks
 on:
   push:
-    paths: ['gs_*.py', 'tests/test_gs_learning.py', 'experiments/learning/import.json', '.github/workflows/gs_learning.yml']
+    paths: ['gs_*.py', 'tests/test_gs_*.py', 'experiments/learning/import.json', '.github/workflows/gs_learning.yml']
   schedule:
     - cron: '45 * * * *'
   workflow_dispatch:
@@ -19,7 +19,7 @@ jobs:
         with:
           python-version: '3.11'
       - run: pip install requests
-      - run: python -m unittest discover -s tests -p 'test_gs_learning.py' -v
+      - run: python -m unittest discover -s tests -p 'test_gs_*.py' -v
       - name: Collect live account observations
         env:
           IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
