@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-02T07:02:47.694903+00:00",
+  "generated_at": "2026-11-02T08:22:19.326613+00:00",
   "windows": {
     "24h": [
       {
@@ -38,7 +38,7 @@
       {
         "subject": null,
         "format": "legacy_unclassified",
-        "reels": 5,
+        "reels": 6,
         "metrics": {
           "shares_per_1000": {
             "mean": 1.923076923076923,
@@ -512,7 +512,7 @@
   },
   "weekly": {
     "current": {
-      "reels": 9,
+      "reels": 10,
       "best": "18174696019395674",
       "weakest": "18136094323708858",
       "basis": "24h share/save rate; hypotheses only",
