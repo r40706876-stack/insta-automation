@@ -1,0 +1,66 @@
+{
+  "id": "tapi_20261102",
+  "approved_for_publication": true,
+  "requested_at": "2026-11-02T12:50:00Z",
+  "experiment_format": "map_pyq_challenge",
+  "reference": {
+    "subject": "Geography",
+    "question": "ताप्ती नदी पूर्व की ओर बहती है या पश्चिम की ओर?",
+    "options": {
+      "a": "पश्चिम, अरब सागर की ओर",
+      "b": "पूर्व, बंगाल की खाड़ी की ओर"
+    },
+    "answer": "a",
+    "explanation": "ताप्ती नदी का उद्गम मध्य प्रदेश के मुलताई के पास है। यह पश्चिम की ओर बहती है और खंभात की खाड़ी से अरब सागर में मिलती है।",
+    "sources": [
+      "https://anantamias.com/tapi-river/",
+      "https://en.wikipedia.org/wiki/Tapti_River"
+    ],
+    "map_geometry": {
+      "purpose": "river_flow_direction",
+      "region": "india",
+      "origin_label": "मुलताई",
+      "destination_label": "खंभात की खाड़ी",
+      "route": [
+        [
+          78.2537,
+          21.7827
+        ],
+        [
+          77.9,
+          21.56
+        ],
+        [
+          77.3,
+          21.39
+        ],
+        [
+          76.25,
+          21.31
+        ],
+        [
+          75.78,
+          21.06
+        ],
+        [
+          74.5,
+          21.4
+        ],
+        [
+          73.65,
+          21.25
+        ],
+        [
+          72.6842,
+          21.0845
+        ]
+      ],
+      "sources": [
+        "https://geo.wikisort.org/river/de/Fluss/Tapti",
+        "https://dahiti.dgfi.tum.de/en/10465/",
+        "https://mapcarta.com/14855566"
+      ],
+      "note": "Schematic geographic waypoints anchored to published source and mouth coordinates; not a surveyed river polyline, and no claim of exact bends."
+    }
+  }
+}
