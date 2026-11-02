@@ -87,6 +87,22 @@ def report(rows):
         score=lambda r:r['shares_per_1000']/3+r['saves_per_1000']/8
         comparable=len(usable)>=3 and max(map(score,usable))>min(map(score,usable))
         weekly[label]={'reels':len(recent),'best':max(usable,key=score)['media_id'] if comparable else None,'weakest':min(usable,key=score)['media_id'] if comparable else None,'basis':'24h share/save rate; hypotheses only','mean_shares_per_1000':sum(r['shares_per_1000'] for r in usable)/len(usable) if usable else None,'mean_saves_per_1000':sum(r['saves_per_1000'] for r in usable)/len(usable) if usable else None}
+    # Require actual age-matched results before declaring a winner.
+    candidates=[]
+    for entry in output['windows']['72h']:
+        m=entry['metrics']
+        if entry['decision']!='review_matched_cohort':
+            continue
+        shares=m['shares_per_1000']['mean']
+        saves=m['saves_per_1000']['mean']
+        watch=m['average_watch_time']['mean']
+        if shares is None or saves is None or watch is None:
+            continue
+        candidates.append({'subject':entry['subject'],'format':entry['format'],'reels':entry['reels'],
+                           'shares_per_1000':shares,'saves_per_1000':saves,'average_watch_time':watch})
+    output['format_evidence']={'eligible':candidates,'winner':None,
+        'decision':'manual_review_required',
+        'reason':'No automatic winner from sparse or unmatched cohorts; compare subject and age before rollout'}
     output['experimental_targets']={'three_second_rate_percent':60,'shares_per_1000':3,'saves_per_1000':8,'note':'Experimental goals; not benchmarks or guarantees'}
     output['weekly']=weekly
     output['weekly_change']={key:weekly['current'][key]-weekly['previous'][key] if weekly['current'][key] is not None and weekly['previous'][key] is not None else None for key in ('mean_shares_per_1000','mean_saves_per_1000')}
