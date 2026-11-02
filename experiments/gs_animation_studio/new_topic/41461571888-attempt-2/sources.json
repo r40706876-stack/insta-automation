@@ -1,0 +1,6 @@
+[
+  {
+    "url": "user-provided",
+    "excerpt": "Verified question-bank reference; do not add claims beyond this reference: {\"subject\": \"Science\", \"question\": \"आकाश नीला क्यों दिखाई देता है?\", \"options\": {\"a\": \"वायुमंडल में नीले प्रकाश का अधिक प्रकीर्णन\", \"b\": \"समुद्र के नीले रंग का परावर्तन\"}, \"answer\": \"a\", \"explanation\": \"सूर्य का सफेद प्रकाश कई रंगों से बना है। वायुमंडल के गैस अणु कम तरंगदैर्ध्य वाले नीले प्रकाश को लाल प्रकाश की तुलना में अधिक बिखेरते हैं। इस प्रक्रिया को रेले प्रकीर्णन कहते हैं।\", \"sources\": [\"https://www.weather.gov/fgz/SkyBlue\", \"https://scijinks.gov/about/k-12-education/atmosphere/why-the-sky-blue\", \"https://www.noaa.gov/jetstream/clouds/color-of-clouds\"], \"visual_notes\": \"First show sunlight entering Earth's atmosphere with neutral blue/red choice; do not reveal answer before two-second pause. After reveal, animate blue light scattering sideways off air molecules while red light continues forward; explain Rayl"
+  }
+]

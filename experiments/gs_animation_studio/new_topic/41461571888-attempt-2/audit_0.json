@@ -1,0 +1,10 @@
+{
+  "ok": false,
+  "reasons": [
+    "Scene 2 lacks causal teaching movement and does not demonstrate Rayleigh scattering.",
+    "Scene 3 shows blue light spinning but does not illustrate scattering by air molecules.",
+    "Scene 5 uses water scattering as analogy, which is not Rayleigh scattering and does not match the mechanism.",
+    "Scene 6 is a static card and does not show any mechanism.",
+    "The first five scenes do not all contain causal teaching movement as required."
+  ]
+}

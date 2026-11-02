@@ -1,0 +1,37 @@
+{
+  "ok": true,
+  "reasons": [
+    "All six scenes follow the evidence and avoid unsupported claims",
+    "First five scenes provide causal teaching movement",
+    "No premature answer reveal",
+    "No sea‑reflection claim",
+    "Novel topic confirmed"
+  ],
+  "novel_topic": true,
+  "scene_checks": [
+    {
+      "scene": 0,
+      "mechanism_matches": true
+    },
+    {
+      "scene": 1,
+      "mechanism_matches": true
+    },
+    {
+      "scene": 2,
+      "mechanism_matches": true
+    },
+    {
+      "scene": 3,
+      "mechanism_matches": true
+    },
+    {
+      "scene": 4,
+      "mechanism_matches": true
+    },
+    {
+      "scene": 5,
+      "mechanism_matches": true
+    }
+  ]
+}

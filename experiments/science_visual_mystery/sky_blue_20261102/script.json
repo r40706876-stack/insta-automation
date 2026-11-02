@@ -1,0 +1,120 @@
+{
+  "ok": true,
+  "title": "आकाश नीला क्यों दिखाई देता है?",
+  "subject": "Science",
+  "renderer_version": "rich_3d_v1",
+  "question_hash": "3962a8a9b2b413c9d226ecc4c4c63dc5dde75100572961c8a8761b727a2ca107",
+  "reference": {
+    "subject": "Science",
+    "question": "आकाश नीला क्यों दिखाई देता है?",
+    "options": {
+      "a": "वायुमंडल में नीले प्रकाश का अधिक प्रकीर्णन",
+      "b": "समुद्र के नीले रंग का परावर्तन"
+    },
+    "answer": "a",
+    "explanation": "सूर्य का सफेद प्रकाश कई रंगों से बना है। वायुमंडल के गैस अणु कम तरंगदैर्ध्य वाले नीले प्रकाश को लाल प्रकाश की तुलना में अधिक बिखेरते हैं। इस प्रक्रिया को रेले प्रकीर्णन कहते हैं।",
+    "sources": [
+      "https://www.weather.gov/fgz/SkyBlue",
+      "https://scijinks.gov/about/k-12-education/atmosphere/why-the-sky-blue",
+      "https://www.noaa.gov/jetstream/clouds/color-of-clouds"
+    ],
+    "visual_notes": "First show sunlight entering Earth's atmosphere with neutral blue/red choice; do not reveal answer before two-second pause. After reveal, animate blue light scattering sideways off air molecules while red light continues forward; explain Rayleigh scattering. Avoid claiming sea reflection. All diagrams schematic."
+  },
+  "experiment_format": "visual_mystery",
+  "primary_objective": "save",
+  "series_next_topic": null,
+  "series_next_hash": null,
+  "topic_policy": "evidence_cohort_v2",
+  "topic_priority": 1.0,
+  "recall": "याद रखें: वायुमंडल में नीले प्रकाश का अधिक प्रकीर्णन।",
+  "share_card": {
+    "kind": "common_misconception",
+    "recipient": "परीक्षा की तैयारी करने वाले मित्र",
+    "benefit": "आकाश का नीला रंग समुद्र के प्रतिबिंब से नहीं, बल्कि रेले प्रकीर्णन से है",
+    "cta": "दोस्त को यह तथ्य बताओ"
+  },
+  "share_reason": "बहुत से छात्र सोचते हैं कि आकाश का नीला रंग समुद्र के प्रतिबिंब से आता है, यह रेले प्रकीर्णन कारण है।",
+  "scenes": [
+    {
+      "label": "दृश्य से जवाब",
+      "quiz_options": null,
+      "speech": "आकाश नीला क्यों दिखाई देता है? दृश्य देखकर जवाब खोजिए।",
+      "role": "hook",
+      "revision_card": false,
+      "teaches": "प्रश्न को पहचानना: आकाश नीला क्यों दिखता है",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "सूर्य का प्रकाश वायुमंडल में प्रवेश करता है और नीला प्रकाश बिखरता है"
+      }
+    },
+    {
+      "label": "अपना जवाब चुनिए",
+      "quiz_options": [
+        "वायुमंडल में नीले प्रकाश का अधिक प्रकीर्णन",
+        "समुद्र के नीले रंग का परावर्तन"
+      ],
+      "speech": "दोनों विकल्पों में सही कौन-सा है? दो सेकंड सोचिए।",
+      "role": "challenge",
+      "revision_card": false,
+      "teaches": "विकल्पों की तुलना, सोचने को प्रेरित करना",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "दो तीर विकल्प A और B की ओर चलते हैं"
+      }
+    },
+    {
+      "label": "सही उत्तर",
+      "quiz_options": null,
+      "speech": "सही उत्तर है: वायुमंडल में नीले प्रकाश का अधिक प्रकीर्णन।",
+      "role": "reveal",
+      "revision_card": false,
+      "teaches": "सही उत्तर बताना: रेले प्रकीर्णन",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "नीला प्रकाश का कण घूमता है, सही उत्तर दिखाता है"
+      }
+    },
+    {
+      "label": "तथ्य समझिए",
+      "quiz_options": null,
+      "speech": "सूर्य का सफेद प्रकाश कई रंगों से बना है।",
+      "role": "explain",
+      "revision_card": false,
+      "teaches": "रेले प्रकीर्णन प्रक्रिया समझाना",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "laboratory",
+        "visible_action": "वायुमंडलीय अणु घूमते हैं, नीला प्रकाश बिखरता है"
+      }
+    },
+    {
+      "label": "खुद को जाँचिए",
+      "quiz_options": null,
+      "speech": "वायुमंडल के गैस अणु कम तरंगदैर्ध्य वाले नीले प्रकाश को लाल प्रकाश की तुलना में अधिक बिखेरते हैं।",
+      "role": "transfer",
+      "revision_card": false,
+      "teaches": "दैनिक जीवन में समान प्रकीर्णन दिखाना",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "village",
+        "visible_action": "पानी में प्रकाश बिखरता है, जैसे आकाश में"
+      }
+    },
+    {
+      "label": "रिवीजन कार्ड",
+      "quiz_options": null,
+      "speech": "याद रखें: वायुमंडल में नीले प्रकाश का अधिक प्रकीर्णन।",
+      "role": "revision",
+      "revision_card": true,
+      "teaches": "स्मरण शक्ति बढ़ाना",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "स्थिर स्मृति कार्ड दिखाया जाता है"
+      }
+    }
+  ]
+}
