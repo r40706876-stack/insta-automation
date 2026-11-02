@@ -14,7 +14,7 @@ subject=os.environ.get('GS_SUBJECT','')
 key=dt.strftime('%Y-%m-%d_%H%M')
 os.environ['GS_TARGET_DATE']=dt.date().isoformat()
 os.environ['GS_VISUAL_OUTPUT']='experiments/scheduled_visual_gs/'+key
-os.environ['GS_FORCE_BUILD']='1'
+os.environ.setdefault('GS_FORCE_BUILD','0')
 if os.environ.get('REEL_FORMAT')=='current':
  subject='Current Affairs'
  items=e.pick_current(e.load_progress())
