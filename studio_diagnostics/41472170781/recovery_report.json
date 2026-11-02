@@ -1,0 +1,26 @@
+{
+  "topic": "new_topic",
+  "run_id": "41472170781",
+  "attempt": "1",
+  "status": "failed",
+  "events": [
+    {
+      "stage": "plan_new_topic",
+      "status": "started",
+      "log": "0_plan_new_topic.log"
+    },
+    {
+      "stage": "plan_new_topic",
+      "status": "failed",
+      "code": "process_failed",
+      "detail": "Plan repair 1 Audit: ['All six scenes have visual actions that match their narrative descriptions.', \"The answer 'जवाहर लाल नेहरू' matches the evidence provided.\", 'The topic has not appeared in the list of previous topics.']\nPlan repair 2 visual: Map trace needs 2-8 sourced geographical points\nPlan repair 3 Audit: ['Factual claims match evidence', 'Scene 3 visual action does not directly illustrate explanation']\nTraceback (most recent call last):\n  File \"/home/runner/work/insta-automation/insta-automation/gs_animation_studio/planner.py\", line 378, in <module>\n    generate(sys.argv[1],sys.argv[2],os.getenv('STUDIO_TOPIC_TEXT','').strip(),os.getenv('STUDIO_SUBJECT','auto'),os.getenv('STUDIO_REFERENCE_TEXT',''))\n  File \"/home/runner/work/insta-automation/insta-automation/gs_animation_studio/planner.py\", line 374, in generate\n    raise RuntimeError('New-topic plan failed validation after three attempts: '+str(errors))\nRuntimeError: New-topic plan failed validation after three attempts: ['Audit: [\\'All six scenes have visual actions that match their narrative descriptions.\\', \"The answer \\'जवाहर लाल नेहरू\\' matches the evidence provided.\", \\'The topic has not appeared in the list of previous topics.\\']', 'visual: Map trace needs 2-8 sourced geographical points', \"Audit: ['Factual claims match evidence', 'Scene 3 visual action does not directly illustrate explanation']\"]\n"
+    }
+  ],
+  "repairs": [],
+  "injected_failures": [],
+  "instagram_publish": false,
+  "failure": {
+    "type": "StageError",
+    "message": "plan_new_topic: process_failed"
+  }
+}

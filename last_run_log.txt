@@ -8,7 +8,18 @@ Traceback (most recent call last):
   File "daily_visual_gs.py", line 48, in <module>
     if not (ROOT/'release_review.json').exists() or os.getenv('GS_FORCE_BUILD')=='1' or not (ROOT/'validated.json').exists() or json.loads((ROOT/'validated.json').read_text()).get('renderer_version')!=bridge.VERSION:build()
                                                                                                                                                                                                                         ^^^^^^^
-  File "daily_visual_gs.py", line 18, in build
-    if not release['safe_to_publish']:raise RuntimeError('Rendered AV review blocked: '+', '.join(release['blocking_reasons']))
-                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-RuntimeError: Rendered AV review blocked: unverified visual_relevance
+  File "daily_visual_gs.py", line 13, in build
+    script=bridge.build(ROOT,DAY)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/insta-automation/insta-automation/gs_animation_bridge.py", line 96, in build
+    raise RuntimeError('3D build failed: '+detail[-2500:]+'; diagnostics: '+str(runner.diag))
+RuntimeError: 3D build failed: Plan repair 1 Audit: ['All six scenes have visual actions that match their narrative descriptions.', "The answer 'जवाहर लाल नेहरू' matches the evidence provided.", 'The topic has not appeared in the list of previous topics.']
+Plan repair 2 visual: Map trace needs 2-8 sourced geographical points
+Plan repair 3 Audit: ['Factual claims match evidence', 'Scene 3 visual action does not directly illustrate explanation']
+Traceback (most recent call last):
+  File "/home/runner/work/insta-automation/insta-automation/gs_animation_studio/planner.py", line 378, in <module>
+    generate(sys.argv[1],sys.argv[2],os.getenv('STUDIO_TOPIC_TEXT','').strip(),os.getenv('STUDIO_SUBJECT','auto'),os.getenv('STUDIO_REFERENCE_TEXT',''))
+  File "/home/runner/work/insta-automation/insta-automation/gs_animation_studio/planner.py", line 374, in generate
+    raise RuntimeError('New-topic plan failed validation after three attempts: '+str(errors))
+RuntimeError: New-topic plan failed validation after three attempts: ['Audit: [\'All six scenes have visual actions that match their narrative descriptions.\', "The answer \'जवाहर लाल नेहरू\' matches the evidence provided.", \'The topic has not appeared in the list of previous topics.\']', 'visual: Map trace needs 2-8 sourced geographical points', "Audit: ['Factual claims match evidence', 'Scene 3 visual action does not directly illustrate explanation']"]
+; diagnostics: /home/runner/work/insta-automation/insta-automation/studio_diagnostics/41472170781
