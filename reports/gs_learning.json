@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-02T01:03:52.960541+00:00",
+  "generated_at": "2026-11-02T04:04:06.563315+00:00",
   "windows": {
     "24h": [
       {
@@ -38,23 +38,23 @@
       {
         "subject": null,
         "format": "legacy_unclassified",
-        "reels": 3,
+        "reels": 4,
         "metrics": {
           "shares_per_1000": {
-            "mean": 3.205128205128205,
-            "n": 3
+            "mean": 2.4038461538461537,
+            "n": 4
           },
           "saves_per_1000": {
-            "mean": 5.016722408026756,
-            "n": 3
+            "mean": 3.762541806020067,
+            "n": 4
           },
           "average_watch_time": {
-            "mean": 4.345,
-            "n": 3
+            "mean": 4.537,
+            "n": 4
           },
           "three_second_rate": {
-            "mean": 30.26666566666667,
-            "n": 3
+            "mean": 31.025,
+            "n": 4
           },
           "retention": {
             "mean": null,
@@ -139,23 +139,23 @@
       {
         "subject": null,
         "format": "legacy_unclassified",
-        "reels": 10,
+        "reels": 11,
         "metrics": {
           "shares_per_1000": {
-            "mean": 0.7407407407407407,
-            "n": 10
+            "mean": 0.6734006734006734,
+            "n": 11
           },
           "saves_per_1000": {
-            "mean": 2.7191714851624775,
-            "n": 10
+            "mean": 2.471974077420434,
+            "n": 11
           },
           "average_watch_time": {
-            "mean": 5.217099999999999,
-            "n": 10
+            "mean": 5.1785454545454535,
+            "n": 11
           },
           "three_second_rate": {
-            "mean": 25.0,
-            "n": 10
+            "mean": 26.072727272727274,
+            "n": 11
           },
           "retention": {
             "mean": null,
@@ -401,6 +401,39 @@
         },
         "decision": "collect_more",
         "automatic_scale": false
+      },
+      {
+        "subject": "राजव्यवस्था",
+        "format": "legacy_unclassified",
+        "reels": 1,
+        "metrics": {
+          "shares_per_1000": {
+            "mean": 0.0,
+            "n": 1
+          },
+          "saves_per_1000": {
+            "mean": 5.2631578947368425,
+            "n": 1
+          },
+          "average_watch_time": {
+            "mean": 5.024,
+            "n": 1
+          },
+          "three_second_rate": {
+            "mean": 22.199997,
+            "n": 1
+          },
+          "retention": {
+            "mean": null,
+            "n": 0
+          },
+          "net_followers": {
+            "mean": null,
+            "n": 0
+          }
+        },
+        "decision": "collect_more",
+        "automatic_scale": false
       }
     ]
   },
@@ -413,7 +446,7 @@
   },
   "weekly": {
     "current": {
-      "reels": 7,
+      "reels": 8,
       "best": "18174696019395674",
       "weakest": "18136094323708858",
       "basis": "24h share/save rate; hypotheses only",
