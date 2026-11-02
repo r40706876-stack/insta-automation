@@ -1,0 +1,83 @@
+name: One-shot verified Tapi Map Challenge
+on:
+  push:
+    branches: [main]
+    paths: [experiments/map_challenge_publish_request.json]
+permissions:
+  contents: write
+concurrency:
+  group: map-challenge-tapi-20261102
+  cancel-in-progress: false
+jobs:
+  render-review-publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 80
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: ./.github/actions/gs-3d-dependencies
+      - name: Install Python dependencies
+        run: pip install --timeout 30 --retries 1 -r requirements.txt imageio-ffmpeg
+      - name: Render sourced map challenge and review actual AV
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          BLENDER_BIN: /tmp/blender/blender
+          GS_EXPERIMENT_FORMAT: map_pyq_challenge
+          GS_VISUAL_SUBJECT: Geography
+          GS_VISUAL_OUTPUT: experiments/map_challenge_publish/tapi_20261102
+          GS_TARGET_DATE: '2026-11-02'
+          PYTHONUNBUFFERED: '1'
+        run: |
+          python - <<'PY'
+          import json,os,runpy
+          from pathlib import Path
+          request=json.loads(Path('experiments/map_challenge_publish_request.json').read_text())
+          if request.get('id')!='tapi_20261102' or request.get('approved_for_publication') is not True:
+              raise SystemExit('Unapproved or unexpected request')
+          root=Path(os.environ['GS_VISUAL_OUTPUT'])
+          receipt=root/'published.json'
+          if receipt.exists() and json.loads(receipt.read_text()).get('media_id'):
+              print('Already published; no duplicate render')
+          else:
+              if (root/'publish_started.json').exists():
+                  raise SystemExit('Prior uncertain publication; stop and reconcile receipt')
+              os.environ['GS_REFERENCE_JSON']=json.dumps([request['reference']],ensure_ascii=False)
+              runpy.run_path('daily_visual_gs.py',run_name='__main__')
+          PY
+      - name: Publish only fully QA-approved video to verified Instagram account
+        env:
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          GS_VISUAL_OUTPUT: experiments/map_challenge_publish/tapi_20261102
+          GS_TARGET_DATE: '2026-11-02'
+          PYTHONUNBUFFERED: '1'
+        run: python daily_visual_gs.py --publish
+      - name: Preserve QA evidence and publication receipt
+        if: always()
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git add experiments/map_challenge_publish experiments/gs_animation_studio studio_diagnostics || true
+          git diff --cached --quiet && exit 0
+          git commit -m 'Save sourced Tapi map challenge render and publication evidence [skip ci]'
+          for attempt in 1 2 3; do
+            git pull --rebase && git push && exit 0
+            sleep 3
+          done
+          exit 1
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: verified-tapi-map-challenge
+          path: |
+            experiments/map_challenge_publish
+            studio_diagnostics
+          if-no-files-found: warn
+          retention-days: 30
