@@ -1,0 +1,43 @@
+{
+  "answer_correct": true,
+  "visual_relevance": true,
+  "hindi_readable": true,
+  "pronunciation_correct": true,
+  "audio_visual_match": true,
+  "answer_reveal_timing": true,
+  "revision_card_readable": true,
+  "reasons": [
+    "All video elements align accurately with the grounded reference and policy requirements."
+  ],
+  "observed_answer": "11",
+  "scene_evidence": [
+    {
+      "scene": 1,
+      "observation": "Student walks towards a map displaying 'संवैधानिक भाग IV A' while the question is posed."
+    },
+    {
+      "scene": 2,
+      "observation": "Two options (11 and 12) are shown with arrows rotating, giving two seconds to think."
+    },
+    {
+      "scene": 3,
+      "observation": "The correct option '11' is highlighted and elevated as the correct answer."
+    },
+    {
+      "scene": 4,
+      "observation": "Student walks toward a book explaining the total number of fundamental duties is 11."
+    },
+    {
+      "scene": 5,
+      "observation": "A rotating gear animation visually represents the 42nd constitutional amendment under Sardar Swaran Singh Committee."
+    },
+    {
+      "scene": 6,
+      "observation": "A clear revision card displays 'याद रखें: 11' for memory retention."
+    }
+  ],
+  "sha256": "da5e1e2bb507ab1390a0eec4c3a5c8131acca9ab7218b293918c26a5fd17b919",
+  "reviewer": "gemini-3.5-flash-lite / actual rendered video and audio",
+  "reviewed_at": "2026-11-02T21:04:05.350060+00:00",
+  "review_type": "automated_multimodal"
+}

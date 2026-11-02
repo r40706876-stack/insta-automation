@@ -1,0 +1,11 @@
+[
+  {
+    "url": "user-provided",
+    "excerpt": "Verified question-bank reference; do not add claims beyond this reference: {\"subject\": \"Polity\", \"subject_hi\": \"राजव्यवस्था\", \"chapter\": \"मौलिक कर्त्तव्य (Fundamental Duties)\", \"sub\": \"\", \"question\": \"भारतीय संविधान के भाग IV A में शामिल मौलिक कर्तव्यों की कुल संख्या कितनी है?\", \"options\": {\"a\": \"12\", \"b\": \"13\", \"c\": \"11\", \"d\": \"14\"}, \"answer\": \"c\", \"exams\": [\"RRB Group D 29/09/2022 (Shift-I)\", \"RRB Group D 30/08/2022 (Shift-III)\"], \"explanation\": \"भारतीय संविधान के भाग IV A में शामिल मौलिक कर्तव्यों की कुल संख्या 11 है। सरदार स्वर्ण सिंह समिति की अनुसंशा पर 42वें संविधान संशोधन 1976 द्वारा 10 मौलिक कर्तव्यों को शामिल किया गया था। 86 वें संविधान संशोधन-2002 द्वारा 11वें मौलिक कर्तव्य को शामिल किया गया।\", \"times_asked\": 2, \"years\": [\"2022\"], \"id\": \"72aa55f77e\", \"seq\": 125}"
+  },
+  {
+    "url": "https://www.naturalearthdata.com/downloads/110m-physical-vectors/110m-land/",
+    "publisher": "Natural Earth, public-domain physical coastline geometry",
+    "note": "Modern Gujarat outline is separately attributed in dandi_map.LICENSE; routes are schematic."
+  }
+]
