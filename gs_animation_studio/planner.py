@@ -140,6 +140,31 @@ def check_quantities(p,evidence):
  for hi,en in [('लाख','lakh'),('करोड़','crore'),('हजार','thousand'),('हज़ार','thousand')]:
   if hi in speech and hi not in source and en not in source:raise ValueError('Unsupported quantity word: '+hi)
 
+def validate_sky_scattering(p, topic_text):
+ # The multimodal review of run 41461571888 found water props and a village
+ # masquerading as air molecules. Reject this known failure before costly rendering.
+ if not ('आकाश' in topic_text and 'नील' in topic_text):return
+ scenes=p.get('scenes',[])
+ if len(scenes)!=6:return
+ for index in (3,4):
+  sc=scenes[index]
+  if sc.get('setting') in ('village','coast'):raise ValueError('Sky-scattering demonstration cannot use village/coast scenery')
+  if any(o.get('kind') in ('water','ocean','bottle','tree','building','fort') or 'पानी' in str(o.get('label','')) for o in sc.get('objects',[])):
+   raise ValueError('Sky-scattering lesson uses air and light, never water or unrelated scenery')
+  if not any(o.get('kind')=='arrow' and o.get('action') in ('move','flow','trace') for o in sc.get('objects',[])):
+   raise ValueError('Sky-scattering explanation requires visible moving light rays')
+ transfer=scenes[4]
+ labels=' '.join(str(o.get('label','')) for o in transfer.get('objects',[]))
+ if 'नील' not in labels or 'लाल' not in labels:
+  raise ValueError('Sky-scattering comparison must show separately labelled blue and red light')
+ for o in transfer.get('objects',[]):
+  label=str(o.get('label',''))
+  if 'नील' in label and o.get('color','').lower() not in ('#1689ff','#247bff','#2563eb','#2196f3','#0000ff'):
+   raise ValueError('Blue-light ray must be visibly blue')
+  if 'लाल' in label and o.get('color','').lower() not in ('#ef4444','#ff3333','#ff0000','#dc2626','#e53935'):
+   raise ValueError('Red-light ray must be visibly red')
+
+
 def validate(p):
  if not isinstance(p,dict):raise ValueError('Plan must be object')
  if not isinstance(p.get('title'),str) or not 3<=len(p['title'])<=80:raise ValueError('Invalid title')
@@ -270,7 +295,7 @@ def generate(root,repo,topic_text='',subject='auto',source_text=''):
      for sc,txt in zip(p['scenes'],short['texts']):sc['heading']=txt['heading'];sc['explanation']=txt['explanation']
    diag=Path(os.getenv('STUDIO_DIAGNOSTICS',str(root)));diag.mkdir(parents=True,exist_ok=True)
    (diag/f'plan_attempt_{attempt}.json').write_text(json.dumps(p,ensure_ascii=False,indent=2))
-   validators=[('script',lambda:validate(p)),('visual',lambda:validate_visual(p)),('facts',lambda:check_quantities(p,evidence))]
+   validators=[('script',lambda:validate(p)),('visual',lambda:validate_visual(p)),('facts',lambda:check_quantities(p,evidence)),('sky_scattering',lambda:validate_sky_scattering(p,topic_text))]
    # A save/follow experiment must not be blocked by a share CTA it does not use.
    if not os.getenv('GS_EXPERIMENT_FORMAT') or os.getenv('GS_PRIMARY_OBJECTIVE','share')=='share':validators.append(('share',lambda:validate_share(p)))
    if os.getenv('GS_EXPERIMENT_FORMAT'):
