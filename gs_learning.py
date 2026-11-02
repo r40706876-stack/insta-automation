@@ -35,8 +35,17 @@ def normalize(row):
     result['missing']=[k for k in METRICS if result[k] is None]
     return result
 
+def read_snapshots(path):
+    path=Path(path)
+    if not path.exists() or not path.read_text().strip():
+        return []
+    rows=json.loads(path.read_text())
+    if not isinstance(rows,list):
+        raise ValueError('Analytics snapshots must be a JSON array')
+    return rows
+
 def ingest(rows,path='experiments/learning/snapshots.json'):
-    path=Path(path); old=json.loads(path.read_text()) if path.exists() else []
+    path=Path(path); old=read_snapshots(path)
     indexed={(r['media_id'],r['observed_at'],r['source']):r for r in old}
     for row in rows:
         row=normalize(row); indexed[row['media_id'],row['observed_at'],row['source']]=row
@@ -54,7 +63,7 @@ def cohort(rows,window='72h'):
     return list(selected.values())
 
 def evidence_score(question,path='experiments/learning/snapshots.json'):
-    rows=json.loads(Path(path).read_text()) if Path(path).exists() else []
+    rows=read_snapshots(path)
     samples=[r for r in cohort(rows) if r.get('subject')==question.get('subject') and r.get('topic')==question.get('topic_key',question.get('question'))]
     if len(samples)<3:
         samples=[r for r in cohort(rows) if r.get('subject')==question.get('subject')]
@@ -112,5 +121,5 @@ if __name__=='__main__':
     import argparse
     p=argparse.ArgumentParser();p.add_argument('--import-json');p.add_argument('--store',default='experiments/learning/snapshots.json');p.add_argument('--report',default='reports/gs_learning.json');a=p.parse_args()
     if a.import_json: ingest(json.loads(Path(a.import_json).read_text()),a.store)
-    rows=json.loads(Path(a.store).read_text()) if Path(a.store).exists() else []
+    rows=read_snapshots(a.store)
     dest=Path(a.report);dest.parent.mkdir(parents=True,exist_ok=True);dest.write_text(json.dumps(report(rows),ensure_ascii=False,indent=2))
