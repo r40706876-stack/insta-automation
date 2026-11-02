@@ -10,7 +10,7 @@ def grounded_storyboard(reference,format_name=None):
     facts=[s.strip()+'।' for s in re.split(r'[।!?]|(?<!\d)\.(?!\d)',str(reference.get('explanation',''))) if 3<=len(s.split())<=25]
     if not facts:raise ValueError('A complete concise source explanation is required')
     other=next((str(v).strip().rstrip('।.') for k,v in options.items() if k!=key),None)
-    choices='दोनों विकल्प देखिए। सही जवाब मन में तय कीजिए।' if other else 'अपना जवाब सोचिए। अगले दृश्य में सही उत्तर से मिलाइए।'
+    choices='दोनों विकल्पों में सही कौन-सा है? दो सेकंड सोचिए।' if other else 'दो सेकंड सोचिए, फिर जवाब मिलाइए।'
     displayed=[answer,other] if other else [answer]
     if other and sum(question.encode())%2:displayed.reverse()
     opening=question  # Start with the actual question; remove generic preambles.
