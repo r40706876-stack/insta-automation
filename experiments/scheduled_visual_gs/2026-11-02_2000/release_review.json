@@ -1,0 +1,43 @@
+{
+  "answer_correct": true,
+  "visual_relevance": false,
+  "hindi_readable": true,
+  "pronunciation_correct": true,
+  "audio_visual_match": true,
+  "answer_reveal_timing": true,
+  "revision_card_readable": true,
+  "reasons": [
+    "Visual relevance is false because a generic 3D mannequin walking on a plank with text tags fails to visually explain the Sarhul festival, Sarna religion, or tribal traditions."
+  ],
+  "observed_answer": "झारखंड",
+  "scene_evidence": [
+    {
+      "scene": 1,
+      "observation": "A 3D character tagged 'व्यक्ति' walks on a plain bar while the narrator asks which state's tribal population celebrates the Sarhul festival."
+    },
+    {
+      "scene": 2,
+      "observation": "Two directional arrows labeled 'झारखंड' and 'मेघालय' appear on screen as options to choose from."
+    },
+    {
+      "scene": 3,
+      "observation": "An outline map of India highlights Jharkhand to reveal it as the correct answer."
+    },
+    {
+      "scene": 4,
+      "observation": "The mannequin character walks again with a tag 'आदिवासी' while explaining Sarhul as a Sarna religion tribal festival in Jharkhand."
+    },
+    {
+      "scene": 5,
+      "observation": "The 3D character stands tagged with 'नव वर्ष' while the narration mentions that this festival marks the tribal new year."
+    },
+    {
+      "scene": 6,
+      "observation": "A revision card shows the map outline of Jharkhand with text 'याद रखें: झारखंड।'."
+    }
+  ],
+  "sha256": "10235547c6de305d90c2a07b9f45ee36560f6cde0b9f649bfa9988e62e705356",
+  "reviewer": "gemini-3.6-flash / actual rendered video and audio",
+  "reviewed_at": "2026-11-02T13:39:27.421694+00:00",
+  "review_type": "automated_multimodal"
+}

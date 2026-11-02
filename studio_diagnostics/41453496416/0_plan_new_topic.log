@@ -1,0 +1,2 @@
+Plan repair 1 Audit: ['Scene 2 visual action (spinning arrows) does not represent the quiz options; other scenes match their narration.']
+Plan repair 2 script: Invalid title; visual: 'scenes'; facts: 'scenes'; experiment: Use hook/challenge/reveal/explain/transfer/revision scene roles

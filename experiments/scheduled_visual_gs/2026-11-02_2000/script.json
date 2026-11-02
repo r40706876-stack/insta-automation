@@ -1,0 +1,129 @@
+{
+  "ok": true,
+  "title": "सरहुल का राज्य पहचानें",
+  "subject": "Traditional GK",
+  "renderer_version": "rich_3d_v1",
+  "question_hash": "163868e6834591b134f18ff8795c1ffe42df4966e3836ed9953a93523cf34323",
+  "reference": {
+    "subject": "Traditional GK",
+    "subject_hi": "सामान्य ज्ञान",
+    "chapter": "कला एवं संस्कृति (Art and Culture)",
+    "sub": "",
+    "question": "सरहुल निम्न में से किस राज्य की जनजातीय आबादी का मुख्य पर्व है?",
+    "options": {
+      "a": "मेघालय",
+      "b": "नागालैंड",
+      "c": "झारखंड",
+      "d": "असम"
+    },
+    "answer": "c",
+    "exams": [
+      "RRB Group-D – 18/09/2022 (Shift–II)",
+      "RRB Group-D – 29/09/2022 (Shift–II)"
+    ],
+    "explanation": "सरहुल झारखंड राज्य में स्थानीय सरना धर्म के रूप में आदिवासी समुदायों द्वारा मनाया जाने वाला मुख्य पर्व है। यह पर्व आदिवासी नव वर्ष है।",
+    "times_asked": 2,
+    "years": [
+      "2022"
+    ],
+    "id": "f2df40b1c3",
+    "seq": 19
+  },
+  "experiment_format": "visual_mystery",
+  "primary_objective": "save",
+  "series_next_topic": "‘‘मोहिनीअट्टम’’ नृत्य शैली निम्नलिखित में से किस राज्य में लोकप्रिय है?",
+  "series_next_hash": "8bd6dce4385b02704f2d92990964e12c7b6f519ca0845b9b6ccf361b8cd13056",
+  "topic_policy": "evidence_cohort_v2",
+  "topic_priority": 1.0,
+  "recall": "याद रखें: झारखंड।",
+  "share_card": {
+    "kind": "exam_confusion",
+    "recipient": "GS परीक्षा की तैयारी करने वाले मित्र",
+    "benefit": "झारखंड का सरहुल मुख्य जनजातीय पर्व है",
+    "cta": "दोस्त को यह तथ्य बताओ"
+  },
+  "share_reason": "झारखंड का सरहुल मुख्य जनजातीय पर्व है",
+  "scenes": [
+    {
+      "label": "दृश्य से जवाब",
+      "quiz_options": null,
+      "speech": "सरहुल निम्न में से किस राज्य की जनजातीय आबादी का मुख्य पर्व है? दृश्य देखकर जवाब खोजिए।",
+      "role": "hook",
+      "revision_card": false,
+      "teaches": "प्रश्न पहचानें",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "व्यक्ति मानचित्र की ओर चलता है"
+      }
+    },
+    {
+      "label": "अपना जवाब चुनिए",
+      "quiz_options": [
+        "झारखंड",
+        "मेघालय"
+      ],
+      "speech": "दोनों विकल्पों में सही कौन-सा है? दो सेकंड सोचिए।",
+      "role": "challenge",
+      "revision_card": false,
+      "teaches": "विकल्प विचारें",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "दो विकल्प तीरों के रूप में दिखाए जाते हैं"
+      }
+    },
+    {
+      "label": "सही उत्तर",
+      "quiz_options": null,
+      "speech": "सही उत्तर है: झारखंड।",
+      "role": "reveal",
+      "revision_card": false,
+      "teaches": "सही उत्तर दिखाएँ",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "मानचित्र पर झारखंड को ट्रेस किया गया"
+      }
+    },
+    {
+      "label": "तथ्य समझिए",
+      "quiz_options": null,
+      "speech": "सरहुल झारखंड राज्य में स्थानीय सरना धर्म के रूप में आदिवासी समुदायों द्वारा मनाया जाने वाला मुख्य पर्व है।",
+      "role": "explain",
+      "revision_card": false,
+      "teaches": "पर्व का विवरण दें",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "आदिवासी व्यक्ति मानचित्र के पास चलता है"
+      }
+    },
+    {
+      "label": "खुद को जाँचिए",
+      "quiz_options": null,
+      "speech": "यह पर्व आदिवासी नव वर्ष है।",
+      "role": "transfer",
+      "revision_card": false,
+      "teaches": "मुख्य अवधारणा याद रखें",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "व्यक्ति ऊपर उठता है"
+      }
+    },
+    {
+      "label": "रिवीजन कार्ड",
+      "quiz_options": null,
+      "speech": "याद रखें: झारखंड।",
+      "role": "revision",
+      "revision_card": true,
+      "teaches": "स्मरण कार्ड",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "स्थिर स्मरण कार्ड दिखाया गया"
+      }
+    }
+  ]
+}

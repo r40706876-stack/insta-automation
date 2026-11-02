@@ -1,0 +1,36 @@
+{
+  "ok": true,
+  "reasons": [
+    "All six scenes contain causal teaching movement in the first five scenes.",
+    "The answer 'झारखंड' matches the evidence provided.",
+    "Visual actions in each scene demonstrate the intended teaching mechanism.",
+    "No unsupported claims or invented facts are present."
+  ],
+  "novel_topic": true,
+  "scene_checks": [
+    {
+      "scene": 1,
+      "mechanism_matches": true
+    },
+    {
+      "scene": 2,
+      "mechanism_matches": true
+    },
+    {
+      "scene": 3,
+      "mechanism_matches": true
+    },
+    {
+      "scene": 4,
+      "mechanism_matches": true
+    },
+    {
+      "scene": 5,
+      "mechanism_matches": true
+    },
+    {
+      "scene": 6,
+      "mechanism_matches": true
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+[
+  {
+    "url": "user-provided",
+    "excerpt": "Verified question-bank reference; do not add claims beyond this reference: {\"subject\": \"Traditional GK\", \"subject_hi\": \"सामान्य ज्ञान\", \"chapter\": \"कला एवं संस्कृति (Art and Culture)\", \"sub\": \"\", \"question\": \"सरहुल निम्न में से किस राज्य की जनजातीय आबादी का मुख्य पर्व है?\", \"options\": {\"a\": \"मेघालय\", \"b\": \"नागालैंड\", \"c\": \"झारखंड\", \"d\": \"असम\"}, \"answer\": \"c\", \"exams\": [\"RRB Group-D – 18/09/2022 (Shift–II)\", \"RRB Group-D – 29/09/2022 (Shift–II)\"], \"explanation\": \"सरहुल झारखंड राज्य में स्थानीय सरना धर्म के रूप में आदिवासी समुदायों द्वारा मनाया जाने वाला मुख्य पर्व है। यह पर्व आदिवासी नव वर्ष है।\", \"times_asked\": 2, \"years\": [\"2022\"], \"id\": \"f2df40b1c3\", \"seq\": 19}"
+  },
+  {
+    "url": "https://www.naturalearthdata.com/downloads/110m-physical-vectors/110m-land/",
+    "publisher": "Natural Earth, public-domain physical coastline geometry",
+    "note": "Modern Gujarat outline is separately attributed in dandi_map.LICENSE; routes are schematic."
+  }
+]
