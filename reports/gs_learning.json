@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-02T10:02:56.345795+00:00",
+  "generated_at": "2026-11-02T12:42:19.225287+00:00",
   "windows": {
     "24h": [
       {
@@ -166,6 +166,39 @@
         },
         "decision": "collect_more",
         "automatic_scale": false
+      },
+      {
+        "subject": "Traditional GK",
+        "format": "exam_trap",
+        "reels": 1,
+        "metrics": {
+          "shares_per_1000": {
+            "mean": null,
+            "n": 0
+          },
+          "saves_per_1000": {
+            "mean": null,
+            "n": 0
+          },
+          "average_watch_time": {
+            "mean": null,
+            "n": 0
+          },
+          "three_second_rate": {
+            "mean": null,
+            "n": 0
+          },
+          "retention": {
+            "mean": null,
+            "n": 0
+          },
+          "net_followers": {
+            "mean": null,
+            "n": 0
+          }
+        },
+        "decision": "collect_more",
+        "automatic_scale": false
       }
     ],
     "72h": [
@@ -288,6 +321,39 @@
           "three_second_rate": {
             "mean": 39.5,
             "n": 1
+          },
+          "retention": {
+            "mean": null,
+            "n": 0
+          },
+          "net_followers": {
+            "mean": null,
+            "n": 0
+          }
+        },
+        "decision": "collect_more",
+        "automatic_scale": false
+      },
+      {
+        "subject": "Polity",
+        "format": "legacy_unclassified",
+        "reels": 1,
+        "metrics": {
+          "shares_per_1000": {
+            "mean": null,
+            "n": 0
+          },
+          "saves_per_1000": {
+            "mean": null,
+            "n": 0
+          },
+          "average_watch_time": {
+            "mean": null,
+            "n": 0
+          },
+          "three_second_rate": {
+            "mean": null,
+            "n": 0
           },
           "retention": {
             "mean": null,
@@ -570,6 +636,21 @@
     ]
   },
   "note": "3-sec rate is not retention. Targets are experiments, not guarantees.",
+  "format_evidence": {
+    "eligible": [
+      {
+        "subject": null,
+        "format": "legacy_unclassified",
+        "reels": 12,
+        "shares_per_1000": 1.335674755214985,
+        "saves_per_1000": 3.7027578468308007,
+        "average_watch_time": 5.0346666666666655
+      }
+    ],
+    "winner": null,
+    "decision": "manual_review_required",
+    "reason": "No automatic winner from sparse or unmatched cohorts; compare subject and age before rollout"
+  },
   "experimental_targets": {
     "three_second_rate_percent": 60,
     "shares_per_1000": 3,
@@ -578,7 +659,7 @@
   },
   "weekly": {
     "current": {
-      "reels": 11,
+      "reels": 12,
       "best": "18174696019395674",
       "weakest": "18136094323708858",
       "basis": "24h share/save rate; hypotheses only",
