@@ -13,7 +13,12 @@ def grounded_storyboard(reference,format_name=None):
     choices='दोनों विकल्पों में सही कौन-सा है? दो सेकंड सोचिए।' if other else 'दो सेकंड सोचिए, फिर जवाब मिलाइए।'
     displayed=[answer,other] if other else [answer]
     if other and sum(question.encode())%2:displayed.reverse()
-    opening=question  # Start with the actual question; remove generic preambles.
+    # Lead with the question itself, then vary the short challenge by experiment.
+    # Format diversity matters for controlled A/B testing without generic preambles.
+    prompt_tail={'exam_trap':' गलत विकल्प पहचानिए।',
+                 'visual_mystery':' दृश्य देखकर जवाब खोजिए।',
+                 'map_pyq_challenge':' नक्शे पर दिशा पहचानिए।'}.get(format_name,'')
+    opening=question+prompt_tail if len((question+prompt_tail).split())<=25 else question
     speech=[opening,choices,'सही उत्तर है: '+answer+'।',facts[0],facts[1] if len(facts)>1 else 'अब बिना देखे जवाब दीजिए: '+question,'याद रखें: '+answer+'।']
     if any(len(line.split())>25 for line in speech):raise ValueError('Question/options exceed readable scene limits')
     result=[{'role':role,'heading':heading,'speech':line,'explanation':(' '.join(line.split()[:6]))} for role,heading,line in zip(ROLES,HEADINGS,speech)]
