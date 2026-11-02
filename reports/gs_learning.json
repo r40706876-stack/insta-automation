@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-02T08:22:19.326613+00:00",
+  "generated_at": "2026-11-02T10:02:56.345795+00:00",
   "windows": {
     "24h": [
       {
@@ -41,20 +41,20 @@
         "reels": 6,
         "metrics": {
           "shares_per_1000": {
-            "mean": 1.923076923076923,
-            "n": 5
+            "mean": 1.6025641025641024,
+            "n": 6
           },
           "saves_per_1000": {
-            "mean": 3.0100334448160533,
-            "n": 5
+            "mean": 2.508361204013378,
+            "n": 6
           },
           "average_watch_time": {
-            "mean": 4.5286,
-            "n": 5
+            "mean": 4.494833333333333,
+            "n": 6
           },
           "three_second_rate": {
-            "mean": 32.779999999999994,
-            "n": 5
+            "mean": 30.55000033333333,
+            "n": 6
           },
           "retention": {
             "mean": null,
@@ -120,6 +120,39 @@
           },
           "three_second_rate": {
             "mean": 56.0,
+            "n": 1
+          },
+          "retention": {
+            "mean": null,
+            "n": 0
+          },
+          "net_followers": {
+            "mean": null,
+            "n": 0
+          }
+        },
+        "decision": "collect_more",
+        "automatic_scale": false
+      },
+      {
+        "subject": "Geography",
+        "format": "map_pyq_challenge",
+        "reels": 1,
+        "metrics": {
+          "shares_per_1000": {
+            "mean": 0.0,
+            "n": 1
+          },
+          "saves_per_1000": {
+            "mean": 0.0,
+            "n": 1
+          },
+          "average_watch_time": {
+            "mean": 5.843,
+            "n": 1
+          },
+          "three_second_rate": {
+            "mean": 43.3,
             "n": 1
           },
           "retention": {
@@ -221,6 +254,39 @@
           },
           "three_second_rate": {
             "mean": 28.599998,
+            "n": 1
+          },
+          "retention": {
+            "mean": null,
+            "n": 0
+          },
+          "net_followers": {
+            "mean": null,
+            "n": 0
+          }
+        },
+        "decision": "collect_more",
+        "automatic_scale": false
+      },
+      {
+        "subject": "Traditional GK",
+        "format": "legacy_unclassified",
+        "reels": 1,
+        "metrics": {
+          "shares_per_1000": {
+            "mean": 0.0,
+            "n": 1
+          },
+          "saves_per_1000": {
+            "mean": 0.0,
+            "n": 1
+          },
+          "average_watch_time": {
+            "mean": 5.057,
+            "n": 1
+          },
+          "three_second_rate": {
+            "mean": 39.5,
             "n": 1
           },
           "retention": {
@@ -512,12 +578,12 @@
   },
   "weekly": {
     "current": {
-      "reels": 10,
+      "reels": 11,
       "best": "18174696019395674",
       "weakest": "18136094323708858",
       "basis": "24h share/save rate; hypotheses only",
-      "mean_shares_per_1000": 1.6025641025641024,
-      "mean_saves_per_1000": 2.508361204013378
+      "mean_shares_per_1000": 1.3736263736263736,
+      "mean_saves_per_1000": 2.150023889154324
     },
     "previous": {
       "reels": 0,
