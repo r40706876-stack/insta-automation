@@ -80,7 +80,8 @@ def build(root,day):
  sys.path.insert(0,str(repo/'gs_animation_studio'))
  from dynamic import DynamicRecovery
  from gs_learning import experiment
- format_name=experiment(day,subject)
+ format_name=os.getenv('GS_EXPERIMENT_FORMAT') or experiment(day,subject)
+ if format_name not in ('exam_trap','visual_mystery','map_pyq_challenge'):raise ValueError('Unsupported experiment format')
  objective={'exam_trap':'share','visual_mystery':'save','map_pyq_challenge':'follow' if following else 'save'}[format_name]
  from gs_storyboard import grounded_storyboard
  locked=grounded_storyboard(q,format_name)
