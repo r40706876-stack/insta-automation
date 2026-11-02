@@ -13,7 +13,7 @@ def grounded_storyboard(reference,format_name=None):
     choices='दोनों विकल्प देखिए। सही जवाब मन में तय कीजिए।' if other else 'अपना जवाब सोचिए। अगले दृश्य में सही उत्तर से मिलाइए।'
     displayed=[answer,other] if other else [answer]
     if other and sum(question.encode())%2:displayed.reverse()
-    opening={'exam_trap':'गलत विकल्प में मत फँसिए। '+question,'visual_mystery':'दृश्य देखकर जवाब चुनिए। '+question}.get(format_name,question)
+    opening=question  # Start with the actual question; remove generic preambles.
     speech=[opening,choices,'सही उत्तर है: '+answer+'।',facts[0],facts[1] if len(facts)>1 else 'अब बिना देखे जवाब दीजिए: '+question,'याद रखें: '+answer+'।']
     if any(len(line.split())>25 for line in speech):raise ValueError('Question/options exceed readable scene limits')
     result=[{'role':role,'heading':heading,'speech':line,'explanation':(' '.join(line.split()[:6]))} for role,heading,line in zip(ROLES,HEADINGS,speech)]
