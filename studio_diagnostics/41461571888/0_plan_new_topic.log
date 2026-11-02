@@ -1,0 +1,9 @@
+Plan repair 1 visual: Scene 3: no causal movement beyond decorative pulse/zoom
+Plan repair 2 script: Object label too long; visual: Scene 3: no causal movement beyond decorative pulse/zoom
+Plan repair 3 script: Invalid title; visual: 'scenes'; facts: 'scenes'; experiment: Use hook/challenge/reveal/explain/transfer/revision scene roles
+Traceback (most recent call last):
+  File "/home/runner/work/insta-automation/insta-automation/gs_animation_studio/planner.py", line 310, in <module>
+    generate(sys.argv[1],sys.argv[2],os.getenv('STUDIO_TOPIC_TEXT','').strip(),os.getenv('STUDIO_SUBJECT','auto'),os.getenv('STUDIO_REFERENCE_TEXT',''))
+  File "/home/runner/work/insta-automation/insta-automation/gs_animation_studio/planner.py", line 306, in generate
+    raise RuntimeError('New-topic plan failed validation after three attempts: '+str(errors))
+RuntimeError: New-topic plan failed validation after three attempts: ['visual: Scene 3: no causal movement beyond decorative pulse/zoom', 'script: Object label too long; visual: Scene 3: no causal movement beyond decorative pulse/zoom', "script: Invalid title; visual: 'scenes'; facts: 'scenes'; experiment: Use hook/challenge/reveal/explain/transfer/revision scene roles"]
