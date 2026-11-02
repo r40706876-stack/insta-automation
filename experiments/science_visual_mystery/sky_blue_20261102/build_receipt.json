@@ -1,11 +1,11 @@
 {
   "topic": "new_topic",
-  "run_id": "41461571888",
-  "attempt": "2",
-  "commit": "adc5d59a6721ed78949559afbc0fd81d8942de6a",
+  "run_id": "41471180582",
+  "attempt": "1",
+  "commit": "2b96a67d0c20a9d4042ac26b5191e5be03a787ec",
   "built_on_github": true,
-  "elapsed_seconds": 494.28,
-  "sha256": "6f6ca3d9db2f9783a73c9a93630a8d56cce7b0f7d09e60b926d4af2a43aee1da",
+  "elapsed_seconds": 418.59,
+  "sha256": "b41758598f0f65af0b3bcb8565e9e82709659bf7861b84ce956c0a4ebe5653bb",
   "instagram_publish": false,
   "recovery_verified": false
 }

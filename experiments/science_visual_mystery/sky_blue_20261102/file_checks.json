@@ -19,25 +19,25 @@
   "decoded_without_errors": true,
   "black_intervals": 0,
   "audio_mean_db": -17.6,
-  "audio_peak_db": -1.3,
-  "sha256": "6f6ca3d9db2f9783a73c9a93630a8d56cce7b0f7d09e60b926d4af2a43aee1da",
+  "audio_peak_db": -1.5,
+  "sha256": "b41758598f0f65af0b3bcb8565e9e82709659bf7861b84ce956c0a4ebe5653bb",
   "voice": "Edge / Swara female fallback",
   "published": false,
   "actual_rendered_motion_checks": {
     "scene_1_teaching_motion": {
-      "changed_fraction": 0.08007
+      "changed_fraction": 0.08055
     },
     "scene_2_teaching_motion": {
-      "changed_fraction": 0.12659
+      "changed_fraction": 0.12678
     },
     "scene_3_teaching_motion": {
-      "changed_fraction": 0.02031
+      "changed_fraction": 0.08586
     },
     "scene_4_teaching_motion": {
-      "changed_fraction": 0.11362
+      "changed_fraction": 0.14688
     },
     "scene_5_teaching_motion": {
-      "changed_fraction": 0.08471
+      "changed_fraction": 0.13687
     }
   },
   "static_revision_checks": {

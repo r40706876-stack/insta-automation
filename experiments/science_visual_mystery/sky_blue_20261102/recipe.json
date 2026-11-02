@@ -2,14 +2,14 @@
   "title": "आकाश नीला क्यों दिखाई देता है?",
   "subject": "विज्ञान",
   "topic_key": "akash_nila_kyon",
-  "share_reason": "बहुत से छात्र सोचते हैं कि आकाश का नीला रंग समुद्र के प्रतिबिंब से आता है, यह रेले प्रकीर्णन कारण है।",
+  "share_reason": "परीक्षा में नीले आकाश का कारण याद रखने में मदद",
   "recall": "याद रखें: वायुमंडल में नीले प्रकाश का अधिक प्रकीर्णन।",
   "pyq_challenge": true,
   "share_card": {
-    "kind": "common_misconception",
-    "recipient": "परीक्षा की तैयारी करने वाले मित्र",
-    "benefit": "आकाश का नीला रंग समुद्र के प्रतिबिंब से नहीं, बल्कि रेले प्रकीर्णन से है",
-    "cta": "दोस्त को यह तथ्य बताओ"
+    "kind": "exam_confusion",
+    "recipient": "परीक्षा की तैयारी कर रहे मित्र",
+    "benefit": "आकाश के नीले रंग का कारण स्पष्ट",
+    "cta": "इसे अपने दोस्त को भेजें"
   },
   "scenes": [
     {
@@ -17,40 +17,40 @@
       "heading": "दृश्य से जवाब",
       "explanation": "आकाश नीला क्यों दिखाई देता है?",
       "speech": "आकाश नीला क्यों दिखाई देता है? दृश्य देखकर जवाब खोजिए।",
-      "teaches": "प्रश्न को पहचानना: आकाश नीला क्यों दिखता है",
-      "visual_action": "सूर्य का प्रकाश वायुमंडल में प्रवेश करता है और नीला प्रकाश बिखरता है",
-      "setting": "neutral",
+      "teaches": "प्रश्न पहचान",
+      "visual_action": "सूर्य से सफेद प्रकाश की किरण वायुमंडल की ओर बढ़ती है; उत्तर अभी नहीं दिखता",
+      "setting": "space",
       "objects": [
         {
+          "id": "sun",
           "kind": "sun",
           "action": "none",
           "label": "सूर्य",
-          "id": "object_0",
-          "color": "#59c7c5",
+          "color": "#ffca54",
           "pos": [
-            -0.9,
+            -1.5,
             0,
             0
           ],
           "size": [
-            0.7,
-            0.7,
-            0.7
+            0.8,
+            0.8,
+            0.8
           ]
         },
         {
+          "id": "sunlight",
           "kind": "arrow",
           "action": "move",
-          "label": "प्रकाश",
-          "id": "object_1",
-          "to": [
-            1.2,
+          "label": "सफेद प्रकाश",
+          "color": "#f2f2e8",
+          "pos": [
+            -0.5,
             0,
             0
           ],
-          "color": "#59c7c5",
-          "pos": [
-            0.45,
+          "to": [
+            1.0,
             0,
             0
           ],
@@ -67,20 +67,15 @@
       "heading": "अपना जवाब चुनिए",
       "explanation": "दोनों विकल्पों में सही कौन-सा है?",
       "speech": "दोनों विकल्पों में सही कौन-सा है? दो सेकंड सोचिए।",
-      "teaches": "विकल्पों की तुलना, सोचने को प्रेरित करना",
-      "visual_action": "दो तीर विकल्प A और B की ओर चलते हैं",
+      "teaches": "विकल्प तुलना",
+      "visual_action": "दो तीर विकल्पों की ओर बढ़ते हैं",
       "setting": "neutral",
       "objects": [
         {
           "kind": "arrow",
           "action": "move",
-          "label": "विकल्प A",
+          "label": "विकल्प1",
           "id": "object_0",
-          "to": [
-            -0.15,
-            0,
-            0
-          ],
           "color": "#59c7c5",
           "pos": [
             -1.35,
@@ -91,18 +86,18 @@
             0.7,
             0.7,
             0.7
+          ],
+          "to": [
+            -0.15,
+            0,
+            0
           ]
         },
         {
           "kind": "arrow",
           "action": "move",
-          "label": "विकल्प B",
+          "label": "विकल्प2",
           "id": "object_1",
-          "to": [
-            1.65,
-            0,
-            0
-          ],
           "color": "#59c7c5",
           "pos": [
             0.45,
@@ -113,6 +108,11 @@
             0.7,
             0.7,
             0.7
+          ],
+          "to": [
+            1.65,
+            0,
+            0
           ]
         }
       ],
@@ -126,20 +126,42 @@
       "heading": "सही उत्तर",
       "explanation": "सही उत्तर है: वायुमंडल में नीले",
       "speech": "सही उत्तर है: वायुमंडल में नीले प्रकाश का अधिक प्रकीर्णन।",
-      "teaches": "सही उत्तर बताना: रेले प्रकीर्णन",
-      "visual_action": "नीला प्रकाश का कण घूमता है, सही उत्तर दिखाता है",
-      "setting": "neutral",
+      "teaches": "उत्तर स्पष्ट",
+      "visual_action": "नीली प्रकाश किरण वायु अणु से गुजरते हुए दिशा बदलकर ऊपर बिखरती है",
+      "setting": "laboratory",
       "objects": [
         {
+          "id": "air",
           "kind": "sphere",
-          "action": "spin",
-          "label": "नीला प्रकाश",
-          "id": "object_0",
-          "color": "#59c7c5",
+          "action": "none",
+          "label": "वायु अणु",
+          "color": "#a8c6d6",
           "pos": [
-            0.0,
+            -0.7,
             0,
             0
+          ],
+          "size": [
+            0.6,
+            0.6,
+            0.6
+          ]
+        },
+        {
+          "id": "blue_reveal",
+          "kind": "arrow",
+          "action": "move",
+          "label": "नीला प्रकाश",
+          "color": "#2563eb",
+          "pos": [
+            -0.1,
+            0,
+            0.2
+          ],
+          "to": [
+            0.3,
+            0,
+            1.5
           ],
           "size": [
             0.7,
@@ -154,18 +176,18 @@
       "heading": "तथ्य समझिए",
       "explanation": "सूर्य का सफेद प्रकाश कई रंगों",
       "speech": "सूर्य का सफेद प्रकाश कई रंगों से बना है।",
-      "teaches": "रेले प्रकीर्णन प्रक्रिया समझाना",
-      "visual_action": "वायुमंडलीय अणु घूमते हैं, नीला प्रकाश बिखरता है",
+      "teaches": "रेले प्रकीर्णन समझें",
+      "visual_action": "सूर्य की सफेद किरण से नीली और लाल किरणें अलग-अलग रंग में निकलती हैं",
       "setting": "laboratory",
       "objects": [
         {
-          "kind": "atom",
-          "action": "spin",
-          "label": "वायुमंडलीय अणु",
-          "id": "object_0",
-          "color": "#59c7c5",
+          "id": "sun",
+          "kind": "sun",
+          "action": "none",
+          "label": "सूर्य",
+          "color": "#ffca54",
           "pos": [
-            -0.9,
+            -1.5,
             0,
             0
           ],
@@ -176,20 +198,42 @@
           ]
         },
         {
+          "id": "blue",
           "kind": "arrow",
           "action": "move",
           "label": "नीला प्रकाश",
-          "id": "object_1",
-          "to": [
-            1.65,
-            0,
-            0
-          ],
-          "color": "#59c7c5",
+          "color": "#2563eb",
           "pos": [
-            0.45,
+            -0.6,
             0,
-            0
+            0.2
+          ],
+          "to": [
+            0.4,
+            0,
+            1.2
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        {
+          "id": "red",
+          "kind": "arrow",
+          "action": "move",
+          "label": "लाल प्रकाश",
+          "color": "#ef4444",
+          "pos": [
+            -0.6,
+            0,
+            0.2
+          ],
+          "to": [
+            1.0,
+            0,
+            0.2
           ],
           "size": [
             0.7,
@@ -204,47 +248,64 @@
       "heading": "खुद को जाँचिए",
       "explanation": "वायुमंडल के गैस अणु कम तरंगदैर्ध्य",
       "speech": "वायुमंडल के गैस अणु कम तरंगदैर्ध्य वाले नीले प्रकाश को लाल प्रकाश की तुलना में अधिक बिखेरते हैं।",
-      "teaches": "दैनिक जीवन में समान प्रकीर्णन दिखाना",
-      "visual_action": "पानी में प्रकाश बिखरता है, जैसे आकाश में",
-      "setting": "village",
+      "teaches": "संधि समझें",
+      "visual_action": "वायु अणु के पास नीली किरण ऊपर की ओर अधिक बिखरती है और लाल किरण आगे बढ़ती है",
+      "setting": "laboratory",
       "objects": [
         {
-          "kind": "water",
-          "action": "flow",
-          "label": "पानी",
-          "id": "object_0",
-          "color": "#18a9dd",
+          "id": "gas",
+          "kind": "sphere",
+          "action": "none",
+          "label": "वायु अणु",
+          "color": "#a8c6d6",
           "pos": [
-            -0.9,
+            -0.8,
             0,
             0
+          ],
+          "size": [
+            0.6,
+            0.6,
+            0.6
+          ]
+        },
+        {
+          "id": "blue",
+          "kind": "arrow",
+          "action": "move",
+          "label": "नीला प्रकाश",
+          "color": "#2563eb",
+          "pos": [
+            -0.2,
+            0,
+            0.3
+          ],
+          "to": [
+            0.2,
+            0,
+            1.7
           ],
           "size": [
             0.7,
             0.7,
             0.7
-          ],
-          "to": [
-            0.3,
-            0,
-            0
           ]
         },
         {
+          "id": "red",
           "kind": "arrow",
           "action": "move",
-          "label": "प्रकाश",
-          "id": "object_1",
-          "to": [
-            1.2,
-            0,
-            0
-          ],
-          "color": "#59c7c5",
+          "label": "लाल प्रकाश",
+          "color": "#ef4444",
           "pos": [
-            0.45,
+            0.35,
             0,
-            0
+            0.3
+          ],
+          "to": [
+            1.8,
+            0,
+            0.3
           ],
           "size": [
             0.7,
@@ -259,15 +320,14 @@
       "heading": "रिवीजन कार्ड",
       "explanation": "याद रखें: वायुमंडल में नीले प्रकाश",
       "speech": "याद रखें: वायुमंडल में नीले प्रकाश का अधिक प्रकीर्णन।",
-      "teaches": "स्मरण शक्ति बढ़ाना",
-      "visual_action": "स्थिर स्मृति कार्ड दिखाया जाता है",
+      "teaches": "स्मरण",
+      "visual_action": "स्मरण कार्ड दिखाया जाता है",
       "setting": "neutral",
-      "revision_card": true,
       "objects": [
         {
           "kind": "book",
           "action": "none",
-          "label": "स्मृति",
+          "label": "कार्ड",
           "id": "object_0",
           "color": "#59c7c5",
           "pos": [
@@ -281,7 +341,8 @@
             0.7
           ]
         }
-      ]
+      ],
+      "revision_card": true
     }
   ],
   "speech": [
@@ -320,8 +381,8 @@
   ],
   "requested_topic": "आकाश नीला क्यों दिखाई देता है?",
   "automatic_selection": false,
-  "planner": "Cloudflare / @cf/meta/llama-3.3-70b-instruct-fp8-fast",
-  "auditor": "Groq / openai/gpt-oss-120b",
+  "planner": "Groq / openai/gpt-oss-120b",
+  "auditor": "Groq / openai/gpt-oss-20b",
   "dynamic": true,
   "topic_policy": "easy_single_concept_v1",
   "quality_version": "rich_3d_v1",

@@ -1,44 +1,41 @@
 {
   "answer_correct": true,
-  "visual_relevance": false,
+  "visual_relevance": true,
   "hindi_readable": true,
   "pronunciation_correct": true,
-  "audio_visual_match": false,
+  "audio_visual_match": true,
   "answer_reveal_timing": true,
   "revision_card_readable": true,
-  "reasons": [
-    "In scene 5, the visual displays small spheres labeled 'पानी' (water) in a village setting, which fails to visually depict atmospheric gas molecules scattering blue light versus red light as described in the narration.",
-    "The 3D visuals rely on generic, inaccurate models (such as a sphere labeled 'सूर्य' placed on a flat plane in scene 1) rather than clearly illustrating the physical scattering of light in the atmosphere."
-  ],
+  "reasons": [],
   "observed_answer": "वायुमंडल में नीले प्रकाश का अधिक प्रकीर्णन",
   "scene_evidence": [
     {
       "scene": 1,
-      "observation": "A 3D sphere labeled 'सूर्य' emits light rays with a directional arrow labeled 'प्रकाश' on a dark plane."
+      "observation": "Sun sphere emitting white light in space with hook text asking why the sky is blue."
     },
     {
       "scene": 2,
-      "observation": "Two blue arrows labeled 'विकल्प A' and 'विकल्प B' move along a flat track with question options displayed at the top."
+      "observation": "Two choices displayed: blue light scattering vs ocean reflection, followed by a thinking pause."
     },
     {
       "scene": 3,
-      "observation": "A teal sphere labeled 'नीला प्रकाश' appears as the correct answer (Option A) is revealed."
+      "observation": "Answer reveal demonstrating blue light scattering off a sphere labeled 'वायु अणु'."
     },
     {
       "scene": 4,
-      "observation": "An atomic orbital model labeled 'वायुमंडलीय अणु' is shown alongside an arrow labeled 'नीला प्रकाश'."
+      "observation": "Sun sphere split into red and blue light components to explain sunlight spectrum composition."
     },
     {
       "scene": 5,
-      "observation": "A row of small blue spheres labeled 'पानी' sits next to an arrow labeled 'प्रकाश' in front of a stylized hut and tree."
+      "observation": "Air molecule scattering shorter wavelength blue light while red light passes straight through."
     },
     {
       "scene": 6,
-      "observation": "A 3D book model labeled 'स्मृति' is displayed under the heading 'रिवीजन कार्ड' with summary text."
+      "observation": "Revision card frame displaying clear summary text: 'याद रखें: वायुमंडल में नीले प्रकाश का अधिक प्रकीर्णन।'"
     }
   ],
-  "sha256": "6f6ca3d9db2f9783a73c9a93630a8d56cce7b0f7d09e60b926d4af2a43aee1da",
+  "sha256": "b41758598f0f65af0b3bcb8565e9e82709659bf7861b84ce956c0a4ebe5653bb",
   "reviewer": "gemini-3.6-flash / actual rendered video and audio",
-  "reviewed_at": "2026-11-02T14:42:00.678366+00:00",
+  "reviewed_at": "2026-11-02T15:32:14.974161+00:00",
   "review_type": "automated_multimodal"
 }

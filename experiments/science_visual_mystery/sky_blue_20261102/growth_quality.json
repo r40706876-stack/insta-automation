@@ -1,0 +1,13 @@
+{
+  "version": "growth_qa_v1",
+  "safe_to_publish": true,
+  "blocking_reasons": [],
+  "warnings": [],
+  "first_hook": "आकाश नीला क्यों दिखाई देता है? दृश्य देखकर जवाब खोजिए।",
+  "question": "आकाश नीला क्यों दिखाई देता है?",
+  "revision_value": true,
+  "share_value": true,
+  "follow_value": false,
+  "manual_visual_review_required": false,
+  "note": "This checks script metadata, not real viewer retention or visual accuracy."
+}
