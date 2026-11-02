@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-02T19:07:38.826027+00:00",
+  "generated_at": "2026-11-02T22:06:03.310070+00:00",
   "windows": {
     "24h": [
       {
@@ -205,23 +205,23 @@
       {
         "subject": null,
         "format": "legacy_unclassified",
-        "reels": 12,
+        "reels": 13,
         "metrics": {
           "shares_per_1000": {
-            "mean": 1.335674755214985,
-            "n": 12
+            "mean": 1.2329305432753708,
+            "n": 13
           },
           "saves_per_1000": {
-            "mean": 3.7027578468308007,
-            "n": 12
+            "mean": 3.417930320151508,
+            "n": 13
           },
           "average_watch_time": {
-            "mean": 5.0346666666666655,
-            "n": 12
+            "mean": 5.146230769230769,
+            "n": 13
           },
           "three_second_rate": {
-            "mean": 25.808333500000003,
-            "n": 12
+            "mean": 26.307692692307697,
+            "n": 13
           },
           "retention": {
             "mean": null,
@@ -383,7 +383,7 @@
             "n": 15
           },
           "average_watch_time": {
-            "mean": 6.094533333333333,
+            "mean": 6.093933333333333,
             "n": 15
           },
           "three_second_rate": {
@@ -632,6 +632,39 @@
         },
         "decision": "collect_more",
         "automatic_scale": false
+      },
+      {
+        "subject": "History",
+        "format": "legacy_unclassified",
+        "reels": 1,
+        "metrics": {
+          "shares_per_1000": {
+            "mean": 0.0,
+            "n": 1
+          },
+          "saves_per_1000": {
+            "mean": 0.0,
+            "n": 1
+          },
+          "average_watch_time": {
+            "mean": 5.329,
+            "n": 1
+          },
+          "three_second_rate": {
+            "mean": 30.5,
+            "n": 1
+          },
+          "retention": {
+            "mean": null,
+            "n": 0
+          },
+          "net_followers": {
+            "mean": null,
+            "n": 0
+          }
+        },
+        "decision": "collect_more",
+        "automatic_scale": false
       }
     ]
   },
@@ -641,10 +674,10 @@
       {
         "subject": null,
         "format": "legacy_unclassified",
-        "reels": 12,
-        "shares_per_1000": 1.335674755214985,
-        "saves_per_1000": 3.7027578468308007,
-        "average_watch_time": 5.0346666666666655
+        "reels": 13,
+        "shares_per_1000": 1.2329305432753708,
+        "saves_per_1000": 3.417930320151508,
+        "average_watch_time": 5.146230769230769
       }
     ],
     "winner": null,
