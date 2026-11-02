@@ -1,0 +1,15 @@
+{
+  "version": "growth_qa_v1",
+  "safe_to_publish": true,
+  "blocking_reasons": [],
+  "warnings": [
+    "Scene 5: check if moving shapes teach the actual topic"
+  ],
+  "first_hook": "भारतीय संविधान के भाग IV A में शामिल मौलिक कर्तव्यों की कुल संख्या कितनी है? नक्शे पर दिशा पहचानिए।",
+  "question": "भारतीय संविधान के भाग IV A में शामिल मौलिक कर्तव्यों की कुल संख्या कितनी है?",
+  "revision_value": true,
+  "share_value": true,
+  "follow_value": true,
+  "manual_visual_review_required": true,
+  "note": "This checks script metadata, not real viewer retention or visual accuracy."
+}
