@@ -88,6 +88,14 @@ def normalize_layout(p):
     elif o['action']=='fall':o['pos'][2]+=1.2
     else:pos[0]+=1.2
     o['to']=pos
+  # Reveal-stage answer pointers must move toward the answer, not just pulse decoratively.
+  # Only repair an arrow explicitly labelled as the correct answer; never fabricate a mechanism.
+  if sc.get('role')=='reveal':
+   for o in objects:
+    if o.get('kind')=='arrow' and o.get('action')=='pulse' and 'सही उत्तर' in str(o.get('label','')):
+     o['action']='move'
+     pos=list(o['pos']);o['to']=[pos[0]+1.2,pos[1],pos[2]]
+     repairs.append({'scene':k+1,'repair':'animate_answer_reveal_pointer'})
   for o in objects:
    direction=str(o.get('direction') or o.get('label','')).strip().lower()
    if o.get('kind')=='arrow' and o.get('action')=='move' and direction in ('पूर्व','पश्चिम','east','west'):
