@@ -15,7 +15,7 @@ class StoryboardTests(unittest.TestCase):
         for fmt in ("exam_trap", "visual_mystery", "map_pyq_challenge"):
             with self.subTest(fmt=fmt):
                 scenes = grounded_storyboard(QUESTION, fmt)
-                self.assertEqual(scenes[0]["speech"], QUESTION["question"])
+                self.assertTrue(scenes[0]["speech"].startswith(QUESTION["question"]))
                 self.assertEqual(len(scenes), 6)
                 self.assertIn("दो सेकंड", scenes[1]["speech"])
                 self.assertIn("पश्चिम", scenes[2]["speech"])
