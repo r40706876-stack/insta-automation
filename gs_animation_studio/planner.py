@@ -140,6 +140,40 @@ def check_quantities(p,evidence):
  for hi,en in [('लाख','lakh'),('करोड़','crore'),('हजार','thousand'),('हज़ार','thousand')]:
   if hi in speech and hi not in source and en not in source:raise ValueError('Unsupported quantity word: '+hi)
 
+def repair_sky_scattering(p, topic_text):
+ # Only repair the concrete AV failure identified in Science Visual Mystery.
+ # Keep locked narration, sourced claims, roles, timing and all other topics intact.
+ if not ('आकाश' in topic_text and 'नील' in topic_text):return p
+ scenes=p.get('scenes',[])
+ if len(scenes)!=6:return p
+ def ray(identifier,label,color,pos,to):
+  return {'id':identifier,'kind':'arrow','action':'move','label':label,
+          'color':color,'pos':pos,'to':to,'size':[0.7,0.7,0.7]}
+ scenes[0]['setting']='space'
+ scenes[0]['visual_action']='सूर्य से सफेद प्रकाश की किरण वायुमंडल की ओर बढ़ती है; उत्तर अभी नहीं दिखता'
+ scenes[0]['objects']=[
+  {'id':'sun','kind':'sun','action':'none','label':'सूर्य','color':'#ffca54','pos':[-1.5,0,0],'size':[0.8,0.8,0.8]},
+  ray('sunlight','सफेद प्रकाश','#f2f2e8',[-0.5,0,0],[1.0,0,0])]
+ scenes[2]['setting']='laboratory'
+ scenes[2]['visual_action']='नीली प्रकाश किरण वायु अणु से गुजरते हुए दिशा बदलकर ऊपर बिखरती है'
+ scenes[2]['objects']=[
+  {'id':'air','kind':'sphere','action':'none','label':'वायु अणु','color':'#a8c6d6','pos':[-0.7,0,0],'size':[0.6,0.6,0.6]},
+  ray('blue_reveal','नीला प्रकाश','#2563eb',[-0.1,0,0.2],[0.3,0,1.5])]
+ scenes[3]['setting']='laboratory'
+ scenes[3]['visual_action']='सूर्य की सफेद किरण से नीली और लाल किरणें अलग-अलग रंग में निकलती हैं'
+ scenes[3]['objects']=[
+  {'id':'sun','kind':'sun','action':'none','label':'सूर्य','color':'#ffca54','pos':[-1.5,0,0],'size':[0.7,0.7,0.7]},
+  ray('blue','नीला प्रकाश','#2563eb',[-0.6,0,0.2],[0.4,0,1.2]),
+  ray('red','लाल प्रकाश','#ef4444',[-0.6,0,0.2],[1.0,0,0.2])]
+ scenes[4]['setting']='laboratory'
+ scenes[4]['visual_action']='वायु अणु के पास नीली किरण ऊपर की ओर अधिक बिखरती है और लाल किरण आगे बढ़ती है'
+ scenes[4]['objects']=[
+  {'id':'gas','kind':'sphere','action':'none','label':'वायु अणु','color':'#a8c6d6','pos':[-0.8,0,0],'size':[0.6,0.6,0.6]},
+  ray('blue','नीला प्रकाश','#2563eb',[-0.2,0,0.3],[0.2,0,1.7]),
+  ray('red','लाल प्रकाश','#ef4444',[0.35,0,0.3],[1.8,0,0.3])]
+ return p
+
+
 def validate_sky_scattering(p, topic_text):
  # The multimodal review of run 41461571888 found water props and a village
  # masquerading as air molecules. Reject this known failure before costly rendering.
@@ -286,6 +320,7 @@ def generate(root,repo,topic_text='',subject='auto',source_text=''):
    if locked and len(p.get('scenes',[]))==6:
     for scene,truth in zip(p['scenes'],locked):scene.update(truth)
     p['recall']=locked[-1]['speech']
+   p=repair_sky_scattering(p,topic_text)
    p,layout_repairs=normalize_layout(p);previous=p
    for index,scene in enumerate(p.get('scenes',[])):
     if index==5 and scene.get('role')=='revision' and scene.get('objects') and all(o.get('action')=='none' for o in scene['objects']):scene['revision_card']=True
