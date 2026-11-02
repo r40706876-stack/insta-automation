@@ -33,6 +33,7 @@ jobs:
           GS_VISUAL_SUBJECT: Science
           GS_VISUAL_OUTPUT: experiments/science_visual_mystery/sky_blue_20261102
           GS_TARGET_DATE: '2026-11-02'
+          GS_FORCE_BUILD: '1'
           PYTHONUNBUFFERED: '1'
         run: |
           python - <<'PY'
