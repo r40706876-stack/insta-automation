@@ -1,0 +1,164 @@
+{
+  "ok": true,
+  "title": "ताप्ती नदी पूर्व की ओर बहती है या पश्चिम की ओर?",
+  "subject": "Geography",
+  "renderer_version": "rich_3d_v1",
+  "question_hash": "ab64091b4d0b1e92e3567b3f3893723757dfaf5c3e9906471834d67372e1280a",
+  "reference": {
+    "subject": "Geography",
+    "question": "ताप्ती नदी पूर्व की ओर बहती है या पश्चिम की ओर?",
+    "options": {
+      "a": "पश्चिम, अरब सागर की ओर",
+      "b": "पूर्व, बंगाल की खाड़ी की ओर"
+    },
+    "answer": "a",
+    "explanation": "ताप्ती नदी का उद्गम मध्य प्रदेश के मुलताई के पास है। यह पश्चिम की ओर बहती है और खंभात की खाड़ी से अरब सागर में मिलती है।",
+    "sources": [
+      "https://anantamias.com/tapi-river/",
+      "https://en.wikipedia.org/wiki/Tapti_River"
+    ],
+    "map_geometry": {
+      "purpose": "river_flow_direction",
+      "region": "india",
+      "origin_label": "मुलताई",
+      "destination_label": "खंभात की खाड़ी",
+      "route": [
+        [
+          78.2537,
+          21.7827
+        ],
+        [
+          77.9,
+          21.56
+        ],
+        [
+          77.3,
+          21.39
+        ],
+        [
+          76.25,
+          21.31
+        ],
+        [
+          75.78,
+          21.06
+        ],
+        [
+          74.5,
+          21.4
+        ],
+        [
+          73.65,
+          21.25
+        ],
+        [
+          72.6842,
+          21.0845
+        ]
+      ],
+      "sources": [
+        "https://geo.wikisort.org/river/de/Fluss/Tapti",
+        "https://dahiti.dgfi.tum.de/en/10465/",
+        "https://mapcarta.com/14855566"
+      ],
+      "note": "Schematic geographic waypoints anchored to published source and mouth coordinates; not a surveyed river polyline, and no claim of exact bends."
+    }
+  },
+  "experiment_format": "map_pyq_challenge",
+  "primary_objective": "save",
+  "series_next_topic": null,
+  "series_next_hash": null,
+  "topic_policy": "evidence_cohort_v2",
+  "topic_priority": 1.0,
+  "recall": "याद रखें: पश्चिम, अरब सागर की ओर।",
+  "share_card": {
+    "kind": "friend_quiz",
+    "recipient": "भूगोल की तैयारी वाला दोस्त",
+    "benefit": "नदी की दिशा और समुद्र का सही संबंध याद रखना",
+    "cta": "दोस्त से यही नदी वाला सवाल पूछिए"
+  },
+  "share_reason": "नदी की दिशा और मुहाने का भ्रम स्पष्ट करना",
+  "scenes": [
+    {
+      "label": "नक्शा टेस्ट",
+      "quiz_options": null,
+      "speech": "ताप्ती नदी पूर्व की ओर बहती है या पश्चिम की ओर? नक्शे पर दिशा पहचानिए।",
+      "role": "hook",
+      "revision_card": false,
+      "teaches": "Identify the two possible directions without revealing the answer",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "Two equally weighted east and west choices move over the sourced regional map; neither is marked correct"
+      }
+    },
+    {
+      "label": "अपना जवाब चुनिए",
+      "quiz_options": [
+        "पूर्व, बंगाल की खाड़ी की ओर",
+        "पश्चिम, अरब सागर की ओर"
+      ],
+      "speech": "दोनों विकल्पों में सही कौन-सा है? दो सेकंड सोचिए।",
+      "role": "challenge",
+      "revision_card": false,
+      "teaches": "Identify the two possible directions without revealing the answer",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "Two equally weighted east and west choices move over the sourced regional map; neither is marked correct"
+      }
+    },
+    {
+      "label": "सही उत्तर",
+      "quiz_options": null,
+      "speech": "सही उत्तर है: पश्चिम, अरब सागर की ओर।",
+      "role": "reveal",
+      "revision_card": false,
+      "teaches": "Read the correct flow direction on real geographic context",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "The sourced river polyline traces from its origin toward its actual destination"
+      }
+    },
+    {
+      "label": "तथ्य समझिए",
+      "quiz_options": null,
+      "speech": "ताप्ती नदी का उद्गम मध्य प्रदेश के मुलताई के पास है।",
+      "role": "explain",
+      "revision_card": false,
+      "teaches": "Locate the named origin on the sourced route",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "A labelled origin remains anchored to its geographic position while the river path begins there"
+      }
+    },
+    {
+      "label": "खुद को जाँचिए",
+      "quiz_options": null,
+      "speech": "यह पश्चिम की ओर बहती है और खंभात की खाड़ी से अरब सागर में मिलती है।",
+      "role": "transfer",
+      "revision_card": false,
+      "teaches": "Link the correct flow direction with the named destination",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "The river route reaches the labelled destination on the regional map"
+      }
+    },
+    {
+      "label": "रिवीजन कार्ड",
+      "quiz_options": null,
+      "speech": "याद रखें: पश्चिम, अरब सागर की ओर।",
+      "role": "revision",
+      "revision_card": true,
+      "teaches": "Recall direction and destination in one readable revision card",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "A short still revision map retains the two geographic location markers"
+      }
+    }
+  ]
+}

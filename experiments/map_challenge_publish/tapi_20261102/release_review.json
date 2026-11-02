@@ -1,0 +1,41 @@
+{
+  "answer_correct": true,
+  "visual_relevance": true,
+  "hindi_readable": true,
+  "pronunciation_correct": true,
+  "audio_visual_match": true,
+  "answer_reveal_timing": true,
+  "revision_card_readable": true,
+  "reasons": [],
+  "observed_answer": "a",
+  "scene_evidence": [
+    {
+      "scene": 1,
+      "observation": "An outline map of India is shown with East and West directional arrows asking whether the Tapi river flows East or West without revealing the answer."
+    },
+    {
+      "scene": 2,
+      "observation": "Two options ('पूर्व, बंगाल की खाड़ी की ओर' and 'पश्चिम, अरब सागर की ओर') are presented with a pause to allow thinking time."
+    },
+    {
+      "scene": 3,
+      "observation": "The correct answer 'पश्चिम, अरब सागर की ओर' is revealed alongside map markers for Multai and Khambhat."
+    },
+    {
+      "scene": 4,
+      "observation": "The origin point at Multai in Madhya Pradesh is highlighted on the map as the narration explains its source."
+    },
+    {
+      "scene": 5,
+      "observation": "The river's westward path towards the Gulf of Khambhat and Arabian Sea is demonstrated on the map."
+    },
+    {
+      "scene": 6,
+      "observation": "A clear revision card displays the summary takeaway 'याद रखें: पश्चिम, अरब सागर की ओर'."
+    }
+  ],
+  "sha256": "95aabebb34d7daf4e16abc47c64967b3bd4f39b24fda08b95fcfaedcdcb395e8",
+  "reviewer": "gemini-3.6-flash / actual rendered video and audio",
+  "reviewed_at": "2026-11-02T12:53:09.983731+00:00",
+  "review_type": "automated_multimodal"
+}

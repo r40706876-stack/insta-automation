@@ -1,0 +1,42 @@
+[
+  {
+    "scene": 1,
+    "repair": "align_cardinal_arrow",
+    "direction": "\u092a\u0942\u0930\u094d\u0935"
+  },
+  {
+    "scene": 1,
+    "repair": "align_cardinal_arrow",
+    "direction": "\u092a\u0936\u094d\u091a\u093f\u092e"
+  },
+  {
+    "scene": 1,
+    "object": "east_choice",
+    "repair": "fit_to"
+  },
+  {
+    "scene": 1,
+    "object": "west_choice",
+    "repair": "fit_to"
+  },
+  {
+    "scene": 2,
+    "repair": "align_cardinal_arrow",
+    "direction": "\u092a\u0942\u0930\u094d\u0935"
+  },
+  {
+    "scene": 2,
+    "repair": "align_cardinal_arrow",
+    "direction": "\u092a\u0936\u094d\u091a\u093f\u092e"
+  },
+  {
+    "scene": 2,
+    "object": "east_choice",
+    "repair": "fit_to"
+  },
+  {
+    "scene": 2,
+    "object": "west_choice",
+    "repair": "fit_to"
+  }
+]
