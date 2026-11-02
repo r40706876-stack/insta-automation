@@ -18,5 +18,7 @@
       "https://www.noaa.gov/jetstream/clouds/color-of-clouds"
     ],
     "visual_notes": "First show sunlight entering Earth's atmosphere with neutral blue/red choice; do not reveal answer before two-second pause. After reveal, animate blue light scattering sideways off air molecules while red light continues forward; explain Rayleigh scattering. Avoid claiming sea reflection. All diagrams schematic."
-  }
+  },
+  "qa_repair_revision": "sky_scattering_av_relevance_v2",
+  "repair_reason": "Actual AV reviewer rejected village/water props; render atmospheric gas and separate blue/red light rays, preserve all QA and duplicate guards"
 }
