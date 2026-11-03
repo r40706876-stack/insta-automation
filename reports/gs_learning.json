@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-03T22:02:03.108514+00:00",
+  "generated_at": "2026-11-03T23:44:03.636536+00:00",
   "windows": {
     "24h": [
       {
@@ -38,7 +38,7 @@
       {
         "subject": null,
         "format": "legacy_unclassified",
-        "reels": 9,
+        "reels": 10,
         "metrics": {
           "shares_per_1000": {
             "mean": 2.3679212275703505,
@@ -238,7 +238,7 @@
       {
         "subject": null,
         "format": "legacy_unclassified",
-        "reels": 17,
+        "reels": 18,
         "metrics": {
           "shares_per_1000": {
             "mean": 1.3541825915051067,
@@ -438,7 +438,7 @@
       {
         "subject": null,
         "format": "legacy_unclassified",
-        "reels": 22,
+        "reels": 23,
         "metrics": {
           "shares_per_1000": {
             "mean": 2.385540452877701,
@@ -806,7 +806,7 @@
       {
         "subject": null,
         "format": "legacy_unclassified",
-        "reels": 17,
+        "reels": 18,
         "shares_per_1000": 1.3541825915051067,
         "saves_per_1000": 3.3134154081935487,
         "average_watch_time": 4.969235294117646
@@ -824,7 +824,7 @@
   },
   "weekly": {
     "current": {
-      "reels": 17,
+      "reels": 18,
       "best": "18174696019395674",
       "weakest": "18136094323708858",
       "basis": "24h share/save rate; hypotheses only",
