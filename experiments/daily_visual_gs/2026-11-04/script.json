@@ -1,0 +1,129 @@
+{
+  "ok": true,
+  "title": "राष्ट्रीय एकता दिवस का सही दिन",
+  "subject": "Traditional GK",
+  "renderer_version": "rich_3d_v1",
+  "question_hash": "16dbe7eb8bedc060a7f7bdaba56e4212e1d18a077a83931e8df34c2668366647",
+  "reference": {
+    "subject": "Traditional GK",
+    "subject_hi": "सामान्य ज्ञान",
+    "chapter": "दिन/दिवस (Day/Diwas)",
+    "sub": "",
+    "question": "भारत हर साल_____को राष्ट्रीय एकता दिवस के रूप में मनाता है।",
+    "options": {
+      "a": "12 नवंबर",
+      "b": "27 जुलाई",
+      "c": "15 अगस्त",
+      "d": "29 अगस्त"
+    },
+    "answer": "d",
+    "exams": [
+      "RRB Group-D 15-11-2018 (Shift-II)",
+      "RRB Group-D 22-09-2018 (Shift-II)"
+    ],
+    "explanation": "मेजर ध्यानचंद का जन्म 29 अगस्त, 1905 को इलाहाबाद (प्रयागराज) में हुआ था। वह भारतीय हॉकी टीम के महान खिलाड़ी थे। इनके जन्म दिवस पर राष्ट्रीय खेल दिवस (29 अगस्त) प्रत्येक वर्ष मनाया जाता है। इन्हें ‘हॉकी के जादूगर’ के नाम से भी जाना जाता है।",
+    "times_asked": 2,
+    "years": [
+      "2018"
+    ],
+    "id": "9295535462",
+    "seq": 39
+  },
+  "experiment_format": "exam_trap",
+  "primary_objective": "share",
+  "series_next_topic": "‘‘ट्रैंसेंडेंस’’ नामक जीवनी, निम्नलिखित में से किस व्यक्तित्व पर लिखी गई है?",
+  "series_next_hash": "739a873b1f2873b6a5b025b74e0f6c430d58f763643036fe1e94c1891bf5e83f",
+  "topic_policy": "evidence_cohort_v2",
+  "topic_priority": 1.0,
+  "recall": "याद रखें: 29 अगस्त।",
+  "share_card": {
+    "kind": "exam_confusion",
+    "recipient": "परीक्षा की तैयारी करने वाले दोस्त",
+    "benefit": "राष्ट्रीय एकता दिवस का सही दिन याद रहेगा",
+    "cta": "दोस्त को बताओ और याद रखें"
+  },
+  "share_reason": "दोस्त को परीक्षा में सही उत्तर याद रखने में मदद",
+  "scenes": [
+    {
+      "label": "परीक्षा का जाल",
+      "quiz_options": null,
+      "speech": "भारत हर साल_____को राष्ट्रीय एकता दिवस के रूप में मनाता है। गलत विकल्प पहचानिए।",
+      "role": "hook",
+      "revision_card": false,
+      "teaches": "प्रश्न पहचान",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "व्यक्ति प्रश्न बोर्ड के सामने चलता है"
+      }
+    },
+    {
+      "label": "अपना जवाब चुनिए",
+      "quiz_options": [
+        "12 नवंबर",
+        "29 अगस्त"
+      ],
+      "speech": "दोनों विकल्पों में सही कौन-सा है? दो सेकंड सोचिए।",
+      "role": "challenge",
+      "revision_card": false,
+      "teaches": "विकल्प विश्लेषण",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "व्यक्ति दो विकल्पों की ओर इशारा करता है"
+      }
+    },
+    {
+      "label": "सही उत्तर",
+      "quiz_options": null,
+      "speech": "सही उत्तर है: 29 अगस्त।",
+      "role": "reveal",
+      "revision_card": false,
+      "teaches": "उत्तर पहचान",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "व्यक्ति हाथ उठाकर सही विकल्प दिखाता है"
+      }
+    },
+    {
+      "label": "तथ्य समझिए",
+      "quiz_options": null,
+      "speech": "मेजर ध्यानचंद का जन्म 29 अगस्त, 1905 को इलाहाबाद (प्रयागराज) में हुआ था।",
+      "role": "explain",
+      "revision_card": false,
+      "teaches": "तथ्य समझ",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "institution",
+        "visible_action": "व्यक्ति जन्म तिथि बोर्ड पर लिखता है"
+      }
+    },
+    {
+      "label": "खुद को जाँचिए",
+      "quiz_options": null,
+      "speech": "वह भारतीय हॉकी टीम के महान खिलाड़ी थे।",
+      "role": "transfer",
+      "revision_card": false,
+      "teaches": "संबंधित तथ्य",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "institution",
+        "visible_action": "गेंद (sphere) घूमती है, हॉकी का संकेत देती है"
+      }
+    },
+    {
+      "label": "रिवीजन कार्ड",
+      "quiz_options": null,
+      "speech": "याद रखें: 29 अगस्त।",
+      "role": "revision",
+      "revision_card": true,
+      "teaches": "स्मरण",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "पुस्तक स्थिर रहती है"
+      }
+    }
+  ]
+}

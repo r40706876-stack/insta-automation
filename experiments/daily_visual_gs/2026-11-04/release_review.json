@@ -1,0 +1,43 @@
+{
+  "answer_correct": false,
+  "visual_relevance": true,
+  "hindi_readable": true,
+  "pronunciation_correct": true,
+  "audio_visual_match": true,
+  "answer_reveal_timing": true,
+  "revision_card_readable": true,
+  "reasons": [
+    "The video states the question is about 'राष्ट्रीय एकता दिवस' (National Unity Day), but the explanation and correct answer (29 August, Major Dhyan Chand's birth anniversary) are actually for 'राष्ट्रीय खेल दिवस' (National Sports Day). National Unity Day is celebrated on 31 October (Sardar Vallabhbhai Patel's birth anniversary)."
+  ],
+  "observed_answer": "29 अगस्त",
+  "scene_evidence": [
+    {
+      "scene": 1,
+      "observation": "A 3D character walks past a board displaying the question about 'राष्ट्रीय एकता दिवस'."
+    },
+    {
+      "scene": 2,
+      "observation": "The character points towards two options (12 नवंबर and 29 अगस्त) for the user to choose from."
+    },
+    {
+      "scene": 3,
+      "observation": "The video reveals 29 अगस्त as the correct answer."
+    },
+    {
+      "scene": 4,
+      "observation": "The video explains Major Dhyan Chand's birth date as 29 अगस्त 1905."
+    },
+    {
+      "scene": 5,
+      "observation": "A 3D sphere representing a hockey ball rolls past rails to signify his role as a hockey player."
+    },
+    {
+      "scene": 6,
+      "observation": "A clear revision card is shown displaying 'याद रखें: 29 अगस्त'."
+    }
+  ],
+  "sha256": "2057e9fd3970d41545ff8a5f7a3182c53a272929fde6c4de1010b465997cec3b",
+  "reviewer": "gemini-3.5-flash-lite / actual rendered video and audio",
+  "reviewed_at": "2026-11-03T18:41:09.699464+00:00",
+  "review_type": "automated_multimodal"
+}
