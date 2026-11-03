@@ -1,0 +1,129 @@
+{
+  "ok": true,
+  "title": "शास्त्रीय भाषा प्रश्न",
+  "subject": "Polity",
+  "renderer_version": "rich_3d_v1",
+  "question_hash": "5d9db265966eebcc111adc391146a66fbbfc6c5b276c817f4b4f14d3e30a6336",
+  "reference": {
+    "subject": "Polity",
+    "subject_hi": "राजव्यवस्था",
+    "chapter": "राज भाषा (Official Language)",
+    "sub": "",
+    "question": "निम्नलिखित में से कौन सी भाषा शास्त्रीय भाषा की श्रेणी में आती है?",
+    "options": {
+      "a": "हिंदी",
+      "b": "प्राकृत",
+      "c": "संस्कृत",
+      "d": "पालि"
+    },
+    "answer": "c",
+    "exams": [
+      "RRB Group D 02/09/2022 (Shift-III)",
+      "RRB Group D 06/09/2022 (Shift-III)"
+    ],
+    "explanation": "दिए गए विकल्पों में संस्कृत भाषा शास्त्रीय भाषा की श्रेणी में आती है. वर्तमान में भारत सरकार द्वारा 6 भारतीय भाषाओं को शास्त्रीय भाषा का दर्जा प्रदान किया गया है। शास्त्रीय भाषा का दर्जा प्राप्त करने वाली भाषाएं निम्नलिखित है-तमिल, संस्कृत, तेलुगू, कन्नड़ मलयालम और ओडिया। केन्द्रीय मंत्रिमंडल द्वारा अक्टूबर 2024 में 5 और भाषाओं की शास्त्रीय भाषा के रूप में मान्यता प्रदान करने की स्वीकृत प्रदान की गई है।",
+    "times_asked": 2,
+    "years": [
+      "2022"
+    ],
+    "id": "3ab9f16101",
+    "seq": 143
+  },
+  "experiment_format": "map_pyq_challenge",
+  "primary_objective": "follow",
+  "series_next_topic": "भारत की कम्युनिस्ट पार्टी का प्रतीक चिह्न निम्न में से क्या है?",
+  "series_next_hash": "f606c09b548fa9ce8659b456f68da5ed98a32a60bacb4109f14a9ba093dbffef",
+  "topic_policy": "evidence_cohort_v2",
+  "topic_priority": 1.0,
+  "recall": "याद रखें: संस्कृत।",
+  "share_card": {
+    "kind": "exam_confusion",
+    "recipient": "परीक्षा की तैयारी करने वाले मित्र",
+    "benefit": "भाषा शास्त्रीय वर्गीकरण में भ्रम दूर होता है",
+    "cta": "इसे अपने दोस्त को भेजें"
+  },
+  "share_reason": "यह मित्र को परीक्षा में सही उत्तर याद रखने में मदद करेगा",
+  "scenes": [
+    {
+      "label": "नक्शा टेस्ट",
+      "quiz_options": null,
+      "speech": "निम्नलिखित में से कौन सी भाषा शास्त्रीय भाषा की श्रेणी में आती है? नक्शे पर दिशा पहचानिए।",
+      "role": "hook",
+      "revision_card": false,
+      "teaches": "प्रश्न को पहचानना",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "एक तीर विकल्पों की ओर चलता है"
+      }
+    },
+    {
+      "label": "अपना जवाब चुनिए",
+      "quiz_options": [
+        "संस्कृत",
+        "हिंदी"
+      ],
+      "speech": "दोनों विकल्पों में सही कौन-सा है? दो सेकंड सोचिए।",
+      "role": "challenge",
+      "revision_card": false,
+      "teaches": "विकल्पों पर विचार करना",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "दो तीर अलग‑अलग विकल्पों की ओर चलते हैं"
+      }
+    },
+    {
+      "label": "सही उत्तर",
+      "quiz_options": null,
+      "speech": "सही उत्तर है: संस्कृत।",
+      "role": "reveal",
+      "revision_card": false,
+      "teaches": "सही उत्तर बताना",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "तीर संस्कृत विकल्प की ओर बढ़ता है"
+      }
+    },
+    {
+      "label": "तथ्य समझिए",
+      "quiz_options": null,
+      "speech": "दिए गए विकल्पों में संस्कृत भाषा शास्त्रीय भाषा की श्रेणी में आती है।",
+      "role": "explain",
+      "revision_card": false,
+      "teaches": "स्पष्टीकरण देना",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "तीर संस्कृत के ऊपर घुमता है"
+      }
+    },
+    {
+      "label": "खुद को जाँचिए",
+      "quiz_options": null,
+      "speech": "वर्तमान में भारत सरकार द्वारा 6 भारतीय भाषाओं को शास्त्रीय भाषा का दर्जा प्रदान किया गया है।",
+      "role": "transfer",
+      "revision_card": false,
+      "teaches": "व्यापक संदर्भ देना",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "नक्शे पर तीर कई भाषाओं की ओर चलता है"
+      }
+    },
+    {
+      "label": "रिवीजन कार्ड",
+      "quiz_options": null,
+      "speech": "याद रखें: संस्कृत।",
+      "role": "revision",
+      "revision_card": true,
+      "teaches": "स्मरण शक्ति बढ़ाना",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "पुस्तक स्थिर दिखती है"
+      }
+    }
+  ]
+}

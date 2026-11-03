@@ -1,0 +1,11 @@
+[
+  {
+    "url": "user-provided",
+    "excerpt": "Verified question-bank reference; do not add claims beyond this reference: {\"subject\": \"Polity\", \"subject_hi\": \"राजव्यवस्था\", \"chapter\": \"राज भाषा (Official Language)\", \"sub\": \"\", \"question\": \"निम्नलिखित में से कौन सी भाषा शास्त्रीय भाषा की श्रेणी में आती है?\", \"options\": {\"a\": \"हिंदी\", \"b\": \"प्राकृत\", \"c\": \"संस्कृत\", \"d\": \"पालि\"}, \"answer\": \"c\", \"exams\": [\"RRB Group D 02/09/2022 (Shift-III)\", \"RRB Group D 06/09/2022 (Shift-III)\"], \"explanation\": \"दिए गए विकल्पों में संस्कृत भाषा शास्त्रीय भाषा की श्रेणी में आती है. वर्तमान में भारत सरकार द्वारा 6 भारतीय भाषाओं को शास्त्रीय भाषा का दर्जा प्रदान किया गया है। शास्त्रीय भाषा का दर्जा प्राप्त करने वाली भाषाएं निम्नलिखित है-तमिल, संस्कृत, तेलुगू, कन्नड़ मलयालम और ओडिया। केन्द्रीय मंत्रिमंडल द्वारा अक्टूबर 2024 में 5 और भाषाओं की शास्त्रीय भाषा के रूप में मान्यता प्रदान करने की स्वीकृत प्रदान की गई है।\", \"times_asked\": 2, \"years\": [\"2022\"], \"i"
+  },
+  {
+    "url": "https://www.naturalearthdata.com/downloads/110m-physical-vectors/110m-land/",
+    "publisher": "Natural Earth, public-domain physical coastline geometry",
+    "note": "Modern Gujarat outline is separately attributed in dandi_map.LICENSE; routes are schematic."
+  }
+]

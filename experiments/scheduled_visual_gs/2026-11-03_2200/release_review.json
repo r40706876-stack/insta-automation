@@ -1,0 +1,46 @@
+{
+  "answer_correct": true,
+  "visual_relevance": true,
+  "hindi_readable": true,
+  "pronunciation_correct": true,
+  "audio_visual_match": true,
+  "answer_reveal_timing": true,
+  "revision_card_readable": true,
+  "reasons": [
+    "All questions, options, facts and revision points precisely match the grounded reference.",
+    "Visuals (3D arrows and map animations) align correctly with the audio narration.",
+    "Hindi on-screen text is fully legible without overlapping or clipping.",
+    "Audio pronunciation is natural, clear, and perfectly timed."
+  ],
+  "observed_answer": "संस्कृत",
+  "scene_evidence": [
+    {
+      "scene": 1,
+      "observation": "Hook poses the classical language question with a 3D arrow pointing towards options."
+    },
+    {
+      "scene": 2,
+      "observation": "Challenge presents two choices ('संस्कृत' and 'हिंदी') with a 2-second thinking pause."
+    },
+    {
+      "scene": 3,
+      "observation": "Reveal clearly highlights 'संस्कृत' as the correct answer."
+    },
+    {
+      "scene": 4,
+      "observation": "Explanation scene explains why Sanskrit falls into the classical language category."
+    },
+    {
+      "scene": 5,
+      "observation": "Transfer scene shows an India map graphic while mentioning the 6 classical languages recognized by the government."
+    },
+    {
+      "scene": 6,
+      "observation": "Revision card clearly displays the final reminder 'याद रखें: संस्कृत'."
+    }
+  ],
+  "sha256": "79713ffedf4d723f854928742e85e3dca62d46e350a66bd3663f8a2bf9ffa49c",
+  "reviewer": "gemini-3.5-flash-lite / actual rendered video and audio",
+  "reviewed_at": "2026-11-03T15:39:14.973534+00:00",
+  "review_type": "automated_multimodal"
+}
