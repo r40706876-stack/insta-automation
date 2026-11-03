@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-03T10:07:42.241618+00:00",
+  "generated_at": "2026-11-03T13:05:31.858577+00:00",
   "windows": {
     "24h": [
       {
@@ -199,6 +199,39 @@
         },
         "decision": "collect_more",
         "automatic_scale": false
+      },
+      {
+        "subject": "Science",
+        "format": "visual_mystery",
+        "reels": 1,
+        "metrics": {
+          "shares_per_1000": {
+            "mean": 0.0,
+            "n": 1
+          },
+          "saves_per_1000": {
+            "mean": 0.0,
+            "n": 1
+          },
+          "average_watch_time": {
+            "mean": 5.592,
+            "n": 1
+          },
+          "three_second_rate": {
+            "mean": 31.300003,
+            "n": 1
+          },
+          "retention": {
+            "mean": null,
+            "n": 0
+          },
+          "net_followers": {
+            "mean": null,
+            "n": 0
+          }
+        },
+        "decision": "collect_more",
+        "automatic_scale": false
       }
     ],
     "72h": [
@@ -353,6 +386,39 @@
           },
           "three_second_rate": {
             "mean": 39.4,
+            "n": 1
+          },
+          "retention": {
+            "mean": null,
+            "n": 0
+          },
+          "net_followers": {
+            "mean": null,
+            "n": 0
+          }
+        },
+        "decision": "collect_more",
+        "automatic_scale": false
+      },
+      {
+        "subject": "Economics",
+        "format": "legacy_unclassified",
+        "reels": 1,
+        "metrics": {
+          "shares_per_1000": {
+            "mean": 0.0,
+            "n": 1
+          },
+          "saves_per_1000": {
+            "mean": 0.0,
+            "n": 1
+          },
+          "average_watch_time": {
+            "mean": 6.361,
+            "n": 1
+          },
+          "three_second_rate": {
+            "mean": 53.5,
             "n": 1
           },
           "retention": {
@@ -725,7 +791,7 @@
   },
   "weekly": {
     "current": {
-      "reels": 16,
+      "reels": 17,
       "best": "18174696019395674",
       "weakest": "18136094323708858",
       "basis": "24h share/save rate; hypotheses only",
