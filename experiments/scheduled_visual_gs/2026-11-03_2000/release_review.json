@@ -1,0 +1,43 @@
+{
+  "answer_correct": true,
+  "visual_relevance": false,
+  "hindi_readable": true,
+  "pronunciation_correct": true,
+  "audio_visual_match": true,
+  "answer_reveal_timing": true,
+  "revision_card_readable": true,
+  "reasons": [
+    "In scenes 4 and 5, generic 3D mannequins walking or standing still fail to visually explain the spoken concepts of dance styles or an enchanting woman."
+  ],
+  "observed_answer": "केरल",
+  "scene_evidence": [
+    {
+      "scene": 1,
+      "observation": "Map of India is shown with a directional arrow pointing towards Kerala alongside the question about Mohiniyattam."
+    },
+    {
+      "scene": 2,
+      "observation": "Options 'राजस्थान' and 'केरल' are displayed while a 3D avatar walks during the thinking pause."
+    },
+    {
+      "scene": 3,
+      "observation": "Kerala is highlighted on the map of India, revealing it as the correct answer."
+    },
+    {
+      "scene": 4,
+      "observation": "A static 3D character labeled 'नर्तकी' stands motionless near a simple hut while narration explains the dance form."
+    },
+    {
+      "scene": 5,
+      "observation": "A 3D character labeled 'परीक्षा यादकर्ता' walks back and forth while audio explains the meaning of Mohini."
+    },
+    {
+      "scene": 6,
+      "observation": "A clear revision card displays 'याद रखें: केरल' along with the state highlight on the India map outline."
+    }
+  ],
+  "sha256": "03c7747d55953fa7bc69efe73acdeb4207138fe1f35ac77434999b9da6409e66",
+  "reviewer": "gemini-3.6-flash / actual rendered video and audio",
+  "reviewed_at": "2026-11-03T13:40:11.980202+00:00",
+  "review_type": "automated_multimodal"
+}

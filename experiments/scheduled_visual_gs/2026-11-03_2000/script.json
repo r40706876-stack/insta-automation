@@ -1,0 +1,129 @@
+{
+  "ok": true,
+  "title": "मोहिनीअट्टम नृत्य शैली का राज्य",
+  "subject": "Traditional GK",
+  "renderer_version": "rich_3d_v1",
+  "question_hash": "8bd6dce4385b02704f2d92990964e12c7b6f519ca0845b9b6ccf361b8cd13056",
+  "reference": {
+    "subject": "Traditional GK",
+    "subject_hi": "सामान्य ज्ञान",
+    "chapter": "कला एवं संस्कृति (Art and Culture)",
+    "sub": "",
+    "question": "‘‘मोहिनीअट्टम’’ नृत्य शैली निम्नलिखित में से किस राज्य में लोकप्रिय है?",
+    "options": {
+      "a": "राजस्थान",
+      "b": "तेलंगाना",
+      "c": "केरल",
+      "d": "कर्नाटक"
+    },
+    "answer": "c",
+    "exams": [
+      "RRB Group-D 05-11-2018 (Shift-III)",
+      "RRB Group-D 15-10-2018 (Shift-II)"
+    ],
+    "explanation": "मोहिनीअट्टम केरल की महिलाओं द्वारा किया जाने वाला अर्ध शास्त्रीय नृत्य है जो कथकली से अधिक पुराना माना जाता है। मोहिनी का अर्थ ऐसी महिला जो देखने वालों का मन मोह ले। मोहिनी को भारतीय पौराणिक कथाओं में भगवान विष्णु का एक प्रमुख अवतार माना गया है।",
+    "times_asked": 2,
+    "years": [
+      "2018"
+    ],
+    "id": "6bf48a28bf",
+    "seq": 29
+  },
+  "experiment_format": "map_pyq_challenge",
+  "primary_objective": "follow",
+  "series_next_topic": "भारत हर साल_____को राष्ट्रीय एकता दिवस के रूप में मनाता है।",
+  "series_next_hash": "16dbe7eb8bedc060a7f7bdaba56e4212e1d18a077a83931e8df34c2668366647",
+  "topic_policy": "evidence_cohort_v2",
+  "topic_priority": 1.0,
+  "recall": "याद रखें: केरल।",
+  "share_card": {
+    "kind": "exam_confusion",
+    "recipient": "परीक्षा की तैयारी करने वाले मित्र",
+    "benefit": "केरल के नृत्य मोहिनीअट्टम को याद रखेंगे",
+    "cta": "दोस्त को यह नृत्य बताओ"
+  },
+  "share_reason": "परीक्षा में नृत्य राज्य भ्रम दूर करने के लिए",
+  "scenes": [
+    {
+      "label": "नक्शा टेस्ट",
+      "quiz_options": null,
+      "speech": "‘‘मोहिनीअट्टम’’ नृत्य शैली निम्नलिखित में से किस राज्य में लोकप्रिय है? नक्शे पर दिशा पहचानिए।",
+      "role": "hook",
+      "revision_card": false,
+      "teaches": "प्रश्न पहचान",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "institution",
+        "visible_action": "नक्शा दिखाते हुए तीर चलाते हैं"
+      }
+    },
+    {
+      "label": "अपना जवाब चुनिए",
+      "quiz_options": [
+        "राजस्थान",
+        "केरल"
+      ],
+      "speech": "दोनों विकल्पों में सही कौन-सा है? दो सेकंड सोचिए।",
+      "role": "challenge",
+      "revision_card": false,
+      "teaches": "विकल्प विचार",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "व्यक्ति दो विकल्पों के बीच चलता है"
+      }
+    },
+    {
+      "label": "सही उत्तर",
+      "quiz_options": null,
+      "speech": "सही उत्तर है: केरल।",
+      "role": "reveal",
+      "revision_card": false,
+      "teaches": "उत्तर पहचान",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "institution",
+        "visible_action": "नक्शे पर केरल को ट्रेस करके हाइलाइट करते हैं"
+      }
+    },
+    {
+      "label": "तथ्य समझिए",
+      "quiz_options": null,
+      "speech": "मोहिनीअट्टम केरल की महिलाओं द्वारा किया जाने वाला अर्ध शास्त्रीय नृत्य है जो कथकली से अधिक पुराना माना जाता है।",
+      "role": "explain",
+      "revision_card": false,
+      "teaches": "नृत्य की उत्पत्ति",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "village",
+        "visible_action": "नर्तकी घुमते हुए नाचती दिखती है"
+      }
+    },
+    {
+      "label": "खुद को जाँचिए",
+      "quiz_options": null,
+      "speech": "मोहिनी का अर्थ ऐसी महिला जो देखने वालों का मन मोह ले।",
+      "role": "transfer",
+      "revision_card": false,
+      "teaches": "परीक्षा स्मरण",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "व्यक्ति किताब की ओर चलता है"
+      }
+    },
+    {
+      "label": "रिवीजन कार्ड",
+      "quiz_options": null,
+      "speech": "याद रखें: केरल।",
+      "role": "revision",
+      "revision_card": true,
+      "teaches": "स्मरण",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "टेक्स्ट फेड इन होता है"
+      }
+    }
+  ]
+}
