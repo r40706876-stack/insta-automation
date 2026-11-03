@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-03T16:06:39.665556+00:00",
+  "generated_at": "2026-11-03T18:07:23.966727+00:00",
   "windows": {
     "24h": [
       {
@@ -752,6 +752,39 @@
           "three_second_rate": {
             "mean": 19.800003,
             "n": 1
+          },
+          "retention": {
+            "mean": null,
+            "n": 0
+          },
+          "net_followers": {
+            "mean": null,
+            "n": 0
+          }
+        },
+        "decision": "collect_more",
+        "automatic_scale": false
+      },
+      {
+        "subject": "Geography",
+        "format": "legacy_unclassified",
+        "reels": 1,
+        "metrics": {
+          "shares_per_1000": {
+            "mean": null,
+            "n": 0
+          },
+          "saves_per_1000": {
+            "mean": null,
+            "n": 0
+          },
+          "average_watch_time": {
+            "mean": null,
+            "n": 0
+          },
+          "three_second_rate": {
+            "mean": null,
+            "n": 0
           },
           "retention": {
             "mean": null,
