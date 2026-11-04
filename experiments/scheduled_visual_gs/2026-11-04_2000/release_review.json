@@ -1,0 +1,44 @@
+{
+  "answer_correct": true,
+  "visual_relevance": false,
+  "hindi_readable": true,
+  "pronunciation_correct": true,
+  "audio_visual_match": false,
+  "answer_reveal_timing": true,
+  "revision_card_readable": true,
+  "observed_answer": "B: आर के नारायण",
+  "reasons": [
+    "The 3D visuals consist of generic animations (a walking human figure, a turning gear wheel, and a basic book model) that do not visually explain the historical/literary facts about R. K. Narayan or the biography.",
+    "Audio-visual match fails as the visual animations do not illustrate or represent the narrated concepts or subject matter."
+  ],
+  "scene_evidence": [
+    {
+      "scene": 1,
+      "observation": "Generic 3D human character walking aimlessly while question is displayed on screen."
+    },
+    {
+      "scene": 2,
+      "observation": "Generic 3D character continues walking during the prompt asking viewers to think."
+    },
+    {
+      "scene": 3,
+      "observation": "A basic 3D book model labelled 'पुस्तक' appears revealing option B (आर के नारायण)."
+    },
+    {
+      "scene": 4,
+      "observation": "Generic 3D character walking with label 'लेखक' while narrator states R. K. Narayan's full name."
+    },
+    {
+      "scene": 5,
+      "observation": "A rotating mechanical gear labelled 'लेखक' is shown while discussing Narayan's role in English literature."
+    },
+    {
+      "scene": 6,
+      "observation": "Final revision card displaying the book model with clear text 'याद रखें: आर के नारायण।'."
+    }
+  ],
+  "sha256": "bff2bbcb3e6a99c2f9d034e818c38f4741238bdeaaf7796331c004fc5b0dedfd",
+  "reviewer": "gemini-3.6-flash / actual rendered video and audio",
+  "reviewed_at": "2026-11-04T13:39:53.093062+00:00",
+  "review_type": "automated_multimodal"
+}

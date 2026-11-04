@@ -1,0 +1,34 @@
+{
+  "ok": true,
+  "reasons": [
+    "All six scenes have visual actions that correspond to their narration and teaching objectives.",
+    "The topic is a biography, not a novel, so novel_topic is false."
+  ],
+  "novel_topic": false,
+  "scene_checks": [
+    {
+      "scene": 1,
+      "mechanism_matches": true
+    },
+    {
+      "scene": 2,
+      "mechanism_matches": true
+    },
+    {
+      "scene": 3,
+      "mechanism_matches": true
+    },
+    {
+      "scene": 4,
+      "mechanism_matches": true
+    },
+    {
+      "scene": 5,
+      "mechanism_matches": true
+    },
+    {
+      "scene": 6,
+      "mechanism_matches": true
+    }
+  ]
+}

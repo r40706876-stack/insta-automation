@@ -1,0 +1,132 @@
+{
+  "ok": true,
+  "title": "‘ट्रैंसेंडेंस’ जीवनी का लेखक कौन?",
+  "subject": "Traditional GK",
+  "renderer_version": "rich_3d_v1",
+  "question_hash": "739a873b1f2873b6a5b025b74e0f6c430d58f763643036fe1e94c1891bf5e83f",
+  "reference": {
+    "subject": "Traditional GK",
+    "subject_hi": "सामान्य ज्ञान",
+    "chapter": "पुस्तकें/लेखक (Books/Authors)",
+    "sub": "",
+    "question": "‘‘ट्रैंसेंडेंस’’ नामक जीवनी, निम्नलिखित में से किस व्यक्तित्व पर लिखी गई है?",
+    "options": {
+      "a": "रवीन्द्रनाथ टैगोर",
+      "b": "मुल्क राज आनंद",
+      "c": "आर के लक्ष्मण",
+      "d": "आर के नारायण"
+    },
+    "answer": "d",
+    "exams": [
+      "RRB Group-D 03-12-2018 (Shift-III)",
+      "RRB Group-D 27-11-2018 (Shift-III)"
+    ],
+    "explanation": "आर. के. नारायण का पूरा नाम रासीपुरम कृष्णास्वामी अय्यर नारायण स्वामी था। आर. के. नारायण अंग्रेजी साहित्य के महान उपन्यासकारों में से एक थे। मालगुडी दक्षिण भारत का एक काल्पनिक स्थान है इसी को आधार बनाकर उन्होंने मालगुडी डेज की रचना की। उनकी अन्य रचनाओं में o डार्कâ रूम, o गाइड, माई डेज, o पेंटर ऑफ साइन्स आदि प्रसिद्ध है।",
+    "times_asked": 2,
+    "years": [
+      "2018"
+    ],
+    "id": "33db22cb09",
+    "seq": 59
+  },
+  "experiment_format": "visual_mystery",
+  "primary_objective": "save",
+  "series_next_topic": "यूनेस्को के विश्व नेटवर्कâ ऑफ बायोस्फीयर रिजर्व (WNBR) में निम्नलिखित में से कौन सा शामिल है?",
+  "series_next_hash": "8fb295e0f3a41fe465b7aedae3fab7ef928e7f6bc35ea057e2f4a7c3a20c0fb9",
+  "topic_policy": "evidence_cohort_v2",
+  "topic_priority": 1.0,
+  "recall": "याद रखें: आर के नारायण।",
+  "share_card": {
+    "kind": "exam_confusion",
+    "recipient": "परीक्षा की तैयारी करने वाले मित्र",
+    "benefit": "आर के नारायण की जीवनी का सही उत्तर याद रखें",
+    "cta": "दोस्त को बताओ और साथ पढ़ो"
+  },
+  "share_reason": "आर के नारायण पर अक्सर भ्रम रहता है, यह रील मदद करेगी",
+  "scenes": [
+    {
+      "label": "पहले अपना जवाब चुनिए",
+      "quiz_options": [
+        "A: रवीन्द्रनाथ टैगोर",
+        "B: आर के नारायण"
+      ],
+      "speech": "‘‘ट्रैंसेंडेंस’’ नामक जीवनी, निम्नलिखित में से किस व्यक्तित्व पर लिखी गई है? दृश्य देखकर जवाब खोजिए।",
+      "role": "hook",
+      "revision_card": false,
+      "teaches": "प्रश्न पहचान",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "व्यक्ति स्क्रीन में चलकर प्रश्न दिखाता है"
+      }
+    },
+    {
+      "label": "कमेंट में लिखिए: A या B?",
+      "quiz_options": [
+        "A: रवीन्द्रनाथ टैगोर",
+        "B: आर के नारायण"
+      ],
+      "speech": "A या B? दो सेकंड सोचिए और कमेंट में अपना जवाब लिखिए।",
+      "role": "challenge",
+      "revision_card": false,
+      "teaches": "विकल्प विचार",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "व्यक्ति फिर से चलकर दो विकल्प दिखाता है"
+      }
+    },
+    {
+      "label": "सही उत्तर",
+      "quiz_options": null,
+      "speech": "सही उत्तर है: आर के नारायण।",
+      "role": "reveal",
+      "revision_card": false,
+      "teaches": "सही उत्तर बताना",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "पुस्तक ऊपर उठकर सही उत्तर दिखाती है"
+      }
+    },
+    {
+      "label": "तथ्य समझिए",
+      "quiz_options": null,
+      "speech": "नारायण का पूरा नाम रासीपुरम कृष्णास्वामी अय्यर नारायण स्वामी था।",
+      "role": "explain",
+      "revision_card": false,
+      "teaches": "लेखक का पूरा नाम समझना",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "व्यक्ति चलकर नाम लिखता है"
+      }
+    },
+    {
+      "label": "खुद को जाँचिए",
+      "quiz_options": null,
+      "speech": "नारायण अंग्रेजी साहित्य के महान उपन्यासकारों में से एक थे।",
+      "role": "transfer",
+      "revision_card": false,
+      "teaches": "लेखक की प्रमुख पहचान बताना",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "गियर घूमकर लेखक की महत्ता दर्शाता है"
+      }
+    },
+    {
+      "label": "रिवीजन कार्ड",
+      "quiz_options": null,
+      "speech": "याद रखें: आर के नारायण।",
+      "role": "revision",
+      "revision_card": true,
+      "teaches": "स्मरण शक्ति बढ़ाना",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "पुस्तक स्थिर रहकर याद दिलाता है"
+      }
+    }
+  ]
+}
