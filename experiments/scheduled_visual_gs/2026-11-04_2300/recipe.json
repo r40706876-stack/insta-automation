@@ -1,0 +1,336 @@
+{
+  "title": "केसर का उत्पाद स्थान",
+  "subject": "भूगोल",
+  "topic_key": "kesar_product_location",
+  "share_reason": "जम्मू‑कश्मीर के केसर को समझना परीक्षा में मददगार",
+  "recall": "याद रखें: जम्मू–कश्मीर।",
+  "pyq_challenge": true,
+  "share_card": {
+    "kind": "exam_confusion",
+    "recipient": "भूगोल के छात्र",
+    "benefit": "केसर किस राज्य का उत्पाद है, स्पष्ट उत्तर",
+    "cta": "अब अपने दोस्त को बताओ"
+  },
+  "scenes": [
+    {
+      "role": "hook",
+      "heading": "पहले अपना जवाब चुनिए",
+      "explanation": "A या B — सोचिए",
+      "speech": "केसर ................. का एक उत्पाद है। नक्शा देखिए।",
+      "teaches": "केसर के उत्पाद राज्य को पहचानें",
+      "visual_action": "नक्शे पर जम्मू‑कश्मीर दिखाएँ, व्यक्ति चलकर उस क्षेत्र की ओर जाता है",
+      "setting": "neutral",
+      "objects": [
+        {
+          "kind": "map",
+          "action": "none",
+          "map_region": "india",
+          "id": "obj0",
+          "label": "",
+          "color": "#59c7c5",
+          "pos": [
+            -0.9,
+            0,
+            0
+          ],
+          "size": [
+            1.1,
+            1.1,
+            1.1
+          ]
+        },
+        {
+          "kind": "person",
+          "action": "walk",
+          "id": "obj1",
+          "label": "",
+          "color": "#f4e7bf",
+          "pos": [
+            0.45,
+            0,
+            0
+          ],
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ],
+          "to": [
+            1.65,
+            0,
+            0
+          ]
+        }
+      ],
+      "hook_question": "केसर ................. का एक उत्पाद है।",
+      "quiz_options": [
+        "A: जम्मू–कश्मीर",
+        "B: पश्चिम बंगाल"
+      ]
+    },
+    {
+      "role": "challenge",
+      "heading": "कमेंट में लिखिए: A या B?",
+      "explanation": "दो सेकंड: A या B?",
+      "speech": "दो सेकंड: A या B?",
+      "teaches": "विकल्पों में सोचें",
+      "visual_action": "व्यक्ति दो बिंदुओं के बीच चलकर विकल्प दिखाता है, तीर घूमता है",
+      "setting": "neutral",
+      "objects": [
+        {
+          "kind": "map",
+          "action": "none",
+          "map_region": "india",
+          "id": "obj0",
+          "label": "",
+          "color": "#59c7c5",
+          "pos": [
+            -0.9,
+            0,
+            0
+          ],
+          "size": [
+            1.1,
+            1.1,
+            1.1
+          ]
+        },
+        {
+          "kind": "arrow",
+          "action": "spin",
+          "id": "obj1",
+          "label": "",
+          "color": "#59c7c5",
+          "pos": [
+            0.9,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        }
+      ],
+      "quiz_options": [
+        "A: जम्मू–कश्मीर",
+        "B: पश्चिम बंगाल"
+      ]
+    },
+    {
+      "role": "reveal",
+      "heading": "सही उत्तर",
+      "explanation": "सही उत्तर है: जम्मू–कश्मीर।",
+      "speech": "सही उत्तर है: जम्मू–कश्मीर।",
+      "teaches": "सही उत्तर पहचानें",
+      "visual_action": "नक्शे पर जम्मू‑कश्मीर को हाइलाइट किया जाता है",
+      "setting": "neutral",
+      "objects": [
+        {
+          "kind": "map",
+          "action": "trace",
+          "map_region": "india",
+          "route": [
+            [
+              74.0,
+              34.0
+            ],
+            [
+              75.0,
+              34.5
+            ]
+          ],
+          "id": "obj0",
+          "label": "",
+          "color": "#59c7c5",
+          "pos": [
+            0.0,
+            0,
+            0
+          ],
+          "size": [
+            1.1,
+            1.1,
+            1.1
+          ]
+        }
+      ]
+    },
+    {
+      "role": "explain",
+      "heading": "तथ्य समझिए",
+      "explanation": "इसका वानस्पतिक नाम क्रोकस सैटाइवस (Crocus",
+      "speech": "इसका वानस्पतिक नाम क्रोकस सैटाइवस (Crocus Sativus) है।",
+      "teaches": "भौगोलिक कारण समझें",
+      "visual_action": "मिट्टी में जल का प्रवाह दिखाया जाता है",
+      "setting": "laboratory",
+      "objects": [
+        {
+          "kind": "map",
+          "action": "none",
+          "map_region": "india",
+          "id": "obj0",
+          "label": "",
+          "color": "#59c7c5",
+          "pos": [
+            -0.9,
+            0,
+            0
+          ],
+          "size": [
+            1.1,
+            1.1,
+            1.1
+          ]
+        },
+        {
+          "kind": "water",
+          "action": "flow",
+          "id": "obj1",
+          "label": "",
+          "color": "#18a9dd",
+          "pos": [
+            0.9,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            2.1,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "role": "transfer",
+      "heading": "खुद को जाँचिए",
+      "explanation": "अब बिना देखे बताइए।",
+      "speech": "अब बिना देखे बताइए।",
+      "teaches": "अन्य स्थानों में न उगने का कारण तुलना करें",
+      "visual_action": "दूसरे राज्य के मानचित्र पर कोई जल नहीं दिखाया जाता, व्यक्ति चलता है",
+      "setting": "institution",
+      "objects": [
+        {
+          "kind": "map",
+          "action": "none",
+          "map_region": "india",
+          "id": "obj0",
+          "label": "",
+          "color": "#59c7c5",
+          "pos": [
+            -0.9,
+            0,
+            0
+          ],
+          "size": [
+            1.1,
+            1.1,
+            1.1
+          ]
+        },
+        {
+          "kind": "person",
+          "action": "walk",
+          "id": "obj1",
+          "label": "",
+          "color": "#f4e7bf",
+          "pos": [
+            0.45,
+            0,
+            0
+          ],
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ],
+          "to": [
+            1.65,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "role": "revision",
+      "heading": "रिवीजन कार्ड",
+      "explanation": "याद रखें: जम्मू–कश्मीर।",
+      "speech": "याद रखें: जम्मू–कश्मीर।",
+      "teaches": "स्मरण शक्ति बढ़ाएँ",
+      "visual_action": "सभी वस्तुएँ स्थिर, टेक्स्ट दिखता है",
+      "setting": "neutral",
+      "revision_card": true,
+      "objects": [
+        {
+          "kind": "map",
+          "action": "none",
+          "map_region": "india",
+          "id": "obj0",
+          "label": "",
+          "color": "#59c7c5",
+          "pos": [
+            0.0,
+            0,
+            0
+          ],
+          "size": [
+            1.1,
+            1.1,
+            1.1
+          ]
+        }
+      ]
+    }
+  ],
+  "speech": [
+    "केसर ................. का एक उत्पाद है। नक्शा देखिए।",
+    "दो सेकंड: A या B?",
+    "सही उत्तर है: जम्मू–कश्मीर।",
+    "इसका वानस्पतिक नाम क्रोकस सैटाइवस (Crocus Sativus) है।",
+    "अब बिना देखे बताइए।",
+    "याद रखें: जम्मू–कश्मीर।"
+  ],
+  "titles": [
+    [
+      "पहले अपना जवाब चुनिए",
+      "A या B — सोचिए"
+    ],
+    [
+      "कमेंट में लिखिए: A या B?",
+      "दो सेकंड: A या B?"
+    ],
+    [
+      "सही उत्तर",
+      "सही उत्तर है: जम्मू–कश्मीर।"
+    ],
+    [
+      "तथ्य समझिए",
+      "इसका वानस्पतिक नाम क्रोकस सैटाइवस (Crocus"
+    ],
+    [
+      "खुद को जाँचिए",
+      "अब बिना देखे बताइए।"
+    ],
+    [
+      "रिवीजन कार्ड",
+      "याद रखें: जम्मू–कश्मीर।"
+    ]
+  ],
+  "requested_topic": "केसर ................. का एक उत्पाद है।",
+  "automatic_selection": false,
+  "planner": "Groq / openai/gpt-oss-20b",
+  "auditor": "Cloudflare / @cf/meta/llama-3.3-70b-instruct-fp8-fast",
+  "dynamic": true,
+  "topic_policy": "easy_single_concept_v1",
+  "quality_version": "rich_3d_v1",
+  "primary_objective": "follow",
+  "series_next_topic": "गोल्डन फाइबर के रूप में किसे जाना जाता है?"
+}

@@ -1,0 +1,132 @@
+{
+  "ok": true,
+  "title": "केसर का उत्पाद स्थान",
+  "subject": "Geography",
+  "renderer_version": "rich_3d_v1",
+  "question_hash": "77e0249471ab71f31196c9a8e3cfa76283afa4cfef3367b32fbced252d8ae4fe",
+  "reference": {
+    "subject": "Geography",
+    "subject_hi": "भूगोल",
+    "chapter": "कृषि एवं पशुपालन (Agriculture and Animal Husbandry)",
+    "sub": "",
+    "question": "केसर ................. का एक उत्पाद है।",
+    "options": {
+      "a": "पश्चिम बंगाल",
+      "b": "गोवा",
+      "c": "जम्मू–कश्मीर",
+      "d": "अरुणाचल प्रदेश"
+    },
+    "answer": "c",
+    "exams": [
+      "RRB Group-D 10-10-2018 (Shift-II)",
+      "RRB Group-D 27-11-2018 (Shift-I)"
+    ],
+    "explanation": "केसर की खेती जम्मू कश्मीर के किश्तवाड़ तथा पम्पोर में की जाती है। कश्मीर में पायी जाने वाली करेवा मिट्टी केसर की खेती के लिए उपयुक्त है। इसका वानस्पतिक नाम क्रोकस सैटाइवस (Crocus Sativus) है। विश्व में केसर (Saffron) उत्पादक प्रमुख देश-फ्रांस, स्पेन, भारत, ईरान, इटली, ग्रीस, जर्मनी, जापान, रुस इत्यादि है।",
+    "times_asked": 2,
+    "years": [
+      "2018"
+    ],
+    "id": "ad53cd811c",
+    "seq": 46
+  },
+  "experiment_format": "map_pyq_challenge",
+  "primary_objective": "follow",
+  "series_next_topic": "गोल्डन फाइबर के रूप में किसे जाना जाता है?",
+  "series_next_hash": "6e4af295b8020048295567ff9c4336c2aadcc0114323e133ea4eed4dddf09ce5",
+  "topic_policy": "evidence_cohort_v2",
+  "topic_priority": 1.0,
+  "recall": "याद रखें: जम्मू–कश्मीर।",
+  "share_card": {
+    "kind": "exam_confusion",
+    "recipient": "भूगोल के छात्र",
+    "benefit": "केसर किस राज्य का उत्पाद है, स्पष्ट उत्तर",
+    "cta": "अब अपने दोस्त को बताओ"
+  },
+  "share_reason": "जम्मू‑कश्मीर के केसर को समझना परीक्षा में मददगार",
+  "scenes": [
+    {
+      "label": "पहले अपना जवाब चुनिए",
+      "quiz_options": [
+        "A: जम्मू–कश्मीर",
+        "B: पश्चिम बंगाल"
+      ],
+      "speech": "केसर ................. का एक उत्पाद है। नक्शा देखिए।",
+      "role": "hook",
+      "revision_card": false,
+      "teaches": "केसर के उत्पाद राज्य को पहचानें",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "नक्शे पर जम्मू‑कश्मीर दिखाएँ, व्यक्ति चलकर उस क्षेत्र की ओर जाता है"
+      }
+    },
+    {
+      "label": "कमेंट में लिखिए: A या B?",
+      "quiz_options": [
+        "A: जम्मू–कश्मीर",
+        "B: पश्चिम बंगाल"
+      ],
+      "speech": "दो सेकंड: A या B?",
+      "role": "challenge",
+      "revision_card": false,
+      "teaches": "विकल्पों में सोचें",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "व्यक्ति दो बिंदुओं के बीच चलकर विकल्प दिखाता है, तीर घूमता है"
+      }
+    },
+    {
+      "label": "सही उत्तर",
+      "quiz_options": null,
+      "speech": "सही उत्तर है: जम्मू–कश्मीर।",
+      "role": "reveal",
+      "revision_card": false,
+      "teaches": "सही उत्तर पहचानें",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "नक्शे पर जम्मू‑कश्मीर को हाइलाइट किया जाता है"
+      }
+    },
+    {
+      "label": "तथ्य समझिए",
+      "quiz_options": null,
+      "speech": "इसका वानस्पतिक नाम क्रोकस सैटाइवस (Crocus Sativus) है।",
+      "role": "explain",
+      "revision_card": false,
+      "teaches": "भौगोलिक कारण समझें",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "laboratory",
+        "visible_action": "मिट्टी में जल का प्रवाह दिखाया जाता है"
+      }
+    },
+    {
+      "label": "खुद को जाँचिए",
+      "quiz_options": null,
+      "speech": "अब बिना देखे बताइए।",
+      "role": "transfer",
+      "revision_card": false,
+      "teaches": "अन्य स्थानों में न उगने का कारण तुलना करें",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "institution",
+        "visible_action": "दूसरे राज्य के मानचित्र पर कोई जल नहीं दिखाया जाता, व्यक्ति चलता है"
+      }
+    },
+    {
+      "label": "रिवीजन कार्ड",
+      "quiz_options": null,
+      "speech": "याद रखें: जम्मू–कश्मीर।",
+      "role": "revision",
+      "revision_card": true,
+      "teaches": "स्मरण शक्ति बढ़ाएँ",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "सभी वस्तुएँ स्थिर, टेक्स्ट दिखता है"
+      }
+    }
+  ]
+}

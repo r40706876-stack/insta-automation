@@ -1,0 +1,45 @@
+{
+  "answer_correct": true,
+  "visual_relevance": true,
+  "hindi_readable": true,
+  "pronunciation_correct": true,
+  "audio_visual_match": true,
+  "answer_reveal_timing": true,
+  "revision_card_readable": true,
+  "reasons": [
+    "Video correctly poses the question with options A and B after a 2-second thinking window.",
+    "Correct answer (Jammu and Kashmir) is revealed with clear audio and visual map highlighting.",
+    "Botanical name facts and revision card are clearly explained and readable in Hindi."
+  ],
+  "observed_answer": "जम्मू–कश्मीर",
+  "scene_evidence": [
+    {
+      "scene": 1,
+      "observation": "Question about Saffron production state is displayed with options A and B."
+    },
+    {
+      "scene": 2,
+      "observation": "2-second timer runs allowing the viewer to choose between A and B."
+    },
+    {
+      "scene": 3,
+      "observation": "The correct answer Jammu and Kashmir is revealed on the map."
+    },
+    {
+      "scene": 4,
+      "observation": "Botanical name Crocus Sativus is explained visually with laboratory 3D setting."
+    },
+    {
+      "scene": 5,
+      "observation": "Transfer test scene prompts recall without looking."
+    },
+    {
+      "scene": 6,
+      "observation": "Revision card clearly displays 'याद रखें: जम्मू–कश्मीर' along with the next question."
+    }
+  ],
+  "sha256": "2ef952f9283e29e224b9e0e40240e0509729e8b960a0a29cdedb09f145394dbb",
+  "reviewer": "gemini-3.5-flash-lite / actual rendered video and audio",
+  "reviewed_at": "2026-11-04T17:05:26.040701+00:00",
+  "review_type": "automated_multimodal"
+}

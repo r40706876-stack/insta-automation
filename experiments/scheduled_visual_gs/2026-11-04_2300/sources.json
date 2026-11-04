@@ -1,0 +1,11 @@
+[
+  {
+    "url": "user-provided",
+    "excerpt": "Verified question-bank reference; do not add claims beyond this reference: {\"subject\": \"Geography\", \"subject_hi\": \"भूगोल\", \"chapter\": \"कृषि एवं पशुपालन (Agriculture and Animal Husbandry)\", \"sub\": \"\", \"question\": \"केसर ................. का एक उत्पाद है।\", \"options\": {\"a\": \"पश्चिम बंगाल\", \"b\": \"गोवा\", \"c\": \"जम्मू–कश्मीर\", \"d\": \"अरुणाचल प्रदेश\"}, \"answer\": \"c\", \"exams\": [\"RRB Group-D 10-10-2018 (Shift-II)\", \"RRB Group-D 27-11-2018 (Shift-I)\"], \"explanation\": \"केसर की खेती जम्मू कश्मीर के किश्तवाड़ तथा पम्पोर में की जाती है। कश्मीर में पायी जाने वाली करेवा मिट्टी केसर की खेती के लिए उपयुक्त है। इसका वानस्पतिक नाम क्रोकस सैटाइवस (Crocus Sativus) है। विश्व में केसर (Saffron) उत्पादक प्रमुख देश-फ्रांस, स्पेन, भारत, ईरान, इटली, ग्रीस, जर्मनी, जापान, रुस इत्यादि है।\", \"times_asked\": 2, \"years\": [\"2018\"], \"id\": \"ad53cd811c\", \"seq\": 46}"
+  },
+  {
+    "url": "https://www.naturalearthdata.com/downloads/110m-physical-vectors/110m-land/",
+    "publisher": "Natural Earth, public-domain physical coastline geometry",
+    "note": "Modern Gujarat outline is separately attributed in dandi_map.LICENSE; routes are schematic."
+  }
+]
