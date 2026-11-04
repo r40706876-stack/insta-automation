@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-04T01:05:21.881125+00:00",
+  "generated_at": "2026-11-04T03:22:57.130880+00:00",
   "windows": {
     "24h": [
       {
@@ -238,7 +238,7 @@
       {
         "subject": null,
         "format": "legacy_unclassified",
-        "reels": 18,
+        "reels": 19,
         "metrics": {
           "shares_per_1000": {
             "mean": 1.2789502253103786,
@@ -797,6 +797,39 @@
         },
         "decision": "collect_more",
         "automatic_scale": false
+      },
+      {
+        "subject": "Traditional GK",
+        "format": "legacy_unclassified",
+        "reels": 1,
+        "metrics": {
+          "shares_per_1000": {
+            "mean": null,
+            "n": 0
+          },
+          "saves_per_1000": {
+            "mean": null,
+            "n": 0
+          },
+          "average_watch_time": {
+            "mean": null,
+            "n": 0
+          },
+          "three_second_rate": {
+            "mean": null,
+            "n": 0
+          },
+          "retention": {
+            "mean": null,
+            "n": 0
+          },
+          "net_followers": {
+            "mean": null,
+            "n": 0
+          }
+        },
+        "decision": "collect_more",
+        "automatic_scale": false
       }
     ]
   },
@@ -806,7 +839,7 @@
       {
         "subject": null,
         "format": "legacy_unclassified",
-        "reels": 18,
+        "reels": 19,
         "shares_per_1000": 1.2789502253103786,
         "saves_per_1000": 3.1293367744050182,
         "average_watch_time": 4.961055555555555
