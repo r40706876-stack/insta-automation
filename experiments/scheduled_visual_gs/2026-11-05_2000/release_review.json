@@ -1,0 +1,46 @@
+{
+  "answer_correct": true,
+  "visual_relevance": true,
+  "hindi_readable": true,
+  "pronunciation_correct": true,
+  "audio_visual_match": true,
+  "answer_reveal_timing": true,
+  "revision_card_readable": true,
+  "reasons": [
+    "Video correctly poses the question about Shri Lal Bahadur Shastri National Sanskrit University location.",
+    "Visual assets clearly show map locations, options, and explanations matching the reference data.",
+    "Pronunciation is correct and clear in Hindi.",
+    "All six scenes are properly timed and structured."
+  ],
+  "observed_answer": "B",
+  "scene_evidence": [
+    {
+      "scene": 1,
+      "observation": "Question displayed with options Pune and New Delhi alongside a map of India."
+    },
+    {
+      "scene": 2,
+      "observation": "Challenge prompt displayed with a 2-second pause and voting instruction."
+    },
+    {
+      "scene": 3,
+      "observation": "Map highlighting New Delhi as the correct answer."
+    },
+    {
+      "scene": 4,
+      "observation": "Explanation regarding establishment date (8 October 1962) and central university status (30 April 2020)."
+    },
+    {
+      "scene": 5,
+      "observation": "Self-assessment recall test without visible markers."
+    },
+    {
+      "scene": 6,
+      "observation": "Revision card showing 'याद रखें: नई दिल्ली।' clearly for memory reinforcement."
+    }
+  ],
+  "sha256": "440fed9ba426d0df4956203a3777551400a9917623d1f68b43fc63046349a112",
+  "reviewer": "gemini-3.5-flash-lite / actual rendered video and audio",
+  "reviewed_at": "2026-11-04T14:57:38.348635+00:00",
+  "review_type": "automated_multimodal"
+}

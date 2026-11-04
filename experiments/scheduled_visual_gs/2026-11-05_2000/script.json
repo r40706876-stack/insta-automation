@@ -1,0 +1,132 @@
+{
+  "ok": true,
+  "title": "श्री लाल बहादुर शास्त्री राष्ट्रीय संस्कृत विश्वविद्यालय का स्थान",
+  "subject": "Traditional GK",
+  "renderer_version": "rich_3d_v1",
+  "question_hash": "84d3081989a4b76bda0d9a8adaf1022d4c55df86a0fa46ff0b0acb1d22942621",
+  "reference": {
+    "subject": "Traditional GK",
+    "subject_hi": "सामान्य ज्ञान",
+    "chapter": "प्रमुख राष्ट्रीय संस्थान/संगठन (Major Institutions/Organizations)",
+    "sub": "",
+    "question": "श्री लाल बहादुर शास्त्री राष्ट्रीय संस्कृत विश्वविद्यालय _____ में स्थित है।",
+    "options": {
+      "a": "पुणे",
+      "b": "नई दिल्ली",
+      "c": "लखनऊ",
+      "d": "जयपुर"
+    },
+    "answer": "b",
+    "exams": [
+      "RRB Group D 05/09/2022 (Shift-I)",
+      "RRB Group D 14/09/2022 (Shift-III)"
+    ],
+    "explanation": "श्री लाल बहादुर शास्त्री राष्ट्रीय संस्कृत विश्वविद्यालय, पूर्व में इसे श्री लाल बहादुर शास्त्री राष्ट्रीय संस्कृत विद्यापीठ, के रूप में जाना जाता था, नई दिल्ली में स्थित एक केन्द्रीय विश्वविद्यालय है। इसकी स्थापना 8 अक्टूबर 1962 को हुई तथा 30 अप्रैल, 2020 को यह केन्द्रीय विश्वविद्यालय बना।",
+    "times_asked": 2,
+    "years": [
+      "2022"
+    ],
+    "id": "c71400dea6",
+    "seq": 89
+  },
+  "experiment_format": "exam_trap",
+  "primary_objective": "share",
+  "series_next_topic": "निम्न में से किसकी परिशुद्धता में गड़बड़ी के कारण बैलिस्टिक मिसाइल विफल हो जाती हैं?",
+  "series_next_hash": "b456d99ccf2615595baaf81acfdec1a9de40a0d3c842d19e761b95489d20189d",
+  "topic_policy": "evidence_cohort_v2",
+  "topic_priority": 1.0,
+  "recall": "याद रखें: नई दिल्ली।",
+  "share_card": {
+    "kind": "exam_confusion",
+    "recipient": "परीक्षा की तैयारी करने वाले दोस्त",
+    "benefit": "विश्वविद्यालय का सही स्थान नई दिल्ली है",
+    "cta": "दोस्त को यह तथ्य बताओ"
+  },
+  "share_reason": "दोस्त को परीक्षा में इस विश्वविद्यालय के सही स्थान की याद दिलाने के लिए",
+  "scenes": [
+    {
+      "label": "पहले अपना जवाब चुनिए",
+      "quiz_options": [
+        "A: पुणे",
+        "B: नई दिल्ली"
+      ],
+      "speech": "श्री लाल बहादुर शास्त्री राष्ट्रीय संस्कृत विश्वविद्यालय _____ में स्थित है। जाल पहचानिए।",
+      "role": "hook",
+      "revision_card": false,
+      "teaches": "प्रश्न को पहचानना और विकल्पों पर विचार करना",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "institution",
+        "visible_action": "नक्शे पर पुणे और नई दिल्ली मार्कर दिखाएँ, व्यक्ति चलता है"
+      }
+    },
+    {
+      "label": "कमेंट में लिखिए: A या B?",
+      "quiz_options": [
+        "A: पुणे",
+        "B: नई दिल्ली"
+      ],
+      "speech": "A या B? दो सेकंड सोचिए, कमेंट कीजिए।",
+      "role": "challenge",
+      "revision_card": false,
+      "teaches": "दो संभावित विकल्पों को समझना",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "institution",
+        "visible_action": "विकल्प कार्ड दिखाएँ, तीर घूमता है"
+      }
+    },
+    {
+      "label": "सही उत्तर",
+      "quiz_options": null,
+      "speech": "सही उत्तर है: नई दिल्ली।",
+      "role": "reveal",
+      "revision_card": false,
+      "teaches": "सही स्थान की पुष्टि करना",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "institution",
+        "visible_action": "नक्शे पर नई दिल्ली को हाइलाइट किया गया, रूट दिखाया"
+      }
+    },
+    {
+      "label": "तथ्य समझिए",
+      "quiz_options": null,
+      "speech": "इसकी स्थापना 8 अक्टूबर 1962 को हुई तथा 30 अप्रैल, 2020 को यह केन्द्रीय विश्वविद्यालय बना।",
+      "role": "explain",
+      "revision_card": false,
+      "teaches": "स्थान के महत्व को समझना",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "institution",
+        "visible_action": "भवन ऊपर उठता है, दर्शक देखता है"
+      }
+    },
+    {
+      "label": "खुद को जाँचिए",
+      "quiz_options": null,
+      "speech": "अब बिना देखे बताइए।",
+      "role": "transfer",
+      "revision_card": false,
+      "teaches": "स्थान याद रखने की तकनीक",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "institution",
+        "visible_action": "दूसरे विश्वविद्यालय का नक्शा दिखाया, रूट ट्रेस किया"
+      }
+    },
+    {
+      "label": "रिवीजन कार्ड",
+      "quiz_options": null,
+      "speech": "याद रखें: नई दिल्ली।",
+      "role": "revision",
+      "revision_card": true,
+      "teaches": "स्मृति को सुदृढ़ करना",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "टेक्स्ट स्थिर दिखाया गया"
+      }
+    }
+  ]
+}
