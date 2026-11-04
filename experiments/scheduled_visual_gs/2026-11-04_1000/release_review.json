@@ -1,0 +1,46 @@
+{
+  "answer_correct": true,
+  "visual_relevance": false,
+  "hindi_readable": false,
+  "pronunciation_correct": false,
+  "audio_visual_match": false,
+  "answer_reveal_timing": true,
+  "revision_card_readable": true,
+  "reasons": [
+    "On-screen text contains severe typos and corrupted character glitches ('उद् गमा', 'दा क्षिण', 'e निकट', 'n ुआ', 'n w').",
+    "TTS audio literally pronounces the garbled text and random letters ('ई निकट', 'एन हुआ', 'एन डब्ल्यू', 'उद् गमा').",
+    "Scene 4 uses generic floating blue spheres rather than explaining the geographical origin visually.",
+    "Scene 5 shows an arrow pointing to the bottom of a world map rather than tracing Brahmaputra's path through Tibet, India, and Bangladesh."
+  ],
+  "observed_answer": "ब्रह्मपुत्र",
+  "scene_evidence": [
+    {
+      "scene": 1,
+      "observation": "Map of India shown with an arrow while asking which river does not originate in India."
+    },
+    {
+      "scene": 2,
+      "observation": "Options 'ब्रह्मपुत्र' and 'कोइल' displayed with 2-second thinking pause."
+    },
+    {
+      "scene": 3,
+      "observation": "Answer revealed as Brahmaputra on a simple world map."
+    },
+    {
+      "scene": 4,
+      "observation": "Generic blue balls labeled 'हिम जल' float across a dark background; on-screen text contains severe character corruptions ('e निकट', 'n ुआ')."
+    },
+    {
+      "scene": 5,
+      "observation": "World map displayed with an arrow pointing toward the southern ocean/Antarctica while text reads garbled 'n w'."
+    },
+    {
+      "scene": 6,
+      "observation": "Revision card shown clearly with text 'याद रखें: ब्रह्मपुत्र'."
+    }
+  ],
+  "sha256": "5f31e067baece3f1844bfddb627b42f2b9f36617135838dc97f068558d3078ff",
+  "reviewer": "gemini-3.6-flash / actual rendered video and audio",
+  "reviewed_at": "2026-11-04T03:39:59.833684+00:00",
+  "review_type": "automated_multimodal"
+}

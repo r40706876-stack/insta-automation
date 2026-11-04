@@ -1,0 +1,129 @@
+{
+  "ok": true,
+  "title": "नदी का उद्गम प्रश्न",
+  "subject": "Geography",
+  "renderer_version": "rich_3d_v1",
+  "question_hash": "a8c610b63332e6c669d40af0dd75834a7888d66ce3286c9b12bfe3dbd722b8f5",
+  "reference": {
+    "subject": "Geography",
+    "subject_hi": "भूगोल",
+    "chapter": "अपवाह तन्त्र (Drainage System)",
+    "sub": "",
+    "question": "निम्नलिखित में से कौन सी नदी का उद्गम भारत में नहीं है?",
+    "options": {
+      "a": "कोइल",
+      "b": "सांख",
+      "c": "ब्रह्मपुत्र",
+      "d": "ब्राह्मणी"
+    },
+    "answer": "c",
+    "exams": [
+      "RRB Group-D 17-09-2018 (Shift-III)",
+      "RRB Group-D 25-09-2018 (Shift-II)"
+    ],
+    "explanation": "ब्रह्मपुत्र नदी का उद् गमा तिब्बत के दा क्षिण में मानसरोवर के e निकट ‘चेमायुंगडुंग’ नामका हिमवाह से n ुआ है। यहा तिब्बत, भारत तथा बांग्लादेश से होकर बहती n w। e तिब्बत में इसे ‘सांग्पो’, अरुणाचल प्रदेश में ‘दिहंाग’ एवं असम में ‘ब्रह्मपुत्र’ कहते n Q। इसकी लम्बाई लगभग 2900 e किलोमीटर n w। इसकी प्रमुख सहायक ना दियाँ दिबांग, कामेंग, ueese हित, मानस, तीस्ता, धना सिरी, बराक Deee दि n w।",
+    "times_asked": 2,
+    "years": [
+      "2018"
+    ],
+    "id": "5b546fd3bd",
+    "seq": 26
+  },
+  "experiment_format": "map_pyq_challenge",
+  "primary_objective": "follow",
+  "series_next_topic": "सूरत से होकर बहने वाली नदी निम्न में से कौन सी है?",
+  "series_next_hash": "2b11354d779eb1a7dbaa0f691cf60dc4eda10bcb4ed0248f1c5b4bd1e226b2fd",
+  "topic_policy": "evidence_cohort_v2",
+  "topic_priority": 1.0,
+  "recall": "याद रखें: ब्रह्मपुत्र।",
+  "share_card": {
+    "kind": "exam_confusion",
+    "recipient": "परीक्षा की तैयारी करने वाले दोस्त",
+    "benefit": "भ्रम दूर करके सही नदी का उद्गम याद रहेगा",
+    "cta": "दोस्त को यह क्विज़ भेजें"
+  },
+  "share_reason": "भ्रम दूर करके सही नदी का उद्गम याद रहेगा",
+  "scenes": [
+    {
+      "label": "नक्शा टेस्ट",
+      "quiz_options": null,
+      "speech": "निम्नलिखित में से कौन सी नदी का उद्गम भारत में नहीं है? नक्शे पर दिशा पहचानिए।",
+      "role": "hook",
+      "revision_card": false,
+      "teaches": "प्रश्न पहचान",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "एक तीर नक्शे पर बाएँ से दाएँ चलता है"
+      }
+    },
+    {
+      "label": "अपना जवाब चुनिए",
+      "quiz_options": [
+        "ब्रह्मपुत्र",
+        "कोइल"
+      ],
+      "speech": "दोनों विकल्पों में सही कौन-सा है? दो सेकंड सोचिए।",
+      "role": "challenge",
+      "revision_card": false,
+      "teaches": "विकल्पों पर विचार",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "तीर दो विकल्पों के बीच झपकता है"
+      }
+    },
+    {
+      "label": "सही उत्तर",
+      "quiz_options": null,
+      "speech": "सही उत्तर है: ब्रह्मपुत्र।",
+      "role": "reveal",
+      "revision_card": false,
+      "teaches": "सही उत्तर बताना",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "नक्शे पर ब्रह्मपुत्र की धारा को ट्रेस किया जाता है"
+      }
+    },
+    {
+      "label": "तथ्य समझिए",
+      "quiz_options": null,
+      "speech": "ब्रह्मपुत्र नदी का उद् गमा तिब्बत के दा क्षिण में मानसरोवर के e निकट ‘चेमायुंगडुंग’ नामका हिमवाह से n ुआ है।",
+      "role": "explain",
+      "revision_card": false,
+      "teaches": "उद्गम स्थान समझना",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "हिम जल स्रोत से पानी नीचे की ओर बहता दिखाया जाता है"
+      }
+    },
+    {
+      "label": "खुद को जाँचिए",
+      "quiz_options": null,
+      "speech": "यहा तिब्बत, भारत तथा बांग्लादेश से होकर बहती n w।",
+      "role": "transfer",
+      "revision_card": false,
+      "teaches": "भौगोलिक प्रवाह याद रखना",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "तीर तिब्बत से भारत तक यात्रा दिखाता है"
+      }
+    },
+    {
+      "label": "रिवीजन कार्ड",
+      "quiz_options": null,
+      "speech": "याद रखें: ब्रह्मपुत्र।",
+      "role": "revision",
+      "revision_card": true,
+      "teaches": "स्मरण",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "स्थिर कार्ड दिखाया जाता है"
+      }
+    }
+  ]
+}

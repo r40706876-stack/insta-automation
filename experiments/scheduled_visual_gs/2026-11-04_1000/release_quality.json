@@ -1,0 +1,11 @@
+{
+  "safe_to_publish": false,
+  "blocking_reasons": [
+    "unverified visual_relevance",
+    "unverified hindi_readable",
+    "unverified pronunciation_correct",
+    "unverified audio_visual_match"
+  ],
+  "sha256": "5f31e067baece3f1844bfddb627b42f2b9f36617135838dc97f068558d3078ff",
+  "version": "rendered_release_v1"
+}
