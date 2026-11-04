@@ -44,7 +44,6 @@ def clean_reference(q):
  ewords=words(str(q.get('explanation','')))
  answer=str(options.get(q.get('answer'),'')).strip()
  expl=str(q.get('explanation',''))
- if qwords and not (qwords&ewords):return False
  # The explanation must actually contain the answer (e.g. 'एकता दिवस' row explained Dhyan Chand).
  tokens=[t for t in _re.findall(r'[\u0900-\u097fA-Za-z0-9]+',answer) if t not in _STOP and len(t)>=2]
  if tokens and sum(t in expl for t in tokens)/len(tokens)<.6:return False

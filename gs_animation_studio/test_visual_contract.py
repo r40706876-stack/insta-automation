@@ -39,7 +39,7 @@ class VisualContractTests(unittest.TestCase):
    with bridge.environment({'STUDIO_REVIEWED_RECIPE':'test'}):raise RuntimeError('fixture')
   self.assertEqual(os.environ.get('STUDIO_REVIEWED_RECIPE'),before)
  def test_bank_filter_obeys_subject_and_prevents_repeat(self):
-  bank=[{'subject':'History','question':'old','options':{'a':'answer'},'answer':'a','explanation':'Grounded explanation for a source.'},{'subject':'Geography','question':'new','options':{'a':'answer'},'answer':'a','explanation':'Grounded explanation for a source.'}]
+  bank=[{'subject':'History','question':'old','options':{'a':'answer'},'answer':'a','explanation':'Grounded explanation for a source: answer.'},{'subject':'Geography','question':'new','options':{'a':'answer'},'answer':'a','explanation':'Grounded explanation for a source: answer.'}]
   with self.assertRaises(RuntimeError):bridge.choose_reference(bank,'History',{hashlib.sha256(b'old').hexdigest()})
   self.assertEqual(bridge.choose_reference(bank,'Geography',set())[1]['question'],'new')
  def test_regular_schedule_keeps_pyq_mega_and_hold(self):
