@@ -1,0 +1,164 @@
+{
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string"
+    },
+    "subject": {
+      "type": "string"
+    },
+    "topic_key": {
+      "type": "string"
+    },
+    "share_reason": {
+      "type": "string"
+    },
+    "recall": {
+      "type": "string"
+    },
+    "pyq_challenge": {
+      "type": "boolean"
+    },
+    "share_card": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "type": "string"
+        },
+        "recipient": {
+          "type": "string"
+        },
+        "benefit": {
+          "type": "string"
+        },
+        "cta": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "recipient",
+        "benefit",
+        "cta"
+      ]
+    },
+    "scenes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "role": {
+            "type": "string",
+            "enum": [
+              "hook",
+              "challenge",
+              "reveal",
+              "explain",
+              "transfer",
+              "revision"
+            ]
+          },
+          "heading": {
+            "type": "string"
+          },
+          "explanation": {
+            "type": "string"
+          },
+          "speech": {
+            "type": "string"
+          },
+          "teaches": {
+            "type": "string"
+          },
+          "visual_action": {
+            "type": "string"
+          },
+          "setting": {
+            "type": "string",
+            "description": "neutral, coast, space, institution, laboratory or village"
+          },
+          "revision_card": {
+            "type": "boolean"
+          },
+          "objects": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "kind": {
+                  "type": "string"
+                },
+                "action": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "map_region": {
+                  "type": "string"
+                },
+                "route": {
+                  "type": "array",
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "type": "number"
+                    }
+                  }
+                },
+                "pos": {
+                  "type": "array",
+                  "items": {
+                    "type": "number"
+                  }
+                },
+                "to": {
+                  "type": "array",
+                  "items": {
+                    "type": "number"
+                  }
+                },
+                "size": {
+                  "type": "array",
+                  "items": {
+                    "type": "number"
+                  }
+                }
+              },
+              "required": [
+                "kind",
+                "action"
+              ]
+            },
+            "minItems": 1,
+            "maxItems": 4
+          }
+        },
+        "required": [
+          "role",
+          "heading",
+          "explanation",
+          "speech",
+          "teaches",
+          "visual_action",
+          "setting",
+          "objects"
+        ]
+      },
+      "minItems": 6,
+      "maxItems": 6
+    }
+  },
+  "required": [
+    "title",
+    "subject",
+    "topic_key",
+    "share_reason",
+    "recall",
+    "share_card",
+    "scenes"
+  ]
+}
