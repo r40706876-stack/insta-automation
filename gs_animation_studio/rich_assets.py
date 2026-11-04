@@ -117,7 +117,7 @@ def clip_polygon(poly,bounds):
    a=b
  return poly
 
-PASTEL=[(.93,.83,.45),(.78,.72,.93),(.74,.86,.62),(.95,.7,.56),(.62,.84,.9),(.93,.74,.84),(.83,.9,.55),(.97,.85,.66)]
+PASTEL=[(1.0,.9,.42),(.82,.74,1.0),(.72,.95,.58),(1.0,.72,.55),(.6,.9,1.0),(1.0,.74,.88),(.88,1.0,.5),(1.0,.86,.62)]
 def in_ring(pt,ring):
  x,y=pt;inside=False;j=len(ring)-1
  for i in range(len(ring)):
@@ -152,10 +152,12 @@ def map_asset(parent,spec):
  if regional:
   # Upgrade (4 Nov): full-width coloured state map like the 1,789-view Map Test 01,
   # instead of a small dark single-colour silhouette.
-  factor=6.1/(xmax-xmin);cz=0.0
+  # The scene scales the whole group by spec size; keep the on-screen width ~6.0 units (frame ~6.4).
+  scale=float((spec.get('size') or [1])[0]) or 1.0
+  factor=6.0/((xmax-xmin)*scale);cz=0.0
   def point(p,y=-.08):return Vector(((p[0]-(xmin+xmax)/2)*factor,y,(p[1]-(ymin+ymax)/2)*factor+cz))
-  sea_l=mat('Light map sea',(.55,.78,.86));neigh=mat('Neighbour land',(.8,.79,.72));border=mat('State border',(.3,.33,.32));river=mat('River blue',(.02,.28,.78))
-  box('Map ocean backplate',(0,.1,cz),(6.3,.12,(ymax-ymin)*factor+.2),sea_l,parent)
+  sea_l=mat('Light map sea',(.62,.9,1.0));neigh=mat('Neighbour land',(.9,.88,.8));border=mat('State border',(.3,.33,.32));river=mat('River blue',(.02,.28,.78))
+  box('Map ocean backplate',(0,.1,cz),((xmax-xmin)*factor+.15,.12,(ymax-ymin)*factor+.15),sea_l,parent)
   data=json.loads((R/'world_land.json').read_text())
   for feature in data['features']:
    geom=feature['geometry']
@@ -169,7 +171,7 @@ def map_asset(parent,spec):
     ring=clip_polygon([list(p[:2]) for p in ring],bounds)
     if len(ring)<3:continue
     flat_fill('Indian state '+st['name'],ring,point,m,parent,-.05)
-    line('State boundary',[point(p,-.07) for p in ring+[ring[0]]],.006,border,parent)
+    line('State boundary',[point(p,-.07) for p in ring+[ring[0]]],.005/scale,border,parent)
   context=[]
   for label,at in (('अरब सागर',(70.2,max(ymin+1.2,min(ymax-1.5,17.5)))),('बंगाल की खाड़ी',(87.6,max(ymin+1.2,min(ymax-1.5,17.5))))):
    if xmin<at[0]<xmax and ymin<at[1]<ymax and state_at(at,states) is None:context.append((label,point(at,-.15)))
@@ -182,7 +184,7 @@ def map_asset(parent,spec):
   choice=[]
   for a,b in spec.get('choice_lines',[]):
    pa,pb=point(a,-.12),point(b,-.12)
-   for k in range(0,10,2):choice.append(line('Equal choice dash',[pa.lerp(pb,k/10),pa.lerp(pb,(k+1)/10)],.03,dark,parent))
+   for k in range(0,10,2):choice.append(line('Equal choice dash',[pa.lerp(pb,k/10),pa.lerp(pb,(k+1)/10)],.028/scale,dark,parent))
   route_mat=river
  else:
   span=max(xmax-xmin,(ymax-ymin)*1.3);factor=3.5/span
