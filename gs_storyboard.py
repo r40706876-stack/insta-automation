@@ -11,17 +11,22 @@ def grounded_storyboard(reference,format_name=None):
     if not facts:raise ValueError('A complete concise source explanation is required')
     other=next((str(v).strip().rstrip('।.') for k,v in options.items() if k!=key),None)
     # Comment pause: ask for A/B in the comments before the reveal (comments were ~0).
-    choices='A या B? दो सेकंड सोचिए और कमेंट में अपना जवाब लिखिए।' if other else 'दो सेकंड सोचिए, फिर जवाब मिलाइए।'
+    choices='A या B? दो सेकंड सोचिए, कमेंट कीजिए।' if other else 'दो सेकंड सोचिए, फिर जवाब मिलाइए।'
     displayed=[answer,other] if other else [answer]
     if other and sum(question.encode())%2:displayed.reverse()
     if other:displayed=['A: '+displayed[0],'B: '+displayed[1]]
     # Lead with the question itself, then vary the short challenge by experiment.
     # Format diversity matters for controlled A/B testing without generic preambles.
-    prompt_tail={'exam_trap':' गलत विकल्प पहचानिए।',
-                 'visual_mystery':' दृश्य देखकर जवाब खोजिए।',
-                 'map_pyq_challenge':' नक्शे पर दिशा पहचानिए।'}.get(format_name,'')
+    prompt_tail={'exam_trap':' जाल पहचानिए।',
+                 'visual_mystery':' दृश्य देखिए।',
+                 'map_pyq_challenge':' नक्शा देखिए।'}.get(format_name,'')
+    # 4 Nov: studio reels ran 32-35 s while top reels were 21-25 s (watched 12-15 s).
+    # Keep every role but speak less: question only, one short fact, a quick recall line.
     opening=question+prompt_tail if len((question+prompt_tail).split())<=25 else question
-    speech=[opening,choices,'सही उत्तर है: '+answer+'।',facts[0],facts[1] if len(facts)>1 else 'अब बिना देखे जवाब दीजिए: '+question,'याद रखें: '+answer+'।']
+    explain=facts[0] if len(facts[0].split())<=14 or len(facts)==1 else min(facts[:2],key=lambda f:len(f.split()))
+    rest=[f for f in facts if f!=explain]
+    transfer=rest[0] if rest and len(rest[0].split())<=6 else 'अब बिना देखे बताइए।'
+    speech=[opening,choices,'सही उत्तर है: '+answer+'।',explain,transfer,'याद रखें: '+answer+'।']
     if any(len(line.split())>25 for line in speech):raise ValueError('Question/options exceed readable scene limits')
     result=[{'role':role,'heading':heading,'speech':line,'explanation':(' '.join(line.split()[:6]))} for role,heading,line in zip(ROLES,HEADINGS,speech)]
     # Top reels (Map Test 01, हथौड़ा, समुद्री हवा) showed the FULL question and both options

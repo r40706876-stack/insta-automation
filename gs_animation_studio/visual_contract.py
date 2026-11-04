@@ -6,6 +6,9 @@ from gs_scene_policy import is_revision_card
 VERSION='rich_3d_v1'
 SETTINGS={'neutral','coast','space','institution','laboratory','village'}
 ROLES={'ordinary','marcher','soldier','gandhi'}
+GENERIC_KINDS={'arrow','gear','sphere','box','cylinder','book'}
+GENERIC_PEOPLE={'विद्यार्थी','छात्र','छात्रा','व्यक्ति','student','Student'}
+GENERIC_LABELS={'तीर','इशारा','कार्ड','मार्ग','स्मरण','स्मरण पुस्तक','नदी विकल्प','विकल्प','वस्तु','चीज़'}
 BOUNDS={'world':(-180,-85,180,85),'india':(67,6,98,37),'gujarat':(68,20,75,25)}
 def coordinate(p,b):
  return isinstance(p,list) and len(p)==2 and all(isinstance(v,(float,int)) and not isinstance(v,bool) and math.isfinite(v) for v in p) and b[0]<=p[0]<=b[2] and b[1]<=p[1]<=b[3]
@@ -45,5 +48,22 @@ def validate_visual(plan):
    # Decorative pulsing/growing alone cannot meet the teaching-motion requirement.
    if action in ('walk','move','flow','rise','fall','spin','orbit','trace','wave','compress') or o.get('gesture') in ('point','collect','hold'):meaningful+=1
   if meaningful<1 and not is_revision_card(s,i,len(plan['scenes'])):raise ValueError(f'Scene {i+1}: no causal movement beyond decorative pulse/zoom')
+  # 4 Nov insights: flop reels used a walking 'विद्यार्थी', spinning arrows labelled '11'/'12',
+  # a gear for 'संशोधन' and a map for a Polity question. Top reels always showed the real thing.
+  if not is_revision_card(s,i,len(plan['scenes'])):
+   has_map=any(o['kind']=='map' for o in objects)
+   def generic(o):
+    label=str(o.get('label','')).strip()
+    if o['kind'] in ('person','soldier'):return label in GENERIC_PEOPLE
+    # A labelled sphere/arrow can stand for a real thing (वायु अणु, नीला प्रकाश); an empty,
+    # numeric or placeholder label cannot.
+    return o['kind'] in GENERIC_KINDS and (not label or label.replace('.','').isdigit() or label in GENERIC_LABELS or label.rstrip('0123456789')=='विकल्प')
+   real=[o for o in objects if not generic(o)]
+   if not has_map and not real and s.get('role')!='challenge':raise ValueError(f'Scene {i+1}: only generic props (arrow/gear/sphere/box/student); show a topic-specific object or skip this topic')
+   for o in objects:
+    if s.get('role')!='challenge' and str(o.get('label','')).strip() in GENERIC_LABELS:raise ValueError(f'Scene {i+1}: meaningless label "{o.get("label")}"; label must name the real thing or be empty')
+ subject=str(plan.get('subject',''))
+ if any(o['kind']=='map' for sc in plan['scenes'] for o in sc['objects']) and subject and not any(w in subject for w in ('Geography','भूगोल','History','इतिहास','QA')):
+  raise ValueError('Map shown for a non-geography/history topic')
  return plan
 

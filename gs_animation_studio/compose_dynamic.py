@@ -20,6 +20,29 @@ plan=json.loads((R/'recipe.json').read_text())
 def fit(d,xy,s,n,c,maxw):
  while n>17 and d.textlength(s,font=font(n))>maxw:n-=1
  text(d,xy,s,n,c)
+import re as _re
+@lru_cache(None)
+def phrases(text,limit=7):
+ """4 Nov: subtitles used fixed 5-word slices ('नहीं किया जाएगा।', 'की ओर।').
+ Split at sentence/comma breaks; long parts split evenly; never leave a 1-2 word tail."""
+ if len(text.split())<=limit+1:return (text,)
+ parts=[p.strip() for p in _re.split(r'(?<=[।?!,:])\s+',text) if p.strip()]
+ out=[]
+ joins={'या','और','लेकिन','क्योंकि','तो','जबकि','पर'}
+ for p in parts:
+  w=p.split()
+  while len(w)>limit:
+   mid=len(w)//2
+   # Prefer breaking just before a conjunction near the middle ("… बहती है | या पश्चिम …").
+   cut=min((j for j in range(2,len(w)-1) if w[j] in joins),key=lambda j:abs(j-mid),default=None)
+   if cut is None or abs(cut-mid)>3:cut=-(-len(w)//(-(-len(w)//limit)))
+   out.append(' '.join(w[:cut]));w=w[cut:]
+  out.append(' '.join(w))
+ merged=[]
+ for p in out:
+  if merged and (len(p.split())<=2 or len(merged[-1].split())<=2) and len((merged[-1]+' '+p).split())<=limit+2:merged[-1]+=' '+p
+  else:merged.append(p)
+ return tuple(merged) or (text,)
 def rgb(value,default):
  try:return tuple(int(value[j:j+2],16) for j in (1,3,5)) if isinstance(value,str) and len(value)==7 and value[0]=='#' else default
  except ValueError:return default
@@ -98,8 +121,8 @@ def overlay(im,i):
   if not (40<ax<680 and label_floor-40<ay<1030):continue
   if any(abs(ax-a)<150 and abs(ay-b)<40 for a,b in occupied):continue
   d.text((ax,ay),label,font=font(n),fill=(22,52,66),anchor='mm',stroke_width=3,stroke_fill=(250,250,244));occupied.append((ax,ay))
- if row.get('map_disclaimer'):
-  fit(d,(336,1018),'दिशा सांकेतिक • हर पड़ाव का सटीक मार्ग नहीं',21,(224,237,240),590)
+ if row.get('map_disclaimer') and plan['scenes'][k].get('role')=='reveal':
+  fit(d,(336,1018),'दिशा सांकेतिक • हर पड़ाव का सटीक मार्ग नहीं',19,(224,237,240),590)
  # A specific useful share invitation appears only after the explanation, for two seconds.
  card=plan.get('share_card') or {}
  objective=plan.get('primary_objective','share')
@@ -109,13 +132,17 @@ def overlay(im,i):
   d.rounded_rectangle((36,305,636,365),12,fill=(17,63,65),outline=GOLD,width=2)
   fit(d,(336,335),card['cta'],26,GOLD,570)
  # Phrase timing is approximate for Gemini; it is not falsely labelled word-aligned.
- words=sc['speech'].split();groups=[' '.join(words[j:j+5]) for j in range(0,len(words),5)]
- phrase=groups[min(len(groups)-1,int(max(0,q)*len(groups)))]
+ groups=phrases(sc['speech'])
+ # Time each phrase by its share of words, not equal slices.
+ sizes=[len(g.split()) for g in groups];total_w=sum(sizes);acc=0;phrase=groups[-1]
+ for g,n in zip(groups,sizes):
+  acc+=n
+  if max(0,q)*total_w<acc:phrase=g;break
  d.rounded_rectangle((36,1050,636,1123),14,fill=(13,40,53),outline=(57,126,143),width=2)
  fit(d,(336,1086),phrase,32,accent,560)
- for j in range(6):
-  x=236+j*40;d.ellipse((x-7,1137,x+7,1151),fill=GOLD if j==k else (76,114,130))
- fit(d,(336,1170),'समझाने के लिए सांकेतिक 3D दृश्य',20,(174,197,206),580)
+ # 4 Nov: less clutter. Scene dots removed (the progress bar already shows progress);
+ # the 'symbolic 3D' note only on the final revision scene.
+ if k==len(plan['scenes'])-1:fit(d,(336,1160),'समझाने के लिए सांकेतिक 3D दृश्य',19,(150,175,186),580)
  d.rectangle((36,1192,636,1196),fill=(43,75,92));d.rectangle((36,1192,36+int(600*i/(len(motion)-1)),1196),fill=COL)
  return im
 if __name__=='__main__':

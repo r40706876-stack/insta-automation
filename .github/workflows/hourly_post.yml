@@ -83,7 +83,18 @@ jobs:
             ENTRY=auto_poster.py
           fi
           if python -u "$ENTRY" 2>&1 | sed -u -E 's/(access_token=|key=|Bearer )[^&" ]+/\1***/g' | tee last_run_log.txt; then exit 0; fi
-          echo "::error::Build/QA failed; keep diagnostics. No alternate post bypasses the gate."
+          # 4 Nov: a studio reel that fails its visual/QA gate must not leave the slot empty.
+          # Fall back to the same subject's 7 PYQ card, only if nothing was published or started.
+          if [ "$ENTRY" = scheduled_visual_gs.py ] && [ "$POST_MODE" = publish ] && [ "$REEL_FORMAT" != current ] && [ "$GS_SUBJECT" != "Current Affairs" ]; then
+            KEY=$(python -c "import datetime,os;t=os.environ['GS_TARGET_UTC'];d=datetime.datetime.fromisoformat(t.replace('Z','+00:00')).astimezone(datetime.timezone(datetime.timedelta(hours=5,minutes=30)));print(d.strftime('%Y-%m-%d_%H%M'))")
+            SLOTF="experiments/regular_schedule/$KEY.json"
+            if [ ! -e "experiments/scheduled_visual_gs/$KEY/publish_started.json" ] && [ ! -e "experiments/scheduled_visual_gs/$KEY/published.json" ] && ! python -c "import json,sys;d=json.load(open(sys.argv[1]));sys.exit(0 if d.get('media_id') or d.get('publish_started_utc') else 1)" "$SLOTF" 2>/dev/null; then
+              rm -f "$SLOTF"
+              echo "::warning::Studio reel failed QA -> same-subject 7 PYQ fallback for slot $KEY"
+              if REEL_FORMAT=list python -u auto_poster.py 2>&1 | sed -u -E 's/(access_token=|key=|Bearer )[^&" ]+/\1***/g' | tee -a last_run_log.txt; then exit 0; fi
+            fi
+          fi
+          echo "::error::Build/QA failed; keep diagnostics."
           exit 1
 
       - name: Progress save
