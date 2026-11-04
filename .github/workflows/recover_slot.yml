@@ -53,6 +53,8 @@ jobs:
           PY
           then exit 0; fi
           rm -f "$D/publish_started.json"
+          # Account checked above: the reel is NOT there, so an uncertain journal from the failed attempt can go.
+          rm -f "$D/reel.upload.json"
           GS_VISUAL_OUTPUT="$D" python -u daily_visual_gs.py --publish 2>&1 | sed -u -E 's/(access_token=|key=|Bearer )[^&" ]+/\1***/g' | tee last_run_log.txt
       - name: Receipt save
         if: always()
