@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-04T03:22:57.130880+00:00",
+  "generated_at": "2026-11-04T04:06:41.420229+00:00",
   "windows": {
     "24h": [
       {
@@ -241,20 +241,20 @@
         "reels": 19,
         "metrics": {
           "shares_per_1000": {
-            "mean": 1.2789502253103786,
-            "n": 18
+            "mean": 1.2116370555572007,
+            "n": 19
           },
           "saves_per_1000": {
-            "mean": 3.1293367744050182,
-            "n": 18
+            "mean": 2.9646348389100172,
+            "n": 19
           },
           "average_watch_time": {
-            "mean": 4.961055555555555,
-            "n": 18
+            "mean": 4.930210526315789,
+            "n": 19
           },
           "three_second_rate": {
-            "mean": 27.072222833333335,
-            "n": 18
+            "mean": 27.726316368421056,
+            "n": 19
           },
           "retention": {
             "mean": null,
@@ -804,20 +804,20 @@
         "reels": 1,
         "metrics": {
           "shares_per_1000": {
-            "mean": null,
-            "n": 0
+            "mean": 0.0,
+            "n": 1
           },
           "saves_per_1000": {
-            "mean": null,
-            "n": 0
+            "mean": 0.0,
+            "n": 1
           },
           "average_watch_time": {
-            "mean": null,
-            "n": 0
+            "mean": 5.63,
+            "n": 1
           },
           "three_second_rate": {
-            "mean": null,
-            "n": 0
+            "mean": 47.3,
+            "n": 1
           },
           "retention": {
             "mean": null,
@@ -840,9 +840,9 @@
         "subject": null,
         "format": "legacy_unclassified",
         "reels": 19,
-        "shares_per_1000": 1.2789502253103786,
-        "saves_per_1000": 3.1293367744050182,
-        "average_watch_time": 4.961055555555555
+        "shares_per_1000": 1.2116370555572007,
+        "saves_per_1000": 2.9646348389100172,
+        "average_watch_time": 4.930210526315789
       }
     ],
     "winner": null,
