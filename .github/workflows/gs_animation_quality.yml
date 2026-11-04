@@ -13,7 +13,7 @@ on:
       - '.github/workflows/hourly_post.yml'
       - '.github/workflows/daily_visual_gs.yml'
 permissions:
-  contents: read
+  contents: write
 concurrency:
   group: gs-animation-quality
   cancel-in-progress: true
@@ -42,3 +42,14 @@ jobs:
             /tmp/gs-quality-preview/quality_smoke.json
             /tmp/gs-quality-preview/scene_checks.json
           if-no-files-found: warn
+      - name: Save preview image to repo (manual runs only)
+        if: success() && github.event_name == 'workflow_dispatch'
+        run: |
+          mkdir -p studio_diagnostics
+          cp /tmp/gs-quality-preview/contact_sheet.jpg studio_diagnostics/quality_preview.jpg
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git add studio_diagnostics/quality_preview.jpg
+          git diff --cached --quiet && exit 0
+          git commit -m 'Save GS 3D quality preview image [skip ci]'
+          for i in 1 2 3; do git pull --rebase -q && git push -q && break; sleep 10; done
