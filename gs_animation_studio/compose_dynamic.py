@@ -55,7 +55,7 @@ def wrap(d,s,size,maxw):
  if cur:lines.append(cur)
  return lines
 def ease_out(x):x=max(0.,min(1.,x));return 1-(1-x)**3
-def hook_poster(im,age,sc,total_hook):
+def hook_poster(im,age,sc,total_hook,countdown=None,slide=True):
  """4 Nov: frame 0 must stop the thumb. Poster card like हथौड़ा-पंख: one bold question,
  two big coloured answer tiles face to face, a MinuteMe stopwatch counting down, and
  movement from the very first frames. The 3D scene stays visible but dimmed behind it."""
@@ -64,7 +64,7 @@ def hook_poster(im,age,sc,total_hook):
  for y in range(H_):
   f=y/H_;g.line([(0,y),(W_,y)],fill=(int(14+30*f),int(24+10*f),int(52-14*f)))
  im=Image.blend(im,bg,.86);d=ImageDraw.Draw(im)
- a=ease_out(age/.35)
+ a=ease_out(age/.35) if slide else 1.0
  # top chip
  chip='परीक्षा में पूछा गया सवाल'
  cw=d.textlength(chip,font=font(26))+44
@@ -83,7 +83,7 @@ def hook_poster(im,age,sc,total_hook):
  cols=[(255,122,61),(61,165,255)];letters=['A','B']
  pulse=1+.025*math.sin(max(0,age-.6)*6.0)
  for j,opt in enumerate(opts):
-  sl=ease_out((age+.14-.06*j)/.32);off=int((1-sl)*(-420 if j==0 else 420))
+  sl=ease_out((age+.14-.06*j)/.32) if slide else 1.0;off=int((1-sl)*(-420 if j==0 else 420))
   cx=190+340*j+off;w=150*pulse;h=th/2*pulse;cy=top+th/2
   d.rounded_rectangle((cx-w+6,cy-h+8,cx+w+6,cy+h+8),28,fill=(4,8,18))
   d.rounded_rectangle((cx-w,cy-h,cx+w,cy+h),28,fill=cols[j],outline=(255,255,255),width=4)
@@ -95,28 +95,40 @@ def hook_poster(im,age,sc,total_hook):
   for line in ol[:3]:
    d.text((cx,oy),line,font=font(n),fill=(255,255,255),anchor='mm',stroke_width=3,stroke_fill=(20,20,30));oy+=n+8
  if len(opts)==2:
-  vs=ease_out((age-.45)/.25);r=int(34*vs)
+  vs=ease_out((age-.45)/.25) if slide else 1.0;r=int(34*vs)
   if r>2:
    d.ellipse((360-r,top+th/2-r,360+r,top+th/2+r),fill=(255,255,255),outline=(20,20,30),width=3)
    d.text((360,top+th/2),'या',font=font(max(10,int(30*vs))),fill=(20,20,30),anchor='mm')
- # MinuteMe stopwatch countdown (brand identity + reason to stay)
+ # MinuteMe stopwatch: 4 Nov (user) — only a 2-second timer, never 5. During the question
+ # it shows the challenge; the 2..1 countdown runs in the last 2 s before the answer.
  cy=top+th+120;R=62
- left=max(0.,1-age/max(1.,total_hook))
  d.ellipse((360-R-8,cy-R-8,360+R+8,cy+R+8),fill=(255,196,61))
  d.rectangle((360-12,cy-R-30,360+12,cy-R-6),fill=(255,196,61))
  d.ellipse((360-R,cy-R,360+R,cy+R),fill=(14,26,44))
- d.pieslice((360-R+6,cy-R+6,360+R-6,cy+R-6),-90,-90+360*left,fill=(255,92,72))
- d.ellipse((360-R+20,cy-R+20,360+R-20,cy+R-20),fill=(14,26,44))
- secs=max(1,math.ceil(left*min(5,total_hook)))
- d.text((360,cy),str(secs),font=font(46),fill=(255,255,255),anchor='mm')
- d.text((360,cy+R+42),'जवाब आने से पहले कमेंट करो: A या B?',font=font(30),fill=(255,214,92),anchor='mm',stroke_width=3,stroke_fill=(8,14,30))
+ if countdown is None:
+  d.text((360,cy),'2s',font=font(44),fill=(255,255,255),anchor='mm')
+  d.text((360,cy+R+42),'सिर्फ 2 सेकंड में जवाब दो!',font=font(32),fill=(255,214,92),anchor='mm',stroke_width=3,stroke_fill=(8,14,30))
+ else:
+  left=max(0.,min(1.,countdown/2.0))
+  d.pieslice((360-R+6,cy-R+6,360+R-6,cy+R-6),-90,-90+360*left,fill=(255,92,72))
+  d.ellipse((360-R+20,cy-R+20,360+R-20,cy+R-20),fill=(14,26,44))
+  n=max(1,math.ceil(countdown));pop=1+.25*max(0,(math.ceil(countdown)-countdown)-.75)*4
+  d.text((360,cy),str(n),font=font(int(50*pop)),fill=(255,255,255),anchor='mm')
+  d.text((360,cy+R+42),'कमेंट करो: A या B?',font=font(34),fill=(255,214,92),anchor='mm',stroke_width=3,stroke_fill=(8,14,30))
  d.text((360,1236),'@MinuteMe_GS',font=font(24),fill=(190,210,230),anchor='mm')
  return im
 
 def overlay(im,i):
  row=motion[i];t=row['t'];k=row['scene'];sc=plan['scenes'][k];age=t-float(starts[k]);q=age/meta['seconds'][k];d=ImageDraw.Draw(im);accent=rgb(sc.get('text_color'),GOLD);secondary=rgb(sc.get('explanation_color'),(244,248,250))
- if sc.get('hook_question') and sc.get('role','hook')=='hook':
-  im=hook_poster(im,age,sc,meta['seconds'][k])
+ hook_sc=plan['scenes'][0] if plan['scenes'] and plan['scenes'][0].get('hook_question') else None
+ poster=None
+ if hook_sc and k==0:poster=hook_poster(im,age,hook_sc,meta['seconds'][0])
+ elif hook_sc and k==1 and sc.get('role')=='challenge':
+  # Same poster continues (no cut); the 2-second countdown runs right before the reveal.
+  rem=meta['seconds'][1]-age
+  poster=hook_poster(im,age+meta['seconds'][0],hook_sc,meta['seconds'][0],countdown=rem if rem<=2.0 else None,slide=False)
+ if poster is not None:
+  im=poster
   d=ImageDraw.Draw(im);d.rectangle((36,1192,636,1196),fill=(43,75,92));d.rectangle((36,1192,36+int(600*i/(len(motion)-1)),1196),fill=COL)
   return im
  # Notes/WhatsApp banner only in the last 3 seconds (end card): top-of-frame space is

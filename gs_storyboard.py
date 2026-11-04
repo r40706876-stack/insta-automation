@@ -11,7 +11,7 @@ def grounded_storyboard(reference,format_name=None):
     if not facts:raise ValueError('A complete concise source explanation is required')
     other=next((str(v).strip().rstrip('।.') for k,v in options.items() if k!=key),None)
     # Comment pause: ask for A/B in the comments before the reveal (comments were ~0).
-    choices='A या B? दो सेकंड सोचिए, कमेंट कीजिए।' if other else 'दो सेकंड सोचिए, फिर जवाब मिलाइए।'
+    choices='दो सेकंड: A या B?' if other else 'दो सेकंड सोचिए, फिर जवाब मिलाइए।'
     displayed=[answer,other] if other else [answer]
     if other and sum(question.encode())%2:displayed.reverse()
     if other:displayed=['A: '+displayed[0],'B: '+displayed[1]]
