@@ -23,7 +23,9 @@ def grounded_storyboard(reference,format_name=None):
     # 4 Nov: studio reels ran 32-35 s while top reels were 21-25 s (watched 12-15 s).
     # Keep every role but speak less: question only, one short fact, a quick recall line.
     opening=question+prompt_tail if len((question+prompt_tail).split())<=25 else question
-    explain=facts[0] if len(facts[0].split())<=14 or len(facts)==1 else min(facts[:2],key=lambda f:len(f.split()))
+    # Short explanation (<=12 words) keeps the reel ~25 s and subtitles whole.
+    short=[f for f in facts if len(f.split())<=12]
+    explain=short[0] if short else min(facts,key=lambda f:len(f.split()))
     rest=[f for f in facts if f!=explain]
     transfer=rest[0] if rest and len(rest[0].split())<=6 else 'अब बिना देखे बताइए।'
     speech=[opening,choices,'सही उत्तर है: '+answer+'।',explain,transfer,'याद रखें: '+answer+'।']

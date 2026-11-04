@@ -47,10 +47,10 @@ def validate_visual(plan):
    if kind=='ocean' and action!='wave':raise ValueError('Ocean must deform, not be a still background')
    # Decorative pulsing/growing alone cannot meet the teaching-motion requirement.
    if action in ('walk','move','flow','rise','fall','spin','orbit','trace','wave','compress') or o.get('gesture') in ('point','collect','hold'):meaningful+=1
-  if meaningful<1 and not is_revision_card(s,i,len(plan['scenes'])):raise ValueError(f'Scene {i+1}: no causal movement beyond decorative pulse/zoom')
+  if meaningful<1 and not is_revision_card(s,i,len(plan['scenes'])) and not s.get('hook_question'):raise ValueError(f'Scene {i+1}: no causal movement beyond decorative pulse/zoom')
   # 4 Nov insights: flop reels used a walking 'विद्यार्थी', spinning arrows labelled '11'/'12',
   # a gear for 'संशोधन' and a map for a Polity question. Top reels always showed the real thing.
-  if not is_revision_card(s,i,len(plan['scenes'])):
+  if not is_revision_card(s,i,len(plan['scenes'])) and not s.get('hook_question'):
    has_map=any(o['kind']=='map' for o in objects)
    def generic(o):
     label=str(o.get('label','')).strip()

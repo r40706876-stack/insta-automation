@@ -321,6 +321,13 @@ def generate(root,repo,topic_text='',subject='auto',source_text=''):
     for scene,truth in zip(p['scenes'],locked):scene.update(truth)
     p['recall']=locked[-1]['speech']
    p=repair_sky_scattering(p,topic_text)
+   # 4 Nov: a walking 'विद्यार्थी' or 'व्यक्ति' teaches nothing; drop such objects when the scene
+   # has anything else to show (the hook is now a poster card over a dimmed scene).
+   GENERIC_PEOPLE={'विद्यार्थी','छात्र','छात्रा','व्यक्ति','student','Student','दर्शक'}
+   for scene in p.get('scenes',[]):
+    objs=scene.get('objects') or []
+    keep=[o for o in objs if not (o.get('kind') in ('person','soldier') and str(o.get('label','')).strip() in GENERIC_PEOPLE)]
+    if keep and len(keep)<len(objs):scene['objects']=keep
    p,layout_repairs=normalize_layout(p);previous=p
    for index,scene in enumerate(p.get('scenes',[])):
     if index==5 and scene.get('role')=='revision' and scene.get('objects') and all(o.get('action')=='none' for o in scene['objects']):scene['revision_card']=True

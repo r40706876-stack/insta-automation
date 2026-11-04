@@ -46,8 +46,79 @@ def phrases(text,limit=7):
 def rgb(value,default):
  try:return tuple(int(value[j:j+2],16) for j in (1,3,5)) if isinstance(value,str) and len(value)==7 and value[0]=='#' else default
  except ValueError:return default
+def wrap(d,s,size,maxw):
+ words=s.split();lines=[];cur=''
+ for w in words:
+  t=(cur+' '+w).strip()
+  if d.textlength(t,font=font(size))<=maxw or not cur:cur=t
+  else:lines.append(cur);cur=w
+ if cur:lines.append(cur)
+ return lines
+def ease_out(x):x=max(0.,min(1.,x));return 1-(1-x)**3
+def hook_poster(im,age,sc,total_hook):
+ """4 Nov: frame 0 must stop the thumb. Poster card like हथौड़ा-पंख: one bold question,
+ two big coloured answer tiles face to face, a MinuteMe stopwatch counting down, and
+ movement from the very first frames. The 3D scene stays visible but dimmed behind it."""
+ W_,H_=im.size
+ bg=Image.new('RGB',(W_,H_),(10,22,40));g=ImageDraw.Draw(bg)
+ for y in range(H_):
+  f=y/H_;g.line([(0,y),(W_,y)],fill=(int(14+30*f),int(24+10*f),int(52-14*f)))
+ im=Image.blend(im,bg,.86);d=ImageDraw.Draw(im)
+ a=ease_out(age/.35)
+ # top chip
+ chip='परीक्षा में पूछा गया सवाल'
+ cw=d.textlength(chip,font=font(26))+44
+ d.rounded_rectangle((360-cw/2,92,360+cw/2,140),24,fill=(255,196,61))
+ d.text((360,116),chip,font=font(26),fill=(25,25,30),anchor='mm')
+ # question: slams in (slight scale/drop) and stays big
+ q=sc['hook_question'];size=54
+ lines=wrap(d,q,size,640)
+ while len(lines)>4 and size>36:size-=3;lines=wrap(d,q,size,640)
+ y=200-int(26*(1-a))
+ for line in lines[:4]:
+  d.text((360,y),line,font=font(size),fill=(255,255,255),anchor='mm',stroke_width=4,stroke_fill=(8,14,30));y+=size+16
+ # two answer tiles slide in from left/right, then pulse gently
+ opts=[str(o).split(':',1)[-1].strip() for o in (sc.get('quiz_options') or [])][:2]
+ top=max(y+30,470);th=300
+ cols=[(255,122,61),(61,165,255)];letters=['A','B']
+ pulse=1+.025*math.sin(max(0,age-.6)*6.0)
+ for j,opt in enumerate(opts):
+  sl=ease_out((age+.14-.06*j)/.32);off=int((1-sl)*(-420 if j==0 else 420))
+  cx=190+340*j+off;w=150*pulse;h=th/2*pulse;cy=top+th/2
+  d.rounded_rectangle((cx-w+6,cy-h+8,cx+w+6,cy+h+8),28,fill=(4,8,18))
+  d.rounded_rectangle((cx-w,cy-h,cx+w,cy+h),28,fill=cols[j],outline=(255,255,255),width=4)
+  d.ellipse((cx-44,cy-h+22,cx+44,cy-h+110),fill=(255,255,255))
+  d.text((cx,cy-h+66),letters[j],font=font(64),fill=cols[j],anchor='mm')
+  n=36;ol=wrap(d,opt,n,270)
+  while len(ol)>3 and n>24:n-=2;ol=wrap(d,opt,n,270)
+  oy=cy+26-((len(ol[:3])-1)*(n+8))/2
+  for line in ol[:3]:
+   d.text((cx,oy),line,font=font(n),fill=(255,255,255),anchor='mm',stroke_width=3,stroke_fill=(20,20,30));oy+=n+8
+ if len(opts)==2:
+  vs=ease_out((age-.45)/.25);r=int(34*vs)
+  if r>2:
+   d.ellipse((360-r,top+th/2-r,360+r,top+th/2+r),fill=(255,255,255),outline=(20,20,30),width=3)
+   d.text((360,top+th/2),'या',font=font(max(10,int(30*vs))),fill=(20,20,30),anchor='mm')
+ # MinuteMe stopwatch countdown (brand identity + reason to stay)
+ cy=top+th+120;R=62
+ left=max(0.,1-age/max(1.,total_hook))
+ d.ellipse((360-R-8,cy-R-8,360+R+8,cy+R+8),fill=(255,196,61))
+ d.rectangle((360-12,cy-R-30,360+12,cy-R-6),fill=(255,196,61))
+ d.ellipse((360-R,cy-R,360+R,cy+R),fill=(14,26,44))
+ d.pieslice((360-R+6,cy-R+6,360+R-6,cy+R-6),-90,-90+360*left,fill=(255,92,72))
+ d.ellipse((360-R+20,cy-R+20,360+R-20,cy+R-20),fill=(14,26,44))
+ secs=max(1,math.ceil(left*min(5,total_hook)))
+ d.text((360,cy),str(secs),font=font(46),fill=(255,255,255),anchor='mm')
+ d.text((360,cy+R+42),'जवाब आने से पहले कमेंट करो: A या B?',font=font(30),fill=(255,214,92),anchor='mm',stroke_width=3,stroke_fill=(8,14,30))
+ d.text((360,1236),'@MinuteMe_GS',font=font(24),fill=(190,210,230),anchor='mm')
+ return im
+
 def overlay(im,i):
  row=motion[i];t=row['t'];k=row['scene'];sc=plan['scenes'][k];age=t-float(starts[k]);q=age/meta['seconds'][k];d=ImageDraw.Draw(im);accent=rgb(sc.get('text_color'),GOLD);secondary=rgb(sc.get('explanation_color'),(244,248,250))
+ if sc.get('hook_question') and sc.get('role','hook')=='hook':
+  im=hook_poster(im,age,sc,meta['seconds'][k])
+  d=ImageDraw.Draw(im);d.rectangle((36,1192,636,1196),fill=(43,75,92));d.rectangle((36,1192,36+int(600*i/(len(motion)-1)),1196),fill=COL)
+  return im
  # Notes/WhatsApp banner only in the last 3 seconds (end card): top-of-frame space is
  # reserved for the question, which decides the 3-second hold.
  total=float(sum(meta['seconds']))
