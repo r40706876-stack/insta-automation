@@ -4236,38 +4236,36 @@ def render_list_frame(subject, items):
     sw = stopwatch_sprite(70, 0.0)
     cv.paste(sw, (150, 1597), sw)
     d.text((235, 1618), BRAND_HANDLE, font=get_font(36), fill=INK, anchor="lm")
-    d.text((235, 1660), "रिवीजन के लिए यह कार्ड सेव करें",
+    d.text((235, 1660), f"कितने पहले से आते थे?  कमेंट करो __/{len(items)}   •   दोस्तों को भेजो",
            font=get_font(30), fill=PEN_RED, anchor="lm")
     return cv
 
 
 def build_list_reel(subject, items, out):
     resolve_font()
-    # Read one question, then reveal its answer. Full card is retained for revision.
-    import bisect
-    pages=[];ends=[];elapsed=0.0
-    for index,item in enumerate(items):
-        think=max(2.5,len(item['q'].split())/3)
-        answer_time=max(2.0,len(item['a'].split())/3+1)
-        for revealed,seconds in ((False,think),(True,answer_time)):
-            visible=[{'q':it['q'] if j<=index else 'अगला सवाल…',
-                      'a':it['a'] if j<index or (j==index and revealed) else 'सोचिए…'}
-                     for j,it in enumerate(items)]
-            pages.append(render_list_frame(subject,visible));elapsed+=seconds;ends.append(elapsed)
-    frame=render_list_frame(subject,items)
-    pages.append(frame);elapsed+=4;ends.append(elapsed)
-    def page(fi):return min(len(pages)-1,bisect.bisect_right(ends,fi/FPS))
-    music=beat_music(elapsed,seed=len(items))
-    encode_frames(lambda fi:pages[page(fi)],int(elapsed*FPS),music,out,key=page)
-    frame.save(os.path.join(os.path.dirname(out) or '.', 'thumbnail.jpg'),quality=92)
-    print(f'LIST REEL TAIYAR: {out} ({elapsed:.1f}s; sequential question/reveal)')
-    return elapsed
+    frame = render_list_frame(subject, items)
+    music = beat_music(LIST_DUR, seed=len(items))
+    encode_frames(lambda fi: frame, int(LIST_DUR * FPS), music, out, key=lambda fi: 0)
+    frame.save(os.path.join(os.path.dirname(out) or ".", "thumbnail.jpg"), quality=92)
+    print(f"LIST REEL TAIYAR: {out} ({LIST_DUR:.0f}s)")
+    return LIST_DUR
+
+
+SHARE_LINE = "📤 ये reel उस दोस्त को भेजो जो Group D / NTPC / SSC / Police की तैयारी कर रहा है!"
 
 
 def list_caption(subject, items):
-    return (f"📚 {list_title(subject)}\n\nसवाल पढ़ें, अपना जवाब सोचें, फिर सही उत्तर मिलाएँ। "
-            "आखिर में पूरा रिवीजन कार्ड है—दोहराने के लिए सेव करें।\n\n"
-            f"#MinuteMeGS #GS #StudyHindi #PYQ {SUBJ_TAGS.get(subject, '#gk')}")
+    lines = [f"📚 {list_title(subject)} - RRB, SSC, Police, Patwari, Army, State Exams के लिए (Save करो)", ""]
+    lines += [f"{k + 1}. {it['q']} → {it['a']}" for k, it in enumerate(items)]
+    lines += ["", "💬 कितने पहले से आते थे? कमेंट करो: 7/7?",
+              "📤 Save करो + उस दोस्त को भेजो जो exam की तैयारी कर रहा है।",
+              f"{'GK' if subject in ('TODAY', 'WEEK') else subj_word(subject)} GK Questions | RRB NTPC, Group D, SSC GD, State Exam PYQ",
+              f"⏱ {BRAND} - {BRAND_TAGLINE}"]
+    if WHATSAPP_NUMBER:
+        lines.append(f"📲 Free test / notes: WhatsApp {WHATSAPP_NUMBER}")
+    lines += ["", f"#gkquiz #rrbntpc #sscgd #gkpyq {SUBJ_TAGS.get(subject, '#gk')}"]
+    # 7 PYQ: purana caption jaisa tha (series + share line upar)
+    return f"{series_line()}\n{SHARE_LINE}\n\n" + "\n".join(lines)
 
 
 def run_list(bank, st, ep, args):
