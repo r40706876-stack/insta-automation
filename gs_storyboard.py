@@ -2,12 +2,15 @@
 import re
 ROLES=('hook','challenge','reveal','explain','transfer','revision')
 HEADINGS=('सवाल देखिए','अपना जवाब चुनिए','सही उत्तर','तथ्य समझिए','खुद को जाँचिए','रिवीजन कार्ड')
+def grounded_facts(explanation):
+    return [s.strip()+'।' for s in re.split(r'[।!?]|(?<!\d)\.(?!\d)',str(explanation)) if 3<=len(s.split())<=25]
+
 def grounded_storyboard(reference,format_name=None):
     question=re.sub(r'^[a-z0-9_-]+:\s*','',str(reference.get('question','')).strip())
     options=reference.get('options') or {};key=reference.get('answer')
     if not question or key not in options:raise ValueError('Grounded question and answer required')
     answer=str(options[key]).strip().rstrip('।.')
-    facts=[s.strip()+'।' for s in re.split(r'[।!?]|(?<!\d)\.(?!\d)',str(reference.get('explanation',''))) if 3<=len(s.split())<=25]
+    facts=grounded_facts(reference.get('explanation',''))
     if not facts:raise ValueError('A complete concise source explanation is required')
     other=next((str(v).strip().rstrip('।.') for k,v in options.items() if k!=key),None)
     # Comment pause: ask for A/B in the comments before the reveal (comments were ~0).

@@ -134,6 +134,8 @@ def regional_bounds(spec):
  pts=[p for p in spec.get('route',[])]+[m['at'] for m in spec.get('markers',[])]+[q for pair in spec.get('choice_lines',[]) for q in pair]+list(spec.get('frame_points',[]))
  if not pts:return None
  lat=[p[1] for p in pts]
+ # State data has no J&K/Ladakh: never draw a regional state map for northern points.
+ if max(lat)>31.5:return None
  ymin=max(8.0,min(lat)-3.2);ymax=min(31.5,max(lat)+3.2)
  if ymax-ymin<15:
   mid=(ymin+ymax)/2;ymin,ymax=mid-7.5,mid+7.5

@@ -34,6 +34,8 @@ def clean_reference(q):
  options=q.get('options') or {}
  blob=' '.join([str(q.get('question','')),str(q.get('explanation',''))]+[str(v) for v in options.values()])
  if _MOJIBAKE.search(blob):return False
+ from gs_storyboard import grounded_facts
+ if not grounded_facts(q.get('explanation','')):return False  # e.g. one 32-word sentence: nothing speakable
  # Book answers to 'current/recent' questions go stale (e.g. 'RBI के वर्तमान गवर्नर — उर्जित पटेल').
  if _re.search(r'वर्तमान|हाल ही|हाल में|मौजूदा|अभी तक|नवीनतम|इस वर्ष|पिछले वर्ष|\bcurrent\b|\blatest\b|\brecent',str(q.get('question','')),_re.I):return False
  # Latin word glued to stray Devanagari marks is PDF damage, e.g. 'Basilica दिँदस्'.
