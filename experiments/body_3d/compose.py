@@ -49,8 +49,8 @@ def overlay(f):
     for i in range(260):
         d.line([(0, H - i), (W, H - i)], fill=(0, 0, 0, int(170 * (1 - i / 260) ** 1.4)))
     # repo-standard notes banner (kept clear of Instagram's top bar)
-    if f >= 2 * FPS:          # first 2 s: only the question + visual (hook), banner fades in after
-        ba = int(225 * min(1, (f - 2 * FPS) / 8)); tb = int(255 * min(1, (f - 2 * FPS) / 8))
+    if f >= N - 3 * FPS:      # banner only as end card (last 3 s); top space belongs to the question
+        ba = int(225 * min(1, (f - (N - 3 * FPS)) / 8)); tb = int(255 * min(1, (f - (N - 3 * FPS)) / 8))
         d.rounded_rectangle((36, 60, 684, 140), radius=16, fill=(10, 34, 48, ba), outline=(70, 140, 160, tb), width=2)
         text(d, (360, 84), 'सभी प्रतियोगी परीक्षाओं के नोट्स उपलब्ध हैं', 24, WHITE + (tb,), stroke=0)
         text(d, (360, 117), 'WhatsApp: +91 89892 79637', 28, GOLD + (tb,), stroke=0)

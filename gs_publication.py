@@ -23,30 +23,34 @@ def footer(size,font):
 
 def prepare_video(src,font):
     src=Path(src)
-    if src.name.endswith('_notes_safe_v2.mp4'):return str(src)
-    # The shared Studio compositor already includes the safe-area Notes banner.
+    if src.name.endswith(('_notes_safe_v2.mp4','_notes_end_v3.mp4')):return str(src)
+    # The shared Studio compositor already includes the Notes banner (now as an end card).
     # Only skip the second banner for the exact hash verified by its export gate.
     check_path=src.parent/'file_checks.json'
     if check_path.exists():
         checked=json.loads(check_path.read_text());banner=checked.get('notes_banner') or {}
         if checked.get('quality_version')=='rich_3d_v1' and banner.get('version')=='studio-notes-v1' and banner.get('phone')==PHONE and checked.get('sha256')==hashlib.sha256(src.read_bytes()).hexdigest():
             return str(src)
-    # Resolve dimensions without requiring a separate ffprobe binary.
     import re
     probe=subprocess.run(['ffmpeg','-hide_banner','-i',str(src)],capture_output=True,text=True)
     line=next((x for x in probe.stderr.splitlines() if 'Video:' in x),'')
     match=re.search(r'\b(\d{3,5})x(\d{3,5})\b',line)
     if not match:raise RuntimeError('Cannot determine reel dimensions')
     w,h=map(int,match.groups());w-=w%2;h-=h%2
+    dm=re.search(r'Duration: (\d+):(\d+):([\d.]+)',probe.stderr)
+    if not dm:raise RuntimeError('Cannot determine reel duration')
+    dur=int(dm.group(1))*3600+int(dm.group(2))*60+float(dm.group(3))
+    # 4 Nov: banner moved from a permanent top strip (which shrank the video and took the
+    # hook's space) to an end card shown only in the last seconds. No scaling of the reel.
+    show=min(3.0,max(1.2,dur*.3));start=max(0.0,dur-show)
     top=round(h*.105)//2*2
     banner_w=round(w*.80)//2*2
-    band=footer((banner_w,h),font);reserved=top+band.height+(band.height%2)
-    digest=hashlib.sha256(src.read_bytes()+b'notes-safe-v2').hexdigest()[:16]
-    out=src.with_name(src.stem+'_'+digest+'_notes_safe_v2.mp4');png=out.with_suffix('.png')
+    band=footer((banner_w,h),font)
+    digest=hashlib.sha256(src.read_bytes()+b'notes-end-v3').hexdigest()[:16]
+    out=src.with_name(src.stem+'_'+digest+'_notes_end_v3.mp4');png=out.with_suffix('.png')
     if out.exists() and out.stat().st_size>1000:return str(out)
     band.save(png)
-    # Reserve space instead of covering teaching text. Preserve aspect ratio and duration.
-    graph=f'[0:v]scale={w}:{h-reserved}:force_original_aspect_ratio=decrease,pad={w}:{h}:x=(ow-iw)/2:y={reserved}:color=0xf6f3ea[base];[base][1:v]overlay={round(w*.04)}:{top}:format=auto,format=yuv420p[v]'
+    graph=f"[0:v]scale={w}:{h}[base];[base][1:v]overlay={(w-banner_w)//2}:{top}:enable='gte(t,{start:.2f})':format=auto,format=yuv420p[v]"
     try:
         subprocess.run(['ffmpeg','-y','-v','error','-i',str(src),'-i',str(png),'-filter_complex',graph,'-map','[v]','-map','0:a?','-c:v','libx264','-profile:v','main','-pix_fmt','yuv420p','-preset','fast','-crf','19','-c:a','aac','-movflags','+faststart',str(out)],check=True,timeout=900)
     except Exception:

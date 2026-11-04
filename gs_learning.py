@@ -74,7 +74,10 @@ def evidence_score(question,path='experiments/learning/snapshots.json'):
 def experiment(day,subject):
     # Stable balanced assignment; existing slots and PYQ/mega are preserved.
     offset=sum(subject.encode('utf-8'))
-    return FORMATS[(dt.date.fromisoformat(day).toordinal()+offset)%3]
+    # Map challenge only makes sense for Geography; other subjects got a meaningless
+    # India map and a "नक्शा टेस्ट" label (e.g. Polity, 3 Nov), which killed the hook.
+    pool=FORMATS if subject=='Geography' else tuple(f for f in FORMATS if f!='map_pyq_challenge')
+    return pool[(dt.date.fromisoformat(day).toordinal()+offset)%len(pool)]
 
 def report(rows):
     output={'generated_at':dt.datetime.now(UTC).isoformat(),'windows':{},'note':'3-sec rate is not retention. Targets are experiments, not guarantees.'}

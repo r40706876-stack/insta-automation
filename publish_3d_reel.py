@@ -35,6 +35,7 @@ trap = next((s for s in sc if s.get('trap')), None)
 caption = TITLE + '\n\n' + '\n'.join(body)
 if trap: caption += f"\n\n⚠️ परीक्षा की आम गलती\n✗ {trap['title'].replace('गलती: ', '')}\n✓ {trap['sub'].replace('सही: ', '')}"
 if quiz: caption += f"\n\n❓ {quiz['q']}\n{quiz['a']}\n{quiz['b']}\nजवाब कमेंट में लिखो 👇"
+caption += '\n\n📤 उस दोस्त को भेजो जो कहता है "मुझे GS आता है" — देखो वो सही बताता है या नहीं!'
 caption += (f"\n\nअगली रील: {plan['next']} — फ़ॉलो करो ताकि छूटे नहीं @minuteme_gs\n\n" if plan.get('next') else '\n\nरोज़ ऐसे 3D सवाल के लिए फ़ॉलो करो @minuteme_gs\n\n') + tags + (('\n\n' + credit) if credit else '')
 
 # ---------------------------------------------------------------- checks

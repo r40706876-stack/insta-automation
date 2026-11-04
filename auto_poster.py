@@ -3056,8 +3056,12 @@ def series_line():
 
 
 def _with_series(caption):
-    # Each format owns its primary objective; do not prepend generic follow/share promises.
-    return caption.strip()
+    # 1 Nov ko ye line hata di gayi thi -> uske baad shares lagbhag 0. Wapas: series (follow) + share.
+    caption = caption.strip()
+    if caption.startswith("📅"):
+        return caption
+    share = "📤 ये reel उस दोस्त को भेजो जो Group D / NTPC / SSC / Police की तैयारी कर रहा है!"
+    return f"{series_line()}\n{share}\n\n{caption}"
 
 
 # ============================== INSTAGRAM ==============================

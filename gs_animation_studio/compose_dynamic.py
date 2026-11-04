@@ -25,28 +25,58 @@ def rgb(value,default):
  except ValueError:return default
 def overlay(im,i):
  row=motion[i];t=row['t'];k=row['scene'];sc=plan['scenes'][k];age=t-float(starts[k]);q=age/meta['seconds'][k];d=ImageDraw.Draw(im);accent=rgb(sc.get('text_color'),GOLD);secondary=rgb(sc.get('explanation_color'),(244,248,250))
- d.rounded_rectangle((36,64,636,151),16,fill=(12,40,54),outline=(58,128,147),width=2)
- text(d,(336,89),'सभी प्रतियोगी परीक्षाओं के नोट्स उपलब्ध हैं',25,(244,247,237))
- text(d,(336,124),'WhatsApp: +91 89892 79637',29,GOLD)
- text(d,(40,176),'MINUTE ME GS / ANIMATION STUDIO',19,COL,anchor='lm')
- fit(d,(336,222+int(12*(1-min(1,age/.3)))),sc['heading'],40,accent,600)
- fit(d,(336,273),sc['explanation'],30,secondary,600)
+ # Notes/WhatsApp banner only in the last 3 seconds (end card): top-of-frame space is
+ # reserved for the question, which decides the 3-second hold.
+ total=float(sum(meta['seconds']))
+ if t>=total-3:
+  d.rounded_rectangle((36,64,636,151),16,fill=(12,40,54),outline=(58,128,147),width=2)
+  text(d,(336,89),'सभी प्रतियोगी परीक्षाओं के नोट्स उपलब्ध हैं',25,(244,247,237))
+  text(d,(336,124),'WhatsApp: +91 89892 79637',29,GOLD)
+ hook_q=sc.get('hook_question')
+ options=sc.get('quiz_options') or []
+ label_floor=430 if options else 355
+ if hook_q:
+  # Frame 0 = full question in big letters + both options (pattern of the top 5 reels).
+  size=46
+  while True:
+   words=hook_q.split();lines=[];cur=''
+   for w in words:
+    trial=(cur+' '+w).strip()
+    if d.textlength(trial,font=font(size))<=610 or not cur:cur=trial
+    else:lines.append(cur);cur=w
+   if cur:lines.append(cur)
+   if len(lines)<=3 or size<=32:break
+   size-=2
+  y=128
+  for line in lines[:3]:
+   fit(d,(336,y),line,size,accent,620);y+=size+14
+  if options:
+   top=y+6;box_h=26+48*min(2,len(options))
+   d.rounded_rectangle((46,top,626,top+box_h),14,fill=(12,39,52),outline=COL,width=3)
+   for option_index,option in enumerate(options[:2]):fit(d,(336,top+37+option_index*48),str(option),32,(244,248,250),550)
+   y=top+box_h+14
+  fit(d,(336,y+18),sc['explanation'],26,secondary,600)
+  label_floor=y+60
+  options=[]
+ else:
+  text(d,(40,176),'MINUTE ME GS',19,COL,anchor='lm')
+  fit(d,(336,222+int(12*(1-min(1,age/.3)))),sc['heading'],40,accent,600)
+  fit(d,(336,273),sc['explanation'],30,secondary,600)
  # Optional question/reveal card stays above the mechanism and below the title.
  card_spec=sc.get('quiz_card')
- if card_spec:
+ if card_spec and not hook_q:
   reveal=age>=float(card_spec.get('reveal_after',2))
   color=rgb(card_spec.get('answer_color'),(96,238,167)) if reveal else accent
   message=card_spec.get('answer','') if reveal else card_spec.get('question','')
   d.rounded_rectangle((46,310,626,376),12,fill=(12,39,52),outline=color,width=2)
   fit(d,(336,342),message,29,color,550)
- options=sc.get('quiz_options') or []
  if options:
   d.rounded_rectangle((46,304,626,402),12,fill=(12,39,52),outline=COL,width=2)
   for option_index,option in enumerate(options[:2]):fit(d,(336,330+option_index*44),str(option),29,(244,248,250),550)
  occupied=[]
  for obj in sc['objects']:
   if not obj.get('label'):continue
-  ax,ay=row['pins'][obj['id']];x,y=ax,ay;x=max(115,min(550,x));y=max(430 if options else 355,min(950,y-30))
+  ax,ay=row['pins'][obj['id']];x,y=ax,ay;x=max(115,min(550,x));y=max(label_floor,min(950,y-30))
   while any(abs(x-a)<170 and abs(y-b)<55 for a,b in occupied):y+=58
   y=min(1010,y);occupied.append((x,y));label=obj['label'];n=26
   while n>18 and d.textlength(label,font=font(n))>200:n-=1
@@ -55,7 +85,7 @@ def overlay(im,i):
   d.rounded_rectangle((x-w,y-23,x+w,y+23),10,fill=(9,35,47),outline=COL,width=2);text(d,(x,y),label,n,rgb(obj.get('label_color'),(244,248,250)))
  # Dedicated scene labels are projected from the actual 3D scene, not guessed object names.
  for item in row.get('annotations',[]):
-  ax,ay=item['anchor'];x=max(135,min(535,ax));y=max(350,min(997,ay));label=item['text'];n=25
+  ax,ay=item['anchor'];x=max(135,min(535,ax));y=max(max(350,label_floor-80),min(997,ay));label=item['text'];n=25
   while n>18 and d.textlength(label,font=font(n))>370:n-=1
   while any(abs(x-a)<210 and abs(y-b)<54 for a,b in occupied):y+=58
   y=min(997,y);occupied.append((x,y))

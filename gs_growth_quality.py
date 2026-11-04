@@ -56,18 +56,19 @@ def evaluate(script):
     }
 
 def caption_addendum(script, report):
-    card = script.get('share_card') or {}
-    challenge = str(card.get('cta') or '').strip()
+    """Every visual reel asks for a comment, a share and a follow (data: 7 comments and
+    32 shares on 23,631 views; captions without these lines got ~0)."""
     recall = str(script.get('recall') or '').strip()
+    options = [o for s in (script.get('scenes') or []) for o in (s.get('quiz_options') or [])]
     parts = []
-    objective=script.get('primary_objective','share')
-    if challenge and objective=='share':
-        parts.append('💬 '+challenge)
-    if recall and objective=='save':
+    if len(set(options)) >= 2:
+        parts.append('💬 पहले बिना देखे जवाब कमेंट करो: A या B?')
+    parts.append('📤 उस दोस्त को भेजो जो कहता है "मुझे GS आता है" — देखो वो सही बताता है या नहीं!')
+    if recall:
         parts.append('📌 रिवीजन: '+recall)
-    if script.get('primary_objective','share')=='share' and report['share_value'] and not challenge:
-        parts.append('📤 अपने स्टडी पार्टनर से यही सवाल पूछो।')
     next_topic = str(script.get('series_next_topic') or '').strip()
-    if next_topic and objective=='follow':
-        parts.append('📅 अगला सवाल: '+next_topic+' — मिस न करने के लिए Follow करें।')
-    return '\n\n'+'\n'.join(parts) if parts else ''
+    if next_topic:
+        parts.append('📅 अगला सवाल: '+next_topic+' — Follow करो ताकि छूटे नहीं।')
+    else:
+        parts.append('⏱ रोज़ 1 चौंकाने वाला GS सवाल — Follow करो @MinuteMe_GS')
+    return '\n\n'+'\n'.join(parts)

@@ -45,6 +45,6 @@ if (r/'recipe.json').exists():
   if any(o['kind'] in ('map','planet') for o in objects):assert scene_checks.get('source_based_maps')
   if any(o['kind']=='rock_layers' for o in objects):assert scene_checks.get('continuous_rock_layers')
   if any(o['kind']=='mountain' for o in objects):assert scene_checks.get('terrain_relief')
-checks={'notes_banner':{'version':'studio-notes-v1','phone':'+91 89892 79637','safe_area':[36,64,636,151]} if quality_version=='rich_3d_v1' else None,'quality_version':quality_version,'duration_seconds':dur,'dimensions':[720,1280],'fps':video['r_frame_rate'],'decoded_without_errors':True,'black_intervals':0,'audio_mean_db':mean,'audio_peak_db':peak,'sha256':hashlib.sha256(p.read_bytes()).hexdigest(),'voice':meta.get('voice'),'published':False,'actual_rendered_motion_checks':motion_checks,'static_revision_checks':revision_checks}
+checks={'notes_banner':{'version':'studio-notes-v1','phone':'+91 89892 79637','safe_area':[36,64,636,151],'placement':'end_card_last_3s'} if quality_version=='rich_3d_v1' else None,'quality_version':quality_version,'duration_seconds':dur,'dimensions':[720,1280],'fps':video['r_frame_rate'],'decoded_without_errors':True,'black_intervals':0,'audio_mean_db':mean,'audio_peak_db':peak,'sha256':hashlib.sha256(p.read_bytes()).hexdigest(),'voice':meta.get('voice'),'published':False,'actual_rendered_motion_checks':motion_checks,'static_revision_checks':revision_checks}
 (r/'file_checks.json').write_text(json.dumps(checks,indent=2));print(json.dumps(checks,indent=2),flush=True)
 

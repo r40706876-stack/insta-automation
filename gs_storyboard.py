@@ -10,9 +10,11 @@ def grounded_storyboard(reference,format_name=None):
     facts=[s.strip()+'।' for s in re.split(r'[।!?]|(?<!\d)\.(?!\d)',str(reference.get('explanation',''))) if 3<=len(s.split())<=25]
     if not facts:raise ValueError('A complete concise source explanation is required')
     other=next((str(v).strip().rstrip('।.') for k,v in options.items() if k!=key),None)
-    choices='दोनों विकल्पों में सही कौन-सा है? दो सेकंड सोचिए।' if other else 'दो सेकंड सोचिए, फिर जवाब मिलाइए।'
+    # Comment pause: ask for A/B in the comments before the reveal (comments were ~0).
+    choices='A या B? दो सेकंड सोचिए और कमेंट में अपना जवाब लिखिए।' if other else 'दो सेकंड सोचिए, फिर जवाब मिलाइए।'
     displayed=[answer,other] if other else [answer]
     if other and sum(question.encode())%2:displayed.reverse()
+    if other:displayed=['A: '+displayed[0],'B: '+displayed[1]]
     # Lead with the question itself, then vary the short challenge by experiment.
     # Format diversity matters for controlled A/B testing without generic preambles.
     prompt_tail={'exam_trap':' गलत विकल्प पहचानिए।',
@@ -22,6 +24,12 @@ def grounded_storyboard(reference,format_name=None):
     speech=[opening,choices,'सही उत्तर है: '+answer+'।',facts[0],facts[1] if len(facts)>1 else 'अब बिना देखे जवाब दीजिए: '+question,'याद रखें: '+answer+'।']
     if any(len(line.split())>25 for line in speech):raise ValueError('Question/options exceed readable scene limits')
     result=[{'role':role,'heading':heading,'speech':line,'explanation':(' '.join(line.split()[:6]))} for role,heading,line in zip(ROLES,HEADINGS,speech)]
-    result[0]['heading']={'exam_trap':'परीक्षा का जाल','visual_mystery':'दृश्य से जवाब','map_pyq_challenge':'नक्शा टेस्ट'}.get(format_name,result[0]['heading'])
+    # Top reels (Map Test 01, हथौड़ा, समुद्री हवा) showed the FULL question and both options
+    # in frame 0. The hook now carries them; the compositor draws them large.
+    result[0]['heading']='पहले अपना जवाब चुनिए'
+    result[0]['explanation']='A या B — सोचिए' if other else 'पहले खुद सोचिए'
+    result[0]['hook_question']=question
+    if other:result[0]['quiz_options']=displayed
+    result[1]['heading']='कमेंट में लिखिए: A या B?' if other else result[1]['heading']
     result[1]['quiz_options']=displayed
     return result
