@@ -84,7 +84,7 @@ def overlay(im,i):
   if abs(x-ax)+abs(y-ay)>45:arrow(d,(x,y+23),(ax,ay),COL,2)
   d.rounded_rectangle((x-w,y-23,x+w,y+23),10,fill=(9,35,47),outline=COL,width=2);text(d,(x,y),label,n,rgb(obj.get('label_color'),(244,248,250)))
  # Dedicated scene labels are projected from the actual 3D scene, not guessed object names.
- for item in row.get('annotations',[]):
+ for item in [a for a in row.get('annotations',[]) if a.get('style')!='context']:
   ax,ay=item['anchor'];x=max(135,min(535,ax));y=max(max(350,label_floor-80),min(997,ay));label=item['text'];n=25
   while n>18 and d.textlength(label,font=font(n))>370:n-=1
   while any(abs(x-a)<210 and abs(y-b)<54 for a,b in occupied):y+=58
@@ -92,6 +92,12 @@ def overlay(im,i):
   w=d.textlength(label,font=font(n))/2+12
   if abs(x-ax)+abs(y-ay)>50:arrow(d,(x,y+20),(ax,ay),COL,2)
   d.rounded_rectangle((x-w,y-22,x+w,y+22),10,fill=(9,35,47),outline=COL,width=2);text(d,(x,y),label,n,(244,248,250))
+ # Map context names (seas, route states) are printed on the map itself, like Map Test 01.
+ for item in [a for a in row.get('annotations',[]) if a.get('style')=='context']:
+  ax,ay=item['anchor'];label=item['text'];n=24
+  if not (40<ax<680 and label_floor-40<ay<1030):continue
+  if any(abs(ax-a)<150 and abs(ay-b)<40 for a,b in occupied):continue
+  d.text((ax,ay),label,font=font(n),fill=(22,52,66),anchor='mm',stroke_width=3,stroke_fill=(250,250,244));occupied.append((ax,ay))
  if row.get('map_disclaimer'):
   fit(d,(336,1018),'दिशा सांकेतिक • हर पड़ाव का सटीक मार्ग नहीं',21,(224,237,240),590)
  # A specific useful share invitation appears only after the explanation, for two seconds.

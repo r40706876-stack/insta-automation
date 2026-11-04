@@ -4,7 +4,7 @@ from recovery import Recovery,StageError
 class DynamicRecovery(Recovery):
  def __init__(self,*args,**kwargs):
   super().__init__('new_topic',*args,**kwargs)
-  self.snapshot={n:(self.base/n).read_bytes() for n in ('scene_india_drift_v2.py','scene_fold_quiz.py','scene_dynamic.py','scene_india_drift.py','compose_dynamic.py','scene_dandi.py','dandi_map.json','dandi_map.LICENSE','rich_assets.py','world_land.json','world_land.LICENSE')}
+  self.snapshot={n:(self.base/n).read_bytes() for n in ('scene_india_drift_v2.py','scene_fold_quiz.py','scene_dynamic.py','scene_india_drift.py','compose_dynamic.py','scene_dandi.py','dandi_map.json','dandi_map.LICENSE','rich_assets.py','world_land.json','world_land.LICENSE','india_states.json','india_states.LICENSE')}
  def prepare_inputs(self):
   self.root.mkdir(parents=True,exist_ok=True)
   if (self.root/'final.mp4').exists():raise StageError('inputs','stale_export')
@@ -31,7 +31,7 @@ class DynamicRecovery(Recovery):
  def restore_renderer(self):
   self.compatible_snapshot()
   renderer='scene_fold_quiz.py' if self.recipe.get('renderer')=='fold_quiz_v1' else 'scene_india_drift_v2.py' if self.recipe.get('renderer')=='india_drift_v2' else 'scene_india_drift.py' if self.recipe.get('renderer')=='india_drift_v1' else 'scene_dandi.py' if self.recipe.get('renderer')=='dandi_coast_v3' else 'scene_dynamic.py'
-  for name in ('dandi_map.json','dandi_map.LICENSE','rich_assets.py','world_land.json','world_land.LICENSE'):(self.root/name).write_bytes(self.snapshot[name])
+  for name in ('dandi_map.json','dandi_map.LICENSE','rich_assets.py','world_land.json','world_land.LICENSE','india_states.json','india_states.LICENSE'):(self.root/name).write_bytes(self.snapshot[name])
   for src,dst in [(renderer,'scene.py'),('compose_dynamic.py','compose.py')]:(self.root/dst).write_bytes(self.snapshot[src])
   self.repair('restore_reviewed_renderer',engine='data-driven-3d',same_recipe=True)
  def restore_voice(self):

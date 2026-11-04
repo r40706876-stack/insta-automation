@@ -16,7 +16,7 @@ def test_plan():
   ('अर्थशास्त्र • लेनदेन','institution',[obj('citizen','person',[-1.5,0,0],'walk',[-.5,0,0]),obj('coin','coin',[.1,0,.5],'move',[1.2,0,.5])]),
   ('भूविज्ञान • परतें','neutral',[obj('strata','rock_layers',[-1.1,0,0],'compress',size=[.7]*3),obj('relief','mountain',[1.2,0,0],'grow',size=[.65]*3)]),
   ('राजव्यवस्था • मतदान','institution',[obj('citizen','person',[-1.4,0,0],'walk',[-.4,0,0]),obj('ballot','ballot',[1,0,0],'pulse')]),
-  ('भूगोल • नक्शा','neutral',[obj('map','map',[0,0,0],'trace',map_region='gujarat',route=[[72.5802,23.0608],[72.8014,20.8867]],markers=[{'at':[72.58,23.06],'label':'साबरमती'},{'at':[72.80,20.89],'label':'दांडी'}],size=[1.2]*3),obj('arrow','arrow',[-1.8,-.4,0],'move',[-1,-.4,0],size=[.3]*3)]),
+  ('भूगोल • नक्शा','neutral',[obj('map','map',[0,0,0],'trace',map_region='india',route=[[78.254, 21.783], [77.9, 21.56], [77.3, 21.39], [76.25, 21.31], [75.78, 21.06], [74.5, 21.4], [73.65, 21.25], [72.684, 21.084]],markers=[{'at':[78.254, 21.783],'label':'मुलताई'},{'at':[72.684, 21.084],'label':'खंभात की खाड़ी'}],choice_lines=[[[78.254, 21.783],[70.0,19.5]],[[78.254, 21.783],[87.8,19.0]]],frame_points=[[70.0,19.5],[87.8,19.0]],size=[1.2]*3),obj('arrow','arrow',[-1.8,-.4,0],'move',[-1,-.4,0],size=[.3]*3)]),
   ('अंतरिक्ष • तटरेखा','space',[obj('earth','planet',[-1.1,0,0],'spin'),obj('moon','moon',[1.2,0,0],'orbit')])]
  result={'title':'3D इंजन का तकनीकी परीक्षण','subject':'QA only','quality_version':VERSION,'dynamic':True,'share_reason':'Build-only verification','recall':'Not a published lesson','scenes':[]}
  for title,setting,objects in scenes:result['scenes'].append({'heading':title,'explanation':'परीक्षण दृश्य • प्रकाशित पाठ नहीं','setting':setting,'visual_action':'The articulated object demonstrates its supported operation with visible motion','speech':'यह केवल वीडियो इंजन की जाँच है और इसे पब्लिश नहीं किया जाएगा।','teaches':'Exercise assets, do not assert educational physics from this test fixture','objects':objects})
@@ -27,7 +27,7 @@ def render(root,blender):
  import numpy as np
  root=Path(root).resolve();root.mkdir(parents=True,exist_ok=True)
  (root/'recipe.json').write_text(json.dumps(test_plan(),ensure_ascii=False,indent=2));(root/'audio.json').write_text(json.dumps({'seconds':[2]*6,'voice':'NONE: build-only QA fixture'}))
- for name in ('rich_assets.py','world_land.json','dandi_map.json','world_land.LICENSE','dandi_map.LICENSE'):shutil.copy(BASE/name,root/name)
+ for name in ('rich_assets.py','world_land.json','dandi_map.json','world_land.LICENSE','dandi_map.LICENSE','india_states.json','india_states.LICENSE'):shutil.copy(BASE/name,root/name)
  shutil.copy(BASE/'known_good/Mukta.ttf',root/'Mukta.ttf')
  env=dict(os.environ,STUDIO_ROOT=str(root),STUDIO_PREVIEW_FRAME='12',LIBGL_ALWAYS_SOFTWARE='1')
  prefix=['xvfb-run','-a'] if shutil.which('xvfb-run') else []

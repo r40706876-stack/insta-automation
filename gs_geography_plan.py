@@ -10,16 +10,23 @@ def grounded_map_plan(reference,storyboard):
         raise ValueError('Sourced geographic route required')
     origin=geometry.get('origin_label');mouth=geometry.get('destination_label')
     if not origin or not mouth:raise ValueError('Grounded source and destination labels required')
-    def map_asset(trace=False,markers=()):
+    first={'at':route[0],'label':origin};last={'at':route[-1],'label':mouth}
+    lat0=route[0][1]
+    # Map Test 01: from the source, two equal dashed paths to BOTH seas (does not reveal the answer).
+    choices=[[route[0],[70.0,19.5]],[route[0],[87.8,19.0]]] if geometry['region']=='india' else []
+    def map_asset(trace=False,markers=(),choice=False):
         value={'id':'geographic_map','kind':'map','action':'trace' if trace else 'none','map_region':geometry['region'],'label':'','pos':[0,0,0],'size':[1.45]*3,'color':'#268f89','markers':list(markers)}
         if trace:value['route']=copy.deepcopy(route)
+        if geometry['region']=='india':
+            # Same regional crop in every scene: always include the source and the mouth.
+            value['choice_lines']=copy.deepcopy(choices) if choice else []
+            value['frame_points']=[route[0],route[-1]]+[c[1] for c in choices]
         return value
-    first={'at':route[0],'label':origin};last={'at':route[-1],'label':mouth}
     scenes=copy.deepcopy(storyboard)
     # Same spatial context throughout. The first two scenes show equal alternatives,
     # and never draw only the correct river route before the reveal.
     for index in (0,1):
-        scenes[index].update(setting='neutral',camera_view='front',visual_action='Two equally weighted east and west choices move over the sourced regional map; neither is marked correct',teaches='Identify the two possible directions without revealing the answer',objects=[map_asset(),
+        scenes[index].update(setting='neutral',camera_view='front',visual_action='Two equally weighted east and west choices move over the sourced regional map; neither is marked correct',teaches='Identify the two possible directions without revealing the answer',objects=[map_asset(False,[first],True),
           {'id':'east_choice','kind':'arrow','action':'move','label':'पूर्व','pos':[-.3,-.35,.9],'to':[.9,-.35,.9],'size':[.5]*3,'color':'#56bbdf'},
           {'id':'west_choice','kind':'arrow','action':'move','label':'पश्चिम','pos':[.3,-.35,.9],'to':[-.9,-.35,.9],'size':[.5]*3,'color':'#56bbdf'}])
     scenes[2].update(setting='neutral',camera_view='front',visual_action='The sourced river polyline traces from its origin toward its actual destination',teaches='Read the correct flow direction on real geographic context',objects=[map_asset(True,[first,last])])

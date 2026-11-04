@@ -117,29 +117,94 @@ def clip_polygon(poly,bounds):
    a=b
  return poly
 
+PASTEL=[(.93,.83,.45),(.78,.72,.93),(.74,.86,.62),(.95,.7,.56),(.62,.84,.9),(.93,.74,.84),(.83,.9,.55),(.97,.85,.66)]
+def in_ring(pt,ring):
+ x,y=pt;inside=False;j=len(ring)-1
+ for i in range(len(ring)):
+  xi,yi=ring[i][:2];xj,yj=ring[j][:2]
+  if (yi>y)!=(yj>y) and x<(xj-xi)*(y-yi)/((yj-yi) or 1e-9)+xi:inside=not inside
+  j=i
+ return inside
+def state_at(pt,states):
+ for st in states:
+  if any(in_ring(pt,r) for r in st['rings']):return st
+ return None
+def regional_bounds(spec):
+ """Map Test 01 style: crop to the route region, always keep both seas in view."""
+ pts=[p for p in spec.get('route',[])]+[m['at'] for m in spec.get('markers',[])]+[q for pair in spec.get('choice_lines',[]) for q in pair]+list(spec.get('frame_points',[]))
+ if not pts:return None
+ lat=[p[1] for p in pts]
+ ymin=max(8.0,min(lat)-3.2);ymax=min(31.5,max(lat)+3.2)
+ if ymax-ymin<15:
+  mid=(ymin+ymax)/2;ymin,ymax=mid-7.5,mid+7.5
+  if ymin<8.0:ymin,ymax=8.0,23.0
+  if ymax>31.5:ymin,ymax=16.5,31.5
+ return (67.8,ymin,90.6,ymax)
+def flat_fill(name,ring,point,m,parent,depth):
+ c=bpy.data.curves.new(name,'CURVE');c.dimensions='2D';c.fill_mode='BOTH';sp=c.splines.new('POLY');sp.points.add(len(ring)-1)
+ for v,p in zip(sp.points,ring):p=point(p);v.co=(p.x,p.z,0,1)
+ sp.use_cyclic_u=True;o=bpy.data.objects.new(name,c);bpy.context.collection.objects.link(o);o.parent=parent;o.rotation_euler.x=math.pi/2;o.location.y=depth;c.materials.append(m);return o
 def map_asset(parent,spec):
- region=spec.get('map_region','world');bounds=MAP_BOUNDS[region];xmin,ymin,xmax,ymax=bounds
- span=max(xmax-xmin,(ymax-ymin)*1.3);factor=3.5/span
- def point(p,y=-.08):return Vector(((p[0]-(xmin+xmax)/2)*factor,y,(p[1]-(ymin+ymax)/2)*factor+1.2))
- box('Map ocean backplate',(0,.1,1.2),(3.8,.12,3.4 if region!='world' else 2.2),sea,parent)
- if region=='gujarat':rings=json.loads((R/'dandi_map.json').read_text())['rings']
- else:
-  data=json.loads((R/'world_land.json').read_text());rings=[]
+ region=spec.get('map_region','world');bounds=MAP_BOUNDS[region]
+ regional=region=='india' and regional_bounds(spec)
+ if regional:bounds=regional
+ xmin,ymin,xmax,ymax=bounds
+ if regional:
+  # Upgrade (4 Nov): full-width coloured state map like the 1,789-view Map Test 01,
+  # instead of a small dark single-colour silhouette.
+  factor=6.1/(xmax-xmin);cz=0.0
+  def point(p,y=-.08):return Vector(((p[0]-(xmin+xmax)/2)*factor,y,(p[1]-(ymin+ymax)/2)*factor+cz))
+  sea_l=mat('Light map sea',(.55,.78,.86));neigh=mat('Neighbour land',(.8,.79,.72));border=mat('State border',(.3,.33,.32));river=mat('River blue',(.02,.28,.78))
+  box('Map ocean backplate',(0,.1,cz),(6.3,.12,(ymax-ymin)*factor+.2),sea_l,parent)
+  data=json.loads((R/'world_land.json').read_text())
   for feature in data['features']:
-   geom=feature['geometry'];rings.extend([p[0] for p in geom['coordinates']] if geom['type']=='MultiPolygon' else [geom['coordinates'][0]])
- for ring in rings:
-  ring=clip_polygon(ring,bounds)
-  if len(ring)<3:continue
-  c=bpy.data.curves.new('Source-based coast outline','CURVE');c.dimensions='2D';c.fill_mode='BOTH';sp=c.splines.new('POLY');sp.points.add(len(ring)-1)
-  for v,p in zip(sp.points,ring):p=point(p);v.co=(p.x,p.z,0,1)
-  sp.use_cyclic_u=True;o=bpy.data.objects.new('Geographic land',c);bpy.context.collection.objects.link(o);o.parent=parent;o.rotation_euler.x=math.pi/2;o.location.y=-.035;c.materials.append(land)
+   geom=feature['geometry']
+   for ring in ([q[0] for q in geom['coordinates']] if geom['type']=='MultiPolygon' else [geom['coordinates'][0]]):
+    ring=clip_polygon(ring,bounds)
+    if len(ring)>2:flat_fill('Neighbour and coast land',ring,point,neigh,parent,-.03)
+  states=json.loads((R/'india_states.json').read_text())['states'];mats={}
+  for i,st in enumerate(states):
+   m=mats.setdefault(i%len(PASTEL),mat('State fill %d'%(i%len(PASTEL)),PASTEL[i%len(PASTEL)]))
+   for ring in st['rings']:
+    ring=clip_polygon([list(p[:2]) for p in ring],bounds)
+    if len(ring)<3:continue
+    flat_fill('Indian state '+st['name'],ring,point,m,parent,-.05)
+    line('State boundary',[point(p,-.07) for p in ring+[ring[0]]],.006,border,parent)
+  context=[]
+  for label,at in (('अरब सागर',(70.2,max(ymin+1.2,min(ymax-1.5,17.5)))),('बंगाल की खाड़ी',(87.6,max(ymin+1.2,min(ymax-1.5,17.5))))):
+   if xmin<at[0]<xmax and ymin<at[1]<ymax and state_at(at,states) is None:context.append((label,point(at,-.15)))
+  seen=set()
+  for p in spec.get('route',[])[:1]+spec.get('route',[])[-1:]+[m['at'] for m in spec.get('markers',[])]:
+   st=state_at(p,states)
+   if st and st.get('hindi') and st['name'] not in seen and st['name']!='Andhra Pradesh':
+    seen.add(st['name']);rings=st['rings'];big=max(rings,key=len);cx=sum(q[0] for q in big)/len(big);cy=sum(q[1] for q in big)/len(big)
+    if xmin<cx<xmax and ymin<cy<ymax:context.append((st['hindi'],point((cx,cy),-.15)))
+  choice=[]
+  for a,b in spec.get('choice_lines',[]):
+   pa,pb=point(a,-.12),point(b,-.12)
+   for k in range(0,10,2):choice.append(line('Equal choice dash',[pa.lerp(pb,k/10),pa.lerp(pb,(k+1)/10)],.03,dark,parent))
+  route_mat=river
+ else:
+  span=max(xmax-xmin,(ymax-ymin)*1.3);factor=3.5/span
+  def point(p,y=-.08):return Vector(((p[0]-(xmin+xmax)/2)*factor,y,(p[1]-(ymin+ymax)/2)*factor+1.2))
+  box('Map ocean backplate',(0,.1,1.2),(3.8,.12,3.4 if region!='world' else 2.2),sea,parent)
+  if region=='gujarat':rings=json.loads((R/'dandi_map.json').read_text())['rings']
+  else:
+   data=json.loads((R/'world_land.json').read_text());rings=[]
+   for feature in data['features']:
+    geom=feature['geometry'];rings.extend([p[0] for p in geom['coordinates']] if geom['type']=='MultiPolygon' else [geom['coordinates'][0]])
+  for ring in rings:
+   ring=clip_polygon(ring,bounds)
+   if len(ring)<3:continue
+   flat_fill('Geographic land',ring,point,land,parent,-.035)
+  context=[];route_mat=gold
  route=None;marker=None
  if spec.get('route'):
-  points=[point(p,-.13) for p in spec['route']];route=line('Animated geographic route',points,.024,gold,parent);route.data.bevel_factor_end=.01;marker=ell('Travel marker',points[0],(.055,.04,.055),white,parent)
+  points=[point(p,-.13) for p in spec['route']];route=line('Animated geographic route',points,.045 if regional else .024,route_mat,parent);route.data.bevel_factor_end=.01;marker=ell('Travel marker',points[0],(.075,.05,.075) if regional else (.055,.04,.055),white,parent)
  markers=[]
  for item in spec.get('markers',[]):
-  p=point(item['at'],-.15);ell('Location marker',p,(.045,.035,.045),gold,parent);markers.append((item['label'],p))
- return {'route':route,'marker':marker,'route_points':[point(p,-.13) for p in spec.get('route',[])],'map_markers':markers}
+  p=point(item['at'],-.15);ell('Location marker',p,(.07,.05,.07) if regional else (.045,.035,.045),red if regional else gold,parent);markers.append((item['label'],p))
+ return {'route':route,'marker':marker,'route_points':[point(p,-.13) for p in spec.get('route',[])],'map_markers':markers,'map_context':context}
 
 def animate_map(details,q,frame):
  route=details.get('route')

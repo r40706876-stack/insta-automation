@@ -1,0 +1,3 @@
+State polygons: https://github.com/geohacker/india/blob/master/state/india_state.geojson
+Regional mainland crop; simplified boundaries, not an official political map. Used only for regional crops south of 31.5N; never shown as a full national map.
+Old Andhra Pradesh boundary includes Telangana in this dataset; labels shown only for large route states.

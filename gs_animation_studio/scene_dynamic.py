@@ -180,6 +180,8 @@ for frame in range(1,N+1):
  for spec,o,details in sets[k]:
   for label,point in details.get('map_markers',[]):
    v=world_to_camera_view(s,cam,o.matrix_world@point);annotations.append({'text':label,'anchor':[v.x*720,(1-v.y)*1280]})
+  for label,point in details.get('map_context',[]):
+   v=world_to_camera_view(s,cam,o.matrix_world@point);annotations.append({'text':label,'anchor':[v.x*720,(1-v.y)*1280],'style':'context'})
   if spec.get('label'):
    anchor=2.4 if spec['kind'] in ('person','soldier') else .65 if spec['kind'] in ('salt','book') else 1.6;world=o.matrix_world@Vector((0,0,anchor));v=world_to_camera_view(s,cam,world);pins[spec['id']]=[v.x*720,(1-v.y)*1280]
  track.append({'t':t,'scene':k,'pins':pins,'annotations':annotations,'map_disclaimer':any(sp['kind']=='map' and sp.get('route') for sp,_,_ in sets[k])})
