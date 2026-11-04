@@ -25,11 +25,36 @@ def topic_priority(question):
  years=len(re.findall(r'(?<!\d)(?:1[5-9]|20)\d{2}(?!\d)',str(question.get('question',''))))
  return int(utility)+evidence_score(question)-.05*years-.001*max(0,len(str(question.get('question','')).split())-16)
 
+import re as _re
+_MOJIBAKE=_re.compile(r'[\u00c0-\u00ff\ufffd]|Ã|â€')
+_STOP={'निम्नलिखित','में','से','कौन','सा','सी','से','है','हैं','की','का','के','को','किस','किसे','क्या','और','या','था','थी','थे','एक','भारत','भारतीय','द्वारा','लिए','शामिल','गया','गई','होता','होती'}
+def clean_reference(q):
+ """4 Nov: the 20:00 Static GK pick had broken PDF text ('नेटवर्कâ', 'Basilica दिँदस् Jesus')
+ and an explanation about a different topic. Skip such bank rows instead of rendering them."""
+ options=q.get('options') or {}
+ blob=' '.join([str(q.get('question','')),str(q.get('explanation',''))]+[str(v) for v in options.values()])
+ if _MOJIBAKE.search(blob):return False
+ # Book answers to 'current/recent' questions go stale (e.g. 'RBI के वर्तमान गवर्नर — उर्जित पटेल').
+ if _re.search(r'वर्तमान|हाल ही|हाल में|मौजूदा|अभी तक|नवीनतम|इस वर्ष|पिछले वर्ष|\bcurrent\b|\blatest\b|\brecent',str(q.get('question','')),_re.I):return False
+ # Latin word glued to stray Devanagari marks is PDF damage, e.g. 'Basilica दिँदस्'.
+ if _re.search(r'[A-Za-z]{3,}\s+[\u0900-\u097f]*[\u0901][\u0900-\u097f]*\u094d(?:\s|$)',blob):return False
+ def words(t):return {w for w in _re.findall(r'[\u0900-\u097fA-Za-z]{3,}',t) if w not in _STOP}
+ option_words=set().union(*[words(str(v)) for v in options.values()]) if options else set()
+ qwords=words(str(q.get('question','')))-option_words
+ ewords=words(str(q.get('explanation','')))
+ answer=str(options.get(q.get('answer'),'')).strip()
+ expl=str(q.get('explanation',''))
+ if qwords and not (qwords&ewords):return False
+ # The explanation must actually contain the answer (e.g. 'एकता दिवस' row explained Dhyan Chand).
+ tokens=[t for t in _re.findall(r'[\u0900-\u097fA-Za-z0-9]+',answer) if t not in _STOP and len(t)>=2]
+ if tokens and sum(t in expl for t in tokens)/len(tokens)<.6:return False
+ return True
+
 def choose_reference(bank,subject,used):
  eligible=[]
  for q in bank:
   digest=hashlib.sha256(q.get('question','').encode()).hexdigest()
-  if digest in used or q.get('answer') not in q.get('options',{}) or len(q.get('explanation',''))<11:continue
+  if digest in used or q.get('answer') not in q.get('options',{}) or len(q.get('explanation',''))<11 or not clean_reference(q):continue
   if subject and q.get('subject')!=subject:continue
   eligible.append((digest,q))
  if not eligible:raise RuntimeError('No unused grounded question for subject; no old/static substitute')

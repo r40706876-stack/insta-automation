@@ -63,7 +63,7 @@ def validate_visual(plan):
    for o in objects:
     if s.get('role')!='challenge' and str(o.get('label','')).strip() in GENERIC_LABELS:raise ValueError(f'Scene {i+1}: meaningless label "{o.get("label")}"; label must name the real thing or be empty')
  subject=str(plan.get('subject',''))
- if any(o['kind']=='map' for sc in plan['scenes'] for o in sc['objects']) and subject and not any(w in subject for w in ('Geography','भूगोल','History','इतिहास','QA')):
+ if any(o['kind']=='map' for sc in plan['scenes'] for o in sc['objects']) and subject and not any(w in subject for w in ('Geography','भूगोल','History','इतिहास','Traditional GK','Static','स्टैटिक','QA')):
   raise ValueError('Map shown for a non-geography/history topic')
  return plan
 
