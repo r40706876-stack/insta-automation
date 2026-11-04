@@ -1,0 +1,261 @@
+{
+  "title": "WNBR में कौन सा राज्य शामिल है?",
+  "subject": "स्टैटिक जीके",
+  "topic_key": "wnbr_state_inclusion",
+  "share_reason": "सही उत्तर जानकर परीक्षा में मदद",
+  "recall": "याद रखें: गोवा।",
+  "pyq_challenge": true,
+  "share_card": {
+    "kind": "exam_confusion",
+    "recipient": "परीक्षा की तैयारी करने वाले मित्र",
+    "benefit": "WNBR में गोवा शामिल है, भ्रम दूर होगा",
+    "cta": "दोस्त को बताओ, गोवा सही उत्तर है"
+  },
+  "scenes": [
+    {
+      "role": "hook",
+      "heading": "पहले अपना जवाब चुनिए",
+      "explanation": "A या B — सोचिए",
+      "speech": "यूनेस्को के विश्व नेटवर्कâ ऑफ बायोस्फीयर रिजर्व (WNBR) में निम्नलिखित में से कौन सा शामिल है? दृश्य देखिए।",
+      "teaches": "प्रश्न पहचानना और विकल्पों पर विचार करना",
+      "visual_action": "व्यक्ति मानचित्र की ओर चलता है",
+      "setting": "neutral",
+      "objects": [
+        {
+          "kind": "person",
+          "action": "walk",
+          "id": "obj_0",
+          "label": "विचारकर्ता",
+          "pos": [
+            -1.5,
+            0,
+            0
+          ],
+          "to": [
+            -0.5,
+            0,
+            0
+          ],
+          "color": "#f4e7bf",
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ]
+        },
+        {
+          "kind": "map",
+          "action": "none",
+          "map_region": "india",
+          "id": "obj_1",
+          "label": "भारत मानचित्र",
+          "pos": [
+            0.5,
+            0,
+            0
+          ],
+          "color": "#59c7c5",
+          "size": [
+            1.1,
+            1.1,
+            1.1
+          ]
+        }
+      ],
+      "hook_question": "यूनेस्को के विश्व नेटवर्कâ ऑफ बायोस्फीयर रिजर्व (WNBR) में निम्नलिखित में से कौन सा शामिल है?",
+      "quiz_options": [
+        "A: गोवा",
+        "B: आंध्र प्रदेश"
+      ]
+    },
+    {
+      "role": "challenge",
+      "heading": "कमेंट में लिखिए: A या B?",
+      "explanation": "A या B? दो सेकंड सोचिए,",
+      "speech": "A या B? दो सेकंड सोचिए, कमेंट कीजिए।",
+      "teaches": "विकल्पों में से सही चुनने की प्रक्रिया",
+      "visual_action": "तीर विकल्पों के बीच चलता है",
+      "setting": "neutral",
+      "objects": [
+        {
+          "kind": "arrow",
+          "action": "move",
+          "id": "obj_0",
+          "label": "विकल्प संकेत",
+          "pos": [
+            -1,
+            0,
+            0
+          ],
+          "to": [
+            1,
+            0,
+            0
+          ],
+          "color": "#59c7c5",
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        }
+      ],
+      "quiz_options": [
+        "A: गोवा",
+        "B: आंध्र प्रदेश"
+      ]
+    },
+    {
+      "role": "reveal",
+      "heading": "सही उत्तर",
+      "explanation": "सही उत्तर है: गोवा।",
+      "speech": "सही उत्तर है: गोवा।",
+      "teaches": "सही उत्तर की पुष्टि",
+      "visual_action": "मानचित्र गोवा पर ट्रेस दिखाता है",
+      "setting": "neutral",
+      "objects": [
+        {
+          "kind": "map",
+          "action": "trace",
+          "map_region": "india",
+          "id": "obj_0",
+          "label": "गोवा",
+          "route": [
+            [
+              78.0,
+              22.0
+            ],
+            [
+              73.9,
+              15.5
+            ]
+          ],
+          "color": "#59c7c5",
+          "pos": [
+            0.0,
+            0,
+            0
+          ],
+          "size": [
+            1.1,
+            1.1,
+            1.1
+          ]
+        }
+      ]
+    },
+    {
+      "role": "explain",
+      "heading": "तथ्य समझिए",
+      "explanation": "बोम जीसस का बसीलिका (Basilica दिँदस्",
+      "speech": "बोम जीसस का बसीलिका (Basilica दिँदस् Jesus) भारत के गोवा में स्थित है।",
+      "teaches": "गोवा में बेसिलिका का महत्व",
+      "visual_action": "व्यक्ति बेसिलिका की ओर चलता है",
+      "setting": "institution",
+      "objects": [
+        {
+          "kind": "person",
+          "action": "walk",
+          "id": "obj_0",
+          "label": "विचारकर्ता",
+          "pos": [
+            -1.5,
+            0,
+            0
+          ],
+          "to": [
+            -0.5,
+            0,
+            0
+          ],
+          "color": "#f4e7bf",
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ]
+        },
+        {
+          "kind": "building",
+          "action": "none",
+          "id": "obj_1",
+          "label": "बेसिलिका",
+          "pos": [
+            0.5,
+            0,
+            0
+          ],
+          "color": "#b1a4d3",
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        }
+      ]
+    },
+    {
+      "role": "transfer",
+      "heading": "खुद को जाँचिए",
+      "explanation": "अब बिना देखे बताइए।",
+      "speech": "अब बिना देखे बताइए।",
+      "teaches": "स्मृति परीक्षण",
+      "visual_action": "व्यक्ति दूर चलता है, याद करने को प्रेरित",
+      "setting": "neutral",
+      "objects": [
+        {
+          "kind": "person",
+          "action": "walk",
+          "id": "obj_0",
+          "label": "विचारकर्ता",
+          "pos": [
+            0,
+            0,
+            0
+          ],
+          "to": [
+            1,
+            0,
+            0
+          ],
+          "color": "#f4e7bf",
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ]
+        }
+      ]
+    },
+    {
+      "role": "revision",
+      "heading": "रिवीजन कार्ड",
+      "explanation": "याद रखें: गोवा।",
+      "speech": "याद रखें: गोवा।",
+      "teaches": "मुख्य तथ्य दोहराना",
+      "visual_action": "स्थिर मानचित्र दिखाता है",
+      "setting": "neutral",
+      "revision_card": true,
+      "objects": [
+        {
+          "kind": "map",
+          "action": "none",
+          "map_region": "india",
+          "id": "obj_0",
+          "label": "गोवा",
+          "pos": [
+            0,
+            0,
+            0
+          ],
+          "color": "#59c7c5",
+          "size": [
+            1.1,
+            1.1,
+            1.1
+          ]
+        }
+      ]
+    }
+  ]
+}
