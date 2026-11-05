@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-05T04:08:04.020787+00:00",
+  "generated_at": "2026-11-05T07:06:11.709388+00:00",
   "windows": {
     "24h": [
       {
@@ -38,23 +38,23 @@
       {
         "subject": null,
         "format": "legacy_unclassified",
-        "reels": 13,
+        "reels": 14,
         "metrics": {
           "shares_per_1000": {
-            "mean": 1.6393300806256272,
-            "n": 13
+            "mean": 1.5222350748666538,
+            "n": 14
           },
           "saves_per_1000": {
-            "mean": 3.1900071335526574,
-            "n": 13
+            "mean": 2.962149481156039,
+            "n": 14
           },
           "average_watch_time": {
-            "mean": 4.001,
-            "n": 13
+            "mean": 4.038571428571429,
+            "n": 14
           },
           "three_second_rate": {
-            "mean": 26.41538453846153,
-            "n": 13
+            "mean": 27.928571357142854,
+            "n": 14
           },
           "retention": {
             "mean": null,
@@ -271,23 +271,23 @@
       {
         "subject": null,
         "format": "legacy_unclassified",
-        "reels": 22,
+        "reels": 23,
         "metrics": {
           "shares_per_1000": {
-            "mean": 1.535172373983174,
-            "n": 22
+            "mean": 1.4684257490273838,
+            "n": 23
           },
           "saves_per_1000": {
-            "mean": 2.560366451785924,
-            "n": 22
+            "mean": 2.976055393934889,
+            "n": 23
           },
           "average_watch_time": {
-            "mean": 4.8601363636363635,
-            "n": 22
+            "mean": 4.759739130434783,
+            "n": 23
           },
           "three_second_rate": {
-            "mean": 27.0090915,
-            "n": 22
+            "mean": 26.447826565217394,
+            "n": 23
           },
           "retention": {
             "mean": null,
@@ -469,23 +469,23 @@
       {
         "subject": "Geography",
         "format": "map_pyq_challenge",
-        "reels": 1,
+        "reels": 2,
         "metrics": {
           "shares_per_1000": {
-            "mean": 0.0,
-            "n": 1
+            "mean": 9.036144578313253,
+            "n": 2
           },
           "saves_per_1000": {
-            "mean": 0.0,
-            "n": 1
+            "mean": 3.0120481927710845,
+            "n": 2
           },
           "average_watch_time": {
-            "mean": 5.797,
-            "n": 1
+            "mean": 5.257,
+            "n": 2
           },
           "three_second_rate": {
-            "mean": 41.8,
-            "n": 1
+            "mean": 36.5500015,
+            "n": 2
           },
           "retention": {
             "mean": null,
@@ -537,23 +537,23 @@
       {
         "subject": null,
         "format": "legacy_unclassified",
-        "reels": 33,
+        "reels": 34,
         "metrics": {
           "shares_per_1000": {
-            "mean": 2.1289978692163785,
-            "n": 32
+            "mean": 2.0644827822704275,
+            "n": 33
           },
           "saves_per_1000": {
-            "mean": 4.716631680291105,
-            "n": 32
+            "mean": 4.708383582235146,
+            "n": 33
           },
           "average_watch_time": {
-            "mean": 6.4386874999999995,
-            "n": 32
+            "mean": 6.39769696969697,
+            "n": 33
           },
           "three_second_rate": {
-            "mean": 33.13548406451613,
-            "n": 31
+            "mean": 32.925000250000004,
+            "n": 32
           },
           "retention": {
             "mean": null,
@@ -938,10 +938,10 @@
       {
         "subject": null,
         "format": "legacy_unclassified",
-        "reels": 22,
-        "shares_per_1000": 1.535172373983174,
-        "saves_per_1000": 2.560366451785924,
-        "average_watch_time": 4.8601363636363635
+        "reels": 23,
+        "shares_per_1000": 1.4684257490273838,
+        "saves_per_1000": 2.976055393934889,
+        "average_watch_time": 4.759739130434783
       }
     ],
     "winner": null,
@@ -956,12 +956,12 @@
   },
   "weekly": {
     "current": {
-      "reels": 22,
+      "reels": 23,
       "best": "18174696019395674",
       "weakest": "18136094323708858",
       "basis": "24h share/save rate; hypotheses only",
-      "mean_shares_per_1000": 1.7759409206777628,
-      "mean_saves_per_1000": 1.7197299502376016
+      "mean_shares_per_1000": 1.6393300806256272,
+      "mean_saves_per_1000": 1.5874430309885552
     },
     "previous": {
       "reels": 0,
