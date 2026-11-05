@@ -1,0 +1,371 @@
+{
+  "title": "गोल्डन फाइबर क्या है?",
+  "subject": "भूगोल",
+  "topic_key": "golden_fiber_jute",
+  "share_reason": "जूट को गोल्डन फाइबर समझना परीक्षा में मददगार",
+  "recall": "याद रखें: जूट।",
+  "pyq_challenge": true,
+  "share_card": {
+    "kind": "exam_confusion",
+    "recipient": "परीक्षा की तैयारी करने वाले मित्र",
+    "benefit": "जूट को गोल्डन फाइबर के रूप में पहचानना",
+    "cta": "चलो साथ मिलकर जूट याद रखें"
+  },
+  "scenes": [
+    {
+      "role": "hook",
+      "heading": "पहले अपना जवाब चुनिए",
+      "explanation": "A या B — सोचिए",
+      "speech": "गोल्डन फाइबर के रूप में किसे जाना जाता है? दृश्य देखिए।",
+      "teaches": "सवाल की पहचान",
+      "visual_action": "व्यक्ति तीर घुमाते हुए जूट बॉक्स की ओर इशारा करता है",
+      "setting": "neutral",
+      "objects": [
+        {
+          "kind": "arrow",
+          "action": "spin",
+          "id": "obj_arrow",
+          "label": "",
+          "color": "#59c7c5",
+          "pos": [
+            -1.8,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        {
+          "kind": "box",
+          "action": "none",
+          "id": "obj_jute",
+          "label": "जूट",
+          "color": "#59c7c5",
+          "pos": [
+            0.0,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        {
+          "kind": "box",
+          "action": "none",
+          "id": "obj_wheat",
+          "label": "गेहूँ",
+          "color": "#59c7c5",
+          "pos": [
+            1.8,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        }
+      ],
+      "hook_question": "गोल्डन फाइबर के रूप में किसे जाना जाता है?",
+      "quiz_options": [
+        "A: गेहूँ",
+        "B: जूट"
+      ]
+    },
+    {
+      "role": "challenge",
+      "heading": "कमेंट में लिखिए: A या B?",
+      "explanation": "दो सेकंड: A या B?",
+      "speech": "दो सेकंड: A या B?",
+      "teaches": "विकल्प विचार",
+      "visual_action": "व्यक्ति दो बॉक्स के बीच चलता है",
+      "setting": "neutral",
+      "objects": [
+        {
+          "kind": "person",
+          "action": "walk",
+          "id": "obj_person",
+          "label": "",
+          "color": "#f4e7bf",
+          "pos": [
+            -2.25,
+            0,
+            0
+          ],
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ],
+          "to": [
+            -1.05,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "box",
+          "action": "none",
+          "id": "obj_wheat",
+          "label": "गेहूँ",
+          "color": "#59c7c5",
+          "pos": [
+            0.0,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        {
+          "kind": "box",
+          "action": "none",
+          "id": "obj_jute",
+          "label": "जूट",
+          "color": "#59c7c5",
+          "pos": [
+            1.8,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        }
+      ],
+      "quiz_options": [
+        "A: गेहूँ",
+        "B: जूट"
+      ]
+    },
+    {
+      "role": "reveal",
+      "heading": "सही उत्तर",
+      "explanation": "सही उत्तर है: जूट।",
+      "speech": "सही उत्तर है: जूट।",
+      "teaches": "उत्तर पहचान",
+      "visual_action": "जूट बॉक्स ऊपर उठता है",
+      "setting": "neutral",
+      "objects": [
+        {
+          "kind": "box",
+          "action": "rise",
+          "id": "obj_jute",
+          "label": "जूट",
+          "color": "#59c7c5",
+          "pos": [
+            0.0,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            0.0,
+            0,
+            1.2
+          ]
+        }
+      ]
+    },
+    {
+      "role": "explain",
+      "heading": "तथ्य समझिए",
+      "explanation": "जूट को गोल्डन फाइबर के रूप",
+      "speech": "जूट को गोल्डन फाइबर के रूप में जाना जाता है।",
+      "teaches": "जूट का महत्व",
+      "visual_action": "सूरज उगते हुए जूट को सुनहरा दिखाता है",
+      "setting": "village",
+      "objects": [
+        {
+          "kind": "sun",
+          "action": "rise",
+          "id": "obj_sun",
+          "label": "",
+          "color": "#59c7c5",
+          "pos": [
+            -0.9,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            -0.9,
+            0,
+            1.2
+          ]
+        },
+        {
+          "kind": "box",
+          "action": "none",
+          "id": "obj_jute",
+          "label": "जूट",
+          "color": "#59c7c5",
+          "pos": [
+            0.9,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        }
+      ]
+    },
+    {
+      "role": "transfer",
+      "heading": "खुद को जाँचिए",
+      "explanation": "अब बिना देखे बताइए।",
+      "speech": "अब बिना देखे बताइए।",
+      "teaches": "अन्य फाइबर से तुलना",
+      "visual_action": "तीर जूट से कपास की तुलना करता है",
+      "setting": "institution",
+      "objects": [
+        {
+          "kind": "arrow",
+          "action": "spin",
+          "id": "obj_arrow",
+          "label": "",
+          "color": "#59c7c5",
+          "pos": [
+            -1.8,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        {
+          "kind": "box",
+          "action": "none",
+          "id": "obj_jute",
+          "label": "जूट",
+          "color": "#59c7c5",
+          "pos": [
+            0.0,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        {
+          "kind": "box",
+          "action": "none",
+          "id": "obj_cotton",
+          "label": "कॉटन",
+          "color": "#59c7c5",
+          "pos": [
+            1.8,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        }
+      ]
+    },
+    {
+      "role": "revision",
+      "heading": "रिवीजन कार्ड",
+      "explanation": "याद रखें: जूट।",
+      "speech": "याद रखें: जूट।",
+      "teaches": "स्मरण",
+      "visual_action": "स्थिर जूट बॉक्स दिखाया जाता है",
+      "setting": "neutral",
+      "revision_card": true,
+      "objects": [
+        {
+          "kind": "box",
+          "action": "none",
+          "id": "obj_jute",
+          "label": "जूट",
+          "color": "#59c7c5",
+          "pos": [
+            0.0,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        }
+      ]
+    }
+  ],
+  "speech": [
+    "गोल्डन फाइबर के रूप में किसे जाना जाता है? दृश्य देखिए।",
+    "दो सेकंड: A या B?",
+    "सही उत्तर है: जूट।",
+    "जूट को गोल्डन फाइबर के रूप में जाना जाता है।",
+    "अब बिना देखे बताइए।",
+    "याद रखें: जूट।"
+  ],
+  "titles": [
+    [
+      "पहले अपना जवाब चुनिए",
+      "A या B — सोचिए"
+    ],
+    [
+      "कमेंट में लिखिए: A या B?",
+      "दो सेकंड: A या B?"
+    ],
+    [
+      "सही उत्तर",
+      "सही उत्तर है: जूट।"
+    ],
+    [
+      "तथ्य समझिए",
+      "जूट को गोल्डन फाइबर के रूप"
+    ],
+    [
+      "खुद को जाँचिए",
+      "अब बिना देखे बताइए।"
+    ],
+    [
+      "रिवीजन कार्ड",
+      "याद रखें: जूट।"
+    ]
+  ],
+  "requested_topic": "गोल्डन फाइबर के रूप में किसे जाना जाता है?",
+  "automatic_selection": false,
+  "planner": "Groq / openai/gpt-oss-20b",
+  "auditor": "Groq / openai/gpt-oss-120b",
+  "dynamic": true,
+  "topic_policy": "easy_single_concept_v1",
+  "quality_version": "rich_3d_v1",
+  "primary_objective": "save",
+  "series_next_topic": "गाँधी सागर बांध किस राज्य में स्थित है?"
+}

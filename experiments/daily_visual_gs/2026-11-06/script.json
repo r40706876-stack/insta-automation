@@ -1,0 +1,132 @@
+{
+  "ok": true,
+  "title": "गोल्डन फाइबर क्या है?",
+  "subject": "Geography",
+  "renderer_version": "rich_3d_v1",
+  "question_hash": "6e4af295b8020048295567ff9c4336c2aadcc0114323e133ea4eed4dddf09ce5",
+  "reference": {
+    "subject": "Geography",
+    "subject_hi": "भूगोल",
+    "chapter": "कृषि एवं पशुपालन (Agriculture and Animal Husbandry)",
+    "sub": "",
+    "question": "गोल्डन फाइबर के रूप में किसे जाना जाता है?",
+    "options": {
+      "a": "गेहूँ",
+      "b": "ऊन",
+      "c": "जूट",
+      "d": "रेयान"
+    },
+    "answer": "c",
+    "exams": [
+      "RRB Group-D 06-12-2018 (Shift-III)",
+      "RRB Group-D 09-10-2018 (Shift-II)"
+    ],
+    "explanation": "जूट को गोल्डन फाइबर के रूप में जाना जाता है। विश्व में भारत जूट से बनी वस्तुओं का सबसे बड़ा उत्पादक है। जूट का पहला कारखाना 1855 ई. में कोलकाता के निकट रिसरा नामक स्थान पर स्थापित हुआ था। इस उद्योग के अधिकांश कारखाने पश्चिम बंगाल में है।",
+    "times_asked": 2,
+    "years": [
+      "2018"
+    ],
+    "id": "7d6a2fd813",
+    "seq": 56
+  },
+  "experiment_format": "visual_mystery",
+  "primary_objective": "save",
+  "series_next_topic": "गाँधी सागर बांध किस राज्य में स्थित है?",
+  "series_next_hash": "a49755fb6ab7c3de95e6daf540d489a7ec7d52a39b60f8a84b0a606ffd1fa6d1",
+  "topic_policy": "evidence_cohort_v2",
+  "topic_priority": 1.0,
+  "recall": "याद रखें: जूट।",
+  "share_card": {
+    "kind": "exam_confusion",
+    "recipient": "परीक्षा की तैयारी करने वाले मित्र",
+    "benefit": "जूट को गोल्डन फाइबर के रूप में पहचानना",
+    "cta": "चलो साथ मिलकर जूट याद रखें"
+  },
+  "share_reason": "जूट को गोल्डन फाइबर समझना परीक्षा में मददगार",
+  "scenes": [
+    {
+      "label": "पहले अपना जवाब चुनिए",
+      "quiz_options": [
+        "A: गेहूँ",
+        "B: जूट"
+      ],
+      "speech": "गोल्डन फाइबर के रूप में किसे जाना जाता है? दृश्य देखिए।",
+      "role": "hook",
+      "revision_card": false,
+      "teaches": "सवाल की पहचान",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "व्यक्ति तीर घुमाते हुए जूट बॉक्स की ओर इशारा करता है"
+      }
+    },
+    {
+      "label": "कमेंट में लिखिए: A या B?",
+      "quiz_options": [
+        "A: गेहूँ",
+        "B: जूट"
+      ],
+      "speech": "दो सेकंड: A या B?",
+      "role": "challenge",
+      "revision_card": false,
+      "teaches": "विकल्प विचार",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "व्यक्ति दो बॉक्स के बीच चलता है"
+      }
+    },
+    {
+      "label": "सही उत्तर",
+      "quiz_options": null,
+      "speech": "सही उत्तर है: जूट।",
+      "role": "reveal",
+      "revision_card": false,
+      "teaches": "उत्तर पहचान",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "जूट बॉक्स ऊपर उठता है"
+      }
+    },
+    {
+      "label": "तथ्य समझिए",
+      "quiz_options": null,
+      "speech": "जूट को गोल्डन फाइबर के रूप में जाना जाता है।",
+      "role": "explain",
+      "revision_card": false,
+      "teaches": "जूट का महत्व",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "village",
+        "visible_action": "सूरज उगते हुए जूट को सुनहरा दिखाता है"
+      }
+    },
+    {
+      "label": "खुद को जाँचिए",
+      "quiz_options": null,
+      "speech": "अब बिना देखे बताइए।",
+      "role": "transfer",
+      "revision_card": false,
+      "teaches": "अन्य फाइबर से तुलना",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "institution",
+        "visible_action": "तीर जूट से कपास की तुलना करता है"
+      }
+    },
+    {
+      "label": "रिवीजन कार्ड",
+      "quiz_options": null,
+      "speech": "याद रखें: जूट।",
+      "role": "revision",
+      "revision_card": true,
+      "teaches": "स्मरण",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "स्थिर जूट बॉक्स दिखाया जाता है"
+      }
+    }
+  ]
+}

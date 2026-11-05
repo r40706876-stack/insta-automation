@@ -1,0 +1,45 @@
+{
+  "answer_correct": true,
+  "visual_relevance": true,
+  "hindi_readable": true,
+  "pronunciation_correct": true,
+  "audio_visual_match": true,
+  "answer_reveal_timing": true,
+  "revision_card_readable": true,
+  "reasons": [
+    "All questions, options, explanation facts and revision cards match the grounded reference accurately without contradictions.",
+    "The 3D animations visually depict the question and facts (sun shining on jute, comparing jute and cotton, etc.).",
+    "Audio pronunciation in Hindi is clear and natural, with proper timing allowing the user to think before reveal."
+  ],
+  "observed_answer": "जूट",
+  "scene_evidence": [
+    {
+      "scene": 1,
+      "observation": "Question is posed showing options A (गेहूँ) and B (जूट) with a clear two-second timer."
+    },
+    {
+      "scene": 2,
+      "observation": "Timer counts down giving time to choose between A or B."
+    },
+    {
+      "scene": 3,
+      "observation": "Correct answer 'जूट' is revealed clearly on screen."
+    },
+    {
+      "scene": 4,
+      "observation": "Explanation scene shows a sunrise over a village setting emphasizing jute as golden fiber."
+    },
+    {
+      "scene": 5,
+      "observation": "Transfer scene tests knowledge by showing jute and cotton boxes."
+    },
+    {
+      "scene": 6,
+      "observation": "Revision card presents 'याद रखें: जूट' clearly at the end."
+    }
+  ],
+  "sha256": "2abf96b712a16eace53a67d36e688d4be21c86443cbbaabad46f5be5fa244231",
+  "reviewer": "gemini-3.5-flash-lite / actual rendered video and audio",
+  "reviewed_at": "2026-11-05T18:59:33.519825+00:00",
+  "review_type": "automated_multimodal"
+}
