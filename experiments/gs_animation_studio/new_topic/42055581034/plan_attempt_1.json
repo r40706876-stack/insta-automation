@@ -1,0 +1,88 @@
+{
+  "title": "भारत की कम्युनिस्ट पार्टी का प्रतीक चिह्न",
+  "subject": "राजव्यवस्था",
+  "topic_key": "bharat_communist_party_symbol",
+  "share_reason": "सही प्रतीक चिह्न याद रखकर परीक्षा में विकल्प भ्रम से बचें",
+  "recall": "याद रखें: मक्के और हंसिया।",
+  "share_card": {
+    "kind": "exam_confusion",
+    "recipient": "परीक्षा की तैयारी करने वाले मित्र",
+    "benefit": "सही प्रतीक चिह्न याद रखकर विकल्प भ्रम से बचें",
+    "cta": "दोस्त को भेजो, परीक्षा में मदद करो"
+  },
+  "pyq_challenge": true,
+  "scenes": [
+    {
+      "role": "hook",
+      "heading": "पहले अपना जवाब चुनिए",
+      "explanation": "A या B — सोचिए",
+      "speech": "भारत की कम्युनिस्ट पार्टी का प्रतीक चिह्न निम्न में से क्या है? जाल पहचानिए।",
+      "teaches": "प्रश्न पहचान",
+      "visual_action": "प्रश्न चिह्न स्क्रीन पर प्रकट होता है",
+      "setting": "neutral",
+      "objects": [],
+      "hook_question": "भारत की कम्युनिस्ट पार्टी का प्रतीक चिह्न निम्न में से क्या है?",
+      "quiz_options": [
+        "A: मक्के और हंसिया",
+        "B: हथौड़ा, हंसिया और तारा"
+      ]
+    },
+    {
+      "role": "challenge",
+      "heading": "कमेंट में लिखिए: A या B?",
+      "explanation": "दो सेकंड: A या B?",
+      "speech": "दो सेकंड: A या B?",
+      "teaches": "विकल्प तुलना",
+      "visual_action": "दो विकल्प स्क्रीन पर प्रकट होते हैं",
+      "setting": "neutral",
+      "objects": [],
+      "quiz_options": [
+        "A: मक्के और हंसिया",
+        "B: हथौड़ा, हंसिया और तारा"
+      ]
+    },
+    {
+      "role": "reveal",
+      "heading": "सही उत्तर",
+      "explanation": "सही उत्तर है: मक्के और हंसिया।",
+      "speech": "सही उत्तर है: मक्के और हंसिया।",
+      "teaches": "सही प्रतीक पहचान",
+      "visual_action": "सही विकल्प पर प्रकाश पड़ता है",
+      "setting": "neutral",
+      "objects": []
+    },
+    {
+      "role": "explain",
+      "heading": "तथ्य समझिए",
+      "explanation": "भारतीय कम्युनिस्ट पार्टी एक साम्यवादी दल",
+      "speech": "भारतीय कम्युनिस्ट पार्टी एक साम्यवादी दल है।",
+      "teaches": "प्रतीक का अर्थ समझें",
+      "visual_action": "प्रतीक के घटकों का विवरण दिखता है",
+      "setting": "neutral",
+      "objects": []
+    },
+    {
+      "role": "transfer",
+      "heading": "खुद को जाँचिए",
+      "explanation": "जिसकी स्थापना एम।",
+      "speech": "जिसकी स्थापना एम।",
+      "teaches": "अन्य प्रतीकों से अंतर",
+      "visual_action": "अन्य पार्टी प्रतीक स्क्रीन पर चलते हैं",
+      "setting": "neutral",
+      "objects": []
+    },
+    {
+      "role": "revision",
+      "heading": "रिवीजन कार्ड",
+      "explanation": "याद रखें: मक्के और हंसिया।",
+      "speech": "याद रखें: मक्के और हंसिया।",
+      "teaches": "स्मरण",
+      "visual_action": "टेक्स्ट स्थिर रूप से दिखता है",
+      "setting": "neutral",
+      "revision_card": true,
+      "objects": []
+    }
+  ],
+  "needs_custom_assets": true,
+  "asset_requirement": "maize (corn) and sickle (हंसिया) 3D models"
+}

@@ -1,6 +1,6 @@
 {
  "next_seq": 185,
- "episode": 174,
+ "episode": 175,
  "posted": [
   "684d76bcbc",
   "6bb20b4a07",
@@ -515,7 +515,14 @@
   "7c2027bc23",
   "4de3dfcfe5",
   "5dbafd8f9d",
-  "f4126a319b"
+  "f4126a319b",
+  "4805dab1e7",
+  "00cac3a840",
+  "0c43121e7a",
+  "6c11c6f660",
+  "2281b2799a",
+  "1faf52c5bd",
+  "5d7dbff4e4"
  ],
  "skipped": {
   "bdd1ce5a8b": "उत्तर कुंजी वर्तमान स्थिति के अनुसार गलत है।",
@@ -536,9 +543,9 @@
   "f073415fe3": "Answer key incorrect; correct answer is 11 airlines"
  },
  "last": {
-  "seq": 1989,
-  "id": "f4126a319b",
-  "time": "2026-11-05 14:30",
+  "seq": 1962,
+  "id": "5d7dbff4e4",
+  "time": "2026-11-05 16:30",
   "format": "list"
  },
  "carousel_queue": [
