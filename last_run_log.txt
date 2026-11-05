@@ -1,53 +1,97 @@
+Traceback (most recent call last):
+  File "/home/runner/work/insta-automation/insta-automation/scheduled_visual_gs.py", line 40, in <module>
+    sys.argv=['daily_visual_gs.py'];runpy.run_path('daily_visual_gs.py',run_name='__main__')
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen runpy>", line 291, in run_path
+  File "<frozen runpy>", line 98, in _run_module_code
+  File "<frozen runpy>", line 88, in _run_code
+  File "daily_visual_gs.py", line 48, in <module>
+    if not (ROOT/'release_review.json').exists() or os.getenv('GS_FORCE_BUILD')=='1' or not (ROOT/'validated.json').exists() or json.loads((ROOT/'validated.json').read_text()).get('renderer_version')!=bridge.VERSION:build()
+                                                                                                                                                                                                                        ^^^^^^^
+  File "daily_visual_gs.py", line 13, in build
+    script=bridge.build(ROOT,DAY)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/insta-automation/insta-automation/gs_animation_bridge.py", line 122, in build
+    raise RuntimeError('3D build failed: '+detail[-2500:]+'; diagnostics: '+str(runner.diag))
+RuntimeError: 3D build failed: Plan repair 1 visual: Scene 6: explain the visible action, not just screen text
+Plan repair 2 visual: Scene 6: explain the visible action, not just screen text
+Plan repair 3 visual: Scene 6: explain the visible action, not just screen text
+Traceback (most recent call last):
+  File "/home/runner/work/insta-automation/insta-automation/gs_animation_studio/planner.py", line 385, in <module>
+    generate(sys.argv[1],sys.argv[2],os.getenv('STUDIO_TOPIC_TEXT','').strip(),os.getenv('STUDIO_SUBJECT','auto'),os.getenv('STUDIO_REFERENCE_TEXT',''))
+  File "/home/runner/work/insta-automation/insta-automation/gs_animation_studio/planner.py", line 381, in generate
+    raise RuntimeError('New-topic plan failed validation after three attempts: '+str(errors))
+RuntimeError: New-topic plan failed validation after three attempts: ['visual: Scene 6: explain the visible action, not just screen text', 'visual: Scene 6: explain the visible action, not just screen text', 'visual: Scene 6: explain the visible action, not just screen text']
+; diagnostics: /home/runner/work/insta-automation/insta-automation/studio_diagnostics/41961967775
 FORMAT: list
   Gemini text models: gemini-flash-latest, gemini-3.8-flash, gemini-3.7-flash, gemini-3.6-flash
-  Gemini gemini-flash-latest: HTTP 503 (koshish 1) {   "error": {     "code": 503,     "message": "This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later
+  Gemini gemini-flash-latest: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
   Gemini gemini-flash-latest: HTTP 429 (koshish 2) 
   Gemini gemini-3.8-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
   Gemini gemini-3.8-flash: HTTP 429 (koshish 2) 
   Gemini gemini-3.7-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
   Gemini gemini-3.7-flash: HTTP 429 (koshish 2) 
+  Gemini gemini-3.6-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-3.6-flash: HTTP 429 (koshish 2) 
+  Groq llama-3.3-70b-versatile: HTTP 404
+  Gemini gemini-flash-latest: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-flash-latest: HTTP 429 (koshish 2) 
+  Gemini gemini-3.8-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-3.8-flash: HTTP 429 (koshish 2) 
+  Gemini gemini-3.7-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-3.7-flash: HTTP 429 (koshish 2) 
+  Gemini gemini-3.6-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-3.6-flash: HTTP 429 (koshish 2) 
+  Groq llama-3.3-70b-versatile: HTTP 404
+  Gemini gemini-flash-latest: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-flash-latest: HTTP 429 (koshish 2) 
+  Gemini gemini-3.8-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-3.8-flash: HTTP 429 (koshish 2) 
+  Gemini gemini-3.7-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-3.7-flash: HTTP 429 (koshish 2) 
+  Gemini gemini-3.6-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-3.6-flash: HTTP 503 (koshish 2) 
+  Groq llama-3.3-70b-versatile: HTTP 404
+  Gemini gemini-flash-latest: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-flash-latest: HTTP 429 (koshish 2) 
+  Gemini gemini-3.8-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-3.8-flash: HTTP 429 (koshish 2) 
+  Gemini gemini-3.7-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-3.7-flash: HTTP 429 (koshish 2) 
+  Gemini gemini-3.6-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-3.6-flash: HTTP 429 (koshish 2) 
+  Groq llama-3.3-70b-versatile: HTTP 404
+  Gemini gemini-flash-latest: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-flash-latest: HTTP 429 (koshish 2) 
+  Gemini gemini-3.8-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-3.8-flash: HTTP 429 (koshish 2) 
+  Gemini gemini-3.7-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-3.7-flash: HTTP 503 (koshish 2) 
+  Gemini gemini-3.6-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-3.6-flash: HTTP 429 (koshish 2) 
+  Groq llama-3.3-70b-versatile: HTTP 404
+  Gemini gemini-flash-latest: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-flash-latest: HTTP 429 (koshish 2) 
+  Gemini gemini-3.8-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-3.8-flash: HTTP 429 (koshish 2) 
+  Gemini gemini-3.7-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-3.7-flash: HTTP 429 (koshish 2) 
+  Gemini gemini-3.6-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-3.6-flash: HTTP 429 (koshish 2) 
+  Groq llama-3.3-70b-versatile: HTTP 404
+  Gemini gemini-flash-latest: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-flash-latest: HTTP 429 (koshish 2) 
+  Gemini gemini-3.8-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-3.8-flash: HTTP 429 (koshish 2) 
+  Gemini gemini-3.7-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-3.7-flash: HTTP 429 (koshish 2) 
+  Gemini gemini-3.6-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-3.6-flash: HTTP 429 (koshish 2) 
+  Groq llama-3.3-70b-versatile: HTTP 404
+  Groq openai/gpt-oss-120b: HTTP 400
+  Groq llama-3.1-8b-instant: HTTP 404
   Gemini gemini-flash-latest: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
   Gemini gemini-flash-latest: HTTP 503 (koshish 2) 
-  Gemini gemini-3.8-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
-  Gemini gemini-3.8-flash: HTTP 429 (koshish 2) 
-  Gemini gemini-3.7-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
-  Gemini gemini-3.7-flash: HTTP 429 (koshish 2) 
-  Gemini gemini-3.6-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
-  Gemini gemini-flash-latest: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
-  Gemini gemini-flash-latest: HTTP 429 (koshish 2) 
-  Gemini gemini-3.8-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
-  Gemini gemini-3.8-flash: HTTP 429 (koshish 2) 
-  Gemini gemini-3.7-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
-  Gemini gemini-3.7-flash fail (koshish 2): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
-  Gemini gemini-3.6-flash: HTTP 503 (koshish 1) {   "error": {     "code": 503,     "message": "This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later
-  Gemini gemini-3.6-flash: HTTP 429 (koshish 2) 
-  Groq llama-3.3-70b-versatile: HTTP 404
-  Gemini gemini-flash-latest: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
-  Gemini gemini-flash-latest: HTTP 429 (koshish 2) 
-  Gemini gemini-3.8-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
-  Gemini gemini-3.8-flash: HTTP 429 (koshish 2) 
-  Gemini gemini-3.7-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
-  Gemini gemini-3.7-flash: HTTP 429 (koshish 2) 
-  Gemini gemini-3.6-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
-  Gemini gemini-3.6-flash: HTTP 429 (koshish 2) 
-  Groq llama-3.3-70b-versatile: HTTP 404
-  Gemini gemini-flash-latest: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
-  Gemini gemini-flash-latest: HTTP 429 (koshish 2) 
-  Gemini gemini-3.8-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
-  Gemini gemini-3.8-flash: HTTP 429 (koshish 2) 
-  Gemini gemini-3.7-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
-  Gemini gemini-3.7-flash fail (koshish 2): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
-  Gemini gemini-flash-latest: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
-  Gemini gemini-flash-latest: HTTP 429 (koshish 2) 
-  Gemini gemini-3.8-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
-  Gemini gemini-3.8-flash: HTTP 429 (koshish 2) 
-  Gemini gemini-3.7-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
-  Gemini gemini-3.7-flash: HTTP 429 (koshish 2) 
-  Gemini gemini-3.6-flash: HTTP 503 (koshish 1) {   "error": {     "code": 503,     "message": "This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later
-  Gemini gemini-3.6-flash: HTTP 429 (koshish 2) 
-  Groq llama-3.3-70b-versatile: HTTP 404
-  Gemini gemini-flash-latest: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
-  Gemini gemini-flash-latest: HTTP 429 (koshish 2) 
   Gemini gemini-3.8-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
   Gemini gemini-3.8-flash: HTTP 429 (koshish 2) 
   Gemini gemini-3.7-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
@@ -61,28 +105,28 @@ CAPTION:
 📅 Day 15/100 • 100 दिन में पूरा GS | कल Day 16/100 - Follow करो ताकि छूटे नहीं
 📤 ये reel उस दोस्त को भेजो जो Group D / NTPC / SSC / Police की तैयारी कर रहा है!
 
-📚 इतिहास के 7 PYQ - RRB, SSC, Police, Patwari, Army, State Exams के लिए (Save करो)
+📚 भूगोल के 7 PYQ - RRB, SSC, Police, Patwari, Army, State Exams के लिए (Save करो)
 
-1. पुर्तगालियों द्वारा गोवा पर कब्जा कब किया गया था? → 1510 AD
-2. भारत में अंग्रेजों द्वारा निर्मित पहला किला कौन सा था? → फोर्ट सेंट जॉर्ज
-3. 1939 में सुभाष चंद्र बोस द्वारा शुरू की गई पार्टी का नाम क्या था? → ऑल इंडिया फॉरवर्ड ब्लॉक
-4. डांडी नमक सत्याग्रह किस वर्ष प्रारंभ हुआ था? → 1930
-5. बाबर की आत्मकथा 'बाबरनामा' किस भाषा में लिखी गई थी? → तुर्की
-6. मध्यकालीन भारत के दौरान लिखी गई किताब 'गीत गोविंद' के लेखक कौन हैं? → जयदेव
-7. रॉलेट एक्ट पारित किए जाने के समय ब्रिटिश भारत का वायसराय कौन था? → लॉर्ड चेल्म्सफ़ोर्ड
+1. भारत का कौन सा शहर हुगली नदी पर बसा है? → कोलकाता
+2. भारतीय अर्थव्यवस्था को गति देने वाले परिवहन के मुख्य साधन क्या हैं? → रेलवे
+3. भारत में सर्वाधिक फैले हुए वन किस प्रकार के हैं? → उष्णकटिबंधीय पर्णपाती वन
+4. मैंग्रोव कहाँ पनपते हैं? → तटीय क्षेत्रों में
+5. कौन सा क्षेत्र क्षोभमंडल को समताप मंडल से अलग करता है? → क्षोभ सीमा (Tropopause)
+6. हवा के दबाव को आप क्या कहेंगे? → वायुमंडलीय दबाव
+7. इलायची पहाड़ियाँ भारत के किस राज्य में स्थित हैं? → केरल
 
 💬 कितने पहले से आते थे? कमेंट करो: 7/7?
 📤 Save करो + उस दोस्त को भेजो जो exam की तैयारी कर रहा है।
-इतिहास GK Questions | RRB NTPC, Group D, SSC GD, State Exam PYQ
+भूगोल GK Questions | RRB NTPC, Group D, SSC GD, State Exam PYQ
 ⏱ MinuteMe_GS - एक मिनट, एक PYQ - पक्का!
 📲 Free test / notes: WhatsApp 8989971379
 
-#gkquiz #rrbntpc #sscgd #gkpyq #history
-SCHEDULE: video ready; target 2026-11-05T01:30:00Z
+#gkquiz #rrbntpc #sscgd #gkpyq #geography
+SCHEDULE: video ready; target 2026-11-05T04:30:00Z
 Collab invitation requested: @ar_publication
-  IG container: 17912431722568651
+  IG container: 17912448975568651
   upload try 1.1: HTTP 200 {"success":true,"message":"Upload Successful."}
   IG processing: FINISHED
-REMINDER: reel ready, publication due within 10 minutes: 2026-11-05T01:30:00Z
-  LIVE: https://www.instagram.com/reel/DfVxLJECYOR/
-INSTAGRAM PE POST HO GAYA: 17967208605234760
+REMINDER: reel ready, publication due within 10 minutes: 2026-11-05T04:30:00Z
+  LIVE: https://www.instagram.com/reel/DfWGPYmjRZn/
+INSTAGRAM PE POST HO GAYA: 18198198916349495

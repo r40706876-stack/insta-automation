@@ -1,0 +1,355 @@
+{
+  "title": "गोल्डन फाइबर - जूट",
+  "subject": "भूगोल",
+  "topic_key": "golden_fiber_jute",
+  "share_reason": "जूट को गोल्डन फाइबर समझना परीक्षा में मददगार",
+  "recall": "याद रखें: जूट।",
+  "pyq_challenge": true,
+  "share_card": {
+    "kind": "exam_confusion",
+    "recipient": "परीक्षा की तैयारी करने वाले मित्र",
+    "benefit": "जूट को गोल्डन फाइबर समझ कर विकल्प सही चुनें",
+    "cta": "अब जूट को याद रखें"
+  },
+  "scenes": [
+    {
+      "role": "hook",
+      "heading": "पहले अपना जवाब चुनिए",
+      "explanation": "A या B — सोचिए",
+      "speech": "गोल्डन फाइबर के रूप में किसे जाना जाता है? जाल पहचानिए।",
+      "teaches": "प्रश्न पहचानना",
+      "visual_action": "व्यक्ति जूट बॉक्स और गेहूँ बॉक्स के बीच चलता है",
+      "setting": "neutral",
+      "objects": [
+        {
+          "kind": "person",
+          "action": "walk",
+          "id": "obj0",
+          "label": "",
+          "color": "#f4e7bf",
+          "pos": [
+            -2.25,
+            0,
+            0
+          ],
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ],
+          "to": [
+            -1.05,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "box",
+          "action": "none",
+          "label": "जूट",
+          "id": "obj1",
+          "color": "#59c7c5",
+          "pos": [
+            0.0,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        {
+          "kind": "box",
+          "action": "none",
+          "label": "गेहूँ",
+          "id": "obj2",
+          "color": "#59c7c5",
+          "pos": [
+            1.8,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        }
+      ],
+      "hook_question": "गोल्डन फाइबर के रूप में किसे जाना जाता है?",
+      "quiz_options": [
+        "A: गेहूँ",
+        "B: जूट"
+      ]
+    },
+    {
+      "role": "challenge",
+      "heading": "कमेंट में लिखिए: A या B?",
+      "explanation": "दो सेकंड: A या B?",
+      "speech": "दो सेकंड: A या B?",
+      "teaches": "विकल्पों की तुलना",
+      "visual_action": "व्यक्ति गेहूँ बॉक्स से जूट बॉक्स तक चलता है",
+      "setting": "neutral",
+      "objects": [
+        {
+          "kind": "person",
+          "action": "walk",
+          "id": "obj0",
+          "label": "",
+          "color": "#f4e7bf",
+          "pos": [
+            -2.25,
+            0,
+            0
+          ],
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ],
+          "to": [
+            -1.05,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "box",
+          "action": "none",
+          "label": "गेहूँ",
+          "id": "obj1",
+          "color": "#59c7c5",
+          "pos": [
+            0.0,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        {
+          "kind": "box",
+          "action": "none",
+          "label": "जूट",
+          "id": "obj2",
+          "color": "#59c7c5",
+          "pos": [
+            1.8,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        }
+      ],
+      "quiz_options": [
+        "A: गेहूँ",
+        "B: जूट"
+      ]
+    },
+    {
+      "role": "reveal",
+      "heading": "सही उत्तर",
+      "explanation": "सही उत्तर है: जूट।",
+      "speech": "सही उत्तर है: जूट।",
+      "teaches": "सही उत्तर पहचानना",
+      "visual_action": "तीर जूट बॉक्स की ओर चलता है",
+      "setting": "neutral",
+      "objects": [
+        {
+          "kind": "arrow",
+          "action": "move",
+          "id": "obj0",
+          "label": "",
+          "color": "#59c7c5",
+          "pos": [
+            -1.35,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            -0.15,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "box",
+          "action": "none",
+          "label": "जूट",
+          "id": "obj1",
+          "color": "#59c7c5",
+          "pos": [
+            0.9,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        }
+      ]
+    },
+    {
+      "role": "explain",
+      "heading": "तथ्य समझिए",
+      "explanation": "जूट को गोल्डन फाइबर के रूप",
+      "speech": "जूट को गोल्डन फाइबर के रूप में जाना जाता है।",
+      "teaches": "जूट के गुण समझना",
+      "visual_action": "व्यक्ति जूट बैग लेकर चलता है",
+      "setting": "village",
+      "objects": [
+        {
+          "kind": "person",
+          "action": "walk",
+          "id": "obj0",
+          "label": "",
+          "color": "#f4e7bf",
+          "pos": [
+            -1.35,
+            0,
+            0
+          ],
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ],
+          "to": [
+            -0.15,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "box",
+          "action": "none",
+          "label": "जूट बैग",
+          "id": "obj1",
+          "color": "#59c7c5",
+          "pos": [
+            0.9,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        }
+      ]
+    },
+    {
+      "role": "transfer",
+      "heading": "खुद को जाँचिए",
+      "explanation": "अब बिना देखे बताइए।",
+      "speech": "अब बिना देखे बताइए।",
+      "teaches": "जूट के उपयोग याद रखना",
+      "visual_action": "व्यक्ति जूट बैग और गेहूँ बैग के साथ चलता है",
+      "setting": "village",
+      "objects": [
+        {
+          "kind": "person",
+          "action": "walk",
+          "id": "obj0",
+          "label": "",
+          "color": "#f4e7bf",
+          "pos": [
+            -2.25,
+            0,
+            0
+          ],
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ],
+          "to": [
+            -1.05,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "box",
+          "action": "none",
+          "label": "जूट बैग",
+          "id": "obj1",
+          "color": "#59c7c5",
+          "pos": [
+            0.0,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        {
+          "kind": "box",
+          "action": "none",
+          "label": "गेहूँ बैग",
+          "id": "obj2",
+          "color": "#59c7c5",
+          "pos": [
+            1.8,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        }
+      ]
+    },
+    {
+      "role": "revision",
+      "heading": "रिवीजन कार्ड",
+      "explanation": "याद रखें: जूट।",
+      "speech": "याद रखें: जूट।",
+      "teaches": "स्मरण शक्ति",
+      "visual_action": "स्थिर दृश्य",
+      "setting": "neutral",
+      "revision_card": true,
+      "objects": [
+        {
+          "kind": "box",
+          "action": "none",
+          "label": "जूट",
+          "id": "obj0",
+          "color": "#59c7c5",
+          "pos": [
+            0.0,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        }
+      ]
+    }
+  ]
+}
