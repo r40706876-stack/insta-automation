@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-05T00:33:49.677540+00:00",
+  "generated_at": "2026-11-05T01:05:18.815945+00:00",
   "windows": {
     "24h": [
       {
@@ -41,20 +41,20 @@
         "reels": 13,
         "metrics": {
           "shares_per_1000": {
-            "mean": 1.7759409206777628,
-            "n": 12
+            "mean": 1.6393300806256272,
+            "n": 13
           },
           "saves_per_1000": {
-            "mean": 3.4558410613487123,
-            "n": 12
+            "mean": 3.1900071335526574,
+            "n": 13
           },
           "average_watch_time": {
-            "mean": 4.049083333333334,
-            "n": 12
+            "mean": 4.001,
+            "n": 13
           },
           "three_second_rate": {
-            "mean": 27.116666583333327,
-            "n": 12
+            "mean": 26.41538453846153,
+            "n": 13
           },
           "retention": {
             "mean": null,
@@ -537,23 +537,23 @@
       {
         "subject": null,
         "format": "legacy_unclassified",
-        "reels": 30,
+        "reels": 31,
         "metrics": {
           "shares_per_1000": {
-            "mean": 2.2624325293999017,
-            "n": 27
+            "mean": 2.3492390281008313,
+            "n": 29
           },
           "saves_per_1000": {
-            "mean": 5.159054529744269,
-            "n": 27
+            "mean": 4.803257665623975,
+            "n": 29
           },
           "average_watch_time": {
-            "mean": 6.920814814814815,
-            "n": 27
+            "mean": 6.6948620689655165,
+            "n": 29
           },
           "three_second_rate": {
-            "mean": 35.16538480769231,
-            "n": 26
+            "mean": 34.11071457142857,
+            "n": 28
           },
           "retention": {
             "mean": null,
@@ -960,8 +960,8 @@
       "best": "18174696019395674",
       "weakest": "18136094323708858",
       "basis": "24h share/save rate; hypotheses only",
-      "mean_shares_per_1000": 1.9373900952848322,
-      "mean_saves_per_1000": 1.876069036622838
+      "mean_shares_per_1000": 1.7759409206777628,
+      "mean_saves_per_1000": 1.7197299502376016
     },
     "previous": {
       "reels": 0,
