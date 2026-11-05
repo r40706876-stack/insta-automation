@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-05T19:05:52.019377+00:00",
+  "generated_at": "2026-11-05T22:00:25.881767+00:00",
   "windows": {
     "24h": [
       {
@@ -271,23 +271,23 @@
       {
         "subject": null,
         "format": "legacy_unclassified",
-        "reels": 23,
+        "reels": 24,
         "metrics": {
           "shares_per_1000": {
-            "mean": 1.4684257490273838,
-            "n": 23
+            "mean": 1.4072413428179094,
+            "n": 24
           },
           "saves_per_1000": {
-            "mean": 2.976055393934889,
-            "n": 23
+            "mean": 2.8520530858542688,
+            "n": 24
           },
           "average_watch_time": {
-            "mean": 4.759739130434783,
-            "n": 23
+            "mean": 4.686083333333333,
+            "n": 24
           },
           "three_second_rate": {
-            "mean": 26.447826565217394,
-            "n": 23
+            "mean": 26.070833875,
+            "n": 24
           },
           "retention": {
             "mean": null,
@@ -570,23 +570,23 @@
       {
         "subject": null,
         "format": "legacy_unclassified",
-        "reels": 37,
+        "reels": 38,
         "metrics": {
           "shares_per_1000": {
-            "mean": 1.8924425504145586,
-            "n": 36
+            "mean": 1.8412954544574085,
+            "n": 37
           },
           "saves_per_1000": {
-            "mean": 4.592105243219596,
-            "n": 36
+            "mean": 4.466989702650636,
+            "n": 37
           },
           "average_watch_time": {
-            "mean": 6.384,
-            "n": 36
+            "mean": 6.338054054054053,
+            "n": 37
           },
           "three_second_rate": {
-            "mean": 32.174285942857146,
-            "n": 35
+            "mean": 32.269444750000005,
+            "n": 36
           },
           "retention": {
             "mean": null,
@@ -971,10 +971,10 @@
       {
         "subject": null,
         "format": "legacy_unclassified",
-        "reels": 23,
-        "shares_per_1000": 1.4684257490273838,
-        "saves_per_1000": 2.976055393934889,
-        "average_watch_time": 4.759739130434783
+        "reels": 24,
+        "shares_per_1000": 1.4072413428179094,
+        "saves_per_1000": 2.8520530858542688,
+        "average_watch_time": 4.686083333333333
       }
     ],
     "winner": null,
