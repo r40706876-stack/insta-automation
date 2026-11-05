@@ -1,0 +1,36 @@
+{
+  "ok": true,
+  "reasons": [
+    "Answer matches evidence: वायु प्रतिरोध के कारण",
+    "Scene 1 visual action (arrow spin) does not demonstrate causal teaching, so mechanism_matches false",
+    "Scenes 2-5 visual actions demonstrate causal teaching and match teaching goals",
+    "Scene 6 is a static revision card, acceptable as final scene"
+  ],
+  "novel_topic": true,
+  "scene_checks": [
+    {
+      "scene": 1,
+      "mechanism_matches": false
+    },
+    {
+      "scene": 2,
+      "mechanism_matches": true
+    },
+    {
+      "scene": 3,
+      "mechanism_matches": true
+    },
+    {
+      "scene": 4,
+      "mechanism_matches": true
+    },
+    {
+      "scene": 5,
+      "mechanism_matches": true
+    },
+    {
+      "scene": 6,
+      "mechanism_matches": false
+    }
+  ]
+}

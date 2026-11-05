@@ -1,0 +1,9 @@
+Plan repair 1 Audit: ['Answer matches evidence: वायु प्रतिरोध के कारण', 'Scene 1 visual action (arrow spin) does not demonstrate causal teaching, so mechanism_matches false', 'Scenes 2-5 visual actions demonstrate causal teaching and match teaching goals', 'Scene 6 is a static revision card, acceptable as final s
+Plan repair 2 script: Invalid title; visual: 'scenes'; facts: 'scenes'; share: Concrete share_card required; experiment: Use hook/challenge/reveal/explain/transfer/revision scene roles
+Plan repair 3 Audit: ['All scenes except final revision demonstrate causal movement', 'Topic not present in previous list', 'Answer matches evidence, no invented facts']
+Traceback (most recent call last):
+  File "/home/runner/work/insta-automation/insta-automation/gs_animation_studio/planner.py", line 385, in <module>
+    generate(sys.argv[1],sys.argv[2],os.getenv('STUDIO_TOPIC_TEXT','').strip(),os.getenv('STUDIO_SUBJECT','auto'),os.getenv('STUDIO_REFERENCE_TEXT',''))
+  File "/home/runner/work/insta-automation/insta-automation/gs_animation_studio/planner.py", line 381, in generate
+    raise RuntimeError('New-topic plan failed validation after three attempts: '+str(errors))
+RuntimeError: New-topic plan failed validation after three attempts: ["Audit: ['Answer matches evidence: वायु प्रतिरोध के कारण', 'Scene 1 visual action (arrow spin) does not demonstrate causal teaching, so mechanism_matches false', 'Scenes 2-5 visual actions demonstrate causal teaching and match teaching goals', 'Scene 6 is a static revision card, acceptable as final scene']", "script: Invalid title; visual: 'scenes'; facts: 'scenes'; share: Concrete share_card required; experiment: Use hook/challenge/reveal/explain/transfer/revision scene roles", "Audit: ['All scenes except final revision demonstrate causal movement', 'Topic not present in previous list', 'Answer matches evidence, no invented facts']"]
