@@ -1,0 +1,226 @@
+{
+  "type": "object",
+  "value": {
+    "title": "भारत WTO सदस्यता वर्ष",
+    "subject": "अर्थशास्त्र",
+    "topic_key": "bharat_wto_sadasyata_varsh",
+    "share_reason": "दोस्त को परीक्षा में WTO सदस्यता तिथि याद रखने में मदद",
+    "recall": "याद रखें: 1995।",
+    "pyq_challenge": true,
+    "share_card": {
+      "kind": "exam_confusion",
+      "recipient": "परीक्षा की तैयारी करने वाले मित्र",
+      "benefit": "WTO सदस्यता वर्ष 1995 को याद रखें",
+      "cta": "अब साथ में याद करें"
+    },
+    "scenes": [
+      {
+        "role": "hook",
+        "heading": "पहले अपना जवाब चुनिए",
+        "explanation": "A या B — सोचिए",
+        "speech": "भारत डब्ल्यू.टी.ओ. (WTO) का सदस्य कब से है? जाल पहचानिए।",
+        "teaches": "प्रश्न पहचान",
+        "visual_action": "व्यक्ति प्रश्न बोर्ड की ओर चलता है",
+        "setting": "neutral",
+        "objects": [
+          {
+            "kind": "person",
+            "action": "walk",
+            "id": "object_0",
+            "label": "विद्यार्थी",
+            "color": "#f4e7bf",
+            "pos": [
+              -0.45,
+              0,
+              0
+            ],
+            "size": [
+              1.05,
+              1.05,
+              1.05
+            ],
+            "to": [
+              0.75,
+              0,
+              0
+            ]
+          }
+        ]
+      },
+      {
+        "role": "challenge",
+        "heading": "कमेंट में लिखिए: A या B?",
+        "explanation": "दो सेकंड: A या B?",
+        "speech": "दो सेकंड: A या B?",
+        "teaches": "विकल्प विचार",
+        "visual_action": "व्यक्ति विकल्प बोर्ड की ओर चलता है",
+        "setting": "neutral",
+        "objects": [
+          {
+            "kind": "person",
+            "action": "walk",
+            "id": "object_0",
+            "label": "विद्यार्थी",
+            "color": "#f4e7bf",
+            "pos": [
+              -0.45,
+              0,
+              0
+            ],
+            "size": [
+              1.05,
+              1.05,
+              1.05
+            ],
+            "to": [
+              0.75,
+              0,
+              0
+            ]
+          }
+        ]
+      },
+      {
+        "role": "reveal",
+        "heading": "सही उत्तर",
+        "explanation": "सही उत्तर है: 1995।",
+        "speech": "सही उत्तर है: 1995।",
+        "teaches": "उत्तर स्पष्ट",
+        "visual_action": "व्यक्ति हाथ उठाकर 1995 दिखाता है",
+        "setting": "neutral",
+        "objects": [
+          {
+            "kind": "person",
+            "action": "rise",
+            "id": "object_0",
+            "label": "उत्तर",
+            "color": "#f4e7bf",
+            "pos": [
+              0.0,
+              0,
+              0
+            ],
+            "size": [
+              1.05,
+              1.05,
+              1.05
+            ],
+            "to": [
+              0.0,
+              0,
+              1.2
+            ]
+          }
+        ]
+      },
+      {
+        "role": "explain",
+        "heading": "तथ्य समझिए",
+        "explanation": "यह 1948 में स्थापित GATT की",
+        "speech": "यह 1948 में स्थापित GATT की जगह लिया है।",
+        "teaches": "इतिहास समझें",
+        "visual_action": "व्यक्ति पुस्तक की ओर चलता है और पढ़ता है",
+        "setting": "institution",
+        "objects": [
+          {
+            "kind": "person",
+            "action": "walk",
+            "id": "object_0",
+            "label": "इतिहास",
+            "color": "#f4e7bf",
+            "pos": [
+              -1.35,
+              0,
+              0
+            ],
+            "size": [
+              1.05,
+              1.05,
+              1.05
+            ],
+            "to": [
+              -0.15,
+              0,
+              0
+            ]
+          },
+          {
+            "kind": "book",
+            "action": "none",
+            "id": "object_1",
+            "label": "पुस्तक",
+            "color": "#59c7c5",
+            "pos": [
+              0.9,
+              0,
+              0
+            ],
+            "size": [
+              0.7,
+              0.7,
+              0.7
+            ]
+          }
+        ]
+      },
+      {
+        "role": "transfer",
+        "heading": "खुद को जाँचिए",
+        "explanation": "अब बिना देखे बताइए।",
+        "speech": "अब बिना देखे बताइए।",
+        "teaches": "संकल्पना लागू करें",
+        "visual_action": "व्यक्ति WTO भवन की ओर चलता है और उसे घुमाता है",
+        "setting": "institution",
+        "objects": [
+          {
+            "kind": "building",
+            "action": "spin",
+            "id": "object_1",
+            "label": "WTO",
+            "color": "#b1a4d3",
+            "pos": [
+              0.0,
+              0,
+              0
+            ],
+            "size": [
+              0.7,
+              0.7,
+              0.7
+            ]
+          }
+        ]
+      },
+      {
+        "role": "revision",
+        "heading": "रिवीजन कार्ड",
+        "explanation": "याद रखें: 1995।",
+        "speech": "याद रखें: 1995।",
+        "teaches": "स्मरण शक्ति",
+        "visual_action": "स्थिर कार्ड पर पाठ दिखता है",
+        "setting": "neutral",
+        "revision_card": true,
+        "objects": [
+          {
+            "kind": "map",
+            "action": "none",
+            "id": "object_0",
+            "label": "भारत",
+            "map_region": "india",
+            "color": "#59c7c5",
+            "pos": [
+              0.0,
+              0,
+              0
+            ],
+            "size": [
+              1.1,
+              1.1,
+              1.1
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
