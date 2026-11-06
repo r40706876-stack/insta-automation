@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-06T11:34:54.940832+00:00",
+  "generated_at": "2026-11-06T13:08:48.176887+00:00",
   "windows": {
     "24h": [
       {
@@ -41,20 +41,20 @@
         "reels": 23,
         "metrics": {
           "shares_per_1000": {
-            "mean": 1.0319772188420755,
-            "n": 21
+            "mean": 0.9422400693775472,
+            "n": 23
           },
           "saves_per_1000": {
-            "mean": 3.8872189146730407,
-            "n": 21
+            "mean": 4.574897290024417,
+            "n": 23
           },
           "average_watch_time": {
-            "mean": 4.406285714285715,
-            "n": 21
+            "mean": 4.342869565217391,
+            "n": 23
           },
           "three_second_rate": {
-            "mean": 29.04285704761904,
-            "n": 21
+            "mean": 28.3913042173913,
+            "n": 23
           },
           "retention": {
             "mean": null,
@@ -571,20 +571,20 @@
         "reels": 1,
         "metrics": {
           "shares_per_1000": {
-            "mean": null,
-            "n": 0
+            "mean": 0.0,
+            "n": 1
           },
           "saves_per_1000": {
-            "mean": null,
-            "n": 0
+            "mean": 0.0,
+            "n": 1
           },
           "average_watch_time": {
-            "mean": null,
-            "n": 0
+            "mean": 3.336,
+            "n": 1
           },
           "three_second_rate": {
-            "mean": null,
-            "n": 0
+            "mean": 20.800003,
+            "n": 1
           },
           "retention": {
             "mean": null,
@@ -1059,8 +1059,8 @@
       "best": "18174696019395674",
       "weakest": "18136094323708858",
       "basis": "24h share/save rate; hypotheses only",
-      "mean_shares_per_1000": 1.1406063997728204,
-      "mean_saves_per_1000": 2.608542569401093
+      "mean_shares_per_1000": 1.0319772188420755,
+      "mean_saves_per_1000": 3.483492822907072
     },
     "previous": {
       "reels": 0,
