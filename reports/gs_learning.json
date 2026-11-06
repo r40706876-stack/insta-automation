@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-06T07:02:02.641487+00:00",
+  "generated_at": "2026-11-06T11:34:54.940832+00:00",
   "windows": {
     "24h": [
       {
@@ -38,7 +38,7 @@
       {
         "subject": null,
         "format": "legacy_unclassified",
-        "reels": 21,
+        "reels": 23,
         "metrics": {
           "shares_per_1000": {
             "mean": 1.0319772188420755,
@@ -564,6 +564,39 @@
         },
         "decision": "collect_more",
         "automatic_scale": false
+      },
+      {
+        "subject": "Polity",
+        "format": "map_pyq_challenge",
+        "reels": 1,
+        "metrics": {
+          "shares_per_1000": {
+            "mean": null,
+            "n": 0
+          },
+          "saves_per_1000": {
+            "mean": null,
+            "n": 0
+          },
+          "average_watch_time": {
+            "mean": null,
+            "n": 0
+          },
+          "three_second_rate": {
+            "mean": null,
+            "n": 0
+          },
+          "retention": {
+            "mean": null,
+            "n": 0
+          },
+          "net_followers": {
+            "mean": null,
+            "n": 0
+          }
+        },
+        "decision": "collect_more",
+        "automatic_scale": false
       }
     ],
     "7d": [
@@ -1022,7 +1055,7 @@
   },
   "weekly": {
     "current": {
-      "reels": 30,
+      "reels": 32,
       "best": "18174696019395674",
       "weakest": "18136094323708858",
       "basis": "24h share/save rate; hypotheses only",
