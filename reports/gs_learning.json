@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-07T01:03:06.392173+00:00",
+  "generated_at": "2026-11-07T03:15:54.822315+00:00",
   "windows": {
     "24h": [
       {
@@ -271,7 +271,7 @@
       {
         "subject": null,
         "format": "legacy_unclassified",
-        "reels": 27,
+        "reels": 28,
         "metrics": {
           "shares_per_1000": {
             "mean": 1.2508811936159194,
@@ -966,7 +966,7 @@
       {
         "subject": "Traditional GK",
         "format": "legacy_unclassified",
-        "reels": 2,
+        "reels": 3,
         "metrics": {
           "shares_per_1000": {
             "mean": 0.0,
@@ -1037,7 +1037,7 @@
       {
         "subject": null,
         "format": "legacy_unclassified",
-        "reels": 27,
+        "reels": 28,
         "shares_per_1000": 1.2508811936159194,
         "saves_per_1000": 2.7149497404644922,
         "average_watch_time": 4.569370370370371
@@ -1055,24 +1055,24 @@
   },
   "weekly": {
     "current": {
-      "reels": 34,
+      "reels": 33,
       "best": "18174696019395674",
       "weakest": "18136094323708858",
       "basis": "24h share/save rate; hypotheses only",
-      "mean_shares_per_1000": 1.249927840398869,
-      "mean_saves_per_1000": 4.117223883026332
+      "mean_shares_per_1000": 1.3067427422351812,
+      "mean_saves_per_1000": 4.304370423163893
     },
     "previous": {
-      "reels": 0,
+      "reels": 1,
       "best": null,
       "weakest": null,
       "basis": "24h share/save rate; hypotheses only",
-      "mean_shares_per_1000": null,
-      "mean_saves_per_1000": null
+      "mean_shares_per_1000": 0.0,
+      "mean_saves_per_1000": 0.0
     }
   },
   "weekly_change": {
-    "mean_shares_per_1000": null,
-    "mean_saves_per_1000": null
+    "mean_shares_per_1000": 1.3067427422351812,
+    "mean_saves_per_1000": 4.304370423163893
   }
 }
