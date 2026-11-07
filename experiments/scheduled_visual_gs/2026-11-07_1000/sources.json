@@ -1,0 +1,11 @@
+[
+  {
+    "url": "user-provided",
+    "excerpt": "Verified question-bank reference; do not add claims beyond this reference: {\"subject\": \"Geography\", \"subject_hi\": \"भूगोल\", \"chapter\": \"नदी घाटी परियोजनाएँ (River Valley Projects)\", \"sub\": \"\", \"question\": \"गाँधी सागर बांध किस राज्य में स्थित है?\", \"options\": {\"a\": \"मध्य प्रदेश\", \"b\": \"महाराष्ट्र\", \"c\": \"उत्तर प्रदेश\", \"d\": \"पश्चिम बंगाल\"}, \"answer\": \"a\", \"exams\": [\"RRB Group-D 18-09-2018 (Shift-III)\", \"RRB Group-D 22-09-2018 (Shift-I)\"], \"explanation\": \"गाँधी सागर बाँध मंदसौर, मध्य प्रदेश में चंबल नदी पर स्थित है। यह महत्वाकांक्षी बहुउद्देशीय ‘चंबल नदी घाटी परियोजना’ का पहला व प्रमुख बांध है। चम्बल नदी परियोजना के अंतर्गत राणा प्रताप सागर, जवाहर सागर तथा कोटा बैराज बांध का निर्माण हुआ है।\", \"times_asked\": 2, \"years\": [\"2018\"], \"id\": \"0fbe239e14\", \"seq\": 86}"
+  },
+  {
+    "url": "https://www.naturalearthdata.com/downloads/110m-physical-vectors/110m-land/",
+    "publisher": "Natural Earth, public-domain physical coastline geometry",
+    "note": "Modern Gujarat outline is separately attributed in dandi_map.LICENSE; routes are schematic."
+  }
+]

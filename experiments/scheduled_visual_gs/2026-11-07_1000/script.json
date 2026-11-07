@@ -1,0 +1,132 @@
+{
+  "ok": true,
+  "title": "गाँधी सागर बांध का राज्य",
+  "subject": "Geography",
+  "renderer_version": "rich_3d_v1",
+  "question_hash": "a49755fb6ab7c3de95e6daf540d489a7ec7d52a39b60f8a84b0a606ffd1fa6d1",
+  "reference": {
+    "subject": "Geography",
+    "subject_hi": "भूगोल",
+    "chapter": "नदी घाटी परियोजनाएँ (River Valley Projects)",
+    "sub": "",
+    "question": "गाँधी सागर बांध किस राज्य में स्थित है?",
+    "options": {
+      "a": "मध्य प्रदेश",
+      "b": "महाराष्ट्र",
+      "c": "उत्तर प्रदेश",
+      "d": "पश्चिम बंगाल"
+    },
+    "answer": "a",
+    "exams": [
+      "RRB Group-D 18-09-2018 (Shift-III)",
+      "RRB Group-D 22-09-2018 (Shift-I)"
+    ],
+    "explanation": "गाँधी सागर बाँध मंदसौर, मध्य प्रदेश में चंबल नदी पर स्थित है। यह महत्वाकांक्षी बहुउद्देशीय ‘चंबल नदी घाटी परियोजना’ का पहला व प्रमुख बांध है। चम्बल नदी परियोजना के अंतर्गत राणा प्रताप सागर, जवाहर सागर तथा कोटा बैराज बांध का निर्माण हुआ है।",
+    "times_asked": 2,
+    "years": [
+      "2018"
+    ],
+    "id": "0fbe239e14",
+    "seq": 86
+  },
+  "experiment_format": "map_pyq_challenge",
+  "primary_objective": "follow",
+  "series_next_topic": "जायकवाड़ी (चरण-1) जलविद्युत परियोजना किस नदी पर बनायी गयी है?",
+  "series_next_hash": "f6665238f7baaf37386b9ffd5c8b7af460ef964f90c91b958dd99285c9064774",
+  "topic_policy": "evidence_cohort_v2",
+  "topic_priority": 1.0,
+  "recall": "याद रखें: मध्य प्रदेश।",
+  "share_card": {
+    "kind": "exam_confusion",
+    "recipient": "परीक्षा की तैयारी करने वाले मित्र",
+    "benefit": "भूगोल में राज्य‑बांध मिलान आसान",
+    "cta": "दोस्त को भेजो, उत्तर याद रखें"
+  },
+  "share_reason": "भूगोल में राज्य‑बांध भ्रम अक्सर होता है",
+  "scenes": [
+    {
+      "label": "पहले अपना जवाब चुनिए",
+      "quiz_options": [
+        "A: मध्य प्रदेश",
+        "B: महाराष्ट्र"
+      ],
+      "speech": "गाँधी सागर बांध किस राज्य में स्थित है? नक्शा देखिए।",
+      "role": "hook",
+      "revision_card": false,
+      "teaches": "प्रश्न की पहचान और सोच",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "व्यक्ति मानचित्र के ऊपर चल रहा है"
+      }
+    },
+    {
+      "label": "कमेंट में लिखिए: A या B?",
+      "quiz_options": [
+        "A: मध्य प्रदेश",
+        "B: महाराष्ट्र"
+      ],
+      "speech": "दो सेकंड: A या B?",
+      "role": "challenge",
+      "revision_card": false,
+      "teaches": "विकल्पों पर विचार",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "मानचित्र पर दो राज्य के निशान उठते हैं"
+      }
+    },
+    {
+      "label": "सही उत्तर",
+      "quiz_options": null,
+      "speech": "सही उत्तर है: मध्य प्रदेश।",
+      "role": "reveal",
+      "revision_card": false,
+      "teaches": "सही राज्य की पुष्टि",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "मानचित्र पर चंबल नदी का मार्ग दिखाया गया"
+      }
+    },
+    {
+      "label": "तथ्य समझिए",
+      "quiz_options": null,
+      "speech": "गाँधी सागर बाँध मंदसौर, मध्य प्रदेश में चंबल नदी पर स्थित है।",
+      "role": "explain",
+      "revision_card": false,
+      "teaches": "स्थानिक विवरण समझें",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "institution",
+        "visible_action": "बांध मॉडल पर पानी बह रहा है"
+      }
+    },
+    {
+      "label": "खुद को जाँचिए",
+      "quiz_options": null,
+      "speech": "अब बिना देखे बताइए।",
+      "role": "transfer",
+      "revision_card": false,
+      "teaches": "जानकारी लागू करें",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "institution",
+        "visible_action": "महाराष्ट्र में कॉयना बांध दिखाया गया"
+      }
+    },
+    {
+      "label": "रिवीजन कार्ड",
+      "quiz_options": null,
+      "speech": "याद रखें: मध्य प्रदेश।",
+      "role": "revision",
+      "revision_card": true,
+      "teaches": "तेज़ स्मरण",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "पाठ स्क्रीन पर स्थिर टेक्स्ट"
+      }
+    }
+  ]
+}

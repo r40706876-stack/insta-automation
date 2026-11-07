@@ -1,0 +1,43 @@
+{
+  "answer_correct": true,
+  "visual_relevance": false,
+  "hindi_readable": true,
+  "pronunciation_correct": true,
+  "audio_visual_match": false,
+  "answer_reveal_timing": true,
+  "revision_card_readable": true,
+  "reasons": [
+    "In Scene 5, the audio prompts the viewer to recall ('अब बिना देखे बताइए'), but the 3D visual completely mismatches by displaying 'कॉयना बांध' and 'कॉयना नदी' instead of relevant content for Gandhi Sagar Dam."
+  ],
+  "observed_answer": "A: मध्य प्रदेश",
+  "scene_evidence": [
+    {
+      "scene": 1,
+      "observation": "Displays the question 'गाँधी सागर बांध किस राज्य में स्थित है?' alongside options A: मध्य प्रदेश and B: महाराष्ट्र."
+    },
+    {
+      "scene": 2,
+      "observation": "Displays a 2-second countdown timer prompting the viewer to comment option A or B."
+    },
+    {
+      "scene": 3,
+      "observation": "Shows a map of India highlighting Madhya Pradesh with a location pin and revealing 'सही उत्तर है: मध्य प्रदेश'."
+    },
+    {
+      "scene": 4,
+      "observation": "presents a 3D model illustration labeled 'गाँधी सागर बांध' and 'चंबल नदी' with flow particles."
+    },
+    {
+      "scene": 5,
+      "observation": "Audio says 'अब बिना देखे बताइए' while visual mistakenly displays an unrelated model labeled 'कॉयना बांध' and 'कॉयना नदी'."
+    },
+    {
+      "scene": 6,
+      "observation": "Displays the revision summary card with text 'याद रखें: मध्य प्रदेश।' alongside a state outline map."
+    }
+  ],
+  "sha256": "7a64d91fbae4ea1797badc09d63581ff793ae074eed0e673540947749ba90bfd",
+  "reviewer": "gemini-3.6-flash / actual rendered video and audio",
+  "reviewed_at": "2026-11-07T03:39:53.853076+00:00",
+  "review_type": "automated_multimodal"
+}

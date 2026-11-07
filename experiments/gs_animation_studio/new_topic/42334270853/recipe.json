@@ -1,0 +1,361 @@
+{
+  "title": "गाँधी सागर बांध का राज्य",
+  "subject": "भूगोल",
+  "topic_key": "gandhi_sagar_bandh_state",
+  "share_reason": "भूगोल में राज्य‑बांध भ्रम अक्सर होता है",
+  "recall": "याद रखें: मध्य प्रदेश।",
+  "pyq_challenge": true,
+  "share_card": {
+    "kind": "exam_confusion",
+    "recipient": "परीक्षा की तैयारी करने वाले मित्र",
+    "benefit": "भूगोल में राज्य‑बांध मिलान आसान",
+    "cta": "दोस्त को भेजो, उत्तर याद रखें"
+  },
+  "scenes": [
+    {
+      "role": "hook",
+      "heading": "पहले अपना जवाब चुनिए",
+      "explanation": "A या B — सोचिए",
+      "speech": "गाँधी सागर बांध किस राज्य में स्थित है? नक्शा देखिए।",
+      "teaches": "प्रश्न की पहचान और सोच",
+      "visual_action": "व्यक्ति मानचित्र के ऊपर चल रहा है",
+      "setting": "neutral",
+      "objects": [
+        {
+          "kind": "map",
+          "action": "none",
+          "map_region": "india",
+          "id": "object_0",
+          "label": "",
+          "color": "#59c7c5",
+          "pos": [
+            -0.9,
+            0,
+            0
+          ],
+          "size": [
+            1.1,
+            1.1,
+            1.1
+          ]
+        },
+        {
+          "kind": "person",
+          "action": "walk",
+          "id": "object_1",
+          "label": "",
+          "color": "#f4e7bf",
+          "pos": [
+            0.45,
+            0,
+            0
+          ],
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ],
+          "to": [
+            1.65,
+            0,
+            0
+          ]
+        }
+      ],
+      "hook_question": "गाँधी सागर बांध किस राज्य में स्थित है?",
+      "quiz_options": [
+        "A: मध्य प्रदेश",
+        "B: महाराष्ट्र"
+      ]
+    },
+    {
+      "role": "challenge",
+      "heading": "कमेंट में लिखिए: A या B?",
+      "explanation": "दो सेकंड: A या B?",
+      "speech": "दो सेकंड: A या B?",
+      "teaches": "विकल्पों पर विचार",
+      "visual_action": "मानचित्र पर दो राज्य के निशान उठते हैं",
+      "setting": "neutral",
+      "objects": [
+        {
+          "kind": "map",
+          "action": "none",
+          "map_region": "india",
+          "id": "object_0",
+          "label": "",
+          "color": "#59c7c5",
+          "pos": [
+            -1.8,
+            0,
+            0
+          ],
+          "size": [
+            1.1,
+            1.1,
+            1.1
+          ]
+        },
+        {
+          "kind": "arrow",
+          "action": "rise",
+          "label": "मध्य प्रदेश",
+          "id": "object_1",
+          "color": "#59c7c5",
+          "pos": [
+            0.0,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            0.0,
+            0,
+            1.2
+          ]
+        },
+        {
+          "kind": "arrow",
+          "action": "rise",
+          "label": "महाराष्ट्र",
+          "id": "object_2",
+          "color": "#59c7c5",
+          "pos": [
+            1.8,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            1.8,
+            0,
+            1.2
+          ]
+        }
+      ],
+      "quiz_options": [
+        "A: मध्य प्रदेश",
+        "B: महाराष्ट्र"
+      ]
+    },
+    {
+      "role": "reveal",
+      "heading": "सही उत्तर",
+      "explanation": "सही उत्तर है: मध्य प्रदेश।",
+      "speech": "सही उत्तर है: मध्य प्रदेश।",
+      "teaches": "सही राज्य की पुष्टि",
+      "visual_action": "मानचित्र पर चंबल नदी का मार्ग दिखाया गया",
+      "setting": "neutral",
+      "objects": [
+        {
+          "kind": "map",
+          "action": "trace",
+          "map_region": "india",
+          "route": [
+            [
+              78.0,
+              22.0
+            ],
+            [
+              78.5,
+              22.5
+            ]
+          ],
+          "id": "object_0",
+          "label": "",
+          "color": "#59c7c5",
+          "pos": [
+            0.0,
+            0,
+            0
+          ],
+          "size": [
+            1.1,
+            1.1,
+            1.1
+          ]
+        }
+      ]
+    },
+    {
+      "role": "explain",
+      "heading": "तथ्य समझिए",
+      "explanation": "गाँधी सागर बाँध मंदसौर, मध्य प्रदेश",
+      "speech": "गाँधी सागर बाँध मंदसौर, मध्य प्रदेश में चंबल नदी पर स्थित है।",
+      "teaches": "स्थानिक विवरण समझें",
+      "visual_action": "बांध मॉडल पर पानी बह रहा है",
+      "setting": "institution",
+      "objects": [
+        {
+          "kind": "building",
+          "action": "none",
+          "label": "गाँधी सागर बांध",
+          "id": "object_0",
+          "color": "#b1a4d3",
+          "pos": [
+            -0.9,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        {
+          "kind": "water",
+          "action": "flow",
+          "label": "चंबल नदी",
+          "id": "object_1",
+          "color": "#18a9dd",
+          "pos": [
+            0.9,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            2.1,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "role": "transfer",
+      "heading": "खुद को जाँचिए",
+      "explanation": "अब बिना देखे बताइए।",
+      "speech": "अब बिना देखे बताइए।",
+      "teaches": "जानकारी लागू करें",
+      "visual_action": "महाराष्ट्र में कॉयना बांध दिखाया गया",
+      "setting": "institution",
+      "objects": [
+        {
+          "kind": "building",
+          "action": "none",
+          "label": "कॉयना बांध",
+          "id": "object_0",
+          "color": "#b1a4d3",
+          "pos": [
+            -0.9,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        {
+          "kind": "water",
+          "action": "flow",
+          "label": "कॉयना नदी",
+          "id": "object_1",
+          "color": "#18a9dd",
+          "pos": [
+            0.9,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            2.1,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "role": "revision",
+      "heading": "रिवीजन कार्ड",
+      "explanation": "याद रखें: मध्य प्रदेश।",
+      "speech": "याद रखें: मध्य प्रदेश।",
+      "teaches": "तेज़ स्मरण",
+      "visual_action": "पाठ स्क्रीन पर स्थिर टेक्स्ट",
+      "setting": "neutral",
+      "revision_card": true,
+      "objects": [
+        {
+          "kind": "map",
+          "action": "none",
+          "map_region": "india",
+          "id": "object_0",
+          "label": "",
+          "color": "#59c7c5",
+          "pos": [
+            0.0,
+            0,
+            0
+          ],
+          "size": [
+            1.1,
+            1.1,
+            1.1
+          ]
+        }
+      ]
+    }
+  ],
+  "speech": [
+    "गाँधी सागर बांध किस राज्य में स्थित है? नक्शा देखिए।",
+    "दो सेकंड: A या B?",
+    "सही उत्तर है: मध्य प्रदेश।",
+    "गाँधी सागर बाँध मंदसौर, मध्य प्रदेश में चंबल नदी पर स्थित है।",
+    "अब बिना देखे बताइए।",
+    "याद रखें: मध्य प्रदेश।"
+  ],
+  "titles": [
+    [
+      "पहले अपना जवाब चुनिए",
+      "A या B — सोचिए"
+    ],
+    [
+      "कमेंट में लिखिए: A या B?",
+      "दो सेकंड: A या B?"
+    ],
+    [
+      "सही उत्तर",
+      "सही उत्तर है: मध्य प्रदेश।"
+    ],
+    [
+      "तथ्य समझिए",
+      "गाँधी सागर बाँध मंदसौर, मध्य प्रदेश"
+    ],
+    [
+      "खुद को जाँचिए",
+      "अब बिना देखे बताइए।"
+    ],
+    [
+      "रिवीजन कार्ड",
+      "याद रखें: मध्य प्रदेश।"
+    ]
+  ],
+  "requested_topic": "गाँधी सागर बांध किस राज्य में स्थित है?",
+  "automatic_selection": false,
+  "planner": "Groq / openai/gpt-oss-120b",
+  "auditor": "Groq / openai/gpt-oss-20b",
+  "dynamic": true,
+  "topic_policy": "easy_single_concept_v1",
+  "quality_version": "rich_3d_v1",
+  "primary_objective": "follow",
+  "series_next_topic": "जायकवाड़ी (चरण-1) जलविद्युत परियोजना किस नदी पर बनायी गयी है?"
+}
