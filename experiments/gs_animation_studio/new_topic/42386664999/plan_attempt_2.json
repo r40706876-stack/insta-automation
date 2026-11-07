@@ -1,0 +1,131 @@
+{
+  "type": "object",
+  "value": {
+    "title": "भारत की कम्युनिस्ट पार्टी का प्रतीक चिह्न",
+    "subject": "राजव्यवस्था",
+    "topic_key": "bharat_communist_party_symbol",
+    "share_reason": "परीक्षा में अक्सर विकल्प भ्रमित करते हैं",
+    "recall": "याद रखें: मक्के और हंसिया।",
+    "pyq_challenge": true,
+    "share_card": {
+      "kind": "exam_confusion",
+      "recipient": "परीक्षा की तैयारी करने वाले मित्र",
+      "benefit": "सही प्रतीक चिह्न याद रखकर अंक बचाएँ",
+      "cta": "अब साथ में क्विज़ करें"
+    },
+    "scenes": [
+      {
+        "role": "hook",
+        "heading": "पहले अपना जवाब चुनिए",
+        "explanation": "A या B — सोचिए",
+        "speech": "भारत की कम्युनिस्ट पार्टी का प्रतीक चिह्न निम्न में से क्या है? जाल पहचानिए।",
+        "teaches": "प्रतीक चिह्न के विकल्पों को पहचानना",
+        "visual_action": "दो विकल्पों को दिखाना",
+        "setting": "institution",
+        "objects": [
+          {
+            "kind": "book",
+            "action": "none",
+            "label": "विकल्प A"
+          }
+        ]
+      },
+      {
+        "role": "challenge",
+        "heading": "कमेंट में लिखिए: A या B?",
+        "explanation": "दो सेकंड: A या B?",
+        "speech": "दो सेकंड: A या B?",
+        "teaches": "विकल्पों के बीच चयन करना",
+        "visual_action": "दोनों विकल्पों को दिखाना",
+        "setting": "institution",
+        "objects": [
+          {
+            "kind": "book",
+            "action": "none",
+            "label": "विकल्प A"
+          },
+          {
+            "kind": "book",
+            "action": "none",
+            "label": "विकल्प B"
+          }
+        ]
+      },
+      {
+        "role": "reveal",
+        "heading": "सही उत्तर",
+        "explanation": "सही उत्तर है: मक्के और हंसिया।",
+        "speech": "सही उत्तर है: मक्के और हंसिया।",
+        "teaches": "सही प्रतीक चिह्न को पहचानना",
+        "visual_action": "मक्के और हंसिया को दिखाना",
+        "setting": "institution",
+        "objects": [
+          {
+            "kind": "corn",
+            "action": "move",
+            "label": "मक्के"
+          },
+          {
+            "kind": "sickle",
+            "action": "move",
+            "label": "हंसिया"
+          }
+        ]
+      },
+      {
+        "role": "explain",
+        "heading": "तथ्य समझिए",
+        "explanation": "भारतीय कम्युनिस्ट पार्टी एक साम्यवादी दल है।",
+        "speech": "भारतीय कम्युनिस्ट पार्टी एक साम्यवादी दल है।",
+        "teaches": "भारतीय कम्युनिस्ट पार्टी के बारे में जानना",
+        "visual_action": "भारतीय कम्युनिस्ट पार्टी के प्रतीक चिह्न को दिखाना",
+        "setting": "institution",
+        "objects": [
+          {
+            "kind": "book",
+            "action": "none",
+            "label": "भारतीय कम्युनिस्ट पार्टी"
+          }
+        ]
+      },
+      {
+        "role": "transfer",
+        "heading": "खुद को जाँचिए",
+        "explanation": "जिसकी स्थापना एम।",
+        "speech": "जिसकी स्थापना एम।",
+        "teaches": "भारतीय कम्युनिस्ट पार्टी के इतिहास को जानना",
+        "visual_action": "भारतीय कम्युनिस्ट पार्टी के इतिहास को दिखाना",
+        "setting": "institution",
+        "objects": [
+          {
+            "kind": "book",
+            "action": "none",
+            "label": "भारतीय कम्युनिस्ट पार्टी का इतिहास"
+          }
+        ]
+      },
+      {
+        "role": "revision",
+        "heading": "रिवीजन कार्ड",
+        "explanation": "याद रखें: मक्के और हंसिया।",
+        "speech": "याद रखें: मक्के और हंसिया।",
+        "teaches": "सही प्रतीक चिह्न को याद रखना",
+        "visual_action": "मक्के और हंसिया को दिखाना",
+        "setting": "institution",
+        "revision_card": true,
+        "objects": [
+          {
+            "kind": "corn",
+            "action": "none",
+            "label": "मक्के"
+          },
+          {
+            "kind": "sickle",
+            "action": "none",
+            "label": "हंसिया"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,6 +1,6 @@
 {
  "next_seq": 185,
- "episode": 183,
+ "episode": 184,
  "posted": [
   "684d76bcbc",
   "6bb20b4a07",
@@ -578,7 +578,14 @@
   "cc790be8d8",
   "2e3099d1e1",
   "8b636cecc6",
-  "13f76fbc3d"
+  "13f76fbc3d",
+  "3ea52cbab7",
+  "5aeabb4db7",
+  "54cdddd39c",
+  "6b9c2dd5e9",
+  "8f20dcf550",
+  "971e2dca85",
+  "fe4f578be9"
  ],
  "skipped": {
   "bdd1ce5a8b": "उत्तर कुंजी वर्तमान स्थिति के अनुसार गलत है।",
@@ -598,12 +605,13 @@
   "ab44f7b95e": "प्रश्न में 'ऐसी कोशिकाएं' लिखा है जिससे चित्र या संदर्भ की कमी स्पष्ट होती है, तथा उत्तर संदेहास्पद है।",
   "f073415fe3": "Answer key incorrect; correct answer is 11 airlines",
   "c141cf3d28": "मंत्रिमंडल के विभाग और मंत्री समय के साथ बदलते रहते हैं (समसामयिक प्रश्न)।",
-  "d710bd5453": "Answer key outdated; current editor‑in‑chief is Ravi Kumar"
+  "d710bd5453": "Answer key outdated; current editor‑in‑chief is Ravi Kumar",
+  "494dbdcb7a": "Answer outdated: ministry renamed to Education Ministry in 2020"
  },
  "last": {
-  "seq": 2389,
-  "id": "13f76fbc3d",
-  "time": "2026-11-07 14:30",
+  "seq": 2386,
+  "id": "fe4f578be9",
+  "time": "2026-11-07 16:30",
   "format": "list"
  },
  "carousel_queue": [

@@ -1,0 +1,16 @@
+{
+  "title": "भारत की कम्युनिस्ट पार्टी का प्रतीक चिह्न",
+  "subject": "राजव्यवस्था",
+  "topic_key": "bharat_communist_party_symbol",
+  "share_reason": "परीक्षा में अक्सर विकल्प भ्रमित करते हैं",
+  "recall": "याद रखें: मक्के और हंसिया।",
+  "share_card": {
+    "kind": "exam_confusion",
+    "recipient": "परीक्षा की तैयारी करने वाले मित्र",
+    "benefit": "सही प्रतीक चिह्न याद रखकर अंक बचाएँ",
+    "cta": "अब साथ में क्विज़ करें"
+  },
+  "pyq_challenge": true,
+  "needs_custom_assets": true,
+  "asset_requirement": "corn and sickle models"
+}

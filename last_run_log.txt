@@ -8,29 +8,31 @@ Traceback (most recent call last):
   File "daily_visual_gs.py", line 48, in <module>
     if not (ROOT/'release_review.json').exists() or os.getenv('GS_FORCE_BUILD')=='1' or not (ROOT/'validated.json').exists() or json.loads((ROOT/'validated.json').read_text()).get('renderer_version')!=bridge.VERSION:build()
                                                                                                                                                                                                                         ^^^^^^^
-  File "daily_visual_gs.py", line 18, in build
-    if not release['safe_to_publish']:raise RuntimeError('Rendered AV review blocked: '+', '.join(release['blocking_reasons']))
-                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-RuntimeError: Rendered AV review blocked: unverified visual_relevance
+  File "daily_visual_gs.py", line 13, in build
+    script=bridge.build(ROOT,DAY)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/insta-automation/insta-automation/gs_animation_bridge.py", line 122, in build
+    raise RuntimeError('3D build failed: '+detail[-2500:]+'; diagnostics: '+str(runner.diag))
+RuntimeError: 3D build failed: Plan repair 1 script: Every scene needs a causal animated object, not a static poster; visual: Scene 2: no causal movement beyond decorative pulse/zoom
+Plan repair 2 script: Exactly six scenes required; visual: Custom model needed: corn and sickle models; facts: 'scenes'; experiment: Use hook/challenge/reveal/explain/transfer/revision scene roles
+Plan repair 3 script: Invalid title; visual: 'scenes'; facts: 'scenes'; share: Concrete share_card required; experiment: Use hook/challenge/reveal/explain/transfer/revision scene roles
+Traceback (most recent call last):
+  File "/home/runner/work/insta-automation/insta-automation/gs_animation_studio/planner.py", line 385, in <module>
+    generate(sys.argv[1],sys.argv[2],os.getenv('STUDIO_TOPIC_TEXT','').strip(),os.getenv('STUDIO_SUBJECT','auto'),os.getenv('STUDIO_REFERENCE_TEXT',''))
+  File "/home/runner/work/insta-automation/insta-automation/gs_animation_studio/planner.py", line 381, in generate
+    raise RuntimeError('New-topic plan failed validation after three attempts: '+str(errors))
+RuntimeError: New-topic plan failed validation after three attempts: ['script: Every scene needs a causal animated object, not a static poster; visual: Scene 2: no causal movement beyond decorative pulse/zoom', "script: Exactly six scenes required; visual: Custom model needed: corn and sickle models; facts: 'scenes'; experiment: Use hook/challenge/reveal/explain/transfer/revision scene roles", "script: Invalid title; visual: 'scenes'; facts: 'scenes'; share: Concrete share_card required; experiment: Use hook/challenge/reveal/explain/transfer/revision scene roles"]
+; diagnostics: /home/runner/work/insta-automation/insta-automation/studio_diagnostics/42386664999
 FORMAT: list
   Gemini text models: gemini-flash-latest, gemini-3.8-flash, gemini-3.7-flash, gemini-3.6-flash
-  Gemini gemini-flash-latest: HTTP 503 (koshish 1) {   "error": {     "code": 503,     "message": "This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later
-  Gemini gemini-flash-latest: HTTP 429 (koshish 2) 
-  Gemini gemini-3.8-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
-  Gemini gemini-3.8-flash: HTTP 429 (koshish 2) 
-  Gemini gemini-3.7-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
-  Gemini gemini-3.7-flash: HTTP 429 (koshish 2) 
-  Gemini gemini-3.6-flash: HTTP 503 (koshish 1) {   "error": {     "code": 503,     "message": "This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later
-  Gemini gemini-flash-latest: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
-  Gemini gemini-flash-latest: HTTP 429 (koshish 2) 
-  Gemini gemini-3.8-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
   Gemini gemini-flash-latest: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
   Gemini gemini-flash-latest: HTTP 429 (koshish 2) 
   Gemini gemini-3.8-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
   Gemini gemini-3.8-flash: HTTP 429 (koshish 2) 
   Gemini gemini-3.7-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
   Gemini gemini-3.7-flash: HTTP 429 (koshish 2) 
-  Gemini gemini-3.6-flash: HTTP 503 (koshish 1) {   "error": {     "code": 503,     "message": "This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later
+  Gemini gemini-flash-latest: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-flash-latest: HTTP 429 (koshish 2) 
   Gemini gemini-flash-latest: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
   Gemini gemini-flash-latest: HTTP 429 (koshish 2) 
   Gemini gemini-3.8-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
@@ -46,16 +48,25 @@ FORMAT: list
   Gemini gemini-3.8-flash: HTTP 429 (koshish 2) 
   Gemini gemini-3.7-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
   Gemini gemini-3.7-flash: HTTP 429 (koshish 2) 
-  Gemini gemini-3.6-flash: HTTP 503 (koshish 1) {   "error": {     "code": 503,     "message": "This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later
+  Gemini gemini-3.6-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
   Gemini gemini-3.6-flash: HTTP 429 (koshish 2) 
   Groq llama-3.3-70b-versatile: HTTP 404
   Gemini gemini-flash-latest: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
   Gemini gemini-flash-latest: HTTP 429 (koshish 2) 
   Gemini gemini-3.8-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
   Gemini gemini-3.8-flash: HTTP 429 (koshish 2) 
-  Gemini gemini-3.7-flash fail (koshish 1): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
+  Gemini gemini-3.7-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
   Gemini gemini-3.7-flash: HTTP 429 (koshish 2) 
   Gemini gemini-3.6-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-3.6-flash: HTTP 429 (koshish 2) 
+  Groq llama-3.3-70b-versatile: HTTP 404
+  Gemini gemini-flash-latest: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-flash-latest: HTTP 429 (koshish 2) 
+  Gemini gemini-3.8-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-3.8-flash: HTTP 503 (koshish 2) 
+  Gemini gemini-3.7-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-3.7-flash: HTTP 429 (koshish 2) 
+  Gemini gemini-3.6-flash: HTTP 503 (koshish 1) {   "error": {     "code": 503,     "message": "This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later
   Gemini gemini-3.6-flash: HTTP 429 (koshish 2) 
   Groq llama-3.3-70b-versatile: HTTP 404
   Gemini gemini-flash-latest: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
@@ -82,28 +93,28 @@ CAPTION:
 📅 Day 17/100 • 100 दिन में पूरा GS | कल Day 18/100 - Follow करो ताकि छूटे नहीं
 📤 ये reel उस दोस्त को भेजो जो Group D / NTPC / SSC / Police की तैयारी कर रहा है!
 
-📚 सामान्य ज्ञान के 7 PYQ - RRB, SSC, Police, Patwari, Army, State Exams के लिए (Save करो)
+📚 राजव्यवस्था के 7 PYQ - RRB, SSC, Police, Patwari, Army, State Exams के लिए (Save करो)
 
-1. दुनिया की पहली रोबोट स्की प्रतियोगिता किस देश में आयोजित की गई थी? → दक्षिण कोरिया
-2. पोप ने, मदर टेरेसा को 'संत' की उपाधि किस वर्ष दी? → 2016
-3. भारत की पहली मस्जिद कौन-सी है? → चेरामन जुमा मस्जिद
-4. भारतीय फिल्म निर्देशक 'गुरु दत्त' का वास्तविक नाम क्या था? → वसंत कुमार शिवशंकर पादुकोण
-5. विप्रो लिमिटेड का निगमन किस वर्ष हुआ था? → 1945
-6. हैदराबाद में स्थित अंग्रेजी और विदेशी भाषा विश्वविद्यालय की स्थापना किस वर्ष हुई थी? → 1958
-7. "आर्ट ऑफ लिविंग" के प्रस्तावक और प्रचारक कौन हैं? → श्री श्री रवि शंकर
+1. राष्ट्रीय विकास परिषद् (NDC) की स्थापना कब की गयी? → 1952
+2. लैंगिक अपराधों से बच्चों का संरक्षण अधिनियम किस वर्ष पारित किया गया था? → 2012
+3. सूचना का अधिकार (आरटीआई) अधिनियम किस वर्ष लागू हुआ? → 2005
+4. स्वतंत्र भारत का पहला केंद्रीय बजट संसद में कब पेश किया गया? → 26 नवंबर 1947
+5. स्वतंत्र भारत के पहले वित्त मंत्री कौन थे? → आर. के. शैनमुखम चेट्टी
+6. भारत के संघीय न्यायालय ने किस वर्ष कार्य करना शुरू किया? → 1937
+7. भारत के सर्वोच्च न्यायालय के न्यायाधीश के लिए आयु सीमा क्या है? → 65 वर्ष
 
 💬 कितने पहले से आते थे? कमेंट करो: 7/7?
 📤 Save करो + उस दोस्त को भेजो जो exam की तैयारी कर रहा है।
-GK GK Questions | RRB NTPC, Group D, SSC GD, State Exam PYQ
+राजव्यवस्था GK Questions | RRB NTPC, Group D, SSC GD, State Exam PYQ
 ⏱ MinuteMe_GS - एक मिनट, एक PYQ - पक्का!
 📲 Free test / notes: WhatsApp 8989971379
 
-#gkquiz #rrbntpc #sscgd #gkpyq #gk
-SCHEDULE: video ready; target 2026-11-07T14:30:00Z
+#gkquiz #rrbntpc #sscgd #gkpyq #polity
+SCHEDULE: video ready; target 2026-11-07T16:30:00Z
 Collab invitation requested: @ar_publication
-  IG container: 17912810142568651
+  IG container: 17912827767568651
   upload try 1.1: HTTP 200 {"success":true,"message":"Upload Successful."}
   IG processing: FINISHED
-REMINDER: reel ready, publication due within 10 minutes: 2026-11-07T14:30:00Z
-  LIVE: https://www.instagram.com/reel/DfcVL-FkxnJ/
-INSTAGRAM PE POST HO GAYA: 18103046816423509
+REMINDER: reel ready, publication due within 10 minutes: 2026-11-07T16:30:00Z
+  LIVE: https://www.instagram.com/reel/DfcitHkk6Xf/
+INSTAGRAM PE POST HO GAYA: 18125304170005298
