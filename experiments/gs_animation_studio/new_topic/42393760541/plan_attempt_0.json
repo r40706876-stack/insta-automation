@@ -1,0 +1,261 @@
+{
+  "title": "दिल्ली से दौलताबाद राजधानी परिवर्तन",
+  "subject": "इतिहास",
+  "topic_key": "capital_move_daulatabad",
+  "share_reason": "सही उत्तर याद रहेगा, परीक्षा में जल्दी याद आएगा",
+  "recall": "याद रखें: मुहम्मद बिन तुगलक।",
+  "pyq_challenge": true,
+  "share_card": {
+    "kind": "exam_confusion",
+    "recipient": "परीक्षा की तैयारी कर रहे मित्र",
+    "benefit": "सही उत्तर याद रहेगा, राजधानी परिवर्तन का कारण",
+    "cta": "दोस्त को भेजो, जल्दी याद रखें"
+  },
+  "scenes": [
+    {
+      "role": "hook",
+      "heading": "पहले अपना जवाब चुनिए",
+      "explanation": "A या B — सोचिए",
+      "speech": "किस सम्राट ने अपनी राजधानी दिल्ली से दौलताबाद स्थानान्तरित की थी? दृश्य देखिए।",
+      "teaches": "प्रश्न पहचान",
+      "visual_action": "व्यक्ति चलते हुए मानचित्र की ओर इशारा करता है",
+      "setting": "neutral",
+      "objects": [
+        {
+          "kind": "person",
+          "action": "walk",
+          "label": "सम्राट",
+          "id": "object_0",
+          "color": "#f4e7bf",
+          "pos": [
+            -0.45,
+            0,
+            0
+          ],
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ],
+          "to": [
+            0.75,
+            0,
+            0
+          ]
+        }
+      ],
+      "hook_question": "किस सम्राट ने अपनी राजधानी दिल्ली से दौलताबाद स्थानान्तरित की थी?",
+      "quiz_options": [
+        "A: फिरोजशाह तुगलक",
+        "B: मुहम्मद बिन तुगलक"
+      ]
+    },
+    {
+      "role": "challenge",
+      "heading": "कमेंट में लिखिए: A या B?",
+      "explanation": "दो सेकंड: A या B?",
+      "speech": "दो सेकंड: A या B?",
+      "teaches": "विकल्प विचार",
+      "visual_action": "दो सिक्के घूमते हैं, विकल्प दर्शाते",
+      "setting": "neutral",
+      "objects": [
+        {
+          "kind": "coin",
+          "action": "spin",
+          "label": "फिरोजशाह तुगलक",
+          "id": "object_0",
+          "color": "#f5bd3d",
+          "pos": [
+            -0.9,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        {
+          "kind": "coin",
+          "action": "spin",
+          "label": "मुहम्मद बिन तुगलक",
+          "id": "object_1",
+          "color": "#f5bd3d",
+          "pos": [
+            0.9,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        }
+      ],
+      "quiz_options": [
+        "A: फिरोजशाह तुगलक",
+        "B: मुहम्मद बिन तुगलक"
+      ]
+    },
+    {
+      "role": "reveal",
+      "heading": "सही उत्तर",
+      "explanation": "सही उत्तर है: मुहम्मद बिन तुगलक।",
+      "speech": "सही उत्तर है: मुहम्मद बिन तुगलक।",
+      "teaches": "सही उत्तर पहचान",
+      "visual_action": "मानचित्र पर दिल्ली‑दौलताबाद मार्ग दिखाया",
+      "setting": "institution",
+      "objects": [
+        {
+          "kind": "map",
+          "action": "trace",
+          "map_region": "india",
+          "route": [
+            [
+              77.1025,
+              28.7041
+            ],
+            [
+              75.0,
+              19.0
+            ]
+          ],
+          "label": "मार्ग",
+          "id": "object_0",
+          "color": "#59c7c5",
+          "pos": [
+            0.0,
+            0,
+            0
+          ],
+          "size": [
+            1.1,
+            1.1,
+            1.1
+          ]
+        }
+      ]
+    },
+    {
+      "role": "explain",
+      "heading": "तथ्य समझिए",
+      "explanation": "में उसकी मृत्यु पर इतिहासकार बदायूँनी",
+      "speech": "में उसकी मृत्यु पर इतिहासकार बदायूँनी ने लिखा है कि ‘‘सुल्तान को उसकी प्रजा से और प्रजा को सुल्तान से मुक्ति मिल गई’’।",
+      "teaches": "परिवर्तन कारण समझना",
+      "visual_action": "गियर घूमते हैं, प्रशासनिक सुधार दर्शाते",
+      "setting": "institution",
+      "objects": [
+        {
+          "kind": "gear",
+          "action": "spin",
+          "label": "सुधार",
+          "id": "object_0",
+          "color": "#59c7c5",
+          "pos": [
+            -0.9,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        {
+          "kind": "person",
+          "action": "walk",
+          "label": "सम्राट",
+          "id": "object_1",
+          "color": "#f4e7bf",
+          "pos": [
+            0.45,
+            0,
+            0
+          ],
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ],
+          "to": [
+            1.65,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "role": "transfer",
+      "heading": "खुद को जाँचिए",
+      "explanation": "अब बिना देखे बताइए।",
+      "speech": "अब बिना देखे बताइए।",
+      "teaches": "अन्य सम्राटों के समान कदम",
+      "visual_action": "मानचित्र पर आगरा‑फ़तेहपुर मार्ग दिखाया",
+      "setting": "institution",
+      "objects": [
+        {
+          "kind": "map",
+          "action": "trace",
+          "map_region": "india",
+          "route": [
+            [
+              78.0081,
+              27.1767
+            ],
+            [
+              77.9045,
+              27.0935
+            ]
+          ],
+          "label": "मार्ग",
+          "id": "object_0",
+          "color": "#59c7c5",
+          "pos": [
+            0.0,
+            0,
+            0
+          ],
+          "size": [
+            1.1,
+            1.1,
+            1.1
+          ]
+        }
+      ]
+    },
+    {
+      "role": "revision",
+      "heading": "रिवीजन कार्ड",
+      "explanation": "याद रखें: मुहम्मद बिन तुगलक।",
+      "speech": "याद रखें: मुहम्मद बिन तुगलक।",
+      "teaches": "स्मरण शक्ति",
+      "visual_action": "स्थिर मानचित्र दिखाया",
+      "setting": "institution",
+      "revision_card": true,
+      "objects": [
+        {
+          "kind": "map",
+          "action": "none",
+          "map_region": "india",
+          "label": "दिल्ली‑दौलताबाद",
+          "id": "object_0",
+          "color": "#59c7c5",
+          "pos": [
+            0.0,
+            0,
+            0
+          ],
+          "size": [
+            1.1,
+            1.1,
+            1.1
+          ]
+        }
+      ]
+    }
+  ]
+}

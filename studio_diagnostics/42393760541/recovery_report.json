@@ -1,0 +1,26 @@
+{
+  "topic": "new_topic",
+  "run_id": "42393760541",
+  "attempt": "1",
+  "status": "failed",
+  "events": [
+    {
+      "stage": "plan_new_topic",
+      "status": "started",
+      "log": "0_plan_new_topic.log"
+    },
+    {
+      "stage": "plan_new_topic",
+      "status": "failed",
+      "code": "process_failed",
+      "detail": "Plan repair 1 visual: Scene 3: meaningless label \"मार्ग\"; label must name the real thing or be empty\nPlan repair 2 visual: Scene 4: explain the visible action, not just screen text\nPlan repair 3 script: Invalid title; visual: 'scenes'; facts: 'scenes'; experiment: Use hook/challenge/reveal/explain/transfer/revision scene roles\nTraceback (most recent call last):\n  File \"/home/runner/work/insta-automation/insta-automation/gs_animation_studio/planner.py\", line 385, in <module>\n    generate(sys.argv[1],sys.argv[2],os.getenv('STUDIO_TOPIC_TEXT','').strip(),os.getenv('STUDIO_SUBJECT','auto'),os.getenv('STUDIO_REFERENCE_TEXT',''))\n  File \"/home/runner/work/insta-automation/insta-automation/gs_animation_studio/planner.py\", line 381, in generate\n    raise RuntimeError('New-topic plan failed validation after three attempts: '+str(errors))\nRuntimeError: New-topic plan failed validation after three attempts: ['visual: Scene 3: meaningless label \"मार्ग\"; label must name the real thing or be empty', 'visual: Scene 4: explain the visible action, not just screen text', \"script: Invalid title; visual: 'scenes'; facts: 'scenes'; experiment: Use hook/challenge/reveal/explain/transfer/revision scene roles\"]\n"
+    }
+  ],
+  "repairs": [],
+  "injected_failures": [],
+  "instagram_publish": false,
+  "failure": {
+    "type": "StageError",
+    "message": "plan_new_topic: process_failed"
+  }
+}
