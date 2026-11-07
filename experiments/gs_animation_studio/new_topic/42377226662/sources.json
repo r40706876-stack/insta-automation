@@ -1,0 +1,6 @@
+[
+  {
+    "url": "user-provided",
+    "excerpt": "Verified question-bank reference; do not add claims beyond this reference: {\"subject\": \"Traditional GK\", \"subject_hi\": \"सामान्य ज्ञान\", \"chapter\": \"अंतरिक्ष कार्यक्रम (Space Programme)\", \"sub\": \"\", \"question\": \"निम्न में से किसकी परिशुद्धता में गड़बड़ी के कारण बैलिस्टिक मिसाइल विफल हो जाती हैं?\", \"options\": {\"a\": \"अपने आकार के कारण\", \"b\": \"वायु प्रतिरोध के कारण\", \"c\": \"प्रक्षेपण कोण के कारण\", \"d\": \"धातु के कारण\"}, \"answer\": \"b\", \"exams\": [\"RRB Group-D 02-11-2018 (Shift-I)\"], \"explanation\": \"वायु प्रतिरोध की परिशुद्धता में गड़बड़ी के कारण बैलिस्टिक मिसाइल विफल हो जाती है।\", \"times_asked\": 1, \"years\": [\"2018\"], \"id\": \"1d992e73b9\", \"seq\": 119}"
+  }
+]

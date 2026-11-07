@@ -1,0 +1,6 @@
+Natural Earth ne_110m_land geographic geometry.
+Source: https://www.naturalearthdata.com/downloads/110m-physical-vectors/110m-land/
+Terms: https://www.naturalearthdata.com/about/terms-of-use/
+Natural Earth data is in the public domain.
+Bundled geometry reused from experiments/cinematic_coast_v1/land.geojson.
+This is a physical coastline dataset; it does not supply administrative borders.

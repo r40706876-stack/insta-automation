@@ -1,0 +1,43 @@
+{
+  "answer_correct": true,
+  "visual_relevance": false,
+  "hindi_readable": true,
+  "pronunciation_correct": true,
+  "audio_visual_match": true,
+  "answer_reveal_timing": true,
+  "revision_card_readable": true,
+  "reasons": [
+    "The 3D animation consists of generic arrow shapes moving towards simple cloud blobs, failing to visually demonstrate how air resistance causes missile trajectory inaccuracy or failure."
+  ],
+  "observed_answer": "B",
+  "scene_evidence": [
+    {
+      "scene": 1,
+      "observation": "Question presented with two options (A: अपने आकार के कारण, B: वायु प्रतिरोध के कारण)."
+    },
+    {
+      "scene": 2,
+      "observation": "Countdown timer counts down from 2 to 1 second."
+    },
+    {
+      "scene": 3,
+      "observation": "Option B (वायु प्रतिरोध के कारण) is revealed as the correct answer along with a simple 3D arrow labeled 'मिसाइल'."
+    },
+    {
+      "scene": 4,
+      "observation": "Explanation phase shows a 3D arrow moving horizontally towards a 3D cloud structure labeled 'हवा'."
+    },
+    {
+      "scene": 5,
+      "observation": "Transfer frame titled 'खुद को जाँचिए' shows a similar arrow labeled 'रॉकेट' facing 'हवा'."
+    },
+    {
+      "scene": 6,
+      "observation": "Final revision card clearly states 'याद रखें: वायु प्रतिरोध के कारण' with contact details."
+    }
+  ],
+  "sha256": "5bab142f25e8272aaa68f65bd708a1f0c14cee4c52a9875314b22ae783eb4058",
+  "reviewer": "gemini-3.6-flash / actual rendered video and audio",
+  "reviewed_at": "2026-11-07T13:40:26.353947+00:00",
+  "review_type": "automated_multimodal"
+}

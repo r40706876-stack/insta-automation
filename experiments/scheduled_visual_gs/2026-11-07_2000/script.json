@@ -1,0 +1,131 @@
+{
+  "ok": true,
+  "title": "बैलिस्टिक मिसाइल विफलता कारण",
+  "subject": "Traditional GK",
+  "renderer_version": "rich_3d_v1",
+  "question_hash": "b456d99ccf2615595baaf81acfdec1a9de40a0d3c842d19e761b95489d20189d",
+  "reference": {
+    "subject": "Traditional GK",
+    "subject_hi": "सामान्य ज्ञान",
+    "chapter": "अंतरिक्ष कार्यक्रम (Space Programme)",
+    "sub": "",
+    "question": "निम्न में से किसकी परिशुद्धता में गड़बड़ी के कारण बैलिस्टिक मिसाइल विफल हो जाती हैं?",
+    "options": {
+      "a": "अपने आकार के कारण",
+      "b": "वायु प्रतिरोध के कारण",
+      "c": "प्रक्षेपण कोण के कारण",
+      "d": "धातु के कारण"
+    },
+    "answer": "b",
+    "exams": [
+      "RRB Group-D 02-11-2018 (Shift-I)"
+    ],
+    "explanation": "वायु प्रतिरोध की परिशुद्धता में गड़बड़ी के कारण बैलिस्टिक मिसाइल विफल हो जाती है।",
+    "times_asked": 1,
+    "years": [
+      "2018"
+    ],
+    "id": "1d992e73b9",
+    "seq": 119
+  },
+  "experiment_format": "exam_trap",
+  "primary_objective": "share",
+  "series_next_topic": "भारत का प्रथम रक्षा इनक्यूबेटर्स किस शहर में स्थापित होगा?",
+  "series_next_hash": "1505ce327773628ef7714a68f58b6eefb6d9a11549dec5ae81c35d4b72d33c08",
+  "topic_policy": "evidence_cohort_v2",
+  "topic_priority": 1.0,
+  "recall": "याद रखें: वायु प्रतिरोध के कारण।",
+  "share_card": {
+    "kind": "exam_confusion",
+    "recipient": "परीक्षा की तैयारी करने वाले मित्र",
+    "benefit": "वायु प्रतिरोध कारण को समझकर गलत विकल्प से बचें",
+    "cta": "अब साथ में क्विज़ करें"
+  },
+  "share_reason": "वायु प्रतिरोध कारण को समझकर गलत विकल्प से बचें",
+  "scenes": [
+    {
+      "label": "पहले अपना जवाब चुनिए",
+      "quiz_options": [
+        "A: अपने आकार के कारण",
+        "B: वायु प्रतिरोध के कारण"
+      ],
+      "speech": "निम्न में से किसकी परिशुद्धता में गड़बड़ी के कारण बैलिस्टिक मिसाइल विफल हो जाती हैं? जाल पहचानिए।",
+      "role": "hook",
+      "revision_card": false,
+      "teaches": "प्रश्न पहचान",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "तीर स्क्रीन पर तेज़ी से उड़ता है"
+      }
+    },
+    {
+      "label": "कमेंट में लिखिए: A या B?",
+      "quiz_options": [
+        "A: अपने आकार के कारण",
+        "B: वायु प्रतिरोध के कारण"
+      ],
+      "speech": "दो सेकंड: A या B?",
+      "role": "challenge",
+      "revision_card": false,
+      "teaches": "विकल्प विचार",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "दो तीर अलग‑अलग दिशा में चलते हैं"
+      }
+    },
+    {
+      "label": "सही उत्तर",
+      "quiz_options": null,
+      "speech": "सही उत्तर है: वायु प्रतिरोध के कारण।",
+      "role": "reveal",
+      "revision_card": false,
+      "teaches": "उत्तर स्पष्ट",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "वायु प्रतिरोध वाला तीर धीमा होकर रुकता है"
+      }
+    },
+    {
+      "label": "तथ्य समझिए",
+      "quiz_options": null,
+      "speech": "वायु प्रतिरोध की परिशुद्धता में गड़बड़ी के कारण बैलिस्टिक मिसाइल विफल हो जाती है।",
+      "role": "explain",
+      "revision_card": false,
+      "teaches": "मेकैनिज़्म समझ",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "तीर के पीछे हवा के प्रवाह गति में बदलता है"
+      }
+    },
+    {
+      "label": "खुद को जाँचिए",
+      "quiz_options": null,
+      "speech": "अब बिना देखे बताइए।",
+      "role": "transfer",
+      "revision_card": false,
+      "teaches": "संबंधित अनुप्रयोग",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "रॉकेट फिर से उड़ता, हवा उसे मोड़ती"
+      }
+    },
+    {
+      "label": "रिवीजन कार्ड",
+      "quiz_options": null,
+      "speech": "याद रखें: वायु प्रतिरोध के कारण।",
+      "role": "revision",
+      "revision_card": true,
+      "teaches": "स्मरण",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "स्थिर स्क्रीन पर पाठ दिखता"
+      }
+    }
+  ]
+}
