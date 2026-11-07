@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-07T03:15:54.822315+00:00",
+  "generated_at": "2026-11-07T04:03:39.562740+00:00",
   "windows": {
     "24h": [
       {
@@ -274,20 +274,20 @@
         "reels": 28,
         "metrics": {
           "shares_per_1000": {
-            "mean": 1.2508811936159194,
-            "n": 27
+            "mean": 1.2062068652724938,
+            "n": 28
           },
           "saves_per_1000": {
-            "mean": 2.7149497404644922,
-            "n": 27
+            "mean": 2.617987249733617,
+            "n": 28
           },
           "average_watch_time": {
-            "mean": 4.569370370370371,
-            "n": 27
+            "mean": 4.564464285714286,
+            "n": 28
           },
           "three_second_rate": {
-            "mean": 25.937037444444446,
-            "n": 27
+            "mean": 26.63571467857143,
+            "n": 28
           },
           "retention": {
             "mean": null,
@@ -970,19 +970,19 @@
         "metrics": {
           "shares_per_1000": {
             "mean": 0.0,
-            "n": 2
+            "n": 3
           },
           "saves_per_1000": {
-            "mean": 0.0,
-            "n": 2
+            "mean": 3.9920159680638725,
+            "n": 3
           },
           "average_watch_time": {
-            "mean": 5.2989999999999995,
-            "n": 2
+            "mean": 5.386333333333333,
+            "n": 3
           },
           "three_second_rate": {
-            "mean": 43.45,
-            "n": 2
+            "mean": 43.1,
+            "n": 3
           },
           "retention": {
             "mean": null,
@@ -993,7 +993,7 @@
             "n": 0
           }
         },
-        "decision": "collect_more",
+        "decision": "review_matched_cohort",
         "automatic_scale": false
       },
       {
@@ -1038,9 +1038,9 @@
         "subject": null,
         "format": "legacy_unclassified",
         "reels": 28,
-        "shares_per_1000": 1.2508811936159194,
-        "saves_per_1000": 2.7149497404644922,
-        "average_watch_time": 4.569370370370371
+        "shares_per_1000": 1.2062068652724938,
+        "saves_per_1000": 2.617987249733617,
+        "average_watch_time": 4.564464285714286
       }
     ],
     "winner": null,
