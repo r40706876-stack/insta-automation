@@ -1,0 +1,384 @@
+{
+  "title": "कम्युनिस्ट पार्टी का प्रतीक चिह्न",
+  "subject": "राजव्यवस्था",
+  "topic_key": "communist_party_symbol",
+  "share_reason": "परीक्षा में अक्सर विकल्प भ्रमित करते हैं",
+  "recall": "याद रखें: मक्के और हंसिया।",
+  "pyq_challenge": true,
+  "share_card": {
+    "kind": "exam_confusion",
+    "recipient": "परीक्षा की तैयारी करने वाले मित्र",
+    "benefit": "सही प्रतीक चिह्न याद रखेंगे",
+    "cta": "चलो साथ में याद करें"
+  },
+  "scenes": [
+    {
+      "role": "hook",
+      "heading": "पहले अपना जवाब चुनिए",
+      "explanation": "A या B — सोचिए",
+      "speech": "भारत की कम्युनिस्ट पार्टी का प्रतीक चिह्न निम्न में से क्या है? दृश्य देखिए।",
+      "teaches": "प्रश्न पहचान और विकल्प देखना",
+      "visual_action": "ट्री बढ़ता है, गियर घूमता है, सूरज उगता है",
+      "setting": "neutral",
+      "objects": [
+        {
+          "kind": "tree",
+          "action": "grow",
+          "label": "मक्का",
+          "id": "object_0",
+          "color": "#59c7c5",
+          "pos": [
+            -2.7,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        {
+          "kind": "gear",
+          "action": "spin",
+          "label": "हंसिया",
+          "id": "object_1",
+          "color": "#59c7c5",
+          "pos": [
+            -0.9,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        {
+          "kind": "gear",
+          "action": "spin",
+          "label": "हथौड़ा",
+          "id": "object_2",
+          "color": "#59c7c5",
+          "pos": [
+            0.9,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        {
+          "kind": "sun",
+          "action": "rise",
+          "label": "",
+          "id": "object_3",
+          "color": "#59c7c5",
+          "pos": [
+            2.7,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            2.7,
+            0,
+            1.2
+          ]
+        }
+      ],
+      "hook_question": "भारत की कम्युनिस्ट पार्टी का प्रतीक चिह्न निम्न में से क्या है?",
+      "quiz_options": [
+        "A: मक्के और हंसिया",
+        "B: हथौड़ा, हंसिया और तारा"
+      ]
+    },
+    {
+      "role": "challenge",
+      "heading": "कमेंट में लिखिए: A या B?",
+      "explanation": "दो सेकंड: A या B?",
+      "speech": "दो सेकंड: A या B?",
+      "teaches": "विकल्प तुलना",
+      "visual_action": "सभी वस्तुएँ धीरे‑धीरे घूमती हैं",
+      "setting": "neutral",
+      "objects": [
+        {
+          "kind": "tree",
+          "action": "grow",
+          "label": "मक्का",
+          "id": "object_0",
+          "color": "#59c7c5",
+          "pos": [
+            -2.7,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        {
+          "kind": "gear",
+          "action": "spin",
+          "label": "हंसिया",
+          "id": "object_1",
+          "color": "#59c7c5",
+          "pos": [
+            -0.9,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        {
+          "kind": "gear",
+          "action": "spin",
+          "label": "हथौड़ा",
+          "id": "object_2",
+          "color": "#59c7c5",
+          "pos": [
+            0.9,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        {
+          "kind": "sun",
+          "action": "rise",
+          "label": "",
+          "id": "object_3",
+          "color": "#59c7c5",
+          "pos": [
+            2.7,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            2.7,
+            0,
+            1.2
+          ]
+        }
+      ],
+      "quiz_options": [
+        "A: मक्के और हंसिया",
+        "B: हथौड़ा, हंसिया और तारा"
+      ]
+    },
+    {
+      "role": "reveal",
+      "heading": "सही उत्तर",
+      "explanation": "सही उत्तर है: मक्के और हंसिया।",
+      "speech": "सही उत्तर है: मक्के और हंसिया।",
+      "teaches": "सही विकल्प पहचान",
+      "visual_action": "ट्री और हंसिया गियर चमकते हैं",
+      "setting": "neutral",
+      "objects": [
+        {
+          "kind": "tree",
+          "action": "grow",
+          "label": "मक्का",
+          "id": "object_0",
+          "color": "#59c7c5",
+          "pos": [
+            -1.8,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        {
+          "kind": "gear",
+          "action": "spin",
+          "label": "हंसिया",
+          "id": "object_1",
+          "color": "#59c7c5",
+          "pos": [
+            0.0,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        {
+          "kind": "gear",
+          "action": "spin",
+          "label": "हथौड़ा",
+          "id": "object_2",
+          "color": "#59c7c5",
+          "pos": [
+            1.8,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        }
+      ]
+    },
+    {
+      "role": "explain",
+      "heading": "तथ्य समझिए",
+      "explanation": "भारतीय कम्युनिस्ट पार्टी एक साम्यवादी दल",
+      "speech": "भारतीय कम्युनिस्ट पार्टी एक साम्यवादी दल है।",
+      "teaches": "प्रतीक का अर्थ समझना",
+      "visual_action": "ट्री पूरी तरह बढ़ता है, गियर तेज़ी से घूमता है",
+      "setting": "neutral",
+      "objects": [
+        {
+          "kind": "tree",
+          "action": "grow",
+          "label": "मक्का",
+          "id": "object_0",
+          "color": "#59c7c5",
+          "pos": [
+            -0.9,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        {
+          "kind": "gear",
+          "action": "spin",
+          "label": "हंसिया",
+          "id": "object_1",
+          "color": "#59c7c5",
+          "pos": [
+            0.9,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        }
+      ]
+    },
+    {
+      "role": "transfer",
+      "heading": "खुद को जाँचिए",
+      "explanation": "जिसकी स्थापना एम।",
+      "speech": "जिसकी स्थापना एम।",
+      "teaches": "प्रतीक तुलना",
+      "visual_action": "दो लोग चलते हैं",
+      "setting": "neutral",
+      "objects": [
+        {
+          "kind": "person",
+          "action": "walk",
+          "label": "कांग्रेस",
+          "id": "object_0",
+          "color": "#f4e7bf",
+          "pos": [
+            -1.35,
+            0,
+            0
+          ],
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ],
+          "to": [
+            -0.15,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "person",
+          "action": "walk",
+          "label": "भाजपा",
+          "id": "object_1",
+          "color": "#f4e7bf",
+          "pos": [
+            0.45,
+            0,
+            0
+          ],
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ],
+          "to": [
+            1.65,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "role": "revision",
+      "heading": "रिवीजन कार्ड",
+      "explanation": "याद रखें: मक्के और हंसिया।",
+      "speech": "याद रखें: मक्के और हंसिया।",
+      "teaches": "स्मरण",
+      "visual_action": "कोई गति नहीं",
+      "setting": "neutral",
+      "revision_card": true,
+      "objects": [
+        {
+          "kind": "book",
+          "action": "none",
+          "label": "स्मरण",
+          "id": "object_0",
+          "color": "#59c7c5",
+          "pos": [
+            0.0,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        }
+      ]
+    }
+  ]
+}
