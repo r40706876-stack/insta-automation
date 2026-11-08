@@ -1,0 +1,47 @@
+{
+  "answer_correct": true,
+  "visual_relevance": false,
+  "hindi_readable": true,
+  "pronunciation_correct": true,
+  "audio_visual_match": true,
+  "answer_reveal_timing": true,
+  "revision_card_readable": true,
+  "reasons": [
+    "The core question answer (Hyderabad) is correct according to reference.",
+    "The 3D visuals rely on a generic avatar walking next to an unlabelled India map silhouette with a generic building icon, failing to visually explain defense incubators or pinpoint Hyderabad accurately on the map.",
+    "On-screen Hindi text is clear, legible, and properly rendered without overlapping or clipping.",
+    "Audio narration is well-timed with clear Hindi pronunciation.",
+    "The question prompt allows a full 2-second countdown before revealing the correct answer."
+  ],
+  "observed_answer": "हैदराबाद",
+  "scene_evidence": [
+    {
+      "scene": 1,
+      "observation": "Displays the question frame asking which city will host India's first defense incubator with options A (Hyderabad) and B (Bengaluru)."
+    },
+    {
+      "scene": 2,
+      "observation": "A 2-second countdown timer runs with the prompt asking the viewer to comment option A or B."
+    },
+    {
+      "scene": 3,
+      "observation": "Reveals the correct answer as Hyderabad ('सही उत्तर है: हैदराबाद') while a 3D avatar walks beside a map outline."
+    },
+    {
+      "scene": 4,
+      "observation": "Explains that India's first defense incubator/missile development center will be set up in Hyderabad, showing a generic pillar building icon popping up."
+    },
+    {
+      "scene": 5,
+      "observation": "Memory test prompt 'अब बिना देखे बताइए' appears as the character walks along the map frame."
+    },
+    {
+      "scene": 6,
+      "observation": "Final revision card frame displays 'याद रखें: हैदराबाद' cleanly on screen."
+    }
+  ],
+  "sha256": "1bcbd3f4038b66aa56f19eba8e05de92907739b708052029af234c7670f7dbf8",
+  "reviewer": "gemini-3.6-flash / actual rendered video and audio",
+  "reviewed_at": "2026-11-08T13:37:57.440702+00:00",
+  "review_type": "automated_multimodal"
+}

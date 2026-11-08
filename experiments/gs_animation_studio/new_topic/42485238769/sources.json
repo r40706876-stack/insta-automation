@@ -1,0 +1,11 @@
+[
+  {
+    "url": "user-provided",
+    "excerpt": "Verified question-bank reference; do not add claims beyond this reference: {\"subject\": \"Traditional GK\", \"subject_hi\": \"सामान्य ज्ञान\", \"chapter\": \"अंतरिक्ष कार्यक्रम (Space Programme)\", \"sub\": \"\", \"question\": \"भारत का प्रथम रक्षा इनक्यूबेटर्स किस शहर में स्थापित होगा?\", \"options\": {\"a\": \"बेंगलूरू\", \"b\": \"हैदराबाद\", \"c\": \"अहमदाबाद\", \"d\": \"नई दिल्ली\"}, \"answer\": \"b\", \"exams\": [\"RRB Group-D 25-09-2018 (Shift-I)\"], \"explanation\": \"भारत का पहला डिफेंस इनक्यूबेटर्स जो भारत का मिसाइल विकास केन्द्र है, वह हैदराबाद में स्थापित होगा। इनक्यूबेटर को टी–हब पर रखा जाएगा, जिसे पहले ही स्टार्ट–अप और रचनात्मक विचारों के पोषण के लिए देश के प्रमुख केन्द्रों में मान्यता मिल चुकी है।\", \"times_asked\": 1, \"years\": [\"2018\"], \"id\": \"d489f1f98d\", \"seq\": 156}"
+  },
+  {
+    "url": "https://www.naturalearthdata.com/downloads/110m-physical-vectors/110m-land/",
+    "publisher": "Natural Earth, public-domain physical coastline geometry",
+    "note": "Modern Gujarat outline is separately attributed in dandi_map.LICENSE; routes are schematic."
+  }
+]

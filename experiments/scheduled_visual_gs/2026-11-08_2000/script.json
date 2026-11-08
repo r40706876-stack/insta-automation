@@ -1,0 +1,131 @@
+{
+  "ok": true,
+  "title": "भारत का प्रथम रक्षा इनक्यूबेटर शहर",
+  "subject": "Traditional GK",
+  "renderer_version": "rich_3d_v1",
+  "question_hash": "1505ce327773628ef7714a68f58b6eefb6d9a11549dec5ae81c35d4b72d33c08",
+  "reference": {
+    "subject": "Traditional GK",
+    "subject_hi": "सामान्य ज्ञान",
+    "chapter": "अंतरिक्ष कार्यक्रम (Space Programme)",
+    "sub": "",
+    "question": "भारत का प्रथम रक्षा इनक्यूबेटर्स किस शहर में स्थापित होगा?",
+    "options": {
+      "a": "बेंगलूरू",
+      "b": "हैदराबाद",
+      "c": "अहमदाबाद",
+      "d": "नई दिल्ली"
+    },
+    "answer": "b",
+    "exams": [
+      "RRB Group-D 25-09-2018 (Shift-I)"
+    ],
+    "explanation": "भारत का पहला डिफेंस इनक्यूबेटर्स जो भारत का मिसाइल विकास केन्द्र है, वह हैदराबाद में स्थापित होगा। इनक्यूबेटर को टी–हब पर रखा जाएगा, जिसे पहले ही स्टार्ट–अप और रचनात्मक विचारों के पोषण के लिए देश के प्रमुख केन्द्रों में मान्यता मिल चुकी है।",
+    "times_asked": 1,
+    "years": [
+      "2018"
+    ],
+    "id": "d489f1f98d",
+    "seq": 156
+  },
+  "experiment_format": "visual_mystery",
+  "primary_objective": "save",
+  "series_next_topic": "भारत के पहले निजी तौर पर विकसित पूर्णतः क्रायोजेनिक रॉकेट इंजन का नाम क्या है?",
+  "series_next_hash": "db9af1bb5024bdb82548544df1eda4f0367b554281f00d305b37faa5526afa98",
+  "topic_policy": "evidence_cohort_v2",
+  "topic_priority": 1.0,
+  "recall": "याद रखें: हैदराबाद।",
+  "share_card": {
+    "kind": "exam_confusion",
+    "recipient": "परीक्षा की तैयारी कर रहे दोस्त",
+    "benefit": "हैदराबाद में पहला रक्षा इनक्यूबेटर स्थापित होगा",
+    "cta": "दोस्त को यह बताओ"
+  },
+  "share_reason": "परीक्षा में अक्सर शहर का भ्रम रहता है",
+  "scenes": [
+    {
+      "label": "पहले अपना जवाब चुनिए",
+      "quiz_options": [
+        "A: हैदराबाद",
+        "B: बेंगलूरू"
+      ],
+      "speech": "भारत का प्रथम रक्षा इनक्यूबेटर्स किस शहर में स्थापित होगा? दृश्य देखिए।",
+      "role": "hook",
+      "revision_card": false,
+      "teaches": "प्रश्न पहचान",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "व्यक्ति मानचित्र पर दो शहरों के निशान दिखाते हुए चलता है"
+      }
+    },
+    {
+      "label": "कमेंट में लिखिए: A या B?",
+      "quiz_options": [
+        "A: हैदराबाद",
+        "B: बेंगलूरू"
+      ],
+      "speech": "दो सेकंड: A या B?",
+      "role": "challenge",
+      "revision_card": false,
+      "teaches": "विकल्प विचार",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "व्यक्ति मानचित्र पर दो शहरों के निशान दिखाते हुए चलता है"
+      }
+    },
+    {
+      "label": "सही उत्तर",
+      "quiz_options": null,
+      "speech": "सही उत्तर है: हैदराबाद।",
+      "role": "reveal",
+      "revision_card": false,
+      "teaches": "उत्तर पहचान",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "व्यक्ति हैदराबाद के निशान पर चलता है"
+      }
+    },
+    {
+      "label": "तथ्य समझिए",
+      "quiz_options": null,
+      "speech": "भारत का पहला डिफेंस इनक्यूबेटर्स जो भारत का मिसाइल विकास केन्द्र है, वह हैदराबाद में स्थापित होगा।",
+      "role": "explain",
+      "revision_card": false,
+      "teaches": "कारण समझ",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "institution",
+        "visible_action": "हैदराबाद के निशान पर इंक्यूबेटर भवन ऊपर उठता है"
+      }
+    },
+    {
+      "label": "खुद को जाँचिए",
+      "quiz_options": null,
+      "speech": "अब बिना देखे बताइए।",
+      "role": "transfer",
+      "revision_card": false,
+      "teaches": "स्मृति परीक्षण",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "व्यक्ति हैदराबाद और बेंगलूरू के बीच चलकर तुलना करता है"
+      }
+    },
+    {
+      "label": "रिवीजन कार्ड",
+      "quiz_options": null,
+      "speech": "याद रखें: हैदराबाद।",
+      "role": "revision",
+      "revision_card": true,
+      "teaches": "स्मरण",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "स्थिर मानचित्र पर हैदराबाद का निशान"
+      }
+    }
+  ]
+}
