@@ -1,0 +1,43 @@
+{
+  "answer_correct": true,
+  "visual_relevance": false,
+  "hindi_readable": true,
+  "pronunciation_correct": true,
+  "audio_visual_match": true,
+  "answer_reveal_timing": true,
+  "revision_card_readable": true,
+  "reasons": [
+    "The explanation scene uses a generic sliding WTO gear animation that fails to visually explain GATT or how WTO replaced GATT."
+  ],
+  "observed_answer": "1995 (Option A)",
+  "scene_evidence": [
+    {
+      "scene": 1,
+      "observation": "Hook scene displaying question 'भारत डब्ल्यू.टी.ओ. (WTO) का सदस्य कब से है?' with choices A (1995) and B (1997)."
+    },
+    {
+      "scene": 2,
+      "observation": "Countdown scene showing a 2-second timer asking viewers to comment A or B."
+    },
+    {
+      "scene": 3,
+      "observation": "Answer reveal scene confirming correct answer is 1995."
+    },
+    {
+      "scene": 4,
+      "observation": "Explanation scene stating GATT replacement while showing a generic 3D gear labeled WTO moving along a rail."
+    },
+    {
+      "scene": 5,
+      "observation": "Self-test scene asking to answer without looking while a 3D coin labeled 'व्यापार' rolls along a rail."
+    },
+    {
+      "scene": 6,
+      "observation": "Revision card frame displaying 'याद रखें: 1995!' over a 3D book icon."
+    }
+  ],
+  "sha256": "42584d3edece61fdc16840a1ef5fd45964964c1e0b51149860a286ca4a9a1ed2",
+  "reviewer": "gemini-3.6-flash / actual rendered video and audio",
+  "reviewed_at": "2026-11-08T15:37:52.455767+00:00",
+  "review_type": "automated_multimodal"
+}

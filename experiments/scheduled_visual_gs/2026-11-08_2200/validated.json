@@ -1,0 +1,9 @@
+{
+  "renderer_version": "rich_3d_v1",
+  "date": "2026-11-08",
+  "sha256": "42584d3edece61fdc16840a1ef5fd45964964c1e0b51149860a286ca4a9a1ed2",
+  "duration": 25.333333,
+  "voice": "Edge / Swara female fallback",
+  "studio_output": "experiments/gs_animation_studio/new_topic/42495100398",
+  "built_on_github": true
+}
