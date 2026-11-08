@@ -1,6 +1,6 @@
 {
  "next_seq": 185,
- "episode": 184,
+ "episode": 185,
  "posted": [
   "684d76bcbc",
   "6bb20b4a07",
@@ -609,9 +609,9 @@
   "494dbdcb7a": "Answer outdated: ministry renamed to Education Ministry in 2020"
  },
  "last": {
-  "seq": 2386,
-  "id": "fe4f578be9",
-  "time": "2026-11-07 16:30",
+  "seq": 767,
+  "id": "a4a097fd0b",
+  "time": "2026-11-08 01:30",
   "format": "list"
  },
  "carousel_queue": [
