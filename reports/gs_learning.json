@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-08T01:06:53.626599+00:00",
+  "generated_at": "2026-11-08T06:44:39.584090+00:00",
   "windows": {
     "24h": [
       {
@@ -38,7 +38,7 @@
       {
         "subject": null,
         "format": "legacy_unclassified",
-        "reels": 30,
+        "reels": 32,
         "metrics": {
           "shares_per_1000": {
             "mean": 1.496998549693005,
@@ -271,7 +271,7 @@
       {
         "subject": null,
         "format": "legacy_unclassified",
-        "reels": 34,
+        "reels": 36,
         "metrics": {
           "shares_per_1000": {
             "mean": 1.0037876412666085,
@@ -1061,6 +1061,39 @@
         },
         "decision": "collect_more",
         "automatic_scale": false
+      },
+      {
+        "subject": "Traditional GK",
+        "format": "exam_trap",
+        "reels": 1,
+        "metrics": {
+          "shares_per_1000": {
+            "mean": null,
+            "n": 0
+          },
+          "saves_per_1000": {
+            "mean": null,
+            "n": 0
+          },
+          "average_watch_time": {
+            "mean": null,
+            "n": 0
+          },
+          "three_second_rate": {
+            "mean": null,
+            "n": 0
+          },
+          "retention": {
+            "mean": null,
+            "n": 0
+          },
+          "net_followers": {
+            "mean": null,
+            "n": 0
+          }
+        },
+        "decision": "collect_more",
+        "automatic_scale": false
       }
     ]
   },
@@ -1070,7 +1103,7 @@
       {
         "subject": null,
         "format": "legacy_unclassified",
-        "reels": 34,
+        "reels": 36,
         "shares_per_1000": 1.0037876412666085,
         "saves_per_1000": 3.2037483464282768,
         "average_watch_time": 4.683058823529413
@@ -1096,7 +1129,7 @@
       "mean_saves_per_1000": 4.556519072200139
     },
     "previous": {
-      "reels": 6,
+      "reels": 8,
       "best": "18174696019395674",
       "weakest": "18136094323708858",
       "basis": "24h share/save rate; hypotheses only",
