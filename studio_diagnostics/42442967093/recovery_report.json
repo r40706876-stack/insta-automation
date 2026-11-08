@@ -1,0 +1,26 @@
+{
+  "topic": "new_topic",
+  "run_id": "42442967093",
+  "attempt": "1",
+  "status": "failed",
+  "events": [
+    {
+      "stage": "plan_new_topic",
+      "status": "started",
+      "log": "0_plan_new_topic.log"
+    },
+    {
+      "stage": "plan_new_topic",
+      "status": "failed",
+      "code": "process_failed",
+      "detail": "Plan repair 1 Audit: ['All first five scenes contain causal movement.', 'Question/challenge scene does not reveal correct answer early.', 'Answer matches evidence (Godavari).', 'Novel topic not previously covered.', 'Revision scene is static as permitted.']\nPlan repair 2 Audit: ['Scene 4 visual_action mentions Narmada and Krishna but objects do not represent these rivers', 'Scene 5 visual_action expects a revision card but only a map object is provided']\nTraceback (most recent call last):\n  File \"/home/runner/work/insta-automation/insta-automation/gs_animation_studio/planner.py\", line 385, in <module>\n    generate(sys.argv[1],sys.argv[2],os.getenv('STUDIO_TOPIC_TEXT','').strip(),os.getenv('STUDIO_SUBJECT','auto'),os.getenv('STUDIO_REFERENCE_TEXT',''))\n  File \"/home/runner/work/insta-automation/insta-automation/gs_animation_studio/planner.py\", line 320, in generate\n    if locked and len(p.get('scenes',[]))==6:\n                      ^^^^^\nAttributeError: 'list' object has no attribute 'get'\n"
+    }
+  ],
+  "repairs": [],
+  "injected_failures": [],
+  "instagram_publish": false,
+  "failure": {
+    "type": "StageError",
+    "message": "plan_new_topic: process_failed"
+  }
+}

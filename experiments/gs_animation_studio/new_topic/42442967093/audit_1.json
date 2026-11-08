@@ -1,0 +1,34 @@
+{
+  "ok": false,
+  "reasons": [
+    "Scene 4 visual_action mentions Narmada and Krishna but objects do not represent these rivers",
+    "Scene 5 visual_action expects a revision card but only a map object is provided"
+  ],
+  "novel_topic": true,
+  "scene_checks": [
+    {
+      "scene": 0,
+      "mechanism_matches": true
+    },
+    {
+      "scene": 1,
+      "mechanism_matches": true
+    },
+    {
+      "scene": 2,
+      "mechanism_matches": true
+    },
+    {
+      "scene": 3,
+      "mechanism_matches": true
+    },
+    {
+      "scene": 4,
+      "mechanism_matches": false
+    },
+    {
+      "scene": 5,
+      "mechanism_matches": false
+    }
+  ]
+}
