@@ -1,45 +1,45 @@
 {
-  "observed_at": "2026-11-09T12:11:18.960023+00:00",
+  "observed_at": "2026-11-09T15:18:45.297447+00:00",
   "reels": 43,
   "status": "partial",
   "unavailable": [
     {
-      "media_id": "18130269517880175",
+      "media_id": "17975521359172204",
       "metric": "views",
       "status": "unavailable"
     },
     {
-      "media_id": "18130269517880175",
+      "media_id": "17975521359172204",
       "metric": "reach",
       "status": "unavailable"
     },
     {
-      "media_id": "18130269517880175",
+      "media_id": "17975521359172204",
       "metric": "saved",
       "status": "unavailable"
     },
     {
-      "media_id": "18130269517880175",
+      "media_id": "17975521359172204",
       "metric": "shares",
       "status": "unavailable"
     },
     {
-      "media_id": "18031668539861036",
+      "media_id": "18130269517880175",
       "metric": "views",
       "status": "unavailable"
     },
     {
-      "media_id": "18031668539861036",
+      "media_id": "18130269517880175",
       "metric": "reach",
       "status": "unavailable"
     },
     {
-      "media_id": "18031668539861036",
+      "media_id": "18130269517880175",
       "metric": "saved",
       "status": "unavailable"
     },
     {
-      "media_id": "18031668539861036",
+      "media_id": "18130269517880175",
       "metric": "shares",
       "status": "unavailable"
     },
@@ -104,22 +104,22 @@
       "status": "unavailable"
     },
     {
-      "media_id": "18118174685022247",
+      "media_id": "18371987620300192",
       "metric": "views",
       "status": "unavailable"
     },
     {
-      "media_id": "18118174685022247",
+      "media_id": "18371987620300192",
       "metric": "reach",
       "status": "unavailable"
     },
     {
-      "media_id": "18118174685022247",
+      "media_id": "18371987620300192",
       "metric": "saved",
       "status": "unavailable"
     },
     {
-      "media_id": "18118174685022247",
+      "media_id": "18371987620300192",
       "metric": "shares",
       "status": "unavailable"
     },
@@ -200,33 +200,31 @@
     },
     {
       "media_id": "17939236035127153",
-      "metric": "shares",
-      "status": "unavailable"
-    },
-    {
-      "media_id": "18086692928708848",
-      "metric": "views",
-      "status": "unavailable"
-    },
-    {
-      "media_id": "18086692928708848",
-      "metric": "reach",
-      "status": "unavailable"
-    },
-    {
-      "media_id": "18086692928708848",
-      "metric": "saved",
-      "status": "unavailable"
-    },
-    {
-      "media_id": "18086692928708848",
       "metric": "shares",
       "status": "unavailable"
     }
   ],
   "diagnostics": [
     {
-      "endpoint": "18130269517880175/insights",
+      "endpoint": "17975521359172204/insights",
+      "http_status": 400,
+      "code": 10,
+      "type": "OAuthException"
+    },
+    {
+      "endpoint": "17975521359172204/insights",
+      "http_status": 400,
+      "code": 10,
+      "type": "OAuthException"
+    },
+    {
+      "endpoint": "17975521359172204/insights",
+      "http_status": 400,
+      "code": 10,
+      "type": "OAuthException"
+    },
+    {
+      "endpoint": "17975521359172204/insights",
       "http_status": 400,
       "code": 10,
       "type": "OAuthException"
@@ -250,25 +248,7 @@
       "type": "OAuthException"
     },
     {
-      "endpoint": "18031668539861036/insights",
-      "http_status": 400,
-      "code": 10,
-      "type": "OAuthException"
-    },
-    {
-      "endpoint": "18031668539861036/insights",
-      "http_status": 400,
-      "code": 10,
-      "type": "OAuthException"
-    },
-    {
-      "endpoint": "18031668539861036/insights",
-      "http_status": 400,
-      "code": 10,
-      "type": "OAuthException"
-    },
-    {
-      "endpoint": "18031668539861036/insights",
+      "endpoint": "18130269517880175/insights",
       "http_status": 400,
       "code": 10,
       "type": "OAuthException"
@@ -346,25 +326,25 @@
       "type": "OAuthException"
     },
     {
-      "endpoint": "18118174685022247/insights",
+      "endpoint": "18371987620300192/insights",
       "http_status": 400,
       "code": 10,
       "type": "OAuthException"
     },
     {
-      "endpoint": "18118174685022247/insights",
+      "endpoint": "18371987620300192/insights",
       "http_status": 400,
       "code": 10,
       "type": "OAuthException"
     },
     {
-      "endpoint": "18118174685022247/insights",
+      "endpoint": "18371987620300192/insights",
       "http_status": 400,
       "code": 10,
       "type": "OAuthException"
     },
     {
-      "endpoint": "18118174685022247/insights",
+      "endpoint": "18371987620300192/insights",
       "http_status": 400,
       "code": 10,
       "type": "OAuthException"
@@ -461,30 +441,6 @@
     },
     {
       "endpoint": "17939236035127153/insights",
-      "http_status": 400,
-      "code": 10,
-      "type": "OAuthException"
-    },
-    {
-      "endpoint": "18086692928708848/insights",
-      "http_status": 400,
-      "code": 10,
-      "type": "OAuthException"
-    },
-    {
-      "endpoint": "18086692928708848/insights",
-      "http_status": 400,
-      "code": 10,
-      "type": "OAuthException"
-    },
-    {
-      "endpoint": "18086692928708848/insights",
-      "http_status": 400,
-      "code": 10,
-      "type": "OAuthException"
-    },
-    {
-      "endpoint": "18086692928708848/insights",
       "http_status": 400,
       "code": 10,
       "type": "OAuthException"

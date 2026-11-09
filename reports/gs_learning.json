@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-09T12:11:27.355034+00:00",
+  "generated_at": "2026-11-09T15:18:54.377643+00:00",
   "windows": {
     "24h": [
       {
@@ -38,7 +38,7 @@
       {
         "subject": null,
         "format": "legacy_unclassified",
-        "reels": 40,
+        "reels": 41,
         "metrics": {
           "shares_per_1000": {
             "mean": 1.496998549693005,
@@ -603,7 +603,7 @@
       {
         "subject": null,
         "format": "legacy_unclassified",
-        "reels": 52,
+        "reels": 53,
         "metrics": {
           "shares_per_1000": {
             "mean": 1.7952368463342752,
@@ -1129,7 +1129,7 @@
       "mean_saves_per_1000": 5.23999693303016
     },
     "previous": {
-      "reels": 15,
+      "reels": 16,
       "best": "18174696019395674",
       "weakest": "18136094323708858",
       "basis": "24h share/save rate; hypotheses only",
