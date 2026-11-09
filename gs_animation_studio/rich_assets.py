@@ -526,12 +526,16 @@ def _bubbles(parent,x,z0,z1,n,m,r=.05,spread=.18):
    u=(q*speed+ph)%1;b.location=(x0+dx+.03*math.sin(u*9),-.2,z0+(z1-z0)*u);key(b,'location',frame)
  return step
 
+def _glass_outline(name,parent,cx,r,z0,z1,m,n=10):
+ ring=lambda z:[(cx+r*math.cos(a),-.25+r*math.sin(a)*.35,z) for a in [k*math.tau/32 for k in range(33)]]
+ line(name+' rim',ring(z1),.025,m,parent);line(name+' base',ring(z0),.025,m,parent)
+ for side in (-1,1):line(name+' side',[(cx+side*r,-.25,z0),(cx+side*r,-.25,z1)],.03,m,parent)
 def beaker_asset(parent,spec):
  acid=spec.get('variant','acid')!='base'
  glass=mat('Beaker glass',(.78,.93,1.0));liq=mat('Beaker liquid',(.75,.85,.9))
- cyl('Beaker wall',(0,.05,1.1),.78,1.6,glass,parent);cyl('Beaker rim',(0,.05,1.92),.84,.06,white,parent)
- cyl('Liquid',(0,-.02,.85),.72,1.05,liq,parent)
- strip_m=mat('Litmus strip',(.15,.35,.95) if acid else (.9,.2,.2));strip=box('Litmus paper',(.25,-.45,2.6),(.18,.03,.9),strip_m,parent)
+ _glass_outline('Beaker',parent,0,.8,.3,1.95,glass)
+ cyl('Liquid',(0,0,.85),.74,1.1,liq,parent)
+ strip_m=mat('Litmus strip',(.15,.35,.95) if acid else (.9,.2,.2));strip=box('Litmus paper',(.3,-.75,2.6),(.22,.03,.95),strip_m,parent)
  bub=_bubbles(parent,-.25,.4,1.3,7,mat('Liquid bubble',(.95,.98,1)))
  to=(.92,.15,.12,1) if acid else (.15,.35,.95,1)
  def anim(q,frame):
@@ -540,14 +544,15 @@ def beaker_asset(parent,spec):
   start=(.15,.35,.95,1) if acid else (.9,.2,.2,1)
   strip_m.diffuse_color=tuple(start[i]+(to[i]-start[i])*c for i in range(4));strip_m.keyframe_insert(data_path='diffuse_color',frame=frame)
   bub(q,frame)
- return {'anim':anim,'labels':[('नीला लिटमस → लाल' if acid else 'लाल लिटमस → नीला',(.25,0,2.35)),('अम्ल' if acid else 'क्षार',(-.5,0,.6))]}
+ return {'anim':anim,'labels':[('नीला लिटमस लाल हुआ' if acid else 'लाल लिटमस नीला हुआ',(.3,0,2.4)),('अम्ल' if acid else 'क्षार',(-.5,0,.6))]}
 
 def test_tube_asset(parent,spec):
  glass=mat('Tube glass',(.8,.94,1.0));liq=mat('Reaction liquid',(.35,.85,.5))
- pivot=empty('Tube tilt',parent);pivot.location=(0,0,.9);pivot.rotation_euler.y=-.25
- cyl('Test tube',(0,.05,.9),.28,1.9,glass,pivot);sphere('Tube bottom',(0,.05,-.05),.28,glass,pivot);cyl('Tube liquid',(0,-.02,.25),.24,.6,liq,pivot)
- box('Stand base',(.9,.3,.05),(1.2,.6,.1),dark,parent)
- cyl('Burner',( .0,0,-.15),.22,.3,dark,parent);flame=cone('Flame',(0,-.05,.18),.13,.45,mat('Flame',(1,.55,.1)),parent)
+ pivot=empty('Tube tilt',parent);pivot.location=(0,0,1.25);pivot.rotation_euler.y=-.25
+ for x in (-.28,.28):line('Tube wall',[(x,-.25,-.05),(x,-.25,1.85)],.025,glass,pivot)
+ line('Tube bottom',[(.28*math.cos(a),-.25,-.05-.28*math.sin(a)) for a in [k*math.pi/16 for k in range(17)]],.025,glass,pivot)
+ cyl('Tube liquid',(0,-.1,.2),.25,.6,liq,pivot);sphere('Liquid bottom',(0,-.1,-.05),.25,liq,pivot)
+ cyl('Burner',(0,0,.35),.24,.55,dark,parent);flame=cone('Flame',(0,-.1,.85),.16,.5,mat('Flame',(1,.55,.1)),parent)
  bub=_bubbles(pivot,0,.0,1.75,8,mat('Gas bubble',(.95,.98,1)),r=.045,spread=.25)
  def anim(q,frame):
   s=1+.18*math.sin(q*math.tau*6);flame.scale=(1,1,s);key(flame,'scale',frame);bub(q,frame,speed=2.5)
@@ -598,23 +603,24 @@ PLANETS=[('बुध',(.65,.6,.55),.07,.55,4.1),('शुक्र',(.95,.75,.4),
 def solar_system_asset(parent,spec):
  sys_=empty('Solar plane',parent);sys_.location=(0,0,1.35);sys_.rotation_euler.x=1.15
  sphere('Sun',(0,0,0),.32,mat('Sun',(1,.72,.12)),sys_);pl=[]
- for name,col,r,d,sp in PLANETS:
+ for name,col,r,d,sp in [(n,c,r,d*.86,sp) for n,c,r,d,sp in PLANETS]:
   line('Orbit',[(d*math.cos(a),d*math.sin(a),0) for a in [j*math.tau/64 for j in range(65)]],.008,mat('Orbit line',(.45,.55,.65)),sys_)
   piv=empty('Orbit pivot',sys_);p=sphere(name,(d,0,0),r,mat('Planet '+name,col),piv);pl.append((piv,sp,name,d))
   if name=='शनि':ring=cyl('Saturn ring',(d,0,0),r*1.9,.01,mat('Ring',(.85,.78,.6)),piv);ring.rotation_euler.x=.4
  earth=[x for x in pl if x[2]=='पृथ्वी'][0]
  def anim(q,frame):
-  for piv,sp,name,d in pl:piv.rotation_euler.z=(.6*sp**.5+.05)*q*math.tau*2+d;key(piv,'rotation_euler',frame)
+  for i,(piv,sp,name,d) in enumerate(pl):piv.rotation_euler.z=(.6*sp**.5+.05)*q*math.tau*2+i*2.4;key(piv,'rotation_euler',frame)
  return {'anim':anim,'labels':[('सूर्य',(0,0,1.35+.35))]}
 
 def earth_layers_asset(parent,spec):
- cz=1.35;layers=[('आंतरिक कोर',.42,(1,.92,.55)),('बाहरी कोर',.82,(1,.62,.15)),('मेंटल',1.42,(.85,.32,.12)),('भूपर्पटी',1.55,(.45,.3,.18))]
+ cz=1.45;layers=[('आंतरिक कोर',.32,(1,.92,.55)),('बाहरी कोर',.62,(1,.62,.15)),('मेंटल',1.05,(.85,.32,.12)),('भूपर्पटी',1.17,(.45,.3,.18))]
  objs=[]
  for i,(n,r,col) in enumerate(reversed(layers)):
   o=_solid2d(n,[(math.cos(a)*r,math.sin(a)*r) for a in [j*math.tau/56 for j in range(56)]],.1+.04*i,mat('Layer '+n,col),parent);o.location=(0,-.05*i,cz);objs.append(o)
  def anim(q,frame):
   for i,o in enumerate(objs):s=ease((q-i*.15)/.25);s=max(.001,s);o.scale=(s,s,1);key(o,'scale',frame)
- return {'anim':anim,'labels':[(n,(r*.72,0,cz+r*.6 if i%2 else cz-r*.55)) for i,(n,r,c) in enumerate(layers)]}
+ mids=[0,.47,.84,1.11];ang=[0,.6,-.5,1.1]
+ return {'anim':anim,'labels':[(n,(mids[i]*math.cos(ang[i]),0,cz+mids[i]*math.sin(ang[i]))) for i,(n,r,c) in enumerate(layers)]}
 
 def volcano_asset(parent,spec):
  rock=mat('Volcano rock',(.38,.25,.18));lava=mat('Lava',(1,.35,.05))
