@@ -214,9 +214,16 @@ def overlay(im,i):
  if k==len(plan['scenes'])-1 and age>=max(0,meta['seconds'][k]-2) and card.get('cta'):
   d.rounded_rectangle((36,305,636,365),12,fill=(17,63,65),outline=GOLD,width=2)
   fit(d,(336,335),card['cta'],26,GOLD,570)
- # Phrase timing is approximate for Gemini; it is not falsely labelled word-aligned.
+ # Use measured word/phrase timestamps when the TTS stage provides them;
+ # otherwise keep the existing proportional fallback (not falsely word-aligned).
  groups=phrases(sc['speech'])
- # Time each phrase by its share of words, not equal slices.
+ timed=meta.get('phrase_timestamps',[])
+ if isinstance(timed,list) and k<len(timed) and isinstance(timed[k],list):
+  for item in timed[k]:
+   if isinstance(item,dict) and isinstance(item.get('start'),(int,float)) and isinstance(item.get('end'),(int,float)) and item['start']<=age<item['end'] and item.get('text'):
+    groups=(str(item['text']),)
+    break
+ # Fallback: time each phrase by its share of words, not equal slices.
  sizes=[len(g.split()) for g in groups];total_w=sum(sizes);acc=0;phrase=groups[-1]
  for g,n in zip(groups,sizes):
   acc+=n
