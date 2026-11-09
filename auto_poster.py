@@ -4155,6 +4155,19 @@ def pick_list_items(bank, st):
     # zyada baar poochhe gaye + chhote sawal pehle: student ko "arre, ye to aana chahiye!" lage
     pool = sorted((q for q in pending if q["subject"] == subject),
                   key=lambda q: (-int(q.get("times_asked") or 1), int(q["seq"])))
+    # Nov 2026 analytics: jude hue sawal (ek hi topic) wali reels zyada ruki -> 7 sawal ek hi chapter/upvishay se.
+    # Kram: sabse zyada poochha gaya (jaana-pehchana) pehle -> kam poochha gaya (kathin) baad me.
+    # Kisi chapter me 5 se kam chhote sawal bache hon to purana tareeka (poora subject).
+    groups = {}
+    for q in pool:
+        if list_ok(q):
+            groups.setdefault((q.get("chapter") or "", q.get("sub") or ""), []).append(q)
+    best = max(groups.values(), key=lambda g: (len(g) >= LIST_N + 2, len(g) >= 5,
+                                               min(int(x["seq"]) for x in g) * -1), default=[])
+    if len(best) >= 5:
+        print("  7 PYQ topic:", " / ".join(x for x in (best[0].get("chapter"), best[0].get("sub")) if x))
+        ids = {q["id"] for q in best}
+        pool = best + [q for q in pool if q["id"] not in ids]   # AI ne kuch chhode to hi subject ke baaki sawal
     for q in (today if subject == "TODAY" else pool):
         if subject != "TODAY" and (q["subject"] != subject or not list_ok(q)):
             continue
@@ -4164,9 +4177,13 @@ def pick_list_items(bank, st):
             continue
         qq = clean_text((ai or {}).get("question") or q["question"])
         aa = clean_text(((ai or {}).get("options") or {}).get(q["answer"]) or q["options"][q["answer"]])
+        if any(aa == it["a"] for it in items):          # ek topic me ek hi jawab dobara (jaise 2 baar 'राष्ट्रपति') -> chhodo
+            continue
         items.append({"id": q["id"], "seq": q["seq"], "q": qq, "a": aa, "n": int(q.get("times_asked") or 1)})
         if len(items) >= LIST_N:
             break
+        if len(best) >= 5 and q["id"] == best[-1]["id"] and len(items) >= 5:
+            break                                       # topic ke 5-6 sahi sawal kaafi; doosre topic se mat milao
     return subject, items
 
 
