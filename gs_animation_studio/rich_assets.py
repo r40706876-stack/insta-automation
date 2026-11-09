@@ -141,7 +141,8 @@ def regional_bounds(spec):
   mid=(ymin+ymax)/2;ymin,ymax=mid-7.5,mid+7.5
   if ymin<8.0:ymin,ymax=8.0,23.0
   if ymax>31.5:ymin,ymax=16.5,31.5
- return (67.8,ymin,90.6,ymax)
+ lon=[p[0] for p in pts];xmax=min(97.6,max(90.6,max(lon)+1.5))
+ return (67.8,ymin,xmax,ymax)
 def flat_fill(name,ring,point,m,parent,depth):
  c=bpy.data.curves.new(name,'CURVE');c.dimensions='2D';c.fill_mode='BOTH';sp=c.splines.new('POLY');sp.points.add(len(ring)-1)
  for v,p in zip(sp.points,ring):p=point(p);v.co=(p.x,p.z,0,1)
@@ -226,7 +227,7 @@ def map_asset(parent,spec):
   for ll in spec.get('latitude_lines',[]):
    la=float(ll['lat'])
    if not ymin<la<ymax:continue
-   c=line('Latitude line',[point((xmin+.3,la),-.16),point((xmax-.3,la),-.16)],.022/scale,red,parent);c.data.bevel_factor_end=.004;lat_lines.append(c)
+   c=line('Latitude line',[point((xmin+.3,la),-.45),point((xmax-.3,la),-.45)],.03/scale,mat('Latitude line',(1,.97,.85)),parent);c.data.bevel_factor_end=.004;lat_lines.append(c)
    if ll.get('label'):context.append((str(ll['label']),point((xmin+2.2,la+.6),-.18)))
  else:
   span=max(xmax-xmin,(ymax-ymin)*1.3);factor=3.5/span
@@ -430,7 +431,9 @@ def mirror_asset(parent,spec):
   zz=cz+hz;hx=cx+sgn*math.sqrt(max(0,Rr*Rr-hz*hz))
   if convex:dx,dz=hx-fx,zz-cz
   else:dx,dz=fx-hx,cz-zz
-  k=(-1.9-hx)/dx;paths.append([(-1.9,zz),(hx,zz),(-1.9,zz+dz*k)])
+  k=(-1.9-hx)/dx
+  if abs(dz*k)>1.15:k=math.copysign(1.15,dz*k)/dz if dz else k
+  paths.append([(-1.9,zz),(hx,zz),(hx+dx*k,zz+dz*k)])
  rays=_rays(parent,paths,_ray_mat());focus=sphere('Focus F',(fx,-.35,cz),.09,red,parent);focus.scale=(0,0,0)
  def anim(q,frame):
   _seq(rays,q,frame);s=ease((q-.55)/.2);focus.scale=(s,s,s);key(focus,'scale',frame)

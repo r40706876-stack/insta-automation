@@ -45,7 +45,8 @@ def asset(spec,parent):
   if kind=='soldier':
    h=details['human'];cyl('Helmet',(0,0,.23),.23,.15,m,h['head']);box('Shield',(-.3,-.2,.25),(.5,.1,.65),gold,h['body'])
  elif kind=='map':details.update(rich.map_asset(g,spec))
- elif kind in rich.PHYSICS_BUILDERS:spec['_m']=m;details.update(rich.PHYSICS_BUILDERS[kind](g,spec))
+ elif kind in rich.PHYSICS_BUILDERS:
+  inner=empty(spec['id']+' diagram',g);inner.scale=(1.22,1.22,1.22);inner.location.z=-.4;spec['_m']=m;details.update(rich.PHYSICS_BUILDERS[kind](inner,spec))
  elif kind=='ocean':
   # Ocean is a diorama; its mesh and moving foam are scaled together.
   details.update(rich.ocean_asset(g))
@@ -128,7 +129,8 @@ stage=empty('Stage');box('Ground',(0,0,-.18),(8.5,5,.25),mat('Stage blue',(.025,
 sets=[]
 for k,sc in enumerate(plan['scenes']):
  group=empty('Set '+str(k));group.location.x=k*30
- sc['_environment']=rich.environment(sc.get('setting','neutral'),group)
+ phys=any(o['kind'] in rich.PHYSICS_BUILDERS for o in sc['objects'])
+ sc['_environment']=rich.environment('neutral' if phys else sc.get('setting','neutral'),group)
  sets.append([(o,*asset(o,group)) for o in sc['objects']])
 bpy.ops.object.camera_add();cam=bpy.context.object;cam.data.type='ORTHO';cam.data.ortho_scale=13.8;s.camera=cam
 track=[]
