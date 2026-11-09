@@ -1,0 +1,35 @@
+name: Cinematic 3D assets (Cycles, overnight)
+# Build-only: every new diagram set rendered with Cycles (glass, glow, light, perspective push-in) as a full video. Never posts.
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  render:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 340
+    strategy:
+      fail-fast: false
+      matrix:
+        set: [physics_a, physics_b, diagrams_a, diagrams_b, maps]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: ./.github/actions/gs-3d-dependencies
+      - name: Render ${{ matrix.set }}
+        env:
+          STUDIO_CINEMATIC: '1'
+          STUDIO_SAMPLES: '16'
+          PREVIEW_SET: ${{ matrix.set }}
+          PREVIEW_VIDEO: '1'
+        run: python gs_animation_studio/asset_preview.py experiments/cinematic_assets 2>&1 | grep -vE "^Fra:|Sample|Denois|Updating|Synchroniz" | tail -40
+      - name: Save
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add experiments/cinematic_assets || true
+          git diff --cached --quiet || git commit -m "Cinematic assets ${{ matrix.set }} [skip ci]"
+          for i in 1 2 3 4 5; do git pull --rebase -X theirs --autostash && git push && break; sleep $((RANDOM % 20 + 5)); done

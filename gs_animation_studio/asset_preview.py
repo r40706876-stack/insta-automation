@@ -72,7 +72,27 @@ def render(name,root,blender):
   sheet.paste(a.resize((240,427)),(k*240,0));sheet.paste(b.resize((240,427)),(k*240,427))
  return sheet,motion
 
+def render_video(name,root,blender,out_mp4):
+ """Full animation (all frames) -> Hindi labels/titles overlay -> MP4 with a soft music bed."""
+ root=Path(root)/name
+ frames_dir=root/'anim';frames_dir.mkdir(parents=True,exist_ok=True)
+ env=dict(os.environ,STUDIO_ROOT=str(root),LIBGL_ALWAYS_SOFTWARE='1');pre=['xvfb-run','-a'] if shutil.which('xvfb-run') else []
+ code="import bpy;s=bpy.context.scene;s.render.image_settings.file_format='PNG';s.render.filepath="+repr(str(frames_dir)+'/f_')+";bpy.ops.render.render(animation=True)"
+ subprocess.run(pre+[blender,'-b',str(root/'scene.blend'),'-t','0','--python-expr',code],env=env,check=True,timeout=6*3600)
+ import importlib.util;os.environ['STUDIO_ROOT']=str(root);spec=importlib.util.spec_from_file_location('compose_video_'+name,BASE/'compose_dynamic.py');comp=importlib.util.module_from_spec(spec);spec.loader.exec_module(comp)
+ files=sorted(frames_dir.glob('f_*.png'));(root/'ov').mkdir(exist_ok=True)
+ for i,f in enumerate(files):comp.overlay(Image.open(f).convert('RGB'),i).save(root/'ov'/f'{i:05d}.jpg',quality=94)
+ import wave;SR=44100;T=len(files)/24;t=np.arange(int(SR*T))/SR;a=.05*np.sin(2*np.pi*110*t)*(1+.5*np.sin(2*np.pi*.5*t))+.03*np.sin(2*np.pi*165*t)
+ with wave.open(str(root/'a.wav'),'w') as wf:wf.setnchannels(1);wf.setsampwidth(2);wf.setframerate(SR);wf.writeframes((np.clip(a,-1,1)*32767).astype(np.int16).tobytes())
+ subprocess.run(['ffmpeg','-y','-v','error','-framerate','24','-i',str(root/'ov'/'%05d.jpg'),'-i',str(root/'a.wav'),'-c:v','libx264','-pix_fmt','yuv420p','-crf','19','-c:a','aac','-shortest','-movflags','+faststart',str(out_mp4)],check=True)
+
 if __name__=='__main__':
+ only=os.getenv('PREVIEW_SET')
+ if only:
+  out=Path(sys.argv[1]);out.mkdir(parents=True,exist_ok=True);blender=os.getenv('BLENDER_BIN','/tmp/blender/blender');rep={}
+  sheet,motion=render(only,'/tmp/asset-preview',blender);sheet.save(out/f'{only}.jpg',quality=90);rep['motion']=motion
+  if os.getenv('PREVIEW_VIDEO')=='1':render_video(only,'/tmp/asset-preview',blender,out/f'{only}.mp4');rep['video']=True
+  (out/f'{only}.json').write_text(json.dumps(rep,indent=2));print(only,rep);raise SystemExit(0)
  out=Path(sys.argv[1] if len(sys.argv)>1 else 'experiments/asset_preview');out.mkdir(parents=True,exist_ok=True);report={}
  for name in SETS:
   try:

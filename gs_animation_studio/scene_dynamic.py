@@ -7,8 +7,24 @@ R=Path(os.environ['STUDIO_ROOT']);plan=json.loads((R/'recipe.json').read_text())
 bpy.ops.object.select_all(action='SELECT');bpy.ops.object.delete(use_global=False)
 s=bpy.context.scene;s.render.engine='BLENDER_WORKBENCH';s.render.resolution_x=720;s.render.resolution_y=1280;s.render.resolution_percentage=100;s.render.fps=FPS;s.display.render_aa=os.getenv('STUDIO_RENDER_AA','8')
 sh=s.display.shading;sh.light='STUDIO';sh.color_type='MATERIAL';sh.show_shadows=True;sh.show_cavity=True;sh.cavity_type='BOTH';sh.show_specular_highlight=True;sh.show_object_outline=True;sh.background_type='WORLD';s.world.color=(.018,.039,.063);s.view_settings.view_transform='Standard'
+CINE=os.getenv('STUDIO_CINEMATIC')=='1'
+GLASS_KEYS=('glass','Optical')
+EMIT={'Light ray':7,'Spectrum':9,'Flame':12,'Lava':7,'Sun':5,'Bulb glow':0,'Light halo':5,'Latitude line':2,'White light':10,'Light inside':6,'Magma':4,'Electron':2,'Rain':1.5}
 def mat(name,color):
- m=bpy.data.materials.new(name);m.diffuse_color=(*color,1);return m
+ m=bpy.data.materials.new(name);m.diffuse_color=(*color,1)
+ if CINE:
+  m.use_nodes=True;b=m.node_tree.nodes['Principled BSDF'];b.inputs['Base Color'].default_value=(*color,1);b.inputs['Roughness'].default_value=.38
+  if any(k.lower() in name.lower() for k in GLASS_KEYS):
+   b.inputs['Transmission Weight'].default_value=1;b.inputs['Roughness'].default_value=.03;b.inputs['IOR'].default_value=1.5
+  for k,v in EMIT.items():
+   if name.startswith(k):b.inputs['Emission Color'].default_value=(*color,1);b.inputs['Emission Strength'].default_value=v
+  if name in ('Stage blue','Outline'):b.inputs['Roughness'].default_value=.16;b.inputs['Metallic'].default_value=.3
+ return m
+if CINE:
+ s.render.engine='CYCLES';s.cycles.device='CPU';s.cycles.samples=int(os.getenv('STUDIO_SAMPLES','20'));s.cycles.use_adaptive_sampling=True;s.cycles.use_denoising=True;s.cycles.denoiser='OPENIMAGEDENOISE'
+ s.cycles.max_bounces=8;s.cycles.transmission_bounces=8;s.cycles.caustics_reflective=False;s.cycles.caustics_refractive=False;s.render.use_persistent_data=True
+ s.view_settings.view_transform='AgX';s.view_settings.look='AgX - Punchy'
+ w=bpy.data.worlds.new('Cinematic sky');s.world=w;w.use_nodes=True;wn=w.node_tree;bgn=wn.nodes['Background'];bgn.inputs['Color'].default_value=(.012,.03,.06,1);bgn.inputs['Strength'].default_value=.6
 white=mat('Ivory',(.94,.93,.84));gold=mat('Gold',(.98,.66,.12));skin=mat('Skin',(.77,.49,.29));dark=mat('Outline',(.025,.045,.065));water=mat('Water',(.025,.5,.8));cyan=mat('Cyan',(.1,.82,.95));green=mat('Green',(.1,.48,.25));red=mat('Red',(.84,.14,.08))
 def empty(name,parent=None):
  o=bpy.data.objects.new(name,None);bpy.context.collection.objects.link(o);o.parent=parent;return o
@@ -131,6 +147,9 @@ for k,sc in enumerate(plan['scenes']):
  group=empty('Set '+str(k));group.location.x=k*30
  phys=any(o['kind'] in rich.PHYSICS_BUILDERS for o in sc['objects'])
  sc['_environment']=rich.environment('neutral' if phys else sc.get('setting','neutral'),group)
+ if CINE:
+  for nm,loc,en,size,col in (('Key',(-4,-6,8),1400,6,(1,.95,.88)),('Rim',(4,5,6),900,4,(.55,.78,1)),('Fill',(5,-7,3),350,5,(1,.9,.8))):
+   ld=bpy.data.lights.new(nm,'AREA');ld.energy=en;ld.size=size;ld.color=col;lo=bpy.data.objects.new(nm+' light',ld);bpy.context.collection.objects.link(lo);lo.location=(k*30+loc[0],loc[1],loc[2]);lo.rotation_euler=(Vector((k*30,0,1.2))-Vector(lo.location)).to_track_quat('-Z','Y').to_euler()
  sets.append([(o,*asset(o,group)) for o in sc['objects']])
 bpy.ops.object.camera_add();cam=bpy.context.object;cam.data.type='ORTHO';cam.data.ortho_scale=13.8;s.camera=cam
 track=[]
@@ -179,7 +198,12 @@ for frame in range(1,N+1):
   for j,el in enumerate(details.get('electrons',[])):
    a=q*math.tau*2+j*2;el.location=(math.cos(a),math.sin(a),0);el.keyframe_insert(data_path='location',frame=frame)
  cam.data.ortho_scale=(11.5 if any(sp['kind']=='map' for sp,_,_ in sets[k]) else 8.8 if len(sets[k])<=2 else 10.4 if len(sets[k])==3 else 12.0)-.12*ease(q);cam.data.keyframe_insert(data_path='ortho_scale',frame=frame)
- target=Vector((k*30,0,1.0));cam.location=target+(Vector((0,-20,0)) if any(sp['kind']=='map' for sp,_,_ in sets[k]) else ({'front':Vector((0,-20,3)), 'top':Vector((0,-.01,20)), 'oblique':Vector((3.6,-17,9.5))}['front' if any(sp['kind'] in rich.PHYSICS_BUILDERS for sp,_,_ in sets[k]) else plan['scenes'][k].get('camera_view','oblique')]));cam.rotation_euler=(target-cam.location).to_track_quat('-Z','Y').to_euler();cam.keyframe_insert(data_path='location',frame=frame);cam.keyframe_insert(data_path='rotation_euler',frame=frame)
+ target=Vector((k*30,0,1.0));_dir=(Vector((0,-20,0)) if any(sp['kind']=='map' for sp,_,_ in sets[k]) else ({'front':Vector((0,-20,3)), 'top':Vector((0,-.01,20)), 'oblique':Vector((3.6,-17,9.5))}['front' if any(sp['kind'] in rich.PHYSICS_BUILDERS for sp,_,_ in sets[k]) else plan['scenes'][k].get('camera_view','oblique')]))
+ if CINE:
+  cam.data.type='PERSP';cam.data.lens=50;S=cam.data.ortho_scale*(1-.1*ease(q));cam.location=target+_dir.normalized()*(S*50/36)+Vector((.35*math.sin(q*math.pi),0,0))
+  cam.data.dof.use_dof=True;cam.data.dof.aperture_fstop=3.2;cam.data.dof.focus_distance=(target-cam.location).length;cam.data.dof.keyframe_insert(data_path='focus_distance',frame=frame)
+ else:cam.location=target+_dir
+ cam.rotation_euler=(target-cam.location).to_track_quat('-Z','Y').to_euler();cam.keyframe_insert(data_path='location',frame=frame);cam.keyframe_insert(data_path='rotation_euler',frame=frame)
  bpy.context.view_layer.update()
  for spec,o,details in sets[k]:
   for label,point in details.get('map_markers',[]):
@@ -198,6 +222,19 @@ if cam.data.animation_data and cam.data.animation_data.action:
  for fc in cam.data.animation_data.action.fcurves:
   for key in fc.keyframe_points:key.interpolation='CONSTANT'
 s.frame_start=1;s.frame_end=N
+if CINE:
+ for m in bpy.data.materials:
+  ad=m.animation_data
+  if not (ad and ad.action and m.use_nodes):continue
+  b=m.node_tree.nodes.get('Principled BSDF')
+  frames=sorted({int(kp.co[0]) for fc in ad.action.fcurves if fc.data_path=='diffuse_color' for kp in fc.keyframe_points})
+  for f in frames:
+   col=[next((fc.evaluate(f) for fc in ad.action.fcurves if fc.data_path=='diffuse_color' and fc.array_index==i),1) for i in range(4)]
+   b.inputs['Base Color'].default_value=col;b.inputs['Base Color'].keyframe_insert('default_value',frame=f)
+   if m.name.startswith('Bulb glow'):
+    b.inputs['Emission Color'].default_value=col;b.inputs['Emission Strength'].default_value=12*max(0,col[0]-.4);b.inputs['Emission Color'].keyframe_insert('default_value',frame=f);b.inputs['Emission Strength'].keyframe_insert('default_value',frame=f)
+ s.use_nodes=True;ct=s.node_tree;ct.nodes.clear();rl=ct.nodes.new('CompositorNodeRLayers');gl=ct.nodes.new('CompositorNodeGlare');co=ct.nodes.new('CompositorNodeComposite')
+ gl.glare_type='FOG_GLOW';gl.quality='HIGH';gl.threshold=.85;gl.size=7;ct.links.new(rl.outputs['Image'],gl.inputs['Image']);ct.links.new(gl.outputs['Image'],co.inputs['Image'])
 (R/'motion.json').write_text(json.dumps(track));(R/'scene_checks.json').write_text(json.dumps({'frames':N,'fps':FPS,'actual_3d':True,'quality_version':'rich_3d_v1','articulated_people':any(sp['kind'] in ('person','soldier') for sc in sets for sp,_,_ in sc),'source_based_maps':any(sp['kind'] in ('map','planet') for sc in sets for sp,_,_ in sc),'continuous_rock_layers':any(sp['kind']=='rock_layers' for sc in sets for sp,_,_ in sc),'terrain_relief':any(sp['kind']=='mountain' for sc in sets for sp,_,_ in sc),'photo_assets':0,'distinct_sets':6,'data_driven_objects':sum(len(x) for x in sets),'schematic_not_exact_reconstruction':True},indent=2))
 bpy.ops.wm.save_as_mainfile(filepath=str(R/'scene.blend'));s.render.image_settings.file_format='FFMPEG';s.render.ffmpeg.format='MPEG4';s.render.ffmpeg.codec='H264';s.render.ffmpeg.constant_rate_factor='HIGH';s.render.filepath=str(R/'silent_3d.mp4');
 if os.getenv('STUDIO_PREVIEW_FRAME'):
