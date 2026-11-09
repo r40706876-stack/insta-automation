@@ -1,6 +1,6 @@
 {
- "next_seq": 185,
- "episode": 192,
+ "next_seq": 130,
+ "episode": 193,
  "posted": [
   "684d76bcbc",
   "6bb20b4a07",
@@ -606,7 +606,8 @@
   "7346b6c247",
   "66a0806cd8",
   "f785003a77",
-  "5c720bdba4"
+  "5c720bdba4",
+  "c8fdbf3231"
  ],
  "skipped": {
   "bdd1ce5a8b": "उत्तर कुंजी वर्तमान स्थिति के अनुसार गलत है।",
@@ -630,85 +631,13 @@
   "494dbdcb7a": "Answer outdated: ministry renamed to Education Ministry in 2020"
  },
  "last": {
-  "seq": 2524,
-  "id": "5c720bdba4",
-  "time": "2026-11-09 11:30",
-  "format": "list"
+  "seq": 129,
+  "id": "c8fdbf3231",
+  "time": "2026-11-09 14:30"
  },
- "carousel_queue": [
-  {
-   "episode": 90,
-   "subject": "Traditional GK",
-   "question": "____ भारतीय नौसेना में शामिल होने वाली पहली महिला पायलट बन गई हैं। वह जल्द ही समुद्री आवीक्षण विमान उड़ाएँगी।",
-   "options": [
-    [
-     "A",
-     "शुभांगी स्वरूप"
-    ],
-    [
-     "B",
-     "शीला स्वरूप"
-    ],
-    [
-     "C",
-     "रीता स्वरूप"
-    ],
-    [
-     "D",
-     "गीतिका स्वरूप"
-    ]
-   ],
-   "correct": "A",
-   "correct_text": "शुभांगी स्वरूप",
-   "why": "शुभांगी स्वरूप भारतीय नौसेना में शामिल होने वाली पहली महिला पायलट हैं।",
-   "tip": "पहले नाम और उपनाम दोनों याद रखें।",
-   "exams": [
-    "RRB Group D 2018"
-   ],
-   "times_asked": 1,
-   "topic": "भारतीय नौसेना"
-  },
-  {
-   "episode": 153,
-   "subject": "Physics",
-   "question": "सार्वत्रिक गुरुत्वाकर्षण नियतांक 'G' की खोज ____ ने की थी।",
-   "options": [
-    [
-     "A",
-     "एंटोनी-वॉन लेवोजियर"
-    ],
-    [
-     "B",
-     "आइज़ेक न्यूटन"
-    ],
-    [
-     "C",
-     "हेनरी कैवेंडिश"
-    ],
-    [
-     "D",
-     "जॉन डाल्टन"
-    ]
-   ],
-   "correct": "C",
-   "correct_text": "हेनरी कैवेंडिश",
-   "why": "हेनरी कैवेंडिश ने 1798 में प्रयोग द्वारा 'G' का मान ज्ञात किया था।",
-   "tip": "न्यूटन ने नियम दिया, कैवेंडिश ने G नापा।",
-   "exams": [
-    "RRB Group D 2018"
-   ],
-   "times_asked": 2,
-   "topic": "गुरुत्वाकर्षण"
-  }
- ],
- "carousel_count": 24,
+ "carousel_queue": [],
+ "carousel_count": 25,
  "recent": [
-  {
-   "id": "c1d3d5936d",
-   "seq": 251,
-   "q": "30 जून 2022 तक भारतीय संविधान में कितनी अनुसूचियां हैं?",
-   "a": "12"
-  },
   {
    "id": "4ca88633df",
    "seq": 323,
@@ -828,17 +757,23 @@
    "seq": 184,
    "q": "सार्वत्रिक गुरुत्वाकर्षण नियतांक 'G' की खोज ____ ने की थी।",
    "a": "हेनरी कैवेंडिश"
+  },
+  {
+   "id": "c8fdbf3231",
+   "seq": 129,
+   "q": "निम्नलिखित में से कौन-सी भारत की स्वदेश निर्मित और विकसित लंबी दूरी की सबसोनिक क्रूज मिसाइल है?",
+   "a": "निर्भय"
   }
  ],
  "last_loop": {
-  "media": "18003222410808345",
-  "correct": "C"
+  "media": "17973993549175091",
+  "correct": "D"
  },
  "comment_log": {
-  "media": "18003222410808345",
+  "media": "17973993549175091",
   "ok": false,
-  "error": "{'message': '(#10) Application does not have permission for this action', 'type': 'OAuthException', 'code': 10, 'fbtrace_id': 'AyY3ohwwamD3_Dt5WVeKzgX'}",
-  "time": "2026-10-30 01:30"
+  "error": "{'message': '(#10) Application does not have permission for this action', 'code': 10, 'type': 'OAuthException', 'fbtrace_id': 'AO01fbV_J5CQ8ktGl94yxlK'}",
+  "time": "2026-11-09 14:30"
  },
  "mega_used": [
   "684d76bcbc",
