@@ -27,7 +27,7 @@ def render(root,blender):
  import numpy as np
  root=Path(root).resolve();root.mkdir(parents=True,exist_ok=True)
  (root/'recipe.json').write_text(json.dumps(test_plan(),ensure_ascii=False,indent=2));(root/'audio.json').write_text(json.dumps({'seconds':[2]*6,'voice':'NONE: build-only QA fixture'}))
- for name in ('rich_assets.py','world_land.json','dandi_map.json','world_land.LICENSE','dandi_map.LICENSE','india_states.json','india_states.LICENSE'):shutil.copy(BASE/name,root/name)
+ for name in ('rich_assets.py','world_land.json','dandi_map.json','world_land.LICENSE','dandi_map.LICENSE','india_states.json','india_states.LICENSE','india_rivers.json','india_rivers.LICENSE'):shutil.copy(BASE/name,root/name)
  shutil.copy(BASE/'known_good/Mukta.ttf',root/'Mukta.ttf')
  env=dict(os.environ,STUDIO_ROOT=str(root),STUDIO_PREVIEW_FRAME='12',LIBGL_ALWAYS_SOFTWARE='1')
  prefix=['xvfb-run','-a'] if shutil.which('xvfb-run') else []

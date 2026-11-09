@@ -1,0 +1,26 @@
+name: 3D asset preview (physics + India map)
+# Build-only: renders the new physics and India-map assets and saves contact sheets in the repo. Never posts.
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  preview:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: ./.github/actions/gs-3d-dependencies
+      - name: Render previews
+        run: python gs_animation_studio/asset_preview.py experiments/asset_preview 2>&1 | tail -40
+      - name: Save previews
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add experiments/asset_preview || true
+          git diff --cached --quiet || git commit -m "3D asset preview [skip ci]"
+          for i in 1 2 3; do git pull --rebase -X theirs --autostash && git push && break; sleep 5; done

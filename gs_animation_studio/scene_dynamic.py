@@ -45,6 +45,7 @@ def asset(spec,parent):
   if kind=='soldier':
    h=details['human'];cyl('Helmet',(0,0,.23),.23,.15,m,h['head']);box('Shield',(-.3,-.2,.25),(.5,.1,.65),gold,h['body'])
  elif kind=='map':details.update(rich.map_asset(g,spec))
+ elif kind in rich.PHYSICS_BUILDERS:spec['_m']=m;details.update(rich.PHYSICS_BUILDERS[kind](g,spec))
  elif kind=='ocean':
   # Ocean is a diorama; its mesh and moving foam are scaled together.
   details.update(rich.ocean_asset(g))
@@ -137,7 +138,7 @@ for frame in range(1,N+1):
  if plan['scenes'][k].get('_environment'):rich.animate_ocean(plan['scenes'][k]['_environment'],t,frame)
  for spec,o,details in sets[k]:
   aq=q;window=spec.get('animation_window',[0,1]);q=max(0,min(1,(aq-window[0])/(window[1]-window[0])));e=ease(q)
-  p=Vector(spec['pos']);size=Vector(spec['size']);action=spec['action'];o.rotation_euler=(0,0,0)
+  p=Vector(spec['pos']);size=Vector(spec['size']);action='none' if spec['kind'] in rich.PHYSICS_BUILDERS else spec['action'];o.rotation_euler=(0,0,0)
   if action in ('move','walk','rise','fall','flow'):
    # Flow cycles discrete parcels; causal actors move once towards the explicit destination.
    f=(q*2)%1 if action=='flow' else ease(q/.45) if spec.get('gesture')=='collect' else e;p=p.lerp(Vector(spec['to']),f)
@@ -163,7 +164,8 @@ for frame in range(1,N+1):
     if target and target['kind']!='salt':
      # This engine has no matching grasp payload for this object; do not show fake salt.
      h['salt'].scale=(0,0,0);rich.key(h['salt'],'scale',frame)
-  if details.get('route'):rich.animate_map(details,q,frame)
+  if details.get('route') or details.get('map_extras'):rich.animate_map(details,q,frame)
+  if 'anim' in details:details['anim'](q,frame)
   if 'wave' in details:rich.animate_ocean(details,t,frame)
   if 'paper' in details:
    paper=details['paper'];paper.location.z=2.1-1.5*e;paper.keyframe_insert(data_path='location',frame=frame)
@@ -175,7 +177,7 @@ for frame in range(1,N+1):
   for j,el in enumerate(details.get('electrons',[])):
    a=q*math.tau*2+j*2;el.location=(math.cos(a),math.sin(a),0);el.keyframe_insert(data_path='location',frame=frame)
  cam.data.ortho_scale=(11.5 if any(sp['kind']=='map' for sp,_,_ in sets[k]) else 8.8 if len(sets[k])<=2 else 10.4 if len(sets[k])==3 else 12.0)-.12*ease(q);cam.data.keyframe_insert(data_path='ortho_scale',frame=frame)
- target=Vector((k*30,0,1.0));cam.location=target+(Vector((0,-20,0)) if any(sp['kind']=='map' for sp,_,_ in sets[k]) else ({'front':Vector((0,-20,3)), 'top':Vector((0,-.01,20)), 'oblique':Vector((3.6,-17,9.5))}[plan['scenes'][k].get('camera_view','oblique')]));cam.rotation_euler=(target-cam.location).to_track_quat('-Z','Y').to_euler();cam.keyframe_insert(data_path='location',frame=frame);cam.keyframe_insert(data_path='rotation_euler',frame=frame)
+ target=Vector((k*30,0,1.0));cam.location=target+(Vector((0,-20,0)) if any(sp['kind']=='map' for sp,_,_ in sets[k]) else ({'front':Vector((0,-20,3)), 'top':Vector((0,-.01,20)), 'oblique':Vector((3.6,-17,9.5))}['front' if any(sp['kind'] in rich.PHYSICS_BUILDERS for sp,_,_ in sets[k]) else plan['scenes'][k].get('camera_view','oblique')]));cam.rotation_euler=(target-cam.location).to_track_quat('-Z','Y').to_euler();cam.keyframe_insert(data_path='location',frame=frame);cam.keyframe_insert(data_path='rotation_euler',frame=frame)
  bpy.context.view_layer.update()
  for spec,o,details in sets[k]:
   for label,point in details.get('map_markers',[]):

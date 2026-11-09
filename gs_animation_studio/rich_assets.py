@@ -131,7 +131,7 @@ def state_at(pt,states):
  return None
 def regional_bounds(spec):
  """Map Test 01 style: crop to the route region, always keep both seas in view."""
- pts=[p for p in spec.get('route',[])]+[m['at'] for m in spec.get('markers',[])]+[q for pair in spec.get('choice_lines',[]) for q in pair]+list(spec.get('frame_points',[]))
+ pts=[p for p in spec.get('route',[])]+[m['at'] for m in spec.get('markers',[])]+[q for pair in spec.get('choice_lines',[]) for q in pair]+list(spec.get('frame_points',[]))+list(spec.get('_extra_pts',[]))
  if not pts:return None
  lat=[p[1] for p in pts]
  # State data has no J&K/Ladakh: never draw a regional state map for northern points.
@@ -146,8 +146,21 @@ def flat_fill(name,ring,point,m,parent,depth):
  c=bpy.data.curves.new(name,'CURVE');c.dimensions='2D';c.fill_mode='BOTH';sp=c.splines.new('POLY');sp.points.add(len(ring)-1)
  for v,p in zip(sp.points,ring):p=point(p);v.co=(p.x,p.z,0,1)
  sp.use_cyclic_u=True;o=bpy.data.objects.new(name,c);bpy.context.collection.objects.link(o);o.parent=parent;o.rotation_euler.x=math.pi/2;o.location.y=depth;c.materials.append(m);return o
+def _river_data():
+ p=R/'india_rivers.json'
+ return json.loads(p.read_text())['rivers'] if p.exists() else {}
 def map_asset(parent,spec):
  region=spec.get('map_region','world');bounds=MAP_BOUNDS[region]
+ if region=='india' and (spec.get('highlight_states') or spec.get('rivers') or spec.get('latitude_lines')):
+  sts=json.loads((R/'india_states.json').read_text())['states'];extra=[]
+  for st in sts:
+   if st['name'] in spec.get('highlight_states',[]):
+    big=max(st['rings'],key=len);extra+=[min(big,key=lambda q:q[0])[:2],max(big,key=lambda q:q[0])[:2],min(big,key=lambda q:q[1])[:2],max(big,key=lambda q:q[1])[:2]]
+  rd=_river_data()
+  for name in spec.get('rivers',[]):
+   for seg in rd.get(name,{}).get('segments',[]):extra+=[seg[0],seg[-1]]
+  for ll in spec.get('latitude_lines',[]):extra+=[[72,float(ll['lat'])],[88,float(ll['lat'])]]
+  spec['_extra_pts']=extra
  regional=region=='india' and regional_bounds(spec)
  if regional:bounds=regional
  xmin,ymin,xmax,ymax=bounds
@@ -188,6 +201,33 @@ def map_asset(parent,spec):
    pa,pb=point(a,-.12),point(b,-.12)
    for k in range(0,10,2):choice.append(line('Equal choice dash',[pa.lerp(pb,k/10),pa.lerp(pb,(k+1)/10)],.028/scale,dark,parent))
   route_mat=river
+  hot=mat('Highlighted state',(.93,.2,.16));hot_edge=mat('Highlight edge',(.45,.05,.03));highlights=[]
+  for st in states:
+   if st['name'] in spec.get('highlight_states',[]) and st['name']!='Andhra Pradesh':
+    grp=empty('Highlight '+st['name'],parent)
+    for ring in st['rings']:
+     ring=clip_polygon([list(p[:2]) for p in ring],bounds)
+     if len(ring)<3:continue
+     flat_fill('Highlighted '+st['name'],ring,point,hot,grp,-.11);line('Highlight border',[point(p,-.13) for p in ring+[ring[0]]],.014/scale,hot_edge,grp)
+    highlights.append(grp)
+    if st.get('hindi') and st['name'] not in seen:
+     big=max(st['rings'],key=len);cx=sum(q[0] for q in big)/len(big);cy=sum(q[1] for q in big)/len(big);seen.add(st['name']);context.append((st['hindi'],point((cx,cy),-.18)))
+  rivers=[];rd=_river_data()
+  for name in spec.get('rivers',[]):
+   info=rd.get(name)
+   if not info:continue
+   for seg in info['segments']:
+    seg=[p for p in seg if xmin<=p[0]<=xmax and ymin<=p[1]<=ymax]
+    if len(seg)<2:continue
+    c=line('River '+name,[point(p,-.14) for p in seg],.03/scale,river,parent);c.data.bevel_factor_end=.004;rivers.append(c)
+   src=info['source']
+   if xmin<src[0]<xmax and ymin<src[1]<ymax:context.append((info['hindi'],point(src,-.18)))
+  lat_lines=[]
+  for ll in spec.get('latitude_lines',[]):
+   la=float(ll['lat'])
+   if not ymin<la<ymax:continue
+   c=line('Latitude line',[point((xmin+.3,la),-.16),point((xmax-.3,la),-.16)],.022/scale,red,parent);c.data.bevel_factor_end=.004;lat_lines.append(c)
+   if ll.get('label'):context.append((str(ll['label']),point((xmin+2.2,la+.6),-.18)))
  else:
   span=max(xmax-xmin,(ymax-ymin)*1.3);factor=3.5/span
   def point(p,y=-.08):return Vector(((p[0]-(xmin+xmax)/2)*factor,y,(p[1]-(ymin+ymax)/2)*factor+1.2))
@@ -208,9 +248,20 @@ def map_asset(parent,spec):
  markers=[]
  for item in spec.get('markers',[]):
   p=point(item['at'],-.15);ell('Location marker',p,(.07,.05,.07) if regional else (.045,.035,.045),red if regional else gold,parent);markers.append((item['label'],p))
- return {'route':route,'marker':marker,'route_points':[point(p,-.13) for p in spec.get('route',[])],'map_markers':markers,'map_context':context}
+ out={'route':route,'marker':marker,'route_points':[point(p,-.13) for p in spec.get('route',[])],'map_markers':markers,'map_context':context}
+ if regional:
+  out.update(rivers=rivers,lat_lines=lat_lines,highlights=highlights)
+  if (rivers or lat_lines or highlights) and not route:out['map_extras']=True
+ return out
 
 def animate_map(details,q,frame):
+ for c in details.get('rivers',[]):
+  c.data.bevel_factor_end=max(.004,ease(q/.75));c.data.keyframe_insert(data_path='bevel_factor_end',frame=frame)
+ for c in details.get('lat_lines',[]):
+  c.data.bevel_factor_end=max(.004,ease(q/.5));c.data.keyframe_insert(data_path='bevel_factor_end',frame=frame)
+ for g in details.get('highlights',[]):
+  # state rises out of the map and settles: the eye goes straight to the answer
+  g.location.y=-.25*ease(q/.3)*(1-.3*ease((q-.3)/.3));g.keyframe_insert(data_path='location',frame=frame)
  route=details.get('route')
  if route:
   f=ease(q/.9);route.data.bevel_factor_end=max(.005,f);route.data.keyframe_insert(data_path='bevel_factor_end',frame=frame)
@@ -319,3 +370,141 @@ def rock_layers(parent):
 
 def animate_folds(details,q,frame):
  for fold in details.get('fold_keys',[]):fold.value=ease(q);fold.keyframe_insert(data_path='value',frame=frame)
+
+# ---------------- Physics teaching assets (Nov 2026) ----------------
+# Most-asked physics chapters in the PYQ bank: mechanics, electricity, light, gravitation, magnetism, sound.
+# Every asset returns details['anim'](q,frame) that moves the part which teaches the idea (rays, current, swing...).
+PHYSICS_KINDS=('lens','mirror','prism','circuit','pendulum','spring','lever','wave')
+RAY=None
+def _ray_mat():
+ global RAY
+ if RAY is None:RAY=mat('Light ray',(1.0,.86,.2))
+ return RAY
+def _grow(curve,f,frame):
+ curve.data.bevel_factor_end=max(.004,min(1,f));curve.data.keyframe_insert(data_path='bevel_factor_end',frame=frame)
+def _solid2d(name,poly,depth,m,parent):
+ """Flat polygon in the x-z plane extruded towards the camera axis (y)."""
+ c=bpy.data.curves.new(name,'CURVE');c.dimensions='2D';c.fill_mode='BOTH';c.extrude=depth;sp=c.splines.new('POLY');sp.points.add(len(poly)-1)
+ for v,(x,z) in zip(sp.points,poly):v.co=(x,z,0,1)
+ sp.use_cyclic_u=True;o=bpy.data.objects.new(name,c);bpy.context.collection.objects.link(o);o.parent=parent;o.rotation_euler.x=math.pi/2;c.materials.append(m);return o
+def _rays(parent,paths,m,r=.035):
+ out=[]
+ for pts in paths:
+  c=line('Light ray path',[(x,-.3,z) for x,z in pts],r,m,parent);c.data.bevel_factor_end=.004;out.append(c)
+ return out
+def _seq(curves,q,frame,start=0,end=.8):
+ n=max(1,len(curves))
+ for i,c in enumerate(curves):
+  a=start+(end-start)*i/n*.35;_grow(c,ease((q-a)/max(.05,end-a)),frame)
+
+def lens_asset(parent,spec):
+ concave=spec.get('variant')=='concave';glass=mat('Lens glass',(.55,.9,1.0));cz=1.4;h=.9
+ prof=[]
+ for i in range(17):
+  z=-h+2*h*i/16;t=1-(z/h)**2
+  prof.append(((.06+.24*t) if not concave else (.3-.22*t),z))
+ poly=[(x,cz+z) for x,z in prof]+[(-x,cz+z) for x,z in reversed(prof)]
+ _solid2d('Lens',poly,.18,glass,parent);line('Principal axis',[(-2,-.25,cz),(2,-.25,cz)],.012,white,parent)
+ F=1.05;paths=[]
+ for hz in (-.55,0,.55):
+  hit=(0,cz+hz)
+  if concave:
+   dx,dz=hit[0]+F,hit[1]-cz;k=(1.9-hit[0])/dx;end=(1.9,hit[1]+dz*k)
+  else:
+   dx,dz=F-hit[0],cz-hit[1];k=(1.9-hit[0])/dx;end=(1.9,hit[1]+dz*k)
+  paths.append([(-1.9,hit[1]),hit,end])
+ rays=_rays(parent,paths,_ray_mat());fx=-F if concave else F
+ focus=sphere('Focus F',(fx,-.35,cz),.09,red,parent);focus.scale=(0,0,0)
+ def anim(q,frame):
+  _seq(rays,q,frame);s=ease((q-.55)/.2);focus.scale=(s,s,s);key(focus,'scale',frame)
+ return {'anim':anim,'physics':True}
+
+def mirror_asset(parent,spec):
+ convex=spec.get('variant')=='convex';cz=1.4;Rr=2.2;F=Rr/2;vx=.7
+ cx=vx+Rr if convex else vx-Rr;sgn=-1 if convex else 1
+ arc=[(cx+sgn*Rr*math.cos(a),cz+Rr*math.sin(a)) for a in [(-.42+.84*i/24) for i in range(25)]]
+ line('Mirror silver',[(x,-.25,z) for x,z in arc],.05,mat('Mirror silver',(.85,.9,.95)),parent)
+ line('Mirror back',[(x+.09,-.2,z) for x,z in arc],.05,dark,parent);line('Principal axis',[(-2,-.25,cz),(1.6,-.25,cz)],.012,white,parent)
+ fx=vx+F if convex else vx-F;paths=[]
+ for hz in (-.6,.6):
+  zz=cz+hz;hx=cx+sgn*math.sqrt(max(0,Rr*Rr-hz*hz))
+  if convex:dx,dz=hx-fx,zz-cz
+  else:dx,dz=fx-hx,cz-zz
+  k=(-1.9-hx)/dx;paths.append([(-1.9,zz),(hx,zz),(-1.9,zz+dz*k)])
+ rays=_rays(parent,paths,_ray_mat());focus=sphere('Focus F',(fx,-.35,cz),.09,red,parent);focus.scale=(0,0,0)
+ def anim(q,frame):
+  _seq(rays,q,frame);s=ease((q-.55)/.2);focus.scale=(s,s,s);key(focus,'scale',frame)
+ return {'anim':anim,'physics':True}
+
+SPECTRUM=[('V',(.55,.2,.95)),('I',(.3,.25,.95)),('B',(.15,.55,1)),('G',(.15,.85,.3)),('Y',(1,.92,.15)),('O',(1,.55,.1)),('R',(.95,.12,.1))]
+def prism_asset(parent,spec):
+ glass=mat('Prism glass',(.62,.92,1.0));tri=[(-.75,.55),(.75,.55),(0,1.85)]
+ _solid2d('Prism',tri,.4,glass,parent)
+ a=(-.4,1.2);b=(.38,1.18)
+ white_in=line('White light',[(-1.9,-.3,.95),(a[0],-.3,a[1])],.05,white,parent);inner=line('Light inside prism',[(a[0],-.3,a[1]),(b[0],-.3,b[1])],.035,white,parent)
+ for c in (white_in,inner):c.data.bevel_factor_end=.004
+ colors=[]
+ for i,(n,col) in enumerate(SPECTRUM):
+  c=line('Spectrum '+n,[(b[0],-.3,b[1]),(1.9,-.3,.35+.13*i)],.03,mat('Spectrum '+n,col),parent);c.data.bevel_factor_end=.004;colors.append(c)
+ def anim(q,frame):
+  _grow(white_in,ease(q/.25),frame);_grow(inner,ease((q-.25)/.15),frame)
+  for c in colors:_grow(c,ease((q-.4)/.3),frame)
+ return {'anim':anim,'physics':True}
+
+def circuit_asset(parent,spec):
+ wire=mat('Copper wire',(.85,.45,.15));x0,x1,z0,z1=-1.4,1.4,.45,2.25
+ loop=[(x0,z0),(x1,z0),(x1,z1),(x0,z1),(x0,z0)]
+ line('Circuit wire',[(x,0,z) for x,z in loop],.035,wire,parent)
+ bat=box('Battery',(x0,0,(z0+z1)/2),(.32,.32,.7),mat('Battery body',(.12,.12,.14)),parent);box('Battery + cap',(x0,0,(z0+z1)/2+.42),(.14,.14,.12),gold,parent)
+ glow=mat('Bulb glow',(.35,.35,.3));bulb=sphere('Bulb glass',(0,0,z1+.32),.3,glow,parent);cyl('Bulb base',(0,0,z1+.02),.13,.18,white,parent)
+ halo=sphere('Bulb light',(0,.15,z1+.32),.5,mat('Light halo',(1,.95,.45)),parent);halo.scale=(0,0,0)
+ pivot=empty('Switch pivot',parent);pivot.location=(x1,0,(z0+z1)/2-.3);box('Switch lever',(0,0,.3),(.08,.08,.62),red,pivot);pivot.rotation_euler.y=.7
+ per=[0,2.8,1.8,2.8,1.8];total=sum(per);dots=[sphere('Electron',(x0,-.12,z0),.07,cyan,parent) for _ in range(10)]
+ def at(u):
+  u=(u%1)*total;s=0
+  for i in range(4):
+   seg=per[i+1]
+   if u<=s+seg:t=(u-s)/seg;(ax,az),(bx,bz)=loop[i],loop[i+1];return (ax+(bx-ax)*t,-.12,az+(bz-az)*t)
+   s+=seg
+  return (x0,-.12,z0)
+ def anim(q,frame):
+  closed=ease(q/.2);pivot.rotation_euler.y=.7*(1-closed);key(pivot,'rotation_euler',frame)
+  on=q>.2;glow.diffuse_color=((1,.95,.5,1) if on else (.35,.35,.3,1));glow.keyframe_insert(data_path='diffuse_color',frame=frame)
+  s=.9+.1*math.sin(q*math.tau*3) if on else 0;halo.scale=(s,s*.2,s);key(halo,'scale',frame)
+  for i,d in enumerate(dots):
+   d.location=at(i/len(dots)+(max(0,q-.2))*1.2) if on else (x0,-.12,z0+i*.18*(z1-z0)/1.8);key(d,'location',frame)
+ return {'anim':anim,'physics':True}
+
+def pendulum_asset(parent,spec):
+ box('Support beam',(0,0,2.65),(1.6,.3,.15),dark,parent);pivot=empty('Pendulum pivot',parent);pivot.location=(0,0,2.55)
+ line('Pendulum string',[(0,0,0),(0,0,-1.75)],.018,white,pivot);sphere('Pendulum bob',(0,0,-1.9),.24,gold,pivot)
+ arc=[(1.9*math.sin(a),-.25,2.55-1.9*math.cos(a)) for a in [(-.45+.9*i/20) for i in range(21)]]
+ trail=line('Swing path',arc,.012,mat('Swing path',(.5,.75,.9)),parent)
+ def anim(q,frame):pivot.rotation_euler.y=.45*math.cos(q*math.tau*2);key(pivot,'rotation_euler',frame)
+ return {'anim':anim,'physics':True}
+
+def spring_asset(parent,spec):
+ box('Base',(0,0,.1),(1.4,.8,.2),dark,parent);coil=empty('Spring coil',parent);coil.location=(0,0,.2)
+ pts=[(.32*math.cos(a),.32*math.sin(a),a/(math.tau*8)*1.5) for a in [i*math.tau/24 for i in range(24*8+1)]]
+ line('Spring wire',pts,.035,mat('Spring steel',(.75,.78,.82)),coil);block=box('Mass block',(0,0,1.9),(.9,.9,.6),spec.get('_m') or gold,parent)
+ def anim(q,frame):
+  c=1-.38*(.5-.5*math.cos(q*math.tau*2));coil.scale=(1,1,c);key(coil,'scale',frame);block.location.z=.2+1.5*c+.3;key(block,'location',frame)
+ return {'anim':anim,'physics':True}
+
+def lever_asset(parent,spec):
+ cone('Fulcrum',(0,0,.45),.42,.8,dark,parent)
+ beam=empty('Lever beam',parent);beam.location=(0,0,.88);box('Lever bar',(0,0,0),(3.4,.3,.1),gold,beam)
+ box('Effort weight',(1.45,0,.28),(.35,.35,.45),cyan,beam);box('Load',(-1.0,0,.33),(.6,.6,.55),red,beam)
+ def anim(q,frame):beam.rotation_euler.y=-.22*math.sin(q*math.tau*1.5);key(beam,'rotation_euler',frame)
+ return {'anim':anim,'physics':True}
+
+def wave_asset(parent,spec):
+ n=17;balls=[sphere('Wave particle',(-1.8+3.6*i/(n-1),-.1,1.4),.11,mat('Wave particle %d'%(i%3),[(.2,.8,1),(.4,.6,1),(.3,.95,.8)][i%3]),parent) for i in range(n)]
+ line('Rest line',[(-1.9,-.3,1.4),(1.9,-.3,1.4)],.01,white,parent)
+ cycles=2 if spec.get('variant')=='high' else 1
+ def anim(q,frame):
+  for i,b in enumerate(balls):
+   x=-1.8+3.6*i/(n-1);b.location=(x,-.1,1.4+.55*math.sin(x*math.pi*cycles-q*math.tau*2));key(b,'location',frame)
+ return {'anim':anim,'physics':True}
+
+PHYSICS_BUILDERS={'lens':lens_asset,'mirror':mirror_asset,'prism':prism_asset,'circuit':circuit_asset,'pendulum':pendulum_asset,'spring':spring_asset,'lever':lever_asset,'wave':wave_asset}

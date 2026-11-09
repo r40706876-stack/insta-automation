@@ -45,10 +45,18 @@ def validate_visual(plan):
     if len(markers)>3 or any(not coordinate(m.get('at'),bounds) or not isinstance(m.get('label'),str) or not 1<=len(m['label'])<=24 for m in markers):raise ValueError('Invalid map markers')
    if o.get('route') and kind!='map':raise ValueError('Geographic routes require an actual map asset')
    if action=='trace' and kind!='map':raise ValueError('Trace is only implemented for geographic maps')
+   if kind=='map' and (o.get('highlight_states') or o.get('rivers') or o.get('latitude_lines')):
+    if o.get('map_region')!='india':raise ValueError('State/river/latitude overlays exist only on the India map')
+    ok_states={'Gujarat','Rajasthan','Madhya Pradesh','Maharashtra','Uttar Pradesh','Bihar','West Bengal','Orissa','Karnataka','Tamil Nadu','Kerala','Goa','Chhattisgarh','Jharkhand','Assam','Punjab','Haryana','Himachal Pradesh','Uttaranchal','Sikkim','Meghalaya','Tripura','Mizoram','Manipur','Nagaland','Arunachal Pradesh'}
+    ok_rivers={'Ganga','Yamuna','Brahmaputra','Godavari','Krishna','Narmada','Tapi','Mahanadi','Kaveri','Chambal','Son','Betwa','Mahi','Tungabhadra','Ghaghara','Gandak','Teesta','Penner'}
+    if not set(o.get('highlight_states',[]))<=ok_states:raise ValueError('Unsupported or unsourced state highlight')
+    if not set(o.get('rivers',[]))<=ok_rivers:raise ValueError('River not in the sourced river dataset')
+    if any(not 6<float(x.get('lat',0))<31.5 for x in o.get('latitude_lines',[])):raise ValueError('Latitude line outside mapped India region')
+   if kind in ('lens','mirror','prism','circuit','pendulum','spring','lever','wave') and o.get('variant') not in (None,'convex','concave','high'):raise ValueError('Unknown physics variant')
    if action=='wave' and kind!='ocean':raise ValueError('Wave is only implemented for ocean meshes')
    if kind=='ocean' and action!='wave':raise ValueError('Ocean must deform, not be a still background')
    # Decorative pulsing/growing alone cannot meet the teaching-motion requirement.
-   if action in ('walk','move','flow','rise','fall','spin','orbit','trace','wave','compress') or o.get('gesture') in ('point','collect','hold'):meaningful+=1
+   if action in ('walk','move','flow','rise','fall','spin','orbit','trace','wave','compress') or o.get('gesture') in ('point','collect','hold') or kind in ('lens','mirror','prism','circuit','pendulum','spring','lever','wave') or (kind=='map' and (o.get('highlight_states') or o.get('rivers') or o.get('latitude_lines'))):meaningful+=1
   if meaningful<1 and not is_revision_card(s,i,len(plan['scenes'])) and not s.get('hook_question'):raise ValueError(f'Scene {i+1}: no causal movement beyond decorative pulse/zoom')
   if s.get('role')=='hook' and not (s.get('hook_question') or s.get('quiz_card') or s.get('heading')):raise ValueError('Hook must show an immediate readable question or challenge')
   # 4 Nov insights: flop reels used a walking 'विद्यार्थी', spinning arrows labelled '11'/'12',
@@ -68,7 +76,7 @@ def validate_visual(plan):
  # Never silently accept a repeated, motionless middle sequence.
  for a,b in zip(plan['scenes'],plan['scenes'][1:]):
   if a.get('role') not in ('hook','challenge') and b.get('role') not in ('revision',):
-   sig=lambda sc:tuple(sorted((str(o.get('kind')),str(o.get('action')),str(o.get('label'))) for o in sc.get('objects',[])))
+   sig=lambda sc:tuple(sorted((str(o.get('kind')),str(o.get('action')),str(o.get('label')),str(o.get('variant')),str(o.get('rivers')),str(o.get('highlight_states')),str(o.get('latitude_lines'))) for o in sc.get('objects',[])))
    if sig(a)==sig(b) and a.get('visual_action')==b.get('visual_action'):
     raise ValueError('Adjacent scenes repeat the same objects and action without new visual information')
  subject=str(plan.get('subject',''))
