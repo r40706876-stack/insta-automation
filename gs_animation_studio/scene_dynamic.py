@@ -46,7 +46,7 @@ def asset(spec,parent):
    h=details['human'];cyl('Helmet',(0,0,.23),.23,.15,m,h['head']);box('Shield',(-.3,-.2,.25),(.5,.1,.65),gold,h['body'])
  elif kind=='map':details.update(rich.map_asset(g,spec))
  elif kind in rich.PHYSICS_BUILDERS:
-  inner=empty(spec['id']+' diagram',g);inner.scale=(1.22,1.22,1.22);inner.location.z=-.4;spec['_m']=m;details.update(rich.PHYSICS_BUILDERS[kind](inner,spec))
+  inner=empty(spec['id']+' diagram',g);inner.scale=(1.22,1.22,1.22);inner.location.z=-.4;spec['_m']=m;details.update(rich.PHYSICS_BUILDERS[kind](inner,spec));details['map_markers']=[(t,Vector((x*1.22,y*1.22,z*1.22-.4))) for t,(x,y,z) in details.pop('labels',[])]
  elif kind=='ocean':
   # Ocean is a diorama; its mesh and moving foam are scaled together.
   details.update(rich.ocean_asset(g))

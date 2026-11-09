@@ -4,7 +4,7 @@ from pathlib import Path
 from visual_contract import validate_visual,VERSION as VISUAL_VERSION
 from gs_scene_policy import is_revision_card
 from share_policy import CONTRACT as SHARE_CONTRACT,validate_share
-KINDS={'person','soldier','building','fort','ship','tree','mountain','planet','sun','moon','ballot','assembly','coin','scale','bottle','cloud','piston','atom','factory','train','magnet','gear','water','salt','book','arrow','box','cylinder','sphere','map','ocean','rock_layers','lens','mirror','prism','circuit','pendulum','spring','lever','wave'}
+KINDS={'person','soldier','building','fort','ship','tree','mountain','planet','sun','moon','ballot','assembly','coin','scale','bottle','cloud','piston','atom','factory','train','magnet','gear','water','salt','book','arrow','box','cylinder','sphere','map','ocean','rock_layers','lens','mirror','prism','circuit','pendulum','spring','lever','wave','beaker','test_tube','molecule','cell','solar_system','earth_layers','volcano','water_cycle','timeline','bar_chart','flag'}
 ACTIONS={'none','move','walk','spin','rise','fall','grow','pulse','orbit','flow','trace','wave','compress'}
 SUBJECTS={'auto','भूगोल','इतिहास','विज्ञान','राजव्यवस्था','अर्थशास्त्र','स्टैटिक जीके','पर्यावरण'}
 def parse(text):
@@ -223,7 +223,7 @@ def validate(p):
    if len(o.get('label',''))>24:raise ValueError('Object label too long')
    if o['action'] in {'move','walk','rise','fall','flow'}:
     if not vec(o.get('to'),-3.5,4.5) or o['to'][2]<0 or math.dist(o['pos'],o['to'])<.7:raise ValueError('Meaningful movement needs a visible path')
-   if o['action']!='none' or o['kind'] in ('lens','mirror','prism','circuit','pendulum','spring','lever','wave') or (o['kind']=='map' and (o.get('highlight_states') or o.get('rivers') or o.get('latitude_lines'))):moving+=1
+   if o['action']!='none' or o['kind'] in ('lens','mirror','prism','circuit','pendulum','spring','lever','wave','beaker','test_tube','molecule','cell','solar_system','earth_layers','volcano','water_cycle','timeline','bar_chart','flag') or (o['kind']=='map' and (o.get('highlight_states') or o.get('rivers') or o.get('latitude_lines'))):moving+=1
   if is_revision_card(s,scene_index,len(scenes)) and len(s['speech'].split())>12:raise ValueError('Final revision narration must be at most 12 words')
   if moving<1 and not is_revision_card(s,scene_index,len(scenes)):raise ValueError('Every scene needs a causal animated object, not a static poster')
   if sum(bool(o.get('label')) for o in objects)>3:raise ValueError('Too many labels')
@@ -243,7 +243,12 @@ CATALOG += ('; PHYSICS (front view, self-animating; give action none, the asset 
   'lever=beam tilting on a fulcrum with load and effort; wave=row of particles showing a transverse wave (variant high = higher frequency). '
   'INDIA MAP extras (map_region india, action trace or none): highlight_states:[English state names from: Gujarat, Rajasthan, Madhya Pradesh, Maharashtra, Uttar Pradesh, Bihar, West Bengal, Orissa, Karnataka, Tamil Nadu, Kerala, Goa, Chhattisgarh, Jharkhand, Assam, Punjab, Haryana, Himachal Pradesh, Uttaranchal, Sikkim, Meghalaya, Tripura, Mizoram, Manipur, Nagaland, Arunachal Pradesh] (raised in red; not for J&K/Ladakh/Andhra/Telangana); '
   'rivers:[Ganga, Yamuna, Brahmaputra, Godavari, Krishna, Narmada, Tapi, Mahanadi, Kaveri, Chambal, Son, Betwa, Mahi, Tungabhadra, Ghaghara, Gandak, Teesta, Penner] drawn source to mouth; '
-  'latitude_lines:[{lat:23.44,label:"कर्क रेखा"}] growing red line.')
+  'latitude_lines:[{lat:23.44,label:"कर्क रेखा"}] growing line. '
+  'MORE DIAGRAMS (front view, self-animating, action none, Hindi labels built in): beaker=litmus test (variant acid|base: blue->red or red->blue); '
+  'test_tube=heated tube releasing gas bubbles; molecule=ball-and-stick (variant h2o|co2|o2|ch4|nh3|nacl); cell=cell with moving organelles (variant plant|animal); '
+  'solar_system=sun with 8 orbiting planets; earth_layers=crust/mantle/outer core/inner core cross-section; volcano=magma rises, erupts, lava flows; '
+  'water_cycle=evaporation, cloud, rain, river back to sea; timeline=events:[{year,label}] max 5 sourced dates appear in order; '
+  'bar_chart=bars:[{label,value}] max 5 sourced numbers grow; flag=Indian tricolour waving with Ashoka chakra.')
 
 EASY_MEMORY_CONTRACT="""TOPIC PRIORITY: choose beginner-friendly, useful GS concepts before obscure trivia. One reel = ONE small idea. Prefer a concrete everyday question, a visible cause-and-effect action, and one accurate Hindi recall line of at most 16 words. The viewer should recognize the puzzle in the opening two seconds without prerequisite knowledge. Prefer concepts that connect naturally to exam basics; do not choose a topic merely because animation is available. Avoid obscure dates/names, long lists, multiple concepts, technical jargon and elaborate stories that need extra explanation. An accurate simple explanation is more important than visual spectacle. History: one clear reason or consequence; polity: one basic institution/process; economics: one everyday money/price example; geography/science: one familiar visible mechanism. These are selection principles, not a fixed topic list. Use the existing supported assets honestly. Never replace an explicitly requested user topic; simplify its explanation instead. Automatic selection must also avoid prior concepts, even when easy. """
 CONTRACT += '\n'+EASY_MEMORY_CONTRACT+'\n'+SHARE_CONTRACT

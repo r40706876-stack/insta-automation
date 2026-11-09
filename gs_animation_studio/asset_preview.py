@@ -24,6 +24,18 @@ SETS={
               ('ध्वनि • तरंग','laboratory',[obj('wave','wave')]),
               ('ध्वनि • ऊँची आवृत्ति','laboratory',[obj('wave','wave',variant='high')]),
               ('भूगोल • राज्य','neutral',[obj('map','map',map_region='india',highlight_states=['Madhya Pradesh'],size=[1.2]*3)])],
+ 'diagrams_a':[('रसायन • अम्ल','laboratory',[obj('beaker','beaker',variant='acid')]),
+                ('रसायन • गैस','laboratory',[obj('tube','test_tube')]),
+                ('रसायन • जल अणु','laboratory',[obj('mol','molecule',variant='h2o')]),
+                ('जीव • पादप कोशिका','laboratory',[obj('cell','cell',variant='plant')]),
+                ('जीव • जंतु कोशिका','laboratory',[obj('cell','cell',variant='animal')]),
+                ('अंतरिक्ष • सौरमंडल','space',[obj('sun','solar_system')])],
+ 'diagrams_b':[('भूगोल • पृथ्वी की परतें','neutral',[obj('earth','earth_layers')]),
+                ('भूगोल • ज्वालामुखी','neutral',[obj('volcano','volcano')]),
+                ('भूगोल • जल चक्र','neutral',[obj('cycle','water_cycle')]),
+                ('इतिहास • समयरेखा','neutral',[obj('time','timeline',events=[{'year':1857,'label':'क्रांति'},{'year':1885,'label':'कांग्रेस की स्थापना'},{'year':1930,'label':'दांडी मार्च'},{'year':1947,'label':'स्वतंत्रता'}])]),
+                ('अर्थशास्त्र • तुलना','neutral',[obj('chart','bar_chart',bars=[{'label':'कृषि','value':18},{'label':'उद्योग','value':28},{'label':'सेवा','value':54}])]),
+                ('राजव्यवस्था • तिरंगा','neutral',[obj('flag','flag')])],
  'maps':[('भूगोल • गंगा','neutral',[obj('map','map',map_region='india',rivers=['Ganga','Yamuna'],size=[1.2]*3)]),
          ('भूगोल • नर्मदा-तापी','neutral',[obj('map','map',map_region='india',rivers=['Narmada','Tapi'],size=[1.2]*3)]),
          ('भूगोल • कर्क रेखा','neutral',[obj('map','map',map_region='india',latitude_lines=[{'lat':23.44,'label':'कर्क रेखा'}],highlight_states=['Gujarat','Rajasthan','Madhya Pradesh','Chhattisgarh','Jharkhand','West Bengal','Tripura','Mizoram'],size=[1.2]*3)]),
@@ -40,14 +52,22 @@ def render(name,root,blender):
  root=Path(root)/name;root.mkdir(parents=True,exist_ok=True)
  (root/'recipe.json').write_text(json.dumps(plan(SETS[name]),ensure_ascii=False,indent=2));(root/'audio.json').write_text(json.dumps({'seconds':[2]*6,'voice':'NONE'}))
  for f in ('rich_assets.py','world_land.json','dandi_map.json','india_states.json','india_rivers.json'):shutil.copy(BASE/f,root/f)
+ shutil.copy(BASE/'known_good/Mukta.ttf',root/'Mukta.ttf')
  env=dict(os.environ,STUDIO_ROOT=str(root),STUDIO_PREVIEW_FRAME='12',LIBGL_ALWAYS_SOFTWARE='1');pre=['xvfb-run','-a'] if shutil.which('xvfb-run') else []
  subprocess.run(pre+[blender,'-b','-t','4','--python',str(BASE/'scene_dynamic.py')],env=env,check=True,timeout=400)
  frames=[k*48+d for k in range(6) for d in (10,40)]
  code="import bpy;from pathlib import Path;s=bpy.context.scene;s.render.image_settings.file_format='JPEG';root=Path("+repr(str(root))+");[(s.frame_set(f),setattr(s.render,'filepath',str(root/('frame_'+str(f)+'.jpg'))),bpy.ops.render.render(write_still=True)) for f in "+repr(frames)+"]"
  subprocess.run(pre+[blender,'-b',str(root/'scene.blend'),'-t','4','--python-expr',code],env=env,check=True,timeout=400)
+ comp=None
+ try:
+  import importlib.util;os.environ['STUDIO_ROOT']=str(root);spec=importlib.util.spec_from_file_location('compose_preview_'+name,BASE/'compose_dynamic.py');comp=importlib.util.module_from_spec(spec);spec.loader.exec_module(comp)
+ except Exception as exc:print('compose not loaded',exc);comp=None
  sheet=Image.new('RGB',(6*240,2*427),(8,25,38));motion=[]
  for k in range(6):
   a,b=[Image.open(root/f'frame_{f}.jpg').convert('RGB') for f in frames[2*k:2*k+2]]
+  if comp is not None:
+   try:a,b=comp.overlay(a,frames[2*k]-1),comp.overlay(b,frames[2*k+1]-1)
+   except Exception as exc:print('overlay skipped',exc)
   motion.append(float((np.abs(np.asarray(a,np.float32)-np.asarray(b,np.float32)).max(axis=2)>12).mean()))
   sheet.paste(a.resize((240,427)),(k*240,0));sheet.paste(b.resize((240,427)),(k*240,427))
  return sheet,motion

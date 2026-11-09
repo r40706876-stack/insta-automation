@@ -52,11 +52,18 @@ def validate_visual(plan):
     if not set(o.get('highlight_states',[]))<=ok_states:raise ValueError('Unsupported or unsourced state highlight')
     if not set(o.get('rivers',[]))<=ok_rivers:raise ValueError('River not in the sourced river dataset')
     if any(not 6<float(x.get('lat',0))<31.5 for x in o.get('latitude_lines',[])):raise ValueError('Latitude line outside mapped India region')
-   if kind in ('lens','mirror','prism','circuit','pendulum','spring','lever','wave') and o.get('variant') not in (None,'convex','concave','high'):raise ValueError('Unknown physics variant')
+   VAR={'lens':('convex','concave'),'mirror':('convex','concave'),'wave':('high',),'beaker':('acid','base'),'molecule':('h2o','co2','o2','ch4','nh3','nacl'),'cell':('plant','animal')}
+   if kind in ('lens','mirror','prism','circuit','pendulum','spring','lever','wave','beaker','test_tube','molecule','cell','solar_system','earth_layers','volcano','water_cycle','timeline','bar_chart','flag') and o.get('variant') is not None and o.get('variant') not in VAR.get(kind,()):raise ValueError('Unknown diagram variant')
+   if kind=='timeline':
+    ev=o.get('events');
+    if not isinstance(ev,list) or not 2<=len(ev)<=5 or any(not isinstance(e,dict) or not str(e.get('year','')).strip() or not 1<=len(str(e.get('label','')))<=24 for e in ev):raise ValueError('Timeline needs 2-5 sourced events with year and short label')
+   if kind=='bar_chart':
+    bars=o.get('bars')
+    if not isinstance(bars,list) or not 2<=len(bars)<=5 or any(not isinstance(b,dict) or not isinstance(b.get('value'),(int,float)) or b['value']<0 or not 1<=len(str(b.get('label','')))<=14 for b in bars):raise ValueError('Bar chart needs 2-5 sourced numeric values')
    if action=='wave' and kind!='ocean':raise ValueError('Wave is only implemented for ocean meshes')
    if kind=='ocean' and action!='wave':raise ValueError('Ocean must deform, not be a still background')
    # Decorative pulsing/growing alone cannot meet the teaching-motion requirement.
-   if action in ('walk','move','flow','rise','fall','spin','orbit','trace','wave','compress') or o.get('gesture') in ('point','collect','hold') or kind in ('lens','mirror','prism','circuit','pendulum','spring','lever','wave') or (kind=='map' and (o.get('highlight_states') or o.get('rivers') or o.get('latitude_lines'))):meaningful+=1
+   if action in ('walk','move','flow','rise','fall','spin','orbit','trace','wave','compress') or o.get('gesture') in ('point','collect','hold') or kind in ('lens','mirror','prism','circuit','pendulum','spring','lever','wave','beaker','test_tube','molecule','cell','solar_system','earth_layers','volcano','water_cycle','timeline','bar_chart','flag') or (kind=='map' and (o.get('highlight_states') or o.get('rivers') or o.get('latitude_lines'))):meaningful+=1
   if meaningful<1 and not is_revision_card(s,i,len(plan['scenes'])) and not s.get('hook_question'):raise ValueError(f'Scene {i+1}: no causal movement beyond decorative pulse/zoom')
   if s.get('role')=='hook' and not (s.get('hook_question') or s.get('quiz_card') or s.get('heading')):raise ValueError('Hook must show an immediate readable question or challenge')
   # 4 Nov insights: flop reels used a walking 'विद्यार्थी', spinning arrows labelled '11'/'12',

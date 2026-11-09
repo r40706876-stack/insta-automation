@@ -514,3 +514,179 @@ def wave_asset(parent,spec):
  return {'anim':anim,'physics':True}
 
 PHYSICS_BUILDERS={'lens':lens_asset,'mirror':mirror_asset,'prism':prism_asset,'circuit':circuit_asset,'pendulum':pendulum_asset,'spring':spring_asset,'lever':lever_asset,'wave':wave_asset}
+
+# ---------------- More teaching diagrams (Nov 2026): chemistry, biology, earth, space, history, economy, polity ----------------
+# Same contract as the physics set: front view, self-animating, labels returned as (Hindi text, local point).
+def _bubbles(parent,x,z0,z1,n,m,r=.05,spread=.18):
+ out=[]
+ for i in range(n):
+  b=sphere('Bubble',(x,-.2,z0),r*(.7+.6*((i*37)%10)/10),m,parent);out.append((b,(i*.61)%1,(((i*53)%10)/10-.5)*spread))
+ def step(q,frame,speed=2.0,x0=x):
+  for b,ph,dx in out:
+   u=(q*speed+ph)%1;b.location=(x0+dx+.03*math.sin(u*9),-.2,z0+(z1-z0)*u);key(b,'location',frame)
+ return step
+
+def beaker_asset(parent,spec):
+ acid=spec.get('variant','acid')!='base'
+ glass=mat('Beaker glass',(.78,.93,1.0));liq=mat('Beaker liquid',(.75,.85,.9))
+ cyl('Beaker wall',(0,.05,1.1),.78,1.6,glass,parent);cyl('Beaker rim',(0,.05,1.92),.84,.06,white,parent)
+ cyl('Liquid',(0,-.02,.85),.72,1.05,liq,parent)
+ strip_m=mat('Litmus strip',(.15,.35,.95) if acid else (.9,.2,.2));strip=box('Litmus paper',(.25,-.45,2.6),(.18,.03,.9),strip_m,parent)
+ bub=_bubbles(parent,-.25,.4,1.3,7,mat('Liquid bubble',(.95,.98,1)))
+ to=(.92,.15,.12,1) if acid else (.15,.35,.95,1)
+ def anim(q,frame):
+  dip=ease(q/.3);strip.location.z=2.6-1.2*dip;key(strip,'location',frame)
+  c=ease((q-.35)/.3);base=strip_m.diffuse_color[:]
+  start=(.15,.35,.95,1) if acid else (.9,.2,.2,1)
+  strip_m.diffuse_color=tuple(start[i]+(to[i]-start[i])*c for i in range(4));strip_m.keyframe_insert(data_path='diffuse_color',frame=frame)
+  bub(q,frame)
+ return {'anim':anim,'labels':[('नीला लिटमस → लाल' if acid else 'लाल लिटमस → नीला',(.25,0,2.35)),('अम्ल' if acid else 'क्षार',(-.5,0,.6))]}
+
+def test_tube_asset(parent,spec):
+ glass=mat('Tube glass',(.8,.94,1.0));liq=mat('Reaction liquid',(.35,.85,.5))
+ pivot=empty('Tube tilt',parent);pivot.location=(0,0,.9);pivot.rotation_euler.y=-.25
+ cyl('Test tube',(0,.05,.9),.28,1.9,glass,pivot);sphere('Tube bottom',(0,.05,-.05),.28,glass,pivot);cyl('Tube liquid',(0,-.02,.25),.24,.6,liq,pivot)
+ box('Stand base',(.9,.3,.05),(1.2,.6,.1),dark,parent)
+ cyl('Burner',( .0,0,-.15),.22,.3,dark,parent);flame=cone('Flame',(0,-.05,.18),.13,.45,mat('Flame',(1,.55,.1)),parent)
+ bub=_bubbles(pivot,0,.0,1.75,8,mat('Gas bubble',(.95,.98,1)),r=.045,spread=.25)
+ def anim(q,frame):
+  s=1+.18*math.sin(q*math.tau*6);flame.scale=(1,1,s);key(flame,'scale',frame);bub(q,frame,speed=2.5)
+ return {'anim':anim,'labels':[('गैस निकलती है',(.4,0,2.3))]}
+
+MOLECULES={'h2o':('H₂O (जल)',[('O',(0,0,0)),('H',(-.62,0,-.45)),('H',(.62,0,-.45))]),
+ 'co2':('CO₂',[('C',(0,0,0)),('O',(-.85,0,0)),('O',(.85,0,0))]),
+ 'o2':('O₂',[('O',(-.42,0,0)),('O',(.42,0,0))]),
+ 'ch4':('CH₄ (मीथेन)',[('C',(0,0,0)),('H',(.55,.55,.55)),('H',(-.55,-.55,.55)),('H',(-.55,.55,-.55)),('H',(.55,-.55,-.55))]),
+ 'nh3':('NH₃ (अमोनिया)',[('N',(0,0,.15)),('H',(.7,0,-.3)),('H',(-.35,.6,-.3)),('H',(-.35,-.6,-.3))]),
+ 'nacl':('NaCl (नमक)',[('Na',(-.5,0,-.5)),('Cl',(.5,0,-.5)),('Cl',(-.5,0,.5)),('Na',(.5,0,.5))])}
+ATOM_COL={'O':(.9,.15,.12),'H':(.95,.95,.95),'C':(.2,.2,.22),'N':(.2,.35,.95),'Na':(.65,.45,.95),'Cl':(.3,.9,.3)}
+def molecule_asset(parent,spec):
+ name,atoms=MOLECULES.get(spec.get('variant','h2o'),MOLECULES['h2o']);spin=empty('Molecule spin',parent);spin.location=(0,0,1.4)
+ for el,(x,y,z) in atoms:sphere('Atom '+el,(x*1.3,y*1.3,z*1.3),.42 if el in ('O','C','N','Cl','Na') else .27,mat('Atom '+el,ATOM_COL[el]),spin)
+ if spec.get('variant')!='nacl':
+  c=atoms[0][1]
+  for el,(x,y,z) in atoms[1:]:line('Bond',[(c[0]*1.3,c[1]*1.3,c[2]*1.3),(x*1.3,y*1.3,z*1.3)],.07,white,spin)
+ else:
+  for a,b in ((0,1),(0,2),(1,3),(2,3)):line('Ionic link',[tuple(v*1.3 for v in atoms[a][1]),tuple(v*1.3 for v in atoms[b][1])],.04,white,spin)
+ def anim(q,frame):spin.rotation_euler.z=q*math.tau*.75;spin.rotation_euler.x=.25;key(spin,'rotation_euler',frame)
+ return {'anim':anim,'labels':[(name,(0,0,2.55))]}
+
+def cell_asset(parent,spec):
+ plant=spec.get('variant','plant')!='animal';cz=1.4
+ cyto=mat('Cytoplasm',(.86,.95,.78) if plant else (1.0,.86,.82))
+ if plant:
+  _solid2d('Cell wall',[(-1.75,cz-1.05),(1.75,cz-1.05),(1.75,cz+1.05),(-1.75,cz+1.05)],.12,mat('Cell wall',(.25,.6,.2)),parent)
+  _solid2d('Cytoplasm',[(-1.6,cz-.92),(1.6,cz-.92),(1.6,cz+.92),(-1.6,cz+.92)],.16,cyto,parent).location.y=-.05
+  _solid2d('Vacuole',[(math.cos(a)*.75-.2,cz+math.sin(a)*.5) for a in [i*math.tau/28 for i in range(28)]],.18,mat('Vacuole',(.65,.85,1.0)),parent).location.y=-.1
+ else:
+  _solid2d('Cell membrane',[(math.cos(a)*1.75,cz+math.sin(a)*1.05) for a in [i*math.tau/40 for i in range(40)]],.16,cyto,parent)
+ nucleus=sphere('Nucleus',(.95 if plant else 0,-.35,cz+(.35 if plant else 0)),.36,mat('Nucleus',(.55,.3,.75)),parent)
+ orgs=[]
+ m=mat('Chloroplast',(.12,.62,.2)) if plant else mat('Mitochondria',(.95,.45,.2))
+ for i in range(6):
+  o=ell('Chloroplast' if plant else 'Mitochondrion',(0,-.3,cz),(.22,.1,.12) if plant else (.26,.1,.11),m,parent);orgs.append((o,i/6))
+ def anim(q,frame):
+  for o,ph in orgs:
+   a=(ph+q*.35)*math.tau;o.location=(1.35*math.cos(a)*(1 if plant else .9),-.3,cz+.72*math.sin(a));o.rotation_euler.y=a;key(o,'location',frame);key(o,'rotation_euler',frame)
+  s=1+.06*math.sin(q*math.tau*2);nucleus.scale=(s,s,s);key(nucleus,'scale',frame)
+ labels=[('केंद्रक',(.95 if plant else 0,0,cz+(.35 if plant else 0)))]
+ labels+= [('कोशिका भित्ति',(-1.75,0,cz+1.05)),('हरितलवक',(1.35,0,cz-.72))] if plant else [('कोशिका झिल्ली',(-1.6,0,cz+.6)),('माइटोकॉन्ड्रिया',(1.2,0,cz-.6))]
+ return {'anim':anim,'labels':labels}
+
+PLANETS=[('बुध',(.65,.6,.55),.07,.55,4.1),('शुक्र',(.95,.75,.4),.1,.75,1.6),('पृथ्वी',(.2,.5,.95),.11,.95,1.0),('मंगल',(.9,.35,.2),.09,1.15,.53),
+ ('बृहस्पति',(.85,.65,.45),.22,1.45,.084),('शनि',(.9,.8,.55),.19,1.72,.034),('अरुण',(.55,.85,.9),.14,1.92,.012),('वरुण',(.3,.45,.95),.14,2.1,.006)]
+def solar_system_asset(parent,spec):
+ sys_=empty('Solar plane',parent);sys_.location=(0,0,1.35);sys_.rotation_euler.x=1.15
+ sphere('Sun',(0,0,0),.32,mat('Sun',(1,.72,.12)),sys_);pl=[]
+ for name,col,r,d,sp in PLANETS:
+  line('Orbit',[(d*math.cos(a),d*math.sin(a),0) for a in [j*math.tau/64 for j in range(65)]],.008,mat('Orbit line',(.45,.55,.65)),sys_)
+  piv=empty('Orbit pivot',sys_);p=sphere(name,(d,0,0),r,mat('Planet '+name,col),piv);pl.append((piv,sp,name,d))
+  if name=='शनि':ring=cyl('Saturn ring',(d,0,0),r*1.9,.01,mat('Ring',(.85,.78,.6)),piv);ring.rotation_euler.x=.4
+ earth=[x for x in pl if x[2]=='पृथ्वी'][0]
+ def anim(q,frame):
+  for piv,sp,name,d in pl:piv.rotation_euler.z=(.6*sp**.5+.05)*q*math.tau*2+d;key(piv,'rotation_euler',frame)
+ return {'anim':anim,'labels':[('सूर्य',(0,0,1.35+.35))]}
+
+def earth_layers_asset(parent,spec):
+ cz=1.35;layers=[('आंतरिक कोर',.42,(1,.92,.55)),('बाहरी कोर',.82,(1,.62,.15)),('मेंटल',1.42,(.85,.32,.12)),('भूपर्पटी',1.55,(.45,.3,.18))]
+ objs=[]
+ for i,(n,r,col) in enumerate(reversed(layers)):
+  o=_solid2d(n,[(math.cos(a)*r,math.sin(a)*r) for a in [j*math.tau/56 for j in range(56)]],.1+.04*i,mat('Layer '+n,col),parent);o.location=(0,-.05*i,cz);objs.append(o)
+ def anim(q,frame):
+  for i,o in enumerate(objs):s=ease((q-i*.15)/.25);s=max(.001,s);o.scale=(s,s,1);key(o,'scale',frame)
+ return {'anim':anim,'labels':[(n,(r*.72,0,cz+r*.6 if i%2 else cz-r*.55)) for i,(n,r,c) in enumerate(layers)]}
+
+def volcano_asset(parent,spec):
+ rock=mat('Volcano rock',(.38,.25,.18));lava=mat('Lava',(1,.35,.05))
+ _solid2d('Volcano',[(-1.9,.2),(-.35,1.9),(.35,1.9),(1.9,.2)],.6,rock,parent);_solid2d('Magma chamber',[(math.cos(a)*.6,.45+math.sin(a)*.25) for a in [j*math.tau/24 for j in range(24)]],.62,lava,parent).location.y=-.02
+ vent=box('Magma vent',(0,-.33,1.05),(.2,.02,1.3),lava,parent);vent.scale.z=.01
+ flow=line('Lava flow',[(.25,-.35,1.9),(.6,-.35,1.45),(.95,-.35,1.0),(1.35,-.35,.55),(1.7,-.35,.25)],.07,lava,parent);flow.data.bevel_factor_end=.004
+ drops=[sphere('Lava bomb',(0,-.35,1.95),.07,lava,parent) for _ in range(9)];smoke=[sphere('Ash cloud',(0,-.1,2.1),.25,mat('Ash',(.35,.35,.38)),parent) for _ in range(4)]
+ def anim(q,frame):
+  v=ease(q/.3);vent.scale.z=max(.01,v);vent.location.z=.5+.55*v;key(vent,'scale',frame);key(vent,'location',frame)
+  for i,d in enumerate(drops):
+   u=max(0,(q-.3)*1.6+i*.09)%1 if q>.3 else 0;ang=-.9+1.8*i/8;d.location=(math.sin(ang)*1.1*u,-.35,1.95+1.2*u-1.6*u*u);key(d,'location',frame)
+  for i,s in enumerate(smoke):
+   u=max(0,q-.3)*1.4;s.location=(.2*math.sin(i*2+u*3),-.1,2.1+u*(.5+.15*i));sc=.6+u;s.scale=(sc,sc,sc);key(s,'location',frame);key(s,'scale',frame)
+  _grow(flow,ease((q-.4)/.4),frame)
+ return {'anim':anim,'labels':[('मैग्मा',(0,0,.45)),('लावा',(1.2,0,.7))]}
+
+def water_cycle_asset(parent,spec):
+ sea=mat('Sea',(.1,.45,.85));box('Sea',(-1.1,0,.25),(1.8,.8,.3),sea,parent);_solid2d('Hill',[(.3,.1),(1.2,1.3),(1.95,.1)],.5,mat('Hill',(.25,.55,.25)),parent)
+ sphere('Sun',(-1.6,-.2,2.35),.25,mat('Sun',(1,.75,.15)),parent)
+ vap=_bubbles(parent,-1.1,.45,1.9,8,mat('Vapour',(.85,.92,1)),r=.05,spread=1.2)
+ cloud=empty('Cloud',parent);cm=mat('Cloud',(.95,.95,.97))
+ for x,z,r in [(-.35,0,.3),(0,.12,.38),(.35,0,.3)]:sphere('Cloud puff',(x,0,z),r,cm,cloud)
+ drops=[sphere('Rain drop',(0,-.2,2),.045,mat('Rain',(.35,.6,1)),parent) for _ in range(12)]
+ river=line('River back to sea',[(1.2,-.35,1.0),(.8,-.35,.6),(.2,-.35,.42),(-.4,-.35,.42)],.05,sea,parent);river.data.bevel_factor_end=.004
+ def anim(q,frame):
+  vap(q,frame,speed=1.6)
+  t=ease(q/.6);cloud.location=(-1.0+2.2*t,0,2.15);key(cloud,'location',frame)
+  g=ease((q-.45)/.2);cm.diffuse_color=(.95-.45*g,.95-.45*g,.97-.4*g,1);cm.keyframe_insert(data_path='diffuse_color',frame=frame)
+  for i,d in enumerate(drops):
+   u=((q-.55)*3+i/12)%1 if q>.55 else 0;d.location=(1.0+(i%4-1.5)*.18,-.2,(2.0-1.0*u) if q>.55 else 3.5);key(d,'location',frame)
+  _grow(river,ease((q-.7)/.3),frame)
+ return {'anim':anim,'labels':[('वाष्पीकरण',(-1.1,0,1.4)),('संघनन',(.9,0,2.35)),('वर्षा',(1.3,0,1.55))]}
+
+def timeline_asset(parent,spec):
+ ev=[e for e in spec.get('events',[]) if isinstance(e,dict)][:5];n=max(1,len(ev));axis=line('Timeline axis',[(-1.9,-.2,1.2),(1.9,-.2,1.2)],.04,white,parent);axis.data.bevel_factor_end=.004
+ marks=[];labels=[]
+ for i,e in enumerate(ev):
+  x=-1.6+3.2*i/max(1,n-1) if n>1 else 0;m=sphere('Event',(x,-.3,1.2),.13,mat('Event %d'%i,[(1,.7,.15),(.3,.8,1),(.9,.3,.3),(.4,.9,.4),(.8,.5,1)][i%5]),parent);m.scale=(0,0,0)
+  stem=box('Event stem',(x,-.25,1.2+(.45 if i%2==0 else -.45)),(.03,.03,.9),white,parent);stem.scale=(1,1,0.001);marks.append((m,stem))
+  labels.append((str(e.get('year',''))+' • '+str(e.get('label',''))[:24],(x,0,1.2+(1.0 if i%2==0 else -.9))))
+ def anim(q,frame):
+  _grow(axis,ease(q/.25),frame)
+  for i,(m,stem) in enumerate(marks):
+   s=ease((q-.2-i*.6/n)/.15);m.scale=(s,s,s);stem.scale=(1,1,max(.001,s));key(m,'scale',frame);key(stem,'scale',frame)
+ return {'anim':anim,'labels':labels}
+
+def bar_chart_asset(parent,spec):
+ bars=[b for b in spec.get('bars',[]) if isinstance(b,dict)][:5];n=max(1,len(bars));vmax=max([float(b.get('value',0) or 0) for b in bars]+[1e-9])
+ line('Chart axis',[(-1.9,-.2,2.4),(-1.9,-.2,.35),(1.9,-.2,.35)],.03,white,parent);objs=[];labels=[]
+ cols=[(1,.7,.15),(.3,.8,1),(.9,.3,.3),(.4,.9,.4),(.8,.5,1)]
+ for i,b in enumerate(bars):
+  x=-1.35+2.9*i/max(1,n-1) if n>1 else 0;h=1.9*float(b.get('value',0) or 0)/vmax
+  o=box('Bar',(x,0,.35),(min(.6,2.4/n),.4,1),mat('Bar %d'%i,cols[i%5]),parent);objs.append((o,max(.02,h)))
+  labels.append((str(b.get('label',''))[:14]+': '+str(b.get('value','')),(x,0,.4+max(.02,h)+.2)))
+ def anim(q,frame):
+  for i,(o,h) in enumerate(objs):
+   g=ease((q-i*.08)/.5);hh=max(.01,h*g);o.scale=(1,1,hh);o.location.z=.35+hh/2;key(o,'scale',frame);key(o,'location',frame)
+ return {'anim':anim,'labels':labels}
+
+def flag_asset(parent,spec):
+ box('Flag pole',(-1.55,0,1.2),(.07,.07,2.6),white,parent);box('Pole base',(-1.55,0,.08),(.5,.5,.16),dark,parent)
+ cols=[mat('Saffron',(1,.55,.12)),mat('Flag white',(.97,.97,.95)),mat('Flag green',(.07,.5,.18))];strips=[]
+ for i in range(14):
+  x=-1.5+i*.215
+  for j,c in enumerate(cols):strips.append((box('Flag cell',(x+.1,0,2.35-j*.36),(.22,.04,.36),c,parent),i,j))
+ chakra=empty('Ashoka chakra',parent);chakra.location=(-1.5+7*.215,-.06,1.99);navy=mat('Navy',(.05,.1,.5))
+ line('Chakra rim',[(.15*math.cos(a),0,.15*math.sin(a)) for a in [k*math.tau/32 for k in range(33)]],.012,navy,chakra)
+ for k in range(24):a=k*math.tau/24;line('Spoke',[(0,0,0),(.15*math.cos(a),0,.15*math.sin(a))],.004,navy,chakra)
+ def anim(q,frame):
+  for o,i,j in strips:o.location.y=.18*math.sin(i*.55-q*math.tau*2)*(i/13);key(o,'location',frame)
+  chakra.location.y=-.06+.18*math.sin(7*.55-q*math.tau*2)*(7/13);key(chakra,'location',frame)
+ return {'anim':anim,'labels':[]}
+
+PHYSICS_BUILDERS.update({'beaker':beaker_asset,'test_tube':test_tube_asset,'molecule':molecule_asset,'cell':cell_asset,'solar_system':solar_system_asset,
+ 'earth_layers':earth_layers_asset,'volcano':volcano_asset,'water_cycle':water_cycle_asset,'timeline':timeline_asset,'bar_chart':bar_chart_asset,'flag':flag_asset})
