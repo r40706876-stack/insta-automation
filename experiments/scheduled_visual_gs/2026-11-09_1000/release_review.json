@@ -1,0 +1,43 @@
+{
+  "answer_correct": true,
+  "visual_relevance": true,
+  "hindi_readable": false,
+  "pronunciation_correct": true,
+  "audio_visual_match": true,
+  "answer_reveal_timing": true,
+  "revision_card_readable": true,
+  "reasons": [
+    "The sub-header text under 'तथ्य समझिए' in Scene 4 is truncated ('जायकवाड़ी जलविद्युत परियोजना भारत की नदी')."
+  ],
+  "observed_answer": "B: गोदावरी",
+  "scene_evidence": [
+    {
+      "scene": 1,
+      "observation": "Displays the question 'जायकवाड़ी (चरण-1) जलविद्युत परियोजना किस नदी पर बनायी गयी है?' with options A (सिंधु) and B (गोदावरी)."
+    },
+    {
+      "scene": 2,
+      "observation": "Shows a 2-second timer prompt ('2s', '1s') asking the viewer to comment A or B."
+    },
+    {
+      "scene": 3,
+      "observation": "Reveals option B (गोदावरी) as the correct answer alongside a 3D map pointing to Godavari."
+    },
+    {
+      "scene": 4,
+      "observation": "presents a 3D dam model with water flow ('जल प्रवाह') and dam ('बाँध') labels explaining the project."
+    },
+    {
+      "scene": 5,
+      "observation": "Displays a self-test prompt ('खुद को जाँचिए', 'अब बिना देखे बताइए') with another view of the dam model."
+    },
+    {
+      "scene": 6,
+      "observation": "Displays a revision card summarizing 'याद रखें: गोदावरी' on an outline map of southern India."
+    }
+  ],
+  "sha256": "ad08d01e5dfd748cba4dd9e864205575f76460977dbcdc2cb78e1eb4bfd8618a",
+  "reviewer": "gemini-3.6-flash / actual rendered video and audio",
+  "reviewed_at": "2026-11-09T03:38:50.808736+00:00",
+  "review_type": "automated_multimodal"
+}

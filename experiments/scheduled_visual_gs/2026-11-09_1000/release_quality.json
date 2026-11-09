@@ -1,0 +1,8 @@
+{
+  "safe_to_publish": false,
+  "blocking_reasons": [
+    "unverified hindi_readable"
+  ],
+  "sha256": "ad08d01e5dfd748cba4dd9e864205575f76460977dbcdc2cb78e1eb4bfd8618a",
+  "version": "rendered_release_v1"
+}

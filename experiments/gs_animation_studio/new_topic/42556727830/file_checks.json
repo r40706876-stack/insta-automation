@@ -1,0 +1,50 @@
+{
+  "notes_banner": {
+    "version": "studio-notes-v1",
+    "phone": "+91 89892 79637",
+    "safe_area": [
+      36,
+      64,
+      636,
+      151
+    ],
+    "placement": "end_card_last_3s"
+  },
+  "quality_version": "rich_3d_v1",
+  "duration_seconds": 24.291667,
+  "dimensions": [
+    720,
+    1280
+  ],
+  "fps": "24/1",
+  "decoded_without_errors": true,
+  "black_intervals": 0,
+  "audio_mean_db": -17.5,
+  "audio_peak_db": -1.4,
+  "sha256": "ad08d01e5dfd748cba4dd9e864205575f76460977dbcdc2cb78e1eb4bfd8618a",
+  "voice": "Edge / Swara female fallback",
+  "published": false,
+  "actual_rendered_motion_checks": {
+    "scene_1_teaching_motion": {
+      "changed_fraction": 0.02824
+    },
+    "scene_2_teaching_motion": {
+      "changed_fraction": 0.10747
+    },
+    "scene_3_teaching_motion": {
+      "changed_fraction": 0.18065
+    },
+    "scene_4_teaching_motion": {
+      "changed_fraction": 0.07084
+    },
+    "scene_5_teaching_motion": {
+      "changed_fraction": 0.08587
+    }
+  },
+  "static_revision_checks": {
+    "scene_6": {
+      "seconds": 2.986009070294785,
+      "bounded_revision_card": true
+    }
+  }
+}

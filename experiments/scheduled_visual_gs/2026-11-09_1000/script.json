@@ -1,0 +1,132 @@
+{
+  "ok": true,
+  "title": "जायकवाड़ी जलविद्युत परियोजना नदी पहचान",
+  "subject": "Geography",
+  "renderer_version": "rich_3d_v1",
+  "question_hash": "f6665238f7baaf37386b9ffd5c8b7af460ef964f90c91b958dd99285c9064774",
+  "reference": {
+    "subject": "Geography",
+    "subject_hi": "भूगोल",
+    "chapter": "नदी घाटी परियोजनाएँ (River Valley Projects)",
+    "sub": "",
+    "question": "जायकवाड़ी (चरण-1) जलविद्युत परियोजना किस नदी पर बनायी गयी है?",
+    "options": {
+      "a": "सिंधु",
+      "b": "कावेरी",
+      "c": "गोदावरी",
+      "d": "गंगा"
+    },
+    "answer": "c",
+    "exams": [
+      "RRB Group-D 17-09-2018 (Shift-III)",
+      "RRB Group-D 23-10-2018 (Shift-I)"
+    ],
+    "explanation": "जायकवाड़ी जलविद्युत परियोजना भारत की नदी घाटी परियोजना है। यह परियोजना महाराष्ट्र के औरंगाबाद जिले में जायकवाड़ी गाँव के निकट गोदावरी नदी पर स्थित है। इस बाँध की कुल लम्बाई लगभग 10 किमी. है। बाँध के पीछे जलाशय बना है जिसे नाथसागर जलाशय कहते है। इस बाँध पर 12 मेगावाट की क्षमता का विद्युत गृह लगाया गया है।",
+    "times_asked": 2,
+    "years": [
+      "2018"
+    ],
+    "id": "eebdfa39f7",
+    "seq": 96
+  },
+  "experiment_format": "visual_mystery",
+  "primary_objective": "save",
+  "series_next_topic": "अंकलेश्वर, एक प्रसिद्ध पेट्रोलियम स्थल है, जो ........ राज्य में स्थित है–",
+  "series_next_hash": "f0fc5a4f057fdd3e2785025d03898e052e15127054b098ed22c48ceeb6e1f7af",
+  "topic_policy": "evidence_cohort_v2",
+  "topic_priority": 1.0,
+  "recall": "याद रखें: गोदावरी।",
+  "share_card": {
+    "kind": "exam_confusion",
+    "recipient": "परीक्षा की तैयारी करने वाले मित्र",
+    "benefit": "गलत नदी विकल्प को दूर करके तेज़ी से उत्तर याद रखें",
+    "cta": "दोस्त को यह तथ्य बताइए"
+  },
+  "share_reason": "परीक्षा में नदी‑घाटी प्रश्न अक्सर पूछे जाते हैं",
+  "scenes": [
+    {
+      "label": "पहले अपना जवाब चुनिए",
+      "quiz_options": [
+        "A: सिंधु",
+        "B: गोदावरी"
+      ],
+      "speech": "जायकवाड़ी (चरण-1) जलविद्युत परियोजना किस नदी पर बनायी गयी है? दृश्य देखिए।",
+      "role": "hook",
+      "revision_card": false,
+      "teaches": "प्रश्न की पहचान और विकल्प सोचना",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "institution",
+        "visible_action": "नदी का नक्शा दिखाते हुए रूट ट्रेस होता है"
+      }
+    },
+    {
+      "label": "कमेंट में लिखिए: A या B?",
+      "quiz_options": [
+        "A: सिंधु",
+        "B: गोदावरी"
+      ],
+      "speech": "दो सेकंड: A या B?",
+      "role": "challenge",
+      "revision_card": false,
+      "teaches": "विकल्पों की तुलना",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "दो तीर एक‑दूसरे की ओर इशारा करते हैं"
+      }
+    },
+    {
+      "label": "सही उत्तर",
+      "quiz_options": null,
+      "speech": "सही उत्तर है: गोदावरी।",
+      "role": "reveal",
+      "revision_card": false,
+      "teaches": "सही नदी पहचान",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "institution",
+        "visible_action": "नक्शे पर गोदावरी पर मार्कर चमके"
+      }
+    },
+    {
+      "label": "तथ्य समझिए",
+      "quiz_options": null,
+      "speech": "जायकवाड़ी जलविद्युत परियोजना भारत की नदी घाटी परियोजना है।",
+      "role": "explain",
+      "revision_card": false,
+      "teaches": "परियोजना का भौतिक कारण",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "laboratory",
+        "visible_action": "बाँध मॉडल पर पानी का प्रवाह दिखता है"
+      }
+    },
+    {
+      "label": "खुद को जाँचिए",
+      "quiz_options": null,
+      "speech": "अब बिना देखे बताइए।",
+      "role": "transfer",
+      "revision_card": false,
+      "teaches": "संकल्पना का सामान्यीकरण",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "institution",
+        "visible_action": "एक और बाँध मॉडल पर पानी का प्रवाह"
+      }
+    },
+    {
+      "label": "रिवीजन कार्ड",
+      "quiz_options": null,
+      "speech": "याद रखें: गोदावरी।",
+      "role": "revision",
+      "revision_card": true,
+      "teaches": "स्मरण",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "टेक्स्ट स्थिर दिखता है"
+      }
+    }
+  ]
+}

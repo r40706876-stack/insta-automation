@@ -1,6 +1,6 @@
 {
  "next_seq": 185,
- "episode": 190,
+ "episode": 191,
  "posted": [
   "684d76bcbc",
   "6bb20b4a07",
@@ -592,7 +592,14 @@
   "79cce14930",
   "af81f05c9e",
   "92c2a944d1",
-  "97cc97620b"
+  "97cc97620b",
+  "f944ca63ed",
+  "01ed635122",
+  "930c1ed3eb",
+  "efcccd05b6",
+  "82eed42a25",
+  "873136527a",
+  "7a75e13b35"
  ],
  "skipped": {
   "bdd1ce5a8b": "उत्तर कुंजी वर्तमान स्थिति के अनुसार गलत है।",
@@ -616,9 +623,9 @@
   "494dbdcb7a": "Answer outdated: ministry renamed to Education Ministry in 2020"
  },
  "last": {
-  "seq": 2361,
-  "id": "97cc97620b",
-  "time": "2026-11-09 01:30",
+  "seq": 2847,
+  "id": "7a75e13b35",
+  "time": "2026-11-09 04:30",
   "format": "list"
  },
  "carousel_queue": [

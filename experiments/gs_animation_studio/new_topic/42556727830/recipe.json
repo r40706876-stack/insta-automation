@@ -1,0 +1,353 @@
+{
+  "title": "जायकवाड़ी जलविद्युत परियोजना नदी पहचान",
+  "subject": "भूगोल",
+  "topic_key": "jaya_kavadi_hydro_project_river",
+  "share_reason": "परीक्षा में नदी‑घाटी प्रश्न अक्सर पूछे जाते हैं",
+  "recall": "याद रखें: गोदावरी।",
+  "pyq_challenge": true,
+  "share_card": {
+    "kind": "exam_confusion",
+    "recipient": "परीक्षा की तैयारी करने वाले मित्र",
+    "benefit": "गलत नदी विकल्प को दूर करके तेज़ी से उत्तर याद रखें",
+    "cta": "दोस्त को यह तथ्य बताइए"
+  },
+  "scenes": [
+    {
+      "role": "hook",
+      "heading": "पहले अपना जवाब चुनिए",
+      "explanation": "A या B — सोचिए",
+      "speech": "जायकवाड़ी (चरण-1) जलविद्युत परियोजना किस नदी पर बनायी गयी है? दृश्य देखिए।",
+      "teaches": "प्रश्न की पहचान और विकल्प सोचना",
+      "visual_action": "नदी का नक्शा दिखाते हुए रूट ट्रेस होता है",
+      "setting": "institution",
+      "objects": [
+        {
+          "kind": "map",
+          "action": "trace",
+          "map_region": "india",
+          "route": [
+            [
+              73.0,
+              19.0
+            ],
+            [
+              73.5,
+              19.5
+            ]
+          ],
+          "label": "गोदावरी",
+          "id": "object_0",
+          "color": "#59c7c5",
+          "pos": [
+            0.0,
+            0,
+            0
+          ],
+          "size": [
+            1.1,
+            1.1,
+            1.1
+          ]
+        }
+      ],
+      "hook_question": "जायकवाड़ी (चरण-1) जलविद्युत परियोजना किस नदी पर बनायी गयी है?",
+      "quiz_options": [
+        "A: सिंधु",
+        "B: गोदावरी"
+      ]
+    },
+    {
+      "role": "challenge",
+      "heading": "कमेंट में लिखिए: A या B?",
+      "explanation": "दो सेकंड: A या B?",
+      "speech": "दो सेकंड: A या B?",
+      "teaches": "विकल्पों की तुलना",
+      "visual_action": "दो तीर एक‑दूसरे की ओर इशारा करते हैं",
+      "setting": "neutral",
+      "objects": [
+        {
+          "kind": "arrow",
+          "action": "move",
+          "label": "सिंधु",
+          "id": "object_0",
+          "color": "#59c7c5",
+          "pos": [
+            -1.35,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            -0.15,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "arrow",
+          "action": "move",
+          "label": "गोदावरी",
+          "id": "object_1",
+          "color": "#59c7c5",
+          "pos": [
+            0.45,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            1.65,
+            0,
+            0
+          ]
+        }
+      ],
+      "quiz_options": [
+        "A: सिंधु",
+        "B: गोदावरी"
+      ]
+    },
+    {
+      "role": "reveal",
+      "heading": "सही उत्तर",
+      "explanation": "सही उत्तर है: गोदावरी।",
+      "speech": "सही उत्तर है: गोदावरी।",
+      "teaches": "सही नदी पहचान",
+      "visual_action": "नक्शे पर गोदावरी पर मार्कर चमके",
+      "setting": "institution",
+      "objects": [
+        {
+          "kind": "person",
+          "action": "walk",
+          "label": "मार्कर",
+          "id": "object_0",
+          "color": "#f4e7bf",
+          "pos": [
+            -1.35,
+            0,
+            0
+          ],
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ],
+          "to": [
+            -0.15,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "map",
+          "action": "trace",
+          "map_region": "india",
+          "route": [
+            [
+              73.0,
+              19.0
+            ],
+            [
+              73.5,
+              19.5
+            ]
+          ],
+          "label": "गोदावरी",
+          "id": "object_1",
+          "color": "#59c7c5",
+          "pos": [
+            0.9,
+            0,
+            0
+          ],
+          "size": [
+            1.1,
+            1.1,
+            1.1
+          ]
+        }
+      ]
+    },
+    {
+      "role": "explain",
+      "heading": "तथ्य समझिए",
+      "explanation": "जायकवाड़ी जलविद्युत परियोजना भारत की नदी",
+      "speech": "जायकवाड़ी जलविद्युत परियोजना भारत की नदी घाटी परियोजना है।",
+      "teaches": "परियोजना का भौतिक कारण",
+      "visual_action": "बाँध मॉडल पर पानी का प्रवाह दिखता है",
+      "setting": "laboratory",
+      "objects": [
+        {
+          "kind": "building",
+          "action": "none",
+          "label": "बाँध",
+          "id": "object_0",
+          "color": "#b1a4d3",
+          "pos": [
+            -0.9,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        {
+          "kind": "water",
+          "action": "flow",
+          "label": "जल प्रवाह",
+          "id": "object_1",
+          "color": "#18a9dd",
+          "pos": [
+            0.9,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            2.1,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "role": "transfer",
+      "heading": "खुद को जाँचिए",
+      "explanation": "अब बिना देखे बताइए।",
+      "speech": "अब बिना देखे बताइए।",
+      "teaches": "संकल्पना का सामान्यीकरण",
+      "visual_action": "एक और बाँध मॉडल पर पानी का प्रवाह",
+      "setting": "institution",
+      "objects": [
+        {
+          "kind": "building",
+          "action": "none",
+          "label": "दूसरा बाँध",
+          "id": "object_0",
+          "color": "#b1a4d3",
+          "pos": [
+            -0.9,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        {
+          "kind": "water",
+          "action": "flow",
+          "label": "जल प्रवाह",
+          "id": "object_1",
+          "color": "#18a9dd",
+          "pos": [
+            0.9,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            2.1,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "role": "revision",
+      "heading": "रिवीजन कार्ड",
+      "explanation": "याद रखें: गोदावरी।",
+      "speech": "याद रखें: गोदावरी।",
+      "teaches": "स्मरण",
+      "visual_action": "टेक्स्ट स्थिर दिखता है",
+      "setting": "neutral",
+      "revision_card": true,
+      "objects": [
+        {
+          "kind": "map",
+          "action": "none",
+          "map_region": "india",
+          "label": "गोदावरी",
+          "id": "object_0",
+          "color": "#59c7c5",
+          "pos": [
+            0.0,
+            0,
+            0
+          ],
+          "size": [
+            1.1,
+            1.1,
+            1.1
+          ]
+        }
+      ]
+    }
+  ],
+  "speech": [
+    "जायकवाड़ी (चरण-1) जलविद्युत परियोजना किस नदी पर बनायी गयी है? दृश्य देखिए।",
+    "दो सेकंड: A या B?",
+    "सही उत्तर है: गोदावरी।",
+    "जायकवाड़ी जलविद्युत परियोजना भारत की नदी घाटी परियोजना है।",
+    "अब बिना देखे बताइए।",
+    "याद रखें: गोदावरी।"
+  ],
+  "titles": [
+    [
+      "पहले अपना जवाब चुनिए",
+      "A या B — सोचिए"
+    ],
+    [
+      "कमेंट में लिखिए: A या B?",
+      "दो सेकंड: A या B?"
+    ],
+    [
+      "सही उत्तर",
+      "सही उत्तर है: गोदावरी।"
+    ],
+    [
+      "तथ्य समझिए",
+      "जायकवाड़ी जलविद्युत परियोजना भारत की नदी"
+    ],
+    [
+      "खुद को जाँचिए",
+      "अब बिना देखे बताइए।"
+    ],
+    [
+      "रिवीजन कार्ड",
+      "याद रखें: गोदावरी।"
+    ]
+  ],
+  "requested_topic": "जायकवाड़ी (चरण-1) जलविद्युत परियोजना किस नदी पर बनायी गयी है?",
+  "automatic_selection": false,
+  "planner": "Groq / openai/gpt-oss-120b",
+  "auditor": "Groq / openai/gpt-oss-20b",
+  "dynamic": true,
+  "topic_policy": "easy_single_concept_v1",
+  "quality_version": "rich_3d_v1",
+  "primary_objective": "save",
+  "series_next_topic": "अंकलेश्वर, एक प्रसिद्ध पेट्रोलियम स्थल है, जो ........ राज्य में स्थित है–"
+}
