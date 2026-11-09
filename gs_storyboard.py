@@ -13,8 +13,9 @@ def grounded_storyboard(reference,format_name=None):
     facts=grounded_facts(reference.get('explanation',''))
     if not facts:raise ValueError('A complete concise source explanation is required')
     other=next((str(v).strip().rstrip('।.') for k,v in options.items() if k!=key),None)
+    # Keep one coherent question: no second generic spoken hook before the answer.
     # Comment pause: ask for A/B in the comments before the reveal (comments were ~0).
-    choices='दो सेकंड: A या B?' if other else 'दो सेकंड सोचिए, फिर जवाब मिलाइए।'
+    choices='दो सेकंड सोचिए: A या B?' if other else 'दो सेकंड सोचिए।'
     displayed=[answer,other] if other else [answer]
     if other and sum(question.encode())%2:displayed.reverse()
     if other:displayed=['A: '+displayed[0],'B: '+displayed[1]]
@@ -30,8 +31,10 @@ def grounded_storyboard(reference,format_name=None):
     short=[f for f in facts if len(f.split())<=12]
     explain=short[0] if short else min(facts,key=lambda f:len(f.split()))
     rest=[f for f in facts if f!=explain]
-    transfer=rest[0] if rest and len(rest[0].split())<=6 else 'अब बिना देखे बताइए।'
-    speech=[opening,choices,'सही उत्तर है: '+answer+'।',explain,transfer,'याद रखें: '+answer+'।']
+    transfer=rest[0] if rest and len(rest[0].split())<=6 else 'यही परीक्षा की आम गलती है।'
+    # Avoid repeating the full answer in the final scene; add new value or finish early.
+    recall='याद रखने की ट्रिक: '+answer+'।' if rest else 'अगली बार यह गलती मत कीजिए।'
+    speech=[opening,choices,'सही उत्तर है: '+answer+'।',explain,transfer,recall]
     if any(len(line.split())>25 for line in speech):raise ValueError('Question/options exceed readable scene limits')
     result=[{'role':role,'heading':heading,'speech':line,'explanation':(' '.join(line.split()[:6]))} for role,heading,line in zip(ROLES,HEADINGS,speech)]
     # Top reels (Map Test 01, हथौड़ा, समुद्री हवा) showed the FULL question and both options
@@ -42,4 +45,7 @@ def grounded_storyboard(reference,format_name=None):
     if other:result[0]['quiz_options']=displayed
     result[1]['heading']='कमेंट में लिखिए: A या B?' if other else result[1]['heading']
     result[1]['quiz_options']=displayed
+    # Duration is driven by spoken words, not an arbitrary fixed scene length.
+    # Downstream TTS/renderer still owns the final measured duration.
+    result[0]['content_group']='single_topic'
     return result
