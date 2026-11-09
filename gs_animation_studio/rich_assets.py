@@ -391,6 +391,9 @@ def _solid2d(name,poly,depth,m,parent):
 def _rays(parent,paths,m,r=.035):
  out=[]
  for pts in paths:
+  (ax,az),(bx,bz)=pts[-2],pts[-1]
+  if not .35<=bz<=2.45 and bz!=az:          # last leg leaves the picture -> stop at the frame edge
+   lim=2.45 if bz>2.45 else .35;t=(lim-az)/(bz-az);pts=pts[:-1]+[(ax+(bx-ax)*t,lim)]
   c=line('Light ray path',[(x,-.3,z) for x,z in pts],r,m,parent);c.data.bevel_factor_end=.004;out.append(c)
  return out
 def _seq(curves,q,frame,start=0,end=.8):
