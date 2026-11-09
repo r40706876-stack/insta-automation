@@ -1,0 +1,35 @@
+name: Cinematic optics demo (Cycles)
+# Build-only demo: prism + convex lens with real glass, glow and camera push-in. Never posts.
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  render:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 150
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: ./.github/actions/gs-3d-dependencies
+      - name: Render (Cycles CPU)
+        run: |
+          mkdir -p /tmp/optics
+          xvfb-run -a /tmp/blender/blender -b -t 0 --python gs_animation_studio/cinematic_optics_demo.py -- /tmp/optics 2>&1 | grep -E "OPTICS_DONE|Error|Traceback|Fra:1 |Fra:96 |Fra:192 " | tail -20
+          ls /tmp/optics | wc -l
+      - name: Titles + sound -> MP4
+        run: |
+          mkdir -p experiments/cinematic_optics
+          python gs_animation_studio/cinematic_optics_assemble.py /tmp/optics experiments/cinematic_optics/optics_demo.mp4
+          cp /tmp/optics/txt/0060.png experiments/cinematic_optics/still_prism.png
+          cp /tmp/optics/txt/0170.png experiments/cinematic_optics/still_lens.png
+      - name: Save
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add experiments/cinematic_optics || true
+          git diff --cached --quiet || git commit -m "Cinematic optics demo [skip ci]"
+          for i in 1 2 3; do git pull --rebase -X theirs --autostash && git push && break; sleep 5; done
