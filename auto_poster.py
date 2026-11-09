@@ -4137,6 +4137,42 @@ def list_ok(q):
     return not re.search(r"नहीं|असत्य|गलत|निम्न|इनमें से|इनमे से|सही कथन|पता लगाया|वर्तमान|मौजूदा|हाल ही|अभी", qc)
 
 
+_STALE_Q = re.compile(
+    r"20\d\d के अनुसार|के अनुसार 20\d\d|वर्तमान|मौजूदा|हाल ही|माननीय|प्रस्ताव है|किए जाने का प्रस्ताव"
+    r"|(कमांडर|अध्यक्ष|प्रधानमंत्री|मुख्यमंत्री|राज्यपाल|नेता|सचिव|गवर्नर|मुख्य न्यायाधीश|मंत्री|निदेशक|चेयरमैन|"
+    r"सेनाध्यक्ष|आयुक्त|महासचिव|कप्तान|CEO|सीईओ)[^?]{0,25}कौन (है|हैं)")
+
+
+def stale_question(text):
+    """Samay ke saath badalne wala sawal (aaj ka padadhikari, '2017 ke anusar' ...) -> 7 PYQ me nahi."""
+    return bool(_STALE_Q.search(clean_text(text)))
+
+
+CONNECT_PROMPT = """Ye ek hi subject ke previous-year exam sawal hain (id | sawal | sahi jawab):
+{rows}
+Inme se THEEK 7 aise chuno jo EK HI chhote topic ke hon (jaise sab 'राष्ट्रपति' ya sab 'अम्ल-क्षार'), ek doosre se
+jude hon, aur aaj bhi jawab sahi ho. Kram: sabse aasaan/jaana-pehchana pehle, dheere-dheere kathin. Galat/purane jawab,
+ganit wale ya bina options ke adhoore sawal mat chuno. 7 jude sawal na milein to {{"ids": []}}.
+Sirf JSON: {{"topic": "topic ka Hindi naam (max 3 shabd)", "ids": ["...7 ids kram me..."]}}"""
+
+
+def pick_connected(cand):
+    """AI: 45 sawalon me se ek jude topic ke 7 (aasaan -> kathin). Fail -> []."""
+    if len(cand) < LIST_N or DRY_RUN or not (GEMINI_API_KEY or GROQ_API_KEY):
+        return []
+    rows = "\n".join(f"{q['id']} | {clean_text(q['question'])} | {clean_text(str(q['options'][q['answer']]))}"
+                     for q in cand)
+    by = {str(q["id"]): q for q in cand}
+    for fn in (_gemini, _groq):
+        js = fn(CONNECT_PROMPT.format(rows=rows))
+        ids = [str(i) for i in (js or {}).get("ids", []) if str(i) in by]
+        ids = list(dict.fromkeys(ids))
+        if len(ids) >= LIST_N:
+            print("  7 PYQ topic (AI):", (js or {}).get("topic"))
+            return [by[i] for i in ids[:LIST_N]]
+    return []
+
+
 def pick_list_items(bank, st):
     """Agle sawal ka subject; usi subject ke chhote, bina-post sawal (AI se jaanch ke) 7 tak."""
     done = set(st["posted"]) | set(st["skipped"])
@@ -4160,17 +4196,32 @@ def pick_list_items(bank, st):
     # Kisi chapter me 5 se kam chhote sawal bache hon to purana tareeka (poora subject).
     groups = {}
     for q in pool:
-        if list_ok(q):
+        if list_ok(q) and not stale_question(q["question"]):
             groups.setdefault((q.get("chapter") or "", q.get("sub") or ""), []).append(q)
-    best = max(groups.values(), key=lambda g: (len(g) >= LIST_N + 2, len(g) >= 5,
+    # title hamesha "7 PYQ" -> topic me 7 se kam bache to usi subject ke sawal se poore 7 (topic ke pehle)
+    best = max(groups.values(), key=lambda g: (len(g) >= LIST_N + 2, len(g) >= LIST_N, len(g) >= 5,
                                                min(int(x["seq"]) for x in g) * -1), default=[])
+    # Bank ke chapter tag kai jagah galat hain (pH chapter me aavart sarni ke sawal) -> AI se ek jude topic ke 7 chuno
+    cand = [q for q in pool if list_ok(q) and not stale_question(q["question"])
+            and not _MEGA_JUNK.search(clean_text(q["question"]) + " " + clean_text(str(q["options"][q["answer"]])))][:80]
+    picked = pick_connected(cand)
+    if picked:
+        best = picked
     if len(best) >= 5:
         print("  7 PYQ topic:", " / ".join(x for x in (best[0].get("chapter"), best[0].get("sub")) if x))
         ids = {q["id"] for q in best}
-        pool = best + [q for q in pool if q["id"] not in ids]   # AI ne kuch chhode to hi subject ke baaki sawal
+        chap = best[0].get("chapter") or ""
+        rest = [q for q in pool if q["id"] not in ids]
+        rest.sort(key=lambda q: (q.get("chapter") or "") != chap)   # kami ho to pehle usi chapter ke baaki upvishay
+        pool = best + rest
     for q in (today if subject == "TODAY" else pool):
         if subject != "TODAY" and (q["subject"] != subject or not list_ok(q)):
             continue
+        if stale_question(q["question"]):
+            st["skipped"][q["id"]] = "samay ke saath badalne wala sawal"
+            continue
+        if _MEGA_JUNK.search(clean_text(q["question"]) + " " + clean_text(str(q["options"][q["answer"]]))):
+            continue                                    # toote akshar (jaise '56.1ज्ञ्')
         ai = ai_enrich(q)
         if ai and ai.get("reject"):
             st["skipped"][q["id"]] = ai["reject"]
@@ -4182,8 +4233,6 @@ def pick_list_items(bank, st):
         items.append({"id": q["id"], "seq": q["seq"], "q": qq, "a": aa, "n": int(q.get("times_asked") or 1)})
         if len(items) >= LIST_N:
             break
-        if len(best) >= 5 and q["id"] == best[-1]["id"] and len(items) >= 5:
-            break                                       # topic ke 5-6 sahi sawal kaafi; doosre topic se mat milao
     return subject, items
 
 
