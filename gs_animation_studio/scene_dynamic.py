@@ -9,13 +9,13 @@ s=bpy.context.scene;s.render.engine='BLENDER_WORKBENCH';s.render.resolution_x=72
 sh=s.display.shading;sh.light='STUDIO';sh.color_type='MATERIAL';sh.show_shadows=True;sh.show_cavity=True;sh.cavity_type='BOTH';sh.show_specular_highlight=True;sh.show_object_outline=True;sh.background_type='WORLD';s.world.color=(.018,.039,.063);s.view_settings.view_transform='Standard'
 CINE=os.getenv('STUDIO_CINEMATIC')=='1'
 GLASS_KEYS=('glass','Optical')
-EMIT={'Light ray':7,'Spectrum':9,'Flame':12,'Lava':7,'Sun':5,'Bulb glow':0,'Light halo':5,'Latitude line':2,'White light':10,'Light inside':6,'Magma':4,'Electron':2,'Rain':1.5}
+EMIT={'Glass edge':3,'Light ray':7,'Spectrum':9,'Flame':12,'Lava':7,'Sun':5,'Bulb glow':0,'Light halo':5,'Latitude line':2,'White light':10,'Light inside':6,'Magma':4,'Electron':2,'Rain':1.5}
 def mat(name,color):
  m=bpy.data.materials.new(name);m.diffuse_color=(*color,1)
  if CINE:
   m.use_nodes=True;b=m.node_tree.nodes['Principled BSDF'];b.inputs['Base Color'].default_value=(*color,1);b.inputs['Roughness'].default_value=.38
   if any(k.lower() in name.lower() for k in GLASS_KEYS):
-   b.inputs['Transmission Weight'].default_value=1;b.inputs['Roughness'].default_value=.03;b.inputs['IOR'].default_value=1.5
+   b.inputs['Transmission Weight'].default_value=.85;b.inputs['Roughness'].default_value=.06;b.inputs['IOR'].default_value=1.5;b.inputs['Base Color'].default_value=(.72,.9,1,1)
   for k,v in EMIT.items():
    if name.startswith(k):b.inputs['Emission Color'].default_value=(*color,1);b.inputs['Emission Strength'].default_value=v
   if name in ('Stage blue','Outline'):b.inputs['Roughness'].default_value=.16;b.inputs['Metallic'].default_value=.3

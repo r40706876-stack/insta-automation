@@ -2,6 +2,10 @@ name: Cinematic 3D assets (Cycles, overnight)
 # Build-only: every new diagram set rendered with Cycles (glass, glow, light, perspective push-in) as a full video. Never posts.
 on:
   workflow_dispatch:
+    inputs:
+      sets:
+        description: 'JSON list of sets'
+        default: '["physics_a","physics_b","diagrams_a","diagrams_b","maps"]'
 permissions:
   contents: write
 jobs:
@@ -11,7 +15,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        set: [physics_a, physics_b, diagrams_a, diagrams_b, maps]
+        set: ${{ fromJSON(inputs.sets || '["physics_a","physics_b","diagrams_a","diagrams_b","maps"]') }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5

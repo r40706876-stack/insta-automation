@@ -408,7 +408,7 @@ def lens_asset(parent,spec):
   z=-h+2*h*i/16;t=1-(z/h)**2
   prof.append(((.06+.24*t) if not concave else (.3-.22*t),z))
  poly=[(x,cz+z) for x,z in prof]+[(-x,cz+z) for x,z in reversed(prof)]
- _solid2d('Lens',poly,.18,glass,parent);line('Principal axis',[(-2,-.25,cz),(2,-.25,cz)],.012,white,parent)
+ _solid2d('Lens',poly,.18,glass,parent);line('Glass edge',[(x,-.3,z) for x,z in poly+[poly[0]]],.014,mat('Glass edge',(.7,.95,1)),parent);line('Principal axis',[(-2,-.25,cz),(2,-.25,cz)],.012,white,parent)
  F=1.05;paths=[]
  for hz in (-.55,0,.55):
   hit=(0,cz+hz)
@@ -445,7 +445,7 @@ def mirror_asset(parent,spec):
 SPECTRUM=[('V',(.55,.2,.95)),('I',(.3,.25,.95)),('B',(.15,.55,1)),('G',(.15,.85,.3)),('Y',(1,.92,.15)),('O',(1,.55,.1)),('R',(.95,.12,.1))]
 def prism_asset(parent,spec):
  glass=mat('Prism glass',(.62,.92,1.0));tri=[(-.75,.55),(.75,.55),(0,1.85)]
- _solid2d('Prism',tri,.4,glass,parent)
+ _solid2d('Prism',tri,.4,glass,parent);line('Glass edge',[(x,-.42,z) for x,z in tri+[tri[0]]],.016,mat('Glass edge',(.7,.95,1)),parent)
  a=(-.4,1.2);b=(.38,1.18)
  white_in=line('White light',[(-1.9,-.3,.95),(a[0],-.3,a[1])],.05,white,parent);inner=line('Light inside prism',[(a[0],-.3,a[1]),(b[0],-.3,b[1])],.035,white,parent)
  for c in (white_in,inner):c.data.bevel_factor_end=.004
