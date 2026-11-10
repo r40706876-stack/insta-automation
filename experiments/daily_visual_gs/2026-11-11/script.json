@@ -1,0 +1,132 @@
+{
+  "ok": true,
+  "title": "अंकलेश्वर का राज्य",
+  "subject": "Geography",
+  "renderer_version": "rich_3d_v1",
+  "question_hash": "f0fc5a4f057fdd3e2785025d03898e052e15127054b098ed22c48ceeb6e1f7af",
+  "reference": {
+    "subject": "Geography",
+    "subject_hi": "भूगोल",
+    "chapter": "भारत में खनिज संसाधन (Mineral Resources in India)",
+    "sub": "",
+    "question": "अंकलेश्वर, एक प्रसिद्ध पेट्रोलियम स्थल है, जो ........ राज्य में स्थित है–",
+    "options": {
+      "a": "भोपाल",
+      "b": "बिहार",
+      "c": "उत्तर प्रदेश",
+      "d": "गुजरात"
+    },
+    "answer": "d",
+    "exams": [
+      "RRB Group-D 24-09-2018 (Shift-III)",
+      "RRB Group-D 29-10-2018 (Shift-III)"
+    ],
+    "explanation": "अंकलेश्वर गुजरात के भड़ौच जिले में स्थित खनिज तेल उत्पादक क्षेत्र है। यहाँ तेल की खोज जुलाई, 1958 ई. में हुई, जबकि उत्पादन सन् 1961 ई. में शुरू हुआ। गुजरात राज्य में नवगॉव, कोसम्बा, सनन्द नदी घाटी, कदी, ओल्पाद, कठाना, ढोलका आदि स्थानों पर भी तेल का विस्तार है।",
+    "times_asked": 2,
+    "years": [
+      "2018"
+    ],
+    "id": "a03f007a7f",
+    "seq": 106
+  },
+  "experiment_format": "exam_trap",
+  "primary_objective": "share",
+  "series_next_topic": "जादूगोड़ा की खान ______ के लिए प्रसिद्ध हैं।",
+  "series_next_hash": "acedaeae46802ad55547c1f497ac033bb14ab6e8af393ee81c11a2ce069da2e5",
+  "topic_policy": "evidence_cohort_v2",
+  "topic_priority": 1.0,
+  "recall": "याद रखने की ट्रिक: गुजरात।",
+  "share_card": {
+    "kind": "exam_confusion",
+    "recipient": "जिन्हें भूगोल परीक्षा की तैयारी है",
+    "benefit": "राज्य भ्रम को दूर कर सही उत्तर याद रखें",
+    "cta": "अब शेयर करें और साथ पढ़ें"
+  },
+  "share_reason": "दोस्त को राज्य भ्रम से बचाने के लिए",
+  "scenes": [
+    {
+      "label": "पहले अपना जवाब चुनिए",
+      "quiz_options": [
+        "A: भोपाल",
+        "B: गुजरात"
+      ],
+      "speech": "अंकलेश्वर, एक प्रसिद्ध पेट्रोलियम स्थल है, जो ........ राज्य में स्थित है– जाल पहचानिए।",
+      "role": "hook",
+      "revision_card": false,
+      "teaches": "प्रश्न को पहचानना",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "व्यक्ति स्क्रीन पर चलता हुआ प्रश्न दिखाता है"
+      }
+    },
+    {
+      "label": "कमेंट में लिखिए: A या B?",
+      "quiz_options": [
+        "A: भोपाल",
+        "B: गुजरात"
+      ],
+      "speech": "दो सेकंड सोचिए: A या B?",
+      "role": "challenge",
+      "revision_card": false,
+      "teaches": "विकल्पों पर विचार",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "दो तीर विकल्पों की ओर चलते हैं"
+      }
+    },
+    {
+      "label": "सही उत्तर",
+      "quiz_options": null,
+      "speech": "सही उत्तर है: गुजरात।",
+      "role": "reveal",
+      "revision_card": false,
+      "teaches": "सही राज्य पहचानना",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "institution",
+        "visible_action": "मानचित्र पर गुजरात पर निशान दिखाया जाता है"
+      }
+    },
+    {
+      "label": "तथ्य समझिए",
+      "quiz_options": null,
+      "speech": "अंकलेश्वर गुजरात के भड़ौच जिले में स्थित खनिज तेल उत्पादक क्षेत्र है।",
+      "role": "explain",
+      "revision_card": false,
+      "teaches": "तेल के भौगोलिक कारण समझना",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "institution",
+        "visible_action": "मानचित्र पर तेल क्षेत्र का मार्ग दिखाया जाता है"
+      }
+    },
+    {
+      "label": "खुद को जाँचिए",
+      "quiz_options": null,
+      "speech": "यही परीक्षा की आम गलती है।",
+      "role": "transfer",
+      "revision_card": false,
+      "teaches": "भौगोलिक तुलना",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "व्यक्ति गुजरात से बिहार की ओर चलता है"
+      }
+    },
+    {
+      "label": "रिवीजन कार्ड",
+      "quiz_options": null,
+      "speech": "याद रखने की ट्रिक: गुजरात।",
+      "role": "revision",
+      "revision_card": true,
+      "teaches": "स्मरण",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "स्थिर कार्ड दिखाया जाता है"
+      }
+    }
+  ]
+}
