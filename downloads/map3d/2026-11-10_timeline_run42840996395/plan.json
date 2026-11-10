@@ -1,0 +1,232 @@
+{
+ "template": "timeline",
+ "badge": "MinuteMe 3D टाइमलाइन",
+ "fps": 24,
+ "id": "315ede2d9e",
+ "question": "भारतीय संविधान में पहला संशोधन ____ में किया गया था।",
+ "exam_short": "RRB Group-D 2018",
+ "options": [
+  "1952",
+  "1951",
+  "1950",
+  "1953"
+ ],
+ "answer": 1,
+ "option_colors": [
+  "#ff7a45",
+  "#4ade80",
+  "#c084fc",
+  "#38bdf8"
+ ],
+ "years": [
+  1952,
+  1951,
+  1950,
+  1953
+ ],
+ "answer_year": 1951,
+ "anchors": [
+  {
+   "year": 1950,
+   "label": "संविधान लागू"
+  },
+  {
+   "year": 1952,
+   "label": "पहला आम चुनाव"
+  }
+ ],
+ "chain": [
+  1950,
+  1951,
+  1952
+ ],
+ "slots_opt": {
+  "2": 0,
+  "1": 1,
+  "0": 2,
+  "3": 3
+ },
+ "credit": "MinuteMe GS · PYQ RRB Group-D 2018",
+ "scenes": [
+  {
+   "id": "hook",
+   "seconds": 4.58,
+   "title": "भारतीय संविधान में पहला संशोधन ____ में किया गया था।",
+   "speak": "भारतीय संविधान में पहला संशोधन किस वर्ष में किया गया था।",
+   "cam": {
+    "z": 2.5,
+    "span": 8.0,
+    "elev": 4,
+    "yaw": -28,
+    "from_yaw": -70,
+    "from_span": 13
+   },
+   "actions": [
+    {
+     "type": "pole",
+     "t": 0,
+     "dur": 0.9
+    },
+    {
+     "type": "plate_in",
+     "i": 2,
+     "t": 0.5
+    },
+    {
+     "type": "plate_in",
+     "i": 1,
+     "t": 0.6799999999999999
+    },
+    {
+     "type": "plate_in",
+     "i": 0,
+     "t": 0.86
+    },
+    {
+     "type": "plate_in",
+     "i": 3,
+     "t": 1.04
+    }
+   ],
+   "labels": []
+  },
+  {
+   "id": "options",
+   "seconds": 11.18,
+   "title": "सही वर्ष कौन-सा?",
+   "speak": "ऑप्शन देखिए — A, 1952, B, 1951, C, 1950, D, 1953। तीन सेकंड — सोचिए!",
+   "cam": {
+    "z": 2.5,
+    "span": 7.4,
+    "elev": 6,
+    "yaw": 18
+   },
+   "actions": [],
+   "labels": [
+    {
+     "text": "C",
+     "plate": 2,
+     "color": "#c084fc",
+     "t": 0.2,
+     "kind": "letter"
+    },
+    {
+     "text": "B",
+     "plate": 1,
+     "color": "#4ade80",
+     "t": 0.5,
+     "kind": "letter"
+    },
+    {
+     "text": "A",
+     "plate": 0,
+     "color": "#ff7a45",
+     "t": 0.8,
+     "kind": "letter"
+    },
+    {
+     "text": "D",
+     "plate": 3,
+     "color": "#38bdf8",
+     "t": 1.0999999999999999,
+     "kind": "letter"
+    }
+   ],
+   "countdown": true
+  },
+  {
+   "id": "reveal",
+   "seconds": 4.2,
+   "title": "सही उत्तर: B  1951",
+   "sub": "",
+   "speak": "सही उत्तर है — 1951।",
+   "cam": {
+    "z": 2.5,
+    "span": 6.4,
+    "elev": 2,
+    "yaw": -10
+   },
+   "actions": [
+    {
+     "type": "focus",
+     "i": 1,
+     "t": 0.15
+    }
+   ],
+   "labels": []
+  },
+  {
+   "id": "trick",
+   "seconds": 8.09,
+   "title": "याद रखने की ट्रिक",
+   "sub": "1950 में संविधान लागू, अगले ही साल 1951, फिर 1952 में पहला आम चुनाव।",
+   "speak": "याद रखने की ट्रिक — 1950 में संविधान लागू, अगले ही साल 1951, फिर 1952 में पहला आम चुनाव।",
+   "cam": {
+    "z": 2.5,
+    "span": 7.2,
+    "elev": 8,
+    "yaw": 16
+   },
+   "actions": [
+    {
+     "type": "chain",
+     "t": 0.1
+    },
+    {
+     "type": "anchor_in",
+     "year": 1950,
+     "t": 0.5
+    },
+    {
+     "type": "anchor_in",
+     "year": 1952,
+     "t": 1.0
+    },
+    {
+     "type": "travel",
+     "t": 1.8,
+     "dur": 2.6
+    }
+   ],
+   "labels": [
+    {
+     "text": "संविधान लागू",
+     "year": 1950,
+     "color": "#d9e6f2",
+     "t": 0.9,
+     "kind": "anchor"
+    },
+    {
+     "text": "पहला आम चुनाव",
+     "year": 1952,
+     "color": "#d9e6f2",
+     "t": 1.4,
+     "kind": "anchor"
+    },
+    {
+     "text": "यह सवाल",
+     "year": 1951,
+     "color": "#ffd25c",
+     "t": 1.2,
+     "kind": "anchor"
+    }
+   ]
+  },
+  {
+   "id": "end",
+   "seconds": 7.46,
+   "title": "याद रखो",
+   "sub": "1951",
+   "speak": "याद रखिए — 1951। सही था तो कमेंट में लिखिए, और रोज़ ऐसे PYQ के लिए फ़ॉलो कीजिए।",
+   "cam": {
+    "z": 2.5,
+    "span": 8.4,
+    "elev": 10,
+    "yaw": -20
+   },
+   "actions": [],
+   "labels": [],
+   "end": true
+  }
+ ]
+}
