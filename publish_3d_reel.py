@@ -19,24 +19,38 @@ def persist(msg):
             if subprocess.run(['git', 'pull', '--rebase', '-q']).returncode == 0 and subprocess.run(['git', 'push', '-q']).returncode == 0: break
 
 # ---------------------------------------------------------------- caption
-if KIND == 'body':
+if KIND == 'map3d':
     plan = json.loads((FOLDER / 'plan.json').read_text(encoding='utf-8'))
-    tags = '#मानवशरीर #HumanBody #Biology #GeneralScience #SSC #Railway #RRBGroupD #GK #MinuteMe_GS'
-    credit = '3D models: Z-Anatomy (CC BY-SA 4.0), BodyParts3D/DBCLS (CC BY-SA 2.1 JP)'
+    L = 'ABCD'; sc = plan['scenes']; trap = None
+    TITLE = plan['question'].replace('____', '___')
+    caption = TITLE + '\n\n' + '\n'.join(f"{L[i]}) {o}" for i, o in enumerate(plan['options']))
+    caption += '\n\nजवाब कमेंट में लिखो 👇 (वीडियो में 3 सेकंड का टाइमर है)'
+    facts = [x for s in sc if s['id'] in ('path', 'fact', 'trick') for x in (s.get('sub'), s.get('sub2'), s.get('sub3')) if x]
+    if facts: caption += '\n\n📌 याद रखो\n' + '\n'.join('• ' + f for f in facts)
+    caption += f"\n\nPYQ: {plan.get('exam_short', '')}"
+    caption += '\n\n📤 उस दोस्त को भेजो जो Group D / NTPC / SSC की तैयारी कर रहा है'
+    caption += '\n\nरोज़ 3D में एक PYQ — फ़ॉलो करो @minuteme_gs\n\n#भूगोल #Geography #IndiaMap #GK #GS #RRBGroupD #NTPC #SSC #Railway #MinuteMe_GS'
+    if plan.get('credit'): caption += '\n\n' + plan['credit']
 else:
-    plan = json.loads(Path('experiments/blood_moon_3d/timeline.json').read_text(encoding='utf-8'))
-    tags = '#चंद्रग्रहण #BloodMoon #LunarEclipse #Geography #GeneralScience #SSC #Railway #GK #MinuteMe_GS'
-    credit = ''
-sc = plan['scenes']
-TITLE = f"{sc[0]['title']} | {plan.get('topic', '')}".strip(' |')
-body = [f"• {s['title']} — {s['sub']}" for s in sc[1:] if s.get('sub') and 'quiz' not in s]
-quiz = next((s['quiz'] for s in sc if 'quiz' in s), None)
-trap = next((s for s in sc if s.get('trap')), None)
-caption = TITLE + '\n\n' + '\n'.join(body)
-if trap: caption += f"\n\n⚠️ परीक्षा की आम गलती\n✗ {trap['title'].replace('गलती: ', '')}\n✓ {trap['sub'].replace('सही: ', '')}"
-if quiz: caption += f"\n\n❓ {quiz['q']}\n{quiz['a']}\n{quiz['b']}\nजवाब कमेंट में लिखो 👇"
-caption += '\n\n📤 उस दोस्त को भेजो जो कहता है "मुझे GS आता है" — देखो वो सही बताता है या नहीं!'
-caption += (f"\n\nअगली रील: {plan['next']} — फ़ॉलो करो ताकि छूटे नहीं @minuteme_gs\n\n" if plan.get('next') else '\n\nरोज़ ऐसे 3D सवाल के लिए फ़ॉलो करो @minuteme_gs\n\n') + tags + (('\n\n' + credit) if credit else '')
+    if KIND == 'body':
+        plan = json.loads((FOLDER / 'plan.json').read_text(encoding='utf-8'))
+        tags = '#मानवशरीर #HumanBody #Biology #GeneralScience #SSC #Railway #RRBGroupD #GK #MinuteMe_GS'
+        credit = '3D models: Z-Anatomy (CC BY-SA 4.0), BodyParts3D/DBCLS (CC BY-SA 2.1 JP)'
+    else:
+        plan = json.loads(Path('experiments/blood_moon_3d/timeline.json').read_text(encoding='utf-8'))
+        tags = '#चंद्रग्रहण #BloodMoon #LunarEclipse #Geography #GeneralScience #SSC #Railway #GK #MinuteMe_GS'
+        credit = ''
+    sc = plan['scenes']
+    TITLE = f"{sc[0]['title']} | {plan.get('topic', '')}".strip(' |')
+    body = [f"• {s['title']} — {s['sub']}" for s in sc[1:] if s.get('sub') and 'quiz' not in s]
+    quiz = next((s['quiz'] for s in sc if 'quiz' in s), None)
+    trap = next((s for s in sc if s.get('trap')), None)
+    caption = TITLE + '\n\n' + '\n'.join(body)
+    if trap: caption += f"\n\n⚠️ परीक्षा की आम गलती\n✗ {trap['title'].replace('गलती: ', '')}\n✓ {trap['sub'].replace('सही: ', '')}"
+    if quiz: caption += f"\n\n❓ {quiz['q']}\n{quiz['a']}\n{quiz['b']}\nजवाब कमेंट में लिखो 👇"
+    caption += '\n\n📤 उस दोस्त को भेजो जो कहता है "मुझे GS आता है" — देखो वो सही बताता है या नहीं!'
+    caption += (f"\n\nअगली रील: {plan['next']} — फ़ॉलो करो ताकि छूटे नहीं @minuteme_gs\n\n" if plan.get('next') else '\n\nरोज़ ऐसे 3D सवाल के लिए फ़ॉलो करो @minuteme_gs\n\n') + tags + (('\n\n' + credit) if credit else '')
+
 
 # ---------------------------------------------------------------- checks
 acc = e.requests.get(e.GRAPH + e.IG_USER_ID, params={'fields': 'username', 'access_token': e.IG_ACCESS_TOKEN}, timeout=30)

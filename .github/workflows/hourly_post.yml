@@ -73,6 +73,19 @@ jobs:
               exit 0
             fi
           fi
+          # One-off pre-rendered 3D template reel for this exact slot (experiments/slot_override.json).
+          # If it cannot be published, the normal reel for the slot still goes out below.
+          if [ "$POST_MODE" = publish ] && [ -n "$GS_TARGET_UTC" ] && [ -f experiments/slot_override.json ]; then
+            OV=$(python -c "import json,sys,datetime as d; t=d.datetime.fromisoformat(sys.argv[1].replace('Z','+00:00')).astimezone(d.timezone(d.timedelta(hours=5,minutes=30))); print(json.load(open('experiments/slot_override.json')).get(t.strftime('%Y-%m-%d_%H%M'),''))" "$GS_TARGET_UTC")
+            if [ -n "$OV" ] && [ -f "$OV/reel.mp4" ]; then
+              echo "Slot override: pre-rendered 3D reel $OV"
+              git config user.name 'github-actions[bot]'; git config user.email 'github-actions[bot]@users.noreply.github.com'
+              TARGET_UTC="$GS_TARGET_UTC" python -u publish_3d_reel.py "$OV" map3d 2>&1 | sed -u -E 's/(access_token=|key=|Bearer |OAuth )[^&" ]+/\1***/g' | tee last_run_log.txt || true
+              if grep -qE "PUBLISHED|ALREADY PUBLISHED" last_run_log.txt; then exit 0; fi
+              if [ -f "$OV/publish_started.json" ]; then echo "::error::3D reel publish uncertain; not posting a second reel"; exit 1; fi
+              echo "::warning title=override failed::3D reel not published, normal slot reel follows"
+            fi
+          fi
           if [ "$POST_MODE" = publish ] && { [ -z "$REGULAR_SLOT" ] || [ -z "$GS_TARGET_UTC" ]; }; then
             echo "Old timer request blocked: use the new regular schedule slot"
             exit 0
