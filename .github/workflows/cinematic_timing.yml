@@ -1,0 +1,33 @@
+name: Cinematic timing test (real reel)
+on:
+  workflow_dispatch:
+    inputs:
+      slot:
+        default: 'experiments/scheduled_visual_gs/2026-11-09_1000'
+      samples:
+        default: '8'
+permissions:
+  contents: write
+jobs:
+  time:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 330
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: ./.github/actions/gs-3d-dependencies
+      - name: Render real recipe (Cycles)
+        env:
+          STUDIO_CINEMATIC: '1'
+          STUDIO_SAMPLES: ${{ inputs.samples }}
+        run: python gs_animation_studio/cinematic_timing.py "${{ inputs.slot }}" experiments/cinematic_timing 2>&1 | grep -vE "^Fra:|Sample|Denois|Updating|Synchroniz" | tail -30
+      - name: Save
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add experiments/cinematic_timing || true
+          git diff --cached --quiet || git commit -m "Cinematic timing [skip ci]"
+          for i in 1 2 3 4 5; do git pull --rebase -X theirs --autostash && git push && break; sleep 7; done
