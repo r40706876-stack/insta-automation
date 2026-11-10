@@ -1,0 +1,13 @@
+{
+  "version": "growth_qa_v1",
+  "safe_to_publish": true,
+  "blocking_reasons": [],
+  "warnings": [],
+  "first_hook": "अंकलेश्वर, एक प्रसिद्ध पेट्रोलियम स्थल है, जो ........ राज्य में स्थित है– जाल पहचानिए।",
+  "question": "अंकलेश्वर, एक प्रसिद्ध पेट्रोलियम स्थल है, जो ........ राज्य में स्थित है–",
+  "revision_value": true,
+  "share_value": true,
+  "follow_value": true,
+  "manual_visual_review_required": false,
+  "note": "This checks script metadata, not real viewer retention or visual accuracy."
+}
