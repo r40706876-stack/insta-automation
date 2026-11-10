@@ -7491,7 +7491,8 @@ def main():
     if fmt == "list":
         if run_list(bank, st, ep, args):
             return
-        fmt = "loop"
+        # 10 Nov (user): purana poster/quiz (loop) format kabhi apne aap nahi -> is baar post hi nahi
+        raise SystemExit("7 PYQ nahi bana; purana loop format band hai -> koi post nahi")
     if fmt == "triple":
         if run_triple(bank, st, ep, args):
             return

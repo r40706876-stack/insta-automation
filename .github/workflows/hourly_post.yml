@@ -31,7 +31,7 @@ concurrency:
 jobs:
   post:
     runs-on: ubuntu-latest
-    timeout-minutes: 100
+    timeout-minutes: 200
     steps:
       - uses: actions/checkout@v4
 
@@ -83,6 +83,14 @@ jobs:
             ENTRY=auto_poster.py
           fi
           if python -u "$ENTRY" 2>&1 | sed -u -E 's/(access_token=|key=|Bearer )[^&" ]+/\1***/g' | tee last_run_log.txt; then exit 0; fi
+          # 10 Nov (user): studio fail hone par purana poster/quiz format NAHI. Pehle animation reel dobara banao
+          # (Gemini 503/429 aksar kuch minute me theek ho jaata hai), tabhi 7 PYQ card.
+          if [ "$ENTRY" = scheduled_visual_gs.py ] && [ "$POST_MODE" = publish ]; then
+            for n in 1 2; do
+              echo "::warning::Studio reel fail -> ${n}/2 sirf AV review dobara, 6 min baad"; sleep 360
+              if GS_REVIEW_ONLY=1 python -u "$ENTRY" 2>&1 | sed -u -E 's/(access_token=|key=|Bearer )[^&" ]+/\1***/g' | tee -a last_run_log.txt; then exit 0; fi
+            done
+          fi
           # 4 Nov: a studio reel that fails its visual/QA gate must not leave the slot empty.
           # Fall back to the same subject's 7 PYQ card, only if nothing was published or started.
           if [ "$ENTRY" = scheduled_visual_gs.py ] && [ "$POST_MODE" = publish ] && [ "$REEL_FORMAT" != current ] && [ "$GS_SUBJECT" != "Current Affairs" ]; then

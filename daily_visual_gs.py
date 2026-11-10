@@ -45,4 +45,9 @@ if __name__=='__main__':
  else:
   if (ROOT/'published.json').exists() and json.loads((ROOT/'published.json').read_text()).get('media_id'):
    print((ROOT/'published.json').read_text());raise SystemExit(0)
-  if not (ROOT/'release_review.json').exists() or os.getenv('GS_FORCE_BUILD')=='1' or not (ROOT/'validated.json').exists() or json.loads((ROOT/'validated.json').read_text()).get('renderer_version')!=bridge.VERSION:build()
+  if os.getenv('GS_REVIEW_ONLY')=='1' and (ROOT/'reel.mp4').exists() and (ROOT/'validated.json').exists() and (ROOT/'script.json').exists():
+   # bani hui reel ka sirf Gemini AV review dobara (503/429 ke baad), dobara render nahi
+   from gs_review_render import review
+   review(ROOT);release=evaluate_release(ROOT,json.loads((ROOT/'script.json').read_text()));save('release_quality.json',release)
+   if not release['safe_to_publish']:raise RuntimeError('Rendered AV review blocked: '+', '.join(release['blocking_reasons']))
+  elif not (ROOT/'release_review.json').exists() or os.getenv('GS_FORCE_BUILD')=='1' or not (ROOT/'validated.json').exists() or json.loads((ROOT/'validated.json').read_text()).get('renderer_version')!=bridge.VERSION:build()

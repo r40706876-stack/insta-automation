@@ -33,6 +33,8 @@ jobs:
         env:
           IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
           IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           SLOT: ${{ inputs.slot }}
         run: |
           set -o pipefail
@@ -52,6 +54,9 @@ jobs:
               print('Ye reel account par pehle se hai -> skip'); sys.exit(3)
           PY
           then exit 0; fi
+          if ! python -c "import json,sys;sys.exit(0 if json.load(open('$D/release_quality.json')).get('safe_to_publish') else 1)"; then
+            GS_VISUAL_OUTPUT="$D" GS_TARGET_DATE="${SLOT%%_*}" GS_REVIEW_ONLY=1 python -u daily_visual_gs.py 2>&1 | tail -15
+          fi
           rm -f "$D/publish_started.json"
           # Account checked above: the reel is NOT there, so an uncertain journal from the failed attempt can go.
           rm -f "$D/reel.upload.json"
