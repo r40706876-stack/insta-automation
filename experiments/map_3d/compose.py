@@ -136,7 +136,9 @@ def overlay(f):
             d.ellipse((x0 + 10, y0 + 10, x0 + 52, y0 + 52), fill=OPT_COL[i] + (int(255 * show),))
             d.text((x0 + 31, y0 + 31), LET[i], font=font(28), fill=(10, 16, 24, int(255 * show)), anchor='mm')
             d.text((x0 + 66, y0 + 32), opt, font=font(fit(opt, 30, 230)), fill=WHITE + (int(255 * show),), anchor='lm')
-        if sid == 'options':
+        if sid == 'options' and t >= 1.0:
+            text(d, (360, 975), 'कमेंट में अपना जवाब लिखो!', 30, CYAN)
+        if sid == 'options' and sc.get('countdown'):
             cd0 = dur - 2.4
             if t >= cd0:
                 n_ = 3 - int((t - cd0) / .8); ph = ((t - cd0) % .8) / .8
@@ -145,7 +147,6 @@ def overlay(f):
                     d.ellipse((cx_ - r_, cy_ - r_, cx_ + r_, cy_ + r_), fill=(255, 196, 60, 235))
                     d.arc((cx_ - r_ - 7, cy_ - r_ - 7, cx_ + r_ + 7, cy_ + r_ + 7), -90, -90 + 360 * (1 - ph), fill=(255, 255, 255, 255), width=6)
                     text(d, (cx_, cy_ - 3), str(n_), 56, (20, 24, 30), stroke=0)
-                text(d, (360, 975), 'कमेंट में अपना जवाब लिखो!', 30, CYAN)
     # ---- answer card stays visible after reveal
     if sid == 'reveal':
         i = TL['answer']; a = ease((t - .2) / .3)

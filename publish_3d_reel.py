@@ -24,7 +24,7 @@ if KIND == 'map3d':
     L = 'ABCD'; sc = plan['scenes']; trap = None
     TITLE = plan['question'].replace('____', '___')
     caption = TITLE + '\n\n' + '\n'.join(f"{L[i]}) {o}" for i, o in enumerate(plan['options']))
-    caption += '\n\nजवाब कमेंट में लिखो 👇 (वीडियो में 3 सेकंड का टाइमर है)'
+    caption += '\n\nजवाब कमेंट में लिखो 👇 '
     facts = [x for s in sc if s['id'] in ('path', 'fact', 'trick') for x in (s.get('sub'), s.get('sub2'), s.get('sub3')) if x]
     if facts: caption += '\n\n📌 याद रखो\n' + '\n'.join('• ' + f for f in facts)
     caption += f"\n\nPYQ: {plan.get('exam_short', '')}"
