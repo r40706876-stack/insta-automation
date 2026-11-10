@@ -1,0 +1,217 @@
+{
+  "type": "object",
+  "value": {
+    "title": "अंकलेश्वर का राज्य",
+    "subject": "भूगोल",
+    "topic_key": "ankleshwar_state_location",
+    "share_reason": "परीक्षा में अक्सर गुजरात को भूलते हैं",
+    "recall": "याद रखने की ट्रिक: गुजरात।",
+    "pyq_challenge": true,
+    "share_card": {
+      "kind": "exam_confusion",
+      "recipient": "परीक्षा की तैयारी करने वाले दोस्त",
+      "benefit": "अंकलेश्वर गुजरात में है, भ्रम दूर",
+      "cta": "दोस्त को बताओ, गुजरात याद रखो"
+    },
+    "scenes": [
+      {
+        "role": "hook",
+        "heading": "पहले अपना जवाब चुनिए",
+        "explanation": "A या B — सोचिए",
+        "speech": "अंकलेश्वर, एक प्रसिद्ध पेट्रोलियम स्थल है, जो ........ राज्य में स्थित है– नक्शा देखिए।",
+        "teaches": "सही राज्य पहचानना",
+        "visual_action": "व्यक्ति नक्शे की ओर चलता है",
+        "setting": "institution",
+        "objects": [
+          {
+            "kind": "map",
+            "action": "none",
+            "map_region": "india",
+            "id": "obj1",
+            "label": "भारत मानचित्र",
+            "color": "#59c7c5",
+            "pos": [
+              0.0,
+              0,
+              0
+            ],
+            "size": [
+              1.1,
+              1.1,
+              1.1
+            ]
+          }
+        ]
+      },
+      {
+        "role": "challenge",
+        "heading": "कमेंट में लिखिए: A या B?",
+        "explanation": "दो सेकंड सोचिए: A या B?",
+        "speech": "दो सेकंड सोचिए: A या B?",
+        "teaches": "विकल्पों की तुलना",
+        "visual_action": "नक्शे पर दो मार्कर दिखाता है",
+        "setting": "institution",
+        "objects": [
+          {
+            "kind": "map",
+            "action": "none",
+            "map_region": "india",
+            "id": "obj1",
+            "label": "भारत मानचित्र",
+            "color": "#59c7c5",
+            "pos": [
+              0.0,
+              0,
+              0
+            ],
+            "size": [
+              1.1,
+              1.1,
+              1.1
+            ]
+          }
+        ]
+      },
+      {
+        "role": "reveal",
+        "heading": "सही उत्तर",
+        "explanation": "सही उत्तर है: गुजरात।",
+        "speech": "सही उत्तर है: गुजरात।",
+        "teaches": "सही राज्य पहचानना",
+        "visual_action": "नक्शे पर गुजरात को हाइलाइट किया जाता है",
+        "setting": "institution",
+        "objects": [
+          {
+            "kind": "map",
+            "action": "trace",
+            "map_region": "gujarat",
+            "id": "obj0",
+            "label": "गुजरात मानचित्र",
+            "route": [
+              [
+                73.0,
+                22.0
+              ],
+              [
+                73.5,
+                22.5
+              ]
+            ],
+            "color": "#59c7c5",
+            "pos": [
+              0.0,
+              0,
+              0
+            ],
+            "size": [
+              1.1,
+              1.1,
+              1.1
+            ]
+          }
+        ]
+      },
+      {
+        "role": "explain",
+        "heading": "तथ्य समझिए",
+        "explanation": "अंकलेश्वर गुजरात के भड़ौच जिले में",
+        "speech": "अंकलेश्वर गुजरात के भड़ौच जिले में स्थित खनिज तेल उत्पादक क्षेत्र है।",
+        "teaches": "भौगोलिक स्थान समझना",
+        "visual_action": "गियर घूमते हुए तेल उत्पादन दिखाता है",
+        "setting": "institution",
+        "objects": [
+          {
+            "kind": "gear",
+            "action": "spin",
+            "id": "obj0",
+            "label": "तेल उत्पादन",
+            "color": "#59c7c5",
+            "pos": [
+              0.0,
+              0,
+              0
+            ],
+            "size": [
+              0.7,
+              0.7,
+              0.7
+            ]
+          }
+        ]
+      },
+      {
+        "role": "transfer",
+        "heading": "खुद को जाँचिए",
+        "explanation": "यही परीक्षा की आम गलती है।",
+        "speech": "यही परीक्षा की आम गलती है।",
+        "teaches": "अन्य तेल क्षेत्रों से तुलना",
+        "visual_action": "नक्शे पर अन्य तेल क्षेत्रों को दिखाया जाता है",
+        "setting": "institution",
+        "objects": [
+          {
+            "kind": "map",
+            "action": "trace",
+            "map_region": "gujarat",
+            "id": "obj0",
+            "label": "अन्य तेल क्षेत्र",
+            "route": [
+              [
+                73.0,
+                22.0
+              ],
+              [
+                73.5,
+                22.5
+              ],
+              [
+                74.0,
+                22.0
+              ]
+            ],
+            "color": "#59c7c5",
+            "pos": [
+              0.0,
+              0,
+              0
+            ],
+            "size": [
+              1.1,
+              1.1,
+              1.1
+            ]
+          }
+        ]
+      },
+      {
+        "role": "revision",
+        "heading": "रिवीजन कार्ड",
+        "explanation": "याद रखने की ट्रिक: गुजरात।",
+        "speech": "याद रखने की ट्रिक: गुजरात।",
+        "teaches": "तेज़ स्मरण",
+        "visual_action": "स्थिर स्क्रीन पर टेक्स्ट दिखता है",
+        "setting": "institution",
+        "revision_card": true,
+        "objects": [
+          {
+            "kind": "map",
+            "action": "none",
+            "map_region": "gujarat",
+            "id": "obj0",
+            "label": "स्थान",
+            "color": "#59c7c5",
+            "pos": [
+              0.0,
+              0,
+              0
+            ],
+            "size": [
+              1.1,
+              1.1,
+              1.1
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
