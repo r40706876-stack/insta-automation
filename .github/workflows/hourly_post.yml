@@ -77,7 +77,10 @@ jobs:
             echo "Old timer request blocked: use the new regular schedule slot"
             exit 0
           fi
-          if [ -n "$GS_SUBJECT" ] || [ "$REEL_FORMAT" = current ]; then
+          if [ -f experiments/studio_paused.json ] && [ "$REEL_FORMAT" = list ] && [ -n "$GS_SUBJECT" ] && [ "$GS_SUBJECT" != "Current Affairs" ]; then
+            echo "Studio animation paused (demo pending): $GS_SUBJECT -> 7 PYQ"
+            ENTRY=auto_poster.py
+          elif [ -n "$GS_SUBJECT" ] || [ "$REEL_FORMAT" = current ]; then
             ENTRY=scheduled_visual_gs.py
           else
             ENTRY=auto_poster.py
