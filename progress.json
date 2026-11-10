@@ -1,6 +1,6 @@
 {
  "next_seq": 130,
- "episode": 194,
+ "episode": 195,
  "posted": [
   "684d76bcbc",
   "6bb20b4a07",
@@ -614,7 +614,13 @@
   "81b0aa5fa0",
   "f2def4dab4",
   "cdba134c80",
-  "98c1252e0c"
+  "98c1252e0c",
+  "d2cfd0b9b8",
+  "de32626887",
+  "f5a5fdb75a",
+  "dad7445b4d",
+  "d88bdfd3a6",
+  "3cb88a92da"
  ],
  "skipped": {
   "bdd1ce5a8b": "उत्तर कुंजी वर्तमान स्थिति के अनुसार गलत है।",
@@ -639,12 +645,13 @@
   "34f4793558": "samay ke saath badalne wala sawal",
   "ab94322dd2": "samay ke saath badalne wala sawal",
   "bc99c4b719": "samay ke saath badalne wala sawal",
-  "c268e46e93": "samay ke saath badalne wala sawal"
+  "c268e46e93": "samay ke saath badalne wala sawal",
+  "96cf2b56e8": "104वें संविधान संशोधन (2019) के बाद एंग्लो-इंडियन आरक्षण समाप्त होने से अब अधिकतम संख्या 550 है, 552 नहीं।"
  },
  "last": {
-  "seq": 2661,
-  "id": "98c1252e0c",
-  "time": "2026-11-09 16:30",
+  "seq": 2841,
+  "id": "3cb88a92da",
+  "time": "2026-11-10 01:30",
   "format": "list"
  },
  "carousel_queue": [],
