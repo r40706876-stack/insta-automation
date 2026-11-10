@@ -7,37 +7,38 @@
   "answer_reveal_timing": true,
   "revision_card_readable": true,
   "reasons": [
-    "In scene 4, the audio states a fact about the establishment date of Skyroot Aerospace, but the visual shows cylinders of natural gas and oxygen, which are related to the engine's fuel, not the company's founding. This creates a mismatch between the audio and visual content and reduces visual relevance for the spoken fact."
+    " In scene 4, the spoken narration states that Skyroot Aerospace was founded in June 2018, but the 3D visual depicts gas cylinders labeled 'प्राकृतिक गैस' and 'ऑक्सीजन', creating a visual mismatch with the spoken fact.",
+    " In scene 5, a character walking past generic pillars labeled 'विज्ञानी', 'स्काईरूट', and 'धवन-1' does not visually explain or clarify what the common exam mistake is."
   ],
-  "observed_answer": "धवन-1",
+  "observed_answer": "धवन-1 (Option A)",
   "scene_evidence": [
     {
       "scene": 1,
-      "observation": "The video presents a multiple-choice question in Hindi: 'भारत के पहले निजी तौर पर विकसित पूर्णतः क्रायोजेनिक रॉकेट इंजन का नाम क्या है?' with options A: 'धवन-1' and B: 'भाभा-1'. A 2-second timer is visible."
+      "observation": "Displays the question 'भारत के पहले निजी तौर पर विकसित पूर्णतः क्रायोजेनिक रॉकेट इंजन का नाम क्या है?' with options A (धवन-1) and B (भाभा-1)."
     },
     {
       "scene": 2,
-      "observation": "The 2-second timer counts down, prompting the user to think and comment 'A या B?'."
+      "observation": "Shows a 2-second countdown prompt asking the user to choose option A or B."
     },
     {
       "scene": 3,
-      "observation": "The correct answer 'धवन-1' is revealed on screen, accompanied by a spinning gear labeled 'धवन-1'."
+      "observation": "Reveals the correct answer as 'धवन-1' accompanied by a 3D rotating gear graphic."
     },
     {
       "scene": 4,
-      "observation": "The audio states, 'स्काईरुट एयरोस्पेस की स्थापना जून 2018 में की गई थी।' The visual displays cylinders labeled 'प्राकृतिक गैस' and 'ऑक्सीजन', which are components of a cryogenic engine's fuel, not a visual representation of the company's establishment."
+      "observation": "Displays text about Skyroot Aerospace's founding date (June 2018) while 3D models of gas cylinders labeled 'प्राकृतिक गैस' and 'ऑक्सीजन' stand on screen."
     },
     {
       "scene": 5,
-      "observation": "A 3D animation shows a scientist figure walking towards a structure labeled 'स्काईरूट' and a gear labeled 'धवन-1', with the text 'यही परीक्षा की आम गलती है।'"
+      "observation": "Displays 'यही परीक्षा की आम गलती है' while an animated character walks past pillars labeled 'विज्ञानी', 'स्काईरूट', and 'धवन-1'."
     },
     {
       "scene": 6,
-      "observation": "A 'रिवीजन कार्ड' is displayed with the text 'याद रखने की ट्रिक: धवन-1।' and 'रिवीजन के लिए सेव करें', along with a book object labeled 'धवन-1'."
+      "observation": "Displays the final revision card with 'याद रखने की ट्रिक: धवन-1'."
     }
   ],
   "sha256": "d84ef079c65b61e99428ad0e83824fa1c48bad74e49c00d45bd8532fd615b6f7",
-  "reviewer": "gemini-2.5-flash / actual rendered video and audio",
-  "reviewed_at": "2026-11-10T13:41:17.652431+00:00",
+  "reviewer": "gemini-3.6-flash / actual rendered video and audio",
+  "reviewed_at": "2026-11-10T14:36:58.839403+00:00",
   "review_type": "automated_multimodal"
 }
