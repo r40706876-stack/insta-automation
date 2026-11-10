@@ -1,0 +1,131 @@
+{
+  "ok": true,
+  "title": "पहला निजी क्रायोजेनिक रॉकेट इंजन",
+  "subject": "Traditional GK",
+  "renderer_version": "rich_3d_v1",
+  "question_hash": "db9af1bb5024bdb82548544df1eda4f0367b554281f00d305b37faa5526afa98",
+  "reference": {
+    "subject": "Traditional GK",
+    "subject_hi": "सामान्य ज्ञान",
+    "chapter": "अंतरिक्ष कार्यक्रम (Space Programme)",
+    "sub": "",
+    "question": "भारत के पहले निजी तौर पर विकसित पूर्णतः क्रायोजेनिक रॉकेट इंजन का नाम क्या है?",
+    "options": {
+      "a": "भाभा-1",
+      "b": "कलाम-1",
+      "c": "साराभाई-1",
+      "d": "धवन-1"
+    },
+    "answer": "d",
+    "exams": [
+      "RRB Group D 28/09/2022 (Shift-III)"
+    ],
+    "explanation": "हैदराबाद स्थित एक अंतरिक्ष प्रौद्योगिकी स्टार्टअप स्काईरूट एयरोस्पेस ने भारत के पहले निजी तौर पर विकसित पूर्णतः क्रायोजेनिक रॉकेट इंजन ‘धवन-1 (Dhawan-1)’ विकसित किया है। • धवन-1 पूरी तरह से ‘मेड-इन-इंडिया’ क्रायोजेनिक इंजन है जो तरलीकृत प्राकृतिक गैस और तरल ऑक्सीजन द्वारा संचालित होता है। • स्काईरुट एयरोस्पेस की स्थापना जून 2018 में की गई थी।",
+    "times_asked": 1,
+    "years": [
+      "2022"
+    ],
+    "id": "36245f939e",
+    "seq": 174
+  },
+  "experiment_format": "visual_mystery",
+  "primary_objective": "save",
+  "series_next_topic": "भारत में केंद्रीय औद्योगिक सुरक्षा बल की स्थापना किस वर्ष में हुई थी?",
+  "series_next_hash": "a91845edeacab4b1180293853c66283c1c47a6570a79d73685c5965dcd175f3c",
+  "topic_policy": "evidence_cohort_v2",
+  "topic_priority": 1.0,
+  "recall": "याद रखने की ट्रिक: धवन-1।",
+  "share_card": {
+    "kind": "exam_confusion",
+    "recipient": "परीक्षा की तैयारी करने वाले मित्र",
+    "benefit": "धवन-1 सही उत्तर, भ्रम दूर",
+    "cta": "दोस्त को बताओ, धवन-1 याद रखें"
+  },
+  "share_reason": "परीक्षा में अक्सर विकल्प भ्रमित होते हैं",
+  "scenes": [
+    {
+      "label": "पहले अपना जवाब चुनिए",
+      "quiz_options": [
+        "A: धवन-1",
+        "B: भाभा-1"
+      ],
+      "speech": "भारत के पहले निजी तौर पर विकसित पूर्णतः क्रायोजेनिक रॉकेट इंजन का नाम क्या है? दृश्य देखिए।",
+      "role": "hook",
+      "revision_card": false,
+      "teaches": "पज़ल पहचान",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "एक घूमता गियर दिखाएँ जो इंजन का प्रतीक है"
+      }
+    },
+    {
+      "label": "कमेंट में लिखिए: A या B?",
+      "quiz_options": [
+        "A: धवन-1",
+        "B: भाभा-1"
+      ],
+      "speech": "दो सेकंड सोचिए: A या B?",
+      "role": "challenge",
+      "revision_card": false,
+      "teaches": "विकल्प विचार",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "दो गियर्स बाएँ‑दाएँ चलें"
+      }
+    },
+    {
+      "label": "सही उत्तर",
+      "quiz_options": null,
+      "speech": "सही उत्तर है: धवन-1।",
+      "role": "reveal",
+      "revision_card": false,
+      "teaches": "सही उत्तर पहचान",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "धवन-1 गियर तेज़ी से घूमे"
+      }
+    },
+    {
+      "label": "तथ्य समझिए",
+      "quiz_options": null,
+      "speech": "• स्काईरुट एयरोस्पेस की स्थापना जून 2018 में की गई थी।",
+      "role": "explain",
+      "revision_card": false,
+      "teaches": "इंजन कार्य सिद्धांत",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "laboratory",
+        "visible_action": "दो सिलेंडर से द्रव प्रवाह दिखाएँ"
+      }
+    },
+    {
+      "label": "खुद को जाँचिए",
+      "quiz_options": null,
+      "speech": "यही परीक्षा की आम गलती है।",
+      "role": "transfer",
+      "revision_card": false,
+      "teaches": "संकल्पना स्थानांतरण",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "institution",
+        "visible_action": "एक व्यक्ति बिल्डिंग से गियर तक चलता है"
+      }
+    },
+    {
+      "label": "रिवीजन कार्ड",
+      "quiz_options": null,
+      "speech": "याद रखने की ट्रिक: धवन-1।",
+      "role": "revision",
+      "revision_card": true,
+      "teaches": "स्मरण शक्ति",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "एक किताब पर धवन-1 लिखा दिखाएँ"
+      }
+    }
+  ]
+}

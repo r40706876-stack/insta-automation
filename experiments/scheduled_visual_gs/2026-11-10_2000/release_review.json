@@ -1,0 +1,43 @@
+{
+  "answer_correct": true,
+  "visual_relevance": false,
+  "hindi_readable": true,
+  "pronunciation_correct": true,
+  "audio_visual_match": false,
+  "answer_reveal_timing": true,
+  "revision_card_readable": true,
+  "reasons": [
+    "In scene 4, the audio states a fact about the establishment date of Skyroot Aerospace, but the visual shows cylinders of natural gas and oxygen, which are related to the engine's fuel, not the company's founding. This creates a mismatch between the audio and visual content and reduces visual relevance for the spoken fact."
+  ],
+  "observed_answer": "धवन-1",
+  "scene_evidence": [
+    {
+      "scene": 1,
+      "observation": "The video presents a multiple-choice question in Hindi: 'भारत के पहले निजी तौर पर विकसित पूर्णतः क्रायोजेनिक रॉकेट इंजन का नाम क्या है?' with options A: 'धवन-1' and B: 'भाभा-1'. A 2-second timer is visible."
+    },
+    {
+      "scene": 2,
+      "observation": "The 2-second timer counts down, prompting the user to think and comment 'A या B?'."
+    },
+    {
+      "scene": 3,
+      "observation": "The correct answer 'धवन-1' is revealed on screen, accompanied by a spinning gear labeled 'धवन-1'."
+    },
+    {
+      "scene": 4,
+      "observation": "The audio states, 'स्काईरुट एयरोस्पेस की स्थापना जून 2018 में की गई थी।' The visual displays cylinders labeled 'प्राकृतिक गैस' and 'ऑक्सीजन', which are components of a cryogenic engine's fuel, not a visual representation of the company's establishment."
+    },
+    {
+      "scene": 5,
+      "observation": "A 3D animation shows a scientist figure walking towards a structure labeled 'स्काईरूट' and a gear labeled 'धवन-1', with the text 'यही परीक्षा की आम गलती है।'"
+    },
+    {
+      "scene": 6,
+      "observation": "A 'रिवीजन कार्ड' is displayed with the text 'याद रखने की ट्रिक: धवन-1।' and 'रिवीजन के लिए सेव करें', along with a book object labeled 'धवन-1'."
+    }
+  ],
+  "sha256": "d84ef079c65b61e99428ad0e83824fa1c48bad74e49c00d45bd8532fd615b6f7",
+  "reviewer": "gemini-2.5-flash / actual rendered video and audio",
+  "reviewed_at": "2026-11-10T13:41:17.652431+00:00",
+  "review_type": "automated_multimodal"
+}
