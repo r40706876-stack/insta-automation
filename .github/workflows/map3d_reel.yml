@@ -1,0 +1,129 @@
+name: Map/Timeline 3D PYQ reel (template, no AI visuals)
+# Deterministic template reels: every object on screen comes from the PYQ, verified facts.json and real map data.
+# Build-only (never posts). Saves reel.mp4 + contact sheet into downloads/map3d/.
+on:
+  workflow_dispatch:
+    inputs:
+      template:
+        description: 'river_place | state_place | timeline'
+        default: 'river_place'
+      question:
+        description: 'Question id or part of the question text'
+        default: 'अलमट्टी'
+      chunks:
+        description: 'Parallel render machines (1-12)'
+        default: '6'
+      samples:
+        description: 'Cycles samples'
+        default: '24'
+permissions:
+  contents: write
+env:
+  MAP_DIR: experiments/map_3d
+  BLENDER_URL: https://github.com/UPBGE/upbge/releases/download/v0.44/upbge-0.44-linux-x86_64.tar.xz
+  BLENDER_SHA256: cb23e1003dc3ec10847eb7ac4380eba9cd5de6a53b944d6231f46841534afd5f
+  LIBS: libxrender1 libxi6 libxkbcommon0 libsm6 libgl1 libegl1 libpulse0 libsndfile1 libvulkan1 libice6 libx11-xcb1 libxext6 libxau6 libxdmcp6 libdbus-1-3 libxxf86vm1 libxfixes3
+
+jobs:
+  plan:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    outputs:
+      matrix: ${{ steps.m.outputs.matrix }}
+      frames: ${{ steps.m.outputs.frames }}
+      scene: ${{ steps.m.outputs.scene }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.11' }
+      - name: Plan + Hindi voice
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
+          pip install -q requests numpy edge-tts
+          cd "$MAP_DIR"
+          python make_plan.py "${{ github.event.inputs.template }}" "${{ github.event.inputs.question }}" plan.json
+          python voice.py plan.json out | tee /tmp/voice.log
+          echo "::notice title=voice::$(grep -E 'VOICE|NO VOICE' /tmp/voice.log | tr '\n' ' ')"
+      - id: m
+        run: |
+          cd "$MAP_DIR"; n=${{ github.event.inputs.chunks }}; n=$(( n<1 ? 1 : (n>12 ? 12 : n) ))
+          python - "$n" >> "$GITHUB_OUTPUT" <<'PY'
+          import json,sys
+          p=json.load(open('plan.json')); N=sum(round(s['seconds']*p['fps']) for s in p['scenes'])
+          print('frames=%d'%N); print('matrix='+json.dumps({'chunk':list(range(int(sys.argv[1])))}))
+          print('scene='+('timeline_scene.py' if p['template']=='timeline' else 'map_scene.py'))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: plan
+          path: |
+            ${{ env.MAP_DIR }}/plan.json
+            ${{ env.MAP_DIR }}/out/voice/*
+
+  render:
+    needs: plan
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJson(needs.plan.outputs.matrix) }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: c
+        uses: actions/cache@v4
+        with: { path: /tmp/blender, key: upbge-0.44-linux }
+      - name: Blender
+        if: steps.c.outputs.cache-hit != 'true'
+        run: |
+          curl -fL --retry 3 -sS "$BLENDER_URL" -o /tmp/b.tar.xz
+          echo "$BLENDER_SHA256  /tmp/b.tar.xz" | sha256sum -c -
+          mkdir -p /tmp/blender && tar -xf /tmp/b.tar.xz -C /tmp/blender --strip-components=1
+      - uses: actions/download-artifact@v4
+        with: { name: plan, path: '${{ env.MAP_DIR }}' }
+      - name: Render my frame range
+        run: |
+          for i in 1 2 3; do sudo apt-get update -qq && sudo apt-get install -y -qq $LIBS && break; sleep 15; done
+          cd "$MAP_DIR"; N=${{ needs.plan.outputs.frames }}; n=${{ strategy.job-total }}; i=${{ matrix.chunk }}
+          a=$(( i*N/n )); b=$(( (i+1)*N/n - 1 )); s=$(date +%s)
+          L=$(seq -s, $a $b)
+          TOPIC=$PWD/plan.json OUT=$PWD/out MAP_ROOT=$PWD DEMO_SAMPLES=${{ github.event.inputs.samples }} DEMO_FRAMES="$L" \
+            /tmp/blender/blender -b -t 0 --python-exit-code 3 --python ${{ needs.plan.outputs.scene }} 2>&1 | grep -E "^Saved [0-9]|Error|Traceback|DONE" | tail -20
+          test "$(ls out/frames/*.png | wc -l)" -eq $((b-a+1))
+          echo "::notice title=chunk $i::$((b-a+1)) frames in $(( $(date +%s)-s ))s"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: frames-${{ matrix.chunk }}
+          path: |
+            ${{ env.MAP_DIR }}/out/frames/*.png
+            ${{ env.MAP_DIR }}/out/pins.json
+          retention-days: 2
+
+  compose:
+    needs: [plan, render]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.11' }
+      - uses: actions/download-artifact@v4
+        with: { name: plan, path: '${{ env.MAP_DIR }}' }
+      - uses: actions/download-artifact@v4
+        with: { pattern: 'frames-*', merge-multiple: true, path: '${{ env.MAP_DIR }}/out' }
+      - name: Overlays + sound -> MP4
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg libraqm0
+          pip install -q numpy Pillow
+          python -c "from PIL import features; assert features.check('raqm'), 'Hindi shaping missing'"
+          cd "$MAP_DIR"; test "$(ls out/frames/*.png | wc -l)" -eq "${{ needs.plan.outputs.frames }}"
+          TOPIC=$PWD/plan.json OUT=$PWD/out MAP_ROOT=$PWD python compose.py
+      - name: Save into downloads/map3d
+        run: |
+          d="downloads/map3d/$(date -u +%Y-%m-%d)_${{ github.event.inputs.template }}_run${{ github.run_id }}"
+          mkdir -p "$d"; cp "$MAP_DIR/out/reel.mp4" "$MAP_DIR/out/contact_sheet.jpg" "$MAP_DIR/plan.json" "$MAP_DIR/out/file_checks.json" "$d/"
+          git config user.name 'github-actions[bot]'; git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git add downloads; git commit -m "Map3D reel $d [skip ci]"
+          for i in 1 2 3 4 5; do git pull --rebase -q origin main && git push -q origin HEAD:main && break; sleep $((i*7)); done
+          echo "::notice title=saved::$d"
