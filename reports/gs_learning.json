@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-11T16:39:12.104257+00:00",
+  "generated_at": "2026-11-11T23:07:22.934421+00:00",
   "windows": {
     "24h": [
       {
@@ -38,7 +38,7 @@
       {
         "subject": null,
         "format": "legacy_unclassified",
-        "reels": 48,
+        "reels": 49,
         "metrics": {
           "shares_per_1000": {
             "mean": 1.496998549693005,
@@ -271,7 +271,7 @@
       {
         "subject": null,
         "format": "legacy_unclassified",
-        "reels": 56,
+        "reels": 58,
         "metrics": {
           "shares_per_1000": {
             "mean": 1.0037876412666085,
@@ -603,7 +603,7 @@
       {
         "subject": null,
         "format": "legacy_unclassified",
-        "reels": 63,
+        "reels": 64,
         "metrics": {
           "shares_per_1000": {
             "mean": 1.7952368463342752,
@@ -1136,7 +1136,7 @@
       {
         "subject": null,
         "format": "legacy_unclassified",
-        "reels": 56,
+        "reels": 58,
         "shares_per_1000": 1.0037876412666085,
         "saves_per_1000": 3.2037483464282768,
         "average_watch_time": 4.683058823529413
@@ -1156,22 +1156,22 @@
     "current": {
       "reels": 31,
       "best": "18130111846649610",
-      "weakest": "17955425520297150",
+      "weakest": "18118174685022247",
       "basis": "24h share/save rate; hypotheses only",
-      "mean_shares_per_1000": 1.815281957127461,
-      "mean_saves_per_1000": 6.384394635816619
+      "mean_shares_per_1000": 1.9665554535547496,
+      "mean_saves_per_1000": 6.916427522134671
     },
     "previous": {
-      "reels": 26,
+      "reels": 27,
       "best": "18174696019395674",
       "weakest": "18136094323708858",
       "basis": "24h share/save rate; hypotheses only",
-      "mean_shares_per_1000": 1.4207527365422101,
-      "mean_saves_per_1000": 2.4568650412711626
+      "mean_shares_per_1000": 1.331955690508322,
+      "mean_saves_per_1000": 2.3033109761917148
     }
   },
   "weekly_change": {
-    "mean_shares_per_1000": 0.39452922058525086,
-    "mean_saves_per_1000": 3.9275295945454567
+    "mean_shares_per_1000": 0.6345997630464275,
+    "mean_saves_per_1000": 4.613116545942956
   }
 }
