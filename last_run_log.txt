@@ -1,26 +1,75 @@
-[main ec19597] Record 3D reel publish attempt [skip ci]
- 1 file changed, 4 insertions(+)
- create mode 100644 downloads/map3d/2026-11-10_river_place_run42868070758/publish_started.json
-error: cannot pull with rebase: You have unstaged changes.
-error: Please commit or stash them.
-error: cannot pull with rebase: You have unstaged changes.
-error: Please commit or stash them.
-error: cannot pull with rebase: You have unstaged changes.
-error: Please commit or stash them.
-waiting 3553 s for slot 2026-11-11T04:30:00Z
+FORMAT: mega
+  Gemini text models: gemini-flash-latest, gemini-3.8-flash, gemini-3.7-flash, gemini-3.6-flash
+  Mega AI jaanch: 3 me se 2 sahi
+  Groq llama-3.3-70b-versatile: HTTP 404
+  Mega AI jaanch: 3 me se 3 sahi
+  Mega AI jaanch: 46 me se 34 sahi
+  Groq llama-3.3-70b-versatile: HTTP 404
+  Groq openai/gpt-oss-120b: HTTP 400
+  Groq llama-3.1-8b-instant: HTTP 404
+  Gemini gemini-flash-latest: HTTP 503 (koshish 1) {   "error": {     "code": 503,     "message": "This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later
+  Mega AI jaanch: 40 me se 7 sahi
+  Groq llama-3.3-70b-versatile: HTTP 404
+  Groq openai/gpt-oss-120b: HTTP 400
+  Groq llama-3.1-8b-instant: HTTP 404
+  Mega AI jaanch: 32 me se 19 sahi
+  Groq llama-3.3-70b-versatile: HTTP 404
+  Groq openai/gpt-oss-120b: HTTP 400
+  Groq llama-3.1-8b-instant: HTTP 404
+  Mega AI jaanch: 10 me se 8 sahi
+  Groq llama-3.3-70b-versatile: HTTP 404
+  Mega AI jaanch: 10 me se 3 sahi
+  Mega AI jaanch: 19 me se 8 sahi
+  Groq llama-3.3-70b-versatile: HTTP 404
+  Groq openai/gpt-oss-120b: HTTP 400
+  Groq llama-3.1-8b-instant: HTTP 404
+  Mega AI jaanch: 18 me se 12 sahi
+  Groq llama-3.3-70b-versatile: HTTP 404
+  Groq openai/gpt-oss-120b: HTTP 400
+  Groq llama-3.1-8b-instant: HTTP 404
+  Mega AI jaanch: 43 me se 7 sahi
+  Groq llama-3.3-70b-versatile: HTTP 404
+  Groq openai/gpt-oss-120b: HTTP 400
+  Groq llama-3.1-8b-instant: HTTP 404
+  Mega AI jaanch: 34 me se 7 sahi
+  Groq llama-3.3-70b-versatile: HTTP 404
+  Groq openai/gpt-oss-120b: HTTP 400
+  Groq llama-3.1-8b-instant: HTTP 404
+  Mega AI jaanch: 11 me se 2 sahi
+  Groq llama-3.3-70b-versatile: HTTP 404
+  Mega AI jaanch: 11 me se 1 sahi
+Mega ke liye kaafi chhote sawal nahi -> list format
+  7 PYQ topic (AI): मानव शरीर क्रियाविज्ञान
+  7 PYQ topic: मानव शरीर (Human Body) / श्वसन तंत्र (Respiratory System)
+  Gemini gemini-flash-latest: HTTP 503 (koshish 1) {   "error": {     "code": 503,     "message": "This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later
+LIST REEL TAIYAR: generated_reels/science_pyq_reel.mp4 (10s)
+
+CAPTION:
+📅 Day 21/100 • 100 दिन में पूरा GS | कल Day 22/100 - Follow करो ताकि छूटे नहीं
+📤 ये reel उस दोस्त को भेजो जो Group D / NTPC / SSC / Police की तैयारी कर रहा है!
+
+📚 जीव विज्ञान के 7 PYQ - RRB, SSC, Police, Patwari, Army, State Exams के लिए (Save करो)
+
+1. मानव शरीर में वायु किस अंग द्वारा ग्रहण की जाती है? → नासाद्वार
+2. रक्त का द्रव मैट्रिक्स क्या कहलाता है? → प्लाज्मा
+3. मनुष्यों के पाचन तंत्र में उत्सर्जित अम्ल कौन-सा होता है? → हाइड्रोक्लोरिक अम्ल
+4. मानव शरीर के किस भाग में अंकुर (villi) मौजूद होते हैं? → छोटी आंत
+5. मानवों में केशिकागुच्छ (glomerulus) कहां पाया जाता है? → वृक्क में
+6. श्वसन तंत्र का कौन सा भाग वायु-मार्ग को नष्ट होने से रोकता है? → उपास्थि के छल्ले
+7. मानव मस्तिष्क में ध्वनि का संवेदन कितनी देर तक बना रहता है? → 0.1 s
+
+💬 कितने पहले से आते थे? कमेंट करो: 7/7?
+📤 Save करो + उस दोस्त को भेजो जो exam की तैयारी कर रहा है।
+Science GK Questions | RRB NTPC, Group D, SSC GD, State Exam PYQ
+⏱ MinuteMe_GS - एक मिनट, एक PYQ - पक्का!
+📲 Free test / notes: WhatsApp 8989971379
+
+#gkquiz #rrbntpc #sscgd #gkpyq #biology
+SCHEDULE: video ready; target 2026-11-11T11:30:00Z
 Collab invitation requested: @ar_publication
-  IG container: 17913391497568651
+  IG container: 17913436461568651
   upload try 1.1: HTTP 200 {"success":true,"message":"Upload Successful."}
   IG processing: FINISHED
-  LIVE: https://www.instagram.com/reel/DfloGUVjER3/
-[main 66042cf] Save 3D reel Instagram receipt [skip ci]
- 2 files changed, 7 insertions(+)
- create mode 100644 downloads/map3d/2026-11-10_river_place_run42868070758/published.json
- create mode 100644 downloads/map3d/2026-11-10_river_place_run42868070758/reel.upload.json
-error: cannot pull with rebase: You have unstaged changes.
-error: Please commit or stash them.
-error: cannot pull with rebase: You have unstaged changes.
-error: Please commit or stash them.
-error: cannot pull with rebase: You have unstaged changes.
-error: Please commit or stash them.
-PUBLISHED {"media_id": "18070391534518592", "published_utc": "2026-11-11T04:30:50.486730+00:00", "title": "सरदार सरोवर बांध किस नदी पर स्थित है?", "permalink": "https://www.instagram.com/reel/DfloGUVjER3/"}
+REMINDER: reel ready, publication due within 10 minutes: 2026-11-11T11:30:00Z
+  LIVE: https://www.instagram.com/reel/DfmSYBJCVAz/
+INSTAGRAM PE POST HO GAYA: 18111053375209353
