@@ -99,6 +99,11 @@ jobs:
             ENTRY=auto_poster.py
           fi
           if python -u "$ENTRY" 2>&1 | sed -u -E 's/(access_token=|key=|Bearer )[^&" ]+/\1***/g' | tee last_run_log.txt; then exit 0; fi
+          # 11 Nov: GS subjects ke chhote (7 PYQ layak) sawal khatam ho chuke -> slot khaali na rahe: bina subject 7 PYQ (Science bank)
+          if [ "$ENTRY" = auto_poster.py ] && [ -n "$GS_SUBJECT" ] && [ "$POST_MODE" = publish ] && ! grep -qE "PUBLISHED|publish_started" last_run_log.txt; then
+            echo "::warning::$GS_SUBJECT ke 7 PYQ sawal nahi bache -> Science bank se 7 PYQ"
+            if GS_SUBJECT= python -u auto_poster.py 2>&1 | sed -u -E 's/(access_token=|key=|Bearer )[^&" ]+/\1***/g' | tee -a last_run_log.txt; then exit 0; fi
+          fi
           # 10 Nov (user): studio fail hone par purana poster/quiz format NAHI. Pehle animation reel dobara banao
           # (Gemini 503/429 aksar kuch minute me theek ho jaata hai), tabhi 7 PYQ card.
           if [ "$ENTRY" = scheduled_visual_gs.py ] && [ "$POST_MODE" = publish ]; then
