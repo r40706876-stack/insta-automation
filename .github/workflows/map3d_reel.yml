@@ -42,7 +42,6 @@ jobs:
       - name: Plan + Hindi voice
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          GEMINI_ONLY: '1'   # user wants only the Gemini (Charon) voice; no voice -> no reel -> slot posts 7 PYQ
         run: |
           sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
           pip install -q requests numpy edge-tts
