@@ -99,6 +99,12 @@ def overlay(f):
         b = ease((t - .5) / .4); text(d, (360, 290), sc['sub'], fit(sc['sub'], 32), WHITE + (int(255 * b),))
     else:
         a = ease(t / .3); text(d, (360, 190), sc['title'], fit(sc['title'], 50), GOLD + (int(255 * a),), stroke=4)
+    # ---- seas and neighbouring countries
+    if sid != 'teaser':
+        for name, x, y in p.get('_static', []):
+            if 330 < y < 1000 and 30 < x < 690:
+                sea = 'सागर' in name or 'खाड़ी' in name or 'महासागर' in name
+                d.text((x, y), name, font=font(20 if sea else 18), fill=(150, 205, 235, 200) if sea else (170, 180, 190, 190), anchor='mm')
     # ---- state names written on the map (only where the name fits inside the state)
     if sid != 'teaser' and not (sid == 'hook' and t < .6):
         a_ = int(235 * ease((t - (.6 if sid == 'hook' else 0)) / .4)) if sid == 'hook' else 235

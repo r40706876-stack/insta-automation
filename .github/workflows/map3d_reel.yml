@@ -16,6 +16,9 @@ on:
       samples:
         description: 'Cycles samples'
         default: '24'
+      slot:
+        description: 'Optional IST slot key YYYY-MM-DD_HHMM: the saved reel is set to post in that regular slot'
+        default: ''
 permissions:
   contents: write
 env:
@@ -124,6 +127,17 @@ jobs:
           d="downloads/map3d/$(date -u +%Y-%m-%d)_${{ github.event.inputs.template }}_run${{ github.run_id }}"
           mkdir -p "$d"; cp "$MAP_DIR/out/reel.mp4" "$MAP_DIR/out/contact_sheet.jpg" "$MAP_DIR/plan.json" "$MAP_DIR/out/file_checks.json" "$d/"
           git config user.name 'github-actions[bot]'; git config user.email 'github-actions[bot]@users.noreply.github.com'
-          git add downloads; git commit -m "Map3D reel $d [skip ci]"
+          SLOT="${{ github.event.inputs.slot }}"
+          if [ -n "$SLOT" ]; then
+            python - "$SLOT" "$d" <<'PY'
+          import json, sys, os
+          p = 'experiments/slot_override.json'
+          o = json.load(open(p)) if os.path.exists(p) else {}
+          o[sys.argv[1]] = sys.argv[2]
+          json.dump(o, open(p, 'w'), ensure_ascii=False, indent=1)
+          PY
+            git add experiments/slot_override.json
+          fi
+          git add downloads; git commit -m "Map3D reel $d ${SLOT:+for slot $SLOT} [skip ci]"
           for i in 1 2 3 4 5; do git pull --rebase -q origin main && git push -q origin HEAD:main && break; sleep $((i*7)); done
-          echo "::notice title=saved::$d"
+          echo "::notice title=saved::$d ${SLOT:+-> slot $SLOT}"

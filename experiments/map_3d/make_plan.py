@@ -65,6 +65,18 @@ def exam_short(q):
     return (e_.split('(')[0].strip() or ' '.join(q.get('years', [])))[:24]
 
 
+FIXES = {'उûम': 'उद्गम', 'उद्गमस्थल': 'उद्गम स्थल', 'कâ': 'क', 'â': '', 'û': '', 'ʻ': '‘', 'ʼ': '’'}
+
+
+def fix_text(t):
+    for a, b in FIXES.items(): t = t.replace(a, b)
+    return t
+
+
+def clean_q(q):
+    return dict(q, question=fix_text(q['question']), options={k: fix_text(v) for k, v in q['options'].items()})
+
+
 def clean_opt(s): return re.sub(r'\s+नदी$', '', s.strip())
 
 
@@ -77,18 +89,29 @@ def find_question(match):
 
 
 def river_place(q):
+    q = clean_q(q)
     place = next((k for k in FACTS['places'] if k in q['question'] and 'river' in FACTS['places'][k]), None)
-    assert place, 'no verified place for: ' + q['question']
-    P = FACTS['places'][place]; opts = [clean_opt(q['options'][k]) for k in 'abcd' if k in q['options']]
+    opts = [clean_opt(q['options'][k]) for k in 'abcd' if k in q['options']]
     ans_i = 'abcd'.index(q['answer']); ans_key = HI2RIV.get(opts[ans_i])
-    assert ans_key == P['river'], ('answer/facts mismatch', opts[ans_i], P['river'])
     keys = [HI2RIV.get(o) for o in opts]
+    assert ans_key and sum(1 for k in keys if k) >= 3, ('options not drawable', opts)
+    if place:
+        P = FACTS['places'][place]
+        assert ans_key == P['river'], ('answer/facts mismatch', opts[ans_i], P['river'])
+    else:
+        # no named place: pin the answer river's source if the question names it, otherwise no pin
+        src = FACTS['rivers'][ans_key]['source']; word = re.split(r'[ (]', src)[0]
+        if word and word in q['question']:
+            place = word; P = {'at': RIV[ans_key]['path'][0], 'kind': 'उद्गम'}
+        else:
+            P = None
     path = RIV[ans_key]['path']; crossed = states_along(path); f = FACTS['rivers'][ans_key]
-    hi = RIV[ans_key]['hindi']; kind = P['kind']
-    all_pts = [p for k in keys if k for p in RIV[k]['path'] if 66 < p[0] < 99 and 5 < p[1] < 37] + [P['at']]
+    hi = RIV[ans_key]['hindi']; kind = P['kind'] if P else ''
     full_c, full_s = [82.4, 22.0], 30.0
-    near_c, near_s = [P['at'][0], P['at'][1] - .6], 9.0
     path_c, path_s = bbox([p for p in path if 66 < p[0] < 99], 1.2)
+    near_c, near_s = ([P['at'][0], P['at'][1] - .6], 9.0) if P else (path_c, path_s * .8)
+    fact = first_sentence(q.get('explanation', ''))
+    pin_lab = lambda t: ([{'text': place, 'at': P['at'], 'color': '#ff5a5a', 't': t, 'kind': 'pin'}] if P else [])
     rivers = [{'key': k, 'color': OPT_COL[i], 'letter': LET[i], 'label': opts[i], 'anchor': at_fraction(RIV[k]['path'], .55 if k != 'Ganga' else .45)}
               for i, k in enumerate(keys) if k]
     state_hi = {s['name']: s['hindi'] for s in STATES}
@@ -97,30 +120,30 @@ def river_place(q):
     plan = {
         'template': 'river_place', 'fps': 24, 'brand': 'भूगोल · नक्शे से याद करो', 'id': q.get('id'),
         'question': q_text, 'exam_short': exam_short(q), 'options': opts, 'answer': ans_i, 'exam': (q.get('exams') or [''])[0],
-        'place': {'name': place, 'at': P['at'], 'kind': kind},
+        'place': {'name': place, 'at': P['at'], 'kind': kind} if P else None,
         'rivers': rivers, 'answer_river': ans_key,
         'credit': 'नक्शा: datameet (MIT) · नदियाँ: Natural Earth',
         'scenes': [
             {'id': 'teaser', 'seconds': 1.6, 'title': '3D नक्शे पर पूरा समझो', 'speak': 'नक्शे पर देखिए, पूरा समझ आएगा —',
              'cam': {'center': full_c, 'span': full_s * .92, 'tilt': 46, 'yaw': -22, 'from_tilt': 64, 'from_span': 40},
              'actions': [{'type': 'build', 't': 0, 'dur': .7}] + [a for r in rivers for a in ({'type': 'river', 'key': r['key'], 't': .25, 'dur': 1.0}, {'type': 'river_hide', 'key': r['key'], 't': 1.35})], 'labels': []},
-            {'id': 'hook', 'seconds': 3.6, 'title': q_text, 'sub': 'नक्शा देखकर बताओ', 'speak': q_text,
+            {'id': 'hook', 'seconds': 3.6, 'title': q_text, 'sub': 'नक्शा देखकर बताओ', 'speak': q_text.replace('____', 'किस').replace('––––––', 'कौन-सी'),
              'cam': {'center': full_c, 'span': full_s, 'tilt': 34},
-             'actions': [{'type': 'pin', 'at': P['at'], 't': .5}],
-             'labels': [{'text': place, 'at': P['at'], 'color': '#ff5a5a', 't': .9, 'kind': 'pin'}]},
-            {'id': 'options', 'seconds': 5.2, 'title': 'कौन-सी नदी इस ' + kind + ' से होकर बहती है?', 'sub': '',
+             'actions': [{'type': 'pin', 'at': P['at'], 't': .5}] if P else [],
+             'labels': pin_lab(.9)},
+            {'id': 'options', 'seconds': 5.2, 'title': ('कौन-सी नदी इस ' + kind + ' से होकर बहती है?') if P and kind != 'उद्गम' else 'नक्शे पर चारों नदियाँ देखो', 'sub': '',
              'speak': 'ऑप्शन देखिए — ' + ', '.join(f'{LET[i]}, {o}' for i, o in enumerate(opts)) + '। कमेंट में अपना जवाब लिखिए!',
              'cam': {'center': full_c, 'span': full_s, 'tilt': 30},
              'actions': [{'type': 'river', 'key': r['key'], 't': .2 + .55 * i, 'dur': 1.4} for i, r in enumerate(rivers)],
              'labels': [{'text': r['letter'] + '  ' + r['label'], 'at': r['anchor'], 'color': r['color'], 't': .7 + .55 * i, 'kind': 'river'} for i, r in enumerate(rivers)]
-                       + [{'text': place, 'at': P['at'], 'color': '#ff5a5a', 't': 0, 'kind': 'pin'}],
+                       + pin_lab(0),
              },
-            {'id': 'reveal', 'seconds': 4.2, 'title': 'सही उत्तर: ' + LET[ans_i] + '  ' + opts[ans_i], 'sub': place + ' ' + kind + ' — ' + hi + ' नदी पर',
-             'speak': 'सही उत्तर है — ' + opts[ans_i] + '। ' + place + ' ' + kind + ', ' + hi + ' नदी पर बना है।',
+            {'id': 'reveal', 'seconds': 4.2, 'title': 'सही उत्तर: ' + LET[ans_i] + '  ' + opts[ans_i],
+             'sub': (place + ' ' + kind + ' — ' + hi + ' नदी पर') if P and kind != 'उद्गम' else (place + ' से निकलती है — ' + hi) if P else '',
+             'speak': 'सही उत्तर है — ' + opts[ans_i] + '।' + ((' ' + place + ' ' + kind + ', ' + hi + ' नदी पर बना है।') if P and kind != 'उद्गम' else (' ' + fact if fact and not P else '')),
              'cam': {'center': near_c, 'span': near_s, 'tilt': 40},
-             'actions': [{'type': 'river_focus', 'key': ans_key, 't': .15}, {'type': 'ripple', 'at': P['at'], 't': .5}],
-             'labels': [{'text': place, 'at': P['at'], 'color': '#ff5a5a', 't': 0, 'kind': 'pin'},
-                        {'text': hi, 'at': at_fraction(path, .35), 'color': '#ffd25c', 't': .4, 'kind': 'river'}]},
+             'actions': [{'type': 'river_focus', 'key': ans_key, 't': .15}] + ([{'type': 'ripple', 'at': P['at'], 't': .5}] if P else []),
+             'labels': pin_lab(0) + [{'text': hi, 'at': at_fraction(path, .35), 'color': '#ffd25c', 't': .4, 'kind': 'river'}]},
             {'id': 'path', 'seconds': 6.4, 'title': hi + ' नदी का सफ़र', 'sub': 'उद्गम: ' + f['source'],
              'sub2': 'बहाव: ' + route, 'sub3': 'मुहाना: ' + f['mouth'],
              'speak': hi + ' नदी ' + f['source'] + ' से निकलती है, ' + route + ' से होकर बहती है, और ' + f['mouth'] + ' में मिलती है।',
@@ -129,9 +152,10 @@ def river_place(q):
                         + [{'type': 'state_on', 'name': s, 't': .3 + 5.4 * (k + .5) / max(1, len(crossed))} for k, s in enumerate(crossed)],
              'labels': [{'text': 'उद्गम', 'at': path[0], 'color': '#7ee2ff', 't': .3, 'kind': 'point'},
                         {'text': 'मुहाना', 'at': path[-1], 'color': '#7ee2ff', 't': 5.4, 'kind': 'point'}]},
-            {'id': 'end', 'seconds': 3.8, 'title': 'याद रखो', 'sub': place + ' ' + kind + ' : ' + hi + ' नदी', 'speak': 'याद रखिए — ' + place + ', ' + hi + '। सही था तो कमेंट में लिखिए, और ऐसे ही नक्शे वाले सवालों के लिए फ़ॉलो कीजिए।',
+            {'id': 'end', 'seconds': 3.8, 'title': 'याद रखो', 'sub': ((place + ' ' + kind + ' : ') if P and kind != 'उद्गम' else '') + hi + ' नदी',
+             'speak': 'याद रखिए — ' + ((place + ', ') if P else '') + hi + '। सही था तो कमेंट में लिखिए, और ऐसे ही नक्शे वाले सवालों के लिए फ़ॉलो कीजिए।',
              'cam': {'center': near_c, 'span': near_s * 1.6, 'tilt': 46, 'yaw': 14},
-             'actions': [], 'labels': [{'text': place, 'at': P['at'], 'color': '#ff5a5a', 't': 0, 'kind': 'pin'}], 'end': True},
+             'actions': [], 'labels': pin_lab(0), 'end': True},
         ]}
     return plan
 
@@ -152,26 +176,31 @@ def first_sentence(text, limit=95):
 
 
 def state_place(q):
+    q = clean_q(q)
     place = next((k for k in FACTS['places'] if k in q['question']), None)
-    assert place, 'no verified place for: ' + q['question']
-    P = FACTS['places'][place]; opts = [q['options'][k].strip() for k in 'abcd' if k in q['options']]
+    opts = [q['options'][k].strip() for k in 'abcd' if k in q['options']]
     ans_i = 'abcd'.index(q['answer']); ans_state = HI2STATE.get(opts[ans_i])
-    assert ans_state == P['state'] == state_at(P['at']), ('answer/facts/map mismatch', opts[ans_i], P['state'])
+    assert ans_state and sum(1 for o in opts if HI2STATE.get(o)) >= 3, ('options not drawable', opts)
+    P = FACTS['places'][place] if place else None
+    if P: assert ans_state == P['state'] == state_at(P['at']), ('answer/facts/map mismatch', opts[ans_i], P['state'])
     st_hi = {x['name']: x['hindi'] for x in STATES}
     opt_states = [HI2STATE.get(o) for o in opts]
-    cap = FACTS['capitals'].get(ans_state); kind = P['kind']
+    cap = FACTS['capitals'].get(ans_state); kind = P['kind'] if P else ''
     fact = first_sentence(q.get('explanation', ''))
-    pts = [centroid(s_) for s_ in opt_states if s_] + [P['at']]
+    pin_lab = lambda t: ([{'text': place, 'at': P['at'], 'color': '#ff5a5a', 't': t, 'kind': 'pin'}] if P else [])
+    if not P:   # quoted key term ("मोहिनीअट्टम") stands in for a place name in titles and narration
+        m_ = re.search(r"[‘'\"“ʻ]+\s*([^‘’'\"“”ʻʼ]{2,30}?)\s*[’'\"”ʼ]+", q['question'])
+        place = m_.group(1).strip() if m_ else None
     full_c, full_s = [82.4, 22.0], 30.0
     near_c, near_s = bbox([p for p in next(x for x in STATES if x['name'] == ans_state)['rings'][0]] + ([cap[1]] if cap else []), 1.4)
     near_c = [near_c[0], near_c[1] - .4]
-    q_text = q['question'].replace('........', '____').replace('–', '').strip()
+    q_text = re.sub(r'[_.–-]{3,}', '____', q['question']).replace('–', '').strip()
     on = [{'type': 'state_on', 'name': s_, 'color': OPT_COL[i], 't': .2 + .55 * i, 'raise': 1.5, 'glow': .35} for i, s_ in enumerate(opt_states) if s_]
     off = [{'type': 'state_off', 'name': s_, 't': .1} for s_ in opt_states if s_ and s_ != ans_state]
     labels_opt = [{'text': LET[i] + '  ' + opts[i], 'at': centroid(s_), 'color': OPT_COL[i], 't': .45 + .55 * i, 'kind': 'state'} for i, s_ in enumerate(opt_states) if s_]
     plan = {
         'template': 'state_place', 'fps': 24, 'id': q.get('id'), 'question': q_text, 'exam_short': exam_short(q),
-        'options': opts, 'answer': ans_i, 'option_colors': OPT_COL, 'place': {'name': place, 'at': P['at'], 'kind': kind},
+        'options': opts, 'answer': ans_i, 'option_colors': OPT_COL, 'place': {'name': place, 'at': P['at'], 'kind': kind} if P else None,
         'credit': 'नक्शा: datameet (MIT) · राज्य सीमाएँ सरलीकृत',
         'scenes': [
             {'id': 'teaser', 'seconds': 1.6, 'title': '3D नक्शे पर पूरा समझो', 'speak': 'नक्शे पर देखिए, पूरा समझ आएगा —',
@@ -179,29 +208,28 @@ def state_place(q):
              'actions': [{'type': 'build', 't': 0, 'dur': .7}] + [a for i, s_ in enumerate(opt_states) if s_ for a in ({'type': 'state_on', 'name': s_, 'color': OPT_COL[i], 't': .3 + .15 * i, 'raise': 1.5, 'glow': .35}, {'type': 'state_off', 'name': s_, 't': 1.3})], 'labels': []},
             {'id': 'hook', 'seconds': 3.6, 'title': q_text, 'speak': q_text.replace('____', 'किस'),
              'cam': {'center': full_c, 'span': full_s, 'tilt': 34},
-             'actions': [{'type': 'pin', 'at': P['at'], 't': .5}],
-             'labels': [{'text': place, 'at': P['at'], 'color': '#ff5a5a', 't': .9, 'kind': 'pin'}]},
-            {'id': 'options', 'seconds': 5.2, 'title': place + ' किस राज्य में है?',
+             'actions': [{'type': 'pin', 'at': P['at'], 't': .5}] if P else [],
+             'labels': pin_lab(.9)},
+            {'id': 'options', 'seconds': 5.2, 'title': (place + ' किस राज्य में है?') if P else 'सही राज्य कौन-सा?',
              'speak': 'ऑप्शन देखिए — ' + ', '.join(f'{LET[i]}, {o}' for i, o in enumerate(opts)) + '। कमेंट में अपना जवाब लिखिए!',
              'cam': {'center': full_c, 'span': full_s, 'tilt': 30}, 'actions': on,
-             'labels': labels_opt + [{'text': place, 'at': P['at'], 'color': '#ff5a5a', 't': 0, 'kind': 'pin'}]},
-            {'id': 'reveal', 'seconds': 4.2, 'title': 'सही उत्तर: ' + LET[ans_i] + '  ' + opts[ans_i], 'sub': place + ' — ' + st_hi[ans_state] + ' में',
-             'speak': 'सही उत्तर है — ' + opts[ans_i] + '। ' + place + ', ' + st_hi[ans_state] + ' में है।',
+             'labels': labels_opt + pin_lab(0)},
+            {'id': 'reveal', 'seconds': 4.2, 'title': 'सही उत्तर: ' + LET[ans_i] + '  ' + opts[ans_i], 'sub': (place + ' — ' + st_hi[ans_state] + ' में') if P else ((place + ' — ' + st_hi[ans_state]) if place else ''),
+             'speak': 'सही उत्तर है — ' + opts[ans_i] + '।' + ((' ' + place + ', ' + st_hi[ans_state] + ' में है।') if P else ''),
              'cam': {'center': near_c, 'span': near_s, 'tilt': 38},
-             'actions': off + [{'type': 'state_on', 'name': ans_state, 'color': '#ffc93c', 't': .3, 'raise': 1.65, 'glow': .5}, {'type': 'ripple', 'at': P['at'], 't': .5}],
-             'labels': [{'text': place, 'at': P['at'], 'color': '#ff5a5a', 't': 0, 'kind': 'pin'},
-                        {'text': st_hi[ans_state], 'at': centroid(ans_state), 'color': '#ffd25c', 't': .5, 'kind': 'state'}]},
+             'actions': off + [{'type': 'state_on', 'name': ans_state, 'color': '#ffc93c', 't': .3, 'raise': 1.65, 'glow': .5}] + ([{'type': 'ripple', 'at': P['at'], 't': .5}] if P else []),
+             'labels': pin_lab(0) + [{'text': st_hi[ans_state], 'at': centroid(ans_state), 'color': '#ffd25c', 't': .5, 'kind': 'state'}]},
             {'id': 'fact', 'seconds': 5.6, 'title': st_hi[ans_state] + ' — याद रखने का तरीका', 'sub': fact,
-             'sub2': ('राजधानी: ' + cap[0]) if cap else '', 'sub3': kind + ': ' + place,
+             'sub2': ('राजधानी: ' + cap[0]) if cap else '', 'sub3': (kind + ': ' + place) if P else '',
              'speak': (fact + ' ' if fact else '') + ((st_hi[ans_state] + ' की राजधानी ' + cap[0] + ' है।') if cap else ''),
              'cam': {'center': near_c, 'span': near_s * 1.1, 'tilt': 44, 'yaw': -12},
              'actions': ([{'type': 'pin', 'at': cap[1], 't': .9, 'color': '#3b82f6'}] if cap else []),
-             'labels': [{'text': place, 'at': P['at'], 'color': '#ff5a5a', 't': 0, 'kind': 'pin'}]
+             'labels': pin_lab(0)
                        + ([{'text': cap[0] + ' (राजधानी)', 'at': cap[1], 'color': '#7eb6ff', 't': 1.3, 'kind': 'pin'}] if cap else [])},
-            {'id': 'end', 'seconds': 3.8, 'title': 'याद रखो', 'sub': place + ' : ' + st_hi[ans_state],
-             'speak': 'याद रखिए — ' + place + ', ' + st_hi[ans_state] + '। सही था तो कमेंट में लिखिए, और ऐसे ही नक्शे वाले सवालों के लिए फ़ॉलो कीजिए।',
-             'cam': {'center': [(P['at'][0] + 80) / 2, P['at'][1] - 1], 'span': 20, 'tilt': 40, 'yaw': 10}, 'actions': [],
-             'labels': [{'text': place, 'at': P['at'], 'color': '#ff5a5a', 't': 0, 'kind': 'pin'}], 'end': True},
+            {'id': 'end', 'seconds': 3.8, 'title': 'याद रखो', 'sub': ((place + ' : ') if place else '') + st_hi[ans_state],
+             'speak': 'याद रखिए — ' + ((place + ', ') if place else '') + st_hi[ans_state] + '। सही था तो कमेंट में लिखिए, और ऐसे ही नक्शे वाले सवालों के लिए फ़ॉलो कीजिए।',
+             'cam': {'center': [((P['at'][0] if P else centroid(ans_state)[0]) + 80) / 2, (P['at'][1] if P else centroid(ans_state)[1]) - 1], 'span': 20, 'tilt': 40, 'yaw': 10}, 'actions': [],
+             'labels': pin_lab(0), 'end': True},
         ]}
     return plan
 
@@ -211,6 +239,7 @@ def year_of(s):
 
 
 def timeline(q):
+    q = clean_q(q)
     opts = [q['options'][k].strip() for k in 'abcd' if k in q['options']]
     years = [year_of(o) for o in opts]; assert all(years) and len(set(years)) == len(years), opts
     ans_i = 'abcd'.index(q['answer']); ans = years[ans_i]
@@ -269,6 +298,7 @@ def main():
     tpl, match, out = sys.argv[1:4]
     q = find_question(match)
     plan = {'river_place': river_place, 'state_place': state_place, 'timeline': timeline}[tpl](q)
+    plan['subject'] = q.get('subject', '')
     Path(out).write_text(json.dumps(plan, ensure_ascii=False, indent=1), encoding='utf-8')
     print('PLAN', tpl, plan['question'], '->', plan['options'][plan['answer']])
 

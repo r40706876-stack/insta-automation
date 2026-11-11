@@ -1,0 +1,32 @@
+name: Map3D daily (calendar -> render today's 3D reels)
+# Started by timer.yml around 13:00 IST (or by hand). Reads experiments/map_3d/calendar.json for today and
+# renders each listed reel; each finished reel is registered in experiments/slot_override.json for its slot,
+# so the regular 20:00 / 22:00 run posts it. If a render fails, that slot posts its normal reel.
+on:
+  workflow_dispatch:
+    inputs:
+      date:
+        description: 'IST date YYYY-MM-DD (empty = today)'
+        default: ''
+permissions:
+  actions: write
+  contents: read
+jobs:
+  dispatch:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Dispatch today's renders
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          D="${{ github.event.inputs.date }}"; [ -z "$D" ] && D=$(TZ=Asia/Kolkata date +%Y-%m-%d)
+          cd experiments/map_3d
+          python month_plan.py today "$D" | while read slot tpl qid; do
+            [ -z "$qid" ] && continue
+            if python -c "import json,sys; o=json.load(open('../slot_override.json')); sys.exit(0 if '${D}_${slot}' in o else 1)" 2>/dev/null; then
+              echo "already set: ${D}_${slot}"; continue; fi
+            gh workflow run map3d_reel.yml -R "$GITHUB_REPOSITORY" --ref main -f template="$tpl" -f question="$qid" -f chunks=6 -f samples=24 -f slot="${D}_${slot}"
+            echo "::notice title=render::${D}_${slot} $tpl $qid"
+          done

@@ -135,6 +135,23 @@ for i, st in enumerate(STATES):
     st['_c'] = (cx, cy)
 
 
+# lakes / reservoirs (real shapes) sit on top of the state that holds them; others (Tibet) float on neighbour land
+lake_m = material('Lake', hexc('#2f7fb8'), rough=.18, emit=hexc('#4aa3df'), strength=.25)
+LAKES = json.load(open(ROOT + '/lakes.json', encoding='utf-8'))['lakes'] if os.path.exists(ROOT + '/lakes.json') else []
+def _inside(p, ring):
+    x, y = p; c = False
+    for i in range(len(ring)):
+        (x1, y1), (x2, y2) = ring[i - 1], ring[i]
+        if (y1 > y) != (y2 > y) and x < (x2 - x1) * (y - y1) / (y2 - y1) + x1: c = not c
+    return c
+for lk in LAKES:
+    r0 = lk['rings'][0]; c_ = (sum(p[0] for p in r0) / len(r0), sum(p[1] for p in r0) / len(r0))
+    host = next((st['name'] for st in STATES if any(_inside(c_, r) for r in st['rings'])), None)
+    o = fill_curve('Lake ' + lk['name'], lk['rings'], lake_m, .004, 0)
+    if host: o.parent = STATE_OBJ[host]; o.location.z = H / 2 + .003
+    else: o.location.z = .025
+
+
 def set_build(o, s, frame):
     o.scale.z = max(.02, s); o.location.z = H / 2 * max(.02, s)
     o.keyframe_insert('scale', index=2, frame=frame); o.keyframe_insert('location', index=2, frame=frame)
@@ -176,11 +193,11 @@ def make_pin(at, color='#ff3b3b'):
 
 
 RIPPLES = []
-def ripple(at, f0):
+def ripple(at, f0, color='#ff6b6b'):
     c = bpy.data.curves.new('Ripple', 'CURVE'); c.dimensions = '3D'; c.bevel_depth = .012
     sp = c.splines.new('POLY'); sp.points.add(47)
     for k, v in enumerate(sp.points): a = 2 * math.pi * k / 47; v.co = (math.cos(a) * .3, math.sin(a) * .3, 0, 1)
-    m = material('Ripple', (0, 0, 0), emit=hexc('#ff6b6b'), strength=0)
+    m = material('Ripple', (0, 0, 0), emit=hexc(color), strength=0)
     o = link(bpy.data.objects.new('Ripple', c)); c.materials.append(m); o.location = P(at, H + .006)
     for f, s, e in ((0, .001, 0), (f0, .05, 0), (f0 + 1, .1, 5), (f0 + 24, 1.6, 0), (f0 + 25, .001, 0)):
         o.scale = (s, s, 1); o.keyframe_insert('scale', frame=f); key_input(m, 'Emission Strength', e, f)
@@ -208,7 +225,7 @@ for si, s in enumerate(PLAN['scenes']):
             pin.location = base; pin.keyframe_insert('location', frame=f0 + 9)
             pin.location = base + Vector((0, 0, .18)); pin.keyframe_insert('location', frame=f0 + 13)
             pin.location = base; pin.keyframe_insert('location', frame=f0 + 17)
-            ripple(a['at'], f0 + 9)
+            ripple(a['at'], f0 + 9, a.get('color', '#ff6b6b'))
         elif a['type'] == 'ripple':
             ripple(a['at'], f0)
         elif a['type'] == 'river':
@@ -314,6 +331,8 @@ def label_spot(rings):
 
 
 SPOT = {st['name']: label_spot(st['rings']) for st in STATES}
+STATIC = [('अरब सागर', 66.0, 15.0), ('बंगाल की खाड़ी', 88.8, 15.5), ('हिंद महासागर', 79.5, 3.5), ('पाकिस्तान', 69.0, 28.6),
+          ('नेपाल', 83.6, 28.3), ('चीन', 86.0, 33.0), ('बांग्लादेश', 90.2, 23.6), ('श्रीलंका', 80.7, 7.7), ('म्यांमार', 96.0, 21.5)]
 HI = {st['name']: st['hindi'] for st in STATES}
 pins = []
 deps = bpy.context.evaluated_depsgraph_get()
@@ -334,6 +353,11 @@ for f in range(N):
         if vm.z <= 0 or not (0 < vm.x < 1 and 0 < vm.y < 1): continue
         sts.append([HI[name], round(vm.x * 720, 1), round((1 - vm.y) * 1280, 1), round(abs(vb.x - va.x) * 720, 1)])
     d['_states'] = sts
+    stat = []
+    for txt, lon, lat in STATIC:
+        v = world_to_camera_view(sc, cam, Vector((X(lon), Y(lat), .03)))
+        if v.z > 0 and 0 < v.x < 1 and 0 < v.y < 1: stat.append([txt, round(v.x * 720, 1), round((1 - v.y) * 1280, 1)])
+    d['_static'] = stat
     pins.append(d)
 json.dump(pins, open(OUT + '/pins.json', 'w'))
 

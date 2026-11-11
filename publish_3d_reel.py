@@ -29,7 +29,9 @@ if KIND == 'map3d':
     if facts: caption += '\n\n📌 याद रखो\n' + '\n'.join('• ' + f for f in facts)
     caption += f"\n\nPYQ: {plan.get('exam_short', '')}"
     caption += '\n\n📤 उस दोस्त को भेजो जो Group D / NTPC / SSC की तैयारी कर रहा है'
-    caption += '\n\nरोज़ 3D में एक PYQ — फ़ॉलो करो @minuteme_gs\n\n#भूगोल #Geography #IndiaMap #GK #GS #RRBGroupD #NTPC #SSC #Railway #MinuteMe_GS'
+    subj_tags = {'Geography': '#भूगोल #Geography #IndiaMap', 'History': '#इतिहास #History', 'Polity': '#राजव्यवस्था #Polity',
+                 'Economics': '#अर्थव्यवस्था #Economy', 'Traditional GK': '#StaticGK #सामान्यज्ञान #IndiaMap'}.get(plan.get('subject'), '#GK')
+    caption += '\n\nरोज़ 3D में एक PYQ — फ़ॉलो करो @minuteme_gs\n\n' + subj_tags + ' #GK #GS #RRBGroupD #NTPC #SSC #Railway #MinuteMe_GS'
     if plan.get('credit'): caption += '\n\n' + plan['credit']
 else:
     if KIND == 'body':
