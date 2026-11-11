@@ -85,10 +85,12 @@ def main(plan_path, out):
     plan = json.loads(plan_path.read_text(encoding='utf-8')); lines = scene_lines(plan); key = os.getenv('GEMINI_API_KEY', '')
     segs, provider = None, None
     if key:
-        try:
-            take = gemini(STYLE + '\n\n'.join(lines), key)
-            segs = split_at_pauses(take, len(lines), lines); provider = 'Gemini Charon (one take)' if segs else None
-        except Exception as e: print('one-take failed', type(e).__name__)
+        for attempt in (1, 2):   # a second one-take costs 1 call; per-scene costs one call per scene (daily quota is small)
+            try:
+                take = gemini(STYLE + '\n\n'.join(lines), key)
+                segs = split_at_pauses(take, len(lines), lines); provider = 'Gemini Charon (one take)' if segs else None
+            except Exception as e: print('one-take failed', type(e).__name__); break
+            if segs: break
         if not segs:
             try: segs = [gemini(STYLE + l, key) for l in lines]; provider = 'Gemini Charon (per scene, same voice)'
             except Exception as e: print('per-scene failed', type(e).__name__); segs = None

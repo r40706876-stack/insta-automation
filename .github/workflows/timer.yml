@@ -29,8 +29,8 @@ jobs:
           REPO: ${{ github.repository }}
         run: |
           # IST samay = format (pehle wale schedule jaise, ab theek samay par)
-          SLOTS="05:00=current 07:00=list 10:00=list_Geography 13:00=body3d 14:00=map3d 17:00=mega 20:00=list_Static 22:00=list_Alternate"
-          # map3d = start rendering today's 3D map/timeline reels (calendar) at 13:00 IST; they post in the 20:00 / 22:00 slots
+          SLOTS="05:00=current 07:00=list 10:00=list_Geography 13:00=body3d 15:00=map3d 17:00=mega 20:00=list_Static 22:00=list_Alternate"
+          # map3d = start rendering today's 3D map/timeline reels (calendar) at 14:00 IST, after the daily Gemini TTS quota reset (13:30 IST); they post in the 20:00 / 22:00 slots
           # body3d = Human Body 3D template reel; render takes ~1-1.5 h, so it starts 2.5 h before the slot
           NOW=$(date +%s)
           BEST=""; BESTT=0
