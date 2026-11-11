@@ -91,9 +91,10 @@ chain = PLAN['chain']; ans_i = PLAN['answer']; ans_y = PLAN['answer_year']
 AN = {a['year']: plate(a['year'], '#9fb3c8', f'Anchor {a["year"]}') for a in PLAN['anchors']}
 CH_Z = {y: Z0 + .65 + GAP * 1.15 * k for k, y in enumerate(chain)}
 for y, p in AN.items(): place(p['root'], (0, 6, CH_Z[y]), 0, .001)
+DX, DY = -1.75, -.35  # dot runs down the left edge of the plates, in front so it is never hidden
 dot_m = material('Dot', hexc('#fff3c4'), emit=hexc('#ffd25c'), strength=16)
-bpy.ops.mesh.primitive_uv_sphere_add(radius=.13); dot = bpy.context.object; dot.data.materials.append(dot_m)
-place(dot, (0, .35, CH_Z[chain[0]]), 0, .001)
+bpy.ops.mesh.primitive_uv_sphere_add(radius=.2); dot = bpy.context.object; dot.data.materials.append(dot_m)
+place(dot, (DX, DY, CH_Z[chain[0]]), 0, .001)
 
 for si, s in enumerate(PLAN['scenes']):
     for a in s['actions']:
@@ -129,12 +130,22 @@ for si, s in enumerate(PLAN['scenes']):
         elif a['type'] == 'anchor_in':
             r = AN[a['year']]['root']; place(r, (0, 6, CH_Z[a['year']]), f0, .001); place(r, (0, 0, CH_Z[a['year']]), f0 + 12, .9)
         elif a['type'] == 'travel':
-            f1 = f0 + round(a['dur'] * FPS); zs = [CH_Z[y] for y in chain]
-            place(dot, (0, .35, zs[0]), f0 - 1, .001); place(dot, (0, .35, zs[0]), f0 + 3, 1)
+            f1 = f0 + round(a['dur'] * FPS)
+            zs = [CH_Z[a['from']], CH_Z[a['to']]] if 'from' in a else [CH_Z[y] for y in chain]
+            if 'from' not in a: place(dot, (DX, DY, zs[0]), f0 - 1, .001)
+            place(dot, (DX, DY, zs[0]), f0 + 3, 1)
             for f in range(f0 + 3, f1 + 1):
                 u = ease((f - f0 - 3) / max(1, f1 - f0 - 3)); z = zs[0] + (zs[-1] - zs[0]) * u
-                dot.location = (0, .35, z); dot.keyframe_insert('location', frame=f)
-            place(dot, (0, .35, zs[-1]), f1 + 10, .001)
+                dot.location = (DX, DY, z); dot.keyframe_insert('location', frame=f)
+            place(dot, (DX, DY, zs[-1]), f1, 1)
+            if not a.get('keep'): place(dot, (DX, DY, zs[-1]), f1 + 10, .001)
+        elif a['type'] == 'dot_at':  # dot pops in on a stop of the chain
+            z = CH_Z[a['year']]; place(dot, (DX, DY, z), f0 - 1, .001); place(dot, (DX, DY, z), f0 + 6, 1.4); place(dot, (DX, DY, z), f0 + 12, 1)
+        elif a['type'] == 'pulse':  # the plate the dot just reached bumps forward and glows
+            p = PL[ans_i] if a['year'] == ans_y else AN[a['year']]; r = p['root']; s0 = r.scale[0]
+            loc = tuple(r.location)
+            place(r, loc, f0, s0); place(r, (loc[0], loc[1] - .5, loc[2]), f0 + 6, s0 * 1.22); place(r, loc, f0 + 16, s0)
+            key_input(p['edge'], 'Emission Strength', 3, f0); key_input(p['edge'], 'Emission Strength', 14, f0 + 6); key_input(p['edge'], 'Emission Strength', 3, f0 + 18)
 
 # ------------------------------------------------------------------ camera
 cam = link(bpy.data.objects.new('Camera', bpy.data.cameras.new('Camera'))); sc.camera = cam
@@ -143,6 +154,7 @@ cam.data.lens = 35; cam.data.dof.use_dof = True; cam.data.dof.aperture_fstop = 4
 
 def cam_state(c, t, seconds, first):
     z, span, elev, yaw = c['z'], c['span'], c['elev'], c['yaw']
+    if 'focus_year' in c: z = CH_Z[c['focus_year']]
     drift = t / max(seconds, .1); span *= (1 - .06 * drift); yaw += 6 * drift
     if first and 'from_yaw' in c:
         k = ease(t / 1.8); yaw = c['from_yaw'] + (yaw - c['from_yaw']) * k; span = c['from_span'] + (span - c['from_span']) * k

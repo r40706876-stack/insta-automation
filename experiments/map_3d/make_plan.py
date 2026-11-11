@@ -70,7 +70,7 @@ FIXES = {'उûम': 'उद्गम', 'उद्गमस्थल': 'उद�
 
 def fix_text(t):
     for a, b in FIXES.items(): t = t.replace(a, b)
-    return t
+    return re.sub(r'(?<!\S)कया(?!\S)', 'किया', t)  # bank OCR drops the ि in "किया"
 
 
 def clean_q(q):
@@ -132,7 +132,7 @@ def river_place(q):
              'actions': [{'type': 'pin', 'at': P['at'], 't': .5}] if P else [],
              'labels': pin_lab(.9)},
             {'id': 'options', 'seconds': 5.2, 'title': ('कौन-सी नदी इस ' + kind + ' से होकर बहती है?') if P and kind != 'उद्गम' else 'नक्शे पर चारों नदियाँ देखो', 'sub': '',
-             'speak': 'ऑप्शन देखिए — ' + ', '.join(f'{LET[i]}, {o}' for i, o in enumerate(opts)) + '। कमेंट में अपना जवाब लिखिए!',
+             'speak': 'ऑप्शन — ' + ', '.join(f'{LET[i]} {y}' for i, y in enumerate(years)) + '। कमेंट में अपना जवाब लिखिए!',
              'cam': {'center': full_c, 'span': full_s, 'tilt': 30},
              'actions': [{'type': 'river', 'key': r['key'], 't': .2 + .55 * i, 'dur': 1.4} for i, r in enumerate(rivers)],
              'labels': [{'text': r['letter'] + '  ' + r['label'], 'at': r['anchor'], 'color': r['color'], 't': .7 + .55 * i, 'kind': 'river'} for i, r in enumerate(rivers)]
@@ -211,7 +211,7 @@ def state_place(q):
              'actions': [{'type': 'pin', 'at': P['at'], 't': .5}] if P else [],
              'labels': pin_lab(.9)},
             {'id': 'options', 'seconds': 5.2, 'title': (place + ' किस राज्य में है?') if P else 'सही राज्य कौन-सा?',
-             'speak': 'ऑप्शन देखिए — ' + ', '.join(f'{LET[i]}, {o}' for i, o in enumerate(opts)) + '। कमेंट में अपना जवाब लिखिए!',
+             'speak': 'ऑप्शन — ' + ', '.join(f'{LET[i]} {y}' for i, y in enumerate(years)) + '। कमेंट में अपना जवाब लिखिए!',
              'cam': {'center': full_c, 'span': full_s, 'tilt': 30}, 'actions': on,
              'labels': labels_opt + pin_lab(0)},
             {'id': 'reveal', 'seconds': 4.2, 'title': 'सही उत्तर: ' + LET[ans_i] + '  ' + opts[ans_i], 'sub': (place + ' — ' + st_hi[ans_state] + ' में') if P else ((place + ' — ' + st_hi[ans_state]) if place else ''),
@@ -262,6 +262,36 @@ def timeline(q):
         trick += (f', फिर {after} में {A[after]}।' if after else '।')
     else:
         trick = f'{ans}, यानी {A[after]} ({after}) से {after - ans} साल पहले।'
+    # step-by-step story: the dot walks the timeline one stop at a time, each stop with its own line of voice
+    def hop(a, b):
+        n = b - a; return 'अगले ही साल' if n == 1 else f'{n} साल बाद'
+    steps = []
+    if before:
+        steps.append({'id': 'trick', 'seconds': 3.0, 'title': 'याद रखने की ट्रिक', 'sub': f'{before} में {A[before]}',
+                      'speak': f'याद रखने की ट्रिक — {before} में {A[before]}।',
+                      'cam': {'z': 0, 'focus_year': before, 'span': 6.2, 'elev': 8, 'yaw': 16},
+                      'actions': [{'type': 'chain', 't': .1}, {'type': 'anchor_in', 'year': before, 't': .4}, {'type': 'dot_at', 'year': before, 't': 1.0}],
+                      'labels': [{'text': A[before], 'year': before, 'color': '#d9e6f2', 't': .8, 'kind': 'anchor'}]})
+        steps.append({'id': 'trick', 'seconds': 3.0, 'title': '+' + str(ans - before) + ' साल', 'sub': f'{before} में {A[before]}, {hop(before, ans)} {ans}',
+                      'speak': f'{hop(before, ans)}, {ans}।', 'counter': [before, ans],
+                      'cam': {'z': 0, 'focus_year': ans, 'span': 6.2, 'elev': 8, 'yaw': 8},
+                      'actions': [{'type': 'travel', 'from': before, 'to': ans, 't': .1, 'dur': 1.1, 'keep': True}, {'type': 'pulse', 'year': ans, 't': 1.2}],
+                      'labels': [{'text': A[before], 'year': before, 'color': '#d9e6f2', 't': 0, 'kind': 'anchor'},
+                                 {'text': 'यह सवाल  +' + str(ans - before), 'year': ans, 'color': '#ffd25c', 't': 1.2, 'kind': 'anchor'}]})
+    else:
+        steps.append({'id': 'trick', 'seconds': 2.6, 'title': 'याद रखने की ट्रिक', 'sub': f'{ans}: यह सवाल',
+                      'speak': f'याद रखने की ट्रिक — {ans}।',
+                      'cam': {'z': 0, 'focus_year': ans, 'span': 6.2, 'elev': 8, 'yaw': 16},
+                      'actions': [{'type': 'chain', 't': .1}, {'type': 'dot_at', 'year': ans, 't': .9}, {'type': 'pulse', 'year': ans, 't': 1.0}],
+                      'labels': [{'text': 'यह सवाल', 'year': ans, 'color': '#ffd25c', 't': .9, 'kind': 'anchor'}]})
+    if after:
+        prev = steps[-1]['labels']
+        steps.append({'id': 'trick', 'seconds': 3.2, 'title': '+' + str(after - ans) + ' साल', 'sub': trick,
+                      'speak': f'फिर {after} में {A[after]}।', 'counter': [ans, after],
+                      'cam': {'z': 0, 'focus_year': after, 'span': 6.8, 'elev': 9, 'yaw': 0},
+                      'actions': [{'type': 'anchor_in', 'year': after, 't': .1}, {'type': 'travel', 'from': ans, 'to': after, 't': .5, 'dur': 1.1}],
+                      'labels': [dict(l, t=0) for l in prev] + [{'text': A[after] + '  +' + str(after - ans), 'year': after, 'color': '#d9e6f2', 't': 1.4, 'kind': 'anchor'}]})
+    steps[-1]['sub'] = trick
     plan = {
         'template': 'timeline', 'badge': 'MinuteMe 3D टाइमलाइन', 'fps': 24, 'id': q.get('id'), 'question': q_text, 'exam_short': exam_short(q),
         'options': opts, 'answer': ans_i, 'option_colors': OPT_COL, 'years': years, 'answer_year': ans,
@@ -273,24 +303,18 @@ def timeline(q):
              'actions': [{'type': 'pole', 't': 0, 'dur': .9}] + [{'type': 'plate_in', 'i': i, 't': .5 + .18 * r} for r, i in enumerate(order)],
              'labels': []},
             {'id': 'options', 'seconds': 5.2, 'title': 'सही वर्ष कौन-सा?',
-             'speak': 'ऑप्शन देखिए — ' + ', '.join(f'{LET[i]}, {o}' for i, o in enumerate(opts)) + '। कमेंट में अपना जवाब लिखिए!',
+             'speak': 'ऑप्शन — ' + ', '.join(f'{LET[i]} {y}' for i, y in enumerate(years)) + '। कमेंट में अपना जवाब लिखिए!',
              'cam': {'z': 2.5, 'span': 7.4, 'elev': 6, 'yaw': 18},
              'actions': [], 'labels': [{'text': LET[i], 'plate': i, 'color': OPT_COL[i], 't': .2 + .3 * r, 'kind': 'letter'} for r, i in enumerate(order)],
              },
             {'id': 'reveal', 'seconds': 4.2, 'title': 'सही उत्तर: ' + LET[ans_i] + '  ' + opts[ans_i], 'sub': '',
-             'speak': 'सही उत्तर है — ' + str(ans) + '।',
+             'speak': 'सही उत्तर है — ' + opts[ans_i] + '।',
              'cam': {'z': 2.5, 'span': 6.4, 'elev': 2, 'yaw': -10},
              'actions': [{'type': 'focus', 'i': ans_i, 't': .15}], 'labels': []},
-            {'id': 'trick', 'seconds': 6.0, 'title': 'याद रखने की ट्रिक', 'sub': trick,
-             'speak': 'याद रखने की ट्रिक — ' + trick,
-             'cam': {'z': 2.5, 'span': 7.2, 'elev': 8, 'yaw': 16},
-             'actions': [{'type': 'chain', 't': .1}] + [{'type': 'anchor_in', 'year': y, 't': .5 + .5 * k} for k, y in enumerate(anchors)]
-                        + [{'type': 'travel', 't': 1.8, 'dur': 2.6}],
-             'labels': [{'text': A[y], 'year': y, 'color': '#d9e6f2', 't': .9 + .5 * k, 'kind': 'anchor'} for k, y in enumerate(anchors)]
-                       + [{'text': 'यह सवाल', 'year': ans, 'color': '#ffd25c', 't': 1.2, 'kind': 'anchor'}]},
             {'id': 'end', 'seconds': 3.8, 'title': 'याद रखो', 'sub': opts[ans_i], 'speak': 'याद रखिए — ' + str(ans) + '। सही था तो कमेंट में लिखिए, और रोज़ ऐसे PYQ के लिए फ़ॉलो कीजिए।',
              'cam': {'z': 2.5, 'span': 8.4, 'elev': 10, 'yaw': -20}, 'actions': [], 'labels': [], 'end': True},
         ]}
+    plan['scenes'][3:3] = steps
     return plan
 
 

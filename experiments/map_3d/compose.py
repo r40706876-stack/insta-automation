@@ -186,7 +186,10 @@ def overlay(f):
             hw = font(26).getlength(head) + 76
             d.text((hw, y), rest, font=font(fit(rest, 27, 680 - hw - 20)), fill=WHITE + (int(255 * a),), anchor='lm')
     if sid in ('fact', 'trick'):
-        a = ease((t - .3) / .4)
+        a = 1 if k > 0 and TL['scenes'][k - 1]['id'] == sid else ease((t - .3) / .4)
+        if sc.get('counter'):  # year ticks over while the dot walks to the next stop
+            y0_, y1_ = sc['counter']; u = ease((t - .1) / 1.1); yr = round(y0_ + (y1_ - y0_) * u)
+            text(d, (360, 268), str(yr), 70, (255, 210, 92) if u >= 1 else (127, 227, 255), stroke=4)
         if sc.get('sub'):
             lines = wrap(sc['sub'], 30, 600)[:3]; y0 = 1150 - 42 * len(lines) - 20
             d.rounded_rectangle((40, y0 - 18, 680, 1140), radius=18, fill=(8, 22, 36, int(225 * a)), outline=(70, 130, 160, int(255 * a)), width=2)
