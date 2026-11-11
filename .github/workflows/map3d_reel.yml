@@ -128,16 +128,23 @@ jobs:
           mkdir -p "$d"; cp "$MAP_DIR/out/reel.mp4" "$MAP_DIR/out/contact_sheet.jpg" "$MAP_DIR/plan.json" "$MAP_DIR/out/file_checks.json" "$d/"
           git config user.name 'github-actions[bot]'; git config user.email 'github-actions[bot]@users.noreply.github.com'
           SLOT="${{ github.event.inputs.slot }}"
-          if [ -n "$SLOT" ]; then
-            python - "$SLOT" "$d" <<'PY'
+          T=$(mktemp -d); cp -r "$d" "$T/"
+          # Two reels finish at the same time: re-apply on fresh main each try (no merge conflicts on slot_override.json).
+          for i in 1 2 3 4 5 6; do
+            git fetch -q origin main && git reset -q --hard origin/main
+            mkdir -p downloads/map3d && cp -r "$T/$(basename "$d")" downloads/map3d/
+            if [ -n "$SLOT" ]; then
+              python - "$SLOT" "$d" <<'PY'
           import json, sys, os
           p = 'experiments/slot_override.json'
           o = json.load(open(p)) if os.path.exists(p) else {}
           o[sys.argv[1]] = sys.argv[2]
           json.dump(o, open(p, 'w'), ensure_ascii=False, indent=1)
           PY
-            git add experiments/slot_override.json
-          fi
-          git add downloads; git commit -m "Map3D reel $d ${SLOT:+for slot $SLOT} [skip ci]"
-          for i in 1 2 3 4 5; do git pull --rebase -q origin main && git push -q origin HEAD:main && break; sleep $((i*7)); done
+              git add experiments/slot_override.json
+            fi
+            git add downloads; git commit -q -m "Map3D reel $d ${SLOT:+for slot $SLOT} [skip ci]"
+            git push -q origin HEAD:main && ok=1 && break; sleep $((i*7))
+          done
+          test -n "$ok"
           echo "::notice title=saved::$d ${SLOT:+-> slot $SLOT}"
