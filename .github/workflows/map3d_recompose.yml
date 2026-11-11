@@ -7,6 +7,9 @@ on:
       run_id:
         description: 'map3d_reel run id whose frames to reuse'
         required: true
+      slot:
+        description: 'Optional IST slot key YYYY-MM-DD_HHMM to point at this reel'
+        default: ''
 permissions:
   contents: write
   actions: read
@@ -33,13 +36,23 @@ jobs:
       - name: Overwrite saved reel
         run: |
           RID="${{ github.event.inputs.run_id }}"
-          T=$(mktemp -d); cp "$MAP_DIR/out/reel.mp4" "$MAP_DIR/out/contact_sheet.jpg" "$MAP_DIR/out/file_checks.json" "$T/"
+          T=$(mktemp -d); cp "$MAP_DIR/out/reel.mp4" "$MAP_DIR/out/contact_sheet.jpg" "$MAP_DIR/out/file_checks.json" "$MAP_DIR/plan.json" "$T/"
+          TPL=$(python -c "import json;print(json.load(open('$MAP_DIR/plan.json'))['template'])"); SLOT="${{ github.event.inputs.slot }}"
           git config user.name 'github-actions[bot]'; git config user.email 'github-actions[bot]@users.noreply.github.com'
           for i in 1 2 3 4 5 6; do
             git fetch -q origin main && git reset -q --hard origin/main
-            d=$(ls -d downloads/map3d/*_run$RID | head -1); test -n "$d"
+            d=$(ls -d downloads/map3d/*_run$RID 2>/dev/null | head -1); [ -n "$d" ] || d="downloads/map3d/$(date -u +%Y-%m-%d)_${TPL}_run$RID"; mkdir -p "$d"
             if [ -e "$d/publish_started.json" ]; then echo "::error::already posting/posted, not overwriting"; exit 1; fi
-            cp "$T"/* "$d/"; git add "$d"; git commit -q -m "Map3D re-compose $d [skip ci]"
+            cp "$T"/* "$d/"; git add "$d"
+            if [ -n "$SLOT" ]; then python - "$SLOT" "$d" <<'PY'
+          import json, sys, os
+          p = 'experiments/slot_override.json'
+          o = json.load(open(p)) if os.path.exists(p) else {}
+          o[sys.argv[1]] = sys.argv[2]
+          json.dump(o, open(p, 'w'), ensure_ascii=False, indent=1)
+          PY
+            git add experiments/slot_override.json; fi
+            git commit -q -m "Map3D re-compose $d [skip ci]"
             git push -q origin HEAD:main && ok=1 && break; sleep $((i*7))
           done
           test -n "$ok"; echo "::notice title=recomposed::$d"
