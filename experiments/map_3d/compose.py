@@ -141,7 +141,14 @@ def overlay(f):
     if sid == 'options' or sid == 'hook' and t > dur - .6:
         a = ease((t - (0 if sid == 'options' else dur - .6)) / .35)
         reveal_at = TL['answer']
-        for i, opt in enumerate(TL['options']):
+        # options that differ only at the end (e.g. "73वां ... अधिनियम, 1992/1993"): show the shared part once, cards show the difference
+        ws = [o.split() for o in TL['options']]; k = 0
+        while all(len(w) > k + 1 for w in ws) and len({w[k] for w in ws}) == 1: k += 1
+        shown = [' '.join(w[k:]) for w in ws] if k >= 2 else TL['options']
+        if k >= 2:
+            pre = ' '.join(ws[0][:k]).rstrip(',') + ' ...'
+            text(d, (360, 930), pre, fit(pre, 30, 640), WHITE)
+        for i, opt in enumerate(shown):
             col, row = i % 2, i // 2
             x0 = 44 + col * 322; y0 = 1010 + row * 74 + int(30 * (1 - a))
             show = a if sid == 'hook' else ease((t - .55 * i) / .3)

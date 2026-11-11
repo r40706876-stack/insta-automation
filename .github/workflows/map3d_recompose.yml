@@ -1,0 +1,45 @@
+name: Map/Timeline 3D re-compose (overlay fix, no re-render)
+# Re-runs compose.py from the CURRENT code on frames already rendered by a map3d_reel run (artifacts live 2 days),
+# and overwrites reel.mp4 + contact sheet in that run's downloads/map3d folder. Slot override keeps pointing at the same folder.
+on:
+  workflow_dispatch:
+    inputs:
+      run_id:
+        description: 'map3d_reel run id whose frames to reuse'
+        required: true
+permissions:
+  contents: write
+  actions: read
+env:
+  MAP_DIR: experiments/map_3d
+jobs:
+  compose:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.11' }
+      - uses: actions/download-artifact@v4
+        with: { name: plan, path: '${{ env.MAP_DIR }}', run-id: '${{ github.event.inputs.run_id }}', github-token: '${{ github.token }}' }
+      - uses: actions/download-artifact@v4
+        with: { pattern: 'frames-*', merge-multiple: true, path: '${{ env.MAP_DIR }}/out', run-id: '${{ github.event.inputs.run_id }}', github-token: '${{ github.token }}' }
+      - name: Overlays + sound -> MP4
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg libraqm0
+          pip install -q numpy Pillow
+          python -c "from PIL import features; assert features.check('raqm'), 'Hindi shaping missing'"
+          cd "$MAP_DIR"; TOPIC=$PWD/plan.json OUT=$PWD/out MAP_ROOT=$PWD python compose.py
+      - name: Overwrite saved reel
+        run: |
+          RID="${{ github.event.inputs.run_id }}"
+          T=$(mktemp -d); cp "$MAP_DIR/out/reel.mp4" "$MAP_DIR/out/contact_sheet.jpg" "$MAP_DIR/out/file_checks.json" "$T/"
+          git config user.name 'github-actions[bot]'; git config user.email 'github-actions[bot]@users.noreply.github.com'
+          for i in 1 2 3 4 5 6; do
+            git fetch -q origin main && git reset -q --hard origin/main
+            d=$(ls -d downloads/map3d/*_run$RID | head -1); test -n "$d"
+            if [ -e "$d/publish_started.json" ]; then echo "::error::already posting/posted, not overwriting"; exit 1; fi
+            cp "$T"/* "$d/"; git add "$d"; git commit -q -m "Map3D re-compose $d [skip ci]"
+            git push -q origin HEAD:main && ok=1 && break; sleep $((i*7))
+          done
+          test -n "$ok"; echo "::notice title=recomposed::$d"
