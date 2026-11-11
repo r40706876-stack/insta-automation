@@ -92,6 +92,8 @@ def main(plan_path, out):
         if not segs:
             try: segs = [gemini(STYLE + l, key) for l in lines]; provider = 'Gemini Charon (per scene, same voice)'
             except Exception as e: print('per-scene failed', type(e).__name__); segs = None
+    if not segs and os.getenv('GEMINI_ONLY') == '1':
+        print('NO GEMINI VOICE: build stopped (Gemini-only reels never use another voice)'); sys.exit(2)
     if not segs:
         try: segs = edge(lines, d); provider = 'Edge Madhur (male)'
         except Exception as e: print('edge failed', type(e).__name__); segs = None
