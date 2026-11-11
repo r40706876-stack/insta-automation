@@ -48,7 +48,7 @@ jobs:
           pip install -q requests numpy edge-tts
           cd "$MAP_DIR"
           python make_plan.py "${{ github.event.inputs.template }}" "${{ github.event.inputs.question }}" plan.json
-          python voice.py plan.json out | tee /tmp/voice.log
+          set -o pipefail; python voice.py plan.json out | tee /tmp/voice.log
           echo "::notice title=voice::$(grep -E 'VOICE|NO VOICE' /tmp/voice.log | tr '\n' ' ')"
       - id: m
         run: |
