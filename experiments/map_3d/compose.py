@@ -99,6 +99,14 @@ def overlay(f):
         b = ease((t - .5) / .4); text(d, (360, 290), sc['sub'], fit(sc['sub'], 32), WHITE + (int(255 * b),))
     else:
         a = ease(t / .3); text(d, (360, 190), sc['title'], fit(sc['title'], 50), GOLD + (int(255 * a),), stroke=4)
+    # ---- state names written on the map (only where the name fits inside the state)
+    if sid != 'teaser' and not (sid == 'hook' and t < .6):
+        a_ = int(235 * ease((t - (.6 if sid == 'hook' else 0)) / .4)) if sid == 'hook' else 235
+        for name, x, y, wpx in p.get('_states', []):
+            if not (330 < y < 1000): continue
+            n = 22 if wpx > 150 else 18 if wpx > 95 else 15
+            if font(n).getlength(name) > wpx * .92: continue
+            d.text((x, y), name, font=font(n), fill=(24, 30, 40, a_), anchor='mm', stroke_width=2, stroke_fill=(255, 255, 255, int(a_ * .55)))
     # ---- labels pinned to the 3D map
     placed = []
     for li, lab in enumerate(sc.get('labels', [])):

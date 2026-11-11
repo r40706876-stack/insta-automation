@@ -171,7 +171,8 @@ def make_pin(at, color='#ff3b3b'):
     bpy.ops.mesh.primitive_cone_add(radius1=.0, radius2=.085, depth=.28, location=(0, 0, .14)); cone = bpy.context.object
     bpy.ops.mesh.primitive_uv_sphere_add(radius=.11, location=(0, 0, .32)); head = bpy.context.object
     for o in (cone, head): o.data.materials.append(red); o.parent = pn; bpy.ops.object.shade_smooth()
-    b = P(at, H * 1.65); pn.location = b + Vector((0, 0, 6)); pn.keyframe_insert('location', frame=0); return pn, b
+    b = P(at, H * 1.65); pn.location = b + Vector((0, 0, 6)); pn.keyframe_insert('location', frame=0)
+    pn.scale = (0, 0, 0); pn.keyframe_insert('scale', frame=0); return pn, b
 
 
 RIPPLES = []
@@ -202,6 +203,7 @@ for si, s in enumerate(PLAN['scenes']):
                 set_build(STATE_OBJ[st['name']], .02, 0); set_build(STATE_OBJ[st['name']], .02, fa); set_build(STATE_OBJ[st['name']], 1, fb)
         elif a['type'] == 'pin':
             pin, base = make_pin(a['at'], a.get('color', '#ff3b3b'))
+            pin.scale = (0, 0, 0); pin.keyframe_insert('scale', frame=f0 - 1); pin.scale = (1, 1, 1); pin.keyframe_insert('scale', frame=f0)
             pin.location = base + Vector((0, 0, 6)); pin.keyframe_insert('location', frame=f0)
             pin.location = base; pin.keyframe_insert('location', frame=f0 + 9)
             pin.location = base + Vector((0, 0, .18)); pin.keyframe_insert('location', frame=f0 + 13)
@@ -212,6 +214,9 @@ for si, s in enumerate(PLAN['scenes']):
         elif a['type'] == 'river':
             o = RIV_OBJ[a['key']]; o.data.bevel_factor_end = 0; o.data.keyframe_insert('bevel_factor_end', frame=f0)
             o.data.bevel_factor_end = 1; o.data.keyframe_insert('bevel_factor_end', frame=f0 + round(a['dur'] * FPS))
+        elif a['type'] == 'river_hide':
+            o = RIV_OBJ[a['key']]; o.data.bevel_factor_end = 1; o.data.keyframe_insert('bevel_factor_end', frame=f0)
+            o.data.bevel_factor_end = 0; o.data.keyframe_insert('bevel_factor_end', frame=f0 + 5)
         elif a['type'] == 'river_focus':
             for k, o in RIV_OBJ.items():
                 m = RIV_MAT[k]
@@ -295,6 +300,21 @@ for o in bpy.data.objects:
             for kp in fc.keyframe_points: kp.interpolation = 'LINEAR' if o == cam or o == dot else 'BEZIER'
 
 # ------------------------------------------------------------------ label screen positions (for compose)
+def label_spot(rings):
+    """Point inside the state + usable width: widest horizontal run through the biggest ring, tried at a few latitudes."""
+    ring = max(rings, key=len); ys = [p[1] for p in ring]; best = None
+    for fy in (.5, .4, .6, .3, .7):
+        y = min(ys) + (max(ys) - min(ys)) * fy; xs = []
+        for (x1, y1), (x2, y2) in zip(ring, ring[1:] + ring[:1]):
+            if (y1 > y) != (y2 > y): xs.append(x1 + (x2 - x1) * (y - y1) / (y2 - y1))
+        xs.sort()
+        for a, b in zip(xs[0::2], xs[1::2]):
+            if best is None or b - a > best[2] - best[1]: best = (y, a, b)
+    return best
+
+
+SPOT = {st['name']: label_spot(st['rings']) for st in STATES}
+HI = {st['name']: st['hindi'] for st in STATES}
 pins = []
 deps = bpy.context.evaluated_depsgraph_get()
 for f in range(N):
@@ -305,6 +325,15 @@ for f in range(N):
             z = H + (.45 if lab.get('kind') == 'pin' else .03)
             v = world_to_camera_view(sc, cam, P(lab['at'], z))
             d[f'{si}:{li}'] = [round(v.x * 720, 1), round((1 - v.y) * 1280, 1), round(v.z, 3)]
+    sts = []
+    for name, sp in SPOT.items():
+        if not sp: continue
+        y, a, b = sp; z = H * STATE_OBJ[name].scale.z + .004
+        va = world_to_camera_view(sc, cam, Vector((X(a), Y(y), z))); vb = world_to_camera_view(sc, cam, Vector((X(b), Y(y), z)))
+        vm = world_to_camera_view(sc, cam, Vector((X((a + b) / 2), Y(y), z)))
+        if vm.z <= 0 or not (0 < vm.x < 1 and 0 < vm.y < 1): continue
+        sts.append([HI[name], round(vm.x * 720, 1), round((1 - vm.y) * 1280, 1), round(abs(vb.x - va.x) * 720, 1)])
+    d['_states'] = sts
     pins.append(d)
 json.dump(pins, open(OUT + '/pins.json', 'w'))
 
