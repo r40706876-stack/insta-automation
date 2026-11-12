@@ -1,0 +1,264 @@
+{
+  "title": "कम्युनिस्ट पार्टी का प्रतीक चिह्न",
+  "subject": "राजव्यवस्था",
+  "topic_key": "bharat_communist_party_prateek",
+  "share_reason": "कम्युनिस्ट पार्टी का सही प्रतीक चिह्न याद रहेगा",
+  "recall": "याद रखने की ट्रिक: मक्के और हंसिया।",
+  "pyq_challenge": true,
+  "share_card": {
+    "kind": "exam_confusion",
+    "recipient": "परीक्षा की तैयारी करने वाले दोस्त",
+    "benefit": "कम्युनिस्ट पार्टी का सही प्रतीक चिह्न याद रहेगा",
+    "cta": "अब साथ में क्विज़ करें"
+  },
+  "scenes": [
+    {
+      "role": "hook",
+      "heading": "पहले अपना जवाब चुनिए",
+      "explanation": "A या B — सोचिए",
+      "speech": "भारत की कम्युनिस्ट पार्टी का प्रतीक चिह्न निम्न में से क्या है? जाल पहचानिए।",
+      "teaches": "प्रश्न पहचान",
+      "visual_action": "दो प्रतीक चिह्नों को ऊपर उठाएँ",
+      "setting": "neutral",
+      "objects": [
+        {
+          "kind": "book",
+          "action": "rise",
+          "label": "मक्के और हंसिया",
+          "id": "object_0",
+          "color": "#59c7c5",
+          "pos": [
+            -0.9,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            -0.9,
+            0,
+            1.2
+          ]
+        },
+        {
+          "kind": "book",
+          "action": "rise",
+          "label": "हथौड़ा, हंसिया और तारा",
+          "id": "object_1",
+          "color": "#59c7c5",
+          "pos": [
+            0.9,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            0.9,
+            0,
+            1.2
+          ]
+        }
+      ],
+      "hook_question": "भारत की कम्युनिस्ट पार्टी का प्रतीक चिह्न निम्न में से क्या है?",
+      "quiz_options": [
+        "A: मक्के और हंसिया",
+        "B: हथौड़ा, हंसिया और तारा"
+      ],
+      "content_group": "single_topic"
+    },
+    {
+      "role": "challenge",
+      "heading": "कमेंट में लिखिए: A या B?",
+      "explanation": "दो सेकंड सोचिए: A या B?",
+      "speech": "दो सेकंड सोचिए: A या B?",
+      "teaches": "विकल्प तुलना",
+      "visual_action": "दो प्रतीक चिह्नों को ऊपर उठाएँ",
+      "setting": "neutral",
+      "objects": [
+        {
+          "kind": "book",
+          "action": "rise",
+          "label": "मक्के और हंसिया",
+          "id": "object_0",
+          "color": "#59c7c5",
+          "pos": [
+            -0.9,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            -0.9,
+            0,
+            1.2
+          ]
+        },
+        {
+          "kind": "book",
+          "action": "rise",
+          "label": "हथौड़ा, हंसिया और तारा",
+          "id": "object_1",
+          "color": "#59c7c5",
+          "pos": [
+            0.9,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            0.9,
+            0,
+            1.2
+          ]
+        }
+      ],
+      "quiz_options": [
+        "A: मक्के और हंसिया",
+        "B: हथौड़ा, हंसिया और तारा"
+      ]
+    },
+    {
+      "role": "reveal",
+      "heading": "सही उत्तर",
+      "explanation": "सही उत्तर है: मक्के और हंसिया।",
+      "speech": "सही उत्तर है: मक्के और हंसिया।",
+      "teaches": "सही उत्तर पहचान",
+      "visual_action": "सही विकल्प की पुस्तक ऊपर उठे",
+      "setting": "neutral",
+      "objects": [
+        {
+          "kind": "book",
+          "action": "rise",
+          "label": "मक्के और हंसिया",
+          "id": "object_0",
+          "color": "#59c7c5",
+          "pos": [
+            0.0,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            0.0,
+            0,
+            1.2
+          ]
+        }
+      ]
+    },
+    {
+      "role": "explain",
+      "heading": "तथ्य समझिए",
+      "explanation": "भारतीय कम्युनिस्ट पार्टी एक साम्यवादी दल",
+      "speech": "भारतीय कम्युनिस्ट पार्टी एक साम्यवादी दल है।",
+      "teaches": "प्रतीक अर्थ समझें",
+      "visual_action": "साम्यवादी शब्द वाली पुस्तक ऊपर उठे",
+      "setting": "neutral",
+      "objects": [
+        {
+          "kind": "book",
+          "action": "rise",
+          "label": "साम्यवादी",
+          "id": "object_0",
+          "color": "#59c7c5",
+          "pos": [
+            0.0,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            0.0,
+            0,
+            1.2
+          ]
+        }
+      ]
+    },
+    {
+      "role": "transfer",
+      "heading": "खुद को जाँचिए",
+      "explanation": "जिसकी स्थापना एम।",
+      "speech": "जिसकी स्थापना एम।",
+      "teaches": "अन्य पार्टी प्रतीक तुलना",
+      "visual_action": "कांग्रेस की पुस्तक ऊपर उठे",
+      "setting": "neutral",
+      "objects": [
+        {
+          "kind": "book",
+          "action": "rise",
+          "label": "कांग्रेस",
+          "id": "object_0",
+          "color": "#59c7c5",
+          "pos": [
+            0.0,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            0.0,
+            0,
+            1.2
+          ]
+        }
+      ]
+    },
+    {
+      "role": "revision",
+      "heading": "रिवीजन कार्ड",
+      "explanation": "याद रखने की ट्रिक: मक्के और",
+      "speech": "याद रखने की ट्रिक: मक्के और हंसिया।",
+      "teaches": "स्मरण",
+      "visual_action": "स्मरण पाठ फ़ेड‑इन",
+      "setting": "neutral",
+      "revision_card": true,
+      "objects": [
+        {
+          "kind": "book",
+          "action": "none",
+          "label": "स्मरण",
+          "id": "object_0",
+          "color": "#59c7c5",
+          "pos": [
+            0.0,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        }
+      ]
+    }
+  ]
+}
