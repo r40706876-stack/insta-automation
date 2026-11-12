@@ -1,0 +1,20 @@
+{
+ "brand": "MinuteMe_GS",
+ "exam": "RRB NTPC 2025-26",
+ "subject": "Maths",
+ "hook": ["3 घंटियाँ", "एक साथ कब बजेंगी?"],
+ "hook_sub": "RRB NTPC 2025 का सवाल · 10 सेकंड का शॉर्टकट",
+ "question_hi": "घंटी A हर 18 मिनट, घंटी B हर 24 मिनट और घंटी C हर 30 मिनट में बजती है। तीनों पहली बार 6:30 AM पर एक साथ बजती हैं। तीसरी बार एक साथ कब बजेंगी?",
+ "question_en": "Bells ring every 18, 24 and 30 minutes. First together at 6:30 AM. When do they ring together for the 3rd time?",
+ "options": ["12:30 PM", "6:30 PM", "9:30 PM", "3:30 PM"],
+ "answer": "B",
+ "bells": [18, 24, 30],
+ "factors": [["18", "2 × 3²"], ["24", "2³ × 3"], ["30", "2 × 3 × 5"]],
+ "lcm_expr": "2³ × 3² × 5",
+ "lcm": 360,
+ "lcm_unit": "मिनट",
+ "lcm_big": "6 घंटे",
+ "clock": {"start_h": 6, "start_m": 30, "step_h": 6, "times": ["6:30 AM", "12:30 PM", "6:30 PM"], "labels": ["पहली बार", "दूसरी बार", "तीसरी बार"]},
+ "trick": ["“एक साथ” दिखे = LCM", "n-वीं बार = पहला समय + (n−1)×LCM"],
+ "cta": "रोज़ 1 PYQ + शॉर्टकट"
+}
