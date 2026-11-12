@@ -7,26 +7,33 @@ on:
         description: "Reel spec JSON"
         default: "maths_reel/demo_bells.json"
 
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 40
+    env:
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
     steps:
       - uses: actions/checkout@v4
-        with:
-          sparse-checkout: maths_reel
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
       - name: Tools
         run: |
-          pip install playwright
+          pip install playwright numpy pillow requests edge-tts
           python -m playwright install chromium || echo "runner ka Google Chrome use hoga"
-          sudo apt-get install -y ffmpeg || which ffmpeg
-      - name: Reel banao
-        run: python maths_reel/maths_reel.py "${{ inputs.spec }}" maths_reel_demo.mp4
-      - uses: actions/upload-artifact@v4
-        with:
-          name: maths_reel_demo
-          path: maths_reel_demo.mp4
-          retention-days: 14
+          which ffmpeg || (sudo apt-get update -y && sudo apt-get install -y ffmpeg)
+      - name: Reel banao (Gemini awaaz ke saath)
+        run: |
+          mkdir -p downloads/maths_demo
+          python maths_reel/maths_reel.py "${{ inputs.spec }}" downloads/maths_demo/maths_demo_${{ github.run_number }}.mp4
+      - name: Repo mein save (downloads/maths_demo)
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add downloads/maths_demo
+          git commit -m "Maths demo reel ${{ github.run_number }} [skip ci]" || echo "kuch naya nahi"
+          git pull --rebase origin main && git push
