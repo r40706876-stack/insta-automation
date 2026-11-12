@@ -102,7 +102,7 @@ def sfx_track(path, total, events):
     mix_in = "".join(f"[a{i}]" for i in range(n)) + ("[v]" if vin else "")
     fc = ";".join(labels) + f";{mix_in}amix=inputs={n + (1 if vin else 0)}:normalize=0,alimiter=limit=0.9,apad,atrim=0:{total}[out]"
     subprocess.run(["ffmpeg", "-y", "-loglevel", "error", *parts, *vin, "-filter_complex", fc, "-map", "[out]",
-                    "-c:a", "aac", "-b:a", "160k", path], check=True)
+                    "-c:a", "aac", "-ar", "44100", "-ac", "2", "-b:a", "160k", path], check=True)
 
 
 def main():
@@ -143,8 +143,9 @@ def main():
             return
         tmp = out + ".video.mp4"
         enc = subprocess.Popen(["ffmpeg", "-y", "-loglevel", "error", "-f", "image2pipe", "-framerate", str(FPS),
-                                "-c:v", "mjpeg", "-i", "-", "-c:v", "libx264", "-preset", "veryfast", "-crf", "20",
-                                "-pix_fmt", "yuv420p", tmp], stdin=subprocess.PIPE)
+                                "-c:v", "mjpeg", "-i", "-", "-vf", "scale=out_range=tv,format=yuv420p", "-c:v", "libx264",
+                                "-profile:v", "high", "-level", "4.1", "-preset", "veryfast", "-crf", "20", "-g", "60",
+                                "-pix_fmt", "yuv420p", "-color_range", "tv", tmp], stdin=subprocess.PIPE)
         n = int(real_total * FPS)
         for i in range(n):
             rt = i / FPS
