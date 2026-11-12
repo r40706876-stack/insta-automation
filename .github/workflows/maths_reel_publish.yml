@@ -1,0 +1,39 @@
+name: Maths reel - publish to Instagram
+on:
+  workflow_dispatch:
+    inputs:
+      video: { description: 'downloads/ wali video', default: 'downloads/maths_demo/maths_demo_2.mp4' }
+      spec: { description: 'reel spec JSON', default: 'maths_reel/demo_bells.json' }
+      cover: { description: 'cover photo (khaali = video frame)', default: 'downloads/maths_demo/maths_demo_2_cover.jpg' }
+permissions:
+  contents: write
+concurrency:
+  group: minuteme-3d-publish
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.11' }
+      - name: Publish once
+        env:
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          IMGBB_KEY: ${{ secrets.IMGBB_KEY }}
+          PYTHONUNBUFFERED: '1'
+        run: |
+          pip install -q --timeout 30 -r requirements.txt imageio-ffmpeg
+          python -c "import imageio_ffmpeg,os; p='/usr/local/bin/ffmpeg'; os.path.exists(p) or os.symlink(imageio_ffmpeg.get_ffmpeg_exe(),p)"
+          python -u publish_maths_reel.py "${{ inputs.video }}" "${{ inputs.spec }}" "${{ inputs.cover }}" 2>&1 | sed -u -E 's/(access_token=|key=|Bearer |OAuth )[^&" ]+/\1***/g' | tee /tmp/pub.log
+          grep -qE "PUBLISHED" /tmp/pub.log || { echo "::error title=publish failed::$(tail -c 1500 /tmp/pub.log | tr '\n' ' ')"; exit 1; }
+          echo "::notice title=instagram::$(grep -E 'PUBLISHED' /tmp/pub.log | tail -1)"
+      - name: Receipt save
+        if: always()
+        run: |
+          git config user.name 'github-actions[bot]'; git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git add downloads/maths_demo || true
+          git commit -q -m "Maths reel publish receipt [skip ci]" || exit 0
+          for i in 1 2 3; do git pull --rebase -q origin main && git push -q && break; sleep 5; done

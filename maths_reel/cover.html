@@ -1,0 +1,47 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:Hi;src:url(fonts/FreeSans.ttf)}
+@font-face{font-family:Hi;font-weight:bold;src:url(fonts/FreeSansBold.ttf)}
+@font-face{font-family:Pop;font-weight:bold;src:url(fonts/Poppins-Bold.ttf)}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1920px;overflow:hidden}
+body{font-family:Pop,Hi,sans-serif;color:#fff;background:linear-gradient(165deg,#0b1026 0%,#1c1150 45%,#3a0f5e 100%);position:relative}
+.hi{font-family:Hi,Pop,sans-serif}
+.blob{position:absolute;border-radius:50%;filter:blur(100px);opacity:.6}
+.dots{position:absolute;inset:0;background-image:radial-gradient(#ffffff16 2px,transparent 2px);background-size:46px 46px}
+.top{position:absolute;top:120px;left:0;right:0;text-align:center}
+.pill{display:inline-block;background:#ffd23f;color:#1c1150;font-weight:bold;font-size:46px;border-radius:60px;padding:14px 40px;transform:rotate(-2deg);box-shadow:0 12px 40px #ffd23f66}
+.bells{position:absolute;top:300px;left:0;right:0;display:flex;justify-content:center;gap:40px}
+.bells svg{width:210px;height:230px}
+.h1{position:absolute;top:620px;left:40px;right:40px;text-align:center;font-size:150px;font-weight:bold;line-height:1.05;text-shadow:0 10px 40px #0008}
+.h2{position:absolute;top:800px;left:40px;right:40px;text-align:center;font-size:118px;font-weight:bold;color:#ffd23f;line-height:1.1;text-shadow:0 10px 40px #0008}
+.clock{position:absolute;top:1000px;left:330px;width:420px;height:420px}
+.q{position:absolute;top:1080px;right:70px;width:230px;height:230px;border-radius:50%;background:#ff3d81;font-size:190px;font-weight:bold;display:flex;align-items:center;justify-content:center;transform:rotate(12deg);box-shadow:0 14px 50px #ff3d8199}
+.badges{position:absolute;top:1470px;left:60px;right:60px;display:flex;gap:24px;justify-content:center}
+.b{border-radius:30px;padding:18px 34px;font-size:52px;font-weight:bold}
+.foot{position:absolute;bottom:150px;left:0;right:0;text-align:center;font-size:44px;font-weight:bold;opacity:.95}
+.brand{display:inline-flex;align-items:center;gap:16px;background:#ffffff1c;border:2px solid #ffffff45;border-radius:50px;padding:12px 30px}
+.watch{width:54px;height:54px;border-radius:50%;background:#ffd23f}
+</style></head><body>
+<div class="blob" style="width:760px;height:760px;background:#7c3aed;left:-200px;top:150px"></div>
+<div class="blob" style="width:640px;height:640px;background:#ff3d81;left:600px;top:950px"></div>
+<div class="blob" style="width:520px;height:520px;background:#0ea5e9;left:150px;top:1450px"></div>
+<div class="dots"></div>
+<div class="top"><span class="pill hi">RRB NTPC 2025 का PYQ</span></div>
+<div class="bells" id="bells"></div>
+<div class="h1 hi">3 घंटियाँ</div>
+<div class="h2 hi">कब साथ बजेंगी?</div>
+<svg class="clock" viewBox="0 0 700 700"><circle cx="350" cy="350" r="335" fill="#fff"/><circle cx="350" cy="350" r="335" fill="none" stroke="#7c3aed" stroke-width="22"/>
+<line x1="350" y1="350" x2="350" y2="170" stroke="#ff3d81" stroke-width="30" stroke-linecap="round" transform="rotate(195 350 350)"/>
+<line x1="350" y1="350" x2="350" y2="100" stroke="#1c1150" stroke-width="20" stroke-linecap="round" transform="rotate(180 350 350)"/><circle cx="350" cy="350" r="30" fill="#1c1150"/>
+<text x="350" y="130" font-size="80" font-family="Pop" font-weight="bold" text-anchor="middle" fill="#1c1150">12</text>
+<text x="590" y="378" font-size="80" font-family="Pop" font-weight="bold" text-anchor="middle" fill="#1c1150">3</text>
+<text x="110" y="378" font-size="80" font-family="Pop" font-weight="bold" text-anchor="middle" fill="#1c1150">9</text></svg>
+<div class="q">?</div>
+<div class="badges hi"><div class="b" style="background:#22d3ee;color:#062a33">LCM ट्रिक</div><div class="b" style="background:#ff3d81">10 सेकंड</div></div>
+<div class="foot"><span class="brand"><span class="watch"></span>MinuteMe_GS</span></div>
+<script>
+const C=["#ff3d81","#ffd23f","#22d3ee"];
+document.getElementById("bells").innerHTML=C.map((c,i)=>`<svg viewBox="0 0 220 240" style="transform:rotate(${[-14,0,14][i]}deg)"><circle cx="110" cy="18" r="14" fill="${c}"/><path d="M110 30 C60 30 48 80 46 130 C44 165 30 180 18 195 L202 195 C190 180 176 165 174 130 C172 80 160 30 110 30Z" fill="${c}"/><path d="M70 70 C62 95 60 120 60 140" stroke="#ffffff70" stroke-width="10" fill="none" stroke-linecap="round"/><rect x="12" y="192" width="196" height="16" rx="8" fill="${c}"/><circle cx="110" cy="222" r="18" fill="#fff"/></svg>`).join("");
+</script></body></html>
