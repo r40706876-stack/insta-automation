@@ -132,7 +132,7 @@ def river_place(q):
              'actions': [{'type': 'pin', 'at': P['at'], 't': .5}] if P else [],
              'labels': pin_lab(.9)},
             {'id': 'options', 'seconds': 5.2, 'title': ('कौन-सी नदी इस ' + kind + ' से होकर बहती है?') if P and kind != 'उद्गम' else 'नक्शे पर चारों नदियाँ देखो', 'sub': '',
-             'speak': ', '.join(str(y) for y in years[:-1]) + f' या {years[-1]}? कमेंट में जवाब लिखिए!',
+             'speak': ', '.join(opts[:-1]) + f' या {opts[-1]}? कमेंट में जवाब लिखिए!',
              'cam': {'center': full_c, 'span': full_s, 'tilt': 30},
              'actions': [{'type': 'river', 'key': r['key'], 't': .2 + .55 * i, 'dur': 1.4} for i, r in enumerate(rivers)],
              'labels': [{'text': r['letter'] + '  ' + r['label'], 'at': r['anchor'], 'color': r['color'], 't': .7 + .55 * i, 'kind': 'river'} for i, r in enumerate(rivers)]
@@ -211,7 +211,7 @@ def state_place(q):
              'actions': [{'type': 'pin', 'at': P['at'], 't': .5}] if P else [],
              'labels': pin_lab(.9)},
             {'id': 'options', 'seconds': 5.2, 'title': (place + ' किस राज्य में है?') if P else 'सही राज्य कौन-सा?',
-             'speak': ', '.join(str(y) for y in years[:-1]) + f' या {years[-1]}? कमेंट में जवाब लिखिए!',
+             'speak': ', '.join(opts[:-1]) + f' या {opts[-1]}? कमेंट में जवाब लिखिए!',
              'cam': {'center': full_c, 'span': full_s, 'tilt': 30}, 'actions': on,
              'labels': labels_opt + pin_lab(0)},
             {'id': 'reveal', 'seconds': 4.2, 'title': 'सही उत्तर: ' + LET[ans_i] + '  ' + opts[ans_i], 'sub': (place + ' — ' + st_hi[ans_state] + ' में') if P else ((place + ' — ' + st_hi[ans_state]) if place else ''),
