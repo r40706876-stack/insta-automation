@@ -35,7 +35,34 @@ publication.prepare_video = lambda src, font: str(src)   # video jaisi bani wais
 e._with_series = lambda v: v
 cover_url = e._public_url(str(COVER)) if COVER and COVER.exists() else None
 print('cover:', 'ok' if cover_url else 'nahi (video ka frame cover banega)')
-pid = e.post_reel(str(VIDEO), caption, 0, cover_url)
+def via_url():
+    """Repo public hai: video GitHub raw link se Instagram khud utha le (resumable upload ki jagah)."""
+    import time
+    repo = os.environ.get('GITHUB_REPOSITORY', 'r40706876-stack/insta-automation')
+    url = f"https://raw.githubusercontent.com/{repo}/main/{VIDEO.as_posix()}"
+    body = {'media_type': 'REELS', 'video_url': url, 'caption': caption, 'share_to_feed': 'true', 'access_token': e.IG_ACCESS_TOKEN}
+    if cover_url: body['cover_url'] = cover_url
+    publication.container_policy(body)
+    c = e.requests.post(f"{e.GRAPH}{e.IG_USER_ID}/media", data=body, timeout=60).json()
+    cid = c.get('id'); print('  url-container:', cid or c)
+    if not cid: return None
+    for _ in range(60):
+        time.sleep(10)
+        st = e.requests.get(f"{e.GRAPH}{cid}", params={'fields': 'status_code,status', 'access_token': e.IG_ACCESS_TOKEN}, timeout=30).json()
+        print('  IG processing:', st.get('status_code'), st.get('status', ''))
+        if st.get('status_code') == 'FINISHED': break
+        if st.get('status_code') in ('ERROR', 'EXPIRED'): print('  IG ka kaaran:', st); return None
+    else:
+        return None
+    pub = e.requests.post(f"{e.GRAPH}{e.IG_USER_ID}/media_publish", data={'creation_id': cid, 'access_token': e.IG_ACCESS_TOKEN}, timeout=60).json()
+    print('  publish:', pub)
+    return pub.get('id')
+
+
+pid = via_url()
+if not pid:
+    print('video link se nahi hua -> purana resumable upload')
+    pid = e.post_reel(str(VIDEO), caption, 0, cover_url)
 assert pid, 'Instagram publication not confirmed'
 rec = {'media_id': str(pid), 'published_utc': now(), 'title': TITLE}
 r = e.requests.get(e.GRAPH + str(pid), params={'fields': 'permalink', 'access_token': e.IG_ACCESS_TOKEN}, timeout=30)
