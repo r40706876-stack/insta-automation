@@ -14,7 +14,8 @@ from playwright.sync_api import sync_playwright
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 FPS = 30
-END_HOLD = 2.2  # aakhri line ke baad CTA ke liye
+END_HOLD = 1.6  # aakhri line ke baad CTA ke liye
+STRETCH = (2, 3)  # step 1 (LCM) aur step 2 (ghadi) awaaz ki raftaar se chalein
 
 
 def make_voice(spec, wav_path):
@@ -62,6 +63,9 @@ def time_map(ts, tmpl_total, real_starts, real_total):
     def f(rt):
         i = max(k for k in range(len(B) - 1) if B[k] <= rt or k == 0)
         D, R, u = T[i + 1] - T[i], B[i + 1] - B[i], max(0.0, rt - B[i])
+        if R >= D and i in STRETCH and R > FADE * 2:  # steps: animation awaaz ke saath dheere chale
+            core = R - FADE
+            return T[i] + (u * (D - FADE) / core if u < core else D - FADE + (u - core))
         if R >= D:
             if u < D - FADE:
                 return T[i] + u
