@@ -1,0 +1,50 @@
+{
+  "mode": "render_only",
+  "publish": false,
+  "protected": [
+    "geography_7pyq",
+    "physics_success",
+    "history_success",
+    "river_dam_single",
+    "successful_3d_science",
+    "maths",
+    "successful_polity",
+    "successful_biology"
+  ],
+  "eligible": [
+    "weak_polity",
+    "weak_biology",
+    "economics",
+    "chemistry",
+    "misc_gk",
+    "weekly_revision",
+    "weak_single_pyq"
+  ],
+  "eligibility": "explicit weak cohort only; unknown or protected defaults to unchanged",
+  "experiments": [
+    "question_selection",
+    "first_frame",
+    "voice_onset",
+    "duration",
+    "educational_animation",
+    "question_sequence"
+  ],
+  "design": {
+    "pairs_per_test": 5,
+    "change_one_variable": true,
+    "measurement_hours": [
+      24,
+      72
+    ],
+    "metrics": [
+      "three_second_hold",
+      "average_watch_seconds",
+      "completion_if_available",
+      "saves_per_reach",
+      "shares_per_reach"
+    ],
+    "no_duplicate_publication": true
+  },
+  "baseline": "2026-11-02 through 2026-11-12",
+  "production_changes": false
+}
