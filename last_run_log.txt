@@ -1,26 +1,94 @@
-[main 1baf285] Record 3D reel publish attempt [skip ci]
- 1 file changed, 4 insertions(+)
- create mode 100644 downloads/map3d/2026-11-12_timeline_run43183540900/publish_started.json
-error: cannot pull with rebase: You have unstaged changes.
-error: Please commit or stash them.
-error: cannot pull with rebase: You have unstaged changes.
-error: Please commit or stash them.
-error: cannot pull with rebase: You have unstaged changes.
-error: Please commit or stash them.
-waiting 3501 s for slot 2026-11-12T16:30:00Z
+FORMAT: list
+  Gemini text models: gemini-flash-latest, gemini-3.8-flash, gemini-3.7-flash, gemini-3.6-flash
+  Gemini gemini-flash-latest: HTTP 503 (koshish 1) {   "error": {     "code": 503,     "message": "This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later
+  Gemini gemini-flash-latest fail (koshish 2): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
+  Gemini gemini-3.8-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-3.8-flash: HTTP 429 (koshish 2) 
+  Gemini gemini-3.7-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-3.7-flash: HTTP 429 (koshish 2) 
+  Groq llama-3.3-70b-versatile: HTTP 404
+  7 PYQ topic (AI): पर्यावरण
+  7 PYQ topic: राष्ट्रीय उद्यान तथा वन्य जीव अभ्यारण्य (National Parks and Wild Life Sanctuaries)
+  Gemini gemini-flash-latest: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-flash-latest: HTTP 429 (koshish 2) 
+  Gemini gemini-3.8-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-3.8-flash: HTTP 429 (koshish 2) 
+  Gemini gemini-3.7-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-3.7-flash: HTTP 429 (koshish 2) 
+  Gemini gemini-3.6-flash fail (koshish 1): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
+  Gemini gemini-3.6-flash: HTTP 503 (koshish 2) 
+  Groq llama-3.3-70b-versatile: HTTP 404
+  Gemini gemini-flash-latest: HTTP 503 (koshish 1) {   "error": {     "code": 503,     "message": "This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later
+  Gemini gemini-flash-latest: HTTP 429 (koshish 2) 
+  Gemini gemini-3.8-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-3.8-flash: HTTP 429 (koshish 2) 
+  Gemini gemini-3.7-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-3.7-flash: HTTP 429 (koshish 2) 
+  Gemini gemini-3.6-flash fail (koshish 1): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
+  Gemini gemini-3.6-flash fail (koshish 2): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
+  Groq llama-3.3-70b-versatile: HTTP 404
+  Gemini gemini-flash-latest: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-flash-latest: HTTP 429 (koshish 2) 
+  Gemini gemini-3.8-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-3.8-flash: HTTP 429 (koshish 2) 
+  Gemini gemini-3.7-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-3.7-flash: HTTP 429 (koshish 2) 
+  Gemini gemini-flash-latest: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-flash-latest: HTTP 429 (koshish 2) 
+  Gemini gemini-3.8-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-3.8-flash: HTTP 429 (koshish 2) 
+  Gemini gemini-3.7-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-3.7-flash: HTTP 429 (koshish 2) 
+  Gemini gemini-flash-latest: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-flash-latest: HTTP 429 (koshish 2) 
+  Gemini gemini-3.8-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-3.8-flash: HTTP 429 (koshish 2) 
+  Gemini gemini-3.7-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-3.7-flash: HTTP 429 (koshish 2) 
+  Gemini gemini-flash-latest: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-flash-latest: HTTP 429 (koshish 2) 
+  Gemini gemini-3.8-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-3.8-flash: HTTP 429 (koshish 2) 
+  Gemini gemini-3.7-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-3.7-flash: HTTP 429 (koshish 2) 
+  Gemini gemini-3.6-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-flash-latest: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-flash-latest: HTTP 429 (koshish 2) 
+  Gemini gemini-3.8-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-3.8-flash: HTTP 429 (koshish 2) 
+  Gemini gemini-3.7-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-3.7-flash: HTTP 429 (koshish 2) 
+  Gemini gemini-3.6-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-3.6-flash: HTTP 429 (koshish 2) 
+  Groq llama-3.3-70b-versatile: HTTP 404
+LIST REEL TAIYAR: generated_reels/science_pyq_reel.mp4 (10s)
+
+CAPTION:
+📅 Day 23/100 • 100 दिन में पूरा GS | कल Day 24/100 - Follow करो ताकि छूटे नहीं
+📤 ये reel उस दोस्त को भेजो जो Group D / NTPC / SSC / Police की तैयारी कर रहा है!
+
+📚 पर्यावरण के 7 PYQ - RRB, SSC, Police, Patwari, Army, State Exams के लिए (Save करो)
+
+1. सिमलीपाल बायो रिज़र्व कहाँ स्थित है? → ओडिशा
+2. रॉयल बंगाल टाइगर मुख्यतः किस प्रकार के वनों में निवास करते हैं? → मैंग्रोव वन
+3. भारत ने संयुक्त राष्ट्र के सतत विकास लक्ष्यों (SDG) को किस वर्ष अपनाया था? → 2015
+4. भारत कितनी बार UNFCCC को अपनी बाइएनियल अपडेट रिपोर्ट (BURs) प्रस्तुत करता है? → प्रत्येक दो वर्ष में
+5. 1992 में किस वैश्विक आयोजन ने सतत विकास को लोकप्रिय बनाया? → रियो अर्थ समिट
+6. सतत विकास की अवधारणा किस रिपोर्ट (1987) के बाद लोकप्रिय हुई? → ब्रंटलैंड रिपोर्ट
+7. 29-8-2025 को पर्यावरण लेखापरीक्षा नियम, 2025 किस अधिनियम के अंतर्गत जारी किए गए थे? → पर्यावरण (संरक्षण) अधिनियम, 1986
+
+💬 कितने पहले से आते थे? कमेंट करो: 7/7?
+📤 Save करो + उस दोस्त को भेजो जो exam की तैयारी कर रहा है।
+पर्यावरण GK Questions | RRB NTPC, Group D, SSC GD, State Exam PYQ
+⏱ MinuteMe_GS - एक मिनट, एक PYQ - पक्का!
+📲 Free test / notes: WhatsApp 8989971379
+
+#gkquiz #rrbntpc #sscgd #gkpyq #environment
+SCHEDULE: video ready; target 2026-11-13T01:30:00Z
 Collab invitation requested: @ar_publication
-  IG container: 17913657093568651
+  IG container: 17913701970568651
   upload try 1.1: HTTP 200 {"success":true,"message":"Upload Successful."}
   IG processing: FINISHED
-  LIVE: https://www.instagram.com/reel/DfpfSt4Df8N/
-[main 30653c4] Save 3D reel Instagram receipt [skip ci]
- 2 files changed, 7 insertions(+)
- create mode 100644 downloads/map3d/2026-11-12_timeline_run43183540900/published.json
- create mode 100644 downloads/map3d/2026-11-12_timeline_run43183540900/reel.upload.json
-error: cannot pull with rebase: You have unstaged changes.
-error: Please commit or stash them.
-error: cannot pull with rebase: You have unstaged changes.
-error: Please commit or stash them.
-error: cannot pull with rebase: You have unstaged changes.
-error: Please commit or stash them.
-PUBLISHED {"media_id": "18123501187974484", "published_utc": "2026-11-12T16:30:57.276461+00:00", "title": "पंचायती राज संस्थाओं को किस अधिनियम द्वारा संवैधानिक दर्जा प्रदान किया गया?", "permalink": "https://www.instagram.com/reel/DfpfSt4Df8N/"}
+REMINDER: reel ready, publication due within 10 minutes: 2026-11-13T01:30:00Z
+  LIVE: https://www.instagram.com/reel/DfqYCnWCoVC/
+INSTAGRAM PE POST HO GAYA: 18154100932545149
