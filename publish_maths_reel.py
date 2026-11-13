@@ -11,7 +11,7 @@ COVER = Path(sys.argv[3]) if len(sys.argv) > 3 else None
 RECEIPT = VIDEO.with_suffix('.published.json')
 now = lambda: datetime.datetime.now(datetime.timezone.utc).isoformat()
 
-TITLE = ' '.join(SPEC['hook']) + ' 🔔 | RRB NTPC 2025 PYQ'
+TITLE = ' '.join(SPEC['hook']) + ' ' + SPEC.get('emoji', '🔔') + ' | RRB NTPC 2025 PYQ'
 L = 'ABCD'
 caption = TITLE + '\n\n' + SPEC['question_hi'] + '\n\n' + '\n'.join(f"{L[i]}) {o}" for i, o in enumerate(SPEC['options']))
 caption += '\n\nपहले खुद सोचो, फिर वीडियो में हल देखो 👆 जवाब कमेंट में लिखो 👇'
