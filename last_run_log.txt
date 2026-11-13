@@ -1,26 +1,26 @@
-[main 8758704] Record 3D reel publish attempt [skip ci]
+[main 4ddede2] Record 3D reel publish attempt [skip ci]
  1 file changed, 4 insertions(+)
- create mode 100644 downloads/map3d/2026-11-13_state_place_run43393794904/publish_started.json
+ create mode 100644 downloads/map3d/2026-11-13_timeline_run43393798293/publish_started.json
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
-waiting 3512 s for slot 2026-11-13T14:30:00Z
+waiting 3515 s for slot 2026-11-13T16:30:00Z
 Collab invitation requested: @ar_publication
-  IG container: 17913798093568651
+  IG container: 17913816006568651
   upload try 1.1: HTTP 200 {"success":true,"message":"Upload Successful."}
   IG processing: FINISHED
-  LIVE: https://www.instagram.com/reel/Dfr2XARiJ8F/
-[main e1bafdb] Save 3D reel Instagram receipt [skip ci]
+  LIVE: https://www.instagram.com/reel/DfsEFk9k-Tr/
+[main b3a9e38] Save 3D reel Instagram receipt [skip ci]
  2 files changed, 7 insertions(+)
- create mode 100644 downloads/map3d/2026-11-13_state_place_run43393794904/published.json
- create mode 100644 downloads/map3d/2026-11-13_state_place_run43393794904/reel.upload.json
+ create mode 100644 downloads/map3d/2026-11-13_timeline_run43393798293/published.json
+ create mode 100644 downloads/map3d/2026-11-13_timeline_run43393798293/reel.upload.json
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
-PUBLISHED {"media_id": "18648254497042249", "published_utc": "2026-11-13T14:31:03.286146+00:00", "title": "यूनेस्को के विश्व नेटवर्क ऑफ बायोस्फीयर रिजर्व (WNBR) में निम्नलिखित में से कौन सा शामिल है?", "permalink": "https://www.instagram.com/reel/Dfr2XARiJ8F/"}
+PUBLISHED {"media_id": "18124531844052708", "published_utc": "2026-11-13T16:31:04.144272+00:00", "title": "भारत में उदारीकरण, निजीकरण और वैश्वीकरण की शुरुआत किस वर्ष हुई?", "permalink": "https://www.instagram.com/reel/DfsEFk9k-Tr/"}
