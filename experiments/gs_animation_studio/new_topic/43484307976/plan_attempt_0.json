@@ -1,0 +1,221 @@
+{
+  "pyq_challenge": true,
+  "title": "CISF की स्थापना वर्ष",
+  "subject": "स्टैटिक जीके",
+  "topic_key": "cisd_establishment_year",
+  "share_reason": "CISF की स्थापना वर्ष अक्सर परीक्षा में भ्रमित करता है",
+  "recall": "याद रखने की ट्रिक: 1969।",
+  "share_card": {
+    "kind": "exam_confusion",
+    "recipient": "परीक्षा की तैयारी करने वाले दोस्त",
+    "benefit": "CISF की स्थापना वर्ष 1969 याद रहेगा",
+    "cta": "दोस्त को बताओ, 1969 याद रखो"
+  },
+  "scenes": [
+    {
+      "role": "hook",
+      "heading": "पहले अपना जवाब चुनिए",
+      "explanation": "A या B — सोचिए",
+      "speech": "भारत में केंद्रीय औद्योगिक सुरक्षा बल की स्थापना किस वर्ष में हुई थी? दृश्य देखिए।",
+      "teaches": "प्रश्न पहचानना",
+      "visual_action": "व्यक्ति चलकर CISF भवन की ओर जाता है",
+      "setting": "neutral",
+      "objects": [
+        {
+          "kind": "person",
+          "action": "walk",
+          "label": "विधायक",
+          "id": "object_0",
+          "color": "#f4e7bf",
+          "pos": [
+            -0.45,
+            0,
+            0
+          ],
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ],
+          "to": [
+            0.75,
+            0,
+            0
+          ]
+        }
+      ],
+      "hook_question": "भारत में केंद्रीय औद्योगिक सुरक्षा बल की स्थापना किस वर्ष में हुई थी?",
+      "quiz_options": [
+        "A: 1970",
+        "B: 1969"
+      ],
+      "content_group": "single_topic"
+    },
+    {
+      "role": "challenge",
+      "heading": "कमेंट में लिखिए: A या B?",
+      "explanation": "दो सेकंड सोचिए: A या B?",
+      "speech": "दो सेकंड सोचिए: A या B?",
+      "teaches": "विकल्प तुलना",
+      "visual_action": "सिक्का दो विकल्पों की ओर स्लाइड करता है",
+      "setting": "neutral",
+      "objects": [
+        {
+          "kind": "coin",
+          "action": "move",
+          "label": "विकल्प",
+          "id": "object_0",
+          "color": "#f5bd3d",
+          "pos": [
+            -0.45,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            0.75,
+            0,
+            0
+          ]
+        }
+      ],
+      "quiz_options": [
+        "A: 1970",
+        "B: 1969"
+      ]
+    },
+    {
+      "role": "reveal",
+      "heading": "सही उत्तर",
+      "explanation": "सही उत्तर है: 1969।",
+      "speech": "सही उत्तर है: 1969।",
+      "teaches": "सही वर्ष पहचानना",
+      "visual_action": "मानचित्र पर 1969 का मार्कर दिखता है",
+      "setting": "neutral",
+      "objects": [
+        {
+          "kind": "map",
+          "action": "trace",
+          "map_region": "india",
+          "route": [
+            [
+              77.0,
+              28.6
+            ],
+            [
+              77.2,
+              28.7
+            ]
+          ],
+          "label": "CISF",
+          "id": "object_0",
+          "color": "#59c7c5",
+          "pos": [
+            0.0,
+            0,
+            0
+          ],
+          "size": [
+            1.1,
+            1.1,
+            1.1
+          ]
+        }
+      ]
+    },
+    {
+      "role": "explain",
+      "heading": "तथ्य समझिए",
+      "explanation": "इसका मुख्यालय दिल्ली में है।",
+      "speech": "इसका मुख्यालय दिल्ली में है।",
+      "teaches": "कानूनी आधार समझना",
+      "visual_action": "पुस्तक उठती है और अधिनियम दिखाती है",
+      "setting": "neutral",
+      "objects": [
+        {
+          "kind": "book",
+          "action": "rise",
+          "label": "अधिनियम",
+          "id": "object_0",
+          "color": "#59c7c5",
+          "pos": [
+            0.0,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            0.0,
+            0,
+            1.2
+          ]
+        }
+      ]
+    },
+    {
+      "role": "transfer",
+      "heading": "खुद को जाँचिए",
+      "explanation": "यही परीक्षा की आम गलती है।",
+      "speech": "यही परीक्षा की आम गलती है।",
+      "teaches": "स्मरण तकनीक",
+      "visual_action": "गियर घूमता है, 1969 को हाइलाइट करता है",
+      "setting": "neutral",
+      "objects": [
+        {
+          "kind": "gear",
+          "action": "spin",
+          "label": "स्मरण",
+          "id": "object_0",
+          "color": "#59c7c5",
+          "pos": [
+            0.0,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        }
+      ]
+    },
+    {
+      "role": "revision",
+      "heading": "रिवीजन कार्ड",
+      "explanation": "याद रखने की ट्रिक: 1969।",
+      "speech": "याद रखने की ट्रिक: 1969।",
+      "teaches": "त्वरित स्मरण",
+      "visual_action": "पुस्तक स्थिर दिखती है",
+      "setting": "neutral",
+      "revision_card": true,
+      "objects": [
+        {
+          "kind": "book",
+          "action": "none",
+          "label": "स्मरण कार्ड",
+          "id": "object_0",
+          "color": "#59c7c5",
+          "pos": [
+            0.0,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        }
+      ]
+    }
+  ]
+}
