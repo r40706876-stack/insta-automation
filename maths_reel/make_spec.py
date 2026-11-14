@@ -43,7 +43,17 @@ WARN = ["अटक जाते हैं!", "गलती करते है�
 def parts_of(exp):
     """Book ki vyakhya ' / ' se steps; har step '→' par chhoti lines me."""
     steps = []
-    for p in re.split(r"\s+/\s+", (exp or "").strip()):
+    # " / " separates steps in the book, but "5406 / (1.5 × 0.68)" is division: keep those (digit or ")" before, digit or "(" after; brackets open)
+    exp, chunks, cur, depth = (exp or "").strip(), [], "", 0
+    for i, ch in enumerate(exp):
+        depth += (ch == "(") - (ch == ")")
+        if exp[i:i + 3] == " / " and depth == 0 and (re.match(r"[\d.]+%\s*=", exp[i + 3:]) or not (re.search(r"[\d)]$", exp[:i]) and re.match(r"[\d(]", exp[i + 3:]))):
+            chunks.append(cur); cur = ""; continue
+        if chunks and cur == "" and exp[i - 2:i + 1] == " / ":
+            continue
+        cur += ch
+    chunks.append(cur)
+    for p in [c.lstrip("/ ") for c in chunks]:
         p = p.strip().rstrip(".।").strip()
         if not p:
             continue
