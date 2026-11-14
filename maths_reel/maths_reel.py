@@ -32,6 +32,8 @@ def make_voice(spec, wav_path):
         print("voice helper import nahi hua:", exc)
         return None
     arr, starts = None, None
+    _post = ap.requests.post   # Gemini kabhi 5 min tak latka deta hai: har call max 100s, warna Edge
+    ap.requests.post = lambda *a, **k: _post(*a, **{**k, "timeout": min(k.get("timeout") or 100, 100)})
     one = ap.gemini_voice_timed([ap.to_speech(x) for x in lines], int(spec.get("voice_rot", 0)))
     if one:
         arr, starts = one
