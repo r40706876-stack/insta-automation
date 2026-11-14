@@ -1,0 +1,396 @@
+{
+ "template": "state_place",
+ "fps": 24,
+ "id": "e647971291",
+ "question": "ऐतिहासिक स्थान ‘चौरी चौरा’ किस राज्य में स्थित है?",
+ "exam_short": "RRB Group D 2022",
+ "options": [
+  "केरल",
+  "आंध्र प्रदेश",
+  "उत्तर प्रदेश",
+  "हिमाचल प्रदेश"
+ ],
+ "answer": 2,
+ "option_colors": [
+  "#ff7a45",
+  "#4ade80",
+  "#c084fc",
+  "#38bdf8"
+ ],
+ "place": {
+  "name": "चौरी चौरा",
+  "at": [
+   83.583,
+   26.645
+  ],
+  "kind": "ऐतिहासिक स्थान"
+ },
+ "credit": "नक्शा: datameet (MIT) · राज्य सीमाएँ सरलीकृत",
+ "scenes": [
+  {
+   "id": "teaser",
+   "seconds": 2.3,
+   "title": "3D नक्शे पर पूरा समझो",
+   "speak": "नक्शे पर देखिए, पूरा समझ आएगा —",
+   "cam": {
+    "center": [
+     82.4,
+     22.0
+    ],
+    "span": 27.6,
+    "tilt": 46,
+    "yaw": -22,
+    "from_tilt": 64,
+    "from_span": 40
+   },
+   "actions": [
+    {
+     "type": "build",
+     "t": 0,
+     "dur": 0.7
+    },
+    {
+     "type": "state_on",
+     "name": "Kerala",
+     "color": "#ff7a45",
+     "t": 0.3,
+     "raise": 1.5,
+     "glow": 0.35
+    },
+    {
+     "type": "state_off",
+     "name": "Kerala",
+     "t": 1.3
+    },
+    {
+     "type": "state_on",
+     "name": "Andhra Pradesh",
+     "color": "#4ade80",
+     "t": 0.44999999999999996,
+     "raise": 1.5,
+     "glow": 0.35
+    },
+    {
+     "type": "state_off",
+     "name": "Andhra Pradesh",
+     "t": 1.3
+    },
+    {
+     "type": "state_on",
+     "name": "Uttar Pradesh",
+     "color": "#c084fc",
+     "t": 0.6,
+     "raise": 1.5,
+     "glow": 0.35
+    },
+    {
+     "type": "state_off",
+     "name": "Uttar Pradesh",
+     "t": 1.3
+    },
+    {
+     "type": "state_on",
+     "name": "Himachal Pradesh",
+     "color": "#38bdf8",
+     "t": 0.75,
+     "raise": 1.5,
+     "glow": 0.35
+    },
+    {
+     "type": "state_off",
+     "name": "Himachal Pradesh",
+     "t": 1.3
+    }
+   ],
+   "labels": []
+  },
+  {
+   "id": "hook",
+   "seconds": 3.6,
+   "title": "ऐतिहासिक स्थान ‘चौरी चौरा’ किस राज्य में स्थित है?",
+   "speak": "ऐतिहासिक स्थान ‘चौरी चौरा’ किस राज्य में स्थित है?",
+   "cam": {
+    "center": [
+     82.4,
+     22.0
+    ],
+    "span": 30.0,
+    "tilt": 34
+   },
+   "actions": [
+    {
+     "type": "pin",
+     "at": [
+      83.583,
+      26.645
+     ],
+     "t": 0.5
+    }
+   ],
+   "labels": [
+    {
+     "text": "चौरी चौरा",
+     "at": [
+      83.583,
+      26.645
+     ],
+     "color": "#ff5a5a",
+     "t": 0.9,
+     "kind": "pin"
+    }
+   ]
+  },
+  {
+   "id": "options",
+   "seconds": 5.2,
+   "title": "चौरी चौरा किस राज्य में है?",
+   "speak": "केरल, आंध्र प्रदेश, उत्तर प्रदेश या हिमाचल प्रदेश? कमेंट में जवाब लिखिए!",
+   "cam": {
+    "center": [
+     82.4,
+     22.0
+    ],
+    "span": 30.0,
+    "tilt": 30
+   },
+   "actions": [
+    {
+     "type": "state_on",
+     "name": "Kerala",
+     "color": "#ff7a45",
+     "t": 0.2,
+     "raise": 1.5,
+     "glow": 0.35
+    },
+    {
+     "type": "state_on",
+     "name": "Andhra Pradesh",
+     "color": "#4ade80",
+     "t": 0.75,
+     "raise": 1.5,
+     "glow": 0.35
+    },
+    {
+     "type": "state_on",
+     "name": "Uttar Pradesh",
+     "color": "#c084fc",
+     "t": 1.3,
+     "raise": 1.5,
+     "glow": 0.35
+    },
+    {
+     "type": "state_on",
+     "name": "Himachal Pradesh",
+     "color": "#38bdf8",
+     "t": 1.85,
+     "raise": 1.5,
+     "glow": 0.35
+    }
+   ],
+   "labels": [
+    {
+     "text": "A  केरल",
+     "at": [
+      76.3,
+      11.026
+     ],
+     "color": "#ff7a45",
+     "t": 0.45,
+     "kind": "state"
+    },
+    {
+     "text": "B  आंध्र प्रदेश",
+     "at": [
+      79.882,
+      15.733
+     ],
+     "color": "#4ade80",
+     "t": 1.0,
+     "kind": "state"
+    },
+    {
+     "text": "C  उत्तर प्रदेश",
+     "at": [
+      80.132,
+      26.411
+     ],
+     "color": "#c084fc",
+     "t": 1.55,
+     "kind": "state"
+    },
+    {
+     "text": "D  हिमाचल प्रदेश",
+     "at": [
+      77.308,
+      31.724
+     ],
+     "color": "#38bdf8",
+     "t": 2.1,
+     "kind": "state"
+    },
+    {
+     "text": "चौरी चौरा",
+     "at": [
+      83.583,
+      26.645
+     ],
+     "color": "#ff5a5a",
+     "t": 0,
+     "kind": "pin"
+    }
+   ]
+  },
+  {
+   "id": "reveal",
+   "seconds": 4.2,
+   "title": "सही उत्तर: C  उत्तर प्रदेश",
+   "sub": "चौरी चौरा — उत्तर प्रदेश में",
+   "speak": "सही उत्तर है — उत्तर प्रदेश। चौरी चौरा, उत्तर प्रदेश में है।",
+   "cam": {
+    "center": [
+     80.86,
+     26.740000000000002
+    ],
+    "span": 10.35,
+    "tilt": 38
+   },
+   "actions": [
+    {
+     "type": "state_off",
+     "name": "Kerala",
+     "t": 0.1
+    },
+    {
+     "type": "state_off",
+     "name": "Andhra Pradesh",
+     "t": 0.1
+    },
+    {
+     "type": "state_off",
+     "name": "Himachal Pradesh",
+     "t": 0.1
+    },
+    {
+     "type": "state_on",
+     "name": "Uttar Pradesh",
+     "color": "#ffc93c",
+     "t": 0.3,
+     "raise": 1.65,
+     "glow": 0.5
+    },
+    {
+     "type": "ripple",
+     "at": [
+      83.583,
+      26.645
+     ],
+     "t": 0.5
+    }
+   ],
+   "labels": [
+    {
+     "text": "चौरी चौरा",
+     "at": [
+      83.583,
+      26.645
+     ],
+     "color": "#ff5a5a",
+     "t": 0,
+     "kind": "pin"
+    },
+    {
+     "text": "उत्तर प्रदेश",
+     "at": [
+      80.132,
+      26.411
+     ],
+     "color": "#ffd25c",
+     "t": 0.5,
+     "kind": "state"
+    }
+   ]
+  },
+  {
+   "id": "fact",
+   "seconds": 5.76,
+   "title": "उत्तर प्रदेश — याद रखने का तरीका",
+   "sub": "इसी घटना के कारण गांधी जी ने असहयोग आन्दोलन स्थगित कर दिया था।",
+   "sub2": "राजधानी: लखनऊ",
+   "sub3": "ऐतिहासिक स्थान: चौरी चौरा",
+   "speak": "इसी घटना के कारण गांधी जी ने असहयोग आन्दोलन स्थगित कर दिया था। उत्तर प्रदेश की राजधानी लखनऊ है।",
+   "cam": {
+    "center": [
+     80.86,
+     26.740000000000002
+    ],
+    "span": 11.385,
+    "tilt": 44,
+    "yaw": -12
+   },
+   "actions": [
+    {
+     "type": "pin",
+     "at": [
+      80.946,
+      26.847
+     ],
+     "t": 0.9,
+     "color": "#3b82f6"
+    }
+   ],
+   "labels": [
+    {
+     "text": "चौरी चौरा",
+     "at": [
+      83.583,
+      26.645
+     ],
+     "color": "#ff5a5a",
+     "t": 0,
+     "kind": "pin"
+    },
+    {
+     "text": "लखनऊ (राजधानी)",
+     "at": [
+      80.946,
+      26.847
+     ],
+     "color": "#7eb6ff",
+     "t": 1.3,
+     "kind": "pin"
+    }
+   ]
+  },
+  {
+   "id": "end",
+   "seconds": 7.55,
+   "title": "याद रखो",
+   "sub": "चौरी चौरा : उत्तर प्रदेश",
+   "speak": "याद रखिए — चौरी चौरा, उत्तर प्रदेश। सही था तो कमेंट में लिखिए, और ऐसे ही नक्शे वाले सवालों के लिए फ़ॉलो कीजिए।",
+   "cam": {
+    "center": [
+     81.7915,
+     25.645
+    ],
+    "span": 20,
+    "tilt": 40,
+    "yaw": 10
+   },
+   "actions": [],
+   "labels": [
+    {
+     "text": "चौरी चौरा",
+     "at": [
+      83.583,
+      26.645
+     ],
+     "color": "#ff5a5a",
+     "t": 0,
+     "kind": "pin"
+    }
+   ],
+   "end": true
+  }
+ ],
+ "subject": "History"
+}
