@@ -1,0 +1,258 @@
+{
+ "template": "timeline",
+ "badge": "MinuteMe 3D टाइमलाइन",
+ "fps": 24,
+ "id": "056c04351d",
+ "question": "भारत में केंद्रीय औद्योगिक सुरक्षा बल की स्थापना किस वर्ष में हुई थी?",
+ "exam_short": "RRB NTPC 04.02.2021",
+ "options": [
+  "1970",
+  "1989",
+  "1990",
+  "1969"
+ ],
+ "answer": 3,
+ "option_colors": [
+  "#ff7a45",
+  "#4ade80",
+  "#c084fc",
+  "#38bdf8"
+ ],
+ "years": [
+  1970,
+  1989,
+  1990,
+  1969
+ ],
+ "answer_year": 1969,
+ "anchors": [
+  {
+   "year": 1952,
+   "label": "पहला आम चुनाव"
+  }
+ ],
+ "chain": [
+  1952,
+  1969
+ ],
+ "slots_opt": {
+  "3": 0,
+  "0": 1,
+  "1": 2,
+  "2": 3
+ },
+ "credit": "MinuteMe GS · PYQ RRB NTPC 04.02.2021",
+ "scenes": [
+  {
+   "id": "hook",
+   "seconds": 4.54,
+   "title": "भारत में केंद्रीय औद्योगिक सुरक्षा बल की स्थापना किस वर्ष में हुई थी?",
+   "speak": "भारत में केंद्रीय औद्योगिक सुरक्षा बल की स्थापना किस वर्ष में हुई थी?",
+   "cam": {
+    "z": 2.5,
+    "span": 8.0,
+    "elev": 4,
+    "yaw": -28,
+    "from_yaw": -70,
+    "from_span": 13
+   },
+   "actions": [
+    {
+     "type": "pole",
+     "t": 0,
+     "dur": 0.9
+    },
+    {
+     "type": "plate_in",
+     "i": 3,
+     "t": 0.5
+    },
+    {
+     "type": "plate_in",
+     "i": 0,
+     "t": 0.6799999999999999
+    },
+    {
+     "type": "plate_in",
+     "i": 1,
+     "t": 0.86
+    },
+    {
+     "type": "plate_in",
+     "i": 2,
+     "t": 1.04
+    }
+   ],
+   "labels": []
+  },
+  {
+   "id": "options",
+   "seconds": 6.21,
+   "title": "सही वर्ष कौन-सा?",
+   "speak": "1970, 1989, 1990 या 1969? कमेंट में जवाब लिखिए!",
+   "cam": {
+    "z": 2.5,
+    "span": 7.4,
+    "elev": 6,
+    "yaw": 18
+   },
+   "actions": [],
+   "labels": [
+    {
+     "text": "D",
+     "plate": 3,
+     "color": "#38bdf8",
+     "t": 0.2,
+     "kind": "letter"
+    },
+    {
+     "text": "A",
+     "plate": 0,
+     "color": "#ff7a45",
+     "t": 0.5,
+     "kind": "letter"
+    },
+    {
+     "text": "B",
+     "plate": 1,
+     "color": "#4ade80",
+     "t": 0.8,
+     "kind": "letter"
+    },
+    {
+     "text": "C",
+     "plate": 2,
+     "color": "#c084fc",
+     "t": 1.0999999999999999,
+     "kind": "letter"
+    }
+   ]
+  },
+  {
+   "id": "reveal",
+   "seconds": 4.2,
+   "title": "सही उत्तर: D  1969",
+   "sub": "",
+   "speak": "सही उत्तर है — 1969।",
+   "cam": {
+    "z": 2.5,
+    "span": 6.4,
+    "elev": 2,
+    "yaw": -10
+   },
+   "actions": [
+    {
+     "type": "focus",
+     "i": 3,
+     "t": 0.15
+    }
+   ],
+   "labels": []
+  },
+  {
+   "id": "trick",
+   "seconds": 3.59,
+   "title": "याद रखने की ट्रिक",
+   "sub": "1952 में पहला आम चुनाव",
+   "speak": "याद रखने की ट्रिक — 1952 में पहला आम चुनाव।",
+   "cam": {
+    "z": 0,
+    "focus_year": 1952,
+    "span": 6.2,
+    "elev": 8,
+    "yaw": 16
+   },
+   "actions": [
+    {
+     "type": "chain",
+     "t": 0.1
+    },
+    {
+     "type": "anchor_in",
+     "year": 1952,
+     "t": 0.4
+    },
+    {
+     "type": "dot_at",
+     "year": 1952,
+     "t": 1.0
+    }
+   ],
+   "labels": [
+    {
+     "text": "पहला आम चुनाव",
+     "year": 1952,
+     "color": "#d9e6f2",
+     "t": 0.8,
+     "kind": "anchor"
+    }
+   ]
+  },
+  {
+   "id": "trick",
+   "seconds": 3.0,
+   "title": "+17 साल",
+   "sub": "1952 में पहला आम चुनाव, उसके 17 साल बाद 1969।",
+   "speak": "17 साल बाद, 1969।",
+   "counter": [
+    1952,
+    1969
+   ],
+   "cam": {
+    "z": 0,
+    "focus_year": 1969,
+    "span": 6.2,
+    "elev": 8,
+    "yaw": 8
+   },
+   "actions": [
+    {
+     "type": "travel",
+     "from": 1952,
+     "to": 1969,
+     "t": 0.1,
+     "dur": 1.1,
+     "keep": true
+    },
+    {
+     "type": "pulse",
+     "year": 1969,
+     "t": 1.2
+    }
+   ],
+   "labels": [
+    {
+     "text": "पहला आम चुनाव",
+     "year": 1952,
+     "color": "#d9e6f2",
+     "t": 0,
+     "kind": "anchor"
+    },
+    {
+     "text": "यह सवाल  +17",
+     "year": 1969,
+     "color": "#ffd25c",
+     "t": 1.2,
+     "kind": "anchor"
+    }
+   ]
+  },
+  {
+   "id": "end",
+   "seconds": 7.18,
+   "title": "याद रखो",
+   "sub": "1969",
+   "speak": "याद रखिए — 1969। सही था तो कमेंट में लिखिए, और रोज़ ऐसे PYQ के लिए फ़ॉलो कीजिए।",
+   "cam": {
+    "z": 2.5,
+    "span": 8.4,
+    "elev": 10,
+    "yaw": -20
+   },
+   "actions": [],
+   "labels": [],
+   "end": true
+  }
+ ],
+ "subject": "Traditional GK"
+}
