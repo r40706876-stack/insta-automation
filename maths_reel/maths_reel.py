@@ -34,7 +34,16 @@ def make_voice(spec, wav_path):
     arr, starts = None, None
     _post = ap.requests.post   # Gemini kabhi 5 min tak latka deta hai: har call max 100s, warna Edge
     ap.requests.post = lambda *a, **k: _post(*a, **{**k, "timeout": min(k.get("timeout") or 100, 100)})
-    one = ap.gemini_voice_timed([ap.to_speech(x) for x in lines], int(spec.get("voice_rot", 0)))
+    import signal
+    class _Late(BaseException): pass          # BaseException: Gemini helpers ke "except Exception" ise nahi pakadte
+    def _late(*_): raise _Late("Gemini awaaz > 240s")
+    signal.signal(signal.SIGALRM, _late); signal.alarm(240)      # poori Gemini awaaz max 4 min, phir Edge
+    try:
+        one = ap.gemini_voice_timed([ap.to_speech(x) for x in lines], int(spec.get("voice_rot", 0)))
+    except _Late as exc:
+        print("awaaz:", exc); one = None
+    finally:
+        signal.alarm(0)
     if one:
         arr, starts = one
     else:

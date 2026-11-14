@@ -130,7 +130,16 @@ def teach(q, steps):
 - नंबर हमेशा अंकों में लिखो (50, 1.5), शब्दों में नहीं।
 - "rule": ≤ 60 अक्षर - ऐसे सवाल आएँ तो पहले क्या करें (याद रखने लायक नियम)।
 सिर्फ़ JSON: {{"approach": "...", "steps": [{{"why": "...", "say": "..."}}], "rule": "..."}}"""
-    js = ap._gemini_call(prompt)
+    import signal
+    class _Late(BaseException): pass          # BaseException: Gemini helpers ke "except Exception" ise nahi pakadte
+    def _late(*_): raise _Late("teach > 180s")
+    signal.signal(signal.SIGALRM, _late); signal.alarm(180)      # Gemini kabhi latak jaata hai: max 3 min
+    try:
+        js = ap._gemini_call(prompt)
+    except _Late as exc:
+        print("teach:", exc); js = None
+    finally:
+        signal.alarm(0)
     if not js or len(js.get("steps") or []) != len(steps) or not js.get("approach") or not js.get("rule"):
         print("teach: Gemini ka jawab theek nahi"); return None
     allowed = set(NUM.findall(" ".join([q["question"], *q["options"].values(), q.get("explanation", ""), q.get("tip", "")])))
