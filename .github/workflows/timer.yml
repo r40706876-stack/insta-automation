@@ -29,7 +29,7 @@ jobs:
           REPO: ${{ github.repository }}
         run: |
           # IST samay = format (pehle wale schedule jaise, ab theek samay par)
-          SLOTS="05:00=current 07:00=list 10:00=list_Geography 13:00=body3d 15:00=map3d 17:00=mega 20:00=list_Static 22:00=list_Alternate"
+          SLOTS="05:00=current 07:00=list 10:00=list_Geography 13:00=body3d 15:00=map3d 17:00=mega 18:30=maths 20:00=list_Static 22:00=list_Alternate"
           # map3d = start rendering today's 3D map/timeline reels (calendar) at 14:00 IST, after the daily Gemini TTS quota reset (13:30 IST); they post in the 20:00 / 22:00 slots
           # body3d = Human Body 3D template reel; render takes ~1-1.5 h, so it starts 2.5 h before the slot
           NOW=$(date +%s)
@@ -44,7 +44,8 @@ jobs:
               if [ $TS -gt $((NOW+60)) ] && { [ -z "$BEST" ] || [ $TS -lt $BESTT ]; }; then BEST=$J; BESTT=$TS; BESTS=$T; fi
             done
           done
-          LEAD=3600; [ "$BEST" = body3d ] && LEAD=9000
+          LEAD=3600; [ "$BEST" = body3d ] && LEAD=9000; [ "$BEST" = maths ] && LEAD=1200
+          # maths = daily NTPC Maths PYQ step-by-step reel (maths_reel_daily.yml): builds ~8 min and posts itself, so start 20 min early
           W=$((BESTT-NOW-LEAD))
           if [ "$W" -lt 0 ]; then W=0; fi
           echo "Agla: $BEST, $(TZ=Asia/Kolkata date -d @$BESTT '+%d %b %H:%M IST') ($W sec baad)"
@@ -60,7 +61,9 @@ jobs:
                 DAYS=$((BESTT / 86400))
                 if [ $((DAYS % 2)) -eq 0 ]; then SUBJECT=Polity; else SUBJECT=Economics; fi ;;
             esac
-            if [ "$BEST" = map3d ]; then
+            if [ "$BEST" = maths ]; then
+              gh workflow run maths_reel_daily.yml -R "$REPO" --ref main && echo "Maths reel chalayi"
+            elif [ "$BEST" = map3d ]; then
               gh workflow run map3d_daily.yml -R "$REPO" --ref main && echo "3D map reels ka render chalaya"
             elif [ "$BEST" = body3d ]; then
               gh workflow run body_reel.yml -R "$REPO" --ref main -f topic='auto (agla topic)' -f publish=yes -f chunks=12 -f target_utc="$(date -u -d @$BESTT +%Y-%m-%dT%H:%M:%SZ)" && echo "3D body reel chalayi"

@@ -1,0 +1,244 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:Hi;src:url(fonts/FreeSans.ttf)}
+@font-face{font-family:Hi;font-weight:bold;src:url(fonts/FreeSansBold.ttf)}
+@font-face{font-family:Pop;font-weight:500;src:url(fonts/Poppins-Medium.ttf)}
+@font-face{font-family:Pop;font-weight:bold;src:url(fonts/Poppins-Bold.ttf)}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#0b1026}
+body{font-family:Pop,Hi,sans-serif;color:#fff;position:relative}
+.hi{font-family:Hi,Pop,sans-serif}
+#bg{position:absolute;inset:0;background:linear-gradient(165deg,#0b1026 0%,#1c1150 45%,#3a0f5e 100%)}
+.blob{position:absolute;border-radius:50%;filter:blur(90px);opacity:.55}
+#dots{position:absolute;inset:0;background-image:radial-gradient(#ffffff14 2px,transparent 2px);background-size:46px 46px}
+.scene{position:absolute;left:0;top:0;width:1080px;height:1920px;opacity:0}
+/* top bar */
+#top{position:absolute;top:70px;left:60px;right:60px;display:flex;align-items:center;justify-content:space-between;z-index:5}
+.brand{display:flex;align-items:center;gap:18px;font-weight:bold;font-size:40px}
+.watch{width:70px;height:70px;border-radius:50%;background:#ffd23f;position:relative;box-shadow:0 0 0 6px #ffd23f40}
+.watch:before{content:"";position:absolute;left:31px;top:-14px;width:8px;height:16px;background:#ffd23f;border-radius:3px}
+.watch i{position:absolute;left:33px;top:14px;width:5px;height:24px;background:#1c1150;border-radius:3px;transform-origin:50% 21px}
+.chip{background:#ffffff1a;border:2px solid #ffffff40;border-radius:40px;padding:10px 26px;font-size:30px;font-weight:500}
+/* hook */
+.bellrow{position:absolute;top:470px;left:0;right:0;display:flex;justify-content:center;gap:70px}
+.bell{width:220px;height:240px;position:relative}
+.bell svg{width:220px;height:240px;transform-origin:110px 20px}
+.wave{position:absolute;left:10px;top:20px;width:200px;height:200px;border-radius:50%;border:6px solid;opacity:0}
+.bl{position:absolute;top:255px;width:100%;text-align:center;font-size:44px;font-weight:bold}
+.warn{position:absolute;top:1560px;width:100%;text-align:center;font-size:50px;font-weight:bold}
+.hk1{position:absolute;top:900px;width:100%;text-align:center;font-size:130px;font-weight:bold;line-height:1.1}
+.hk2{position:absolute;top:1060px;width:100%;text-align:center;font-size:96px;font-weight:bold;color:#ffd23f;line-height:1.15}
+.hksub{position:absolute;top:1290px;left:90px;right:90px;text-align:center;font-size:44px;background:#ff3d81;border-radius:60px;padding:22px 30px;font-weight:bold}
+/* question */
+.card{position:absolute;left:60px;right:60px;background:#fff;color:#1b1f2b;border-radius:44px;padding:56px 54px;box-shadow:0 30px 80px #0008}
+.qtag{display:inline-block;background:#ede7ff;color:#6d28d9;font-weight:bold;font-size:32px;border-radius:30px;padding:6px 22px;margin-bottom:22px}
+.qhi{font-size:62px;line-height:1.42;font-weight:bold}
+.qen{font-size:36px;line-height:1.4;color:#6b7280;margin-top:20px}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-top:44px}
+.op{display:flex;align-items:center;gap:22px;border:4px solid #e7e9f2;border-radius:30px;padding:28px 26px;font-size:54px;font-weight:bold;background:#fff}
+.op b{width:74px;height:74px;border-radius:50%;color:#fff;display:flex;align-items:center;justify-content:center;font-size:40px;flex:0 0 74px}
+.think{position:absolute;left:0;right:0;text-align:center;font-size:52px;font-weight:bold}
+.think span{background:#ffd23f;color:#1c1150;border-radius:60px;padding:18px 44px;display:inline-block}
+/* steps */
+.stitle{position:absolute;top:250px;left:60px;right:60px;font-size:58px;font-weight:bold}
+.stitle em{font-style:normal;background:#ffd23f;color:#1c1150;border-radius:18px;padding:4px 20px;margin-right:16px;font-size:44px;vertical-align:middle}
+.bchips{position:absolute;top:400px;left:60px;right:60px;display:flex;gap:26px}
+.bchip{flex:1;border-radius:34px;padding:26px 10px;text-align:center;font-size:66px;font-weight:bold}
+.bchip small{display:block;font-size:34px;font-weight:500;opacity:.9}
+.frow{position:absolute;left:90px;right:90px;font-size:70px;font-weight:bold;display:flex;gap:34px;align-items:center}
+.frow .l{width:150px;text-align:right;color:#cfd3ff}
+.frow .eq{color:#8b8fd9}
+.lcmbox{position:absolute;left:60px;right:60px;top:1250px;border-radius:40px;background:linear-gradient(120deg,#ff3d81,#7c3aed);padding:40px 50px;box-shadow:0 20px 60px #ff3d8160}
+.lcmbox .a{font-size:52px;font-weight:bold}
+.lcmbox .b{font-size:120px;font-weight:bold;margin-top:6px}
+.badge6{position:absolute;right:90px;top:1560px;background:#ffd23f;color:#1c1150;font-size:84px;font-weight:bold;border-radius:30px;padding:16px 40px;box-shadow:0 14px 40px #ffd23f70}
+/* clock */
+#clockwrap{position:absolute;left:190px;top:420px;width:700px;height:700px}
+.digital{position:absolute;top:1150px;width:100%;text-align:center;font-size:120px;font-weight:bold;letter-spacing:2px}
+.tl{position:absolute;top:1530px;left:90px;right:90px;height:12px;background:#ffffff26;border-radius:10px}
+.tlfill{position:absolute;left:0;top:0;height:12px;background:#ffd23f;border-radius:10px}
+.node{position:absolute;top:-34px;width:80px;height:80px;margin-left:-40px;border-radius:50%;background:#1c1150;border:6px solid #ffffff55;display:flex;align-items:center;justify-content:center;font-size:36px;font-weight:bold}
+.nlab{position:absolute;top:70px;width:300px;margin-left:-150px;text-align:center;font-size:40px;font-weight:bold;line-height:1.3}
+.nlab small{display:block;font-size:34px;color:#cfd3ff;font-weight:500}
+.plus6{position:absolute;top:1440px;font-size:44px;font-weight:bold;color:#ffd23f;width:200px;margin-left:-100px;text-align:center}
+/* answer */
+.stamp{position:absolute;font-size:72px;font-weight:bold;color:#16a34a;border:10px solid #16a34a;border-radius:24px;padding:10px 34px;background:#ffffffee}
+.conf{position:absolute;width:22px;height:34px;border-radius:5px}
+/* trick */
+.note{position:absolute;left:70px;right:70px;top:400px;background:#fff7c2;color:#3b2a00;border-radius:36px;padding:56px 56px 60px;box-shadow:0 26px 70px #0008}
+.note h2{font-size:64px;color:#c2410c;margin-bottom:26px}
+.note p{font-size:58px;font-weight:bold;line-height:1.45;margin-top:18px}
+.note p small{font-size:46px;color:#7a5b00}
+.cta{position:absolute;left:70px;right:70px;top:1230px;text-align:center}
+.cta .x{font-size:52px;font-weight:bold}
+.cta .f{display:inline-block;margin-top:36px;background:linear-gradient(120deg,#ff3d81,#7c3aed);border-radius:70px;padding:30px 60px;font-size:60px;font-weight:bold;box-shadow:0 18px 50px #ff3d8170}
+#bar{position:absolute;left:0;bottom:0;height:12px;background:linear-gradient(90deg,#ffd23f,#ff3d81);z-index:6}
+/* steps template */
+.orb{position:absolute;top:330px;left:340px;width:400px;height:400px}
+.orb .big{position:absolute;inset:0;border-radius:50%;background:linear-gradient(135deg,#ffd23f,#ff3d81);color:#1c1150;display:flex;align-items:center;justify-content:center;font-size:170px;font-weight:bold;box-shadow:0 30px 90px #ff3d8170}
+.orb .ring{position:absolute;inset:-40px;border-radius:50%;border:8px solid #ffd23f}
+.orb .sat{position:absolute;left:170px;top:150px;width:60px;text-align:center;font-size:84px;font-weight:bold}
+.book{position:absolute;left:50px;right:50px;top:380px;min-height:1080px;background:#fffdf5;color:#1b1f2b;border-radius:36px;padding:50px 44px 30px;font-size:72px;
+ background-image:repeating-linear-gradient(transparent 0 98px,#c7d2fe 98px 100px);box-shadow:0 26px 70px #0008}
+.srow{display:flex;gap:26px;margin-bottom:40px;align-items:flex-start}
+.srow .num{flex:0 0 86px;height:86px;border-radius:50%;color:#1c1150;font-weight:bold;font-size:44px;display:flex;align-items:center;justify-content:center;margin-top:4px}
+.sbody{flex:1}
+.sline{position:relative;font-weight:bold;line-height:1.38;margin-bottom:8px}
+.sline .mk{position:absolute;left:-8px;right:-8px;top:12%;bottom:4%;background:#ffd23f88;border-radius:10px;transform-origin:0 50%;transform:scaleX(0)}
+.sline .tx{position:relative}
+.resbox{position:absolute;left:160px;right:160px;top:1560px;text-align:center;background:linear-gradient(120deg,#16a34a,#0ea5e9);border-radius:40px;padding:22px 30px;font-size:80px;font-weight:bold;box-shadow:0 20px 60px #16a34a70;opacity:0}
+.resbox small{display:block;font-size:38px;opacity:.9}
+.hk2{font-size:80px}
+.hksub{top:1330px}
+</style></head>
+<body>
+<div id="bg"></div>
+<div class="blob" id="b1" style="width:700px;height:700px;background:#7c3aed"></div>
+<div class="blob" id="b2" style="width:600px;height:600px;background:#ff3d81"></div>
+<div class="blob" id="b3" style="width:520px;height:520px;background:#0ea5e9"></div>
+<div id="dots"></div>
+<div id="top"><div class="brand"><div class="watch"><i id="wh"></i></div><span id="brand"></span></div><div class="chip" id="chip"></div></div>
+<div id="stage"></div>
+<div id="bar"></div>
+<script>
+const S = window.SPEC;
+const C = ["#ff3d81", "#ffd23f", "#22d3ee", "#a78bfa"];
+const OPC = ["#ff3d81", "#7c3aed", "#0ea5e9", "#f97316"];
+const $ = (h) => { const d = document.createElement("div"); d.innerHTML = h.trim(); return d.firstChild; };
+const stage = document.getElementById("stage");
+document.getElementById("brand").textContent = S.brand;
+document.getElementById("chip").textContent = S.exam + " · " + S.subject;
+const clamp = (x, a = 0, b = 1) => Math.max(a, Math.min(b, x));
+const ease = (x) => 1 - Math.pow(1 - clamp(x), 3);
+const back = (x) => { x = clamp(x); const c = 1.70158; return 1 + (c + 1) * Math.pow(x - 1, 3) + c * Math.pow(x - 1, 2); };
+const prog = (t, a, d) => clamp((t - a) / d);
+// ===== generic "step-by-step solution" reel: any Maths PYQ (hook -> question -> N steps -> answer -> trick) =====
+const STEPS = S.steps;                     // [{lines:[...], result:"..."}]
+const N = STEPS.length, SD = 3.2;          // base seconds per step (stretched to the voice)
+const W = {hook: [0, 3.4], q: [3.2, 9.6]};
+let t0 = 9.4; const SW = STEPS.map((_, i) => [t0 + i * SD, t0 + (i + 1) * SD]);
+const stepsEnd = t0 + N * SD + .2;
+W.ans = [stepsEnd - .2, stepsEnd + 3.8]; W.trick = [W.ans[1] - .2, W.ans[1] + 4.1];
+const TOTAL = W.trick[1];
+window.TOTAL = TOTAL;
+window.SCENE_STARTS = [W.hook[0], W.q[0], ...SW.map((w) => w[0]), W.ans[0], W.trick[0]];
+window.STRETCH = STEPS.map((_, i) => i + 2);
+const EV = [[.15, "whoosh"], [.5, "pop"], [.9, "pop"], [3.3, "whoosh"], ...[0, 1, 2, 3].map((i) => [4.3 + i * .22, "pop"]), [9.5, "whoosh"]];
+SW.forEach((w, i) => { EV.push([w[0] + .1, "whoosh"]); STEPS[i].lines.forEach((_, j) => EV.push([w[0] + .45 + j * .7, "pop"])); });
+EV.push([W.ans[0] + .6, "win"], [W.trick[0] + .1, "whoosh"], [W.trick[0] + 1.9, "pop"]);
+window.EVENTS = EV;
+// ---------- hook: big topic symbol orbiting smaller symbols ----------
+const SYM = S.symbols || ["%", "×", "÷", "="];
+const hook = $(`<div class="scene" id="hook"><div class="orb"><div class="ring"></div><div class="ring r2"></div><div class="big">${S.symbol}</div>
+ ${SYM.map((x, i) => `<div class="sat" style="color:${C[i % 4]}">${x}</div>`).join("")}</div>
+ <div class="hk1 hi">${S.hook[0]}</div><div class="hk2 hi">${S.hook[1]}</div><div class="hksub hi">${S.hook_sub}</div>
+ <div class="warn hi">ज़्यादातर लोग यहाँ <span style="color:#ff3d81">${S.warn || "अटक जाते हैं!"}</span></div></div>`);
+const opts = (id) => `<div class="opts" id="${id}">${S.options.map((o, i) => `<div class="op"><b style="background:${OPC[i]}">${"ABCD"[i]}</b><span>${o}</span></div>`).join("")}</div>`;
+const q = $(`<div class="scene" id="q"><div class="card" style="top:260px"><div class="qtag">${S.exam} · PYQ · ${S.topic}</div><div class="qhi hi">${S.question_hi}</div>${opts("o1")}</div>
+ <div class="think hi" style="top:1680px"><span>पहले खुद सोचो… हल नीचे</span></div></div>`);
+// ---------- steps: notebook page, each step written line by line with a marker ----------
+const sol = $(`<div class="scene" id="sol"><div class="stitle hi"><em>हल</em>${S.topic} · ${N} स्टेप में</div>
+ <div class="book">${STEPS.map((s, i) => `<div class="srow" id="sr${i}"><div class="num" style="background:${C[i % 4]}">${i + 1}</div><div class="sbody">
+   ${s.lines.map((l, j) => `<div class="sline hi" id="sl${i}_${j}"><span class="mk"></span><span class="tx">${l}</span></div>`).join("")}</div></div>`).join("")}</div>
+ <div class="resbox hi" id="resbox"><small>जवाब</small><span id="restx">${S.result}</span></div></div>`);
+const ai = "ABCD".indexOf(S.answer);
+const ans = $(`<div class="scene" id="ans"><div class="stitle hi" style="text-align:center"><em>जवाब</em></div><div class="card" style="top:400px"><div class="qhi hi" style="font-size:52px">${S.question_hi}</div>${opts("o2")}</div>
+ <div class="stamp hi" id="stamp" style="top:1460px;left:280px">सही जवाब (${S.answer})</div>
+ ${[...Array(36)].map((_, i) => `<div class="conf" style="background:${C[i % 4]}"></div>`).join("")}</div>`);
+const tr = $(`<div class="scene" id="trick"><div class="note hi"><h2>याद रखो</h2>${S.trick.map((x) => `<p>${x}</p>`).join("")}</div>
+ <div class="cta hi"><div class="x">${S.cta}</div><div class="f">Follow @${S.brand}</div><div class="x" style="margin-top:40px;font-size:46px;color:#ffd23f">सही जवाब मिला? कमेंट में लिखो ✔</div></div></div>`);
+[hook, q, sol, ans, tr].forEach((e) => stage.appendChild(e));
+const op1 = [...document.querySelectorAll("#o1 .op")], op2 = [...document.querySelectorAll("#o2 .op")];
+const confs = [...document.querySelectorAll(".conf")];
+function show(el, t, w) { const fi = prog(t, w[0], .35), fo = 1 - prog(t, w[1] - .35, .35); el.style.opacity = Math.min(fi, fo); return Math.min(fi, fo); }
+function set(el, o, tf) { el.style.opacity = o; el.style.transform = tf || ""; }
+// fit long steps: shrink the notebook text if it would overflow
+function fitBook() {
+  const b = sol.querySelector(".book"); let fs = 72;
+  sol.style.opacity = 1; [...b.querySelectorAll(".sline")].forEach((l) => { l.style.opacity = 1; });
+  while (b.scrollHeight > 1100 && fs > 36) { fs -= 2; b.style.fontSize = fs + "px"; }
+  b.style.minHeight = b.scrollHeight + "px";
+  sol.style.opacity = 0;
+}
+fitBook();
+window.seek = function (t, rt) {
+  if (rt === undefined) rt = t;
+  document.getElementById("b1").style.transform = `translate(${-150 + 120 * Math.sin(rt * .35)}px,${200 + 90 * Math.cos(rt * .3)}px)`;
+  document.getElementById("b2").style.transform = `translate(${620 + 100 * Math.cos(rt * .4)}px,${900 + 140 * Math.sin(rt * .33)}px)`;
+  document.getElementById("b3").style.transform = `translate(${200 + 160 * Math.sin(rt * .27)}px,${1450 + 80 * Math.cos(rt * .45)}px)`;
+  document.getElementById("wh").style.transform = `rotate(${rt * 140}deg)`;
+  document.getElementById("bar").style.width = (100 * clamp(rt / (window.RTOTAL || TOTAL))) + "%";
+  // HOOK
+  if (show(hook, t, W.hook) > 0) {
+    const p = back(prog(t, .1, .6));
+    hook.querySelector(".big").style.transform = `scale(${.3 + .7 * p}) rotate(${(1 - p) * -40 + 4 * Math.sin(rt * 3)}deg)`;
+    hook.querySelectorAll(".ring").forEach((r, k) => { const ph = ((rt * .8 + k * .5) % 1); r.style.opacity = .7 * (1 - ph); r.style.transform = `scale(${.7 + ph * .7})`; });
+    hook.querySelectorAll(".sat").forEach((s, i) => {
+      const a = rt * 1.1 + i * Math.PI / 2, rr = 250 * ease(prog(t, .3 + i * .1, .5));
+      s.style.transform = `translate(${Math.cos(a) * rr}px,${Math.sin(a) * rr * .55}px) scale(${.6 + .4 * ease(prog(t, .3 + i * .1, .5))})`;
+    });
+    const a = back(prog(t, .7, .45)), b = back(prog(t, 1.0, .45)), c = ease(prog(t, 1.45, .4));
+    set(hook.querySelector(".hk1"), clamp(a * 2), `scale(${.5 + .5 * a})`);
+    set(hook.querySelector(".hk2"), clamp(b * 2), `translateY(${(1 - b) * 80}px)`);
+    set(hook.querySelector(".warn"), ease(prog(t, 1.9, .4)), `translateY(${(1 - ease(prog(t, 1.9, .4))) * 60}px)`);
+    set(hook.querySelector(".hksub"), c, `scale(${.85 + .15 * c + .02 * Math.sin(rt * 9) * (t > 1.9)})`);
+  }
+  // QUESTION
+  if (show(q, t, W.q) > 0) {
+    const cp = ease(prog(t, 3.3, .55));
+    q.querySelector(".card").style.transform = `translateY(${(1 - cp) * 300}px)`;
+    op1.forEach((o, i) => { const p = back(prog(t, 4.3 + i * .22, .4)); set(o, clamp(p * 2), `scale(${.6 + .4 * p})`); });
+    const th = q.querySelector(".think span"); const tp = ease(prog(t, 5.6, .4));
+    th.style.opacity = tp; th.style.transform = `scale(${(.8 + .2 * tp) * (1 + .05 * Math.sin(rt * 7))})`;
+  }
+  // STEPS
+  if (show(sol, t, [SW[0][0], stepsEnd]) > 0) {
+    set(sol.querySelector(".stitle"), ease(prog(t, SW[0][0] + .1, .4)), `translateX(${(1 - ease(prog(t, SW[0][0] + .1, .4))) * -200}px)`);
+    STEPS.forEach((s, i) => {
+      const w = SW[i], row = document.getElementById("sr" + i), on = t >= w[0], cur = t >= w[0] && t < w[1];
+      const rp = back(prog(t, w[0] + .1, .4));
+      row.style.opacity = on ? (cur || i === N - 1 ? 1 : .55) : 0;
+      row.style.transform = `translateX(${(1 - rp) * 120}px)`;
+      row.querySelector(".num").style.transform = `scale(${on ? 1 + .4 * Math.exp(-Math.max(0, t - w[0] - .1) * 5) : 0})`;
+      s.lines.forEach((_, j) => {
+        const el = document.getElementById(`sl${i}_${j}`), st = w[0] + .45 + j * .7;
+        const tp = ease(prog(t, st, .55));
+        const tx = el.querySelector(".tx"), full = s.lines[j], k = Math.round(full.length * tp);
+        tx.textContent = full.slice(0, k); tx.style.visibility = k ? "visible" : "hidden";   // typed, works for wrapped lines
+        el.style.opacity = t >= st ? 1 : 0;
+        const mk = el.querySelector(".mk"), mp = ease(prog(t, st + .4, .4));
+        mk.style.transform = `scaleX(${cur ? mp : 0})`;
+      });
+    });
+    const rb = back(prog(t, SW[N - 1][0] + 1.6, .5)), box = document.getElementById("resbox");
+    set(box, clamp(rb * 2), `scale(${.6 + .4 * rb}) rotate(${-4 + 4 * rb}deg)`);
+  }
+  // ANSWER
+  if (show(ans, t, W.ans) > 0) {
+    const A0 = W.ans[0];
+    op2.forEach((o, i) => {
+      const hit = i === ai, p = ease(prog(t, A0 + .6, .4));
+      o.style.opacity = hit ? 1 : 1 - .65 * p;
+      o.style.transform = hit ? `scale(${1 + .12 * back(prog(t, A0 + .6, .5)) - .04 * Math.sin(rt * 6) * (t > A0 + 1.2)})` : "";
+      if (hit) { o.style.borderColor = p > .5 ? "#16a34a" : "#e7e9f2"; o.style.background = p > .5 ? "#dcfce7" : "#fff"; o.style.boxShadow = p > .5 ? "0 0 0 10px #16a34a40" : "none"; }
+    });
+    const sp = back(prog(t, A0 + 1.0, .45)); set(document.getElementById("stamp"), clamp(sp * 2), `rotate(${-12 * sp}deg) scale(${2.2 - 1.2 * sp})`);
+    confs.forEach((c, i) => {
+      const st = A0 + 1.0, dt = t - st; if (dt < 0) { c.style.opacity = 0; return; }
+      const ang = (i / confs.length) * Math.PI * 2 + (i % 3) * .3, v = 900 + (i * 37 % 400);
+      c.style.left = (540 + Math.cos(ang) * v * dt) + "px"; c.style.top = (1420 + Math.sin(ang) * v * dt + 900 * dt * dt) + "px";
+      c.style.opacity = clamp(1.6 - dt); c.style.transform = `rotate(${dt * 720 + i * 40}deg)`;
+    });
+  }
+  // TRICK + CTA
+  if (show(tr, t, [W.trick[0], 99]) > 0) {
+    const T0 = W.trick[0];
+    const np = back(prog(t, T0 + .1, .5)); set(tr.querySelector(".note"), clamp(np * 2), `rotate(${-3 + 2 * np}deg) translateY(${(1 - np) * 200}px)`);
+    tr.querySelectorAll(".note p").forEach((p, i) => { const pp = ease(prog(t, T0 + .7 + i * .6, .4)); set(p, pp, `translateX(${(1 - pp) * 80}px)`); });
+    const cp = back(prog(t, T0 + 1.9, .5)); set(tr.querySelector(".cta"), clamp(cp * 2), `scale(${.7 + .3 * cp})`);
+    tr.querySelector(".f").style.transform = `scale(${1 + .04 * Math.sin(rt * 8)})`;
+  }
+};
+window.seek(0);
+</script></body></html>

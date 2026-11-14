@@ -11,13 +11,13 @@ COVER = Path(sys.argv[3]) if len(sys.argv) > 3 else None
 RECEIPT = VIDEO.with_suffix('.published.json')
 now = lambda: datetime.datetime.now(datetime.timezone.utc).isoformat()
 
-TITLE = ' '.join(SPEC['hook']) + ' ' + SPEC.get('emoji', '🔔') + ' | RRB NTPC 2025 PYQ'
+TITLE = SPEC.get('title') or (' '.join(SPEC['hook']) + ' ' + SPEC.get('emoji', '🔔') + ' | RRB NTPC 2025 PYQ')
 L = 'ABCD'
 caption = TITLE + '\n\n' + SPEC['question_hi'] + '\n\n' + '\n'.join(f"{L[i]}) {o}" for i, o in enumerate(SPEC['options']))
 caption += '\n\nपहले खुद सोचो, फिर वीडियो में हल देखो 👆 जवाब कमेंट में लिखो 👇'
 caption += '\n\n📌 याद रखो\n' + '\n'.join('• ' + t for t in SPEC.get('trick', []))
 caption += '\n\n📤 उस दोस्त को भेजो जो NTPC / Group D / SSC की तैयारी कर रहा है'
-caption += '\n\nरोज़ 1 PYQ + शॉर्टकट — फ़ॉलो करो @minuteme_gs\n\n#Maths #LCM #MathsTricks #RRBNTPC #NTPC #RRBGroupD #SSC #Railway #MathsShortcut #MinuteMe_GS'
+caption += '\n\nरोज़ 1 PYQ + शॉर्टकट — फ़ॉलो करो @minuteme_gs\n\n#Maths ' + ' '.join(SPEC.get('tags', ['#LCM', '#MathsTricks'])) + ' #RRBNTPC #NTPC #RRBGroupD #SSC #Railway #MathsShortcut #MinuteMe_GS'
 
 acc = e.requests.get(e.GRAPH + e.IG_USER_ID, params={'fields': 'username', 'access_token': e.IG_ACCESS_TOKEN}, timeout=30)
 acc.raise_for_status(); assert acc.json().get('username', '').lower() == 'minuteme_gs', 'Wrong Instagram account'

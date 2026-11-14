@@ -1,0 +1,69 @@
+name: Maths PYQ reel - daily (build + publish)
+# Roz ek naya topic: NTPC Maths bank se sawal -> steps.html animation (Gemini awaaz, na mile to Edge) -> MinuteMe_GS par post.
+# timer.yml ise 18:30 IST slot se 20 min pehle chalata hai. Haath se bhi chala sakte ho (question_id khaali = aaj ka topic).
+on:
+  workflow_dispatch:
+    inputs:
+      question_id: { description: 'Bank question id (khaali = aaj ke topic ka agla sawal)', default: '' }
+      publish: { description: 'Instagram par post karein?', default: 'yes' }
+permissions:
+  contents: write
+concurrency:
+  group: minuteme-3d-publish
+  cancel-in-progress: false
+jobs:
+  daily:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.11' }
+      - name: Tools
+        run: |
+          pip install -q --timeout 30 -r requirements.txt playwright numpy pillow requests edge-tts imageio-ffmpeg
+          python -m playwright install chromium || echo "runner ka Google Chrome use hoga"
+          which ffmpeg || python -c "import imageio_ffmpeg,os; os.symlink(imageio_ffmpeg.get_ffmpeg_exe(),'/usr/local/bin/ffmpeg')"
+      - name: Spec + reel
+        id: b
+        run: |
+          D=$(TZ=Asia/Kolkata date +%F); mkdir -p downloads/maths_daily
+          if [ -z "${{ inputs.question_id }}" ] && [ -e "downloads/maths_daily/$D.published.json" ]; then
+            echo "::notice::aaj ki Maths reel pehle hi post ho chuki"; echo "skip=1" >> "$GITHUB_OUTPUT"; exit 0; fi
+          python maths_reel/make_spec.py "downloads/maths_daily/$D.json" "$D" "${{ inputs.question_id }}"
+          python maths_reel/maths_reel.py "downloads/maths_daily/$D.json" "downloads/maths_daily/$D.mp4"
+          echo "d=$D" >> "$GITHUB_OUTPUT"
+      - name: Save (before posting, so the raw link exists)
+        if: steps.b.outputs.skip != '1'
+        run: |
+          git config user.name 'github-actions[bot]'; git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git add downloads/maths_daily; git commit -q -m "Maths daily reel ${{ steps.b.outputs.d }} [skip ci]"
+          for i in 1 2 3 4; do git pull --rebase -q origin main && git push -q && break; sleep $((i*6)); done
+      - name: Publish
+        if: inputs.publish != 'no' && steps.b.outputs.skip != '1'
+        env:
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          IMGBB_KEY: ${{ secrets.IMGBB_KEY }}
+          PYTHONUNBUFFERED: '1'
+        run: |
+          D=${{ steps.b.outputs.d }}
+          set -o pipefail
+          python -u publish_maths_reel.py "downloads/maths_daily/$D.mp4" "downloads/maths_daily/$D.json" none.jpg 2>&1 | sed -u -E 's/(access_token=|key=|Bearer |OAuth )[^&" ]+/\1***/g' | tee /tmp/pub.log
+          grep -qE "PUBLISHED" /tmp/pub.log
+          python - "$D" <<'PY'
+          import json, sys
+          s = json.load(open(f'downloads/maths_daily/{sys.argv[1]}.json'))
+          p = 'maths_reel/posted.json'; done = json.load(open(p))
+          if s['bank_id'] not in done: done.append(s['bank_id'])
+          json.dump(done, open(p, 'w'), indent=0)
+          PY
+          echo "::notice title=instagram::$(grep -E 'PUBLISHED' /tmp/pub.log | tail -1)"
+      - name: Receipt save
+        if: always()
+        run: |
+          git add downloads/maths_daily maths_reel/posted.json || true
+          git commit -q -m "Maths daily receipt ${{ steps.b.outputs.d }} [skip ci]" || exit 0
+          for i in 1 2 3 4; do git pull --rebase -q origin main && git push -q && break; sleep $((i*6)); done

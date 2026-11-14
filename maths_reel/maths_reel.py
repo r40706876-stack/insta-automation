@@ -116,11 +116,16 @@ def main():
             b = p.chromium.launch(channel="chrome")
         pg = b.new_page(viewport={"width": 1080, "height": 1920})
         pg.add_init_script("window.SPEC = " + json.dumps(spec, ensure_ascii=False) + ";")
-        pg.goto("file://" + os.path.join(HERE, "reel.html"))
+        pg.goto("file://" + os.path.join(HERE, spec.get("template", "reel.html")))
         pg.evaluate("document.fonts.ready.then(() => 1)")
         pg.wait_for_timeout(400)
         total = pg.evaluate("window.TOTAL")
         ts = pg.evaluate("window.SCENE_STARTS")
+        global STRETCH, EVENTS
+        STRETCH = tuple(pg.evaluate("window.STRETCH || null") or STRETCH)   # template decides which scenes follow the voice
+        EVENTS = pg.evaluate("window.EVENTS || null")
+        if len(spec.get("voice") or []) not in (0, len(ts)):
+            sys.exit(f"voice lines {len(spec['voice'])} != scenes {len(ts)}")
         wav = out + ".voice.wav"
         v = None if "--stills" in sys.argv else make_voice(spec, wav)
         if v:
@@ -136,7 +141,8 @@ def main():
         pg.evaluate(f"window.RTOTAL = {real_total}")
         if stills:
             base = os.path.splitext(out)[0]
-            for t in (1.6, 6.5, 15.0, 19.0, 21.4, 25.2, 30.0):
+            for t in ((1.6, 6.5, 15.0, 19.0, 21.4, 25.2, 30.0) if spec.get("template", "reel.html") == "reel.html"
+                      else [1.6, 6.5] + [x + 2.6 for x in ts[2:-2]] + [ts[-2] + 2.0, total - .5]):
                 pg.evaluate(f"seek({t})")
                 pg.screenshot(path=f"{base}_{t:05.1f}.jpg", type="jpeg", quality=88)
             b.close()
@@ -158,7 +164,12 @@ def main():
     finish(out, tmp, real_total, lambda te: next((k / FPS for k in range(n) if fmap(k / FPS) >= te), te))
 
 
+EVENTS = None
+
+
 def events():
+    if EVENTS:
+        return [tuple(e) for e in EVENTS]
     ev = [(0.15, "bell"), (0.4, "bell"), (0.65, "bell"), (0.7, "whoosh"), (3.3, "whoosh")]
     ev += [(4.3 + i * 0.22, "pop") for i in range(4)]
     ev += [(9.5, "whoosh")] + [(10.7 + i * 0.55, "pop") for i in range(3)] + [(12.6, "whoosh"), (14.5, "pop")]
