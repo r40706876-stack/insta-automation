@@ -1,42 +1,26 @@
-FORMAT: mega
-  Gemini text models: gemini-flash-latest, gemini-3.8-flash, gemini-3.7-flash, gemini-3.6-flash
-  Gemini gemini-flash-latest: HTTP 503 (koshish 1) {   "error": {     "code": 503,     "message": "This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later
-  Gemini gemini-flash-latest fail (koshish 2): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
-  Gemini gemini-3.8-flash fail (koshish 1): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
-  Gemini gemini-3.8-flash fail (koshish 2): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
-  Gemini gemini-3.7-flash: HTTP 503 (koshish 1) {   "error": {     "code": 503,     "message": "This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later
-  Gemini gemini-3.7-flash: HTTP 503 (koshish 2) 
-  Mega AI jaanch: 62 me se 33 sahi
-  Groq llama-3.3-70b-versatile: HTTP 404
-  Groq openai/gpt-oss-120b: HTTP 400
-  Groq llama-3.1-8b-instant: HTTP 404
-  Gemini gemini-flash-latest fail (koshish 1): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
-  Gemini gemini-flash-latest: HTTP 503 (koshish 2) 
-  Gemini gemini-3.8-flash: HTTP 503 (koshish 1) {   "error": {     "code": 503,     "message": "This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later
-  Gemini gemini-3.8-flash fail (koshish 2): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
-  Gemini gemini-3.7-flash: HTTP 503 (koshish 1) {   "error": {     "code": 503,     "message": "This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later
-  Gemini gemini-3.7-flash: HTTP 503 (koshish 2) 
-  Mega AI jaanch: 57 me se 43 sahi
-  Mega awaaz: gemini-3.1-flash-tts-preview / Sulafat
-MEGA REEL TAIYAR: generated_reels/science_pyq_reel.mp4 (15.5s, 2 page, 40 sawal)
-
-CAPTION:
-📚 "जीव विज्ञान (Biology)" के 40 सबसे महत्वपूर्ण प्रश्न - सभी सरकारी परीक्षाओं के लिए
-
-⏸️ हर पेज पर रोककर पढ़ो (स्क्रीन दबाकर रखो)
-📌 अभी SAVE करो - exam से पहले 1 बार ज़रूर revise करना
-📤 उस दोस्त को भेजो जो SSC / Railway / Police की तैयारी कर रहा है
-💬 कितने पहले से आते थे? कमेंट करो!
-
-जीव विज्ञान (Biology) GK | RRB NTPC, Group D, SSC GD, CGL, MTS, Police, Patwari, State Exam PYQ
-⏱ MinuteMe_GS - एक मिनट, एक PYQ - पक्का!
-
-#gkquiz #gkpyq #sscgd #rrbntpc #biology
-SCHEDULE: video ready; target 2026-11-14T11:30:00Z
+[main cc7e3e3] Record 3D reel publish attempt [skip ci]
+ 1 file changed, 4 insertions(+)
+ create mode 100644 downloads/map3d/2026-11-14_state_place_run43576164471/publish_started.json
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
+waiting 3513 s for slot 2026-11-14T14:30:00Z
 Collab invitation requested: @ar_publication
-  IG container: 17913938598568651
+  IG container: 17913969069568651
   upload try 1.1: HTTP 200 {"success":true,"message":"Upload Successful."}
   IG processing: FINISHED
-REMINDER: reel ready, publication due within 10 minutes: 2026-11-14T11:30:00Z
-  LIVE: https://www.instagram.com/reel/DfuBBWhFlNM/
-INSTAGRAM PE POST HO GAYA: 17920204083469496
+  LIVE: https://www.instagram.com/reel/DfubJzMgkPc/
+[main c68b2bf] Save 3D reel Instagram receipt [skip ci]
+ 2 files changed, 7 insertions(+)
+ create mode 100644 downloads/map3d/2026-11-14_state_place_run43576164471/published.json
+ create mode 100644 downloads/map3d/2026-11-14_state_place_run43576164471/reel.upload.json
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
+PUBLISHED {"media_id": "18120415715046152", "published_utc": "2026-11-14T14:31:07.705848+00:00", "title": "ऐतिहासिक स्थान ‘चौरी चौरा’ किस राज्य में स्थित है?", "permalink": "https://www.instagram.com/reel/DfubJzMgkPc/"}
