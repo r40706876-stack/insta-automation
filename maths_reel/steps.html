@@ -90,6 +90,9 @@ body{font-family:Pop,Hi,sans-serif;color:#fff;position:relative}
 .resbox{position:absolute;left:160px;right:160px;top:1560px;text-align:center;background:linear-gradient(120deg,#16a34a,#0ea5e9);border-radius:40px;padding:22px 30px;font-size:80px;font-weight:bold;box-shadow:0 20px 60px #16a34a70;opacity:0}
 .resbox small{display:block;font-size:38px;opacity:.9}
 .hk2{font-size:80px}
+.appr{position:absolute;top:350px;left:60px;right:60px;font-size:44px;font-weight:bold;color:#ffd23f;line-height:1.35}
+.why{position:absolute;left:60px;right:60px;top:1290px;background:#fff7c2;color:#3b2a00;border-radius:34px;padding:28px 36px 30px;font-size:56px;font-weight:bold;line-height:1.35;box-shadow:0 20px 60px #0007;opacity:0;border-left:16px solid #f97316}
+.why b{display:inline-block;background:#f97316;color:#fff;border-radius:16px;padding:2px 18px;margin-right:16px;font-size:44px;vertical-align:middle}
 .hksub{top:1330px}
 </style></head>
 <body>
@@ -138,7 +141,9 @@ const opts = (id) => `<div class="opts" id="${id}">${S.options.map((o, i) => `<d
 const q = $(`<div class="scene" id="q"><div class="card" style="top:260px"><div class="qtag">${S.exam} · PYQ · ${S.topic}</div><div class="qhi hi">${S.question_hi}</div>${opts("o1")}</div>
  <div class="think hi" style="top:1680px"><span>पहले खुद सोचो… हल नीचे</span></div></div>`);
 // ---------- steps: notebook page, each step written line by line with a marker ----------
-const sol = $(`<div class="scene" id="sol"><div class="stitle hi"><em>हल</em>${S.topic} · ${N} स्टेप में</div>
+const TEACH = STEPS.some((x) => x.why);
+const sol = $(`<div class="scene" id="sol"><div class="stitle hi"><em>हल</em>${S.topic} · ${N} स्टेप में</div>${S.approach ? `<div class="appr hi">💡 ${S.approach}</div>` : ""}
+ ${TEACH ? `<div class="why hi" id="why"><b>क्यों?</b><span id="whytx"></span></div>` : ""}
  <div class="book">${STEPS.map((s, i) => `<div class="srow" id="sr${i}"><div class="num" style="background:${C[i % 4]}">${i + 1}</div><div class="sbody">
    ${s.lines.map((l, j) => `<div class="sline hi" id="sl${i}_${j}"><span class="mk"></span><span class="tx">${l}</span></div>`).join("")}</div></div>`).join("")}</div>
  <div class="resbox hi" id="resbox"><small>जवाब</small><span id="restx">${S.result}</span></div></div>`);
@@ -146,7 +151,7 @@ const ai = "ABCD".indexOf(S.answer);
 const ans = $(`<div class="scene" id="ans"><div class="stitle hi" style="text-align:center"><em>जवाब</em></div><div class="card" style="top:400px"><div class="qhi hi" style="font-size:52px">${S.question_hi}</div>${opts("o2")}</div>
  <div class="stamp hi" id="stamp" style="top:1460px;left:280px">सही जवाब (${S.answer})</div>
  ${[...Array(36)].map((_, i) => `<div class="conf" style="background:${C[i % 4]}"></div>`).join("")}</div>`);
-const tr = $(`<div class="scene" id="trick"><div class="note hi"><h2>याद रखो</h2>${S.trick.map((x) => `<p>${x}</p>`).join("")}</div>
+const tr = $(`<div class="scene" id="trick"><div class="note hi"><h2>${TEACH ? "ऐसे सवाल आएँ तो" : "याद रखो"}</h2>${S.trick.map((x) => `<p>${x}</p>`).join("")}</div>
  <div class="cta hi"><div class="x">${S.cta}</div><div class="f">Follow @${S.brand}</div><div class="x" style="margin-top:40px;font-size:46px;color:#ffd23f">सही जवाब मिला? कमेंट में लिखो ✔</div></div></div>`);
 [hook, q, sol, ans, tr].forEach((e) => stage.appendChild(e));
 const op1 = [...document.querySelectorAll("#o1 .op")], op2 = [...document.querySelectorAll("#o2 .op")];
@@ -155,9 +160,11 @@ function show(el, t, w) { const fi = prog(t, w[0], .35), fo = 1 - prog(t, w[1] -
 function set(el, o, tf) { el.style.opacity = o; el.style.transform = tf || ""; }
 // fit long steps: shrink the notebook text if it would overflow
 function fitBook() {
-  const b = sol.querySelector(".book"); let fs = 72;
+  const b = sol.querySelector(".book"); let fs = 72, MAXH = TEACH ? 760 : 1100;
+  if (S.approach) b.style.top = "490px";
+  if (TEACH) b.style.minHeight = "0px";
   sol.style.opacity = 1; [...b.querySelectorAll(".sline")].forEach((l) => { l.style.opacity = 1; });
-  while (b.scrollHeight > 1100 && fs > 36) { fs -= 2; b.style.fontSize = fs + "px"; }
+  while (b.scrollHeight > MAXH && fs > 36) { fs -= 2; b.style.fontSize = fs + "px"; }
   b.style.minHeight = b.scrollHeight + "px";
   sol.style.opacity = 0;
 }
@@ -211,6 +218,16 @@ window.seek = function (t, rt) {
         mk.style.transform = `scaleX(${cur ? mp : 0})`;
       });
     });
+    if (TEACH) {   // the current step's "why" in a sticky note, pops in with each step
+      let ci = -1; SW.forEach((w, i) => { if (t >= w[0]) ci = i; });
+      const wb = document.getElementById("why");
+      if (ci >= 0) {
+        document.getElementById("whytx").textContent = STEPS[ci].why || "";
+        const wp = back(prog(t, SW[ci][0] + .25, .4));
+        set(wb, STEPS[ci].why ? clamp(wp * 2) : 0, `scale(${.8 + .2 * wp}) rotate(${-2 + 2 * wp}deg)`);
+      } else wb.style.opacity = 0;
+      if (t >= SW[N - 1][0] + 1.4) wb.style.opacity = 1 - ease(prog(t, SW[N - 1][0] + 1.4, .3));
+    }
     const rb = back(prog(t, SW[N - 1][0] + 1.6, .5)), box = document.getElementById("resbox");
     set(box, clamp(rb * 2), `scale(${.6 + .4 * rb}) rotate(${-4 + 4 * rb}deg)`);
   }

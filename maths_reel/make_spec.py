@@ -100,6 +100,48 @@ def speak(t):
     return " ".join(t.replace("(", " ").replace(")", " ").split())
 
 
+NUM = re.compile(r"\d+(?:\.\d+)?")
+
+
+def teach(q, steps):
+    """Gemini se 'teacher' wali samjhaish: har step KYUN kar rahe hain. Hisaab book ka hi rehta hai;
+    Gemini koi naya number nahi la sakta (check), warna None -> purana tarika (sirf padhna)."""
+    sys.path.insert(0, ROOT)
+    try:
+        import auto_poster as ap
+    except Exception as exc:
+        print("teach: auto_poster import nahi hua", exc); return None
+    book = "\n".join(f"स्टेप {i + 1}: " + " → ".join(st["lines"]) for i, st in enumerate(steps))
+    opts = ", ".join(f"{k.upper()}) {v}" for k, v in q["options"].items())
+    prompt = f"""तुम एक बहुत अच्छे Maths टीचर हो जो Railway/SSC के कमज़ोर बच्चों को समझाते हो।
+सवाल: {q["question"]}
+ऑप्शन: {opts}   सही जवाब: {q["answer"].upper()}) {q["options"][q["answer"]]}
+किताब का हल ({len(steps)} स्टेप):
+{book}
+किताब की टिप: {q.get("tip", "")}
+
+काम: हर स्टेप के लिए समझाओ कि ये स्टेप हम क्यों कर रहे हैं (सोच/तर्क), सिर्फ़ हिसाब पढ़ो मत।
+नियम:
+- स्टेप ठीक {len(steps)} ही रहें, उसी क्रम में; हिसाब और नंबर किताब वाले ही; कोई नया नंबर/हिसाब मत बनाओ।
+- सरल बोलचाल की हिंदी (देवनागरी), जैसे टीचर बोर्ड पर समझाता है। गणित के चिन्ह शब्दों में: बराबर, गुणा, भाग, प्लस, माइनस, प्रतिशत।
+- "approach": 1 वाक्य - ये किस तरह का सवाल है और इसकी चाबी क्या है (≤ 20 शब्द)।
+- हर स्टेप में "why": स्क्रीन के लिए छोटी लाइन (≤ 45 अक्षर) - ये स्टेप क्यों; "say": बोलने के लिए 1-2 वाक्य (≤ 35 शब्द) - क्यों + क्या हिसाब।
+- "rule": ≤ 60 अक्षर - ऐसे सवाल आएँ तो पहले क्या करें (याद रखने लायक नियम)।
+सिर्फ़ JSON: {{"approach": "...", "steps": [{{"why": "...", "say": "..."}}], "rule": "..."}}"""
+    js = ap._gemini_call(prompt)
+    if not js or len(js.get("steps") or []) != len(steps) or not js.get("approach") or not js.get("rule"):
+        print("teach: Gemini ka jawab theek nahi"); return None
+    allowed = set(NUM.findall(" ".join([q["question"], *q["options"].values(), q.get("explanation", ""), q.get("tip", "")])))
+    allowed |= {str(i) for i in range(0, 11)} | {"100"}
+    text = " ".join([js["approach"], js["rule"]] + [x.get("why", "") + " " + x.get("say", "") for x in js["steps"]])
+    new = [n for n in NUM.findall(text) if n not in allowed and n.rstrip("0").rstrip(".") not in allowed]
+    if new:
+        print("teach: Gemini ne naye number likhe", new[:5], "-> purana tarika"); return None
+    if any(len(x.get("why", "")) > 70 or not x.get("say") for x in js["steps"]) or len(js["rule"]) > 90:
+        print("teach: lines bahut lambi"); return None
+    return js
+
+
 def posted():
     try:
         return set(json.load(open(POSTED)))
@@ -123,11 +165,22 @@ def build(q, topic, day):
         "सवाल ध्यान से सुनो। " + speak(q["question"]) + " ऑप्शन हैं: "
         + ", ".join(f"{L[i]}, {speak(o)}" for i, o in enumerate(opts)) + "। पहले खुद सोचो!",
     ]
-    for i, s in enumerate(steps):
-        lead = ["पहले", "अब", "फिर", "अब", "आखिर में"][i] if i < len(steps) - 1 else "तो"
-        voice.append(lead + ", " + speak(", ".join(s["lines"])) + "।")
-    voice.append(f"सही जवाब है, ऑप्शन {L[ai]}... {speak(opts[ai])}!")
-    voice.append("याद रखो, " + speak(tip) + "। सही जवाब मिला? कमेंट करो, और ऐसी ही ट्रिक्स के लिए फॉलो करो Minute Me GS!")
+    T = teach(q, steps)
+    if T:   # samjhao: har step ka "kyun" screen par bhi, awaaz me bhi
+        for i, s in enumerate(steps):
+            s["why"] = T["steps"][i]["why"].strip()
+            voice.append(("समझो, " + T["approach"].strip() + " " if i == 0 else "") + speak(T["steps"][i]["say"].strip()))
+        rule = T["rule"].strip().rstrip("।")
+        trick = [rule, tip] if rule != tip else [tip]
+        voice.append(f"सही जवाब है, ऑप्शन {L[ai]}... {speak(opts[ai])}!")
+        voice.append("ऐसे सवाल आएँ तो याद रखो, " + speak(rule) + "। सही जवाब मिला? कमेंट करो, और ऐसी ही ट्रिक्स के लिए फॉलो करो Minute Me GS!")
+    else:
+        for i, s in enumerate(steps):
+            lead = ["पहले", "अब", "फिर", "अब", "आखिर में"][i] if i < len(steps) - 1 else "तो"
+            voice.append(lead + ", " + speak(", ".join(s["lines"])) + "।")
+        trick = [tip]
+        voice.append(f"सही जवाब है, ऑप्शन {L[ai]}... {speak(opts[ai])}!")
+        voice.append("याद रखो, " + speak(tip) + "। सही जवाब मिला? कमेंट करो, और ऐसी ही ट्रिक्स के लिए फॉलो करो Minute Me GS!")
     return {
         "template": "steps.html", "brand": "MinuteMe_GS", "exam": exam, "subject": "Maths",
         "bank_id": q["id"], "chapter": q["chapter"], "topic": name, "date": day,
@@ -137,7 +190,7 @@ def build(q, topic, day):
         "warn": WARN[h % len(WARN)],
         "question_hi": q["question"], "question_en": q.get("question_en", ""),
         "options": opts, "answer": L[ai], "steps": steps, "result": opts[ai],
-        "trick": [tip], "cta": "रोज़ 1 Maths PYQ + शॉर्टकट", "voice": voice,
+        "trick": trick, "approach": (T or {}).get("approach", ""), "cta": "रोज़ 1 Maths PYQ + शॉर्टकट", "voice": voice,
     }
 
 

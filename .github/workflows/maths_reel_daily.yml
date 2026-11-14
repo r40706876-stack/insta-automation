@@ -32,9 +32,10 @@ jobs:
           D=$(TZ=Asia/Kolkata date +%F); mkdir -p downloads/maths_daily
           if [ -z "${{ inputs.question_id }}" ] && [ -e "downloads/maths_daily/$D.published.json" ]; then
             echo "::notice::aaj ki Maths reel pehle hi post ho chuki"; echo "skip=1" >> "$GITHUB_OUTPUT"; exit 0; fi
-          python maths_reel/make_spec.py "downloads/maths_daily/$D.json" "$D" "${{ inputs.question_id }}"
-          python maths_reel/maths_reel.py "downloads/maths_daily/$D.json" "downloads/maths_daily/$D.mp4"
-          echo "d=$D" >> "$GITHUB_OUTPUT"
+          N=$D; [ -n "${{ inputs.question_id }}" ] && N="${D}_${{ inputs.question_id }}"   # test/manual runs never overwrite the day's reel
+          python maths_reel/make_spec.py "downloads/maths_daily/$N.json" "$D" "${{ inputs.question_id }}"
+          python maths_reel/maths_reel.py "downloads/maths_daily/$N.json" "downloads/maths_daily/$N.mp4"
+          echo "d=$N" >> "$GITHUB_OUTPUT"
       - name: Save (before posting, so the raw link exists)
         if: steps.b.outputs.skip != '1'
         run: |
