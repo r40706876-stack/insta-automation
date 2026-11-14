@@ -1,26 +1,26 @@
-[main cc7e3e3] Record 3D reel publish attempt [skip ci]
+[main 1e0dba3] Record 3D reel publish attempt [skip ci]
  1 file changed, 4 insertions(+)
- create mode 100644 downloads/map3d/2026-11-14_state_place_run43576164471/publish_started.json
+ create mode 100644 downloads/map3d/2026-11-14_timeline_run43576166565/publish_started.json
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
-waiting 3513 s for slot 2026-11-14T14:30:00Z
+waiting 3523 s for slot 2026-11-14T16:30:00Z
 Collab invitation requested: @ar_publication
-  IG container: 17913969069568651
+  IG container: 17913986847568651
   upload try 1.1: HTTP 200 {"success":true,"message":"Upload Successful."}
   IG processing: FINISHED
-  LIVE: https://www.instagram.com/reel/DfubJzMgkPc/
-[main c68b2bf] Save 3D reel Instagram receipt [skip ci]
+  LIVE: https://www.instagram.com/reel/Dfuo4fdispK/
+[main 5248799] Save 3D reel Instagram receipt [skip ci]
  2 files changed, 7 insertions(+)
- create mode 100644 downloads/map3d/2026-11-14_state_place_run43576164471/published.json
- create mode 100644 downloads/map3d/2026-11-14_state_place_run43576164471/reel.upload.json
+ create mode 100644 downloads/map3d/2026-11-14_timeline_run43576166565/published.json
+ create mode 100644 downloads/map3d/2026-11-14_timeline_run43576166565/reel.upload.json
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
-PUBLISHED {"media_id": "18120415715046152", "published_utc": "2026-11-14T14:31:07.705848+00:00", "title": "ऐतिहासिक स्थान ‘चौरी चौरा’ किस राज्य में स्थित है?", "permalink": "https://www.instagram.com/reel/DfubJzMgkPc/"}
+PUBLISHED {"media_id": "17978715623936519", "published_utc": "2026-11-14T16:30:59.531899+00:00", "title": "भारत में केंद्रीय औद्योगिक सुरक्षा बल की स्थापना किस वर्ष में हुई थी?", "permalink": "https://www.instagram.com/reel/Dfuo4fdispK/"}
