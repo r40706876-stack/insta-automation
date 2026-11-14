@@ -1,0 +1,232 @@
+{
+  "title": "CISF की स्थापना वर्ष",
+  "subject": "स्टैटिक जीके",
+  "topic_key": "cisf_स्थापना_वर्ष",
+  "share_reason": "परीक्षा में अक्सर 1970 उत्तर दिया जाता है",
+  "recall": "याद रखने की ट्रिक: 1969।",
+  "pyq_challenge": true,
+  "share_card": {
+    "kind": "exam_confusion",
+    "recipient": "परीक्षा की तैयारी करने वाले मित्र",
+    "benefit": "सही उत्तर 1969, 1970 नहीं",
+    "cta": "दोस्त को अभी बताओ"
+  },
+  "scenes": [
+    {
+      "role": "hook",
+      "heading": "पहले अपना जवाब चुनिए",
+      "explanation": "A या B — सोचिए",
+      "speech": "भारत में केंद्रीय औद्योगिक सुरक्षा बल की स्थापना किस वर्ष में हुई थी? दृश्य देखिए।",
+      "teaches": "प्रश्न पहचानना",
+      "visual_action": "व्यक्ति स्क्रीन पर प्रश्न दिखाता है",
+      "setting": "neutral",
+      "objects": [
+        {
+          "kind": "person",
+          "action": "walk",
+          "id": "obj0",
+          "label": "प्रश्नकर्ता",
+          "color": "#f4e7bf",
+          "pos": [
+            -0.45,
+            0,
+            0
+          ],
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ],
+          "to": [
+            0.75,
+            0,
+            0
+          ]
+        }
+      ],
+      "hook_question": "भारत में केंद्रीय औद्योगिक सुरक्षा बल की स्थापना किस वर्ष में हुई थी?",
+      "quiz_options": [
+        "A: 1970",
+        "B: 1969"
+      ],
+      "content_group": "single_topic"
+    },
+    {
+      "role": "challenge",
+      "heading": "कमेंट में लिखिए: A या B?",
+      "explanation": "दो सेकंड सोचिए: A या B?",
+      "speech": "दो सेकंड सोचिए: A या B?",
+      "teaches": "विकल्पों पर विचार",
+      "visual_action": "दो तीर विकल्पों की ओर इशारा करते हैं",
+      "setting": "neutral",
+      "objects": [
+        {
+          "kind": "arrow",
+          "action": "spin",
+          "id": "obj0",
+          "label": "1970",
+          "color": "#59c7c5",
+          "pos": [
+            -0.9,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        {
+          "kind": "arrow",
+          "action": "spin",
+          "id": "obj1",
+          "label": "1969",
+          "color": "#59c7c5",
+          "pos": [
+            0.9,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        }
+      ],
+      "quiz_options": [
+        "A: 1970",
+        "B: 1969"
+      ]
+    },
+    {
+      "role": "reveal",
+      "heading": "सही उत्तर",
+      "explanation": "सही उत्तर है: 1969।",
+      "speech": "सही उत्तर है: 1969।",
+      "teaches": "सही उत्तर बताना",
+      "visual_action": "व्यक्ति हाथ में 1969 दिखाता है",
+      "setting": "neutral",
+      "objects": [
+        {
+          "kind": "person",
+          "action": "rise",
+          "id": "obj0",
+          "label": "उत्तरदाता",
+          "color": "#f4e7bf",
+          "pos": [
+            0.0,
+            0,
+            0
+          ],
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ],
+          "to": [
+            0.0,
+            0,
+            1.2
+          ]
+        }
+      ]
+    },
+    {
+      "role": "explain",
+      "heading": "तथ्य समझिए",
+      "explanation": "इसका मुख्यालय दिल्ली में है।",
+      "speech": "इसका मुख्यालय दिल्ली में है।",
+      "teaches": "स्थापना का कारण",
+      "visual_action": "भवन जमीन से उठता है",
+      "setting": "institution",
+      "objects": [
+        {
+          "kind": "building",
+          "action": "rise",
+          "id": "obj0",
+          "label": "CISF मुख्यालय",
+          "color": "#b1a4d3",
+          "pos": [
+            0.0,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            0.0,
+            0,
+            1.2
+          ]
+        }
+      ]
+    },
+    {
+      "role": "transfer",
+      "heading": "खुद को जाँचिए",
+      "explanation": "यही परीक्षा की आम गलती है।",
+      "speech": "यही परीक्षा की आम गलती है।",
+      "teaches": "सही तथ्य याद रखना",
+      "visual_action": "व्यक्ति 1970 बोर्ड पर जाता, फिर 1969 दिखाता",
+      "setting": "institution",
+      "objects": [
+        {
+          "kind": "person",
+          "action": "walk",
+          "id": "obj0",
+          "label": "छात्र",
+          "color": "#f4e7bf",
+          "pos": [
+            -0.45,
+            0,
+            0
+          ],
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ],
+          "to": [
+            0.75,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "role": "revision",
+      "heading": "रिवीजन कार्ड",
+      "explanation": "याद रखने की ट्रिक: 1969।",
+      "speech": "याद रखने की ट्रिक: 1969।",
+      "teaches": "तेज़ स्मरण",
+      "visual_action": "पाठ स्क्रीन पर स्थिर दिखता है",
+      "setting": "neutral",
+      "revision_card": true,
+      "objects": [
+        {
+          "kind": "book",
+          "action": "none",
+          "id": "obj0",
+          "label": "स्मरण",
+          "color": "#59c7c5",
+          "pos": [
+            0.0,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        }
+      ]
+    }
+  ]
+}
