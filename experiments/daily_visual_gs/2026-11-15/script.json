@@ -1,0 +1,131 @@
+{
+  "ok": true,
+  "title": "ब्रेक्सिट का देश",
+  "subject": "Economics",
+  "renderer_version": "rich_3d_v1",
+  "question_hash": "9d98e864e4343ff3bd04a0078c8929b477d5e97c12fd21dababe4a658caf3b7c",
+  "reference": {
+    "subject": "Economics",
+    "subject_hi": "अर्थशास्त्र",
+    "chapter": "अन्तर्राष्ट्रीय संगठन (International Organizations)",
+    "sub": "",
+    "question": "समाचार में अक्सर देखा जाने वाला शब्द ‘ब्रेक्सिट निम्नलिखित देशों में किस देश से संबंधित है?",
+    "options": {
+      "a": "दुबई",
+      "b": "यू.के.",
+      "c": "अमेरिका",
+      "d": "सिंगापुर"
+    },
+    "answer": "b",
+    "exams": [
+      "RRB Group-D 08-10-2018 (Shift-III)"
+    ],
+    "explanation": "‘ब्रेक्सिट’ का अर्थ-युनाइटेड किंगडम का यूरोपीय संघ से अलग होना है। ध्यातव्य है कि 23 जून, 2016 के हुए जनमत संग्रह में ब्रिटेन के 51.89ज्ञ् लोगों द्वारा ब्रिटेन के यूरोपीय संघ से अलग होने के पक्ष में मत दिया था। 31 जनवरी, 2020 को ब्रिटेन यूरोपीय संघ से अलग हो चुका है।",
+    "times_asked": 1,
+    "years": [
+      "2018"
+    ],
+    "id": "0d637c21df",
+    "seq": 145
+  },
+  "experiment_format": "visual_mystery",
+  "primary_objective": "save",
+  "series_next_topic": "आठवीं पंचवर्षीय योजना के दौरान भारत के प्रधानमंत्री कौन थे?",
+  "series_next_hash": "632754ac75b1332a06503bd364782f66ca8d22463217ff7cbc052b6e1df4b5c1",
+  "topic_policy": "evidence_cohort_v2",
+  "topic_priority": 1.0,
+  "recall": "याद रखने की ट्रिक: यू.के।",
+  "share_card": {
+    "kind": "exam_confusion",
+    "recipient": "परीक्षा की तैयारी करने वाले दोस्त",
+    "benefit": "ब्रेक्सिट का सही देश समझा गया",
+    "cta": "अब साथ में क्विज़ करें"
+  },
+  "share_reason": "परीक्षा में अक्सर विकल्प भ्रमित होते हैं",
+  "scenes": [
+    {
+      "label": "पहले अपना जवाब चुनिए",
+      "quiz_options": [
+        "A: यू.के",
+        "B: दुबई"
+      ],
+      "speech": "समाचार में अक्सर देखा जाने वाला शब्द ‘ब्रेक्सिट निम्नलिखित देशों में किस देश से संबंधित है? दृश्य देखिए।",
+      "role": "hook",
+      "revision_card": false,
+      "teaches": "सवाल पहचान",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "प्रश्न चिह्न स्क्रीन पर घूमता है"
+      }
+    },
+    {
+      "label": "कमेंट में लिखिए: A या B?",
+      "quiz_options": [
+        "A: यू.के",
+        "B: दुबई"
+      ],
+      "speech": "दो सेकंड सोचिए: A या B?",
+      "role": "challenge",
+      "revision_card": false,
+      "teaches": "विकल्प तुलना",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "दो बॉक्स बाएँ‑दाएँ चलते हैं"
+      }
+    },
+    {
+      "label": "सही उत्तर",
+      "quiz_options": null,
+      "speech": "सही उत्तर है: यू.के।",
+      "role": "reveal",
+      "revision_card": false,
+      "teaches": "सही उत्तर पहचान",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "सिक्का ऊपर उठकर यू.के. दर्शाता है"
+      }
+    },
+    {
+      "label": "तथ्य समझिए",
+      "quiz_options": null,
+      "speech": "‘ब्रेक्सिट’ का अर्थ-युनाइटेड किंगडम का यूरोपीय संघ से अलग होना है।",
+      "role": "explain",
+      "revision_card": false,
+      "teaches": "परिभाषा समझना",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "institution",
+        "visible_action": "व्यक्ति भवन की ओर चलता है"
+      }
+    },
+    {
+      "label": "खुद को जाँचिए",
+      "quiz_options": null,
+      "speech": "यही परीक्षा की आम गलती है।",
+      "role": "transfer",
+      "revision_card": false,
+      "teaches": "स्मरण शक्ति बढ़ाना",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "institution",
+        "visible_action": "व्यक्ति दो बक्सों के बीच चलकर इशारा करता है"
+      }
+    },
+    {
+      "label": "रिवीजन कार्ड",
+      "quiz_options": null,
+      "speech": "याद रखने की ट्रिक: यू.के।",
+      "role": "revision",
+      "revision_card": true,
+      "teaches": "स्मरण पुनरावृत्ति",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "टेक्स्ट स्थिर रूप से दिखता है"
+      }
+    }
+  ]
+}

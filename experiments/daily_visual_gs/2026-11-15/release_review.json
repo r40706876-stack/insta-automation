@@ -1,0 +1,43 @@
+{
+  "answer_correct": true,
+  "visual_relevance": false,
+  "hindi_readable": true,
+  "pronunciation_correct": true,
+  "audio_visual_match": false,
+  "answer_reveal_timing": true,
+  "revision_card_readable": true,
+  "reasons": [
+    "3D visuals feature generic character pacing and assets that fail to illustrate Brexit or the UK leaving the EU."
+  ],
+  "observed_answer": "A (यू.के)",
+  "scene_evidence": [
+    {
+      "scene": 1,
+      "observation": "Hook displays the quiz question with option cards A (यू.के) and B (दुबई)."
+    },
+    {
+      "scene": 2,
+      "observation": "A 2-second countdown timer runs below the options."
+    },
+    {
+      "scene": 3,
+      "observation": "Golden coin flips up marked 'A' alongside text stating the correct answer is UK."
+    },
+    {
+      "scene": 4,
+      "observation": "Stylized 3D character walks along a railing without illustrating Brexit concepts."
+    },
+    {
+      "scene": 5,
+      "observation": "Character pauses near the railing while text states common exam mistakes."
+    },
+    {
+      "scene": 6,
+      "observation": "Static revision card displays above a 3D book model showing the recall tip."
+    }
+  ],
+  "sha256": "ece76fa34b99d8fd0ddf16664795109d8fd9c514c0120716364ee5faf8096bc1",
+  "reviewer": "gemini-3.8-flash / actual rendered video and audio",
+  "reviewed_at": "2026-11-15T18:03:57.353302+00:00",
+  "review_type": "automated_multimodal"
+}
