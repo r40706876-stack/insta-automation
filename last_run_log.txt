@@ -1,45 +1,45 @@
-FORMAT: list
-LIST REEL TAIYAR: generated_reels/science_pyq_reel.mp4 (10s)
+FORMAT: mega
+  Gemini text models: gemini-flash-latest, gemini-3.8-flash, gemini-3.7-flash, gemini-3.6-flash
+  Gemini gemini-flash-latest fail (koshish 1): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
+  Gemini gemini-flash-latest: HTTP 503 (koshish 2) 
+  Gemini gemini-3.8-flash: HTTP 503 (koshish 1) {   "error": {     "code": 503,     "message": "This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later
+  Gemini gemini-3.8-flash fail (koshish 2): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
+  Gemini gemini-3.7-flash fail (koshish 1): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
+  Gemini gemini-3.7-flash: HTTP 503 (koshish 2) 
+  Mega AI jaanch: 159 me se 143 sahi
+  Mega awaaz: gemini-3.1-flash-tts-preview / Sulafat
+MEGA REEL TAIYAR: generated_reels/science_pyq_reel.mp4 (23.4s, 5 page, 100 sawal)
 
 CAPTION:
-📅 Day 25/100 • 100 दिन में पूरा GS | कल Day 26/100 - Follow करो ताकि छूटे नहीं
-📤 ये reel उस दोस्त को भेजो जो Group D / NTPC / SSC / Police की तैयारी कर रहा है!
+📚 "इतिहास (History)" के 100 सबसे महत्वपूर्ण प्रश्न - सभी सरकारी परीक्षाओं के लिए
 
-📚 इस हफ्ते के 7 PYQ - Revision - RRB, SSC, Police, Patwari, Army, State Exams के लिए (Save करो)
+⏸️ हर पेज पर रोककर पढ़ो (स्क्रीन दबाकर रखो)
+📌 अभी SAVE करो - exam से पहले 1 बार ज़रूर revise करना
+📤 उस दोस्त को भेजो जो SSC / Railway / Police की तैयारी कर रहा है
+💬 कितने पहले से आते थे? कमेंट करो!
 
-1. जैविक अपशिष्ट निपटान की सर्वोत्तम विधि कौन-सी है? → भस्मीकरण
-2. महाराष्ट्र में गोवर्धन पारिस्थितिकी गाँव की स्थापना किस संगठन ने की है? → इस्कॉन
-3. किस जीवाणु की उपस्थिति जल प्रदूषण का सूचक है? → ई. कोलाई कोलीफॉर्म
-4. रोगाणु मुक्त पेयजल बनाने के लिए किस रसायन का उपयोग किया जा सकता है? → CaOCl2
-5. वायुमंडल में ओजोन का स्तर कम होना कब से शुरू हुआ? → 1980
-6. अधिकांश नवीकरणीय ऊर्जा स्रोतों से होने वाली हानि है: → अस्थिर आपूर्ति
-7. ऊर्जा के पारंपरिक स्रोत के एक उदाहरण की पहचान करें- → प्राकृतिक गैस
-
-💬 कितने पहले से आते थे? कमेंट करो: 7/7?
-📤 Save करो + उस दोस्त को भेजो जो exam की तैयारी कर रहा है।
-GK GK Questions | RRB NTPC, Group D, SSC GD, State Exam PYQ
+इतिहास (History) GK | RRB NTPC, Group D, SSC GD, CGL, MTS, Police, Patwari, State Exam PYQ
 ⏱ MinuteMe_GS - एक मिनट, एक PYQ - पक्का!
-📲 Free test / notes: WhatsApp 8989971379
 
-#gkquiz #rrbntpc #sscgd #gkpyq #gk
-SCHEDULE: video ready; target 2026-11-15T07:40:07Z
+#gkquiz #gkpyq #sscgd #rrbntpc #history
+SCHEDULE: video ready; target 2026-11-15T11:30:00Z
 Collab invitation requested: @ar_publication
-  Instagram koshish 1 fail: IG container nahi bana: {'error': {'message': 'Error validating access token: Session has expired on Saturday, 14-Nov-26 22:25:01 PST. The current time is Saturday, 14-Nov-26 23:31:09 PST.', 'code': 190, 'type': 'OAuthException', 'error_subcode': 463, 'fbtrace_id': 'AXJA3Ki8-FopXtcBNIhZbao'}}
-SCHEDULE: video ready; target 2026-11-15T07:40:07Z
+  Instagram koshish 1 fail: IG container nahi bana: {'error': {'message': 'Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.', 'code': 190, 'type': 'OAuthException', 'error_subcode': 460, 'fbtrace_id': 'ANV1ZDKqaxTTO
+SCHEDULE: video ready; target 2026-11-15T11:30:00Z
 Collab invitation requested: @ar_publication
-  Instagram koshish 2 fail: IG container nahi bana: {'error': {'message': 'Error validating access token: Session has expired on Saturday, 14-Nov-26 22:25:01 PST. The current time is Saturday, 14-Nov-26 23:31:39 PST.', 'code': 190, 'type': 'OAuthException', 'error_subcode': 463, 'fbtrace_id': 'ATr1HwtHooZX51BjHd78CfO'}}
-SCHEDULE: video ready; target 2026-11-15T07:40:07Z
+  Instagram koshish 2 fail: IG container nahi bana: {'error': {'message': 'Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.', 'code': 190, 'type': 'OAuthException', 'error_subcode': 460, 'fbtrace_id': 'AgJNqEp-y7SHJ
+SCHEDULE: video ready; target 2026-11-15T11:30:00Z
 Collab invitation requested: @ar_publication
-  Instagram koshish 3 fail: IG container nahi bana: {'error': {'message': 'Error validating access token: Session has expired on Saturday, 14-Nov-26 22:25:01 PST. The current time is Saturday, 14-Nov-26 23:32:10 PST.', 'code': 190, 'type': 'OAuthException', 'error_subcode': 463, 'fbtrace_id': 'Ahjtk4RmWn0MFYlhykHJ8jN'}}
+  Instagram koshish 3 fail: IG container nahi bana: {'error': {'message': 'Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.', 'code': 190, 'type': 'OAuthException', 'error_subcode': 460, 'fbtrace_id': 'ANGIt0efVNHCs
 Traceback (most recent call last):
   File "/home/runner/work/insta-automation/insta-automation/auto_poster.py", line 7578, in <module>
     main()
-  File "/home/runner/work/insta-automation/insta-automation/auto_poster.py", line 7492, in main
-    if run_list(bank, st, ep, args):
+  File "/home/runner/work/insta-automation/insta-automation/auto_poster.py", line 7480, in main
+    if run_mega(bank, st, ep, args):
        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/insta-automation/insta-automation/auto_poster.py", line 4361, in run_list
+  File "/home/runner/work/insta-automation/insta-automation/auto_poster.py", line 5130, in run_mega
     elif not post_reel(out, caption, 0):
              ^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "/home/runner/work/insta-automation/insta-automation/auto_poster.py", line 3186, in post_reel
     raise RuntimeError(f"Instagram upload 3 baar fail: {last}")
-RuntimeError: Instagram upload 3 baar fail: IG container nahi bana: {'error': {'message': 'Error validating access token: Session has expired on Saturday, 14-Nov-26 22:25:01 PST. The current time is Saturday, 14-Nov-26 23:32:10 PST.', 'code': 190, 'type': 'OAuthException', 'error_subcode': 463, 'fbtrace_id': 'Ahjtk4RmWn0MFYlhykHJ8jN'}}
+RuntimeError: Instagram upload 3 baar fail: IG container nahi bana: {'error': {'message': 'Error validating access token: The session has been invalidated because the user changed their password or Facebook has changed the session for security reasons.', 'code': 190, 'type': 'OAuthException', 'error_subcode': 460, 'fbtrace_id': 'ANGIt0efVNHCs6nvIBfjNIL'}}
