@@ -22,11 +22,24 @@ GK GK Questions | RRB NTPC, Group D, SSC GD, State Exam PYQ
 📲 Free test / notes: WhatsApp 8989971379
 
 #gkquiz #rrbntpc #sscgd #gkpyq #gk
-SCHEDULE: video ready; target 2026-11-15T04:30:00Z
+SCHEDULE: video ready; target 2026-11-15T07:40:07Z
 Collab invitation requested: @ar_publication
-  IG container: 17914062783568651
-  upload try 1.1: HTTP 200 {"success":true,"message":"Upload Successful."}
-  IG processing: FINISHED
-REMINDER: reel ready, publication due within 10 minutes: 2026-11-15T04:30:00Z
-  LIVE: https://www.instagram.com/reel/Dfv0lTiDLrq/
-INSTAGRAM PE POST HO GAYA: 17896276869434460
+  Instagram koshish 1 fail: IG container nahi bana: {'error': {'message': 'Error validating access token: Session has expired on Saturday, 14-Nov-26 22:25:01 PST. The current time is Saturday, 14-Nov-26 23:31:09 PST.', 'code': 190, 'type': 'OAuthException', 'error_subcode': 463, 'fbtrace_id': 'AXJA3Ki8-FopXtcBNIhZbao'}}
+SCHEDULE: video ready; target 2026-11-15T07:40:07Z
+Collab invitation requested: @ar_publication
+  Instagram koshish 2 fail: IG container nahi bana: {'error': {'message': 'Error validating access token: Session has expired on Saturday, 14-Nov-26 22:25:01 PST. The current time is Saturday, 14-Nov-26 23:31:39 PST.', 'code': 190, 'type': 'OAuthException', 'error_subcode': 463, 'fbtrace_id': 'ATr1HwtHooZX51BjHd78CfO'}}
+SCHEDULE: video ready; target 2026-11-15T07:40:07Z
+Collab invitation requested: @ar_publication
+  Instagram koshish 3 fail: IG container nahi bana: {'error': {'message': 'Error validating access token: Session has expired on Saturday, 14-Nov-26 22:25:01 PST. The current time is Saturday, 14-Nov-26 23:32:10 PST.', 'code': 190, 'type': 'OAuthException', 'error_subcode': 463, 'fbtrace_id': 'Ahjtk4RmWn0MFYlhykHJ8jN'}}
+Traceback (most recent call last):
+  File "/home/runner/work/insta-automation/insta-automation/auto_poster.py", line 7578, in <module>
+    main()
+  File "/home/runner/work/insta-automation/insta-automation/auto_poster.py", line 7492, in main
+    if run_list(bank, st, ep, args):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/insta-automation/insta-automation/auto_poster.py", line 4361, in run_list
+    elif not post_reel(out, caption, 0):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/insta-automation/insta-automation/auto_poster.py", line 3186, in post_reel
+    raise RuntimeError(f"Instagram upload 3 baar fail: {last}")
+RuntimeError: Instagram upload 3 baar fail: IG container nahi bana: {'error': {'message': 'Error validating access token: Session has expired on Saturday, 14-Nov-26 22:25:01 PST. The current time is Saturday, 14-Nov-26 23:32:10 PST.', 'code': 190, 'type': 'OAuthException', 'error_subcode': 463, 'fbtrace_id': 'Ahjtk4RmWn0MFYlhykHJ8jN'}}
