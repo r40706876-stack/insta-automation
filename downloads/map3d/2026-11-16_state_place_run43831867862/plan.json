@@ -1,0 +1,320 @@
+{
+ "template": "state_place",
+ "fps": 24,
+ "id": "1a8f02d622",
+ "question": "अशोक के शासनकाल की सबसे महत्वपूर्ण घटना कलिंग, आधुनिक युग में ____पर विजय थी, जो उनके जीवन का एक महत्वपूर्ण परिवर्तन सिद्ध हुआ।",
+ "exam_short": "RRB Group-D 2018",
+ "options": [
+  "असम",
+  "झारखंड",
+  "बिहार",
+  "ओडिशा"
+ ],
+ "answer": 3,
+ "option_colors": [
+  "#ff7a45",
+  "#4ade80",
+  "#c084fc",
+  "#38bdf8"
+ ],
+ "place": null,
+ "credit": "नक्शा: datameet (MIT) · राज्य सीमाएँ सरलीकृत",
+ "scenes": [
+  {
+   "id": "teaser",
+   "seconds": 2.63,
+   "title": "3D नक्शे पर पूरा समझो",
+   "speak": "नक्शे पर देखिए, पूरा समझ आएगा —",
+   "cam": {
+    "center": [
+     82.4,
+     22.0
+    ],
+    "span": 27.6,
+    "tilt": 46,
+    "yaw": -22,
+    "from_tilt": 64,
+    "from_span": 40
+   },
+   "actions": [
+    {
+     "type": "build",
+     "t": 0,
+     "dur": 0.7
+    },
+    {
+     "type": "state_on",
+     "name": "Assam",
+     "color": "#ff7a45",
+     "t": 0.3,
+     "raise": 1.5,
+     "glow": 0.35
+    },
+    {
+     "type": "state_off",
+     "name": "Assam",
+     "t": 1.3
+    },
+    {
+     "type": "state_on",
+     "name": "Jharkhand",
+     "color": "#4ade80",
+     "t": 0.44999999999999996,
+     "raise": 1.5,
+     "glow": 0.35
+    },
+    {
+     "type": "state_off",
+     "name": "Jharkhand",
+     "t": 1.3
+    },
+    {
+     "type": "state_on",
+     "name": "Bihar",
+     "color": "#c084fc",
+     "t": 0.6,
+     "raise": 1.5,
+     "glow": 0.35
+    },
+    {
+     "type": "state_off",
+     "name": "Bihar",
+     "t": 1.3
+    },
+    {
+     "type": "state_on",
+     "name": "Odisha",
+     "color": "#38bdf8",
+     "t": 0.75,
+     "raise": 1.5,
+     "glow": 0.35
+    },
+    {
+     "type": "state_off",
+     "name": "Odisha",
+     "t": 1.3
+    }
+   ],
+   "labels": []
+  },
+  {
+   "id": "hook",
+   "seconds": 7.43,
+   "title": "अशोक के शासनकाल की सबसे महत्वपूर्ण घटना कलिंग, आधुनिक युग में ____पर विजय थी, जो उनके जीवन का एक महत्वपूर्ण परिवर्तन सिद्ध हुआ।",
+   "speak": "अशोक के शासनकाल की सबसे महत्वपूर्ण घटना कलिंग, आधुनिक युग में किसपर विजय थी, जो उनके जीवन का एक महत्वपूर्ण परिवर्तन सिद्ध हुआ।",
+   "cam": {
+    "center": [
+     82.4,
+     22.0
+    ],
+    "span": 30.0,
+    "tilt": 34
+   },
+   "actions": [],
+   "labels": []
+  },
+  {
+   "id": "options",
+   "seconds": 5.2,
+   "title": "सही राज्य कौन-सा?",
+   "speak": "असम, झारखंड, बिहार या ओडिशा? कमेंट में जवाब लिखिए!",
+   "cam": {
+    "center": [
+     82.4,
+     22.0
+    ],
+    "span": 30.0,
+    "tilt": 30
+   },
+   "actions": [
+    {
+     "type": "state_on",
+     "name": "Assam",
+     "color": "#ff7a45",
+     "t": 0.2,
+     "raise": 1.5,
+     "glow": 0.35
+    },
+    {
+     "type": "state_on",
+     "name": "Jharkhand",
+     "color": "#4ade80",
+     "t": 0.75,
+     "raise": 1.5,
+     "glow": 0.35
+    },
+    {
+     "type": "state_on",
+     "name": "Bihar",
+     "color": "#c084fc",
+     "t": 1.3,
+     "raise": 1.5,
+     "glow": 0.35
+    },
+    {
+     "type": "state_on",
+     "name": "Odisha",
+     "color": "#38bdf8",
+     "t": 1.85,
+     "raise": 1.5,
+     "glow": 0.35
+    }
+   ],
+   "labels": [
+    {
+     "text": "A  असम",
+     "at": [
+      92.542,
+      26.105
+     ],
+     "color": "#ff7a45",
+     "t": 0.45,
+     "kind": "state"
+    },
+    {
+     "text": "B  झारखंड",
+     "at": [
+      85.91,
+      23.663
+     ],
+     "color": "#4ade80",
+     "t": 1.0,
+     "kind": "state"
+    },
+    {
+     "text": "C  बिहार",
+     "at": [
+      85.534,
+      25.754
+     ],
+     "color": "#c084fc",
+     "t": 1.55,
+     "kind": "state"
+    },
+    {
+     "text": "D  ओडिशा",
+     "at": [
+      83.91,
+      20.21
+     ],
+     "color": "#38bdf8",
+     "t": 2.1,
+     "kind": "state"
+    }
+   ]
+  },
+  {
+   "id": "reveal",
+   "seconds": 4.2,
+   "title": "सही उत्तर: D  ओडिशा",
+   "sub": "",
+   "speak": "सही उत्तर है — ओडिशा।",
+   "cam": {
+    "center": [
+     84.44,
+     19.790000000000003
+    ],
+    "span": 8.89,
+    "tilt": 38
+   },
+   "actions": [
+    {
+     "type": "state_off",
+     "name": "Assam",
+     "t": 0.1
+    },
+    {
+     "type": "state_off",
+     "name": "Jharkhand",
+     "t": 0.1
+    },
+    {
+     "type": "state_off",
+     "name": "Bihar",
+     "t": 0.1
+    },
+    {
+     "type": "state_on",
+     "name": "Odisha",
+     "color": "#ffc93c",
+     "t": 0.3,
+     "raise": 1.65,
+     "glow": 0.5
+    }
+   ],
+   "labels": [
+    {
+     "text": "ओडिशा",
+     "at": [
+      83.91,
+      20.21
+     ],
+     "color": "#ffd25c",
+     "t": 0.5,
+     "kind": "state"
+    }
+   ]
+  },
+  {
+   "id": "fact",
+   "seconds": 5.6,
+   "title": "ओडिशा — याद रखने का तरीका",
+   "sub": "कलिंग युद्ध अशोक के जीवन का आखिरी युद्ध था।",
+   "sub2": "राजधानी: भुवनेश्वर",
+   "sub3": "",
+   "speak": "कलिंग युद्ध अशोक के जीवन का आखिरी युद्ध था। ओडिशा की राजधानी भुवनेश्वर है।",
+   "cam": {
+    "center": [
+     84.44,
+     19.790000000000003
+    ],
+    "span": 9.779000000000002,
+    "tilt": 44,
+    "yaw": -12
+   },
+   "actions": [
+    {
+     "type": "pin",
+     "at": [
+      85.825,
+      20.296
+     ],
+     "t": 0.9,
+     "color": "#3b82f6"
+    }
+   ],
+   "labels": [
+    {
+     "text": "भुवनेश्वर (राजधानी)",
+     "at": [
+      85.825,
+      20.296
+     ],
+     "color": "#7eb6ff",
+     "t": 1.3,
+     "kind": "pin"
+    }
+   ]
+  },
+  {
+   "id": "end",
+   "seconds": 6.82,
+   "title": "याद रखो",
+   "sub": "ओडिशा",
+   "speak": "याद रखिए — ओडिशा। सही था तो कमेंट में लिखिए, और ऐसे ही नक्शे वाले सवालों के लिए फ़ॉलो कीजिए।",
+   "cam": {
+    "center": [
+     81.955,
+     19.21
+    ],
+    "span": 20,
+    "tilt": 40,
+    "yaw": 10
+   },
+   "actions": [],
+   "labels": [],
+   "end": true
+  }
+ ],
+ "subject": "History"
+}
