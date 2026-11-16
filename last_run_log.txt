@@ -1,26 +1,26 @@
-[main 52c0bc0] Record 3D reel publish attempt [skip ci]
+[main 56463f1] Record 3D reel publish attempt [skip ci]
  1 file changed, 4 insertions(+)
- create mode 100644 downloads/map3d/2026-11-16_state_place_run43831867862/publish_started.json
+ create mode 100644 downloads/map3d/2026-11-16_timeline_run43831871491/publish_started.json
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
-waiting 2919 s for slot 2026-11-16T14:30:00Z
+waiting 144 s for slot 2026-11-16T16:30:00Z
 Collab invitation requested: @ar_publication
-  IG container: 17914362108568651
+  IG container: 17914382850568651
   upload try 1.1: HTTP 200 {"success":true,"message":"Upload Successful."}
   IG processing: FINISHED
-  LIVE: https://www.instagram.com/reel/DfzkvXhAEBx/
-[main 41b62e0] Save 3D reel Instagram receipt [skip ci]
+  LIVE: https://www.instagram.com/reel/DfzyeI6l4i3/
+[main d8e5c85] Save 3D reel Instagram receipt [skip ci]
  2 files changed, 7 insertions(+)
- create mode 100644 downloads/map3d/2026-11-16_state_place_run43831867862/published.json
- create mode 100644 downloads/map3d/2026-11-16_state_place_run43831867862/reel.upload.json
+ create mode 100644 downloads/map3d/2026-11-16_timeline_run43831871491/published.json
+ create mode 100644 downloads/map3d/2026-11-16_timeline_run43831871491/reel.upload.json
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
-PUBLISHED {"media_id": "18217770256358094", "published_utc": "2026-11-16T14:31:02.423654+00:00", "title": "अशोक के शासनकाल की सबसे महत्वपूर्ण घटना कलिंग, आधुनिक युग में ___पर विजय थी, जो उनके जीवन का एक महत्वपूर्ण परिवर्तन सिद्ध हुआ।", "permalink": "https://www.instagram.com/reel/DfzkvXhAEBx/"}
+PUBLISHED {"media_id": "18107398937370661", "published_utc": "2026-11-16T16:30:56.878354+00:00", "title": "भारतीय संविधान में पहला संशोधन ___ में किया गया था।", "permalink": "https://www.instagram.com/reel/DfzyeI6l4i3/"}
