@@ -1,0 +1,133 @@
+{
+  "ok": true,
+  "title": "दिल्ली से दौलताबाद राजधानी परिवर्तन",
+  "subject": "History",
+  "renderer_version": "rich_3d_v1",
+  "question_hash": "4e98470aa02d3fc50becf61121b3fc26e8982f8967fa19680f29de06bc637070",
+  "reference": {
+    "subject": "History",
+    "subject_hi": "इतिहास",
+    "chapter": "दिल्ली सल्तनत (Delhi Sultanate)",
+    "sub": "",
+    "question": "किस सम्राट ने अपनी राजधानी दिल्ली से दौलताबाद स्थानान्तरित की थी?",
+    "options": {
+      "a": "फिरोजशाह तुगलक",
+      "b": "अलाउद्दीन",
+      "c": "मुहम्मद बिन तुगलक",
+      "d": "मुहम्मद गोरी"
+    },
+    "answer": "c",
+    "exams": [
+      "RRB Group-D 01-10-2018 (Shift-I)",
+      "RRB Group-D 03-10-2018 (Shift-I)",
+      "RRB Group-D 03-10-2018 (Shift-III)"
+    ],
+    "explanation": "मुहम्मद बिन तुगलक ने कई प्रशासनिक परिवर्तन किए, जिनमें दोआब में कर वृद्धि, सांकेतिक मुद्रा का प्रचलन तथा राजधानी दिल्ली से दौलताबाद ले जाना शामिल है। 1351 ई. में उसकी मृत्यु पर इतिहासकार बदायूँनी ने लिखा है कि ‘‘सुल्तान को उसकी प्रजा से और प्रजा को सुल्तान से मुक्ति मिल गई’’।",
+    "times_asked": 3,
+    "years": [
+      "2018"
+    ],
+    "id": "04b36a258a",
+    "seq": 14
+  },
+  "experiment_format": "visual_mystery",
+  "primary_objective": "save",
+  "series_next_topic": "सर विलियम जोन्स ने ‘‘एशियाटिक सोसायटी ऑफ बंगाल’’ की स्थापना किस वर्ष में की थी?",
+  "series_next_hash": "74a63257b5fae88f05ed6b2b201f6374a6165d014d100432a42ffffe4e08c3e1",
+  "topic_policy": "evidence_cohort_v2",
+  "topic_priority": 1.0,
+  "recall": "अगली बार यह गलती मत कीजिए।",
+  "share_card": {
+    "kind": "exam_confusion",
+    "recipient": "परीक्षा की तैयारी करने वाले मित्र",
+    "benefit": "सम्राट का सही नाम याद रखें",
+    "cta": "अब साथ में अभ्यास करें"
+  },
+  "share_reason": "परीक्षा में विकल्प भ्रमित करता है",
+  "scenes": [
+    {
+      "label": "पहले अपना जवाब चुनिए",
+      "quiz_options": [
+        "A: फिरोजशाह तुगलक",
+        "B: मुहम्मद बिन तुगलक"
+      ],
+      "speech": "किस सम्राट ने अपनी राजधानी दिल्ली से दौलताबाद स्थानान्तरित की थी? दृश्य देखिए।",
+      "role": "hook",
+      "revision_card": false,
+      "teaches": "प्रश्न पहचान",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "व्यक्ति प्रश्न बोर्ड पर चलता है"
+      }
+    },
+    {
+      "label": "कमेंट में लिखिए: A या B?",
+      "quiz_options": [
+        "A: फिरोजशाह तुगलक",
+        "B: मुहम्मद बिन तुगलक"
+      ],
+      "speech": "दो सेकंड सोचिए: A या B?",
+      "role": "challenge",
+      "revision_card": false,
+      "teaches": "विकल्प तुलना",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "दो व्यक्ति अलग दिशा में चलते हैं"
+      }
+    },
+    {
+      "label": "सही उत्तर",
+      "quiz_options": null,
+      "speech": "सही उत्तर है: मुहम्मद बिन तुगलक।",
+      "role": "reveal",
+      "revision_card": false,
+      "teaches": "उत्तर पहचान",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "मानचित्र पर दिल्ली से दौलताबाद तक रेखा खींची"
+      }
+    },
+    {
+      "label": "तथ्य समझिए",
+      "quiz_options": null,
+      "speech": "में उसकी मृत्यु पर इतिहासकार बदायूँनी ने लिखा है कि ‘‘सुल्तान को उसकी प्रजा से और प्रजा को सुल्तान से मुक्ति मिल गई’’।",
+      "role": "explain",
+      "revision_card": false,
+      "teaches": "परिवर्तन कारण",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "मानचित्र पर रेखा धीरे‑धीरे बढ़ती"
+      }
+    },
+    {
+      "label": "खुद को जाँचिए",
+      "quiz_options": null,
+      "speech": "यही परीक्षा की आम गलती है।",
+      "role": "transfer",
+      "revision_card": false,
+      "teaches": "स्मरण शक्ति",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "institution",
+        "visible_action": "व्यक्ति नोटबुक में लिखता है"
+      }
+    },
+    {
+      "label": "रिवीजन कार्ड",
+      "quiz_options": null,
+      "speech": "अगली बार यह गलती मत कीजिए।",
+      "role": "revision",
+      "revision_card": true,
+      "teaches": "स्मरण",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "स्थिर स्क्रीन पर पाठ दिखता है"
+      }
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "ok": true,
+  "reasons": [
+    "All scenes 1-5 contain causal teaching movement and scene 6 is static as permitted.",
+    "The answer \"मुहम्मद बिन तुगलक\" matches the evidence.",
+    "No invented facts or unsupported claims are present.",
+    "All visual actions correspond to their teaching objectives."
+  ],
+  "novel_topic": true,
+  "scene_checks": [
+    {
+      "scene": 1,
+      "mechanism_matches": true
+    },
+    {
+      "scene": 2,
+      "mechanism_matches": true
+    },
+    {
+      "scene": 3,
+      "mechanism_matches": true
+    },
+    {
+      "scene": 4,
+      "mechanism_matches": true
+    },
+    {
+      "scene": 5,
+      "mechanism_matches": true
+    },
+    {
+      "scene": 6,
+      "mechanism_matches": true
+    }
+  ]
+}
