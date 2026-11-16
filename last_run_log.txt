@@ -1,26 +1,35 @@
-[main e29cd74] Record 3D reel publish attempt [skip ci]
- 1 file changed, 4 insertions(+)
- create mode 100644 downloads/map3d/2026-11-15_timeline_run43694857852/publish_started.json
-error: cannot pull with rebase: You have unstaged changes.
-error: Please commit or stash them.
-error: cannot pull with rebase: You have unstaged changes.
-error: Please commit or stash them.
-error: cannot pull with rebase: You have unstaged changes.
-error: Please commit or stash them.
-waiting 3521 s for slot 2026-11-15T16:30:00Z
+FORMAT: list
+  Gemini text models: gemini-flash-latest, gemini-3.8-flash, gemini-3.7-flash, gemini-3.6-flash
+  7 PYQ topic (AI): ब्रिटिशकालीन प्रमुख विद्रोह
+  7 PYQ topic: आधुनिक इतिहास (Modern History) / आधुनिक इतिहास (Modern History)
+LIST REEL TAIYAR: generated_reels/science_pyq_reel.mp4 (10s)
+
+CAPTION:
+📅 Day 26/100 • 100 दिन में पूरा GS | कल Day 27/100 - Follow करो ताकि छूटे नहीं
+📤 ये reel उस दोस्त को भेजो जो Group D / NTPC / SSC / Police की तैयारी कर रहा है!
+
+📚 इतिहास के 7 PYQ - RRB, SSC, Police, Patwari, Army, State Exams के लिए (Save करो)
+
+1. प्रथम स्वतंत्रता संग्राम (1857) किस स्थान से आरंभ हुआ था? → मेरठ
+2. मुंडा विद्रोह (1899-1900) किस नेता से जुड़ा था? → बिरसा मुंडा
+3. आंध्र प्रदेश में रम्पा विद्रोह (1922-24) के नेता कौन थे? → अल्लूरी सीताराम राजू
+4. वेल्लोर विद्रोह (Vellore Mutiny) किस वर्ष हुआ था? → 1806 ईस्वी
+5. पोलिगर विद्रोह भारत के किस क्षेत्र में हुआ था? → तमिलनाडु
+6. असम में ब्रिटिश हस्तक्षेप के विरुद्ध अहोम विद्रोह (1828-33) का नेतृत्व किसने किया? → गोमधर कुंवर
+7. कुकी विद्रोह (1917-19) किस क्षेत्र में हुआ था? → मणिपुर
+
+💬 कितने पहले से आते थे? कमेंट करो: 7/7?
+📤 Save करो + उस दोस्त को भेजो जो exam की तैयारी कर रहा है।
+इतिहास GK Questions | RRB NTPC, Group D, SSC GD, State Exam PYQ
+⏱ MinuteMe_GS - एक मिनट, एक PYQ - पक्का!
+📲 Free test / notes: WhatsApp 8989971379
+
+#gkquiz #rrbntpc #sscgd #gkpyq #history
+SCHEDULE: video ready; target 2026-11-16T01:30:00Z
 Collab invitation requested: @ar_publication
-  IG container: 17914171251568651
+  IG container: 17914226985568651
   upload try 1.1: HTTP 200 {"success":true,"message":"Upload Successful."}
   IG processing: FINISHED
-  LIVE: https://www.instagram.com/reel/DfxNrcqCPJj/
-[main fca020f] Save 3D reel Instagram receipt [skip ci]
- 2 files changed, 7 insertions(+)
- create mode 100644 downloads/map3d/2026-11-15_timeline_run43694857852/published.json
- create mode 100644 downloads/map3d/2026-11-15_timeline_run43694857852/reel.upload.json
-error: cannot pull with rebase: You have unstaged changes.
-error: Please commit or stash them.
-error: cannot pull with rebase: You have unstaged changes.
-error: Please commit or stash them.
-error: cannot pull with rebase: You have unstaged changes.
-error: Please commit or stash them.
-PUBLISHED {"media_id": "18115817924136307", "published_utc": "2026-11-15T16:30:59.726832+00:00", "title": "एयर इंडिया की यात्रा, प्रतिष्ठित उद्यमी जे. आऱ डी. टाटा द्वारा कंपनी की स्थापना किए जाने के साथ वर्ष ___में शुरू हुई।", "permalink": "https://www.instagram.com/reel/DfxNrcqCPJj/"}
+REMINDER: reel ready, publication due within 10 minutes: 2026-11-16T01:30:00Z
+  LIVE: https://www.instagram.com/reel/DfyFL_bE6pj/
+INSTAGRAM PE POST HO GAYA: 17937203616147555
