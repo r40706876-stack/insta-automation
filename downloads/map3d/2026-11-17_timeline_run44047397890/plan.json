@@ -1,0 +1,318 @@
+{
+ "template": "timeline",
+ "badge": "MinuteMe 3D टाइमलाइन",
+ "fps": 24,
+ "id": "6fb3cb0170",
+ "question": "वाटरलू का युद्ध किस वर्ष लड़ा गया था?",
+ "exam_short": "RRB Group-D 2018",
+ "options": [
+  "1815",
+  "1835",
+  "1850",
+  "1840"
+ ],
+ "answer": 0,
+ "option_colors": [
+  "#ff7a45",
+  "#4ade80",
+  "#c084fc",
+  "#38bdf8"
+ ],
+ "years": [
+  1815,
+  1835,
+  1850,
+  1840
+ ],
+ "answer_year": 1815,
+ "anchors": [
+  {
+   "year": 1793,
+   "label": "स्थायी बंदोबस्त"
+  },
+  {
+   "year": 1829,
+   "label": "सती प्रथा पर रोक"
+  }
+ ],
+ "chain": [
+  1793,
+  1815,
+  1829
+ ],
+ "slots_opt": {
+  "0": 0,
+  "1": 1,
+  "3": 2,
+  "2": 3
+ },
+ "credit": "MinuteMe GS · PYQ RRB Group-D 2018",
+ "scenes": [
+  {
+   "id": "hook",
+   "seconds": 3.6,
+   "title": "वाटरलू का युद्ध किस वर्ष लड़ा गया था?",
+   "speak": "वाटरलू का युद्ध किस वर्ष लड़ा गया था?",
+   "cam": {
+    "z": 2.5,
+    "span": 8.0,
+    "elev": 4,
+    "yaw": -28,
+    "from_yaw": -70,
+    "from_span": 13
+   },
+   "actions": [
+    {
+     "type": "pole",
+     "t": 0,
+     "dur": 0.9
+    },
+    {
+     "type": "plate_in",
+     "i": 0,
+     "t": 0.5
+    },
+    {
+     "type": "plate_in",
+     "i": 1,
+     "t": 0.6799999999999999
+    },
+    {
+     "type": "plate_in",
+     "i": 3,
+     "t": 0.86
+    },
+    {
+     "type": "plate_in",
+     "i": 2,
+     "t": 1.04
+    }
+   ],
+   "labels": []
+  },
+  {
+   "id": "options",
+   "seconds": 6.44,
+   "title": "सही वर्ष कौन-सा?",
+   "speak": "1815, 1835, 1850 या 1840? कमेंट में जवाब लिखिए!",
+   "cam": {
+    "z": 2.5,
+    "span": 7.4,
+    "elev": 6,
+    "yaw": 18
+   },
+   "actions": [],
+   "labels": [
+    {
+     "text": "A",
+     "plate": 0,
+     "color": "#ff7a45",
+     "t": 0.2,
+     "kind": "letter"
+    },
+    {
+     "text": "B",
+     "plate": 1,
+     "color": "#4ade80",
+     "t": 0.5,
+     "kind": "letter"
+    },
+    {
+     "text": "D",
+     "plate": 3,
+     "color": "#38bdf8",
+     "t": 0.8,
+     "kind": "letter"
+    },
+    {
+     "text": "C",
+     "plate": 2,
+     "color": "#c084fc",
+     "t": 1.0999999999999999,
+     "kind": "letter"
+    }
+   ]
+  },
+  {
+   "id": "reveal",
+   "seconds": 4.2,
+   "title": "सही उत्तर: A  1815",
+   "sub": "",
+   "speak": "सही उत्तर है — 1815।",
+   "cam": {
+    "z": 2.5,
+    "span": 6.4,
+    "elev": 2,
+    "yaw": -10
+   },
+   "actions": [
+    {
+     "type": "focus",
+     "i": 0,
+     "t": 0.15
+    }
+   ],
+   "labels": []
+  },
+  {
+   "id": "trick",
+   "seconds": 4.09,
+   "title": "याद रखने की ट्रिक",
+   "sub": "1793 में स्थायी बंदोबस्त",
+   "speak": "याद रखने की ट्रिक — 1793 में स्थायी बंदोबस्त।",
+   "cam": {
+    "z": 0,
+    "focus_year": 1793,
+    "span": 6.2,
+    "elev": 8,
+    "yaw": 16
+   },
+   "actions": [
+    {
+     "type": "chain",
+     "t": 0.1
+    },
+    {
+     "type": "anchor_in",
+     "year": 1793,
+     "t": 0.4
+    },
+    {
+     "type": "dot_at",
+     "year": 1793,
+     "t": 1.0
+    }
+   ],
+   "labels": [
+    {
+     "text": "स्थायी बंदोबस्त",
+     "year": 1793,
+     "color": "#d9e6f2",
+     "t": 0.8,
+     "kind": "anchor"
+    }
+   ]
+  },
+  {
+   "id": "trick",
+   "seconds": 3.0,
+   "title": "+22 साल",
+   "sub": "1793 में स्थायी बंदोबस्त, 22 साल बाद 1815",
+   "speak": "22 साल बाद, 1815।",
+   "counter": [
+    1793,
+    1815
+   ],
+   "cam": {
+    "z": 0,
+    "focus_year": 1815,
+    "span": 6.2,
+    "elev": 8,
+    "yaw": 8
+   },
+   "actions": [
+    {
+     "type": "travel",
+     "from": 1793,
+     "to": 1815,
+     "t": 0.1,
+     "dur": 1.1,
+     "keep": true
+    },
+    {
+     "type": "pulse",
+     "year": 1815,
+     "t": 1.2
+    }
+   ],
+   "labels": [
+    {
+     "text": "स्थायी बंदोबस्त",
+     "year": 1793,
+     "color": "#d9e6f2",
+     "t": 0,
+     "kind": "anchor"
+    },
+    {
+     "text": "यह सवाल  +22",
+     "year": 1815,
+     "color": "#ffd25c",
+     "t": 1.2,
+     "kind": "anchor"
+    }
+   ]
+  },
+  {
+   "id": "trick",
+   "seconds": 3.71,
+   "title": "+14 साल",
+   "sub": "1793 में स्थायी बंदोबस्त, उसके 22 साल बाद 1815, फिर 1829 में सती प्रथा पर रोक।",
+   "speak": "फिर 1829 में सती प्रथा पर रोक।",
+   "counter": [
+    1815,
+    1829
+   ],
+   "cam": {
+    "z": 0,
+    "focus_year": 1829,
+    "span": 6.8,
+    "elev": 9,
+    "yaw": 0
+   },
+   "actions": [
+    {
+     "type": "anchor_in",
+     "year": 1829,
+     "t": 0.1
+    },
+    {
+     "type": "travel",
+     "from": 1815,
+     "to": 1829,
+     "t": 0.5,
+     "dur": 1.1
+    }
+   ],
+   "labels": [
+    {
+     "text": "स्थायी बंदोबस्त",
+     "year": 1793,
+     "color": "#d9e6f2",
+     "t": 0,
+     "kind": "anchor"
+    },
+    {
+     "text": "यह सवाल  +22",
+     "year": 1815,
+     "color": "#ffd25c",
+     "t": 0,
+     "kind": "anchor"
+    },
+    {
+     "text": "सती प्रथा पर रोक  +14",
+     "year": 1829,
+     "color": "#d9e6f2",
+     "t": 1.4,
+     "kind": "anchor"
+    }
+   ]
+  },
+  {
+   "id": "end",
+   "seconds": 7.28,
+   "title": "याद रखो",
+   "sub": "1815",
+   "speak": "याद रखिए — 1815। सही था तो कमेंट में लिखिए, और रोज़ ऐसे PYQ के लिए फ़ॉलो कीजिए।",
+   "cam": {
+    "z": 2.5,
+    "span": 8.4,
+    "elev": 10,
+    "yaw": -20
+   },
+   "actions": [],
+   "labels": [],
+   "end": true
+  }
+ ],
+ "subject": "History"
+}
