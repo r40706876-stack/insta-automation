@@ -1,0 +1,132 @@
+{
+  "ok": true,
+  "title": "कम्युनिस्ट पार्टी का प्रतीक चिह्न",
+  "subject": "Polity",
+  "renderer_version": "rich_3d_v1",
+  "question_hash": "f606c09b548fa9ce8659b456f68da5ed98a32a60bacb4109f14a9ba093dbffef",
+  "reference": {
+    "subject": "Polity",
+    "subject_hi": "राजव्यवस्था",
+    "chapter": "राज भाषा (Official Language)",
+    "sub": "",
+    "question": "भारत की कम्युनिस्ट पार्टी का प्रतीक चिह्न निम्न में से क्या है?",
+    "options": {
+      "a": "हथौड़ा, हंसिया और तारा",
+      "b": "हाथ",
+      "c": "मक्के और हंसिया",
+      "d": "हाथी"
+    },
+    "answer": "c",
+    "exams": [
+      "RRB Group-D 28-09-2018 (Shift-I)",
+      "RRB Group-D 28-09-2018 (Shift-III)"
+    ],
+    "explanation": "भारतीय कम्युनिस्ट पार्टी एक साम्यवादी दल है। जिसकी स्थापना एम. एन. राय ने 26 दिसम्बर 1925 को कानपुर में किया था। भारतीय कम्युनिस्ट पार्टी का प्रतीक चिन्ह मक्के (बाली) तथा हंसिया है।",
+    "times_asked": 2,
+    "years": [
+      "2018"
+    ],
+    "id": "4836fca059",
+    "seq": 152
+  },
+  "experiment_format": "visual_mystery",
+  "primary_objective": "save",
+  "series_next_topic": "आंध्र प्रदेश का राज्य पशु कौन सा है?",
+  "series_next_hash": "d66214bf1f5b2590b8c6a76db2c93dbb4acbaa2347242eeee3987f803c09018d",
+  "topic_policy": "evidence_cohort_v2",
+  "topic_priority": 1.0,
+  "recall": "याद रखने की ट्रिक: मक्के और हंसिया।",
+  "share_card": {
+    "kind": "exam_confusion",
+    "recipient": "परीक्षा की तैयारी करने वाले मित्र",
+    "benefit": "सही प्रतीक याद रखकर अंक बढ़ाएँ",
+    "cta": "इसे अपने दोस्त को भेजें"
+  },
+  "share_reason": "परीक्षा में अक्सर विकल्प भ्रमित करते हैं",
+  "scenes": [
+    {
+      "label": "पहले अपना जवाब चुनिए",
+      "quiz_options": [
+        "A: मक्के और हंसिया",
+        "B: हथौड़ा, हंसिया और तारा"
+      ],
+      "speech": "भारत की कम्युनिस्ट पार्टी का प्रतीक चिह्न निम्न में से क्या है? दृश्य देखिए।",
+      "role": "hook",
+      "revision_card": false,
+      "teaches": "प्रश्न को पहचानना",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "एक व्यक्ति बोर्ड के सामने चलता है और प्रश्न दिखाता है"
+      }
+    },
+    {
+      "label": "कमेंट में लिखिए: A या B?",
+      "quiz_options": [
+        "A: मक्के और हंसिया",
+        "B: हथौड़ा, हंसिया और तारा"
+      ],
+      "speech": "दो सेकंड सोचिए: A या B?",
+      "role": "challenge",
+      "revision_card": false,
+      "teaches": "विकल्पों को तुलना करना",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "दो किताबें क्रमशः उठती हैं, एक में A, दूसरी में B दिखती हैं"
+      }
+    },
+    {
+      "label": "सही उत्तर",
+      "quiz_options": null,
+      "speech": "सही उत्तर है: मक्के और हंसिया।",
+      "role": "reveal",
+      "revision_card": false,
+      "teaches": "सही प्रतीक पहचानना",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "सही किताब घूमती है, गलत किताब धुंधली हो जाती है"
+      }
+    },
+    {
+      "label": "तथ्य समझिए",
+      "quiz_options": null,
+      "speech": "भारतीय कम्युनिस्ट पार्टी एक साम्यवादी दल है।",
+      "role": "explain",
+      "revision_card": false,
+      "teaches": "प्रतीक के तत्वों का अर्थ समझना",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "institution",
+        "visible_action": "एक पुस्तक उठती है और अंदर मक्के व हंसिया की चित्र दिखती है"
+      }
+    },
+    {
+      "label": "खुद को जाँचिए",
+      "quiz_options": null,
+      "speech": "जिसकी स्थापना एम।",
+      "role": "transfer",
+      "revision_card": false,
+      "teaches": "प्रतीक से विचार जुड़ना",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "institution",
+        "visible_action": "एक व्यक्ति दूसरे पुस्तक की ओर चलता है, जिसमें विभिन्न प्रतीक दिखते हैं"
+      }
+    },
+    {
+      "label": "रिवीजन कार्ड",
+      "quiz_options": null,
+      "speech": "याद रखने की ट्रिक: मक्के और हंसिया।",
+      "role": "revision",
+      "revision_card": true,
+      "teaches": "स्मरण शक्ति बढ़ाना",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "पाठ स्थिर रूप से स्क्रीन पर दिखता है"
+      }
+    }
+  ]
+}

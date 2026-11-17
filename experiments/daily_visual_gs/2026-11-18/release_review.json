@@ -1,0 +1,44 @@
+{
+  "answer_correct": true,
+  "visual_relevance": false,
+  "hindi_readable": true,
+  "pronunciation_correct": true,
+  "audio_visual_match": false,
+  "answer_reveal_timing": true,
+  "revision_card_readable": true,
+  "reasons": [
+    "In scene 5, the visual shows a hammer, sickle, and star as 'अन्य प्रतीक' (other symbol), which is not the symbol of the Communist Party of India (CPI) that the question is about. This visual is not relevant to the specific party's symbol and can be confusing.",
+    "In scene 5, the audio states 'जिसकी स्थापना एम।' which is an incomplete sentence and refers to the founding of the party. This audio does not match the visual of 'अन्य प्रतीक' showing a different symbol (hammer, sickle, and star)."
+  ],
+  "observed_answer": "मक्के और हंसिया",
+  "scene_evidence": [
+    {
+      "scene": 1,
+      "observation": "The question 'भारत की कम्युनिस्ट पार्टी का प्रतीक चिह्न निम्न में से क्या है?' is displayed with options A: 'मक्के और हंसिया' and B: 'हथौड़ा, हंसिया और तारा'. A 3D animated character walks in the background."
+    },
+    {
+      "scene": 2,
+      "observation": "A 2-second countdown timer is shown. Options A and B are represented by two books on a table, with the text 'कमेंट करो: A या B?' displayed."
+    },
+    {
+      "scene": 3,
+      "observation": "The correct answer 'मक्के और हंसिया' is revealed. Book A is highlighted and moves slightly, confirming it as the correct choice."
+    },
+    {
+      "scene": 4,
+      "observation": "The text 'तथ्य समझिए' is displayed. A book with a 'प्रतीक' (symbol) label opens to reveal a 3D animation of a corn cob and a sickle. The audio states: 'भारतीय कम्युनिस्ट पार्टी एक साम्यवादी दल है।'"
+    },
+    {
+      "scene": 5,
+      "observation": "The text 'खुद को जाँचिए' is displayed. A book with an 'अन्य प्रतीक' (other symbol) label opens to reveal a 3D animation of a hammer, a sickle, and a star. The audio states: 'जिसकी स्थापना एम।'"
+    },
+    {
+      "scene": 6,
+      "observation": "The 'रिवीजन कार्ड' is displayed with the text 'याद रखने की ट्रिक: मक्के और हंसिया।' A book with a 'स्मरण' (recall) label is on the table. Contact information and a 'रिवीजन के लिए सेव करें' button are also visible."
+    }
+  ],
+  "sha256": "c19784cc4a8ef328c820a9133a01014a066c9ce25d23b213a14940097e055fdd",
+  "reviewer": "gemini-2.5-flash / actual rendered video and audio",
+  "reviewed_at": "2026-11-17T20:04:00.876229+00:00",
+  "review_type": "automated_multimodal"
+}
