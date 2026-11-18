@@ -1,0 +1,396 @@
+{
+ "template": "state_place",
+ "fps": 24,
+ "id": "4ab9e82c18",
+ "question": "शुष्क पर्णपाती जंगल, गिर ____ में है।",
+ "exam_short": "RRB Group-D 2018",
+ "options": [
+  "गोवा",
+  "गुजरात",
+  "महाराष्ट्र",
+  "छत्तीसगढ़"
+ ],
+ "answer": 1,
+ "option_colors": [
+  "#ff7a45",
+  "#4ade80",
+  "#c084fc",
+  "#38bdf8"
+ ],
+ "place": {
+  "name": "गिर",
+  "at": [
+   70.8,
+   21.15
+  ],
+  "kind": "जंगल"
+ },
+ "credit": "नक्शा: datameet (MIT) · राज्य सीमाएँ सरलीकृत",
+ "scenes": [
+  {
+   "id": "teaser",
+   "seconds": 2.14,
+   "title": "3D नक्शे पर पूरा समझो",
+   "speak": "नक्शे पर देखिए, पूरा समझ आएगा —",
+   "cam": {
+    "center": [
+     82.4,
+     22.0
+    ],
+    "span": 27.6,
+    "tilt": 46,
+    "yaw": -22,
+    "from_tilt": 64,
+    "from_span": 40
+   },
+   "actions": [
+    {
+     "type": "build",
+     "t": 0,
+     "dur": 0.7
+    },
+    {
+     "type": "state_on",
+     "name": "Goa",
+     "color": "#ff7a45",
+     "t": 0.3,
+     "raise": 1.5,
+     "glow": 0.35
+    },
+    {
+     "type": "state_off",
+     "name": "Goa",
+     "t": 1.3
+    },
+    {
+     "type": "state_on",
+     "name": "Gujarat",
+     "color": "#4ade80",
+     "t": 0.44999999999999996,
+     "raise": 1.5,
+     "glow": 0.35
+    },
+    {
+     "type": "state_off",
+     "name": "Gujarat",
+     "t": 1.3
+    },
+    {
+     "type": "state_on",
+     "name": "Maharashtra",
+     "color": "#c084fc",
+     "t": 0.6,
+     "raise": 1.5,
+     "glow": 0.35
+    },
+    {
+     "type": "state_off",
+     "name": "Maharashtra",
+     "t": 1.3
+    },
+    {
+     "type": "state_on",
+     "name": "Chhattisgarh",
+     "color": "#38bdf8",
+     "t": 0.75,
+     "raise": 1.5,
+     "glow": 0.35
+    },
+    {
+     "type": "state_off",
+     "name": "Chhattisgarh",
+     "t": 1.3
+    }
+   ],
+   "labels": []
+  },
+  {
+   "id": "hook",
+   "seconds": 3.6,
+   "title": "शुष्क पर्णपाती जंगल, गिर ____ में है।",
+   "speak": "शुष्क पर्णपाती जंगल, गिर किस में है।",
+   "cam": {
+    "center": [
+     82.4,
+     22.0
+    ],
+    "span": 30.0,
+    "tilt": 34
+   },
+   "actions": [
+    {
+     "type": "pin",
+     "at": [
+      70.8,
+      21.15
+     ],
+     "t": 0.5
+    }
+   ],
+   "labels": [
+    {
+     "text": "गिर",
+     "at": [
+      70.8,
+      21.15
+     ],
+     "color": "#ff5a5a",
+     "t": 0.9,
+     "kind": "pin"
+    }
+   ]
+  },
+  {
+   "id": "options",
+   "seconds": 5.2,
+   "title": "गिर किस राज्य में है?",
+   "speak": "गोवा, गुजरात, महाराष्ट्र या छत्तीसगढ़? कमेंट में जवाब लिखिए!",
+   "cam": {
+    "center": [
+     82.4,
+     22.0
+    ],
+    "span": 30.0,
+    "tilt": 30
+   },
+   "actions": [
+    {
+     "type": "state_on",
+     "name": "Goa",
+     "color": "#ff7a45",
+     "t": 0.2,
+     "raise": 1.5,
+     "glow": 0.35
+    },
+    {
+     "type": "state_on",
+     "name": "Gujarat",
+     "color": "#4ade80",
+     "t": 0.75,
+     "raise": 1.5,
+     "glow": 0.35
+    },
+    {
+     "type": "state_on",
+     "name": "Maharashtra",
+     "color": "#c084fc",
+     "t": 1.3,
+     "raise": 1.5,
+     "glow": 0.35
+    },
+    {
+     "type": "state_on",
+     "name": "Chhattisgarh",
+     "color": "#38bdf8",
+     "t": 1.85,
+     "raise": 1.5,
+     "glow": 0.35
+    }
+   ],
+   "labels": [
+    {
+     "text": "A  गोवा",
+     "at": [
+      74.024,
+      15.388
+     ],
+     "color": "#ff7a45",
+     "t": 0.45,
+     "kind": "state"
+    },
+    {
+     "text": "B  गुजरात",
+     "at": [
+      71.781,
+      22.499
+     ],
+     "color": "#4ade80",
+     "t": 1.0,
+     "kind": "state"
+    },
+    {
+     "text": "C  महाराष्ट्र",
+     "at": [
+      76.189,
+      19.111
+     ],
+     "color": "#c084fc",
+     "t": 1.55,
+     "kind": "state"
+    },
+    {
+     "text": "D  छत्तीसगढ़",
+     "at": [
+      82.047,
+      21.291
+     ],
+     "color": "#38bdf8",
+     "t": 2.1,
+     "kind": "state"
+    },
+    {
+     "text": "गिर",
+     "at": [
+      70.8,
+      21.15
+     ],
+     "color": "#ff5a5a",
+     "t": 0,
+     "kind": "pin"
+    }
+   ]
+  },
+  {
+   "id": "reveal",
+   "seconds": 4.2,
+   "title": "सही उत्तर: B  गुजरात",
+   "sub": "गिर — गुजरात में",
+   "speak": "सही उत्तर है — गुजरात। गिर, गुजरात में है।",
+   "cam": {
+    "center": [
+     71.28,
+     22.020000000000003
+    ],
+    "span": 9.18,
+    "tilt": 38
+   },
+   "actions": [
+    {
+     "type": "state_off",
+     "name": "Goa",
+     "t": 0.1
+    },
+    {
+     "type": "state_off",
+     "name": "Maharashtra",
+     "t": 0.1
+    },
+    {
+     "type": "state_off",
+     "name": "Chhattisgarh",
+     "t": 0.1
+    },
+    {
+     "type": "state_on",
+     "name": "Gujarat",
+     "color": "#ffc93c",
+     "t": 0.3,
+     "raise": 1.65,
+     "glow": 0.5
+    },
+    {
+     "type": "ripple",
+     "at": [
+      70.8,
+      21.15
+     ],
+     "t": 0.5
+    }
+   ],
+   "labels": [
+    {
+     "text": "गिर",
+     "at": [
+      70.8,
+      21.15
+     ],
+     "color": "#ff5a5a",
+     "t": 0,
+     "kind": "pin"
+    },
+    {
+     "text": "गुजरात",
+     "at": [
+      71.781,
+      22.499
+     ],
+     "color": "#ffd25c",
+     "t": 0.5,
+     "kind": "state"
+    }
+   ]
+  },
+  {
+   "id": "fact",
+   "seconds": 5.6,
+   "title": "गुजरात — याद रखने का तरीका",
+   "sub": "वर्ष 1965 ई. में गिर राष्ट्रीय उद्यान की स्थापना हुई।",
+   "sub2": "राजधानी: गांधीनगर",
+   "sub3": "जंगल: गिर",
+   "speak": "वर्ष 1965 ई. में गिर राष्ट्रीय उद्यान की स्थापना हुई। गुजरात की राजधानी गांधीनगर है।",
+   "cam": {
+    "center": [
+     71.28,
+     22.020000000000003
+    ],
+    "span": 10.098,
+    "tilt": 44,
+    "yaw": -12
+   },
+   "actions": [
+    {
+     "type": "pin",
+     "at": [
+      72.636,
+      23.216
+     ],
+     "t": 0.9,
+     "color": "#3b82f6"
+    }
+   ],
+   "labels": [
+    {
+     "text": "गिर",
+     "at": [
+      70.8,
+      21.15
+     ],
+     "color": "#ff5a5a",
+     "t": 0,
+     "kind": "pin"
+    },
+    {
+     "text": "गांधीनगर (राजधानी)",
+     "at": [
+      72.636,
+      23.216
+     ],
+     "color": "#7eb6ff",
+     "t": 1.3,
+     "kind": "pin"
+    }
+   ]
+  },
+  {
+   "id": "end",
+   "seconds": 6.78,
+   "title": "याद रखो",
+   "sub": "गिर : गुजरात",
+   "speak": "याद रखिए — गिर, गुजरात। सही था तो कमेंट में लिखिए, और ऐसे ही नक्शे वाले सवालों के लिए फ़ॉलो कीजिए।",
+   "cam": {
+    "center": [
+     75.4,
+     20.15
+    ],
+    "span": 20,
+    "tilt": 40,
+    "yaw": 10
+   },
+   "actions": [],
+   "labels": [
+    {
+     "text": "गिर",
+     "at": [
+      70.8,
+      21.15
+     ],
+     "color": "#ff5a5a",
+     "t": 0,
+     "kind": "pin"
+    }
+   ],
+   "end": true
+  }
+ ],
+ "subject": "Geography"
+}
