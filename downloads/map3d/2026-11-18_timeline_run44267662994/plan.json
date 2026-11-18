@@ -1,0 +1,318 @@
+{
+ "template": "timeline",
+ "badge": "MinuteMe 3D टाइमलाइन",
+ "fps": 24,
+ "id": "1c9558d1fe",
+ "question": "बॉम्बे स्टॉक एक्सचेंज (BSE) किस वर्ष स्थापित किया गया था?",
+ "exam_short": "RRB Group-D 2018",
+ "options": [
+  "1947",
+  "1875",
+  "1920",
+  "1960"
+ ],
+ "answer": 1,
+ "option_colors": [
+  "#ff7a45",
+  "#4ade80",
+  "#c084fc",
+  "#38bdf8"
+ ],
+ "years": [
+  1947,
+  1875,
+  1920,
+  1960
+ ],
+ "answer_year": 1875,
+ "anchors": [
+  {
+   "year": 1857,
+   "label": "1857 का विद्रोह"
+  },
+  {
+   "year": 1885,
+   "label": "कांग्रेस की स्थापना"
+  }
+ ],
+ "chain": [
+  1857,
+  1875,
+  1885
+ ],
+ "slots_opt": {
+  "1": 0,
+  "2": 1,
+  "0": 2,
+  "3": 3
+ },
+ "credit": "MinuteMe GS · PYQ RRB Group-D 2018",
+ "scenes": [
+  {
+   "id": "hook",
+   "seconds": 4.44,
+   "title": "बॉम्बे स्टॉक एक्सचेंज (BSE) किस वर्ष स्थापित किया गया था?",
+   "speak": "बॉम्बे स्टॉक एक्सचेंज (BSE) किस वर्ष स्थापित किया गया था?",
+   "cam": {
+    "z": 2.5,
+    "span": 8.0,
+    "elev": 4,
+    "yaw": -28,
+    "from_yaw": -70,
+    "from_span": 13
+   },
+   "actions": [
+    {
+     "type": "pole",
+     "t": 0,
+     "dur": 0.9
+    },
+    {
+     "type": "plate_in",
+     "i": 1,
+     "t": 0.5
+    },
+    {
+     "type": "plate_in",
+     "i": 2,
+     "t": 0.6799999999999999
+    },
+    {
+     "type": "plate_in",
+     "i": 0,
+     "t": 0.86
+    },
+    {
+     "type": "plate_in",
+     "i": 3,
+     "t": 1.04
+    }
+   ],
+   "labels": []
+  },
+  {
+   "id": "options",
+   "seconds": 5.79,
+   "title": "सही वर्ष कौन-सा?",
+   "speak": "1947, 1875, 1920 या 1960? कमेंट में जवाब लिखिए!",
+   "cam": {
+    "z": 2.5,
+    "span": 7.4,
+    "elev": 6,
+    "yaw": 18
+   },
+   "actions": [],
+   "labels": [
+    {
+     "text": "B",
+     "plate": 1,
+     "color": "#4ade80",
+     "t": 0.2,
+     "kind": "letter"
+    },
+    {
+     "text": "C",
+     "plate": 2,
+     "color": "#c084fc",
+     "t": 0.5,
+     "kind": "letter"
+    },
+    {
+     "text": "A",
+     "plate": 0,
+     "color": "#ff7a45",
+     "t": 0.8,
+     "kind": "letter"
+    },
+    {
+     "text": "D",
+     "plate": 3,
+     "color": "#38bdf8",
+     "t": 1.0999999999999999,
+     "kind": "letter"
+    }
+   ]
+  },
+  {
+   "id": "reveal",
+   "seconds": 4.2,
+   "title": "सही उत्तर: B  1875",
+   "sub": "",
+   "speak": "सही उत्तर है — 1875।",
+   "cam": {
+    "z": 2.5,
+    "span": 6.4,
+    "elev": 2,
+    "yaw": -10
+   },
+   "actions": [
+    {
+     "type": "focus",
+     "i": 1,
+     "t": 0.15
+    }
+   ],
+   "labels": []
+  },
+  {
+   "id": "trick",
+   "seconds": 4.8,
+   "title": "याद रखने की ट्रिक",
+   "sub": "1857 में 1857 का विद्रोह",
+   "speak": "याद रखने की ट्रिक — 1857 में 1857 का विद्रोह।",
+   "cam": {
+    "z": 0,
+    "focus_year": 1857,
+    "span": 6.2,
+    "elev": 8,
+    "yaw": 16
+   },
+   "actions": [
+    {
+     "type": "chain",
+     "t": 0.1
+    },
+    {
+     "type": "anchor_in",
+     "year": 1857,
+     "t": 0.4
+    },
+    {
+     "type": "dot_at",
+     "year": 1857,
+     "t": 1.0
+    }
+   ],
+   "labels": [
+    {
+     "text": "1857 का विद्रोह",
+     "year": 1857,
+     "color": "#d9e6f2",
+     "t": 0.8,
+     "kind": "anchor"
+    }
+   ]
+  },
+  {
+   "id": "trick",
+   "seconds": 3.11,
+   "title": "+18 साल",
+   "sub": "1857 में 1857 का विद्रोह, 18 साल बाद 1875",
+   "speak": "18 साल बाद, 1875।",
+   "counter": [
+    1857,
+    1875
+   ],
+   "cam": {
+    "z": 0,
+    "focus_year": 1875,
+    "span": 6.2,
+    "elev": 8,
+    "yaw": 8
+   },
+   "actions": [
+    {
+     "type": "travel",
+     "from": 1857,
+     "to": 1875,
+     "t": 0.1,
+     "dur": 1.1,
+     "keep": true
+    },
+    {
+     "type": "pulse",
+     "year": 1875,
+     "t": 1.2
+    }
+   ],
+   "labels": [
+    {
+     "text": "1857 का विद्रोह",
+     "year": 1857,
+     "color": "#d9e6f2",
+     "t": 0,
+     "kind": "anchor"
+    },
+    {
+     "text": "यह सवाल  +18",
+     "year": 1875,
+     "color": "#ffd25c",
+     "t": 1.2,
+     "kind": "anchor"
+    }
+   ]
+  },
+  {
+   "id": "trick",
+   "seconds": 3.29,
+   "title": "+10 साल",
+   "sub": "1857 में 1857 का विद्रोह, उसके 18 साल बाद 1875, फिर 1885 में कांग्रेस की स्थापना।",
+   "speak": "फिर 1885 में कांग्रेस की स्थापना।",
+   "counter": [
+    1875,
+    1885
+   ],
+   "cam": {
+    "z": 0,
+    "focus_year": 1885,
+    "span": 6.8,
+    "elev": 9,
+    "yaw": 0
+   },
+   "actions": [
+    {
+     "type": "anchor_in",
+     "year": 1885,
+     "t": 0.1
+    },
+    {
+     "type": "travel",
+     "from": 1875,
+     "to": 1885,
+     "t": 0.5,
+     "dur": 1.1
+    }
+   ],
+   "labels": [
+    {
+     "text": "1857 का विद्रोह",
+     "year": 1857,
+     "color": "#d9e6f2",
+     "t": 0,
+     "kind": "anchor"
+    },
+    {
+     "text": "यह सवाल  +18",
+     "year": 1875,
+     "color": "#ffd25c",
+     "t": 0,
+     "kind": "anchor"
+    },
+    {
+     "text": "कांग्रेस की स्थापना  +10",
+     "year": 1885,
+     "color": "#d9e6f2",
+     "t": 1.4,
+     "kind": "anchor"
+    }
+   ]
+  },
+  {
+   "id": "end",
+   "seconds": 7.41,
+   "title": "याद रखो",
+   "sub": "1875",
+   "speak": "याद रखिए — 1875। सही था तो कमेंट में लिखिए, और रोज़ ऐसे PYQ के लिए फ़ॉलो कीजिए।",
+   "cam": {
+    "z": 2.5,
+    "span": 8.4,
+    "elev": 10,
+    "yaw": -20
+   },
+   "actions": [],
+   "labels": [],
+   "end": true
+  }
+ ],
+ "subject": "Economics"
+}
