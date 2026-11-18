@@ -1,0 +1,128 @@
+{
+  "type": "object",
+  "value": {
+    "title": "CISF की स्थापना वर्ष",
+    "subject": "स्टैटिक जीके",
+    "topic_key": "cisf_establishment_year",
+    "share_reason": "दोस्त को परीक्षा में अक्सर पूछे जाने वाले इस तिथि को याद रखने में मदद",
+    "recall": "याद रखने की ट्रिक: 1969।",
+    "pyq_challenge": true,
+    "share_card": {
+      "kind": "exam_confusion",
+      "recipient": "परीक्षा की तैयारी करने वाले मित्र",
+      "benefit": "CISF की स्थापना वर्ष 1969 को याद रहेगा",
+      "cta": "चलो साथ में याद करें 1969"
+    },
+    "scenes": [
+      {
+        "role": "hook",
+        "heading": "पहले अपना जवाब चुनिए",
+        "explanation": "A या B — सोचिए",
+        "speech": "भारत में केंद्रीय औद्योगिक सुरक्षा बल की स्थापना किस वर्ष में हुई थी? जाल पहचानिए।",
+        "teaches": "प्रश्न पहचान और सोच प्रेरित करना",
+        "visual_action": "एक व्यक्ति स्क्रीन पर चलता है",
+        "setting": "neutral",
+        "objects": [
+          {
+            "kind": "person",
+            "action": "walk",
+            "label": "विद्यार्थी",
+            "id": "obj0"
+          }
+        ]
+      },
+      {
+        "role": "challenge",
+        "heading": "कमेंट में लिखिए: A या B?",
+        "explanation": "दो सेकंड सोचिए: A या B?",
+        "speech": "दो सेकंड सोचिए: A या B?",
+        "teaches": "विकल्पों की तुलना और अनुमान",
+        "visual_action": "दो बॉक्स धीरे‑धीरे ऊपर उठते हैं",
+        "setting": "neutral",
+        "objects": [
+          {
+            "kind": "box",
+            "action": "rise",
+            "label": "1970",
+            "id": "obj0"
+          },
+          {
+            "kind": "box",
+            "action": "rise",
+            "label": "1969",
+            "id": "obj1"
+          }
+        ]
+      },
+      {
+        "role": "reveal",
+        "heading": "सही उत्तर",
+        "explanation": "सही उत्तर है: 1969।",
+        "speech": "सही उत्तर है: 1969।",
+        "teaches": "सही वर्ष बताना",
+        "visual_action": "एक किताब ऊपर उठकर दिखती है",
+        "setting": "neutral",
+        "objects": [
+          {
+            "kind": "book",
+            "action": "rise",
+            "label": "1969",
+            "id": "obj0"
+          }
+        ]
+      },
+      {
+        "role": "explain",
+        "heading": "तथ्य समझिए",
+        "explanation": "इसका मुख्यालय दिल्ली में है।",
+        "speech": "इसका मुख्यालय दिल्ली में है।",
+        "teaches": "स्थापना का कानूनी आधार और मुख्यालय स्थान",
+        "visual_action": "एक भवन ऊपर उठता है",
+        "setting": "institution",
+        "objects": [
+          {
+            "kind": "building",
+            "action": "rise",
+            "label": "CISF HQ",
+            "id": "obj0"
+          }
+        ]
+      },
+      {
+        "role": "transfer",
+        "heading": "खुद को जाँचिए",
+        "explanation": "यही परीक्षा की आम गलती है।",
+        "speech": "यही परीक्षा की आम गलती है।",
+        "teaches": "स्मरण तकनीक लागू करना",
+        "visual_action": "एक तीर 1969 पर घूमता है",
+        "setting": "neutral",
+        "objects": [
+          {
+            "kind": "arrow",
+            "action": "spin",
+            "label": "1969",
+            "id": "obj0"
+          }
+        ]
+      },
+      {
+        "role": "revision",
+        "heading": "रिवीजन कार्ड",
+        "explanation": "याद रखने की ट्रिक: 1969।",
+        "speech": "याद रखने की ट्रिक: 1969।",
+        "teaches": "त्वरित स्मरण",
+        "visual_action": "टेक्स्ट स्थिर रूप से दिखता है",
+        "setting": "neutral",
+        "revision_card": true,
+        "objects": [
+          {
+            "kind": "book",
+            "action": "none",
+            "label": "1969",
+            "id": "obj0"
+          }
+        ]
+      }
+    ]
+  }
+}
