@@ -1,26 +1,26 @@
-[main 378be34] Record 3D reel publish attempt [skip ci]
+[main 9b84b65] Record 3D reel publish attempt [skip ci]
  1 file changed, 4 insertions(+)
- create mode 100644 downloads/map3d/2026-11-18_state_place_run44267659125/publish_started.json
+ create mode 100644 downloads/map3d/2026-11-18_timeline_run44267662994/publish_started.json
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
-waiting 3501 s for slot 2026-11-18T14:30:00Z
+waiting 3468 s for slot 2026-11-18T16:30:00Z
 Collab invitation requested: @ar_publication
-  IG container: 17914673814568651
+  IG container: 17914687878568651
   upload try 1.1: HTTP 200 {"success":true,"message":"Upload Successful."}
   IG processing: FINISHED
-  LIVE: https://www.instagram.com/reel/Df4uU_fDVGR/
-[main bff4306] Save 3D reel Instagram receipt [skip ci]
+  LIVE: https://www.instagram.com/reel/Df48D7JjNOq/
+[main be4a7fe] Save 3D reel Instagram receipt [skip ci]
  2 files changed, 7 insertions(+)
- create mode 100644 downloads/map3d/2026-11-18_state_place_run44267659125/published.json
- create mode 100644 downloads/map3d/2026-11-18_state_place_run44267659125/reel.upload.json
+ create mode 100644 downloads/map3d/2026-11-18_timeline_run44267662994/published.json
+ create mode 100644 downloads/map3d/2026-11-18_timeline_run44267662994/reel.upload.json
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
-PUBLISHED {"media_id": "18019024376968167", "published_utc": "2026-11-18T14:30:56.718685+00:00", "title": "शुष्क पर्णपाती जंगल, गिर ___ में है।", "permalink": "https://www.instagram.com/reel/Df4uU_fDVGR/"}
+PUBLISHED {"media_id": "18121868371778124", "published_utc": "2026-11-18T16:30:57.838899+00:00", "title": "बॉम्बे स्टॉक एक्सचेंज (BSE) किस वर्ष स्थापित किया गया था?", "permalink": "https://www.instagram.com/reel/Df48D7JjNOq/"}
