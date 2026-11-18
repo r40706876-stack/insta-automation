@@ -1,6 +1,6 @@
 {
  "next_seq": 139,
- "episode": 221,
+ "episode": 222,
  "posted": [
   "684d76bcbc",
   "6bb20b4a07",
@@ -743,7 +743,14 @@
   "33bb2bb70a",
   "2f0e4ae0de",
   "bef981d9d3",
-  "5f96144f28"
+  "5f96144f28",
+  "b920e86ac8",
+  "ed979c1006",
+  "96dc014f84",
+  "8892766e29",
+  "b74499ab20",
+  "72a123c585",
+  "d52a05989e"
  ],
  "skipped": {
   "bdd1ce5a8b": "उत्तर कुंजी वर्तमान स्थिति के अनुसार गलत है।",
@@ -774,9 +781,9 @@
   "b509dcc6d1": "Answer key incorrect; work dates to 2nd century CE, not 8th."
  },
  "last": {
-  "seq": 5014,
-  "id": "5f96144f28",
-  "time": "2026-11-18 01:30",
+  "seq": 5112,
+  "id": "d52a05989e",
+  "time": "2026-11-18 07:30",
   "format": "list"
  },
  "carousel_queue": [
