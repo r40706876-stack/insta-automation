@@ -1,26 +1,101 @@
-[main 7074de0] Record 3D reel publish attempt [skip ci]
- 1 file changed, 4 insertions(+)
- create mode 100644 downloads/map3d/2026-11-17_timeline_run44047397890/publish_started.json
-error: cannot pull with rebase: You have unstaged changes.
-error: Please commit or stash them.
-error: cannot pull with rebase: You have unstaged changes.
-error: Please commit or stash them.
-error: cannot pull with rebase: You have unstaged changes.
-error: Please commit or stash them.
-waiting 3478 s for slot 2026-11-17T16:30:00Z
+FORMAT: list
+  Gemini text models: gemini-flash-latest, gemini-3.8-flash, gemini-3.7-flash, gemini-3.6-flash
+  Gemini gemini-flash-latest fail (koshish 1): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
+  Gemini gemini-flash-latest: HTTP 503 (koshish 2) 
+  Gemini gemini-3.8-flash fail (koshish 1): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
+  Gemini gemini-3.8-flash fail (koshish 2): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
+  Gemini gemini-3.7-flash fail (koshish 1): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
+  Gemini gemini-3.7-flash: HTTP 429 (koshish 2) 
+  Gemini gemini-3.6-flash: HTTP 503 (koshish 1) {   "error": {     "code": 503,     "message": "This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later
+  Gemini gemini-3.6-flash: HTTP 503 (koshish 2) 
+  Groq llama-3.3-70b-versatile: HTTP 404
+  7 PYQ topic: प्राचीन इतिहास (Ancient History) / प्राचीन इतिहास (Ancient History)
+  Gemini gemini-flash-latest: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-flash-latest: HTTP 429 (koshish 2) 
+  Gemini gemini-flash-latest: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-flash-latest: HTTP 429 (koshish 2) 
+  Gemini gemini-flash-latest: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-flash-latest: HTTP 429 (koshish 2) 
+  Gemini gemini-3.8-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-3.8-flash: HTTP 429 (koshish 2) 
+  Gemini gemini-3.7-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-3.7-flash: HTTP 429 (koshish 2) 
+  Gemini gemini-3.6-flash: HTTP 503 (koshish 1) {   "error": {     "code": 503,     "message": "This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later
+  Gemini gemini-3.6-flash: HTTP 503 (koshish 2) 
+  Groq llama-3.3-70b-versatile: HTTP 404
+  Gemini gemini-flash-latest: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-flash-latest: HTTP 429 (koshish 2) 
+  Gemini gemini-3.8-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-3.8-flash: HTTP 429 (koshish 2) 
+  Gemini gemini-3.7-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-3.7-flash: HTTP 429 (koshish 2) 
+  Gemini gemini-3.6-flash: HTTP 503 (koshish 1) {   "error": {     "code": 503,     "message": "This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later
+  Gemini gemini-3.6-flash: HTTP 503 (koshish 2) 
+  Groq llama-3.3-70b-versatile: HTTP 404
+  Gemini gemini-flash-latest: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-flash-latest: HTTP 429 (koshish 2) 
+  Gemini gemini-3.8-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-3.8-flash: HTTP 429 (koshish 2) 
+  Gemini gemini-3.7-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-3.7-flash: HTTP 429 (koshish 2) 
+  Gemini gemini-3.6-flash fail (koshish 1): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
+  Gemini gemini-3.6-flash: HTTP 503 (koshish 2) 
+  Groq llama-3.3-70b-versatile: HTTP 404
+  Gemini gemini-flash-latest: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-flash-latest: HTTP 429 (koshish 2) 
+  Gemini gemini-3.8-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-3.8-flash: HTTP 429 (koshish 2) 
+  Gemini gemini-3.7-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-3.7-flash: HTTP 429 (koshish 2) 
+  Gemini gemini-3.6-flash: HTTP 503 (koshish 1) {   "error": {     "code": 503,     "message": "This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later
+  Gemini gemini-3.6-flash: HTTP 503 (koshish 2) 
+  Groq llama-3.3-70b-versatile: HTTP 404
+  Gemini gemini-flash-latest: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-flash-latest: HTTP 429 (koshish 2) 
+  Gemini gemini-3.8-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-3.8-flash: HTTP 429 (koshish 2) 
+  Gemini gemini-3.7-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-3.7-flash: HTTP 429 (koshish 2) 
+  Gemini gemini-3.6-flash: HTTP 503 (koshish 1) {   "error": {     "code": 503,     "message": "This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later
+  Gemini gemini-3.6-flash: HTTP 503 (koshish 2) 
+  Groq llama-3.3-70b-versatile: HTTP 404
+  Gemini gemini-flash-latest: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-flash-latest: HTTP 429 (koshish 2) 
+  Gemini gemini-3.8-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-3.8-flash: HTTP 429 (koshish 2) 
+  Gemini gemini-3.7-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-3.7-flash: HTTP 429 (koshish 2) 
+  Gemini gemini-3.6-flash: HTTP 503 (koshish 1) {   "error": {     "code": 503,     "message": "This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later
+  Gemini gemini-3.6-flash: HTTP 503 (koshish 2) 
+  Groq llama-3.3-70b-versatile: HTTP 404
+LIST REEL TAIYAR: generated_reels/science_pyq_reel.mp4 (10s)
+
+CAPTION:
+📅 Day 28/100 • 100 दिन में पूरा GS | कल Day 29/100 - Follow करो ताकि छूटे नहीं
+📤 ये reel उस दोस्त को भेजो जो Group D / NTPC / SSC / Police की तैयारी कर रहा है!
+
+📚 इतिहास के 7 PYQ - RRB, SSC, Police, Patwari, Army, State Exams के लिए (Save करो)
+
+1. अखज मध्यपाषाणी स्थल (Akhaj Mesolithic site) भारत के किस राज्य में स्थित है? → गुजरात
+2. भीमबेटका पुरापाषाणकालीन स्थल भारत की किस नदी घाटी के निकट स्थित है? → नर्मदा
+3. गुप्तोत्तर काल के बाद के भारत में श्रेणियों (संघों) की क्या भूमिका थी? → विनिमयित व्यापार और शिल्प
+4. अपने पिता बिंदुसर के शासन काल में अशोक किस क्षेत्र के राज्यपाल (वायसराय) थे? → उज्जैन
+5. हड़प्पा सभ्यता मुख्य रूप से किस क्षेत्र से अपना तांबा प्राप्त करती थी? → राजस्थान
+6. भारत में पत्थर के औजारों का सबसे पहला प्रमाण कहाँ पाया गया था? → अत्तिरम्पक्कम
+7. कोणार्क सूर्य मंदिर का निर्माण किसने करवाया था? → नरसिंहदेव प्रथम
+
+💬 कितने पहले से आते थे? कमेंट करो: 7/7?
+📤 Save करो + उस दोस्त को भेजो जो exam की तैयारी कर रहा है।
+इतिहास GK Questions | RRB NTPC, Group D, SSC GD, State Exam PYQ
+⏱ MinuteMe_GS - एक मिनट, एक PYQ - पक्का!
+📲 Free test / notes: WhatsApp 8989971379
+
+#gkquiz #rrbntpc #sscgd #gkpyq #history
+SCHEDULE: video ready; target 2026-11-18T01:30:00Z
 Collab invitation requested: @ar_publication
-  IG container: 17914555023568651
+  IG container: 17914599060568651
   upload try 1.1: HTTP 200 {"success":true,"message":"Upload Successful."}
   IG processing: FINISHED
-  LIVE: https://www.instagram.com/reel/Df2XQ7wifRF/
-[main aaefc2b] Save 3D reel Instagram receipt [skip ci]
- 2 files changed, 7 insertions(+)
- create mode 100644 downloads/map3d/2026-11-17_timeline_run44047397890/published.json
- create mode 100644 downloads/map3d/2026-11-17_timeline_run44047397890/reel.upload.json
-error: cannot pull with rebase: You have unstaged changes.
-error: Please commit or stash them.
-error: cannot pull with rebase: You have unstaged changes.
-error: Please commit or stash them.
-error: cannot pull with rebase: You have unstaged changes.
-error: Please commit or stash them.
-PUBLISHED {"media_id": "18342016192273893", "published_utc": "2026-11-17T16:30:58.118854+00:00", "title": "वाटरलू का युद्ध किस वर्ष लड़ा गया था?", "permalink": "https://www.instagram.com/reel/Df2XQ7wifRF/"}
+REMINDER: reel ready, publication due within 10 minutes: 2026-11-18T01:30:00Z
+  LIVE: https://www.instagram.com/reel/Df3Qnn3CZZk/
+INSTAGRAM PE POST HO GAYA: 18139300291636807
