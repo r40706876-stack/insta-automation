@@ -1,95 +1,26 @@
-FORMAT: mega
-  Gemini text models: gemini-flash-latest, gemini-3.8-flash, gemini-3.7-flash, gemini-3.6-flash
-  Gemini gemini-flash-latest fail (koshish 1): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
-  Gemini gemini-flash-latest fail (koshish 2): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
-  Gemini gemini-3.8-flash: HTTP 503 (koshish 1) {   "error": {     "code": 503,     "message": "This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later
-  Gemini gemini-3.8-flash: HTTP 503 (koshish 2) 
-  Gemini gemini-3.7-flash fail (koshish 1): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
-  Gemini gemini-3.7-flash fail (koshish 2): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
-  Gemini gemini-3.6-flash: HTTP 503 (koshish 1) {   "error": {     "code": 503,     "message": "This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later
-  Gemini gemini-3.6-flash: HTTP 503 (koshish 2) 
-  Groq llama-3.3-70b-versatile: HTTP 404
-  Groq openai/gpt-oss-120b: HTTP 400
-  Groq llama-3.1-8b-instant: HTTP 404
-  Gemini gemini-flash-latest fail (koshish 1): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
-  Gemini gemini-flash-latest: HTTP 503 (koshish 2) 
-  Gemini gemini-3.8-flash fail (koshish 1): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
-  Gemini gemini-3.8-flash: HTTP 503 (koshish 2) 
-  Gemini gemini-3.7-flash fail (koshish 1): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
-  Gemini gemini-3.7-flash fail (koshish 2): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
-  Gemini gemini-3.6-flash: HTTP 503 (koshish 1) {   "error": {     "code": 503,     "message": "This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later
-  Gemini gemini-3.6-flash: HTTP 503 (koshish 2) 
-  Groq llama-3.3-70b-versatile: HTTP 404
-  Groq openai/gpt-oss-120b: HTTP 400
-  Groq llama-3.1-8b-instant: HTTP 404
-  Gemini gemini-flash-latest: HTTP 503 (koshish 1) {   "error": {     "code": 503,     "message": "This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later
-  Gemini gemini-flash-latest fail (koshish 2): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
-  Gemini gemini-3.8-flash: HTTP 503 (koshish 1) {   "error": {     "code": 503,     "message": "This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later
-  Gemini gemini-3.8-flash fail (koshish 2): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
-  Gemini gemini-3.7-flash fail (koshish 1): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
-  Gemini gemini-3.7-flash: HTTP 503 (koshish 2) 
-  Gemini gemini-3.6-flash: HTTP 503 (koshish 1) {   "error": {     "code": 503,     "message": "This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later
-  Gemini gemini-3.6-flash: HTTP 503 (koshish 2) 
-  Groq llama-3.3-70b-versatile: HTTP 404
-  Groq openai/gpt-oss-120b: HTTP 400
-  Groq llama-3.1-8b-instant: HTTP 404
-  Gemini gemini-flash-latest: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
-  Gemini gemini-flash-latest fail (koshish 2): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
-  Gemini gemini-3.8-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
-  Gemini gemini-3.8-flash: HTTP 503 (koshish 2) 
-  Mega AI jaanch: 30 me se 16 sahi
-  Groq llama-3.3-70b-versatile: HTTP 404
-  Groq openai/gpt-oss-120b: HTTP 400
-  Groq llama-3.1-8b-instant: HTTP 404
-  Gemini gemini-flash-latest fail (koshish 1): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
-  Gemini gemini-flash-latest: HTTP 429 (koshish 2) 
-  Gemini gemini-3.8-flash fail (koshish 1): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
-  Gemini gemini-3.8-flash fail (koshish 2): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
-  Gemini gemini-3.7-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
-  Gemini gemini-3.7-flash: HTTP 429 (koshish 2) 
-  Gemini gemini-3.6-flash: HTTP 503 (koshish 1) {   "error": {     "code": 503,     "message": "This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later
-  Gemini gemini-3.6-flash: HTTP 503 (koshish 2) 
-  Groq llama-3.3-70b-versatile: HTTP 404
-  Groq openai/gpt-oss-120b: HTTP 400
-  Groq llama-3.1-8b-instant: HTTP 404
-  Gemini gemini-flash-latest: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
-  Gemini gemini-flash-latest fail (koshish 2): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
-  Gemini gemini-3.8-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
-  Gemini gemini-3.8-flash: HTTP 429 (koshish 2) 
-  Gemini gemini-3.7-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
-  Gemini gemini-3.7-flash: HTTP 429 (koshish 2) 
-  Gemini gemini-3.6-flash: HTTP 503 (koshish 1) {   "error": {     "code": 503,     "message": "This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later
-  Gemini gemini-3.6-flash: HTTP 503 (koshish 2) 
-  Groq llama-3.3-70b-versatile: HTTP 404
-  Groq openai/gpt-oss-120b: HTTP 400
-  Groq llama-3.1-8b-instant: HTTP 404
-  Gemini gemini-flash-latest fail (koshish 1): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
-  Gemini gemini-flash-latest: HTTP 429 (koshish 2) 
-  Gemini gemini-3.8-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
-  Gemini gemini-3.8-flash: HTTP 429 (koshish 2) 
-  Gemini gemini-3.7-flash fail (koshish 1): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
-  Gemini gemini-3.7-flash: HTTP 429 (koshish 2) 
-  Mega AI jaanch: 119 me se 83 sahi
-  Mega awaaz: gemini-3.8-flash-lite-tts / hi-in-tutor-1
-MEGA REEL TAIYAR: generated_reels/science_pyq_reel.mp4 (19.5s, 4 page, 80 sawal)
-
-CAPTION:
-📚 "इतिहास (History)" के 80 सबसे महत्वपूर्ण प्रश्न - सभी सरकारी परीक्षाओं के लिए
-
-⏸️ हर पेज पर रोककर पढ़ो (स्क्रीन दबाकर रखो)
-📌 अभी SAVE करो - exam से पहले 1 बार ज़रूर revise करना
-📤 उस दोस्त को भेजो जो SSC / Railway / Police की तैयारी कर रहा है
-💬 कितने पहले से आते थे? कमेंट करो!
-
-इतिहास (History) GK | RRB NTPC, Group D, SSC GD, CGL, MTS, Police, Patwari, State Exam PYQ
-⏱ MinuteMe_GS - एक मिनट, एक PYQ - पक्का!
-
-#gkquiz #gkpyq #sscgd #rrbntpc #history
-SCHEDULE: video ready; target 2026-11-19T11:30:00Z
+[main 03bc713] Record 3D reel publish attempt [skip ci]
+ 1 file changed, 4 insertions(+)
+ create mode 100644 downloads/map3d/2026-11-19_timeline_run44488266158/publish_started.json
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
+waiting 3403 s for slot 2026-11-19T16:30:00Z
 Collab invitation requested: @ar_publication
-  IG container: 17914779717568651
+  IG container: 17914817001568651
   upload try 1.1: HTTP 200 {"success":true,"message":"Upload Successful."}
   IG processing: FINISHED
-REMINDER: reel ready, publication due within 10 minutes: 2026-11-19T11:30:00Z
-  LIVE: https://www.instagram.com/reel/Df67m3OkoUA/
-INSTAGRAM PE POST HO GAYA: 18107340548527194
+  LIVE: https://www.instagram.com/reel/Df7g2uyDlgv/
+[main 8b8d37f] Save 3D reel Instagram receipt [skip ci]
+ 2 files changed, 7 insertions(+)
+ create mode 100644 downloads/map3d/2026-11-19_timeline_run44488266158/published.json
+ create mode 100644 downloads/map3d/2026-11-19_timeline_run44488266158/reel.upload.json
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
+PUBLISHED {"media_id": "17977378170072980", "published_utc": "2026-11-19T16:30:56.950658+00:00", "title": "भारत रत्न भारत का सर्वोच्च नागरिक पुरस्कार पहली बार वर्ष ___ में दिया गया था।", "permalink": "https://www.instagram.com/reel/Df7g2uyDlgv/"}
