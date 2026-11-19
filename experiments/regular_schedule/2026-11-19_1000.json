@@ -1,5 +1,8 @@
 {
   "target_utc": "2026-11-19T04:30:00Z",
-  "source_sha256": "bdb1dfda14558de83f217f44b954c7786ce053aa6240fa1f907c515df76ae41a",
-  "prepared_utc": "2026-11-19T03:50:58.471951+00:00"
+  "source_sha256": "a9aa481442b97f6499a0b048e0a3a0ffc8d63a0b8be2cc02a00e804a571fb170",
+  "prepared_utc": "2026-11-19T04:36:13.236952+00:00",
+  "publish_started_utc": "2026-11-19T04:36:59.240301+00:00",
+  "media_id": "18109944398210759",
+  "published_utc": "2026-11-19T04:37:13.749792+00:00"
 }
