@@ -1,26 +1,26 @@
-[main f2b9a5a] Record 3D reel publish attempt [skip ci]
+[main f01a419] Record 3D reel publish attempt [skip ci]
  1 file changed, 4 insertions(+)
- create mode 100644 downloads/map3d/2026-11-20_state_place_run44703168342/publish_started.json
+ create mode 100644 downloads/map3d/2026-11-20_timeline_run44703171442/publish_started.json
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
-waiting 3509 s for slot 2026-11-20T14:30:00Z
+waiting 3503 s for slot 2026-11-20T16:30:00Z
 Collab invitation requested: @ar_publication
-  IG container: 17914922493568651
+  IG container: 17914938906568651
   upload try 1.1: HTTP 200 {"success":true,"message":"Upload Successful."}
   IG processing: FINISHED
-  LIVE: https://www.instagram.com/reel/Df936yHjI44/
-[main 9648cae] Save 3D reel Instagram receipt [skip ci]
+  LIVE: https://www.instagram.com/reel/Df-FpkMJS_J/
+[main 9df26c3] Save 3D reel Instagram receipt [skip ci]
  2 files changed, 7 insertions(+)
- create mode 100644 downloads/map3d/2026-11-20_state_place_run44703168342/published.json
- create mode 100644 downloads/map3d/2026-11-20_state_place_run44703168342/reel.upload.json
+ create mode 100644 downloads/map3d/2026-11-20_timeline_run44703171442/published.json
+ create mode 100644 downloads/map3d/2026-11-20_timeline_run44703171442/reel.upload.json
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
-PUBLISHED {"media_id": "18127364854909966", "published_utc": "2026-11-20T14:30:59.751099+00:00", "title": "___ में स्थित कंचनजंगा भारत की सबसे ऊँची चोटी है।", "permalink": "https://www.instagram.com/reel/Df936yHjI44/"}
+PUBLISHED {"media_id": "18084633071738972", "published_utc": "2026-11-20T16:30:56.582586+00:00", "title": "स्टील अथॉरिटी ऑफ इण्डिया लिमिटेड का निगमन किस वर्ष हुआ था?", "permalink": "https://www.instagram.com/reel/Df-FpkMJS_J/"}
