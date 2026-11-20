@@ -1,0 +1,244 @@
+{
+  "title": "जादूगोड़ा की खान का खनिज",
+  "subject": "भूगोल",
+  "topic_key": "jadugoda_khan_uranium",
+  "share_reason": "सही उत्तर जानकर परीक्षा में गलती से बचें",
+  "recall": "अगली बार यह गलती मत कीजिए।",
+  "pyq_challenge": true,
+  "share_card": {
+    "kind": "exam_confusion",
+    "recipient": "परीक्षा की तैयारी करने वाले मित्र",
+    "benefit": "जादूगोड़ा की खान यूरेनियम है, आम गलती तांबा समझना",
+    "cta": "दोस्त को यह बताओ"
+  },
+  "scenes": [
+    {
+      "role": "hook",
+      "heading": "पहले अपना जवाब चुनिए",
+      "explanation": "A या B — सोचिए",
+      "speech": "जादूगोड़ा की खान ______ के लिए प्रसिद्ध हैं। दृश्य देखिए।",
+      "teaches": "प्रश्न को पहचानें",
+      "visual_action": "एक छात्र खान की ओर चल रहा है",
+      "setting": "neutral",
+      "objects": [
+        {
+          "kind": "person",
+          "action": "walk",
+          "id": "object_0",
+          "label": "छात्र",
+          "pos": [
+            -0.5,
+            0,
+            0
+          ],
+          "to": [
+            0.5,
+            0,
+            0
+          ],
+          "color": "#f4e7bf",
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ]
+        }
+      ],
+      "hook_question": "जादूगोड़ा की खान ______ के लिए प्रसिद्ध हैं।",
+      "quiz_options": [
+        "A: तांबा",
+        "B: यूरेनियम"
+      ],
+      "content_group": "single_topic"
+    },
+    {
+      "role": "challenge",
+      "heading": "कमेंट में लिखिए: A या B?",
+      "explanation": "दो सेकंड सोचिए: A या B?",
+      "speech": "दो सेकंड सोचिए: A या B?",
+      "teaches": "विकल्पों पर विचार करें",
+      "visual_action": "दो बॉक्स ऊपर उठते हैं",
+      "setting": "neutral",
+      "objects": [
+        {
+          "kind": "box",
+          "action": "rise",
+          "id": "object_0",
+          "label": "तांबा",
+          "pos": [
+            -0.9,
+            0,
+            0
+          ],
+          "to": [
+            -0.9,
+            0,
+            1.2
+          ],
+          "color": "#59c7c5",
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        {
+          "kind": "box",
+          "action": "rise",
+          "id": "object_1",
+          "label": "यूरेनियम",
+          "pos": [
+            0.9,
+            0,
+            0
+          ],
+          "to": [
+            0.9,
+            0,
+            1.2
+          ],
+          "color": "#59c7c5",
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        }
+      ],
+      "quiz_options": [
+        "A: तांबा",
+        "B: यूरेनियम"
+      ]
+    },
+    {
+      "role": "reveal",
+      "heading": "सही उत्तर",
+      "explanation": "सही उत्तर है: यूरेनियम।",
+      "speech": "सही उत्तर है: यूरेनियम।",
+      "teaches": "सही उत्तर पहचानें",
+      "visual_action": "परमाणु मॉडल घूम रहा है",
+      "setting": "laboratory",
+      "objects": [
+        {
+          "kind": "atom",
+          "action": "spin",
+          "id": "object_0",
+          "label": "यूरेनियम",
+          "pos": [
+            0,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "color": "#59c7c5"
+        }
+      ]
+    },
+    {
+      "role": "explain",
+      "heading": "तथ्य समझिए",
+      "explanation": "जादूगोड़ा की खान यूरेनियम के लिए",
+      "speech": "जादूगोड़ा की खान यूरेनियम के लिए प्रसिद्ध हैं।",
+      "teaches": "कारण समझें",
+      "visual_action": "सफेद क्रिस्टल बढ़ते हैं",
+      "setting": "laboratory",
+      "objects": [
+        {
+          "kind": "salt",
+          "action": "grow",
+          "id": "object_0",
+          "label": "यूरेनियम",
+          "pos": [
+            0,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "color": "#4ebacf"
+        }
+      ]
+    },
+    {
+      "role": "transfer",
+      "heading": "खुद को जाँचिए",
+      "explanation": "यही परीक्षा की आम गलती है।",
+      "speech": "यही परीक्षा की आम गलती है।",
+      "teaches": "गलत धारण हटाएँ",
+      "visual_action": "कॉइन घूमता, फिर परमाणु घूमता",
+      "setting": "institution",
+      "objects": [
+        {
+          "kind": "coin",
+          "action": "spin",
+          "id": "object_0",
+          "label": "तांबा",
+          "pos": [
+            -0.9,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "color": "#f5bd3d"
+        },
+        {
+          "kind": "atom",
+          "action": "spin",
+          "id": "object_1",
+          "label": "यूरेनियम",
+          "pos": [
+            0.9,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "color": "#59c7c5"
+        }
+      ]
+    },
+    {
+      "role": "revision",
+      "heading": "रिवीजन कार्ड",
+      "explanation": "अगली बार यह गलती मत कीजिए।",
+      "speech": "अगली बार यह गलती मत कीजिए।",
+      "teaches": "स्मरण शक्ति बढ़ाएँ",
+      "visual_action": "रिकॉल कार्ड दिखाया जाता है",
+      "setting": "neutral",
+      "revision_card": true,
+      "objects": [
+        {
+          "kind": "book",
+          "action": "none",
+          "id": "object_0",
+          "label": "स्मरण",
+          "pos": [
+            0,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "color": "#59c7c5"
+        }
+      ]
+    }
+  ]
+}
