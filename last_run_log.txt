@@ -1,60 +1,35 @@
 FORMAT: list
+  7 PYQ topic: भूगोल (Geography) / भूगोल (Geography)
   Gemini text models: gemini-flash-latest, gemini-3.8-flash, gemini-3.7-flash, gemini-3.6-flash
-  Groq llama-3.3-70b-versatile: HTTP 404
-  7 PYQ topic: मध्यकालीन इतिहास (Medieval History) / मध्यकालीन इतिहास (Medieval History)
-  Gemini gemini-flash-latest: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
-  Gemini gemini-flash-latest: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
-  Gemini gemini-flash-latest fail (koshish 2): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
-  Gemini gemini-3.8-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
-  Gemini gemini-3.8-flash: HTTP 429 (koshish 2) 
-  Gemini gemini-3.7-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
-  Gemini gemini-3.7-flash: HTTP 429 (koshish 2) 
+  Gemini gemini-flash-latest fail (koshish 1): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
   Gemini gemini-flash-latest: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
   Gemini gemini-flash-latest: HTTP 429 (koshish 2) 
-  Gemini gemini-3.8-flash fail (koshish 1): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
-  Gemini gemini-3.8-flash: HTTP 429 (koshish 2) 
-  Gemini gemini-3.7-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
-  Gemini gemini-3.7-flash: HTTP 429 (koshish 2) 
-  Gemini gemini-flash-latest: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
-  Gemini gemini-flash-latest: HTTP 429 (koshish 2) 
-  Gemini gemini-3.8-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
-  Gemini gemini-3.8-flash: HTTP 429 (koshish 2) 
-  Gemini gemini-3.7-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
-  Gemini gemini-3.7-flash: HTTP 429 (koshish 2) 
-  Gemini gemini-flash-latest: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
-  Gemini gemini-flash-latest: HTTP 429 (koshish 2) 
-  Gemini gemini-3.8-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
-  Gemini gemini-3.8-flash fail (koshish 2): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
-  Gemini gemini-3.7-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
-  Gemini gemini-3.7-flash: HTTP 429 (koshish 2) 
+  Gemini gemini-flash-latest fail (koshish 1): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
 LIST REEL TAIYAR: generated_reels/science_pyq_reel.mp4 (10s)
 
 CAPTION:
 📅 Day 30/100 • 100 दिन में पूरा GS | कल Day 31/100 - Follow करो ताकि छूटे नहीं
 📤 ये reel उस दोस्त को भेजो जो Group D / NTPC / SSC / Police की तैयारी कर रहा है!
 
-📚 इतिहास के 7 PYQ - RRB, SSC, Police, Patwari, Army, State Exams के लिए (Save करो)
+📚 भूगोल के 7 PYQ - RRB, SSC, Police, Patwari, Army, State Exams के लिए (Save करो)
 
-1. कश्मीर के इतिहास को दर्ज करने वाली ऐतिहासिक कृति, 'राजतरंगिणी' किसने लिखी है? → कल्हण
-2. राष्ट्रकूट, मुख्य रूप से किस स्थापत्य कला के लिए प्रसिद्ध थे? → एलोरा में कैलाश मंदिर
-3. हड़प्पा हार्टलैंड (Harappan heartland) में किस प्रकार की अर्थव्यवस्था प्रमुख थी? → कृषि-पशुचारणिक
-4. भारत में "ब्लू वाटर पॉलिसी (Blue Water Policy)" को किसने लागू किया? → फ्रांसिस्को डी अल्मेडा
-5. 1539 में, शेर शाह ने हुमायूं को सर्वप्रथम किस स्थान पर पराजित किया था? → चौसा
-6. सुल्तान बनने से पूर्व अलाउद्दीन खिलजी, जलालुद्दीन के अधीन किस महत्वपूर्ण पद पर था? → अमीर-ए-तुज़ुक
-7. ब्रिटिश शासन के दौरान भारत में महिलाओं के अधिकार में सुधार किसने किया? → पंडिता रमाबाई
+1. वर्ष 2023-24 में अखिल भारतीय कोयला उत्पादन कितना था? → 997.826 मिलियन टन (MT)
+2. भारत की सबसे बड़ी मीठे पानी की झील कौन-सी है? → वुलर झील
+3. तप्त पृष्ठ से गर्म वायु के ऊपर उठने के लिए कौन-सी प्रक्रिया उत्तरदायी है? → संवहन
+4. किस महाद्वीप को 'द्वीप महाद्वीप' कहा जाता है? → ऑस्ट्रेलिया
 
 💬 कितने पहले से आते थे? कमेंट करो: 7/7?
 📤 Save करो + उस दोस्त को भेजो जो exam की तैयारी कर रहा है।
-इतिहास GK Questions | RRB NTPC, Group D, SSC GD, State Exam PYQ
+भूगोल GK Questions | RRB NTPC, Group D, SSC GD, State Exam PYQ
 ⏱ MinuteMe_GS - एक मिनट, एक PYQ - पक्का!
 📲 Free test / notes: WhatsApp 8989971379
 
-#gkquiz #rrbntpc #sscgd #gkpyq #history
-SCHEDULE: video ready; target 2026-11-20T01:30:00Z
+#gkquiz #rrbntpc #sscgd #gkpyq #geography
+SCHEDULE: video ready; target 2026-11-20T04:30:00Z
 Collab invitation requested: @ar_publication
-  IG container: 17914851384568651
+  IG container: 17914865208568651
   upload try 1.1: HTTP 200 {"success":true,"message":"Upload Successful."}
   IG processing: FINISHED
-REMINDER: reel ready, publication due within 10 minutes: 2026-11-20T01:30:00Z
-  LIVE: https://www.instagram.com/reel/Df8ZOGqG2GE/
-INSTAGRAM PE POST HO GAYA: 18078944468461901
+REMINDER: reel ready, publication due within 10 minutes: 2026-11-20T04:30:00Z
+  LIVE: https://www.instagram.com/reel/Df8tef6jDoK/
+INSTAGRAM PE POST HO GAYA: 18036872843884763

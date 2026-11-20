@@ -1,6 +1,6 @@
 {
  "next_seq": 139,
- "episode": 227,
+ "episode": 228,
  "posted": [
   "684d76bcbc",
   "6bb20b4a07",
@@ -771,7 +771,11 @@
   "5f0accfa43",
   "a2e1a60a27",
   "3f2d8c1f7c",
-  "9584d3f0c5"
+  "9584d3f0c5",
+  "17f5ef85b6",
+  "6fc7c6c3c5",
+  "2b498d8160",
+  "c9325e51aa"
  ],
  "skipped": {
   "bdd1ce5a8b": "उत्तर कुंजी वर्तमान स्थिति के अनुसार गलत है।",
@@ -799,12 +803,14 @@
   "c268e46e93": "samay ke saath badalne wala sawal",
   "96cf2b56e8": "104वें संविधान संशोधन (2019) के बाद एंग्लो-इंडियन आरक्षण समाप्त होने से अब अधिकतम संख्या 550 है, 552 नहीं।",
   "7128697eb3": "विकल्प (c) और व्याख्या में फ़ॉन्ट त्रुटि ('n wojeyeeo') के कारण उत्तर अस्पष्ट और अमान्य है (सही उत्तर हैदराबाद है)।",
-  "b509dcc6d1": "Answer key incorrect; work dates to 2nd century CE, not 8th."
+  "b509dcc6d1": "Answer key incorrect; work dates to 2nd century CE, not 8th.",
+  "747dbbee96": "samay ke saath badalne wala sawal",
+  "25c9263a96": "samay ke saath badalne wala sawal"
  },
  "last": {
-  "seq": 2417,
-  "id": "9584d3f0c5",
-  "time": "2026-11-20 01:30",
+  "seq": 5562,
+  "id": "c9325e51aa",
+  "time": "2026-11-20 04:30",
   "format": "list"
  },
  "carousel_queue": [
