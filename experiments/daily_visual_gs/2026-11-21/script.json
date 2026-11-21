@@ -1,0 +1,132 @@
+{
+  "ok": true,
+  "title": "जादूगोड़ा की खान का खनिज",
+  "subject": "Geography",
+  "renderer_version": "rich_3d_v1",
+  "question_hash": "acedaeae46802ad55547c1f497ac033bb14ab6e8af393ee81c11a2ce069da2e5",
+  "reference": {
+    "subject": "Geography",
+    "subject_hi": "भूगोल",
+    "chapter": "भारत में खनिज संसाधन (Mineral Resources in India)",
+    "sub": "",
+    "question": "जादूगोड़ा की खान ______ के लिए प्रसिद्ध हैं।",
+    "options": {
+      "a": "यूरेनियम",
+      "b": "तांबा",
+      "c": "सोना",
+      "d": "लोहा"
+    },
+    "answer": "a",
+    "exams": [
+      "RRB Group-D 01-10-2018 (Shift-II)",
+      "RRB Group-D 26-09-2018 (Shift-III)"
+    ],
+    "explanation": "जादूगोड़ा की खान यूरेनियम के लिए प्रसिद्ध हैं।",
+    "times_asked": 2,
+    "years": [
+      "2018"
+    ],
+    "id": "96a6c90b7e",
+    "seq": 116
+  },
+  "experiment_format": "visual_mystery",
+  "primary_objective": "save",
+  "series_next_topic": "......... आंध्र प्रदेश की नई राजधानी है–",
+  "series_next_hash": "66b95e4fb553fb4e9a5c6d9d5c37438fb3719122344393d123e0c36f78740350",
+  "topic_policy": "evidence_cohort_v2",
+  "topic_priority": 1.0,
+  "recall": "अगली बार यह गलती मत कीजिए।",
+  "share_card": {
+    "kind": "exam_confusion",
+    "recipient": "परीक्षा की तैयारी करने वाले दोस्त",
+    "benefit": "जादूगोड़ा की खान यूरेनियम है, आम गलती दूर",
+    "cta": "इसे अपने दोस्त को दिखाएँ"
+  },
+  "share_reason": "परीक्षा की तैयारी करने वाले दोस्त को सामान्य भ्रम दूर करने में मदद",
+  "scenes": [
+    {
+      "label": "पहले अपना जवाब चुनिए",
+      "quiz_options": [
+        "A: तांबा",
+        "B: यूरेनियम"
+      ],
+      "speech": "जादूगोड़ा की खान ______ के लिए प्रसिद्ध हैं। दृश्य देखिए।",
+      "role": "hook",
+      "revision_card": false,
+      "teaches": "प्रश्न को पहचानना",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "दर्शक को प्रश्न वाला संकेत दिखाएँ"
+      }
+    },
+    {
+      "label": "कमेंट में लिखिए: A या B?",
+      "quiz_options": [
+        "A: तांबा",
+        "B: यूरेनियम"
+      ],
+      "speech": "दो सेकंड सोचिए: A या B?",
+      "role": "challenge",
+      "revision_card": false,
+      "teaches": "विकल्पों पर विचार",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "व्यक्ति दो बक्से की ओर इशारा करता"
+      }
+    },
+    {
+      "label": "सही उत्तर",
+      "quiz_options": null,
+      "speech": "सही उत्तर है: यूरेनियम।",
+      "role": "reveal",
+      "revision_card": false,
+      "teaches": "सही उत्तर पहचानना",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "एक चमकदार यूरेनियम टैग उभरता"
+      }
+    },
+    {
+      "label": "तथ्य समझिए",
+      "quiz_options": null,
+      "speech": "जादूगोड़ा की खान यूरेनियम के लिए प्रसिद्ध हैं।",
+      "role": "explain",
+      "revision_card": false,
+      "teaches": "कारण समझना",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "एटम के चारों ओर इलेक्ट्रॉन घूमते"
+      }
+    },
+    {
+      "label": "खुद को जाँचिए",
+      "quiz_options": null,
+      "speech": "यही परीक्षा की आम गलती है।",
+      "role": "transfer",
+      "revision_card": false,
+      "teaches": "स्मरण शक्ति बढ़ाना",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "एक स्केल पर यूरेनियम वज़न दिखे"
+      }
+    },
+    {
+      "label": "रिवीजन कार्ड",
+      "quiz_options": null,
+      "speech": "अगली बार यह गलती मत कीजिए।",
+      "role": "revision",
+      "revision_card": true,
+      "teaches": "स्मरण",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "neutral",
+        "visible_action": "पाठ्यपुस्तक में टेक्स्ट हाइलाइट"
+      }
+    }
+  ]
+}
