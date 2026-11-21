@@ -1,26 +1,26 @@
-[main 5c986d0] Record 3D reel publish attempt [skip ci]
+[main 9bc8b6e] Record 3D reel publish attempt [skip ci]
  1 file changed, 4 insertions(+)
- create mode 100644 downloads/map3d/2026-11-21_river_place_run44885248206/publish_started.json
+ create mode 100644 downloads/map3d/2026-11-21_timeline_run44885250234/publish_started.json
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
-waiting 3492 s for slot 2026-11-21T14:30:00Z
+waiting 3506 s for slot 2026-11-21T16:30:00Z
 Collab invitation requested: @ar_publication
-  IG container: 17915069874568651
+  IG container: 17915084334568651
   upload try 1.1: HTTP 200 {"success":true,"message":"Upload Successful."}
   IG processing: FINISHED
-  LIVE: https://www.instagram.com/reel/DgActjcCUsF/
-[main 300ab4b] Save 3D reel Instagram receipt [skip ci]
+  LIVE: https://www.instagram.com/reel/DgAqcg3DaWt/
+[main a396528] Save 3D reel Instagram receipt [skip ci]
  2 files changed, 7 insertions(+)
- create mode 100644 downloads/map3d/2026-11-21_river_place_run44885248206/published.json
- create mode 100644 downloads/map3d/2026-11-21_river_place_run44885248206/reel.upload.json
+ create mode 100644 downloads/map3d/2026-11-21_timeline_run44885250234/published.json
+ create mode 100644 downloads/map3d/2026-11-21_timeline_run44885250234/reel.upload.json
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
-PUBLISHED {"media_id": "18026857739943343", "published_utc": "2026-11-21T14:30:57.325462+00:00", "title": "तुंगभद्रा नदी ........ की एक सहायक नदी है–", "permalink": "https://www.instagram.com/reel/DgActjcCUsF/"}
+PUBLISHED {"media_id": "18111034181214003", "published_utc": "2026-11-21T16:30:56.642762+00:00", "title": "भारत का पहला गणतंत्र दिवस इनमें से किस वर्ष में मनाया गया था?", "permalink": "https://www.instagram.com/reel/DgAqcg3DaWt/"}
