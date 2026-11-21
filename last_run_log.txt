@@ -1,8 +1,66 @@
 FORMAT: list
   Gemini text models: gemini-flash-latest, gemini-3.8-flash, gemini-3.7-flash, gemini-3.6-flash
-  7 PYQ topic (AI): हाइड्रोकार्बन
-  7 PYQ topic: ईंधन (Fuel)
+  Gemini gemini-flash-latest fail (koshish 1): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
+  Gemini gemini-flash-latest fail (koshish 2): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
+  Gemini gemini-3.8-flash: HTTP 503 (koshish 1) {   "error": {     "code": 503,     "message": "This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later
+  Gemini gemini-3.8-flash fail (koshish 2): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
+  Gemini gemini-3.7-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-3.7-flash fail (koshish 2): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
+List ke liye kaafi chhote sawal nahi -> loop format
+7 PYQ nahi bana; purana loop format band hai -> koi post nahi
+FORMAT: list
+  Gemini text models: gemini-flash-latest, gemini-3.8-flash, gemini-3.7-flash, gemini-3.6-flash
   Gemini gemini-flash-latest: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-flash-latest fail (koshish 2): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
+  Gemini gemini-3.8-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-3.8-flash: HTTP 429 (koshish 2) 
+  Gemini gemini-3.7-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-3.7-flash fail (koshish 2): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
+  7 PYQ topic (AI): रासायनिक अभिक्रियाएं
+  7 PYQ topic: रासायनिक अभिक्रियाएँ (Chemical Reactions)
+  Gemini gemini-flash-latest: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-flash-latest: HTTP 429 (koshish 2) 
+  Gemini gemini-3.8-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-3.8-flash fail (koshish 2): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
+  Gemini gemini-3.7-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-3.7-flash: HTTP 429 (koshish 2) 
+  Gemini gemini-flash-latest: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-flash-latest: HTTP 429 (koshish 2) 
+  Gemini gemini-3.8-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-3.8-flash: HTTP 429 (koshish 2) 
+  Gemini gemini-3.7-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-3.7-flash: HTTP 429 (koshish 2) 
+  Gemini gemini-flash-latest: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-flash-latest: HTTP 429 (koshish 2) 
+  Gemini gemini-3.8-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-3.8-flash: HTTP 429 (koshish 2) 
+  Gemini gemini-3.7-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-3.7-flash: HTTP 429 (koshish 2) 
+  Gemini gemini-flash-latest: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-flash-latest: HTTP 429 (koshish 2) 
+  Gemini gemini-3.8-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-3.8-flash: HTTP 503 (koshish 2) 
+  Gemini gemini-3.7-flash fail (koshish 1): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
+  Gemini gemini-3.7-flash: HTTP 429 (koshish 2) 
+  Gemini gemini-3.6-flash: HTTP 503 (koshish 1) {   "error": {     "code": 503,     "message": "This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later
+  Gemini gemini-flash-latest: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-flash-latest: HTTP 429 (koshish 2) 
+  Gemini gemini-3.8-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-3.8-flash: HTTP 429 (koshish 2) 
+  Gemini gemini-3.7-flash fail (koshish 1): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
+  Gemini gemini-3.7-flash: HTTP 429 (koshish 2) 
+  Gemini gemini-flash-latest: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-flash-latest: HTTP 429 (koshish 2) 
+  Gemini gemini-3.8-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-3.8-flash: HTTP 429 (koshish 2) 
+  Gemini gemini-3.7-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-3.7-flash: HTTP 429 (koshish 2) 
+  Gemini gemini-flash-latest: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-flash-latest: HTTP 429 (koshish 2) 
+  Gemini gemini-3.8-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-3.8-flash: HTTP 429 (koshish 2) 
+  Gemini gemini-3.7-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-3.7-flash: HTTP 429 (koshish 2) 
 LIST REEL TAIYAR: generated_reels/science_pyq_reel.mp4 (10s)
 
 CAPTION:
@@ -11,13 +69,13 @@ CAPTION:
 
 📚 रसायन विज्ञान के 7 PYQ - RRB, SSC, Police, Patwari, Army, State Exams के लिए (Save करो)
 
-1. सीएनजी (CNG) का मुख्य घटक क्या है? → मीथेन
-2. LPG का मुख्य घटक क्या है? → ब्यूटेन
-3. यौगिक CH3 - CH3 का क्या नाम है? → एथेन
-4. ऐल्कीन श्रेणी के दूसरे सदस्य का आणविक सूत्र क्या है? → C3H6
-5. आइसोब्यूटेन का आण्विक सूत्र क्या है? → C4H10
-6. C6H14 में कितने समावयवी (Isomers) हैं? → 5
-7. साइक्लोपेंटेन में एकल बंधों की कुल संख्या कितनी होती है? → 15
+1. संक्षारण किस प्रकार की अभिक्रिया है? → ऑक्सीकरण अभिक्रिया
+2. एक उदासीनीकरण अभिक्रिया के लिए, अभिकारक क्या होने चाहिए? → अम्ल और क्षार
+3. दी गई अभिक्रियाओं में से कौन सी संयोजन अभिक्रियाओं के विपरीत होती है? → अपघटन
+4. तापन द्वारा की जाने वाली अपघटन अभिक्रिया क्या कहलाती है? → ऊष्मीय अपघटन
+5. क्या होता है जब अनबुझा चूना, जल के साथ प्रबलता से अभिक्रिया करता है? → ऊष्माक्षेपी अभिक्रिया
+6. एक दोहरी अपघटन अभिक्रिया के दौरान अभिकारकों के बीच क्या आदान-प्रदान किया जाता है? → आयन
+7. मेथेन और क्लोरीन गैस से मेथिल क्लोराइड का बनना किस प्रकार की अभिक्रिया है? → प्रतिस्थापन अभिक्रिया
 
 💬 कितने पहले से आते थे? कमेंट करो: 7/7?
 📤 Save करो + उस दोस्त को भेजो जो exam की तैयारी कर रहा है।
@@ -26,11 +84,11 @@ Science GK Questions | RRB NTPC, Group D, SSC GD, State Exam PYQ
 📲 Free test / notes: WhatsApp 8989971379
 
 #gkquiz #rrbntpc #sscgd #gkpyq #chemistry
-SCHEDULE: video ready; target 2026-11-21T01:30:00Z
+SCHEDULE: video ready; target 2026-11-21T04:30:00Z
 Collab invitation requested: @ar_publication
-  IG container: 17914980723568651
+  IG container: 17914998792568651
   upload try 1.1: HTTP 200 {"success":true,"message":"Upload Successful."}
   IG processing: FINISHED
-REMINDER: reel ready, publication due within 10 minutes: 2026-11-21T01:30:00Z
-  LIVE: https://www.instagram.com/reel/Df-9S1Mj1AT/
-INSTAGRAM PE POST HO GAYA: 18136253734783298
+REMINDER: reel ready, publication due within 10 minutes: 2026-11-21T04:30:00Z
+  LIVE: https://www.instagram.com/reel/Df_T2CxjJuC/
+INSTAGRAM PE POST HO GAYA: 18001573892827304
