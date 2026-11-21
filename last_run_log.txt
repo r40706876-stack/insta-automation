@@ -1,26 +1,36 @@
-[main f01a419] Record 3D reel publish attempt [skip ci]
- 1 file changed, 4 insertions(+)
- create mode 100644 downloads/map3d/2026-11-20_timeline_run44703171442/publish_started.json
-error: cannot pull with rebase: You have unstaged changes.
-error: Please commit or stash them.
-error: cannot pull with rebase: You have unstaged changes.
-error: Please commit or stash them.
-error: cannot pull with rebase: You have unstaged changes.
-error: Please commit or stash them.
-waiting 3503 s for slot 2026-11-20T16:30:00Z
+FORMAT: list
+  Gemini text models: gemini-flash-latest, gemini-3.8-flash, gemini-3.7-flash, gemini-3.6-flash
+  7 PYQ topic (AI): हाइड्रोकार्बन
+  7 PYQ topic: ईंधन (Fuel)
+  Gemini gemini-flash-latest: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+LIST REEL TAIYAR: generated_reels/science_pyq_reel.mp4 (10s)
+
+CAPTION:
+📅 Day 31/100 • 100 दिन में पूरा GS | कल Day 32/100 - Follow करो ताकि छूटे नहीं
+📤 ये reel उस दोस्त को भेजो जो Group D / NTPC / SSC / Police की तैयारी कर रहा है!
+
+📚 रसायन विज्ञान के 7 PYQ - RRB, SSC, Police, Patwari, Army, State Exams के लिए (Save करो)
+
+1. सीएनजी (CNG) का मुख्य घटक क्या है? → मीथेन
+2. LPG का मुख्य घटक क्या है? → ब्यूटेन
+3. यौगिक CH3 - CH3 का क्या नाम है? → एथेन
+4. ऐल्कीन श्रेणी के दूसरे सदस्य का आणविक सूत्र क्या है? → C3H6
+5. आइसोब्यूटेन का आण्विक सूत्र क्या है? → C4H10
+6. C6H14 में कितने समावयवी (Isomers) हैं? → 5
+7. साइक्लोपेंटेन में एकल बंधों की कुल संख्या कितनी होती है? → 15
+
+💬 कितने पहले से आते थे? कमेंट करो: 7/7?
+📤 Save करो + उस दोस्त को भेजो जो exam की तैयारी कर रहा है।
+Science GK Questions | RRB NTPC, Group D, SSC GD, State Exam PYQ
+⏱ MinuteMe_GS - एक मिनट, एक PYQ - पक्का!
+📲 Free test / notes: WhatsApp 8989971379
+
+#gkquiz #rrbntpc #sscgd #gkpyq #chemistry
+SCHEDULE: video ready; target 2026-11-21T01:30:00Z
 Collab invitation requested: @ar_publication
-  IG container: 17914938906568651
+  IG container: 17914980723568651
   upload try 1.1: HTTP 200 {"success":true,"message":"Upload Successful."}
   IG processing: FINISHED
-  LIVE: https://www.instagram.com/reel/Df-FpkMJS_J/
-[main 9df26c3] Save 3D reel Instagram receipt [skip ci]
- 2 files changed, 7 insertions(+)
- create mode 100644 downloads/map3d/2026-11-20_timeline_run44703171442/published.json
- create mode 100644 downloads/map3d/2026-11-20_timeline_run44703171442/reel.upload.json
-error: cannot pull with rebase: You have unstaged changes.
-error: Please commit or stash them.
-error: cannot pull with rebase: You have unstaged changes.
-error: Please commit or stash them.
-error: cannot pull with rebase: You have unstaged changes.
-error: Please commit or stash them.
-PUBLISHED {"media_id": "18084633071738972", "published_utc": "2026-11-20T16:30:56.582586+00:00", "title": "स्टील अथॉरिटी ऑफ इण्डिया लिमिटेड का निगमन किस वर्ष हुआ था?", "permalink": "https://www.instagram.com/reel/Df-FpkMJS_J/"}
+REMINDER: reel ready, publication due within 10 minutes: 2026-11-21T01:30:00Z
+  LIVE: https://www.instagram.com/reel/Df-9S1Mj1AT/
+INSTAGRAM PE POST HO GAYA: 18136253734783298
