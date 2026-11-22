@@ -1,0 +1,348 @@
+{
+  "title": "आंध्र प्रदेश का राज्य पशु",
+  "subject": "राजव्यवस्था",
+  "topic_key": "andhra_pradesh_state_animal",
+  "share_reason": "बहुत से छात्र काला हिरन को भूलते हैं",
+  "recall": "याद रखने की ट्रिक: काला हिरन।",
+  "pyq_challenge": true,
+  "share_card": {
+    "kind": "exam_confusion",
+    "recipient": "परीक्षा की तैयारी करने वाले मित्र",
+    "benefit": "राज्य पशु काला हिरन को याद रखने का आसान तरीका",
+    "cta": "इसे अपने दोस्त को भेजो और याद रखें"
+  },
+  "scenes": [
+    {
+      "role": "hook",
+      "heading": "पहले अपना जवाब चुनिए",
+      "explanation": "A या B — सोचिए",
+      "speech": "आंध्र प्रदेश का राज्य पशु कौन सा है? जाल पहचानिए।",
+      "teaches": "प्रश्न पहचान",
+      "visual_action": "एक व्यक्ति प्रश्न बोर्ड की ओर चलता है",
+      "setting": "institution",
+      "objects": [
+        {
+          "kind": "person",
+          "action": "walk",
+          "label": "विचारक",
+          "id": "object_0",
+          "color": "#f4e7bf",
+          "pos": [
+            -0.45,
+            0,
+            0
+          ],
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ],
+          "to": [
+            0.75,
+            0,
+            0
+          ]
+        }
+      ],
+      "hook_question": "आंध्र प्रदेश का राज्य पशु कौन सा है?",
+      "quiz_options": [
+        "A: काला हिरन",
+        "B: मिथुन"
+      ],
+      "content_group": "single_topic"
+    },
+    {
+      "role": "challenge",
+      "heading": "कमेंट में लिखिए: A या B?",
+      "explanation": "दो सेकंड सोचिए: A या B?",
+      "speech": "दो सेकंड सोचिए: A या B?",
+      "teaches": "विकल्प तुलना",
+      "visual_action": "व्यक्ति दो विकल्प कार्ड की ओर इशारा करता है",
+      "setting": "institution",
+      "objects": [
+        {
+          "kind": "person",
+          "action": "walk",
+          "label": "विचारक",
+          "id": "object_0",
+          "color": "#f4e7bf",
+          "pos": [
+            -2.25,
+            0,
+            0
+          ],
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ],
+          "to": [
+            -1.05,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "arrow",
+          "action": "spin",
+          "label": "A",
+          "id": "object_1",
+          "color": "#59c7c5",
+          "pos": [
+            0.0,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        },
+        {
+          "kind": "arrow",
+          "action": "spin",
+          "label": "B",
+          "id": "object_2",
+          "color": "#59c7c5",
+          "pos": [
+            1.8,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        }
+      ],
+      "quiz_options": [
+        "A: काला हिरन",
+        "B: मिथुन"
+      ]
+    },
+    {
+      "role": "reveal",
+      "heading": "सही उत्तर",
+      "explanation": "सही उत्तर है: काला हिरन।",
+      "speech": "सही उत्तर है: काला हिरन।",
+      "teaches": "सही उत्तर दिखाना",
+      "visual_action": "व्यक्ति काला हिरन की तस्वीर दिखाता है",
+      "setting": "institution",
+      "objects": [
+        {
+          "kind": "person",
+          "action": "walk",
+          "label": "विचारक",
+          "id": "object_0",
+          "color": "#f4e7bf",
+          "pos": [
+            -1.35,
+            0,
+            0
+          ],
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ],
+          "to": [
+            -0.15,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "book",
+          "action": "none",
+          "label": "हिरन चित्र",
+          "id": "object_1",
+          "color": "#59c7c5",
+          "pos": [
+            0.9,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        }
+      ]
+    },
+    {
+      "role": "explain",
+      "heading": "तथ्य समझिए",
+      "explanation": "आंध्र प्रदेश का राज्य पशु काला",
+      "speech": "आंध्र प्रदेश का राज्य पशु काला हिरन है।",
+      "teaches": "तथ्य समझाना",
+      "visual_action": "व्यक्ति काला हिरन मॉडल को घुमाता है",
+      "setting": "institution",
+      "objects": [
+        {
+          "kind": "person",
+          "action": "walk",
+          "label": "विचारक",
+          "id": "object_0",
+          "color": "#f4e7bf",
+          "pos": [
+            -1.35,
+            0,
+            0
+          ],
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ],
+          "to": [
+            -0.15,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "sphere",
+          "action": "spin",
+          "label": "काला हिरन",
+          "id": "object_1",
+          "color": "#59c7c5",
+          "pos": [
+            0.9,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        }
+      ]
+    },
+    {
+      "role": "transfer",
+      "heading": "खुद को जाँचिए",
+      "explanation": "यही परीक्षा की आम गलती है।",
+      "speech": "यही परीक्षा की आम गलती है।",
+      "teaches": "स्मरण तकनीक",
+      "visual_action": "व्यक्ति स्मृति कार्ड दिखाता है",
+      "setting": "institution",
+      "objects": [
+        {
+          "kind": "person",
+          "action": "walk",
+          "label": "विचारक",
+          "id": "object_0",
+          "color": "#f4e7bf",
+          "pos": [
+            -1.35,
+            0,
+            0
+          ],
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ],
+          "to": [
+            -0.15,
+            0,
+            0
+          ]
+        },
+        {
+          "kind": "book",
+          "action": "none",
+          "label": "स्मृति कार्ड",
+          "id": "object_1",
+          "color": "#59c7c5",
+          "pos": [
+            0.9,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        }
+      ]
+    },
+    {
+      "role": "revision",
+      "heading": "रिवीजन कार्ड",
+      "explanation": "याद रखने की ट्रिक: काला हिरन।",
+      "speech": "याद रखने की ट्रिक: काला हिरन।",
+      "teaches": "स्मरण पुनरावृत्ति",
+      "visual_action": "स्थिर स्क्रीन पर पाठ दिखता है",
+      "setting": "institution",
+      "revision_card": true,
+      "objects": [
+        {
+          "kind": "book",
+          "action": "none",
+          "label": "रिवीजन",
+          "id": "object_0",
+          "color": "#59c7c5",
+          "pos": [
+            0.0,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        }
+      ]
+    }
+  ],
+  "speech": [
+    "आंध्र प्रदेश का राज्य पशु कौन सा है? जाल पहचानिए।",
+    "दो सेकंड सोचिए: A या B?",
+    "सही उत्तर है: काला हिरन।",
+    "आंध्र प्रदेश का राज्य पशु काला हिरन है।",
+    "यही परीक्षा की आम गलती है।",
+    "याद रखने की ट्रिक: काला हिरन।"
+  ],
+  "titles": [
+    [
+      "पहले अपना जवाब चुनिए",
+      "A या B — सोचिए"
+    ],
+    [
+      "कमेंट में लिखिए: A या B?",
+      "दो सेकंड सोचिए: A या B?"
+    ],
+    [
+      "सही उत्तर",
+      "सही उत्तर है: काला हिरन।"
+    ],
+    [
+      "तथ्य समझिए",
+      "आंध्र प्रदेश का राज्य पशु काला"
+    ],
+    [
+      "खुद को जाँचिए",
+      "यही परीक्षा की आम गलती है।"
+    ],
+    [
+      "रिवीजन कार्ड",
+      "याद रखने की ट्रिक: काला हिरन।"
+    ]
+  ],
+  "requested_topic": "आंध्र प्रदेश का राज्य पशु कौन सा है?",
+  "automatic_selection": false,
+  "planner": "Groq / openai/gpt-oss-120b",
+  "auditor": "Groq / openai/gpt-oss-20b",
+  "dynamic": true,
+  "topic_policy": "easy_single_concept_v1",
+  "quality_version": "rich_3d_v1",
+  "primary_objective": "share",
+  "series_next_topic": "पंचायती राज संस्थाओं को किस अधिनियम द्वारा संवैधानिक दर्जा प्रदान कया गया?"
+}

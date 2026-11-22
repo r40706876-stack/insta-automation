@@ -1,0 +1,44 @@
+{
+  "answer_correct": true,
+  "visual_relevance": false,
+  "hindi_readable": true,
+  "pronunciation_correct": true,
+  "audio_visual_match": false,
+  "answer_reveal_timing": true,
+  "revision_card_readable": true,
+  "reasons": [
+    "Visuals rely on abstract props and generic 3D shapes instead of showing actual imagery of the animal.",
+    "Audio and visual elements lack meaningful correlation during the explanatory scenes."
+  ],
+  "observed_answer": "A: काला हिरन",
+  "scene_evidence": [
+    {
+      "scene": 1,
+      "observation": "Question card displays Andhra Pradesh state animal query with options A and B."
+    },
+    {
+      "scene": 2,
+      "observation": "A 2-second countdown timer runs over the quiz options."
+    },
+    {
+      "scene": 3,
+      "observation": "Answer is revealed with character standing near a book labeled 'हिरन चित्र'."
+    },
+    {
+      "scene": 4,
+      "observation": "A generic blue sphere labeled 'काला हिरन' rolls across the screen."
+    },
+    {
+      "scene": 5,
+      "observation": "Character stands by a book prop labeled 'स्मृति कार्ड'."
+    },
+    {
+      "scene": 6,
+      "observation": "Final revision card displays key recap text clearly."
+    }
+  ],
+  "sha256": "91e4c7effec53fe4c980cfe611297f3029df441d48bf2d416fcbd1eedc1790e9",
+  "reviewer": "gemini-3.8-flash / actual rendered video and audio",
+  "reviewed_at": "2026-11-22T18:48:19.439936+00:00",
+  "review_type": "automated_multimodal"
+}

@@ -1,0 +1,132 @@
+{
+  "ok": true,
+  "title": "आंध्र प्रदेश का राज्य पशु",
+  "subject": "Polity",
+  "renderer_version": "rich_3d_v1",
+  "question_hash": "d66214bf1f5b2590b8c6a76db2c93dbb4acbaa2347242eeee3987f803c09018d",
+  "reference": {
+    "subject": "Polity",
+    "subject_hi": "राजव्यवस्था",
+    "chapter": "राष्ट्रीय प्रतीक (National Emblem)",
+    "sub": "",
+    "question": "आंध्र प्रदेश का राज्य पशु कौन सा है?",
+    "options": {
+      "a": "मिथुन",
+      "b": "बैल",
+      "c": "काला हिरन",
+      "d": "एक सिंग वाला गैंडा"
+    },
+    "answer": "c",
+    "exams": [
+      "RRB Group-D 03-10-2018 (Shift-I)",
+      "RRB Group-D 03-10-2018 (Shift-III)"
+    ],
+    "explanation": "आंध्र प्रदेश का राज्य पशु काला हिरन है। काला हिरन कृष्णमृग बहुसिंगा की एकलौती जीवित प्रजाति है। यह भारत के अलावा पाकिस्तान और नेपाल में भी पायी जाती है। भारत में 1972 के वन्यजीव संरक्षण अधिनियम के अनुसूची-1 के तहत काले हिरन के शिकार पर प्रतिबंध है।",
+    "times_asked": 2,
+    "years": [
+      "2018"
+    ],
+    "id": "deba7d61ef",
+    "seq": 188
+  },
+  "experiment_format": "exam_trap",
+  "primary_objective": "share",
+  "series_next_topic": "पंचायती राज संस्थाओं को किस अधिनियम द्वारा संवैधानिक दर्जा प्रदान कया गया?",
+  "series_next_hash": "151664b45da0beb599b220ec474ce8b6215797bc5a46de37600b61bea26e08da",
+  "topic_policy": "evidence_cohort_v2",
+  "topic_priority": 1.0,
+  "recall": "याद रखने की ट्रिक: काला हिरन।",
+  "share_card": {
+    "kind": "exam_confusion",
+    "recipient": "परीक्षा की तैयारी करने वाले मित्र",
+    "benefit": "राज्य पशु काला हिरन को याद रखने का आसान तरीका",
+    "cta": "इसे अपने दोस्त को भेजो और याद रखें"
+  },
+  "share_reason": "बहुत से छात्र काला हिरन को भूलते हैं",
+  "scenes": [
+    {
+      "label": "पहले अपना जवाब चुनिए",
+      "quiz_options": [
+        "A: काला हिरन",
+        "B: मिथुन"
+      ],
+      "speech": "आंध्र प्रदेश का राज्य पशु कौन सा है? जाल पहचानिए।",
+      "role": "hook",
+      "revision_card": false,
+      "teaches": "प्रश्न पहचान",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "institution",
+        "visible_action": "एक व्यक्ति प्रश्न बोर्ड की ओर चलता है"
+      }
+    },
+    {
+      "label": "कमेंट में लिखिए: A या B?",
+      "quiz_options": [
+        "A: काला हिरन",
+        "B: मिथुन"
+      ],
+      "speech": "दो सेकंड सोचिए: A या B?",
+      "role": "challenge",
+      "revision_card": false,
+      "teaches": "विकल्प तुलना",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "institution",
+        "visible_action": "व्यक्ति दो विकल्प कार्ड की ओर इशारा करता है"
+      }
+    },
+    {
+      "label": "सही उत्तर",
+      "quiz_options": null,
+      "speech": "सही उत्तर है: काला हिरन।",
+      "role": "reveal",
+      "revision_card": false,
+      "teaches": "सही उत्तर दिखाना",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "institution",
+        "visible_action": "व्यक्ति काला हिरन की तस्वीर दिखाता है"
+      }
+    },
+    {
+      "label": "तथ्य समझिए",
+      "quiz_options": null,
+      "speech": "आंध्र प्रदेश का राज्य पशु काला हिरन है।",
+      "role": "explain",
+      "revision_card": false,
+      "teaches": "तथ्य समझाना",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "institution",
+        "visible_action": "व्यक्ति काला हिरन मॉडल को घुमाता है"
+      }
+    },
+    {
+      "label": "खुद को जाँचिए",
+      "quiz_options": null,
+      "speech": "यही परीक्षा की आम गलती है।",
+      "role": "transfer",
+      "revision_card": false,
+      "teaches": "स्मरण तकनीक",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "institution",
+        "visible_action": "व्यक्ति स्मृति कार्ड दिखाता है"
+      }
+    },
+    {
+      "label": "रिवीजन कार्ड",
+      "quiz_options": null,
+      "speech": "याद रखने की ट्रिक: काला हिरन।",
+      "role": "revision",
+      "revision_card": true,
+      "teaches": "स्मरण पुनरावृत्ति",
+      "animation": {
+        "type": "blender_3d",
+        "setting": "institution",
+        "visible_action": "स्थिर स्क्रीन पर पाठ दिखता है"
+      }
+    }
+  ]
+}
