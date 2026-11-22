@@ -1,26 +1,26 @@
-[main c26c018] Record 3D reel publish attempt [skip ci]
+[main 0e92bec] Record 3D reel publish attempt [skip ci]
  1 file changed, 4 insertions(+)
- create mode 100644 downloads/map3d/2026-11-22_state_place_run45003193189/publish_started.json
+ create mode 100644 downloads/map3d/2026-11-22_timeline_run45003195100/publish_started.json
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
-waiting 3489 s for slot 2026-11-22T14:30:00Z
+waiting 3501 s for slot 2026-11-22T16:30:00Z
 Collab invitation requested: @ar_publication
-  IG container: 17915215668568651
+  IG container: 17915229354568651
   upload try 1.1: HTTP 200 {"success":true,"message":"Upload Successful."}
   IG processing: FINISHED
-  LIVE: https://www.instagram.com/reel/DgDBge4jnYg/
-[main 11fc867] Save 3D reel Instagram receipt [skip ci]
+  LIVE: https://www.instagram.com/reel/DgDPPX5jeUH/
+[main f9a509a] Save 3D reel Instagram receipt [skip ci]
  2 files changed, 7 insertions(+)
- create mode 100644 downloads/map3d/2026-11-22_state_place_run45003193189/published.json
- create mode 100644 downloads/map3d/2026-11-22_state_place_run45003193189/reel.upload.json
+ create mode 100644 downloads/map3d/2026-11-22_timeline_run45003195100/published.json
+ create mode 100644 downloads/map3d/2026-11-22_timeline_run45003195100/reel.upload.json
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
-PUBLISHED {"media_id": "18351401491251829", "published_utc": "2026-11-22T14:30:54.277138+00:00", "title": "'सोलंग (Solung)' उत्सव किस राज्य में मनाया जाता है?", "permalink": "https://www.instagram.com/reel/DgDBge4jnYg/"}
+PUBLISHED {"media_id": "17981624100158365", "published_utc": "2026-11-22T16:30:52.198493+00:00", "title": "___ में एक बड़ी हलचल हुई, जिसने ब्रिटिश साम्राज्य की नींव को हिलाकर रख दिया और इसे अक्सर ‘स्वतंत्रता का पहला युद्ध’ कहा जाता है–", "permalink": "https://www.instagram.com/reel/DgDPPX5jeUH/"}
