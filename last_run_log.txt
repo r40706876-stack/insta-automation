@@ -1,26 +1,32 @@
-[main 9bc8b6e] Record 3D reel publish attempt [skip ci]
- 1 file changed, 4 insertions(+)
- create mode 100644 downloads/map3d/2026-11-21_timeline_run44885250234/publish_started.json
-error: cannot pull with rebase: You have unstaged changes.
-error: Please commit or stash them.
-error: cannot pull with rebase: You have unstaged changes.
-error: Please commit or stash them.
-error: cannot pull with rebase: You have unstaged changes.
-error: Please commit or stash them.
-waiting 3506 s for slot 2026-11-21T16:30:00Z
+FORMAT: list
+LIST REEL TAIYAR: generated_reels/science_pyq_reel.mp4 (10s)
+
+CAPTION:
+📅 Day 32/100 • 100 दिन में पूरा GS | कल Day 33/100 - Follow करो ताकि छूटे नहीं
+📤 ये reel उस दोस्त को भेजो जो Group D / NTPC / SSC / Police की तैयारी कर रहा है!
+
+📚 इस हफ्ते के 7 PYQ - Revision - RRB, SSC, Police, Patwari, Army, State Exams के लिए (Save करो)
+
+1. जैविक अपशिष्ट निपटान की सर्वोत्तम विधि कौन-सी है? → भस्मीकरण
+2. महाराष्ट्र में गोवर्धन पारिस्थितिकी गाँव की स्थापना किस संगठन ने की है? → इस्कॉन
+3. किस जीवाणु की उपस्थिति जल प्रदूषण का सूचक है? → ई. कोलाई कोलीफॉर्म
+4. रोगाणु मुक्त पेयजल बनाने के लिए किस रसायन का उपयोग किया जा सकता है? → CaOCl2
+5. वायुमंडल में ओजोन का स्तर कम होना कब से शुरू हुआ? → 1980
+6. अधिकांश नवीकरणीय ऊर्जा स्रोतों से होने वाली हानि है: → अस्थिर आपूर्ति
+7. ऊर्जा के पारंपरिक स्रोत के एक उदाहरण की पहचान करें- → प्राकृतिक गैस
+
+💬 कितने पहले से आते थे? कमेंट करो: 7/7?
+📤 Save करो + उस दोस्त को भेजो जो exam की तैयारी कर रहा है।
+GK GK Questions | RRB NTPC, Group D, SSC GD, State Exam PYQ
+⏱ MinuteMe_GS - एक मिनट, एक PYQ - पक्का!
+📲 Free test / notes: WhatsApp 8989971379
+
+#gkquiz #rrbntpc #sscgd #gkpyq #gk
+SCHEDULE: video ready; target 2026-11-22T01:30:00Z
 Collab invitation requested: @ar_publication
-  IG container: 17915084334568651
+  IG container: 17915123148568651
   upload try 1.1: HTTP 200 {"success":true,"message":"Upload Successful."}
   IG processing: FINISHED
-  LIVE: https://www.instagram.com/reel/DgAqcg3DaWt/
-[main a396528] Save 3D reel Instagram receipt [skip ci]
- 2 files changed, 7 insertions(+)
- create mode 100644 downloads/map3d/2026-11-21_timeline_run44885250234/published.json
- create mode 100644 downloads/map3d/2026-11-21_timeline_run44885250234/reel.upload.json
-error: cannot pull with rebase: You have unstaged changes.
-error: Please commit or stash them.
-error: cannot pull with rebase: You have unstaged changes.
-error: Please commit or stash them.
-error: cannot pull with rebase: You have unstaged changes.
-error: Please commit or stash them.
-PUBLISHED {"media_id": "18111034181214003", "published_utc": "2026-11-21T16:30:56.642762+00:00", "title": "भारत का पहला गणतंत्र दिवस इनमें से किस वर्ष में मनाया गया था?", "permalink": "https://www.instagram.com/reel/DgAqcg3DaWt/"}
+REMINDER: reel ready, publication due within 10 minutes: 2026-11-22T01:30:00Z
+  LIVE: https://www.instagram.com/reel/DgBhhJdFZG5/
+INSTAGRAM PE POST HO GAYA: 18137285443774956
