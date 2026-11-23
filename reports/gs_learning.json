@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-22T23:53:54.199612+00:00",
+  "generated_at": "2026-11-23T08:18:52.266785+00:00",
   "windows": {
     "24h": [
       {
@@ -38,15 +38,15 @@
       {
         "subject": null,
         "format": "legacy_unclassified",
-        "reels": 100,
+        "reels": 101,
         "metrics": {
           "shares_per_1000": {
-            "mean": 2.244032579970897,
-            "n": 63
+            "mean": 2.2089695709088515,
+            "n": 64
           },
           "saves_per_1000": {
-            "mean": 10.0739849973547,
-            "n": 63
+            "mean": 9.916578981771032,
+            "n": 64
           },
           "average_watch_time": {
             "mean": 4.565966666666667,
@@ -271,15 +271,15 @@
       {
         "subject": null,
         "format": "legacy_unclassified",
-        "reels": 124,
+        "reels": 127,
         "metrics": {
           "shares_per_1000": {
-            "mean": 2.306577585233713,
-            "n": 82
+            "mean": 2.363904141073236,
+            "n": 85
           },
           "saves_per_1000": {
-            "mean": 8.99038192877547,
-            "n": 82
+            "mean": 8.969486269884602,
+            "n": 85
           },
           "average_watch_time": {
             "mean": 4.683058823529413,
@@ -603,15 +603,15 @@
       {
         "subject": null,
         "format": "legacy_unclassified",
-        "reels": 133,
+        "reels": 135,
         "metrics": {
           "shares_per_1000": {
-            "mean": 2.320443766565934,
-            "n": 98
+            "mean": 2.274009575419826,
+            "n": 100
           },
           "saves_per_1000": {
-            "mean": 6.784121244737723,
-            "n": 98
+            "mean": 6.886247196616473,
+            "n": 100
           },
           "average_watch_time": {
             "mean": 5.988782608695652,
@@ -1136,9 +1136,9 @@
       {
         "subject": null,
         "format": "legacy_unclassified",
-        "reels": 124,
-        "shares_per_1000": 2.306577585233713,
-        "saves_per_1000": 8.99038192877547,
+        "reels": 127,
+        "shares_per_1000": 2.363904141073236,
+        "saves_per_1000": 8.969486269884602,
         "average_watch_time": 4.683058823529413
       }
     ],
@@ -1154,24 +1154,24 @@
   },
   "weekly": {
     "current": {
-      "reels": 30,
+      "reels": 28,
       "best": "18107340548527194",
       "weakest": "17977378170072980",
       "basis": "24h share/save rate; hypotheses only",
-      "mean_shares_per_1000": 3.2154698682458775,
-      "mean_saves_per_1000": 14.70863756297053
+      "mean_shares_per_1000": 3.090383906828971,
+      "mean_saves_per_1000": 14.462582837337138
     },
     "previous": {
-      "reels": 29,
-      "best": "17896276869434460",
+      "reels": 30,
+      "best": "17937203616147555",
       "weakest": "17978715623936519",
       "basis": "24h share/save rate; hypotheses only",
-      "mean_shares_per_1000": 0.0,
-      "mean_saves_per_1000": 13.827511223344557
+      "mean_shares_per_1000": 1.6555577760275233,
+      "mean_saves_per_1000": 12.964890185618282
     }
   },
   "weekly_change": {
-    "mean_shares_per_1000": 3.2154698682458775,
-    "mean_saves_per_1000": 0.8811263396259736
+    "mean_shares_per_1000": 1.4348261308014478,
+    "mean_saves_per_1000": 1.4976926517188556
   }
 }
