@@ -1,0 +1,396 @@
+{
+ "template": "state_place",
+ "fps": 24,
+ "id": "1546d8b7af",
+ "question": "गुरु शिखर, ____के अर्बुदा पर्वतों का शिखर, अरावली पर्वत श्रेणी का उच्चतम बिंदु है।",
+ "exam_short": "RRB Group-D 2018",
+ "options": [
+  "हिमाचल प्रदेश",
+  "सिक्किम",
+  "राजस्थान",
+  "उत्तराखंड"
+ ],
+ "answer": 2,
+ "option_colors": [
+  "#ff7a45",
+  "#4ade80",
+  "#c084fc",
+  "#38bdf8"
+ ],
+ "place": {
+  "name": "गुरु शिखर",
+  "at": [
+   72.779,
+   24.649
+  ],
+  "kind": "चोटी"
+ },
+ "credit": "नक्शा: datameet (MIT) · राज्य सीमाएँ सरलीकृत",
+ "scenes": [
+  {
+   "id": "teaser",
+   "seconds": 2.2,
+   "title": "3D नक्शे पर पूरा समझो",
+   "speak": "नक्शे पर देखिए, पूरा समझ आएगा —",
+   "cam": {
+    "center": [
+     82.4,
+     22.0
+    ],
+    "span": 27.6,
+    "tilt": 46,
+    "yaw": -22,
+    "from_tilt": 64,
+    "from_span": 40
+   },
+   "actions": [
+    {
+     "type": "build",
+     "t": 0,
+     "dur": 0.7
+    },
+    {
+     "type": "state_on",
+     "name": "Himachal Pradesh",
+     "color": "#ff7a45",
+     "t": 0.3,
+     "raise": 1.5,
+     "glow": 0.35
+    },
+    {
+     "type": "state_off",
+     "name": "Himachal Pradesh",
+     "t": 1.3
+    },
+    {
+     "type": "state_on",
+     "name": "Sikkim",
+     "color": "#4ade80",
+     "t": 0.44999999999999996,
+     "raise": 1.5,
+     "glow": 0.35
+    },
+    {
+     "type": "state_off",
+     "name": "Sikkim",
+     "t": 1.3
+    },
+    {
+     "type": "state_on",
+     "name": "Rajasthan",
+     "color": "#c084fc",
+     "t": 0.6,
+     "raise": 1.5,
+     "glow": 0.35
+    },
+    {
+     "type": "state_off",
+     "name": "Rajasthan",
+     "t": 1.3
+    },
+    {
+     "type": "state_on",
+     "name": "Uttarakhand",
+     "color": "#38bdf8",
+     "t": 0.75,
+     "raise": 1.5,
+     "glow": 0.35
+    },
+    {
+     "type": "state_off",
+     "name": "Uttarakhand",
+     "t": 1.3
+    }
+   ],
+   "labels": []
+  },
+  {
+   "id": "hook",
+   "seconds": 4.59,
+   "title": "गुरु शिखर, ____के अर्बुदा पर्वतों का शिखर, अरावली पर्वत श्रेणी का उच्चतम बिंदु है।",
+   "speak": "गुरु शिखर, किसके अर्बुदा पर्वतों का शिखर, अरावली पर्वत श्रेणी का उच्चतम बिंदु है।",
+   "cam": {
+    "center": [
+     82.4,
+     22.0
+    ],
+    "span": 30.0,
+    "tilt": 34
+   },
+   "actions": [
+    {
+     "type": "pin",
+     "at": [
+      72.779,
+      24.649
+     ],
+     "t": 0.5
+    }
+   ],
+   "labels": [
+    {
+     "text": "गुरु शिखर",
+     "at": [
+      72.779,
+      24.649
+     ],
+     "color": "#ff5a5a",
+     "t": 0.9,
+     "kind": "pin"
+    }
+   ]
+  },
+  {
+   "id": "options",
+   "seconds": 5.2,
+   "title": "गुरु शिखर किस राज्य में है?",
+   "speak": "हिमाचल प्रदेश, सिक्किम, राजस्थान या उत्तराखंड? कमेंट में जवाब लिखिए!",
+   "cam": {
+    "center": [
+     82.4,
+     22.0
+    ],
+    "span": 30.0,
+    "tilt": 30
+   },
+   "actions": [
+    {
+     "type": "state_on",
+     "name": "Himachal Pradesh",
+     "color": "#ff7a45",
+     "t": 0.2,
+     "raise": 1.5,
+     "glow": 0.35
+    },
+    {
+     "type": "state_on",
+     "name": "Sikkim",
+     "color": "#4ade80",
+     "t": 0.75,
+     "raise": 1.5,
+     "glow": 0.35
+    },
+    {
+     "type": "state_on",
+     "name": "Rajasthan",
+     "color": "#c084fc",
+     "t": 1.3,
+     "raise": 1.5,
+     "glow": 0.35
+    },
+    {
+     "type": "state_on",
+     "name": "Uttarakhand",
+     "color": "#38bdf8",
+     "t": 1.85,
+     "raise": 1.5,
+     "glow": 0.35
+    }
+   ],
+   "labels": [
+    {
+     "text": "A  हिमाचल प्रदेश",
+     "at": [
+      77.308,
+      31.724
+     ],
+     "color": "#ff7a45",
+     "t": 0.45,
+     "kind": "state"
+    },
+    {
+     "text": "B  सिक्किम",
+     "at": [
+      88.463,
+      27.628
+     ],
+     "color": "#4ade80",
+     "t": 1.0,
+     "kind": "state"
+    },
+    {
+     "text": "C  राजस्थान",
+     "at": [
+      75.226,
+      26.038
+     ],
+     "color": "#c084fc",
+     "t": 1.55,
+     "kind": "state"
+    },
+    {
+     "text": "D  उत्तराखंड",
+     "at": [
+      79.207,
+      30.101
+     ],
+     "color": "#38bdf8",
+     "t": 2.1,
+     "kind": "state"
+    },
+    {
+     "text": "गुरु शिखर",
+     "at": [
+      72.779,
+      24.649
+     ],
+     "color": "#ff5a5a",
+     "t": 0,
+     "kind": "pin"
+    }
+   ]
+  },
+  {
+   "id": "reveal",
+   "seconds": 4.2,
+   "title": "सही उत्तर: C  राजस्थान",
+   "sub": "गुरु शिखर — राजस्थान में",
+   "speak": "सही उत्तर है — राजस्थान। गुरु शिखर, राजस्थान में है।",
+   "cam": {
+    "center": [
+     73.88,
+     26.23
+    ],
+    "span": 11.59,
+    "tilt": 38
+   },
+   "actions": [
+    {
+     "type": "state_off",
+     "name": "Himachal Pradesh",
+     "t": 0.1
+    },
+    {
+     "type": "state_off",
+     "name": "Sikkim",
+     "t": 0.1
+    },
+    {
+     "type": "state_off",
+     "name": "Uttarakhand",
+     "t": 0.1
+    },
+    {
+     "type": "state_on",
+     "name": "Rajasthan",
+     "color": "#ffc93c",
+     "t": 0.3,
+     "raise": 1.65,
+     "glow": 0.5
+    },
+    {
+     "type": "ripple",
+     "at": [
+      72.779,
+      24.649
+     ],
+     "t": 0.5
+    }
+   ],
+   "labels": [
+    {
+     "text": "गुरु शिखर",
+     "at": [
+      72.779,
+      24.649
+     ],
+     "color": "#ff5a5a",
+     "t": 0,
+     "kind": "pin"
+    },
+    {
+     "text": "राजस्थान",
+     "at": [
+      75.226,
+      26.038
+     ],
+     "color": "#ffd25c",
+     "t": 0.5,
+     "kind": "state"
+    }
+   ]
+  },
+  {
+   "id": "fact",
+   "seconds": 5.6,
+   "title": "राजस्थान — याद रखने का तरीका",
+   "sub": "अरावली पर्वत श्रेणी राजस्थान राज्य में स्थित है।",
+   "sub2": "राजधानी: जयपुर",
+   "sub3": "चोटी: गुरु शिखर",
+   "speak": "अरावली पर्वत श्रेणी राजस्थान राज्य में स्थित है। राजस्थान की राजधानी जयपुर है।",
+   "cam": {
+    "center": [
+     73.88,
+     26.23
+    ],
+    "span": 12.749,
+    "tilt": 44,
+    "yaw": -12
+   },
+   "actions": [
+    {
+     "type": "pin",
+     "at": [
+      75.787,
+      26.912
+     ],
+     "t": 0.9,
+     "color": "#3b82f6"
+    }
+   ],
+   "labels": [
+    {
+     "text": "गुरु शिखर",
+     "at": [
+      72.779,
+      24.649
+     ],
+     "color": "#ff5a5a",
+     "t": 0,
+     "kind": "pin"
+    },
+    {
+     "text": "जयपुर (राजधानी)",
+     "at": [
+      75.787,
+      26.912
+     ],
+     "color": "#7eb6ff",
+     "t": 1.3,
+     "kind": "pin"
+    }
+   ]
+  },
+  {
+   "id": "end",
+   "seconds": 6.66,
+   "title": "याद रखो",
+   "sub": "गुरु शिखर : राजस्थान",
+   "speak": "याद रखिए — गुरु शिखर, राजस्थान। सही था तो कमेंट में लिखिए, और ऐसे ही नक्शे वाले सवालों के लिए फ़ॉलो कीजिए।",
+   "cam": {
+    "center": [
+     76.3895,
+     23.649
+    ],
+    "span": 20,
+    "tilt": 40,
+    "yaw": 10
+   },
+   "actions": [],
+   "labels": [
+    {
+     "text": "गुरु शिखर",
+     "at": [
+      72.779,
+      24.649
+     ],
+     "color": "#ff5a5a",
+     "t": 0,
+     "kind": "pin"
+    }
+   ],
+   "end": true
+  }
+ ],
+ "subject": "Geography"
+}
