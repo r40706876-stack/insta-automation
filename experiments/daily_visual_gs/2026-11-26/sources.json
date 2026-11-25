@@ -1,0 +1,11 @@
+[
+  {
+    "url": "user-provided",
+    "excerpt": "Verified question-bank reference; do not add claims beyond this reference: {\"subject\": \"Geography\", \"subject_hi\": \"भूगोल\", \"chapter\": \"भारत में परिवहन (Transport in India)\", \"sub\": \"थल परिवहन (Land Transport)\", \"question\": \"......... आंध्र प्रदेश की नई राजधानी है–\", \"options\": {\"a\": \"तिरुपति\", \"b\": \"सिकंदराबाद\", \"c\": \"हैदराबाद\", \"d\": \"अमरावती\"}, \"answer\": \"d\", \"exams\": [\"RRB Group-D 03-10-2018 (Shift-I)\", \"RRB Group-D 03-10-2018 (Shift-III)\"], \"explanation\": \"आंध्र प्रदेश की वर्तमान राजधानी हैदराबाद है। आंध्र प्रदेश का पुनर्गठन होने और आंध्र प्रदेश तथा तेलंगाना के रूप में दो राज्यों में विभाजन होने के बाद हैदराबाद दस साल के लिए दोनों राज्यों की राजधानी बनायी गयी है। इसके बाद आन्ध्र प्रदेश की नई प्रस्तावित राजधानी अमरावती है।\", \"times_asked\": 2, \"years\": [\"2018\"], \"id\": \"02764837be\", \"seq\": 126}"
+  },
+  {
+    "url": "https://www.naturalearthdata.com/downloads/110m-physical-vectors/110m-land/",
+    "publisher": "Natural Earth, public-domain physical coastline geometry",
+    "note": "Modern Gujarat outline is separately attributed in dandi_map.LICENSE; routes are schematic."
+  }
+]

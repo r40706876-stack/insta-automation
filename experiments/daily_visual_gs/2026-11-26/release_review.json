@@ -1,0 +1,43 @@
+{
+  "answer_correct": true,
+  "visual_relevance": false,
+  "hindi_readable": true,
+  "pronunciation_correct": true,
+  "audio_visual_match": true,
+  "answer_reveal_timing": true,
+  "revision_card_readable": true,
+  "observed_answer": "A",
+  "reasons": [
+    "Visuals rely on generic 3D pillar shapes with text labels rather than distinct educational graphics explaining the geographical context."
+  ],
+  "scene_evidence": [
+    {
+      "scene": 1,
+      "observation": "Displays question asking for Andhra Pradesh's new capital with options Amaravati and Tirupati."
+    },
+    {
+      "scene": 2,
+      "observation": "Shows a 2-second countdown timer alongside the options."
+    },
+    {
+      "scene": 3,
+      "observation": "Reveals Amaravati as the correct answer over a 3D pillar model."
+    },
+    {
+      "scene": 4,
+      "observation": "Displays 3D pillars labeled Hyderabad and Amaravati during narrative explanation."
+    },
+    {
+      "scene": 5,
+      "observation": "Avatar walks past the labeled 3D pillars while highlighting exam traps."
+    },
+    {
+      "scene": 6,
+      "observation": "Displays revision card with map graphic and memory trick text."
+    }
+  ],
+  "sha256": "3b6fd6bb8b99f19a6fd367f063f1bb71d8e4957b3ec1bbe87d251de0ab77c46d",
+  "reviewer": "gemini-3.6-flash / actual rendered video and audio",
+  "reviewed_at": "2026-11-25T20:44:40.167130+00:00",
+  "review_type": "automated_multimodal"
+}
