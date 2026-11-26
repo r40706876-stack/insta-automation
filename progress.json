@@ -1,6 +1,6 @@
 {
  "next_seq": 139,
- "episode": 246,
+ "episode": 247,
  "posted": [
   "684d76bcbc",
   "6bb20b4a07",
@@ -866,7 +866,14 @@
   "089320f8cf",
   "6f83285cac",
   "0339a7df9f",
-  "5a8ad347f7"
+  "5a8ad347f7",
+  "e35d10ee1c",
+  "32756b69be",
+  "d7724c1318",
+  "bb55b15455",
+  "8297175884",
+  "93bab2a4f3",
+  "9443be6e41"
  ],
  "skipped": {
   "bdd1ce5a8b": "उत्तर कुंजी वर्तमान स्थिति के अनुसार गलत है।",
@@ -899,9 +906,9 @@
   "25c9263a96": "samay ke saath badalne wala sawal"
  },
  "last": {
-  "seq": 4630,
-  "id": "5a8ad347f7",
-  "time": "2026-11-26 04:30",
+  "seq": 6301,
+  "id": "9443be6e41",
+  "time": "2026-11-26 11:30",
   "format": "list"
  },
  "carousel_queue": [
