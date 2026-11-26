@@ -1,0 +1,35 @@
+{
+  "ok": false,
+  "reasons": [
+    "Scene 1 and 2 present only two answer options (A: 1784, B: 1884) which do not match the evidence options (a: 1884, b: 1748, c: 1784, d: 1848).",
+    "Answer labeling in scenes is inconsistent with evidence (1784 labeled as A instead of C).",
+    "The plan incorrectly lists 1884 as option B, whereas evidence lists 1884 as option a."
+  ],
+  "novel_topic": true,
+  "scene_checks": [
+    {
+      "scene": 1,
+      "mechanism_matches": true
+    },
+    {
+      "scene": 2,
+      "mechanism_matches": true
+    },
+    {
+      "scene": 3,
+      "mechanism_matches": true
+    },
+    {
+      "scene": 4,
+      "mechanism_matches": true
+    },
+    {
+      "scene": 5,
+      "mechanism_matches": true
+    },
+    {
+      "scene": 6,
+      "mechanism_matches": true
+    }
+  ]
+}

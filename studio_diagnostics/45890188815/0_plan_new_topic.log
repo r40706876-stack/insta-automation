@@ -1,0 +1,9 @@
+Plan repair 1 Audit: ['Scene 1 and 2 present only two answer options (A: 1784, B: 1884) which do not match the evidence options (a: 1884, b: 1748, c: 1784, d: 1848).', 'Answer labeling in scenes is inconsistent with evidence (1784 labeled as A instead of C).', 'The plan incorrectly lists 1884 as option B, whereas
+Plan repair 2 script: Invalid title; visual: 'scenes'; facts: 'scenes'; experiment: Use hook/challenge/reveal/explain/transfer/revision scene roles
+Plan repair 3 visual: Scene 3: only generic props (arrow/gear/sphere/box/student); show a topic-specific object or skip this topic
+Traceback (most recent call last):
+  File "/home/runner/work/insta-automation/insta-automation/gs_animation_studio/planner.py", line 397, in <module>
+    generate(sys.argv[1],sys.argv[2],os.getenv('STUDIO_TOPIC_TEXT','').strip(),os.getenv('STUDIO_SUBJECT','auto'),os.getenv('STUDIO_REFERENCE_TEXT',''))
+  File "/home/runner/work/insta-automation/insta-automation/gs_animation_studio/planner.py", line 393, in generate
+    raise RuntimeError('New-topic plan failed validation after three attempts: '+str(errors))
+RuntimeError: New-topic plan failed validation after three attempts: ["Audit: ['Scene 1 and 2 present only two answer options (A: 1784, B: 1884) which do not match the evidence options (a: 1884, b: 1748, c: 1784, d: 1848).', 'Answer labeling in scenes is inconsistent with evidence (1784 labeled as A instead of C).', 'The plan incorrectly lists 1884 as option B, whereas evidence lists 1884 as option a.']", "script: Invalid title; visual: 'scenes'; facts: 'scenes'; experiment: Use hook/challenge/reveal/explain/transfer/revision scene roles", 'visual: Scene 3: only generic props (arrow/gear/sphere/box/student); show a topic-specific object or skip this topic']

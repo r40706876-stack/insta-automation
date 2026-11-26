@@ -1,0 +1,215 @@
+{
+  "title": "एशियाटिक सोसायटी ऑफ बंगाल की स्थापना वर्ष",
+  "subject": "इतिहास",
+  "topic_key": "asian_society_of_bengal_establishment_year",
+  "share_reason": "दो विकल्पों में अक्सर 1884 भ्रम होता है, सही 1784 याद रखें",
+  "recall": "याद रखने की ट्रिक: 1784।",
+  "pyq_challenge": true,
+  "share_card": {
+    "kind": "exam_confusion",
+    "recipient": "GS परीक्षा की तैयारी करने वाले मित्र",
+    "benefit": "सही स्थापना वर्ष 1784 को याद रखेंगे",
+    "cta": "अब साथ में अभ्यास करें"
+  },
+  "scenes": [
+    {
+      "role": "hook",
+      "heading": "पहले अपना जवाब चुनिए",
+      "explanation": "A या B — सोचिए",
+      "speech": "सर विलियम जोन्स ने ‘‘एशियाटिक सोसायटी ऑफ बंगाल’’ की स्थापना किस वर्ष में की थी? दृश्य देखिए।",
+      "teaches": "प्रश्न पहचान",
+      "visual_action": "एक बड़ा प्रश्न बोर्ड प्रकट होता है",
+      "setting": "neutral",
+      "objects": [
+        {
+          "kind": "person",
+          "action": "walk",
+          "label": "वक्ता",
+          "id": "object_0",
+          "color": "#f4e7bf",
+          "pos": [
+            -0.45,
+            0,
+            0
+          ],
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ],
+          "to": [
+            0.75,
+            0,
+            0
+          ]
+        }
+      ],
+      "hook_question": "सर विलियम जोन्स ने ‘‘एशियाटिक सोसायटी ऑफ बंगाल’’ की स्थापना किस वर्ष में की थी?",
+      "quiz_options": [
+        "A: 1784",
+        "B: 1884"
+      ],
+      "content_group": "single_topic"
+    },
+    {
+      "role": "challenge",
+      "heading": "कमेंट में लिखिए: A या B?",
+      "explanation": "दो सेकंड सोचिए: A या B?",
+      "speech": "दो सेकंड सोचिए: A या B?",
+      "teaches": "विकल्प तुलना",
+      "visual_action": "दो विकल्प कार्ड स्क्रीन पर स्लाइड होते हैं",
+      "setting": "neutral",
+      "objects": [
+        {
+          "kind": "arrow",
+          "action": "move",
+          "label": "विकल्प",
+          "id": "object_0",
+          "color": "#59c7c5",
+          "pos": [
+            -0.45,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            0.75,
+            0,
+            0
+          ]
+        }
+      ],
+      "quiz_options": [
+        "A: 1784",
+        "B: 1884"
+      ]
+    },
+    {
+      "role": "reveal",
+      "heading": "सही उत्तर",
+      "explanation": "सही उत्तर है: 1784।",
+      "speech": "सही उत्तर है: 1784।",
+      "teaches": "उत्तर पहचान",
+      "visual_action": "एक चेक मार्क स्क्रीन पर उभरता है",
+      "setting": "neutral",
+      "objects": [
+        {
+          "kind": "book",
+          "action": "rise",
+          "label": "स्रोत",
+          "id": "object_0",
+          "color": "#59c7c5",
+          "pos": [
+            0.0,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ],
+          "to": [
+            0.0,
+            0,
+            1.2
+          ]
+        }
+      ]
+    },
+    {
+      "role": "explain",
+      "heading": "तथ्य समझिए",
+      "explanation": "इस संस्था की स्थापना का उद्देश्य",
+      "speech": "इस संस्था की स्थापना का उद्देश्य प्राच्य शिक्षा को बढ़ावा देना था।",
+      "teaches": "उद्देश्य समझना",
+      "visual_action": "पुस्तक खुलता है और पाठ दिखाता है",
+      "setting": "institution",
+      "objects": [
+        {
+          "kind": "person",
+          "action": "walk",
+          "label": "जोन्स",
+          "id": "object_0",
+          "color": "#f4e7bf",
+          "pos": [
+            -0.45,
+            0,
+            0
+          ],
+          "size": [
+            1.05,
+            1.05,
+            1.05
+          ],
+          "to": [
+            0.75,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "role": "transfer",
+      "heading": "खुद को जाँचिए",
+      "explanation": "यही परीक्षा की आम गलती है।",
+      "speech": "यही परीक्षा की आम गलती है।",
+      "teaches": "स्मरण तकनीक",
+      "visual_action": "एक स्मृति कार्ड स्क्रीन पर फ्लिप होता है",
+      "setting": "neutral",
+      "objects": [
+        {
+          "kind": "coin",
+          "action": "spin",
+          "label": "याद",
+          "id": "object_0",
+          "color": "#f5bd3d",
+          "pos": [
+            0.0,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        }
+      ]
+    },
+    {
+      "role": "revision",
+      "heading": "रिवीजन कार्ड",
+      "explanation": "याद रखने की ट्रिक: 1784।",
+      "speech": "याद रखने की ट्रिक: 1784।",
+      "teaches": "त्वरित स्मरण",
+      "visual_action": "स्थिर कार्ड दिखता है",
+      "setting": "neutral",
+      "revision_card": true,
+      "objects": [
+        {
+          "kind": "book",
+          "action": "none",
+          "label": "स्मृति",
+          "id": "object_0",
+          "color": "#59c7c5",
+          "pos": [
+            0.0,
+            0,
+            0
+          ],
+          "size": [
+            0.7,
+            0.7,
+            0.7
+          ]
+        }
+      ]
+    }
+  ]
+}
