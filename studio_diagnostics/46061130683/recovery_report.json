@@ -1,0 +1,63 @@
+{
+  "topic": "new_topic",
+  "run_id": "46061130683",
+  "attempt": "1",
+  "status": "failed",
+  "events": [
+    {
+      "stage": "plan_new_topic",
+      "status": "started",
+      "log": "0_plan_new_topic.log"
+    },
+    {
+      "stage": "plan_new_topic",
+      "status": "passed"
+    },
+    {
+      "stage": "inputs",
+      "status": "passed",
+      "requested_topic": "पंचायती राज संस्थाओं को किस अधिनियम द्वारा संवैधानिक दर्जा प्रदान कया गया?"
+    },
+    {
+      "stage": "voice_generate",
+      "status": "started",
+      "log": "3_voice_generate.log"
+    },
+    {
+      "stage": "voice_generate",
+      "status": "passed"
+    },
+    {
+      "stage": "voice",
+      "status": "retrying",
+      "reason": "ValueError"
+    },
+    {
+      "stage": "voice_generate",
+      "status": "started",
+      "log": "6_voice_generate.log"
+    },
+    {
+      "stage": "voice_generate",
+      "status": "passed"
+    },
+    {
+      "stage": "voice",
+      "status": "retrying",
+      "reason": "ValueError"
+    }
+  ],
+  "repairs": [
+    {
+      "action": "restore_reviewed_renderer",
+      "engine": "data-driven-3d",
+      "same_recipe": true
+    }
+  ],
+  "injected_failures": [],
+  "instagram_publish": false,
+  "failure": {
+    "type": "StageError",
+    "message": "voice: new_topic_has_no_matching_cached_narration"
+  }
+}
