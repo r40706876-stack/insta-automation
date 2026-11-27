@@ -1,26 +1,26 @@
-[main 45359a8] Record 3D reel publish attempt [skip ci]
+[main 1ec57fc] Record 3D reel publish attempt [skip ci]
  1 file changed, 4 insertions(+)
- create mode 100644 downloads/map3d/2026-11-27_river_place_run45966260300/publish_started.json
+ create mode 100644 downloads/map3d/2026-11-27_timeline_run45966263741/publish_started.json
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
-waiting 3437 s for slot 2026-11-27T14:30:00Z
+waiting 3514 s for slot 2026-11-27T16:30:00Z
 Collab invitation requested: @ar_publication
-  IG container: 17915953887568651
+  IG container: 17915968698568651
   upload try 1.1: HTTP 200 {"success":true,"message":"Upload Successful."}
   IG processing: FINISHED
-  LIVE: https://www.instagram.com/reel/DgP5fBhuUsR/
-[main 578c86b] Save 3D reel Instagram receipt [skip ci]
+  LIVE: https://www.instagram.com/reel/DgQHNz_InaM/
+[main 3d86bdb] Save 3D reel Instagram receipt [skip ci]
  2 files changed, 7 insertions(+)
- create mode 100644 downloads/map3d/2026-11-27_river_place_run45966260300/published.json
- create mode 100644 downloads/map3d/2026-11-27_river_place_run45966260300/reel.upload.json
+ create mode 100644 downloads/map3d/2026-11-27_timeline_run45966263741/published.json
+ create mode 100644 downloads/map3d/2026-11-27_timeline_run45966263741/reel.upload.json
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
 error: cannot pull with rebase: You have unstaged changes.
 error: Please commit or stash them.
-PUBLISHED {"media_id": "18111773522220556", "published_utc": "2026-11-27T14:31:00.261753+00:00", "title": "निम्न में से कौन-सी नदी अरब सागर में मिलती है?", "permalink": "https://www.instagram.com/reel/DgP5fBhuUsR/"}
+PUBLISHED {"media_id": "18161005288578284", "published_utc": "2026-11-27T16:30:45.579428+00:00", "title": "ऑल इंडिया रेडियो (AIR) की स्थापना किस वर्ष हुई थी?", "permalink": "https://www.instagram.com/reel/DgQHNz_InaM/"}
