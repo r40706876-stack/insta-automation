@@ -1,6 +1,6 @@
 {
  "next_seq": 139,
- "episode": 247,
+ "episode": 248,
  "posted": [
   "684d76bcbc",
   "6bb20b4a07",
@@ -873,7 +873,14 @@
   "bb55b15455",
   "8297175884",
   "93bab2a4f3",
-  "9443be6e41"
+  "9443be6e41",
+  "c47c8c72d9",
+  "c8fbaeb1ed",
+  "d15449bb02",
+  "5923dc1b11",
+  "29f2be9a82",
+  "d5f6032213",
+  "e2593cae25"
  ],
  "skipped": {
   "bdd1ce5a8b": "उत्तर कुंजी वर्तमान स्थिति के अनुसार गलत है।",
@@ -903,12 +910,13 @@
   "7128697eb3": "विकल्प (c) और व्याख्या में फ़ॉन्ट त्रुटि ('n wojeyeeo') के कारण उत्तर अस्पष्ट और अमान्य है (सही उत्तर हैदराबाद है)।",
   "b509dcc6d1": "Answer key incorrect; work dates to 2nd century CE, not 8th.",
   "747dbbee96": "samay ke saath badalne wala sawal",
-  "25c9263a96": "samay ke saath badalne wala sawal"
+  "25c9263a96": "samay ke saath badalne wala sawal",
+  "5b5415cbb3": "प्रश्न को हल करने के लिए चित्र (रासायनिक संरचना) की आवश्यकता है, जो गायब है।"
  },
  "last": {
-  "seq": 6301,
-  "id": "9443be6e41",
-  "time": "2026-11-26 11:30",
+  "seq": 4704,
+  "id": "e2593cae25",
+  "time": "2026-11-27 01:30",
   "format": "list"
  },
  "carousel_queue": [
