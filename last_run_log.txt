@@ -1,13 +1,13 @@
 FORMAT: list
   Gemini text models: gemini-flash-latest, gemini-3.8-flash, gemini-3.7-flash, gemini-3.6-flash
-  Gemini gemini-flash-latest fail (koshish 1): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
-  Gemini gemini-flash-latest: HTTP 503 (koshish 2) 
-  Gemini gemini-3.8-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
-  Gemini gemini-3.8-flash: HTTP 429 (koshish 2) 
-  Gemini gemini-3.7-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
-  Gemini gemini-3.7-flash: HTTP 429 (koshish 2) 
-  7 PYQ topic (AI): गति
-  7 PYQ topic: मात्रक/मापन/मापक यंत्र (Unit/Measurement/Measuring Instrument) / मापक यंत्र (Measuring Instrument)
+List ke liye kaafi chhote sawal nahi -> loop format
+7 PYQ nahi bana; purana loop format band hai -> koi post nahi
+FORMAT: list
+  Gemini text models: gemini-flash-latest, gemini-3.8-flash, gemini-3.7-flash, gemini-3.6-flash
+  Gemini gemini-flash-latest: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Groq llama-3.3-70b-versatile: HTTP 404
+  7 PYQ topic (AI): विद्युत
+  7 PYQ topic: विद्युत (Electricity) / विद्युत परिपथ (Electric Circuit)
   Gemini gemini-flash-latest: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
   Gemini gemini-flash-latest: HTTP 429 (koshish 2) 
   Gemini gemini-3.8-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
@@ -20,7 +20,6 @@ FORMAT: list
   Gemini gemini-3.8-flash: HTTP 429 (koshish 2) 
   Gemini gemini-3.7-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
   Gemini gemini-3.7-flash: HTTP 429 (koshish 2) 
-  Gemini gemini-3.6-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
   Gemini gemini-flash-latest: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
   Gemini gemini-flash-latest: HTTP 429 (koshish 2) 
   Gemini gemini-3.8-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
@@ -43,7 +42,7 @@ FORMAT: list
   Gemini gemini-flash-latest: HTTP 429 (koshish 2) 
   Gemini gemini-3.8-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
   Gemini gemini-3.8-flash: HTTP 429 (koshish 2) 
-  Gemini gemini-3.7-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
+  Gemini gemini-3.7-flash fail (koshish 1): HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeo
   Gemini gemini-3.7-flash: HTTP 429 (koshish 2) 
   Gemini gemini-3.6-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
   Gemini gemini-3.6-flash: HTTP 429 (koshish 2) 
@@ -54,9 +53,6 @@ FORMAT: list
   Gemini gemini-3.8-flash: HTTP 429 (koshish 2) 
   Gemini gemini-3.7-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
   Gemini gemini-3.7-flash: HTTP 429 (koshish 2) 
-  Gemini gemini-3.6-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
-  Gemini gemini-3.6-flash: HTTP 429 (koshish 2) 
-  Groq llama-3.3-70b-versatile: HTTP 404
   Gemini gemini-flash-latest: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
   Gemini gemini-flash-latest: HTTP 429 (koshish 2) 
   Gemini gemini-3.8-flash: HTTP 429 (koshish 1) {   "error": {     "code": 429,     "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error,
@@ -74,13 +70,13 @@ CAPTION:
 
 📚 भौतिक विज्ञान के 7 PYQ - RRB, SSC, Police, Patwari, Army, State Exams के लिए (Save करो)
 
-1. मोटरगाड़ी का ओडोमीटर क्या मापता है? → दूरी
-2. किसी निर्दिष्ट दिशा में किसी वस्तु की गति को ____ कहा जाता है। → वेग
-3. त्वरण ऋणात्मक होने पर, किसी पिंड का वेग ____ → घटेगा
-4. द्रव्यमान और वेग का गुणनफल क्या कहलाता है? → संवेग
-5. किसी वस्तु के द्रव्यमान का मापन किसका मापन कहलाता है? → जड़त्व
-6. मुक्त रूप से गिर रही किसी वस्तु की गति का उदाहरण क्या है: → समान त्वरित गति
-7. किसी अंतःक्रिया के दौरान किन निकायों पर क्रिया और प्रतिक्रिया बल लगते हैं? → दो अलग-अलग निकाय पर
+1. विद्युत (परिपथ) कनेक्शन कितने प्रकार के होते हैं? → दो
+2. वोल्ट प्रति एम्पीयर मात्रक द्वारा दर्शाई गई राशि किस विद्युत मात्रक के अनुरूप है? → ओम
+3. एक चालक में प्रवाहित विद्युत धारा और विभवांतर के बीच क्या संबंध होता है? → V/I एक नियतांक है
+4. डीसी जनरेटर किस सिद्धांत पर आधारित है? → विद्युतचुंबकीय प्रेरण
+5. विद्युत ट्रांसफॉर्मर किस सिद्धांत पर कार्य करता है? → विद्युत चुम्बकीय प्रेरण
+6. विद्युत प्रतिरोधक में उत्पन्न ऊष्मा को किस SI मात्रक में मापा जाता है? → जूल
+7. इलेक्ट्रॉन के लिए e/m अनुपात, किसके द्वारा निर्धारित किया गया? → जे. जे. थॉमसन
 
 💬 कितने पहले से आते थे? कमेंट करो: 7/7?
 📤 Save करो + उस दोस्त को भेजो जो exam की तैयारी कर रहा है।
@@ -89,11 +85,11 @@ Science GK Questions | RRB NTPC, Group D, SSC GD, State Exam PYQ
 📲 Free test / notes: WhatsApp 8989971379
 
 #gkquiz #rrbntpc #sscgd #gkpyq #physics
-SCHEDULE: video ready; target 2026-11-28T01:30:00Z
+SCHEDULE: video ready; target 2026-11-28T04:30:00Z
 Collab invitation requested: @ar_publication
-  IG container: 17916026547568651
+  IG container: 17916039876568651
   upload try 1.1: HTTP 200 {"success":true,"message":"Upload Successful."}
   IG processing: FINISHED
-REMINDER: reel ready, publication due within 10 minutes: 2026-11-28T01:30:00Z
-  LIVE: https://www.instagram.com/reel/DgQ_hyJiJwt/
-INSTAGRAM PE POST HO GAYA: 18146161195521118
+REMINDER: reel ready, publication due within 10 minutes: 2026-11-28T04:30:00Z
+  LIVE: https://www.instagram.com/reel/DgRUMFagaSh/
+INSTAGRAM PE POST HO GAYA: 18119664236079190
